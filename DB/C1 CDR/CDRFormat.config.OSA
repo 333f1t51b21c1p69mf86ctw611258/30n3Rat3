@@ -1,0 +1,169 @@
+#CDR Format configuration file for GPRS, no blank lines in between.
+#This conforms with Release 5.0 CDR format
+#======================DO NOT CHANGE================================
+#Following 2 fields represent the number of fields present
+#in Balance, Spending Limit, Accumulators.If num of Bal,SL or Acc Fields
+#are increased or decrease then these fields should be modified.
+#
+!NUM_OF_FIELDS_FOR_BAL 6
+#!NUM_OF_FIELDS_FOR_SL 6
+!NUM_OF_FIELDS_FOR_ACC 4
+!NUM_OF_FIELDS_FOR_EXT 2
+#
+#
+#NOTE: balance_info will be expanded to the following fields in the
+# order specified.For balance 1 to max (20)(Any change in number
+# of field should change NUM_OF_FIELDS_FOR_BAL).Any Change here will
+# affect BALANCE_INFO length. 1420 = MAX_NUM_BALANCE * (6+30+16+16+2+1)
+#
+# Field Name Field length
+!BALANCE_ID 6
+!BALANCE_NAME 30
+!BALANCE 16
+!BALANCE_CHANGE 16
+!BALANCE_UNIT_TYPE 2
+!BALANCE_SIGN 1
+#
+#
+#NOTE: accumulator_info will be expanded to the following fields in the
+# order specified.For accumulators 1 to max (30).(Any change in
+# number of field should change NUM_OF_FIELDS_FOR_ACC) Any Change here will
+# affect ACCUMULATOR_INFO len. 2040 = MAX_NUM_ACCUMULATORS * (6+30+16+16).
+#
+# Field Name Field length
+# Field Name Field length
+!ACCUMULATOR_ID 6
+!ACCUMULATOR_NAME 30
+!ACCUMULATOR 16
+!ACCUMULATOR_CHANGE 16
+#
+#
+#NOTE: spending_limit_info will be expanded to the following fields in the
+# order specified.For spendlimit 1 to max (20).(Any change in number
+# of field should change NUM_OF_FIELDS_FOR_SL). Any Change here will
+# affect SPENDING_LIMIT_INFO len. 1420 = MAX_NUM_BALANCE * (6+30+16+16+2+1)
+#
+# Field Name Field length
+#!SPENDING_LIMIT_ID 6
+#!SPENDING_LIMIT_NAME 30
+#!SPENDING_LIMIT 16
+#!SPENDING_LIMIT_CHANGE 16
+#!SPENDING_LIMIT_UNIT_TYPE 2
+#!SPENDING_LIMIT_SIGN 1
+#
+#
+#NOTE: extension_info will be expanded to the following fields in the
+# order specified.For extension data 1 to max (10).(Any change in number
+# of field should change NUM_OF_EXTENSION). Any Change here will
+# affect EXTENSION_INFO len. 600(max) = NUM_OF_EXTENSION(max 10) * (30+30)
+!EXT_TOKEN_NAME 30
+#
+#=========================================================================
+#
+#NOTE: FIELD_DELIMITER & SUB_FIELD_DELIMITER should not be the same character.
+#
+##########################################################################
+# ACTUAL CDR FORMAT #
+##########################################################################
+FIELD_DELIMITER                 '|'            
+SUB_FIELD_DELIMITER             '*'            
+TYPE_OF_CDR                     0                        1
+SUBSCRIBER_ID                   1                       30
+START_TSTAMP                    31                      24
+END_TSTAMP                      55                      24
+APPLICATION_ID                  79                      10
+APPLICATION_INITIAL_SUBTYPE     89                      31
+APPL_DESC_TEXT                 120                     49
+PRIMARY_OFFER_ID                169                     10
+TARIFF_PLAN_ID                  179                      6
+TOTAL_USAGE                     185                     30
+USAGE_UNIT_TYPE                 215                      2
+TOTAL_CURRENCY_CHARGE           217                     16
+CURRENCY_UNIT_TYPE              233                      2
+TOTAL_NON_CURRENCY_CHARGE       235                     16
+MERCHANT_ID                     251                     49
+SESSION_DESCRIPTION             300                     49
+SESSION_ID                      349                     10
+CORRELATION_ID                  359                     10
+CORRELATION_TYPE                369                     10
+ACCOUNT_ID                      379                     10
+ACCOUNT_TYPE                    389                     10
+CHRG_PARAM_ITEM                 399                     49
+CHRG_PARAM_SUBTYPE              448                     49
+CHRG_PARAM_CONFIRM_ID           497                     49
+CHRG_PARAM_CONTRACT             546                     49
+CHRG_PARAM_QOS                  595                     49
+CHRG_PARAM_SERVICE_PARAM1       644                     49
+CHRG_PARAM_SERVICE_PARAM2       693                     49
+CHRG_PARAM_SERVICE_PARAM3       742                     49
+CHRG_PARAM_SERVICE_PARAM4       791                     49
+SUBSCRIBER_LOCATION             840                     32
+SUBSCRIBER_LOCATION_TYPE        872                     10
+LOCATION_B                      882                     32
+LOCATION_B_TYPE                 914                     10
+IMSI                            924                     32
+UNIT_TYPE_ID                    956                     10
+CURRENCY                        966                      4
+SLU_ID                          970                      4
+ACTIVITY_TYPE                   974                     26
+INFO_PARAMETER                  1000                     49
+PRE_POST_INDICATOR              1049                     1
+CHARGE_CODE                     1050                    10
+ESN_IMEI                        1060                    25
+HLR_ID                          1085                     5
+OTHER_SYSTEM_ID                 1090                    30
+POSTPAID_ACCOUNT_NUMBER         1120                    15
+ACCOUNT_TYPE                    1135                     1
+TIM1_TAR1_CURR_CONV             1136                     1
+TIM1_TAR2_CURR_CONV             1137                     1
+TIM1_TAR3_CURR_CONV             1138                     1
+TIM1_TAR4_CURR_CONV             1139                     1
+TIM1_TAR5_CURR_CONV             1140                     1
+TIM2_TAR1_CURR_CONV             1141                     1
+TIM2_TAR2_CURR_CONV             1142                     1
+TIM2_TAR3_CURR_CONV             1143                     1
+TIM2_TAR4_CURR_CONV             1144                     1
+TIM2_TAR5_CURR_CONV             1145                     1
+TIM3_TAR1_CURR_CONV             1146                     1
+TIM3_TAR2_CURR_CONV             1147                     1
+TIM3_TAR3_CURR_CONV             1148                     1
+TIM3_TAR4_CURR_CONV             1149                     1
+TIM3_TAR5_CURR_CONV             1150                     1
+SUBSCRIBER_NO_RESETS            1151                     5
+CURRENCY_CONV_RATE_TO_ACCT      1156                    16
+CURRENCY_CONV_RATE_TO_SUB       1172                    16
+CURR_TRANS_ORIG_CHARGE          1188                    16
+CURR_TRANS_CONV_RATE            1204                    16
+CURR_TRANS_ORIG_CURR_CODE       1220                     3
+SUB_COS_CURR_CODE               1223                     3
+RECHARGE_ORIG_CURR_CODE         1226                     3
+RECHARGE_CONV_RATE              1229                    16
+RECHARGE_CONV_FACE_VALUE        1245                     8
+ACTIVITY_DIRECTION              1253                     1
+RESELLER_ID                     1254                     9
+NUMBER_OF_BALANCE               1263                     2
+BALANCE_INFO                    1265                  1420
+NUM_OF_ACCUMULATOR              2685                     2
+ACCUMULATOR_INFO                2687                  2040
+NUM_OF_EXTENSION                4727                     2
+EXTENSION_INFO                  4729                   600
+AUT_INITIAL                     5329                     6
+AUT_FINAL                       5335                     6
+CLEAR_CAUSE                     5341                     3
+UNCHARGED_AMOUNT_PREPAID        5344                   16
+UNCHARGED_AMOUNT_POSTPAID       5360                   16
+LAST_UNIT_ROUNDING_DISCOUNT_AMOUNT_PREPAID  5376                   16
+LAST_UNIT_ROUNDING_DISCOUNT_AMOUNT_POSTPAID 5392                   16   
+ROUNDED_START_TIME              5408                   10
+ROUNDED_END_TIME                5418                   10
+ROUNDED_DURATION                5428                    9
+TIME_ZONE                       5437                   18 
+SUBSCRIBER_NO                   5455                   30
+LIABILITY_REDIRECT_IND          5485                    1
+LOCATION_INDICATOR_PARTY_A      5486                   16
+LOCATION_INDICATOR_PARTY_B      5502                   16
+TOTAL_VALUE_DISCOUNT            5518                   16
+TOTAL_CURR_VALUE_UNIT_CREDITS   5534                   16
+TOTAL_PREPAID_AMT               5550                   16
+TOTAL_POSTPAID_AMT              5566                   16
+MARKET_OFFER_GROUP_ID          11384        10

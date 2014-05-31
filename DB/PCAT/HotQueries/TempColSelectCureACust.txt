@@ -1,0 +1,6 @@
+select
+	t1.ACCOUNT_NO as accountNo,
+	t1.OPEN_ITEM_ID as openItemId,
+	t1.BALANCE as balance
+from
+	TEMP_COL_SELECT_CURE_A_CUST t1

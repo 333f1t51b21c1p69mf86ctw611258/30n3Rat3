@@ -1,0 +1,5 @@
+select
+	t1.HOUR as hour,
+	t1.IS_RESTRICTED as isRestricted
+from
+	RESTRICTED_HOURS t1

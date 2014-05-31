@@ -1,0 +1,9 @@
+select
+	t1.LR_PRIORITY_MAP_ID as lrPriorityMapId,
+	t1.LIABILITY_REDIRECTION_KEY as liabilityRedirectionKey,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t1.KEY_ORDER_LEVEL as keyOrderLevel
+from
+	LR_PRIORITY_MAP t1
+where
+	t1.RESELLER_VERSION_ID = {0}

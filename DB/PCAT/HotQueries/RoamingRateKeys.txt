@@ -1,0 +1,21 @@
+select
+	t1.RATE_KEY_ID as rateKeyId,
+	t3.SERVICE_VERSION_ID as serviceVersionId,
+	t3.ISO_CODE as currencyIsoCode,
+	t3.IMPLIED_DECIMAL as currencyImpliedDecimal,
+	t4.DISPLAY_VALUE as rateCurrencyKey,
+	t1.CURRENCY_CODE as currencyCode,
+	t1.USAGE_PLAN_ID as usagePlanId,
+	t1.OFFER_ID as offerId,
+	t1.EQUIP_TYPE_CODE as equipTypeCode,
+	t1.RATE_CLASS as rateClass,
+	t1.EQUIP_CLASS_CODE as equipClassCode,
+	t1.CLASS_OF_SERVICE_CODE as classOfServiceCode
+from
+	ROAMING_RATE_KEYS t1
+	inner join RATE_CURRENCY_KEY t2 on t1.CURRENCY_CODE = t2.CURRENCY_CODE
+	inner join RATE_CURRENCY_REF t3 on t2.CURRENCY_CODE = t3.CURRENCY_CODE
+		and t3.SERVICE_VERSION_ID = {1}
+	inner join RATE_CURRENCY_VALUES t4 on t2.CURRENCY_CODE = t4.CURRENCY_CODE
+		and t4.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+		and t4.LANGUAGE_CODE = {2}

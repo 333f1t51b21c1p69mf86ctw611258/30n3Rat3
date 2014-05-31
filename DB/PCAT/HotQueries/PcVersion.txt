@@ -1,0 +1,12 @@
+select
+	t1.MAJOR_PC_VERSION_NUM as majorPcVersionNum,
+	t1.MINOR_PC_VERSION_NUM as minorPcVersionNum,
+	t1.RELEASE_DATE as releaseDate,
+	t1.ACTIVE_DATE as activeDate,
+	t1.INACTIVE_DATE as inactiveDate,
+	t1.PROPAGATION_STATUS as propagationStatus,
+	t1.SERVICE_VERSION_ID as serviceVersionId
+from
+	PC_VERSION t1
+where
+	t1.SERVICE_VERSION_ID = {1}

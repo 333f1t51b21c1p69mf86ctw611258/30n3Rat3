@@ -1,0 +1,10 @@
+select
+	t1.ITEM_ID as itemId,
+	t4.DISPLAY_VALUE as ctcRatingReasonRef,
+	t1.RATING_REASON_ID as ratingReasonId
+from
+	CTC_ITEM_RATING_REASON t1
+	inner join CTC_ITEM t2 on t1.ITEM_ID = t2.ITEM_ID
+	inner join CTC_RATING_REASON_REF t3 on t1.RATING_REASON_ID = t3.RATING_REASON_ID
+	inner join CTC_RATING_REASON_VALUES t4 on t3.RATING_REASON_ID = t4.RATING_REASON_ID
+		and t4.LANGUAGE_CODE = {2}

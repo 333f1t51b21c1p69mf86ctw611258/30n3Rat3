@@ -1,0 +1,10 @@
+select
+	t1.PARAM_ID as paramId,
+	t1.MODULE as module,
+	t1.PARAMETER_NAME as parameterName,
+	t1.INT_VALUE as intValue,
+	t1.CHAR_VALUE as charValue,
+	t1.DESCRIPTION as description,
+	t1.REL_INFO as relInfo
+from
+	SYSTEM_PARAMETERS t1

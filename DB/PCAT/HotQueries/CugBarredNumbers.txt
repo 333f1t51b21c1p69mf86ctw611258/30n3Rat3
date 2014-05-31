@@ -1,0 +1,17 @@
+select
+	t4.DISPLAY_VALUE as cugDefinitionKey,
+	t1.CUG_CODE as cugCode,
+	t1.BARRED_ALLOWED_NUMBER as barredAllowedNumber,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t1.BARRED_ALLOWED_FLAG as barredAllowedFlag,
+	t1.CUG_BARRED_NUMBERS_CODE as cugBarredNumbersCode
+from
+	CUG_BARRED_NUMBERS t1
+	inner join CUG_DEFINITION_KEY t2 on t1.CUG_CODE = t2.CUG_CODE
+	inner join CUG_DEFINITION_REF t3 on t2.CUG_CODE = t3.CUG_CODE
+		and t3.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+	inner join CUG_DEFINITION_VALUES t4 on t2.CUG_CODE = t4.CUG_CODE
+		and t4.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+		and t4.LANGUAGE_CODE = {2}
+where
+	t1.RESELLER_VERSION_ID = {0}

@@ -1,0 +1,12 @@
+select
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t2.OFFER_ID as offerId,
+	t2.DISPLAY_VALUE as name,
+	t2.DESCRIPTION as description
+from
+	LIABILITY_TEMPLATE_ID_REF t1
+	inner join OFFER_VALUES t2 on t1.SUGGESTED_PRIMARY_OFFER_ID = t2.OFFER_ID
+		and t2.LANGUAGE_CODE = {2}
+		and t2.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+where
+	t1.RESELLER_VERSION_ID = {0}

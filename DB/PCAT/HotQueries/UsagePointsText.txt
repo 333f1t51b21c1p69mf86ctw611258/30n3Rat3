@@ -1,0 +1,6 @@
+select
+	t1.POINT_ID as pointId,
+	t1.LANGUAGE_CODE as languageCode,
+	t1.DISPLAY_VALUE as displayValue
+from
+	USAGE_POINTS_TEXT t1

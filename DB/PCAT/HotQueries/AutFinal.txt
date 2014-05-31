@@ -1,0 +1,111 @@
+select
+	t1.AUT_ID as autId,
+	t2.RESELLER_VERSION_ID as resellerVersionId,
+	t2.IS_PRERATED as isPrerated,
+	t5.DISPLAY_VALUE as useDefaultRateType,
+	t2.OPEN_ITEM_ID as openItemId,
+	t2.IS_LATE_FEE_EXEMPT as isLateFeeExempt,
+	t7.SERVICE_VERSION_ID as serviceVersionId,
+	t8.DISPLAY_VALUE as unitsTypeKey,
+	t2.UNIT_TYPE as unitType,
+	t10.DISPLAY_VALUE as passThrough,
+	t13.DISPLAY_VALUE as subTypeIdKey,
+	t2.SUB_TYPE_ID as subTypeId,
+	t16.DISPLAY_VALUE as applicationIdKey,
+	t2.APPLICATION_ID as applicationId,
+	t19.DISPLAY_VALUE as autInitialKey,
+	t2.GENERATED_FROM as generatedFrom,
+	t2.ACTIVITY_CHAR_IDS as activityCharIds,
+	t22.DISPLAY_VALUE as taxClassKey,
+	t2.TAX_CLASS as taxClass,
+	t24.DISPLAY_VALUE as taxLocationUsg,
+	t26.DISPLAY_VALUE as taxCodeOriginReq,
+	t28.DISPLAY_VALUE as taxCodeTargetReq,
+	t30.DISPLAY_VALUE as taxLocationOutcollect,
+	t33.DISPLAY_VALUE as productLineKey,
+	t2.PRODUCT_LINE_ID as productLineId,
+	t36.DISPLAY_VALUE as ratableUnitClassKey,
+	t2.RATABLE_UNIT_CLASS as ratableUnitClass,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	AUT_FINAL_KEY t1
+	inner join AUT_FINAL_REF t2 on t1.AUT_ID = t2.AUT_ID
+	inner join AUT_FINAL_VALUES t3 on t2.AUT_ID = t3.AUT_ID
+		and t2.RESELLER_VERSION_ID = t3.RESELLER_VERSION_ID
+	left outer join GENERIC_ENUMERATION_REF t4 on t4.enumeration_key = lower(''USE_DEFAULT_RATE_TYPE'')
+		and t4.value = t2.USE_DEFAULT_RATE_TYPE
+	left outer join GENERIC_ENUMERATION_VALUES t5 on t5.enumeration_key = t4.enumeration_key
+		and t5.value = t4.value
+		and t5.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	inner join UNITS_TYPE_KEY t6 on t2.UNIT_TYPE = t6.UNIT_TYPE
+	inner join UNITS_TYPE_REF t7 on t6.UNIT_TYPE = t7.UNIT_TYPE
+		and t7.SERVICE_VERSION_ID = {1}
+	inner join UNITS_TYPE_VALUES t8 on t6.UNIT_TYPE = t8.UNIT_TYPE
+		and t8.SERVICE_VERSION_ID = t7.SERVICE_VERSION_ID
+		and t8.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join GENERIC_ENUMERATION_REF t9 on t9.enumeration_key = lower(''PASS_THROUGH'')
+		and t9.value = t2.PASS_THROUGH
+	left outer join GENERIC_ENUMERATION_VALUES t10 on t10.enumeration_key = t9.enumeration_key
+		and t10.value = t9.value
+		and t10.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join SUB_TYPE_ID_KEY t11 on t2.SUB_TYPE_ID = t11.SUB_TYPE_ID
+	left outer join SUB_TYPE_ID_REF t12 on t11.SUB_TYPE_ID = t12.SUB_TYPE_ID
+		and t12.SERVICE_VERSION_ID = t7.SERVICE_VERSION_ID
+	left outer join SUB_TYPE_ID_VALUES t13 on t11.SUB_TYPE_ID = t13.SUB_TYPE_ID
+		and t13.SERVICE_VERSION_ID = t7.SERVICE_VERSION_ID
+		and t13.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join APPLICATION_ID_KEY t14 on t2.APPLICATION_ID = t14.APPLICATION_ID
+	left outer join APPLICATION_ID_REF t15 on t14.APPLICATION_ID = t15.APPLICATION_ID
+		and t15.SERVICE_VERSION_ID = t7.SERVICE_VERSION_ID
+	left outer join APPLICATION_ID_VALUES t16 on t14.APPLICATION_ID = t16.APPLICATION_ID
+		and t16.SERVICE_VERSION_ID = t7.SERVICE_VERSION_ID
+		and t16.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join AUT_INITIAL_KEY t17 on t2.GENERATED_FROM = t17.INITIAL_AUT_ID
+	left outer join AUT_INITIAL_REF t18 on t17.INITIAL_AUT_ID = t18.INITIAL_AUT_ID
+		and t18.SERVICE_VERSION_ID = t7.SERVICE_VERSION_ID
+	left outer join AUT_INITIAL_VALUES t19 on t17.INITIAL_AUT_ID = t19.INITIAL_AUT_ID
+		and t19.SERVICE_VERSION_ID = t7.SERVICE_VERSION_ID
+		and t19.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join TAX_CLASS_KEY t20 on t2.TAX_CLASS = t20.TAX_CLASS
+	left outer join TAX_CLASS_REF t21 on t20.TAX_CLASS = t21.TAX_CLASS
+		and t21.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+	left outer join TAX_CLASS_VALUES t22 on t20.TAX_CLASS = t22.TAX_CLASS
+		and t22.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+		and t22.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join GENERIC_ENUMERATION_REF t23 on t23.enumeration_key = lower(''TAX_LOCATION_USG'')
+		and t23.value = t2.TAX_LOCATION_USG
+	left outer join GENERIC_ENUMERATION_VALUES t24 on t24.enumeration_key = t23.enumeration_key
+		and t24.value = t23.value
+		and t24.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join GENERIC_ENUMERATION_REF t25 on t25.enumeration_key = lower(''TAX_CODE_ORIGIN_REQ'')
+		and t25.value = t2.TAX_CODE_ORIGIN_REQ
+	left outer join GENERIC_ENUMERATION_VALUES t26 on t26.enumeration_key = t25.enumeration_key
+		and t26.value = t25.value
+		and t26.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join GENERIC_ENUMERATION_REF t27 on t27.enumeration_key = lower(''TAX_CODE_TARGET_REQ'')
+		and t27.value = t2.TAX_CODE_TARGET_REQ
+	left outer join GENERIC_ENUMERATION_VALUES t28 on t28.enumeration_key = t27.enumeration_key
+		and t28.value = t27.value
+		and t28.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join GENERIC_ENUMERATION_REF t29 on t29.enumeration_key = lower(''TAX_LOCATION_OUTCOLLECT'')
+		and t29.value = t2.TAX_LOCATION_OUTCOLLECT
+	left outer join GENERIC_ENUMERATION_VALUES t30 on t30.enumeration_key = t29.enumeration_key
+		and t30.value = t29.value
+		and t30.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join PRODUCT_LINE_KEY t31 on t2.PRODUCT_LINE_ID = t31.PRODUCT_LINE_ID
+	left outer join PRODUCT_LINE_REF t32 on t31.PRODUCT_LINE_ID = t32.PRODUCT_LINE_ID
+		and t32.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+	left outer join PRODUCT_LINE_VALUES t33 on t31.PRODUCT_LINE_ID = t33.PRODUCT_LINE_ID
+		and t33.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+		and t33.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join RATABLE_UNIT_CLASS_KEY t34 on t2.RATABLE_UNIT_CLASS = t34.RATABLE_UNIT_CLASS
+	left outer join RATABLE_UNIT_CLASS_REF t35 on t34.RATABLE_UNIT_CLASS = t35.RATABLE_UNIT_CLASS
+		and t35.SERVICE_VERSION_ID = t7.SERVICE_VERSION_ID
+	left outer join RATABLE_UNIT_CLASS_VALUES t36 on t34.RATABLE_UNIT_CLASS = t36.RATABLE_UNIT_CLASS
+		and t36.SERVICE_VERSION_ID = t7.SERVICE_VERSION_ID
+		and t36.LANGUAGE_CODE = t3.LANGUAGE_CODE
+where
+	t2.RESELLER_VERSION_ID = {0}
+	and t3.LANGUAGE_CODE = {2}

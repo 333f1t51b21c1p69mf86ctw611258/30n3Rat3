@@ -1,0 +1,50 @@
+select
+	t1.DISCOUNT_AWARD_ID as discountAwardId,
+	t2.RESELLER_VERSION_ID as resellerVersionId,
+	t6.DISPLAY_VALUE as rtDiscountKey,
+	t2.RT_DISCOUNT_ID as rtDiscountId,
+	t2.THRESHOLD as threshold,
+	t2.AMOUNT as amount, 
+        t5.currency_code, 
+        t8.iso_code as CURRENCYISOCODE, 
+        t8.implied_decimal as CURRENCYIMPLIEDDECIMAL, 
+	t2.ADDON_THRES1 as addonThres1,
+	t2.ADDON_THRES2 as addonThres2,
+	t2.ADDON_THRES3 as addonThres3,
+	t2.ADDON_THRES4 as addonThres4,
+	t2.REWARD_EVENT_TYPE as rewardEventTypeId,
+        CASE
+            WHEN t4.DISPLAY_VALUE is null THEN {3}
+            ELSE t4.DISPLAY_VALUE
+        END as rewardEventType,
+	t2.REWARD_NOTIF_TEXT as rewardNotifText,
+	t2.UNICODE_FLAG as unicodeFlag,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	DISCOUNT_AWARD_KEY t1
+	inner join DISCOUNT_AWARD_REF t2 on t1.DISCOUNT_AWARD_ID = t2.DISCOUNT_AWARD_ID
+        inner join (select reseller_id, major_version_num, reseller_version_id from reseller_version where reseller_version_id = {0}) tReseller on t2.reseller_version_id = tReseller.Reseller_Version_Id
+        inner join (select reseller_version_id, service_version_id, major_version_num, minor_version_num, reseller_id from reseller_version)  tBaseVersion on tReseller.Reseller_Id = tBaseVersion.Reseller_Id  
+            and tReseller.Major_Version_Num = tBaseVersion.Major_Version_Num 
+            and tBaseVersion.Minor_Version_Num = 0
+	inner join DISCOUNT_AWARD_VALUES t3 on t2.DISCOUNT_AWARD_ID = t3.DISCOUNT_AWARD_ID
+		 and t3.reseller_version_id = tBaseVersion.Reseller_Version_Id
+	inner join RT_DISCOUNT_KEY t4 on t2.RT_DISCOUNT_ID = t4.RT_DISCOUNT_ID
+	inner join RT_DISCOUNT_REF t5 on t2.RT_DISCOUNT_ID = t5.RT_DISCOUNT_ID
+		and t5.RESELLER_VERSION_ID = tBaseVersion.Major_Version_Num 
+	inner join RT_DISCOUNT_VALUES t6 on t2.RT_DISCOUNT_ID = t6.RT_DISCOUNT_ID
+		and t6.LANGUAGE_CODE = t3.LANGUAGE_CODE
+		and t6.RESELLER_VERSION_ID = tBaseVersion.Major_Version_Num 
+        left outer join PARAMETER_SUB_ID_VALUES t4 on t3.LANGUAGE_CODE = t4.LANGUAGE_CODE
+                and t2.REWARD_EVENT_TYPE = t4.PARAM_SUB_ID
+                and t4.PARAM_ID = 1
+        left outer join RATE_CURRENCY_KEY t7 on t7.currency_code = t5.currency_code            
+        left outer join RATE_CURRENCY_REF t8 on t7.currency_code = t8.currency_code 
+                and t8.service_version_id = tBaseVersion.Service_Version_Id       
+        left outer join RATE_CURRENCY_VALUES t9 on t9.currency_code = t8.currency_code 
+                and t9.service_version_id = t8.service_version_id 
+                and t9.language_code = t3.language_code                         
+where
+	t3.LANGUAGE_CODE = {2} 

@@ -1,0 +1,15 @@
+select
+	t1.FF_LIST_TYPE_ID as ffListTypeId,
+	t2.SERVICE_VERSION_ID as serviceVersionId,
+	t2.IS_IVR_ELIGIBLE as isIvrEligible,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	FF_LIST_TYPE_KEY t1
+	inner join FF_LIST_TYPE_REF t2 on t1.FF_LIST_TYPE_ID = t2.FF_LIST_TYPE_ID
+	inner join FF_LIST_TYPE_VALUES t3 on t2.FF_LIST_TYPE_ID = t3.FF_LIST_TYPE_ID
+		and t2.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+where
+	t2.SERVICE_VERSION_ID = {1}
+	and t3.LANGUAGE_CODE = {2}

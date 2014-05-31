@@ -1,0 +1,12 @@
+select
+	t1.CURRENCY_CODE as currencyCode,
+	t1.PRERADIX_EXCH_RATE_MANT as preradixExchRateMant,
+	t1.POSTRADIX_EXCH_RATE_MANT as postradixExchRateMant,
+	t1.EXCH_RATE_EXP as exchRateExp,
+	t1.ACTIVE_DT as activeDt,
+	t1.INACTIVE_DT as inactiveDt,
+	t1.CREATE_DT as createDt,
+	t1.CHANGE_DT as changeDt,
+	t1.CHANGE_WHO as changeWho
+from
+	SDR_EXCHANGE_RATES t1

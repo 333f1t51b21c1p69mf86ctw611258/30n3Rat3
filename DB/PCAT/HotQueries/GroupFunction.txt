@@ -1,0 +1,5 @@
+select
+	t1.GROUP_NAME as groupName,
+	t1.MODULE_NAME as moduleName
+from
+	GROUP_FUNCTION t1

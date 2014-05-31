@@ -1,0 +1,11 @@
+select
+	t3.DISPLAY_VALUE as apactionRef,
+	t1.ACTION_ID as actionId,
+	t1.FOREIGN_TAG as foreignTag,
+	t1.COMMON_TAG_ID as commonTagId
+from
+	APSERVICE_PARAM_XLATE t1
+	inner join APACTION_REF t2 on t1.ACTION_ID = t2.ACTION_ID
+	inner join APACTION_VALUES t3 on t2.ACTION_ID = t3.ACTION_ID
+		and t3.LANGUAGE_CODE = {2}
+	inner join APCOMMON_TAG_DATA_SOURCE t4 on t1.COMMON_TAG_ID = t4.COMMON_TAG_ID

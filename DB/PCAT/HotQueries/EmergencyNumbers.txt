@@ -1,0 +1,5 @@
+select
+	t1.EMERGENCY_NUMBER_ID as emergencyNumberId,
+	t1.EMERGENCY_NUMBER as emergencyNumber
+from
+	EMERGENCY_NUMBERS t1

@@ -1,0 +1,35 @@
+select
+	t1.USAGE_ITEM_ID as usageItemId,
+	t2.RESELLER_VERSION_ID as resellerVersionId,
+	t6.DISPLAY_VALUE as autFinalKey,
+	t2.AUT_ID as autId,
+	t9.DISPLAY_VALUE as tariffPlanKey,
+	t2.TARIFF_PLAN_ID as tariffPlanId,
+	t2.IS_DEFAULT_ACTIVITY as isDefaultActivity,
+	t2.CHARGE_CODE as chargeCode,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description 
+from
+	USAGE_ITEM_KEY t1
+	inner join USAGE_ITEM_REF t2 on t1.USAGE_ITEM_ID = t2.USAGE_ITEM_ID
+        inner join (select reseller_id, major_version_num, reseller_version_id from reseller_version where reseller_version_id = {0}) tReseller on t2.reseller_version_id = tReseller.Reseller_Version_Id
+        inner join (select reseller_version_id, service_version_id, major_version_num, minor_version_num, reseller_id from reseller_version)  tBaseVersion on tReseller.Reseller_Id = tBaseVersion.Reseller_Id
+            and tReseller.Major_Version_Num = tBaseVersion.Major_Version_Num 
+            and tBaseVersion.Minor_Version_Num = 0
+	inner join USAGE_ITEM_VALUES t3 on t2.USAGE_ITEM_ID = t3.USAGE_ITEM_ID
+		and t3.RESELLER_VERSION_ID = tBaseVersion.RESELLER_VERSION_ID
+	inner join AUT_FINAL_KEY t4 on t2.AUT_ID = t4.AUT_ID
+	inner join AUT_FINAL_REF t5 on t4.AUT_ID = t5.AUT_ID
+		and t5.RESELLER_VERSION_ID = tBaseVersion.RESELLER_VERSION_ID  
+	inner join AUT_FINAL_VALUES t6 on t5.AUT_ID = t6.AUT_ID
+		and t6.LANGUAGE_CODE = t3.LANGUAGE_CODE    
+		and t6.RESELLER_VERSION_ID = tBaseVersion.RESELLER_VERSION_ID
+	inner join TARIFF_PLAN_KEY t7 on t2.TARIFF_PLAN_ID = t7.TARIFF_PLAN_ID
+	inner join TARIFF_PLAN_REF t8 on t7.TARIFF_PLAN_ID = t8.TARIFF_PLAN_ID
+		and t8.RESELLER_VERSION_ID = tBaseVersion.RESELLER_VERSION_ID
+	inner join TARIFF_PLAN_VALUES t9 on t8.TARIFF_PLAN_ID = t9.TARIFF_PLAN_ID
+		and t9.LANGUAGE_CODE = t3.LANGUAGE_CODE
+		and t9.RESELLER_VERSION_ID = tBaseVersion.RESELLER_VERSION_ID
+where
+	t3.LANGUAGE_CODE = {2}

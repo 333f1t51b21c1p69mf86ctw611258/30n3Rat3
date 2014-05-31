@@ -1,0 +1,11 @@
+select
+	t3.DISPLAY_VALUE as clearingHouseIdRef,
+	t1.CLEARING_HOUSE_ID as clearingHouseId,
+	t1.CCARD_CARRIER as ccardCarrier,
+	t1.AVS_RESPONSE_CODE as avsResponseCode,
+	t1.RESPONSE_CODE_DESCR as responseCodeDescr
+from
+	CCARD_AVS_RESPONSE_CODES t1
+	inner join CLEARING_HOUSE_ID_REF t2 on t1.CLEARING_HOUSE_ID = t2.CLEARING_HOUSE_ID
+	inner join CLEARING_HOUSE_ID_VALUES t3 on t2.CLEARING_HOUSE_ID = t3.CLEARING_HOUSE_ID
+		and t3.LANGUAGE_CODE = {2}

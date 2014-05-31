@@ -1,0 +1,10 @@
+select 
+  t1.unit_type as entityId, 
+  t1.display_value as displayValue 
+from 
+  units_type_values t1 
+where 
+  t1.language_code = {2} 
+  and t1.service_version_id = {1} 
+order by 
+  displayValue 

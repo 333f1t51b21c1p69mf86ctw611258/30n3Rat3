@@ -1,0 +1,26 @@
+select
+	t1.TAX_THRESHOLD_ID as taxThresholdId,
+	t2.RESELLER_VERSION_ID as resellerVersionId,
+	t2.TAX_THRESHOLD as taxThreshold,
+	t5.SERVICE_VERSION_ID as serviceVersionId,
+	t5.ISO_CODE as currencyIsoCode,
+	t5.IMPLIED_DECIMAL as currencyImpliedDecimal,
+	t6.DISPLAY_VALUE as rateCurrencyKey,
+	t2.CURRENCY_CODE as currencyCode,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	TAX_THRESHOLD_KEY t1
+	inner join TAX_THRESHOLD_REF t2 on t1.TAX_THRESHOLD_ID = t2.TAX_THRESHOLD_ID
+	inner join TAX_THRESHOLD_VALUES t3 on t2.TAX_THRESHOLD_ID = t3.TAX_THRESHOLD_ID
+		and t2.RESELLER_VERSION_ID = t3.RESELLER_VERSION_ID
+	left outer join RATE_CURRENCY_KEY t4 on t2.CURRENCY_CODE = t4.CURRENCY_CODE
+	left outer join RATE_CURRENCY_REF t5 on t4.CURRENCY_CODE = t5.CURRENCY_CODE
+		and t5.SERVICE_VERSION_ID = {1}
+	left outer join RATE_CURRENCY_VALUES t6 on t4.CURRENCY_CODE = t6.CURRENCY_CODE
+		and t6.SERVICE_VERSION_ID = {1}
+		and t6.LANGUAGE_CODE = t3.LANGUAGE_CODE
+where
+	t2.RESELLER_VERSION_ID = {0}
+	and t3.LANGUAGE_CODE = {2}

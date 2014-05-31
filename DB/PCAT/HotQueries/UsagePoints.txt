@@ -1,0 +1,63 @@
+select
+	t1.POINT_ID as pointId, 
+        t14.DISPLAY_VALUE as displayValue, 
+	t3.DISPLAY_VALUE as pointType,
+	t5.SERVICE_VERSION_ID as serviceVersionId,
+	t6.DISPLAY_VALUE as pointCategoryKey,
+	t1.POINT_CATEGORY as pointCategory,
+	t1.POINT as point,
+	t15.DISPLAY_VALUE as pointRegion,
+	t1.IS_A_PREFIX as isAPrefix,
+	t8.DISPLAY_VALUE as pointStatus,
+	t1.POINT_CLASS as pointClass,
+	t1.POINT_TAX_CODE as pointTaxCode,
+	t1.POINT_CITY as pointCity,
+	t1.POINT_STATE_ABBR as pointStateAbbr,
+	t1.POINT_ZIP as pointZip,
+	t1.COUNTRY_CODE as countryCode,
+	t1.POINT_COUNTY as pointCounty,
+	t1.POINT_COORDINATE_X as pointCoordinateX,
+	t1.POINT_COORDINATE_Y as pointCoordinateY,
+	t11.DISPLAY_VALUE as serviceProvidersKey,
+	t1.PROVIDER_ID as providerId,
+	t1.ACTIVE_DT as activeDt,
+	t1.INACTIVE_DT as inactiveDt,
+	t1.IS_INTERNATIONAL as isInternational,
+	t1.ACCESS_REGION as accessRegion,
+	t1.POINT_COORDINATE_X_MIN as pointCoordinateXMin,
+	t1.POINT_COORDINATE_Y_MIN as pointCoordinateYMin,
+	t13.DISPLAY_VALUE as pointCoordinateType
+from
+	USAGE_POINTS t1 
+	left outer join GENERIC_ENUMERATION_REF t2 on t2.enumeration_key = lower(''POINT_TYPE'')
+		and t2.value = t1.POINT_TYPE
+	left outer join GENERIC_ENUMERATION_VALUES t3 on t3.enumeration_key = t2.enumeration_key
+		and t3.value = t2.value
+		and t3.LANGUAGE_CODE = {2}
+	inner join POINT_CATEGORY_KEY t4 on t1.POINT_CATEGORY = t4.POINT_CATEGORY
+	inner join POINT_CATEGORY_REF t5 on t4.POINT_CATEGORY = t5.POINT_CATEGORY
+		and t5.SERVICE_VERSION_ID = {1}
+	inner join POINT_CATEGORY_VALUES t6 on t4.POINT_CATEGORY = t6.POINT_CATEGORY
+		and t6.SERVICE_VERSION_ID = t5.SERVICE_VERSION_ID
+		and t6.LANGUAGE_CODE = {2}
+	left outer join GENERIC_ENUMERATION_REF t7 on t7.enumeration_key = lower(''POINT_STATUS'')
+		and t7.value = t1.POINT_STATUS
+	left outer join GENERIC_ENUMERATION_VALUES t8 on t8.enumeration_key = t7.enumeration_key
+		and t8.value = t7.value
+		and t8.LANGUAGE_CODE = t6.LANGUAGE_CODE
+	inner join SERVICE_PROVIDERS_KEY t9 on t1.PROVIDER_ID = t9.PROVIDER_ID
+	inner join SERVICE_PROVIDERS_REF t10 on t9.PROVIDER_ID = t10.PROVIDER_ID
+		and t10.SERVICE_VERSION_ID = t5.SERVICE_VERSION_ID
+	inner join SERVICE_PROVIDERS_VALUES t11 on t9.PROVIDER_ID = t11.PROVIDER_ID
+		and t11.SERVICE_VERSION_ID = t5.SERVICE_VERSION_ID
+		and t11.LANGUAGE_CODE = t6.LANGUAGE_CODE
+	left outer join GENERIC_ENUMERATION_REF t12 on t12.enumeration_key = lower(''POINT_COORDINATE_TYPE'')
+		and t12.value = t1.POINT_COORDINATE_TYPE
+	left outer join GENERIC_ENUMERATION_VALUES t13 on t13.enumeration_key = t12.enumeration_key
+		and t13.value = t12.value
+		and t13.LANGUAGE_CODE = t6.LANGUAGE_CODE 
+        inner join USAGE_POINTS_TEXT t14 on t1.POINT_ID = t14.POINT_ID 
+                and t14.LANGUAGE_CODE = {2}
+        inner join POINT_REGION_VALUES t15 on t1.POINT_REGION = t15.POINT_REGION 
+                and t15.LANGUAGE_CODE = {2} 
+                and t15.SERVICE_VERSION_ID = {1}

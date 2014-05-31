@@ -1,0 +1,111 @@
+select
+	t1.AUT_TRANS_ID as autTransId,
+	t2.RESELLER_VERSION_ID as resellerVersionId,
+	t4.SERVICE_VERSION_ID as serviceVersionId,
+	t5.DISPLAY_VALUE as autInitialKey,
+	t2.INITIAL_AUT_ID as initialAutId,
+	t8.DISPLAY_VALUE as autFinalKey,
+	t2.FINAL_AUT_ID as finalAutId,
+	t2.PRIORITY as priority,
+        t10.AUT_TRANS_SET_ID as autTransSetId,
+        t12.DISPLAY_VALUE as accountSegKey,
+        t14.DISPLAY_VALUE as subscriberSegKey,
+        t16.DISPLAY_VALUE as marketSegKey,
+        t18.DISPLAY_VALUE as locationSegKey,
+        t20.DISPLAY_VALUE as accessMethodSegKey,
+        t22.DISPLAY_VALUE as specialFeatureSegKey,
+        t24.DISPLAY_VALUE as offlineSegKey
+from
+	AUT_TRANSLATION_KEY t1
+	inner join AUT_TRANSLATION t2 on t1.AUT_TRANS_ID = t2.AUT_TRANS_ID
+	inner join AUT_INITIAL_KEY t3 on t2.INITIAL_AUT_ID = t3.INITIAL_AUT_ID
+	inner join AUT_INITIAL_REF t4 on t3.INITIAL_AUT_ID = t4.INITIAL_AUT_ID
+		and t4.SERVICE_VERSION_ID = {1}
+	inner join AUT_INITIAL_VALUES t5 on t3.INITIAL_AUT_ID = t5.INITIAL_AUT_ID
+		and t5.SERVICE_VERSION_ID = t4.SERVICE_VERSION_ID
+		and t5.LANGUAGE_CODE = {2}
+	inner join AUT_FINAL_KEY t6 on t2.FINAL_AUT_ID = t6.AUT_ID
+	inner join AUT_FINAL_REF t7 on t6.AUT_ID = t7.AUT_ID
+		and t7.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+	inner join AUT_FINAL_VALUES t8 on t6.AUT_ID = t8.AUT_ID
+		and t8.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+		and t8.LANGUAGE_CODE = t5.LANGUAGE_CODE
+        left outer join AUT_TRANSLATION_SET t9 on t9.AUT_TRANS_ID = t2.AUT_TRANS_ID
+                and t9.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+                and t9.AUT_TRANS_SET_ID in (select aut_trans_set_id FROM aut_translation_set_map where expression_template_id
+                    in (select expression_template_id from expression_template_id_ref where segmentation_key_id=0))
+        left outer join AUT_TRANSLATION_SET_MAP t10 on t10.AUT_TRANS_SET_ID = t9.AUT_TRANS_SET_ID
+                and t10.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+        left outer join EXPRESSION_TEMPLATE_ID_REF t11 on t11.EXPRESSION_TEMPLATE_ID = t10.EXPRESSION_TEMPLATE_ID
+                and t11.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+        left outer join EXPRESSION_TEMPLATE_ID_VALUES t12 on t12.EXPRESSION_TEMPLATE_ID = t11.EXPRESSION_TEMPLATE_ID
+                and t12.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+                and t12.LANGUAGE_CODE = t5.LANGUAGE_CODE
+        left outer join AUT_TRANSLATION_SET t25 on t25.AUT_TRANS_ID = t2.AUT_TRANS_ID
+                and t25.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+                and t25.AUT_TRANS_SET_ID in (select aut_trans_set_id FROM aut_translation_set_map where expression_template_id
+                    in (select expression_template_id from expression_template_id_ref where segmentation_key_id=1))
+        left outer join AUT_TRANSLATION_SET_MAP t26 on t26.AUT_TRANS_SET_ID = t25.AUT_TRANS_SET_ID
+                and t26.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+        left outer join EXPRESSION_TEMPLATE_ID_REF t13 on t13.EXPRESSION_TEMPLATE_ID = t26.EXPRESSION_TEMPLATE_ID
+                and t13.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+        left outer join EXPRESSION_TEMPLATE_ID_VALUES t14 on t14.EXPRESSION_TEMPLATE_ID = t13.EXPRESSION_TEMPLATE_ID
+                and t14.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+                and t14.LANGUAGE_CODE = t5.LANGUAGE_CODE
+        left outer join AUT_TRANSLATION_SET t27 on t27.AUT_TRANS_ID = t2.AUT_TRANS_ID
+                and t27.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+                and t27.AUT_TRANS_SET_ID in (select aut_trans_set_id FROM aut_translation_set_map where expression_template_id
+                    in (select expression_template_id from expression_template_id_ref where segmentation_key_id=2))
+        left outer join AUT_TRANSLATION_SET_MAP t28 on t28.AUT_TRANS_SET_ID = t27.AUT_TRANS_SET_ID
+                and t28.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+        left outer join EXPRESSION_TEMPLATE_ID_REF t15 on t15.EXPRESSION_TEMPLATE_ID = t28.EXPRESSION_TEMPLATE_ID
+                and t15.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+        left outer join EXPRESSION_TEMPLATE_ID_VALUES t16 on t16.EXPRESSION_TEMPLATE_ID = t15.EXPRESSION_TEMPLATE_ID
+                and t16.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+                and t16.LANGUAGE_CODE = t5.LANGUAGE_CODE
+        left outer join AUT_TRANSLATION_SET t29 on t29.AUT_TRANS_ID = t2.AUT_TRANS_ID
+                and t29.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+                and t29.AUT_TRANS_SET_ID in (select aut_trans_set_id FROM aut_translation_set_map where expression_template_id
+                    in (select expression_template_id from expression_template_id_ref where segmentation_key_id=3))
+        left outer join AUT_TRANSLATION_SET_MAP t30 on t30.AUT_TRANS_SET_ID = t29.AUT_TRANS_SET_ID
+                and t30.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+        left outer join EXPRESSION_TEMPLATE_ID_REF t17 on t17.EXPRESSION_TEMPLATE_ID = t30.EXPRESSION_TEMPLATE_ID
+                and t17.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+        left outer join EXPRESSION_TEMPLATE_ID_VALUES t18 on t18.EXPRESSION_TEMPLATE_ID = t17.EXPRESSION_TEMPLATE_ID
+                and t18.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+                and t18.LANGUAGE_CODE = t5.LANGUAGE_CODE
+        left outer join AUT_TRANSLATION_SET t31 on t31.AUT_TRANS_ID = t2.AUT_TRANS_ID
+                and t31.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+                and t31.AUT_TRANS_SET_ID in (select aut_trans_set_id FROM aut_translation_set_map where expression_template_id
+                    in (select expression_template_id from expression_template_id_ref where segmentation_key_id=4))
+        left outer join AUT_TRANSLATION_SET_MAP t32 on t32.AUT_TRANS_SET_ID = t31.AUT_TRANS_SET_ID
+                and t32.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+        left outer join EXPRESSION_TEMPLATE_ID_REF t19 on t19.EXPRESSION_TEMPLATE_ID = t32.EXPRESSION_TEMPLATE_ID
+                and t19.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+        left outer join EXPRESSION_TEMPLATE_ID_VALUES t20 on t20.EXPRESSION_TEMPLATE_ID = t19.EXPRESSION_TEMPLATE_ID
+                and t20.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+                and t20.LANGUAGE_CODE = t5.LANGUAGE_CODE
+        left outer join AUT_TRANSLATION_SET t33 on t33.AUT_TRANS_ID = t2.AUT_TRANS_ID
+                and t33.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+                and t33.AUT_TRANS_SET_ID in (select aut_trans_set_id FROM aut_translation_set_map where expression_template_id
+                    in (select expression_template_id from expression_template_id_ref where segmentation_key_id=5))
+        left outer join AUT_TRANSLATION_SET_MAP t34 on t34.AUT_TRANS_SET_ID = t33.AUT_TRANS_SET_ID
+                and t34.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+        left outer join EXPRESSION_TEMPLATE_ID_REF t21 on t21.EXPRESSION_TEMPLATE_ID = t34.EXPRESSION_TEMPLATE_ID
+                and t21.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+        left outer join EXPRESSION_TEMPLATE_ID_VALUES t22 on t22.EXPRESSION_TEMPLATE_ID = t21.EXPRESSION_TEMPLATE_ID
+                and t22.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+                and t22.LANGUAGE_CODE = t5.LANGUAGE_CODE
+        left outer join AUT_TRANSLATION_SET t35 on t35.AUT_TRANS_ID = t2.AUT_TRANS_ID
+                and t35.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+                and t35.AUT_TRANS_SET_ID in (select aut_trans_set_id FROM aut_translation_set_map where expression_template_id
+                    in (select expression_template_id from expression_template_id_ref where segmentation_key_id=6))
+        left outer join AUT_TRANSLATION_SET_MAP t36 on t36.AUT_TRANS_SET_ID = t35.AUT_TRANS_SET_ID
+                and t36.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+        left outer join EXPRESSION_TEMPLATE_ID_REF t23 on t23.EXPRESSION_TEMPLATE_ID = t36.EXPRESSION_TEMPLATE_ID
+                and t23.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+        left outer join EXPRESSION_TEMPLATE_ID_VALUES t24 on t24.EXPRESSION_TEMPLATE_ID = t23.EXPRESSION_TEMPLATE_ID
+                and t24.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+                and t24.LANGUAGE_CODE = t5.LANGUAGE_CODE
+where
+	t2.RESELLER_VERSION_ID = {0}

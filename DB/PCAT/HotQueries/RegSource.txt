@@ -1,0 +1,13 @@
+select
+	t1.SOURCE_ID as sourceId,
+	t1.ISO_ID as isoId,
+	t1.SOURCE_FILENAME as sourceFilename,
+	t1.SOURCE_NAME as sourceName,
+	t1.SOURCE_VERSION as sourceVersion,
+	t1.SOURCE_START as sourceStart,
+	t1.SOURCE_STATUS as sourceStatus,
+	t1.SOURCE_END as sourceEnd,
+	t1.SOURCE_NUM_ROWS_LOADED as sourceNumRowsLoaded
+from
+	REG_SOURCE t1
+	inner join REG_INSTALL_SITE_OBJ t2 on t1.ISO_ID = t2.ISO_ID

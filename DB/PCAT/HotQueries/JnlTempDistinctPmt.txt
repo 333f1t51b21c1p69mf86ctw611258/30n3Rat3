@@ -1,0 +1,9 @@
+select
+	t1.ACCOUNT_NO as accountNo,
+	t1.TRACKING_ID as trackingId,
+	t1.TRACKING_ID_SERV as trackingIdServ,
+	t1.TAX_TYPE_CODE as taxTypeCode,
+	t1.OPEN_ITEM_ID as openItemId,
+	t1.CURRENCY_CODE as currencyCode
+from
+	JNL_TEMP_DISTINCT_PMT t1

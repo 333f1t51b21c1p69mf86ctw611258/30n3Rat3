@@ -1,0 +1,9 @@
+select
+	t1.ACCOUNT_NO as accountNo,
+	t1.TRACKING_ID as trackingId,
+	t1.TRACKING_ID_SERV as trackingIdServ,
+	t1.BMF_TRANS_TYPE as bmfTransType,
+	t1.TAX_TYPE_CODE as taxTypeCode,
+	t1.DISCOUNT_ID as discountId
+from
+	JNL_TEMP_DISTINCT_BMF t1

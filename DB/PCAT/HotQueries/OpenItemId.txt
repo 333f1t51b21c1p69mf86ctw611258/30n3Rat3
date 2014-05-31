@@ -1,0 +1,19 @@
+select
+	t1.OPEN_ITEM_ID as openItemId,
+	t2.RESELLER_VERSION_ID as resellerVersionId,
+	t2.IS_DEFAULT as isDefault,
+	t2.IS_INTERNAL as isInternal,
+	t2.PRIORITY as priority,
+	t2.REGULATORY_ID as regulatoryId,
+	t2.IS_CORRECTABLE as isCorrectable,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	OPEN_ITEM_ID_KEY t1
+	inner join OPEN_ITEM_ID_REF t2 on t1.OPEN_ITEM_ID = t2.OPEN_ITEM_ID
+	inner join OPEN_ITEM_ID_VALUES t3 on t2.OPEN_ITEM_ID = t3.OPEN_ITEM_ID
+		and t2.RESELLER_VERSION_ID = t3.RESELLER_VERSION_ID
+where
+	t2.RESELLER_VERSION_ID = {0}
+	and t3.LANGUAGE_CODE = {2}

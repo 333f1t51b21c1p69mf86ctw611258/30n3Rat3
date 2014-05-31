@@ -1,0 +1,38 @@
+select
+	t1.GEOCODE_OVERRIDE_ID as geocodeOverrideId,
+	t3.DISPLAY_VALUE as chargeEltType,
+	t1.CHARGE_ELT_ID as chargeEltId,
+	t1.COUNTRY_CODE as countryCode,
+        t7.DISPLAY_VALUE as countryCodeRef,
+        t1.FRANCHISE_CODE as franchiseCode,
+        CASE
+            WHEN t1.FRANCHISE_CODE=0 THEN {3}
+            ELSE t10.DISPLAY_VALUE
+        END as franchiseCodeValues,
+	t1.STATE_CODE as stateCode,
+	t1.COUNTY_CODE as countyCode,
+	t1.CITY_CODE as cityCode,
+	t1.PRIORITY as priority,
+	t5.DISPLAY_VALUE as taxLocation,
+	t1.OVERRIDE_GEOCODE as overrideGeocode
+from
+	GEOCODE_OVERRIDES t1
+	left outer join GENERIC_ENUMERATION_REF t2 on t2.enumeration_key = lower(''CHARGE_ELT_TYPE'')
+		and t2.value = t1.CHARGE_ELT_TYPE
+	left outer join GENERIC_ENUMERATION_VALUES t3 on t3.enumeration_key = t2.enumeration_key
+		and t3.value = t2.value
+		and t3.LANGUAGE_CODE = {2}
+	left outer join GENERIC_ENUMERATION_REF t4 on t4.enumeration_key = lower(''TAX_LOCATION'')
+		and t4.value = t1.TAX_LOCATION
+	left outer join GENERIC_ENUMERATION_VALUES t5 on t5.enumeration_key = t4.enumeration_key
+		and t5.value = t4.value
+		and t5.LANGUAGE_CODE = {2}
+        inner join COUNTRY_CODE_REF t6 on t6.COUNTRY_CODE = t1.COUNTRY_CODE
+        inner join COUNTRY_CODE_VALUES t7 on t7.COUNTRY_CODE = t1.COUNTRY_CODE
+                and t7.LANGUAGE_CODE = t3.LANGUAGE_CODE
+        left outer join FRANCHISE_CODE_KEY t8 on t8.FRANCHISE_CODE = t1.FRANCHISE_CODE
+        left outer join FRANCHISE_CODE_REF t9 on t9.FRANCHISE_CODE = t1.FRANCHISE_CODE
+                and t9.RESELLER_VERSION_ID = {0}
+        left outer join FRANCHISE_CODE_VALUES t10 on t10.FRANCHISE_CODE = t1.FRANCHISE_CODE
+                and t10.RESELLER_VERSION_ID = t9.RESELLER_VERSION_ID
+                and t10.LANGUAGE_CODE = t3.LANGUAGE_CODE

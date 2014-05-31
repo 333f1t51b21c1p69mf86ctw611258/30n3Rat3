@@ -1,0 +1,17 @@
+select
+	t1.BILL_REF_NO as billRefNo,
+	t1.BILL_REF_RESETS as billRefResets,
+	t3.DISPLAY_VALUE as taxType,
+	t1.BMF_AMOUNT as bmfAmount,
+	t1.NEW_CHARGES as newCharges,
+	t1.TOT_ADJ_AMT as totAdjAmt,
+	t1.TOT_ADJ_TAX as totAdjTax,
+	t1.ADJ_AMOUNT as adjAmount,
+	t1.ADJ_TAX as adjTax
+from
+	TEMP_CBT t1
+	left outer join GENERIC_ENUMERATION_REF t2 on t2.enumeration_key = lower(''TAX_TYPE'')
+		and t2.value = t1.TAX_TYPE
+	left outer join GENERIC_ENUMERATION_VALUES t3 on t3.enumeration_key = t2.enumeration_key
+		and t3.value = t2.value
+		and t3.LANGUAGE_CODE = {2}

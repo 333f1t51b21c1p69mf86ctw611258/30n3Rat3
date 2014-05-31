@@ -1,0 +1,13 @@
+select
+	t1.PARAM_ID as paramId,
+	t1.PARAM_SUB_ID as paramSubId,
+	t1.PARAM_HIERARCHY_ID as paramHierarchyId,
+	t2.LANGUAGE_CODE as languageCode,
+	t2.DISPLAY_VALUE as displayValue,
+	t2.DESCRIPTION as description
+from
+	PARAMETER_SUB_ID_REF t1
+	inner join PARAMETER_SUB_ID_VALUES t2 on t1.PARAM_ID = t2.PARAM_ID
+		and t1.PARAM_SUB_ID = t2.PARAM_SUB_ID
+where
+	t2.LANGUAGE_CODE = {2}

@@ -1,0 +1,46 @@
+select
+	t1.RATE_UNIT_CR_ID as rateUnitCrId,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t3.SERVICE_VERSION_ID as serviceVersionId,
+	t4.DISPLAY_VALUE as rateClassKey,
+	t1.RATE_CLASS as rateClass,
+	t6.DISPLAY_VALUE as unitCrItemKey,
+	t1.UNIT_CR_ID as unitCrId,
+	t1.UNITS_FREE as unitsFree,
+	t9.DISPLAY_VALUE as billingFrequencyRef,
+	t1.BILLING_FREQUENCY as billingFrequency,
+        t12.display_value as rateCurrencyKey, 
+        t1.currency_code, 
+        t11.iso_code as CURRENCYISOCODE, 
+        t11.implied_decimal as CURRENCYIMPLIEDDECIMAL, 
+	t1.AMOUNT_FREE as amountFree,
+	t1.RANGE_ORIGIN as rangeOrigin,
+	t1.RANGE_TERMINUS as rangeTerminus
+from
+	RATE_UNIT_CR t1
+	inner join RATE_CLASS_KEY t2 on t1.RATE_CLASS = t2.RATE_CLASS
+        inner join (select reseller_id, major_version_num, reseller_version_id from reseller_version where reseller_version_id = {0}) tReseller on t1.reseller_version_id = tReseller.Reseller_Version_Id
+        inner join (select reseller_version_id, service_version_id, major_version_num, minor_version_num, reseller_id from reseller_version) tBaseVersion on tReseller.Reseller_Id = tBaseVersion.Reseller_Id  
+                and tReseller.Major_Version_Num = tBaseVersion.Major_Version_Num 
+                and tBaseVersion.Minor_Version_Num = 0 
+	inner join RATE_CLASS_REF t3 on t1.RATE_CLASS = t3.RATE_CLASS
+		and t3.SERVICE_VERSION_ID = tBaseVersion.SERVICE_VERSION_ID
+	inner join RATE_CLASS_VALUES t4 on t1.RATE_CLASS = t4.RATE_CLASS
+		and t4.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+	inner join UNIT_CR_ITEM_KEY t5 on t1.UNIT_CR_ID = t5.UNIT_CR_ID
+	inner join UNIT_CR_ITEM_VALUES t6 on t1.UNIT_CR_ID = t6.UNIT_CR_ID
+		and t6.LANGUAGE_CODE = t4.LANGUAGE_CODE
+		and t6.RESELLER_VERSION_ID = tBaseVersion.RESELLER_VERSION_ID
+	inner join UNIT_CR_ITEM_REF t7 on t1.UNIT_CR_ID = t7.UNIT_CR_ID
+		and t7.RESELLER_VERSION_ID = tBaseVersion.RESELLER_VERSION_ID
+	inner join BILLING_FREQUENCY_REF t8 on t1.BILLING_FREQUENCY = t8.BILLING_FREQUENCY
+	inner join BILLING_FREQUENCY_VALUES t9 on t1.BILLING_FREQUENCY = t9.BILLING_FREQUENCY
+		and t9.LANGUAGE_CODE = t4.LANGUAGE_CODE
+        left outer join rate_currency_key t10 on t1.currency_code = t10.currency_code 
+        left outer join rate_currency_ref t11 on t10.currency_code = t11.currency_code 
+                and t11.service_version_id = tBaseVersion.SERVICE_VERSION_ID 
+        left outer join rate_currency_values t12 on t12.currency_code = t11.currency_code 
+                and t12.service_version_id = t11.service_version_id 
+                and t12.language_code = t4.language_code 
+where
+	t4.LANGUAGE_CODE = {2}

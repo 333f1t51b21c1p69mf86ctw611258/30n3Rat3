@@ -1,0 +1,5 @@
+select
+	t1.JNL_START_DT as jnlStartDt,
+	t1.JNL_END_DT as jnlEndDt
+from
+	JNL_CYCLE t1

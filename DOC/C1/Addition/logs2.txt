@@ -1,0 +1,277 @@
+MANAGER:upm1:mshell> list_jobs -mon sdp1
+
+MANAGER:upm1:mshell>
+
+
+MANAGER:upm1:mshell>
+
+
+MANAGER:upm1:mshell>
+
+
+MANAGER:upm1:mshell> list_running_jobs -mon sdp1
+
+SDP       MAIN1          172.17.201.48     database  recomp_inv_object        --                                    ccdb
+      COMPLETE       OK        12:30:13.560   12:30:17.404   16:30:00.000   0:0:3.844
+
+
+SDP       MAIN1          172.17.201.48     database  backup_level1            --                                    main
+      COMPLETE       OK        12:30:00.016   12:31:06.181   18:30:00.000   0:1:6.165
+
+
+SDP       MAIN1          172.17.201.48     database  backup_level1            --                                    pcat
+      COMPLETE       OK        12:31:06.181   12:31:53.418   18:30:00.000   0:0:47.237
+
+
+SDP       MAIN1          172.17.201.48     database  backup_level1            --                                    ccdb
+      COMPLETE       OK        12:31:53.418   12:32:37.125   18:30:00.000   0:0:43.707
+
+
+SDP       MAIN1          172.17.201.48     database  tape_backup_hist         --
+      PROC_RESULT    --        00:06:45.247   00:06:47.233   --             0:0:1.986
+
+
+SDP       MAIN1          172.17.201.48     database  check_cur_ver            --
+      COMPLETE       OK        15:30:00.026   15:30:01.187   16:00:00.000   0:0:1.161
+
+
+SDP       MAIN1          172.17.201.48     config    up_conf-filedatacollect  --
+      COMPLETE       OK        15:03:00.011   15:03:03.656   18:03:00.000   0:0:3.645
+
+
+SDP       MAIN1          172.17.201.48     log       sdpmon-logrotate         --
+      COMPLETE       OK        14:45:00.574   14:45:01.404   15:45:00.000   0:0:0.830
+
+
+SDP       MAIN1          172.17.201.48     log       sdpmon_debug-logrotate   --
+      COMPLETE       OK        14:45:00.589   14:45:01.484   15:45:00.000   0:0:0.895
+
+
+SDP       MAIN1          172.17.201.48     log       msf-logrotate            --
+      COMPLETE       OK        15:10:00.096   15:10:00.921   16:10:00.000   0:0:0.825
+
+
+SDP       MAIN1          172.17.201.48     applicationreload_environment       --
+       COMPLETE       OK        15:30:00.026   15:30:01.182   15:40:00.000   0:0:1.156
+(END)
+
+
+
+login as: root
+root@10.149.3.15's password:
+Last login: Thu Mar 20 15:29:00 2014 from 172.17.201.5
+
+root@VNPC1RT-upm1 ~]#mshell
+
+Login: secadmin
+Password:
+**************************************************************************************
+*                                                                                    *
+*                                                                                    *
+*  Welcome to Unified Platform !!!                                                   *
+*                                                                                    *
+*                                                                                    *
+*                                                                                    *
+**************************************************************************************
+
+
+MANAGER:upm1:mshell> list_jobs -mon sdp1
+
+MANAGER:upm1:mshell>
+
+
+MANAGER:upm1:mshell>
+
+
+MANAGER:upm1:mshell>
+
+
+MANAGER:upm1:mshell> list_running_jobs -mon sdp1
+
+MANAGER:upm1:mshell> list_jobs -mon sdp1
+
+MANAGER:upm1:mshell> list_workflow -mon sdp1
+Command: list_workflow is invalid. Type help for a list of supported commands
+
+MANAGER:upm1:mshell> list_workflows -mon sdp1
+
+Workflow Listing
+
+
+
+
+
+ Site Name  NodeClass  NodeName        NodeInstance       Group         Name                      TimeZone                               State    NextFireTime         Valid      Blackout
+
+ VNPC1RT    SDP        MAIN1           172.17.201.48      application   continuous_process_start  --                                     ENABLED                       VALID      --
+
+ VNPC1RT    SDP        MAIN1           172.17.201.48      application   continuous_process_stop   --                                     ENABLED                       VALID      --
+
+ VNPC1RT    SDP        MAIN1           172.17.201.48      application   dr_process_start          --                                     ENABLED                       VALID      --
+
+ VNPC1RT    SDP        MAIN1           172.17.201.48      application   refresh_workflow          --                                     ENABLED                       VALID      --
+
+ VNPC1RT    SDP        MAIN1           172.17.201.48      database      cv_post_rcs_jobs          --                                     ENABLED                       VALID      --
+
+ VNPC1RT    SDP        MAIN1           172.17.201.48      database      cv_pre_rcs_jobs           --                                     ENABLED                       VALID      --
+
+ VNPC1RT    SDP        MAIN1           172.17.201.48      database      ora_night_jobs            --                                     ENABLED  00:00:00 03/21/2014  VALID      --
+
+ VNPC1RT    SDP        MAIN1           172.17.201.48      database      ora_periodics             --                                     ENABLED                       VALID      --
+
+ VNPC1RT    SDP        MAIN1           172.17.201.48      database      ora_purge                 --                                     ENABLED                       VALID      --
+
+ VNPC1RT    SDP        MAIN1           172.17.201.48      database      ora_tape_backup           --                                     ENABLED                       VALID      --
+
+ VNPC1RT    SDP        MAIN1           172.17.201.48      log           msf-logtransfer           --                                     ENABLED                       VALID      --
+
+MANAGER:upm1:mshell> list_running_workflows -mon sdp1
+Running Job Listing
+
+
+
+NodeClass NodeName       NodeInstance      Group     Name                     TimeZone                              Instance       State          Status    Start          End            NextFireTime   Duration
+
+MANAGER:upm1:mshell> list_inventory
+Pass the Inventory Data Type
+
+MANAGER:upm1:mshell> list_inventory_type
+#assign elements = elements>
+
+LIST INVENTORY TYPE
+
+NodeClass NodeName       NodeInstance      Name
+MANAGER   MANAGER1       172.17.201.7      disk
+MANAGER   MANAGER1       172.17.201.7      software
+MANAGER   MANAGER1       172.17.201.7      memory
+MANAGER   MANAGER1       172.17.201.7      networkadaptor
+MANAGER   MANAGER1       172.17.201.7      processor
+MANAGER   MANAGER1       172.17.201.7      switch
+MANAGER   MANAGER1       172.17.201.7      port
+
+MANAGER:upm1:mshell> list_inventory -inv memory
+SiteID    NodeClass NodeName       NodeInstance   Name           TotalSize   SwapSize
+VNPC1RT   MANAGER   upm1           172.17.201.7   --             24361MB     2047MB
+VNPC1RT   ONRATER   slu2           172.17.201.26  --             24223MB     8220MB
+VNPC1RT   SDP       sdp1           172.17.201.48  mem0           63488MB     -- 
+VNPC1RT   SDP       sdp2           172.17.201.49  mem0           63488MB     -- 
+VNPC1RT   SGU       sgu1a          172.17.202.62  --             3903MB      4110MB
+VNPC1RT   SGU       sgu1b          172.17.202.63  --             3903MB      4110MB
+
+MANAGER:upm1:mshell> list_inventory -inv networkadaptor
+SiteID    NodeClass NodeName       NodeInstance   Name        MaxSpeed    Duplex
+VNPC1RT   ONRATER   slu2           172.17.201.26  eth1        10 Mbit     half d
+VNPC1RT   ONRATER   slu2           172.17.201.26  eth0        10 Mbit     half d
+VNPC1RT   SDP       sdp1           172.17.201.48  ent4        --          --     Base-TX PCI-X Adapter
+VNPC1RT   SDP       sdp1           172.17.201.48  ent5        --          --     Base-TX PCI-X Adapter
+VNPC1RT   SDP       sdp1           172.17.201.48  ent9        --          --     Base-TX PCI-X Adapter
+VNPC1RT   SDP       sdp1           172.17.201.48  ent10       --          --     Base-TX PCI-X Adapter
+VNPC1RT   SDP       sdp2           172.17.201.49  ent5        --          --     Base-TX PCI-X Adapter
+VNPC1RT   SDP       sdp2           172.17.201.49  ent9        --          --     Base-TX PCI-X Adapter
+VNPC1RT   SDP       sdp2           172.17.201.49  ent4        --          --     Base-TX PCI-X Adapter
+VNPC1RT   SDP       sdp2           172.17.201.49  ent10       --          --     Base-TX PCI-X Adapter
+VNPC1RT   SGU       sgu1a          172.17.202.62  eth3        10 Mbit     full d
+VNPC1RT   SGU       sgu1a          172.17.202.62  eth1        10 Mbit     half d
+VNPC1RT   SGU       sgu1a          172.17.202.62  eth2        10 Mbit     full d
+VNPC1RT   SGU       sgu1a          172.17.202.62  eth0        10 Mbit     half d
+VNPC1RT   SGU       sgu1b          172.17.202.63  eth2        10 Mbit     full d
+VNPC1RT   SGU       sgu1b          172.17.202.63  eth1        10 Mbit     half d
+VNPC1RT   SGU       sgu1b          172.17.202.63  eth3        10 Mbit     full d
+VNPC1RT   SGU       sgu1b          172.17.202.63  eth0        10 Mbit     half d
+
+MANAGER:upm1:mshell> list_inventory -inv software
+
+MANAGER:upm1:mshell> list_files -mon sdp1
+ List Files
+ NodeClass  NodeName        NodeInstance       Name                                          File            Timestamp
+
+ SDP        MAIN1           172.17.201.48      backup                                        --              20:36 09/26/2013
+ SDP        MAIN1           172.17.201.48      graphs                                        --              20:36 09/26/2013
+ SDP        MAIN1           172.17.201.48      logcollection                                 --              20:36 09/26/2013
+ SDP        MAIN1           172.17.201.48      restore                                       --              20:36 09/26/2013
+
+MANAGER:upm1:mshell> list_files -mon sdp1 -d logcollection
+ List Files
+ NodeClass  NodeName        NodeInstance       Name                                          File            Timestamp
+
+MANAGER:upm1:mshell> list_files -mon sgu1a
+No Matching Data Found, Please try a different command.
+
+MANAGER:upm1:mshell> version
+
+NodeClass NodeName       NodeInstance      Platform       OS Version               OS Model    OS Arch   App Version  TC     Build Count         Build Date     
+MANAGER   MANAGER1       172.17.201.7      Linux          2.6.18-8.el5PAE          i686        i386      4.18.0       1.0.0  1                   09/14/2012 10:37
+
+
+MANAGER:upm1:mshell> clear
+Command: clear is invalid. Type help for a list of supported commands
+
+MANAGER:upm1:mshell> status -mon sdp1
+Site Name NodeClass NodeName       NodeInstance      Name                          Registered  State       Uptime
+VNPC1RT   SDP       MAIN1          172.17.201.48     ReportAgent                   true        Started     2 mths, 5 days, 20 hrs, 17 mins and 13 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     HostResourceMonitor           true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     AutoTriggerService            true        Started     2 mths, 5 days, 20 hrs, 17 mins and 36 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     HostProcessController         true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     HostJobManager                true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     AuditScriptManagerService     true        Started     2 mths, 5 days, 20 hrs, 17 mins and 14 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     EventTrapEmitter              true        Started     2 mths, 5 days, 20 hrs, 17 mins and 16 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     FileTransferManager           true        Started     2 mths, 5 days, 20 hrs, 17 mins and 23 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     BoyScoutService               true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     MonitorManager                true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     LogWorkflowManager            true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     EventManager                  true        Started     2 mths, 5 days, 20 hrs, 17 mins and 16 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     LogJobManager                 true        Started     2 mths, 5 days, 20 hrs, 17 mins and 23 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     ClientManager                 true        Started     2 mths, 5 days, 20 hrs, 17 mins and 17 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     WorkflowManager               true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     RepositoryManager             true        Started     2 mths, 5 days, 20 hrs, 17 mins and 15 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     ProcessHandler                true        Started     2 mths, 5 days, 20 hrs, 17 mins and 14 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     NetworkProcessController      true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     EventXMLReceiver              true        Started     2 mths, 5 days, 20 hrs, 17 mins and 16 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     EventObjectEmitter            true        Started     2 mths, 5 days, 20 hrs, 17 mins and 16 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     ApplicationResourceMonitor    true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     NetworkJobManager             true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     DatabaseJobManager            true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     ConfigurationManager          true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     PDP                           true        Started     2 mths, 5 days, 20 hrs, 17 mins and 14 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     ConfigRepositoryManager       true        Started     2 mths, 5 days, 20 hrs, 17 mins and 16 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     HostWorkflowManager           true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     DefaultWorkflowManager        true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     ConfigurationDataCollector    true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     NetworkWorkflowManager        true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     NetworkResourceMonitor        true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     InternalProcessController     true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     ApplicationJobManager         true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     ApplicationProcessController  true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     ProcessManager                true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     DatabaseResourceMonitor       true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     AuditProxyService             true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     ApplicationWorkflowManager    true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     InternalResourceMonitor       true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     Recovery                      true        Started     2 mths, 5 days, 20 hrs, 17 mins and 23 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     InternalJobManager            true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     InventoryCollector            true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     SessionAgent                  true        Started     2 mths, 5 days, 20 hrs, 17 mins and 23 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     EventObjectReceiver           true        Started     2 mths, 5 days, 20 hrs, 17 mins and 16 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     JobManager                    true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     DatabaseProcessController     true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     EventTrapReceiver             true        Started     2 mths, 5 days, 20 hrs, 17 mins and 16 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     DatabaseWorkflowManager       true        Started     2 mths, 5 days, 20 hrs, 17 mins and 24 secs
+VNPC1RT   SDP       MAIN1          172.17.201.48     EventLogEmitter               true        Started     2 mths, 5 days, 20 hrs, 17 mins and 16 secs
+
+MANAGER:upm1:mshell>
+
+
+MANAGER:upm1:mshell>
+
+
+MANAGER:upm1:mshell>
+
+
+MANAGER:upm1:mshell> ge
+generate_graph                       get_system_property
+generate_notif_stats_report          get_threshold_level
+generate_sitebook_topology_metadata  get_trace_level
+
+MANAGER:upm1:mshell> get_trace_level
+
+MANAGER:upm1:mshell>

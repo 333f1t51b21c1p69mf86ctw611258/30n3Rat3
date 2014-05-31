@@ -1,0 +1,11 @@
+select
+	t1.ACCESS_REGION as accessRegion,
+	t1.IS_DEFAULT as isDefault,
+	t1.IS_INTERNAL as isInternal,
+	t2.LANGUAGE_CODE as languageCode,
+	t2.DISPLAY_VALUE as displayValue
+from
+	ACCESS_REGION_REF t1
+	inner join ACCESS_REGION_VALUES t2 on t1.ACCESS_REGION = t2.ACCESS_REGION
+where
+	t2.LANGUAGE_CODE = {2}

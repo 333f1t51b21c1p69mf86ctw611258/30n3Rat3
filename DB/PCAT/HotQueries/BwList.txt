@@ -1,0 +1,23 @@
+select
+	t1.BW_LIST_ID as bwListId,
+	t2.RESELLER_VERSION_ID as resellerVersionId,
+	t5.SERVICE_VERSION_ID as serviceVersionId,
+	t6.DISPLAY_VALUE as ffListTypeKey,
+	t2.FF_LIST_TYPE_ID as ffListTypeId,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	BW_LIST_KEY t1
+	inner join BW_LIST_REF t2 on t1.BW_LIST_ID = t2.BW_LIST_ID
+	inner join BW_LIST_VALUES t3 on t2.BW_LIST_ID = t3.BW_LIST_ID
+		and t2.RESELLER_VERSION_ID = t3.RESELLER_VERSION_ID
+	inner join FF_LIST_TYPE_KEY t4 on t2.FF_LIST_TYPE_ID = t4.FF_LIST_TYPE_ID
+	inner join FF_LIST_TYPE_REF t5 on t4.FF_LIST_TYPE_ID = t5.FF_LIST_TYPE_ID
+                and t5.SERVICE_VERSION_ID = {1}
+	inner join FF_LIST_TYPE_VALUES t6 on t4.FF_LIST_TYPE_ID = t6.FF_LIST_TYPE_ID
+		and t6.SERVICE_VERSION_ID = t5.SERVICE_VERSION_ID
+                and t6.LANGUAGE_CODE = t3.LANGUAGE_CODE
+where
+	t2.RESELLER_VERSION_ID = {0}
+	and t3.LANGUAGE_CODE = {2}

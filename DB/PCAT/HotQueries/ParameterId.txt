@@ -1,0 +1,10 @@
+select
+	t1.PARAM_ID as paramId,
+	t2.LANGUAGE_CODE as languageCode,
+	t2.DISPLAY_VALUE as displayValue,
+	t2.DESCRIPTION as description
+from
+	PARAMETER_ID_REF t1
+	inner join PARAMETER_ID_VALUES t2 on t1.PARAM_ID = t2.PARAM_ID
+where
+	t2.LANGUAGE_CODE = {2}

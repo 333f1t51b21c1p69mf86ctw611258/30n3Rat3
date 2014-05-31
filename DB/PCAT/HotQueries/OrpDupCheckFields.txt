@@ -1,0 +1,6 @@
+select
+	t1.ACTIVITY_TYPE as activityType,
+	t1.FIELD_NAME as fieldName,
+	t1.FIELD_ORDER as fieldOrder
+from
+	ORP_DUP_CHECK_FIELDS t1

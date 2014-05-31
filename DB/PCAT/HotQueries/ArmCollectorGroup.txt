@@ -1,0 +1,6 @@
+select
+	t1.GROUP_ID as groupId,
+	t1.MIN_SCENARIO_ID as minScenarioId,
+	t1.MAX_SCENARIO_ID as maxScenarioId
+from
+	ARM_COLLECTOR_GROUP t1

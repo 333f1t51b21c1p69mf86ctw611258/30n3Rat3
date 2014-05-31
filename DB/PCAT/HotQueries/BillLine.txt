@@ -1,0 +1,32 @@
+select
+	t1.LINE_ID as lineId,
+	t1.TEST_FLAG as testFlag,
+	t1.TAG as tag,
+	t1.HP_LINE_TYPE as hpLineType,
+	t1.HP_PEN_WIDTH as hpPenWidth,
+	t1.SCREEN_VERSION as screenVersion,
+	t1.AFP_LINE_WIDTH as afpLineWidth,
+	t1.AFP_LINE_NAME as afpLineName,
+	t4.DISPLAY_VALUE as winPenStyle,
+	t1.WIN_PEN_WIDTH as winPenWidth,
+	t6.DISPLAY_VALUE as winPenColor,
+	t1.PDF_LINE_TYPE as pdfLineType,
+	t1.PDF_PEN_WIDTH as pdfPenWidth,
+	t2.LANGUAGE_CODE as languageCode,
+	t2.DISPLAY_VALUE as displayValue
+from
+	BILL_LINE_REF t1
+	inner join BILL_LINE_VALUES t2 on t1.LINE_ID = t2.LINE_ID
+		and t1.TEST_FLAG = t2.TEST_FLAG
+	left outer join GENERIC_ENUMERATION_REF t3 on t3.enumeration_key = lower(''WIN_PEN_STYLE'')
+		and t3.value = t1.WIN_PEN_STYLE
+	left outer join GENERIC_ENUMERATION_VALUES t4 on t4.enumeration_key = t3.enumeration_key
+		and t4.value = t3.value
+		and t4.LANGUAGE_CODE = t2.LANGUAGE_CODE
+	left outer join GENERIC_ENUMERATION_REF t5 on t5.enumeration_key = lower(''WIN_PEN_COLOR'')
+		and t5.value = t1.WIN_PEN_COLOR
+	left outer join GENERIC_ENUMERATION_VALUES t6 on t6.enumeration_key = t5.enumeration_key
+		and t6.value = t5.value
+		and t6.LANGUAGE_CODE = t2.LANGUAGE_CODE
+where
+	t2.LANGUAGE_CODE = {2}

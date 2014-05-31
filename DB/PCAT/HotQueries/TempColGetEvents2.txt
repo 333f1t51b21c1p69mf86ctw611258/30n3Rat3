@@ -1,0 +1,26 @@
+select
+	t3.DISPLAY_VALUE as eventCategory,
+	t1.EVENT as event,
+	t1.ACCOUNT_NO as accountNo,
+	t1.BILL_REF_NO as billRefNo,
+	t1.BILL_REF_RESETS as billRefResets,
+	t1.OPEN_ITEM_ID as openItemId,
+	t1.EVENT_PROCESS as eventProcess,
+	t1.DIFF as diff,
+	t1.PROCESS_DATE as processDate,
+	t1.NUM as num,
+	t1.NAME as name,
+	t1.CONTACT1_NAME as contact1Name,
+	t1.CONTACT1_PHONE as contact1Phone,
+	t1.TRACKING_ID as trackingId,
+	t1.TRACKING_ID_SERV as trackingIdServ,
+	t1.ACCOUNT_STATUS as accountStatus,
+	t1.PROCESS_IF_DISC as processIfDisc,
+	t1.SESSION_ID as sessionId
+from
+	TEMP_COL_GET_EVENTS2 t1
+	left outer join GENERIC_ENUMERATION_REF t2 on t2.enumeration_key = lower(''EVENT_CATEGORY'')
+		and t2.value = t1.EVENT_CATEGORY
+	left outer join GENERIC_ENUMERATION_VALUES t3 on t3.enumeration_key = t2.enumeration_key
+		and t3.value = t2.value
+		and t3.LANGUAGE_CODE = {2}

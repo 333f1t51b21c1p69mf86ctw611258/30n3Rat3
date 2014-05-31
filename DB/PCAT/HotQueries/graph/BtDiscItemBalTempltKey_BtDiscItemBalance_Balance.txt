@@ -1,0 +1,15 @@
+select
+	t1.BAL_TEMPLATE_ID as balTemplateId,
+	t1.BALANCE_ID as balanceId,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t2.DISPLAY_VALUE as name,
+	t2.DESCRIPTION as description,
+	t1.AMOUNT as amount,
+	t1.AMOUNT_IMPLIED_DECIMAL as impliedDecimal
+from
+	BT_DISC_ITEM_BALANCE t1
+	inner join BALANCE_VALUES t2 on t1.BALANCE_ID = t2.BALANCE_ID
+		and t2.LANGUAGE_CODE = {2}
+		and t2.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+where
+	t1.RESELLER_VERSION_ID = {0}

@@ -1,0 +1,17 @@
+select
+	t3.SERVICE_VERSION_ID as serviceVersionId,
+	t4.DISPLAY_VALUE as geoAreaKey,
+	t1.GEO_AREA_ID as geoAreaId,
+	t6.DISPLAY_VALUE as ctcScheduleRef,
+	t1.SCHEDULE_ID as scheduleId
+from
+	CTC_GEO_AREA_SCHEDULE t1
+	inner join GEO_AREA_KEY t2 on t1.GEO_AREA_ID = t2.GEO_AREA_ID
+	inner join GEO_AREA_REF t3 on t2.GEO_AREA_ID = t3.GEO_AREA_ID
+		and t3.SERVICE_VERSION_ID = {1}
+	inner join GEO_AREA_VALUES t4 on t2.GEO_AREA_ID = t4.GEO_AREA_ID
+		and t4.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+		and t4.LANGUAGE_CODE = {2}
+	inner join CTC_SCHEDULE_REF t5 on t1.SCHEDULE_ID = t5.SCHEDULE_ID
+	inner join CTC_SCHEDULE_VALUES t6 on t5.SCHEDULE_ID = t6.SCHEDULE_ID
+		and t6.LANGUAGE_CODE = t4.LANGUAGE_CODE

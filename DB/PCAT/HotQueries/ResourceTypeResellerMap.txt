@@ -1,0 +1,12 @@
+select
+	t3.DISPLAY_VALUE as resourceType,
+	t1.RESELLER_VERSION_ID as resellerVersionId
+from
+	RESOURCE_TYPE_RESELLER_MAP t1
+	left outer join GENERIC_ENUMERATION_REF t2 on t2.enumeration_key = lower(''RESOURCE_TYPE'')
+		and t2.value = t1.RESOURCE_TYPE
+	left outer join GENERIC_ENUMERATION_VALUES t3 on t3.enumeration_key = t2.enumeration_key
+		and t3.value = t2.value
+		and t3.LANGUAGE_CODE = {2}
+where
+	t1.RESELLER_VERSION_ID = {0}

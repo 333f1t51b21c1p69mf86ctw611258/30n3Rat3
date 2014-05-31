@@ -1,0 +1,5 @@
+select
+	t1.HOST_NAME as hostName,
+	t1.LAST_SEQ_NO as lastSeqNo
+from
+	MCAP_FLASH_SEQUENCE_NUMBERS t1

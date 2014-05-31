@@ -1,0 +1,16 @@
+select
+	t1.PRODUCT_LINE_ID as productLineId,
+	t1.ELEMENT_ID as elementId,
+	t1.TYPE_ID_USG as typeIdUsg,
+	t1.ACCOUNT_NO_EXT as accountNoExt,
+	t1.SUBSCR_NO_EXT as subscrNoExt,
+	t1.PE_DESCR as peDescr,
+	t1.TYPE_DESCR as typeDescr,
+	t1.TRANS_DT as transDt,
+	t1.CUSTOMER_TAG as customerTag,
+	t1.UNITS as units,
+	t1.BASE_AMT as baseAmt,
+	t1.AMOUNT as amount,
+	t1.ACTIVE_DATE as activeDate
+from
+	TEMP_BED2 t1

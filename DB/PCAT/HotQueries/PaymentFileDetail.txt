@@ -1,0 +1,11 @@
+select
+	t1.CLEARING_HOUSE_ID as clearingHouseId,
+	t1.FIELD_ID as fieldId,
+	t1.SRC_TABLE as srcTable,
+	t1.SRC_FIELD as srcField,
+	t1.FIELD_REC_POS as fieldRecPos,
+	t1.FIELD_LENGTH as fieldLength,
+	t1.FIELD_TYPE as fieldType,
+	t1.FIELD_FORMAT as fieldFormat
+from
+	PAYMENT_FILE_DETAIL t1

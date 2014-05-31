@@ -1,0 +1,17 @@
+select
+	t1.URL_TYPE_ID as urlTypeId,
+	t4.DISPLAY_VALUE as ctcContentTypeRef,
+	t1.CONTENT_TYPE_ID as contentTypeId,
+	t1.P_URL_TYPE_ID as pUrlTypeId,
+	t1.IS_DEFAULT as isDefault,
+	t1.IS_INTERNAL as isInternal,
+	t2.LANGUAGE_CODE as languageCode,
+	t2.DISPLAY_VALUE as displayValue
+from
+	CTC_URL_TYPE_REF t1
+	inner join CTC_URL_TYPE_VALUES t2 on t1.URL_TYPE_ID = t2.URL_TYPE_ID
+	inner join CTC_CONTENT_TYPE_REF t3 on t1.CONTENT_TYPE_ID = t3.CONTENT_TYPE_ID
+	inner join CTC_CONTENT_TYPE_VALUES t4 on t3.CONTENT_TYPE_ID = t4.CONTENT_TYPE_ID
+		and t4.LANGUAGE_CODE = t2.LANGUAGE_CODE
+where
+	t2.LANGUAGE_CODE = {2}

@@ -1,0 +1,55 @@
+select
+	t1.TAX_RATES_VAT_ID as taxRatesVatId,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t3.DISPLAY_VALUE as taxPkgInstIdKey,
+	t1.TAX_PKG_INST_ID as taxPkgInstId,
+	t6.DISPLAY_VALUE as rateCurrencyKey,
+	t6.SERVICE_VERSION_ID as serviceVersionId,
+	t7.ISO_CODE as currencyIsoCode,
+	t7.IMPLIED_DECIMAL as currencyImpliedDecimal,
+	t1.CURRENCY_CODE as currencyCode,
+	t1.FIXED_AMT as fixedAmt,
+	t16.display_value as taxClassKey,
+	t1.RATE as rate,
+	t11.DISPLAY_VALUE as taxTypeCodeKey,
+	t1.TAX_TYPE_CODE as taxTypeCode,
+	t14.DISPLAY_VALUE as billingFrequencyRef,
+	t1.BILLING_FREQUENCY as billingFrequency,
+	t1.RANGE_TERMINUS as rangeTerminus
+from
+	TAX_RATES_VAT t1
+	inner join TAX_PKG_INST_ID_KEY t2 on t1.TAX_PKG_INST_ID = t2.TAX_PKG_INST_ID
+        inner join (select reseller_id, major_version_num, reseller_version_id from reseller_version where reseller_version_id = {0}) tReseller on t1.reseller_version_id = tReseller.Reseller_Version_Id
+        inner join (select reseller_version_id, service_version_id, major_version_num, minor_version_num, reseller_id from reseller_version) tBaseVersion on tReseller.Reseller_Id = tBaseVersion.Reseller_Id  
+            and tReseller.Major_Version_Num = tBaseVersion.Major_Version_Num 
+            and tBaseVersion.Minor_Version_Num = 0 
+	inner join TAX_PKG_INST_ID_VALUES t3 on t1.TAX_PKG_INST_ID = t3.TAX_PKG_INST_ID
+		and t3.RESELLER_VERSION_ID = tBaseVersion.RESELLER_VERSION_ID
+	inner join TAX_PKG_INST_ID_REF t4 on t1.TAX_PKG_INST_ID = t4.TAX_PKG_INST_ID
+		and t4.RESELLER_VERSION_ID = tBaseVersion.RESELLER_VERSION_ID
+	left outer join RATE_CURRENCY_KEY t5 on t1.CURRENCY_CODE = t5.CURRENCY_CODE
+	left outer join RATE_CURRENCY_VALUES t6 on t1.CURRENCY_CODE = t6.CURRENCY_CODE
+		and t6.LANGUAGE_CODE = t3.LANGUAGE_CODE
+		and t6.SERVICE_VERSION_ID = tBaseVersion.SERVICE_VERSION_ID
+	left outer join RATE_CURRENCY_REF t7 on t1.CURRENCY_CODE = t7.CURRENCY_CODE
+		and t7.SERVICE_VERSION_ID = t6.SERVICE_VERSION_ID
+	left outer join BILLING_FREQUENCY_REF t8 on t1.BILLING_FREQUENCY = t8.BILLING_FREQUENCY
+	left outer join BILLING_FREQUENCY_VALUES t9 on t1.BILLING_FREQUENCY = t9.BILLING_FREQUENCY
+		and t9.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	inner join TAX_TYPE_CODE_KEY t10 on t1.TAX_TYPE_CODE = t10.TAX_TYPE_CODE
+	inner join TAX_TYPE_CODE_VALUES t11 on t1.TAX_TYPE_CODE = t11.TAX_TYPE_CODE
+		and t11.LANGUAGE_CODE = t3.LANGUAGE_CODE
+		and t11.RESELLER_VERSION_ID = tBaseVersion.RESELLER_VERSION_ID
+	inner join TAX_TYPE_CODE_REF t12 on t1.TAX_TYPE_CODE = t12.TAX_TYPE_CODE
+		and t12.RESELLER_VERSION_ID = tBaseVersion.RESELLER_VERSION_ID
+	left outer join BILLING_FREQUENCY_REF t13 on t1.BILLING_FREQUENCY = t13.BILLING_FREQUENCY
+	left outer join BILLING_FREQUENCY_VALUES t14 on t1.BILLING_FREQUENCY = t14.BILLING_FREQUENCY
+		and t14.LANGUAGE_CODE = t3.LANGUAGE_CODE
+        inner join TAX_CLASS_KEY t15 on t1.TAX_CLASS = t15.TAX_CLASS
+	inner join TAX_CLASS_VALUES t16 on t1.TAX_CLASS = t16.TAX_CLASS
+		and t16.LANGUAGE_CODE = t3.LANGUAGE_CODE
+		and t16.RESELLER_VERSION_ID = tbaseVersion.RESELLER_VERSION_ID
+	inner join TAX_CLASS_REF t17 on t1.TAX_CLASS = t17.TAX_CLASS
+		and t17.RESELLER_VERSION_ID = t16.RESELLER_VERSION_ID 
+where
+	t3.LANGUAGE_CODE = {2}

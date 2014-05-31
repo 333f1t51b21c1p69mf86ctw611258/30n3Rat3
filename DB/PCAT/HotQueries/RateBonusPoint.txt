@@ -1,0 +1,15 @@
+select
+	t1.BONUS_POINT_ID as bonusPointId,
+	t1.CURRENCY_CODE as currencyCode,
+	t1.CONVERT_FACTOR as convertFactor,
+	t3.DISPLAY_VALUE as operator,
+	t1.IMPLIED_DECIMALS as impliedDecimals,
+	t1.DATE_ACTIVE as dateActive,
+	t1.DATE_INACTIVE as dateInactive
+from
+	RATE_BONUS_POINT t1
+	left outer join GENERIC_ENUMERATION_REF t2 on t2.enumeration_key = lower(''OPERATOR'')
+		and t2.value = t1.OPERATOR
+	left outer join GENERIC_ENUMERATION_VALUES t3 on t3.enumeration_key = t2.enumeration_key
+		and t3.value = t2.value
+		and t3.LANGUAGE_CODE = {2}

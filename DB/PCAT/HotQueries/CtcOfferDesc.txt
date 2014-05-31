@@ -1,0 +1,15 @@
+select
+	t1.OFFER_ID as offerId,
+	t4.DISPLAY_VALUE as languageCodeRef,
+	t1.LANG_CODE as langCode,
+	t1.ALT_NAME as altName,
+	t1.DISPLAY_NAME as displayName,
+	t1.DESCRIPTION as description,
+	t1.EXT_DESCRIPTION as extDescription,
+	t1.MARKETING_MSG as marketingMsg
+from
+	CTC_OFFER_DESC t1
+	inner join CTC_OFFER t2 on t1.OFFER_ID = t2.OFFER_ID
+	inner join LANGUAGE_CODE_REF t3 on t1.LANG_CODE = t3.LANGUAGE_CODE
+	inner join LANGUAGE_CODE_VALUES t4 on t3.LANGUAGE_CODE = t4.INPUT_LANGUAGE
+		and t4.LANGUAGE_CODE = {2}

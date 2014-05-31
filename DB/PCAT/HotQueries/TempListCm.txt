@@ -1,0 +1,24 @@
+select
+	t1.ACCOUNT_NO as accountNo,
+	t1.AMOUNT as amount,
+	t1.BILL_REF_NO as billRefNo,
+	t1.BILL_REF_RESETS as billRefResets,
+	t1.SCENARIO_ID as scenarioId,
+	t1.SCENARIO_MODIFIED_DATE as scenarioModifiedDate,
+	t1.COL_BALANCE_DUE as colBalanceDue,
+	t1.CURRENCY_CODE as currencyCode,
+	t1.VIP_CODE as vipCode,
+	t1.COL_ACTIVE_FLAG as colActiveFlag,
+	t1.NEXT_EVENT_NO as nextEventNo,
+	t1.COLLECTION_STATUS as collectionStatus,
+	t1.SCHEDULED_DATE as scheduledDate,
+	t1.DISPLAY_VALUE as displayValue,
+	t1.TRACKING_ID as trackingId,
+	t1.TRACKING_ID_SERV as trackingIdServ,
+	t1.COLLECTOR_ID as collectorId,
+	t1.GROUP_ID as groupId,
+	t1.FIRST_NAME as firstName,
+	t1.LAST_NAME as lastName,
+	t1.OPEN_ITEM_ID as openItemId
+from
+	TEMP_LIST_CM t1

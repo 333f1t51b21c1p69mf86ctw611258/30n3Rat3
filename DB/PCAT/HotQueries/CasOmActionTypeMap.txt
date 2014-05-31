@@ -1,0 +1,22 @@
+select
+	t1.ROW_ID as rrowId,
+	t3.DISPLAY_VALUE as apactionRef,
+	t1.CAS_ACTION_ID as casActionId,
+	t5.DISPLAY_VALUE as casClientActionRef,
+	t1.CLIENT_ACTION_ID as clientActionId,
+	t1.PRIMARY_OFFER_ID as primaryOfferId,
+	t1.MEMBER_TYPE as memberType,
+	t1.MEMBER_ID as memberId,
+	t1.MEMBER_ID2 as memberId2,
+	t1.ACTION_LEVEL as actionLevel,
+	t1.SEQUENCE as sequence,
+	t1.RESCHEDULE_INTERVAL as rescheduleInterval,
+	t1.ACTION_CODE as actionCode
+from
+	CAS_OM_ACTION_TYPE_MAP t1
+	inner join APACTION_REF t2 on t1.CAS_ACTION_ID = t2.ACTION_ID
+	inner join APACTION_VALUES t3 on t2.ACTION_ID = t3.ACTION_ID
+		and t3.LANGUAGE_CODE = {2}
+	inner join CAS_CLIENT_ACTION_REF t4 on t1.CLIENT_ACTION_ID = t4.CLIENT_ACTION_ID
+	inner join CAS_CLIENT_ACTION_VALUES t5 on t4.CLIENT_ACTION_ID = t5.CLIENT_ACTION_ID
+		and t5.LANGUAGE_CODE = t3.LANGUAGE_CODE

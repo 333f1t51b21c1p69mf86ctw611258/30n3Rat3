@@ -1,0 +1,286 @@
+#This conforms with Release CCBS3.0 CDR format #no blank lines in between.
+#======================DO NOT CHANGE================================
+#Following 2 fields represent the number of fields present
+#in Balance, SharedBalance, Accumulators and SharedAccumulators .If num of Bal,Accumualtors Fields
+#are increased or decreased then these fields should be modified.
+#
+!NUM_OF_FIELDS_FOR_BAL 8
+!NUM_OF_FIELDS_FOR_ACCOUNT_BAL 4
+!NUM_OF_FIELDS_FOR_ACC 4
+!NUM_OF_FIELDS_FOR_ACCOUNT_ACC 4
+!NUM_OF_FIELDS_FOR_VERSION 2
+!NUM_OF_FIELDS_FOR_EXT 2
+#
+#
+#NOTE: balance_info will be expanded to the following fields in the
+# order specified.For balance 1 to max (40)(Any change in number
+# of field should change NUM_OF_FIELDS_FOR_BAL).Any Change here will
+# affect BALANCE_INFO length. 3120 = MAX_NUM_BALANCE * (6+30+16+16+2+1+1+6)
+#
+# Field Name Field length
+!BALANCE_ID 6
+!BALANCE_NAME 30
+!BALANCE 16
+!BALANCE_CHANGE 16
+!BALANCE_UNIT_TYPE 2
+!BALANCE_SIGN 1
+!BALANCE_TYPE 1
+!BALANCE_TARGET_ID 6
+#
+#NOTE: account_balance_info will be expanded to the following fields in the
+# order specified.For balance 1 to max (40)(Any change in number
+# of field should change NUM_OF_FIELDS_FOR_ACCOUNT_BAL).Any Change here will
+# affect ACCOUNT_BALANCE_INFO length. 2720 = MAX_NUM_BALANCE * (6+30+16+16)
+#
+# Field Name Field length
+!ACCOUNT_BALANCE_ID 6
+!ACCOUNT_BALANCE_NAME 30
+!ACCOUNT_BALANCE 16
+!ACCOUNT_BALANCE_CHANGE 16
+#
+#NOTE: accumulator_info will be expanded to the following fields in the
+# order specified.For accumulators 1 to max (30).(Any change in
+# number of field should change NUM_OF_FIELDS_FOR_ACC) Any Change here will
+# affect ACCUMULATOR_INFO len. 2040 = MAX_NUM_ACCUMULATORS * (6+30+16+16).
+#
+# Field Name Field length
+!ACCUMULATOR_ID 6
+!ACCUMULATOR_NAME 30
+!ACCUMULATOR 16
+!ACCUMULATOR_CHANGE 16
+#
+#
+#NOTE: account_accumulator_info will be expanded to the following fields in the
+# order specified.For accumulators 1 to max (30).(Any change in
+# number of field should change NUM_OF_FIELDS_FOR_ACCOUNT_ACC) Any Change here will
+# affect ACCOUNT_ACCUMULATOR_INFO len. 2040 = MAX_NUM_ACCUMULATORS * (6+30+16+16).
+#
+# Field Name Field length
+!ACCOUNT_ACCUMULATOR_ID 6
+!ACCOUNT_ACCUMULATOR_NAME 30
+!ACCOUNT_ACCUMULATOR 16
+!ACCOUNT_ACCUMULATOR_CHANGE 16
+#
+#NOTE: extension_info will be expanded to the following fields in the
+# order specified.For extension data 1 to max (10).(Any change in number
+# of field should change NUM_OF_EXTENSION). Any Change here will
+# affect EXTENSION_INFO len. 600(max) = NUM_OF_EXTENSION(max 10) * (30+30)
+!EXT_TOKEN_NAME 30
+!EXT_TOKEN_VALUE 30
+#
+#
+#NOTE: version_info will be expanded to the following fields in the order specified.
+# The max number of version is (10). Any change here will affect VERSION_INFO
+# 200 = MAX_NUM_OF_VERSION_NUMBER * (10+10)
+!VERSION_MAJOR 10
+!VERSION_MINOR 10
+#
+#
+#=========================================================================
+#
+#NOTE: FIELD_DELIMITER & SUB_FIELD_DELIMITER should not be the same character.
+#
+##########################################################################
+# ACTUAL CDR FORMAT #
+##########################################################################
+FIELD_DELIMITER                 '|'            
+SUB_FIELD_DELIMITER             '*'            
+TYPE_OF_CDR                     0                        1
+ACTIVITY_DIRECTION              1                        1
+ORIGINATE_OFFER_DATE            2                        8
+ORIGINATE_OFFER_TIME            10                      10
+ANSWERED_DATE                   20                       8
+ANSWERED_TIME                   28                      10
+DISCONNECT_DATE                 38                       8
+DISCONNECT_TIME                 46                      10
+REFERENCE                       56                      10
+ASSOC_CDR_REFERENCE             66                      10
+ORIGINATING_NUMBER              76                      30
+CALLING_NUMBER_PRESENTATION     106                      1
+DESTINATION_NUMBER              107                     30
+INCOMING_TRUNK_GROUP            137                      8
+OUTGOING_TRUNK_GROUP            145                      8
+PRIMARY_OFFER_ID                153                     10
+CLEAR_CAUSE                     163                      3
+ACTIVITY_BILLING_CODE           166                      3
+CDR_CALL_TYPE                   169                      3
+SUBSCRIBER_ID                   172                     30
+SUBSCRIBER_NO                   202                     30
+SUBSCRIBER_NO_RESETS            232                      5
+ACCOUNT_NO                      237                     30
+PARENT_ACCOUNT_NO               267                     30
+TARGET_BALANCE_ACCOUNT_NO       297                     30
+USER_SUBSCRIBER_NO              327                     30
+USER_SUBSCRIBER_NO_RESETS       357                      5
+TIME_ZONE                       362                     18
+TOTAL_USAGE                     380                      9
+USAGE_UNIT_TYPE                 389                      2
+TOTAL_CURRENCY_CHARGE           391                     16
+CURRENCY_UNIT_TYPE              407                      3
+TOTAL_NON_CURRENCY_CHARGE       410                     16
+CALLING_PARTY_CATEGORY          426                      3
+ORIGINAL_CALLED_NUMBER          429                     30
+REDIRECTING_NUMBER              459                     30
+REDIRECTING_INDICATOR           489                      2
+ORIGINAL_REDIRECTION_REASON     491                      2
+REDIRECTION_COUNTER             493                      2
+REDIRECTING_REASON              495                      2
+MSRN                            497                     30
+CELL_ID                         527                     15
+PRE_CALL_ANNOUNCEMENT_ID        542                      9
+TIME1_DURATION                  551                      6
+TIME2_DURATION                  557                      6
+TIME3_DURATION                  563                      6
+RECHARGE_EXP_OFFSET             569                      3
+RECHARGE_BATCH_NUM              572                     10
+RECHARGE_SERIAL_NUM             582                     10
+RECHARGE_FACE_VALUE             592                      8
+RECHARGE_RESULT_CODE            600                      2
+LOCATION_INDICATOR_PARTY_A      602                     16
+LOCATION_INDICATOR_PARTY_B      618                     16
+TIME1_FIRST_TARIFF_ID           634                      6
+TIME1_FIRST_TARIFF_CHARGE       640                     16
+TIME1_SECOND_TARIFF_ID          656                      6
+TIME1_SECOND_TARIFF_CHARGE      662                     16
+TIME1_THIRD_TARIFF_ID           678                      6
+TIME1_THIRD_TARIFF_CHARGE       684                     16
+TIME1_FOURTH_TARIFF_ID          700                      6
+TIME1_FOURTH_TARIFF_CHARGE      706                     16
+TIME1_FIFTH_TARIFF_ID           722                      6
+TIME1_FIFTH_TARIFF_CHARGE       728                     16
+TIME2_FIRST_TARIFF_ID           744                      6
+TIME2_FIRST_TARIFF_CHARGE       750                     16
+TIME2_SECOND_TARIFF_ID          766                      6
+TIME2_SECOND_TARIFF_CHARGE      772                     16
+TIME2_THIRD_TARIFF_ID           788                      6
+TIME2_THIRD_TARIFF_CHARGE       794                     16
+TIME2_FOURTH_TARIFF_ID          810                      6
+TIME2_FOURTH_TARIFF_CHARGE      816                     16
+TIME2_FIFTH_TARIFF_ID           832                      6
+TIME2_FIFTH_TARIFF_CHARGE       838                     16
+TIME3_FIRST_TARIFF_ID           854                      6
+TIME3_FIRST_TARIFF_CHARGE       860                     16
+TIME3_SECOND_TARIFF_ID          876                      6
+TIME3_SECOND_TARIFF_CHARGE      882                     16
+TIME3_THIRD_TARIFF_ID           898                      6
+TIME3_THIRD_TARIFF_CHARGE       904                     16
+TIME3_FOURTH_TARIFF_ID          920                      6
+TIME3_FOURTH_TARIFF_CHARGE      926                     16
+TIME3_FIFTH_TARIFF_ID           942                      6
+TIME3_FIFTH_TARIFF_CHARGE       948                     16
+CUG_CODE                        964                      8
+SHORT_DIAL_NUMBER               972                      9
+APPLICATION_ID                  981                      4
+APPLICATION_INITIAL_SUBTYPE     985                      4
+AUT_INITIAL                     989                      6
+BILLING_ID                      995                     20
+HOME_ZONE                       1015                     1
+MSC_ID                          1016                    30
+CELL_ID_OR_LAI                  1046                    16
+SLU_ID                          1062                     4
+PRE_POST_INDICATOR              1066                     1
+TIM1_TAR1_CHG_TYPE              1067                     1
+TIM1_TAR2_CHG_TYPE              1068                     1
+TIM1_TAR3_CHG_TYPE              1069                     1
+TIM1_TAR4_CHG_TYPE              1070                     1
+TIM1_TAR5_CHG_TYPE              1071                     1
+TIM2_TAR1_CHG_TYPE              1072                     1
+TIM2_TAR2_CHG_TYPE              1073                     1
+TIM2_TAR3_CHG_TYPE              1074                     1
+TIM2_TAR4_CHG_TYPE              1075                     1
+TIM2_TAR5_CHG_TYPE              1076                     1
+TIM3_TAR1_CHG_TYPE              1077                     1
+TIM3_TAR2_CHG_TYPE              1078                     1
+TIM3_TAR3_CHG_TYPE              1079                     1
+TIM3_TAR4_CHG_TYPE              1080                     1
+TIM3_TAR5_CHG_TYPE              1081                     1
+HLR_ID                          1082                     5
+OTHER_SYSTEM_ID                 1087                    30
+POSTPAID_ACCOUNT_NUMBER         1117                    15
+ACCOUNT_TYPE                    1132                     1
+ORP_DATE                        1133                     8
+ORP_TIME                        1141                    10
+TOTAL_CURRENCY_CHARGE_SERVER    1151                    16
+TOTAL_CURRENCY_CHARGE_TAX       1167                    16
+ORIGINATE_OFFER_DATETIME        1183                    19
+OR_ORIGIN                       1202                     1
+UTC_OFFSET                      1203                     4
+ORIGINAL_CHARGE_AMOUNT          1207                     8
+GSM_PROVIDER_ID                 1215                     5
+MARKUP_PERCENT                  1220                     4
+ORIGINAL_CURRENCY               1224                     3
+RECORD_SEQUENCE_NUMBER          1227                    16
+INT_EXT_OR_IND                  1243                     1
+TIM1_TAR1_CURR_CONV             1244                     1
+TIM1_TAR2_CURR_CONV             1245                     1
+TIM1_TAR3_CURR_CONV             1246                     1
+TIM1_TAR4_CURR_CONV             1247                     1
+TIM1_TAR5_CURR_CONV             1248                     1
+TIM2_TAR1_CURR_CONV             1249                     1
+TIM2_TAR2_CURR_CONV             1250                     1
+TIM2_TAR3_CURR_CONV             1251                     1
+TIM2_TAR4_CURR_CONV             1252                     1
+TIM2_TAR5_CURR_CONV             1253                     1
+TIM3_TAR1_CURR_CONV             1254                     1
+TIM3_TAR2_CURR_CONV             1255                     1
+TIM3_TAR3_CURR_CONV             1256                     1
+TIM3_TAR4_CURR_CONV             1257                     1
+TIM3_TAR5_CURR_CONV             1258                     1
+CURRENCY_CONV_RATE_TO_ACCT      1259                    16
+CURRENCY_CONV_RATE_TO_SUB       1275                    16
+TOTAL_PULSE_CHARGE              1291                     4
+TOTAL_PULSE_DURATION            1295                     4
+CURR_TRANS_ORIG_CHARGE          1299                    16
+CURR_TRANS_CONV_RATE            1315                    16
+CURR_TRANS_ORIG_CURR_CODE       1331                     3
+SUB_COS_CURR_CODE               1334                     3
+RECHARGE_ORIG_CURR_CODE         1337                     3
+RECHARGE_CONV_RATE              1340                    16
+RECHARGE_CONV_FACE_VALUE        1356                     8
+CALLING_CIRCLE_ID               1364                     6
+USAGE_OFFER_ID                  1370                     10 
+USAGE_PLAN_ID                   1380                     6
+AUT_FINAL                       1386                     6
+TARIFF_PLAN_ID                  1392                     6
+DISCOUNT_ITEM_ID                1398                     6
+DISCOUNT_PLAN_OFFER_ID          1404                     10
+NUMBER_OF_BALANCE               1414                     2
+BALANCE_INFO                    1416                  3120
+NUMBER_OF_ACCOUNT_BALANCE       4536                     2
+ACCOUNT_BALANCE_INFO            4538                  2720
+NUM_OF_ACCUMULATOR              7258                     2
+ACCUMULATOR_INFO                7260                  2040
+NUM_OF_ACCOUNT_ACCUMULATOR      9300                     2
+ACCOUNT_ACCUMULATOR_INFO        9302                  2040
+NUM_OF_VERSION                  11342                    2
+VERSION_INFO                    11344                  200
+NUM_OF_EXTENSION                11544                    2
+EXTENSION_INFO                  11546                  600
+RESELLER_ID                     12146                    9
+LIABILITY_REDIRECT_IND          12155                    1
+UNCHARGED_AMOUNT_PREPAID        12156                   16
+UNCHARGED_AMOUNT_POSTPAID       12172                   16
+LAST_UNIT_ROUNDING_DISCOUNT_AMOUNT_PREPAID   12188                   16
+LAST_UNIT_ROUNDING_DISCOUNT_AMOUNT_POSTPAID  12204                   16
+NETWORK_PORTING_PREFIX          12220 		         6
+ACTUAL_ORIGINATING_NUMBER       12226		        30
+ACTUAL_DESTINATION_NUMBER       12256		        30
+BILLING_DESTINATION_NUMBER      12286                   30
+ROUNDED_START_TIME              12316         		10
+ROUNDED_END_TIME                12326         		10
+ROUNDED_DURATION                12336                    9
+TARGET_IVR_NUMBER               12345                   16
+TOTAL_CURRENCY_CHARGE_CAT1      12361                   16
+TOTAL_CURRENCY_CHARGE_CAT2      12377                   16
+TOTAL_CURRENCY_CHARGE_CAT3      12393                   16
+TOTAL_CURRENCY_CHARGE_CAT4      12409                   16
+SIP_INC_CALLID                  12425                  100
+SIP_OUT_CALLID                  12525                  100
+TIME1_ID                        12625                    6
+TIME2_ID                        12631                    6
+TIME3_ID                        12637                    6
+TOTAL_VALUE_DISCOUNT            12643                   16
+TOTAL_CURR_VALUE_UNIT_CREDITS   12659                   16
+TOTAL_PREPAID_AMT               12675                   16
+TOTAL_POSTPAID_AMT              12691                   16
+MARKET_OFFER_GROUP_ID           13569          			10

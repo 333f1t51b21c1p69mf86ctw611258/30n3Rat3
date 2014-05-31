@@ -1,0 +1,21 @@
+select
+	t1.ACCOUNT_NO as accountNo,
+	t1.SUBSCR_NO as subscrNo,
+	t1.SUBSCR_NO_RESETS as subscrNoResets,
+	t1.PROVIDER_ID as providerId,
+	t1.JURISDICTION as jurisdiction,
+	t1.POINT_TAX_CODE_ORIGIN as pointTaxCodeOrigin,
+	t1.RATE_CURRENCY_CODE as rateCurrencyCode,
+	t1.REV_RCV_COST_CTR as revRcvCostCtr,
+	t1.OPEN_ITEM_ID as openItemId,
+	t1.FILE_ID as fileId,
+	t1.FILE_ID_SERV as fileIdServ,
+	t1.PRIMARY_UNITS as primaryUnits,
+	t1.ROW_COUNT as rowCount,
+	t1.AMOUNT as amount,
+	t1.AUT_ID as autId,
+	t1.USAGE_PLAN_ID as usagePlanId,
+	t1.AMOUNT_POSTPAID as amountPostpaid,
+	t1.AMOUNT_PREPAID as amountPrepaid
+from
+	JNL_TMP_CDR t1

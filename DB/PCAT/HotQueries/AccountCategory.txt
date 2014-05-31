@@ -1,0 +1,20 @@
+select
+	t1.ACCOUNT_CATEGORY as accountCategory,
+	t2.SERVICE_VERSION_ID as serviceVersionId,
+	t2.IS_DEFAULT as isDefault,
+	t2.IS_INTERNAL as isInternal,
+	t2.IS_RESELLER as isReseller,
+	t2.IS_BUSINESS as isBusiness,
+	t2.INTERIM_DUE_DAYS as interimDueDays,
+	t2.CONSOLIDATE_USAGE as consolidateUsage,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	ACCOUNT_CATEGORY_KEY t1
+	inner join ACCOUNT_CATEGORY_REF t2 on t1.ACCOUNT_CATEGORY = t2.ACCOUNT_CATEGORY
+	inner join ACCOUNT_CATEGORY_VALUES t3 on t2.ACCOUNT_CATEGORY = t3.ACCOUNT_CATEGORY
+		and t2.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+where
+	t2.SERVICE_VERSION_ID = {1}
+	and t3.LANGUAGE_CODE = {2}

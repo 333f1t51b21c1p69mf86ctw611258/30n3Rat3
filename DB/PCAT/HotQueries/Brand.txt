@@ -1,0 +1,14 @@
+select
+	t1.BRANDING_ID as brandingId,
+	t2.SERVICE_VERSION_ID as serviceVersionId,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	BRAND_KEY t1
+	inner join BRAND_REF t2 on t1.BRANDING_ID = t2.BRANDING_ID
+	inner join BRAND_VALUES t3 on t2.BRANDING_ID = t3.BRANDING_ID
+		and t2.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+where
+	t2.SERVICE_VERSION_ID = {1}
+	and t3.LANGUAGE_CODE = {2}

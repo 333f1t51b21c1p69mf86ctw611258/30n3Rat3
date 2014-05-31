@@ -1,0 +1,13 @@
+select
+	t1.SVBL_ATTR_ID as svblAttrId,
+	t1.SERVICE_VERSION_ID as serviceVersionId,
+	t1.SVBL_ATTR_NAME as svblAttrName,
+	t1.SVBL_ATTR_DATATYPE as svblAttrDatatype,
+        t1.BASE_TABLE as baseTable,
+        t1.IS_REQUIRED as isRequired,
+	t1.IS_SERVICEABILITY_APPLICABLE as isServiceabilityApplicable,
+	t1.IS_VISIBLE as isVisible
+from
+	SERVICEABILITY_ATTRIBUTE_DEF t1
+where
+	t1.SERVICE_VERSION_ID = {1}

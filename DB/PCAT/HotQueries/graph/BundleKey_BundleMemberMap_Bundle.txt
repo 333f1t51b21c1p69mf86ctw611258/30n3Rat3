@@ -1,0 +1,25 @@
+select
+	t1.BUNDLE_MEMBER_MAP_ID as bundleMemberMapId,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t1.MEMBER_ID as memberId,
+	t1.MEMBER_ID as bundleId,
+	t11.DISPLAY_VALUE as bundleName,
+	t8.DISPLAY_VALUE as association
+from
+	BUNDLE_MEMBER_MAP t1
+	inner join BUNDLE_VALUES t4 on t1.BUNDLE_ID = t4.BUNDLE_ID
+		and t4.LANGUAGE_CODE = {2}
+		and t4.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+	left outer join GUI_INDICATOR_REF t7 on t7.table_name = ''BUNDLE_MEMBER_MAP''
+		and t7.field_name = lower(''MEMBER_SELECTION_TYPE'')
+		and t7.integer_value = t1.MEMBER_SELECTION_TYPE
+	left outer join GUI_INDICATOR_VALUES t8 on t8.table_name = t7.table_name
+		and t8.field_name = t7.field_name
+		and t8.integer_value = t7.integer_value
+		and t8.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join BUNDLE_VALUES t11 on t11.BUNDLE_ID = t1.MEMBER_ID
+		and t11.LANGUAGE_CODE = t4.LANGUAGE_CODE
+		and t11.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+where
+	t1.RESELLER_VERSION_ID = {0}
+		and t1.MEMBER_TYPE = 1

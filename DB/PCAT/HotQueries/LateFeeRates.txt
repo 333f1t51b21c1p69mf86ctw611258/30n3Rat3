@@ -1,0 +1,22 @@
+select
+	t1.LATE_FEE_TYPE_ID as lateFeeTypeId,
+	t3.SERVICE_VERSION_ID as serviceVersionId,
+	t3.ISO_CODE as currencyIsoCode,
+	t3.IMPLIED_DECIMAL as currencyImpliedDecimal,
+	t4.DISPLAY_VALUE as rateCurrencyKey,
+	t1.CURRENCY_CODE as currencyCode,
+	t1.RATE_AMT as rateAmt,
+	t1.RATE_PCT as ratePct,
+	t1.ADD_IMPLIED_DECIMALS as addImpliedDecimals,
+	t1.DELAY_ORIGIN as delayOrigin,
+	t1.DELAY_TERMINUS as delayTerminus,
+	t1.ACTIVE_DT as activeDt,
+	t1.INACTIVE_DT as inactiveDt
+from
+	LATE_FEE_RATES t1
+	inner join RATE_CURRENCY_KEY t2 on t1.CURRENCY_CODE = t2.CURRENCY_CODE
+	inner join RATE_CURRENCY_REF t3 on t2.CURRENCY_CODE = t3.CURRENCY_CODE
+		and t3.SERVICE_VERSION_ID = {1}
+	inner join RATE_CURRENCY_VALUES t4 on t2.CURRENCY_CODE = t4.CURRENCY_CODE
+		and t4.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+		and t4.LANGUAGE_CODE = {2}
