@@ -1,0 +1,25 @@
+select
+	t1.OFFER_UNIT_CHARGE_SIZE_ID as offerUnitChargeSizeId,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t3.SERVICE_VERSION_ID as serviceVersionId,
+	t4.DISPLAY_VALUE as unitsTypeKey,
+	t1.UNIT_TYPE as unitType,
+	t7.DISPLAY_VALUE as offerKey,
+	t1.OFFER_ID as offerId,
+	t1.CHARGE_SIZE as chargeSize
+from
+	OFFER_UNIT_CHARGE_SIZE t1
+	inner join UNITS_TYPE_KEY t2 on t1.UNIT_TYPE = t2.UNIT_TYPE
+	inner join UNITS_TYPE_REF t3 on t2.UNIT_TYPE = t3.UNIT_TYPE
+		and t3.SERVICE_VERSION_ID = {1}
+	inner join UNITS_TYPE_VALUES t4 on t2.UNIT_TYPE = t4.UNIT_TYPE
+		and t4.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+		and t4.LANGUAGE_CODE = {2}
+	inner join OFFER_KEY t5 on t1.OFFER_ID = t5.OFFER_ID
+	inner join OFFER_REF t6 on t5.OFFER_ID = t6.OFFER_ID
+		and t6.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+	inner join OFFER_VALUES t7 on t5.OFFER_ID = t7.OFFER_ID
+		and t7.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+		and t7.LANGUAGE_CODE = t4.LANGUAGE_CODE
+where
+	t1.RESELLER_VERSION_ID = {0}

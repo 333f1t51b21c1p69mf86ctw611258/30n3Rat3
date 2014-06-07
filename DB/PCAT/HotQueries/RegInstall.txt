@@ -1,0 +1,11 @@
+select
+	t1.INSTALL_ID as installId,
+	t1.INSTALL_APP as installApp,
+	t1.INSTALL_OS_USER as installOsUser,
+	t1.INSTALL_MACHINE as installMachine,
+	t1.INSTALL_START as installStart,
+	t1.INSTALL_STATUS as installStatus,
+	t1.INSTALL_END as installEnd,
+	t1.INSTALL_INFO as installInfo
+from
+	REG_INSTALL t1

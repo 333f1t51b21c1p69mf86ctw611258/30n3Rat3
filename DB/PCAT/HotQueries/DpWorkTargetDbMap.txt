@@ -1,0 +1,14 @@
+select
+	t1.WORK_ID as workId,
+	t1.TARGET_DB_ID as targetDbId,
+	t5.DISPLAY_VALUE as successFlag,
+        t3.DS_DATABASE as targetDBName
+from
+	DP_WORK_TARGET_DB_MAP t1
+	inner join DP_WORK t2 on t1.WORK_ID = t2.WORK_ID
+	inner join DP_TARGET_DB t3 on t1.TARGET_DB_ID = t3.TARGET_DB_ID
+	left outer join GENERIC_ENUMERATION_REF t4 on t4.enumeration_key = lower(''SUCCESS_FLAG'')
+		and t4.value = t1.SUCCESS_FLAG
+	left outer join GENERIC_ENUMERATION_VALUES t5 on t5.enumeration_key = t4.enumeration_key
+		and t5.value = t4.value
+		and t5.LANGUAGE_CODE = {2}

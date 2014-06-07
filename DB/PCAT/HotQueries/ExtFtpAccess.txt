@@ -1,0 +1,11 @@
+select
+	t1.EXT_CONTACT_ID as extContactId,
+	t1.REMOTE_HOST as remoteHost,
+	t1.REMOTE_LOGIN as remoteLogin,
+	t1.REMOTE_PASSWORD as remotePassword,
+	t1.REMOTE_READY as remoteReady,
+	t1.REMOTE_DONE as remoteDone,
+	t1.REMOTE_WORK as remoteWork
+from
+	EXT_FTP_ACCESS t1
+	inner join EXT_CONTACTS t2 on t1.EXT_CONTACT_ID = t2.EXT_CONTACT_ID

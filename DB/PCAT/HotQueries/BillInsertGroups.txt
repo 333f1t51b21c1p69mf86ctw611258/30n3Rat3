@@ -1,0 +1,26 @@
+select
+	t3.DISPLAY_VALUE as insertGrpIdRef,
+	t1.INSERT_GRP_ID as insertGrpId,
+	t1.INSERT_ID as insertId,
+	t1.INSERT_TRIGGER_ID as insertTriggerId,
+	t1.INSERT_BIN_NUM as insertBinNum,
+	t1.GEO_KEY as geoKey,
+	t5.DISPLAY_VALUE as mktCodeRef,
+	t1.MKT_CODE as mktCode,
+	t1.IS_REQUIRED as isRequired,
+	t1.PRIORITY as priority,
+	t1.ACTIVE_DT as activeDt,
+	t1.INACTIVE_DT as inactiveDt,
+	t7.DISPLAY_VALUE as insertForeignKeyRef,
+	t1.INSERT_FOREIGN_KEY as insertForeignKey
+from
+	BILL_INSERT_GROUPS t1
+	inner join INSERT_GRP_ID_REF t2 on t1.INSERT_GRP_ID = t2.INSERT_GRP_ID
+	inner join INSERT_GRP_ID_VALUES t3 on t2.INSERT_GRP_ID = t3.INSERT_GRP_ID
+		and t3.LANGUAGE_CODE = {2}
+	inner join MKT_CODE_REF t4 on t1.MKT_CODE = t4.MKT_CODE
+	inner join MKT_CODE_VALUES t5 on t4.MKT_CODE = t5.MKT_CODE
+		and t5.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	inner join INSERT_FOREIGN_KEY_REF t6 on t1.INSERT_FOREIGN_KEY = t6.INSERT_FOREIGN_KEY
+	inner join INSERT_FOREIGN_KEY_VALUES t7 on t6.INSERT_FOREIGN_KEY = t7.INSERT_FOREIGN_KEY
+		and t7.LANGUAGE_CODE = t3.LANGUAGE_CODE

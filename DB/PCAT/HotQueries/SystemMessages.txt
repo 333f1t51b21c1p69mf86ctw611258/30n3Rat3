@@ -1,0 +1,12 @@
+select
+	t1.MESSAGE_LANGUAGE as messageLanguage,
+	t1.MESSAGE_NUMBER as messageNumber,
+	t1.MESSAGE_NAME as messageName,
+	t1.MESSAGE_SEVERITY as messageSeverity,
+	t1.MESSAGE_TEXT as messageText,
+	t1.MODULE_NAME as moduleName,
+	t1.CATEGORY as category,
+	t1.ACTION as action,
+	t1.DESCRIPTION as description
+from
+	SYSTEM_MESSAGES t1

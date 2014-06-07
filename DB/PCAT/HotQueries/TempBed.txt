@@ -1,0 +1,15 @@
+select
+	t1.PRODUCT_LINE_ID as productLineId,
+	t1.ELEMENT_ID as elementId,
+	t1.TYPE_ID_USG as typeIdUsg,
+	t1.JURISDICTION as jurisdiction,
+	t1.POINT_CLASS_DESCR as pointClassDescr,
+	t1.TIME_TYPE_ID as timeTypeId,
+	t1.ELEMENT_DESCR_CODE as elementDescrCode,
+	t1.USAGE_DESCR_CODE as usageDescrCode,
+	t1.JURIS_DESCR_CODE as jurisDescrCode,
+	t1.UNITS as units,
+	t1.AMOUNT as amount,
+	t1.PRERATED_AMOUNT as preratedAmount
+from
+	TEMP_BED t1

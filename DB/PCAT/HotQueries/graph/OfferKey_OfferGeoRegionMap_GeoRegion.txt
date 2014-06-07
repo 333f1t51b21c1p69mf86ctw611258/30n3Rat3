@@ -1,0 +1,17 @@
+select
+        t1.OFFER_ID as offerId,
+	t1.GEO_REGION_ID as geoRegionId,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t4.DISPLAY_VALUE as name,
+	t4.DESCRIPTION as description,
+	t4.SERVICE_VERSION_ID serviceVersionId
+from
+	OFFER_GEO_REGION_MAP t1
+	inner join GEO_REGION_KEY t2 on t1.GEO_REGION_ID = t2.GEO_REGION_ID
+	inner join GEO_REGION_REF t3 on t1.GEO_REGION_ID = t3.GEO_REGION_ID
+		and t3.SERVICE_VERSION_ID = {1}
+	inner join GEO_REGION_VALUES t4 on t1.GEO_REGION_ID = t4.GEO_REGION_ID
+                and t4.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+		and t4.LANGUAGE_CODE = {2}
+where
+	t1.RESELLER_VERSION_ID = {0}

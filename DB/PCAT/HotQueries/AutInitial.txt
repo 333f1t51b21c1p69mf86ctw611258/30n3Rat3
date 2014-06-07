@@ -1,0 +1,104 @@
+select
+	t1.INITIAL_AUT_ID as initialAutId,
+	t2.SERVICE_VERSION_ID as serviceVersionId,
+	t6.DISPLAY_VALUE as applicationIdKey,
+	t2.APPLICATION_ID as applicationId,
+	t9.DISPLAY_VALUE as subTypeIdKey,
+	t2.SUB_TYPE_ID as subTypeId,
+	t2.IS_PRERATED as isPrerated,
+	t2.NETWORK_DELAY as networkDelay,
+	t11.DISPLAY_VALUE as guideTo,
+	t2.GUIDE_TO_PROVIDER as guideToProvider,
+	t14.DISPLAY_VALUE as pointCategoryKey,
+	t2.POINT_CATEGORY as pointCategory,
+	t2.ORIGIN_COUNTRY_DIAL_CODE_REQ as originCountryDialCodeReq,
+	t16.DISPLAY_VALUE as deriveJurisdiction,
+	t2.DERIVE_DISTANCE_UNITS as deriveDistanceUnits,
+	t2.DERIVE_ZONE_CLASS as deriveZoneClass,
+	t2.VH_MINOR_THRESHOLD as vhMinorThreshold,
+	t2.DISTANCE_UNITS_INDICATOR as distanceUnitsIndicator,
+	t2.ACCOUNT_DRV as accountDrv,
+	t2.SUBSCRIBER_DRV as subscriberDrv,
+	t2.MARKET_DRV as marketDrv,
+	t2.PROVIDER_CODE_DRV as providerCodeDrv,
+	t2.LOCATION_DRV as locationDrv,
+	t2.LOCATION_RELATION_DRV as locationRelationDrv,
+	t2.POINT_CLASS_ORIGIN_DRV as pointClassOriginDrv,
+	t2.POINT_CLASS_TARGET_DRV as pointClassTargetDrv,
+	t2.JURISDICTION_DRV as jurisdictionDrv,
+	t2.DISTANCE_BAND_ID_DRV as distanceBandIdDrv,
+	t2.ZONE_CLASS_DRV as zoneClassDrv,
+	t2.ACCESS_METHOD_DRV as accessMethodDrv,
+	t2.CAAN_DRV as caanDrv,
+	t2.CALLING_CARD_DRV as callingCardDrv,
+	t2.SPECIAL_FEATURES_DRV as specialFeaturesDrv,
+	t2.CALLING_CIRCLE_DRV as callingCircleDrv,
+	t2.ONLINE_EXTENSIBLE_KEY_DRV as onlineExtensibleKeyDrv,
+	t2.OFFLINE_EXTENSIBLE_KEY_DRV as offlineExtensibleKeyDrv,
+	t2.BILL_CLASS_DRV as billClassDrv,
+	t19.DISPLAY_VALUE as unitsTypeKey,
+	t2.UNIT_TYPE as unitType,
+	t2.USG_CLASS as usgClass,
+	t2.FRIENDS_AND_FAMILY_DRV as friendsAndFamilyDrv,
+	t2.RATE_CLASS_DRV as rateClassDrv,
+	t21.DISPLAY_VALUE as passThrough,
+	t2.RESERVATION_MAX_AMT as reservationMaxAmt,
+	t2.RESERVATION_MIN_AMT as reservationMinAmt,
+	t2.RESERVATION_MAX_NUM as reservationMaxNum,
+	t2.RESERVATION_LIFETIME as reservationLifetime,
+	t2.RESERVATION_AMT as reservationAmt,
+	t2.ONNET_DRV as onnetDrv,
+	t2.INTRAHIERARCHY_DRV as intrahierarchyDrv,
+	t2.MULTIPLE_FF_DRV as multipleFfDrv,
+	t2.MULTIPLE_FDA_DRV as multipleFdaDrv,
+	t2.MULTIPLE_FOA_DRV as multipleFoaDrv,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	AUT_INITIAL_KEY t1
+	inner join AUT_INITIAL_REF t2 on t1.INITIAL_AUT_ID = t2.INITIAL_AUT_ID
+	inner join AUT_INITIAL_VALUES t3 on t2.INITIAL_AUT_ID = t3.INITIAL_AUT_ID
+		and t2.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+	left outer join APPLICATION_ID_KEY t4 on t2.APPLICATION_ID = t4.APPLICATION_ID
+	left outer join APPLICATION_ID_REF t5 on t4.APPLICATION_ID = t5.APPLICATION_ID
+		and t5.SERVICE_VERSION_ID = t2.SERVICE_VERSION_ID
+	left outer join APPLICATION_ID_VALUES t6 on t4.APPLICATION_ID = t6.APPLICATION_ID
+		and t6.SERVICE_VERSION_ID = t2.SERVICE_VERSION_ID
+		and t6.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join SUB_TYPE_ID_KEY t7 on t2.SUB_TYPE_ID = t7.SUB_TYPE_ID
+	left outer join SUB_TYPE_ID_REF t8 on t7.SUB_TYPE_ID = t8.SUB_TYPE_ID
+		and t8.SERVICE_VERSION_ID = t2.SERVICE_VERSION_ID
+	left outer join SUB_TYPE_ID_VALUES t9 on t7.SUB_TYPE_ID = t9.SUB_TYPE_ID
+		and t9.SERVICE_VERSION_ID = t2.SERVICE_VERSION_ID
+		and t9.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join GENERIC_ENUMERATION_REF t10 on t10.enumeration_key = lower(''GUIDE_TO'')
+		and t10.value = t2.GUIDE_TO
+	left outer join GENERIC_ENUMERATION_VALUES t11 on t11.enumeration_key = t10.enumeration_key
+		and t11.value = t10.value
+		and t11.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join POINT_CATEGORY_KEY t12 on t2.POINT_CATEGORY = t12.POINT_CATEGORY
+	left outer join POINT_CATEGORY_REF t13 on t12.POINT_CATEGORY = t13.POINT_CATEGORY
+		and t13.SERVICE_VERSION_ID = t2.SERVICE_VERSION_ID
+	left outer join POINT_CATEGORY_VALUES t14 on t12.POINT_CATEGORY = t14.POINT_CATEGORY
+		and t14.SERVICE_VERSION_ID = t2.SERVICE_VERSION_ID
+		and t14.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join GENERIC_ENUMERATION_REF t15 on t15.enumeration_key = lower(''DERIVE_JURISDICTION'')
+		and t15.value = t2.DERIVE_JURISDICTION
+	left outer join GENERIC_ENUMERATION_VALUES t16 on t16.enumeration_key = t15.enumeration_key
+		and t16.value = t15.value
+		and t16.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	inner join UNITS_TYPE_KEY t17 on t2.UNIT_TYPE = t17.UNIT_TYPE
+	inner join UNITS_TYPE_REF t18 on t17.UNIT_TYPE = t18.UNIT_TYPE
+		and t18.SERVICE_VERSION_ID = t2.SERVICE_VERSION_ID
+	inner join UNITS_TYPE_VALUES t19 on t17.UNIT_TYPE = t19.UNIT_TYPE
+		and t19.SERVICE_VERSION_ID = t2.SERVICE_VERSION_ID
+		and t19.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join GENERIC_ENUMERATION_REF t20 on t20.enumeration_key = lower(''PASS_THROUGH'')
+		and t20.value = t2.PASS_THROUGH
+	left outer join GENERIC_ENUMERATION_VALUES t21 on t21.enumeration_key = t20.enumeration_key
+		and t21.value = t20.value
+		and t21.LANGUAGE_CODE = t3.LANGUAGE_CODE
+where
+	t2.SERVICE_VERSION_ID = {1}
+	and t3.LANGUAGE_CODE = {2}

@@ -1,0 +1,6 @@
+select
+	t1.KEYWORD as keyword,
+	t1.SDP_ID as sdpId,
+	t1.VALUE as value
+from
+	SDP_PARAMETERS t1

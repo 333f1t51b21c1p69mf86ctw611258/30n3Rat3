@@ -1,0 +1,25 @@
+select
+	t4.DISPLAY_VALUE as autFinalKey,
+	t1.AUT_ID as autId,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t1.USE_TIME_TYPE as useTimeType,
+	t1.USE_JURISDICTION as useJurisdiction,
+	t1.USE_RATE_CLASS as useRateClass,
+	t1.USE_BILL_CLASS as useBillClass,
+	t1.USE_POINT_CLASS_ORIGIN as usePointClassOrigin,
+	t1.USE_POINT_CLASS_TARGET as usePointClassTarget,
+	t1.USE_EQUIPMENT_CLASS_CODE as useEquipmentClassCode,
+	t1.USE_OFFER_ID as useOfferId,
+	t1.CHG_WHO as chgWho,
+	t1.CHG_DT as chgDt,
+	t1.CREATE_DT as createDt
+from
+	UNIT_CR_RATE_LIMIT_KEYS t1
+	inner join AUT_FINAL_KEY t2 on t1.AUT_ID = t2.AUT_ID
+	inner join AUT_FINAL_REF t3 on t2.AUT_ID = t3.AUT_ID
+		and t3.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+	inner join AUT_FINAL_VALUES t4 on t2.AUT_ID = t4.AUT_ID
+		and t4.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+		and t4.LANGUAGE_CODE = {2}
+where
+	t1.RESELLER_VERSION_ID = {0}

@@ -1,0 +1,19 @@
+select
+	t1.FORMAT_CODE as formatCode,
+	t3.DISPLAY_VALUE as typeCode,
+	t1.SUBTYPE_CODE as subtypeCode,
+	t1.BILLING_LEVEL as billingLevel,
+	t5.DISPLAY_VALUE as billingCategory,
+	t1.DISPLAY_TYPE as displayType
+from
+	BILL_FORMAT_DISPLAY_TYPES t1
+	left outer join GENERIC_ENUMERATION_REF t2 on t2.enumeration_key = lower(''TYPE_CODE'')
+		and t2.value = t1.TYPE_CODE
+	left outer join GENERIC_ENUMERATION_VALUES t3 on t3.enumeration_key = t2.enumeration_key
+		and t3.value = t2.value
+		and t3.LANGUAGE_CODE = {2}
+	left outer join GENERIC_ENUMERATION_REF t4 on t4.enumeration_key = lower(''BILLING_CATEGORY'')
+		and t4.value = t1.BILLING_CATEGORY
+	left outer join GENERIC_ENUMERATION_VALUES t5 on t5.enumeration_key = t4.enumeration_key
+		and t5.value = t4.value
+		and t5.LANGUAGE_CODE = {2}

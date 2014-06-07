@@ -1,0 +1,10 @@
+select
+	t1.AUT_TRANS_SET_ID as autTransSetId,
+	t2.AUT_TRANS_ID as autTransId,
+	t2.RESELLER_VERSION_ID as resellerVersionId
+from
+	AUT_TRANSLATION_SET_KEY t1
+	inner join AUT_TRANSLATION_SET t2 on t1.AUT_TRANS_SET_ID = t2.AUT_TRANS_SET_ID
+	inner join AUT_TRANSLATION_KEY t3 on t2.AUT_TRANS_ID = t3.AUT_TRANS_ID
+where
+	t2.RESELLER_VERSION_ID = {0}

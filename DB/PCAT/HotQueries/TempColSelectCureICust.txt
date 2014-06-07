@@ -1,0 +1,8 @@
+select
+	t1.ACCOUNT_NO as accountNo,
+	t1.BILL_REF_NO as billRefNo,
+	t1.BILL_REF_RESETS as billRefResets,
+	t1.OPEN_ITEM_ID as openItemId,
+	t1.BALANCE as balance
+from
+	TEMP_COL_SELECT_CURE_I_CUST t1

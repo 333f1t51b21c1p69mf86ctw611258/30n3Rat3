@@ -1,0 +1,15 @@
+select
+	t1.RT_PREFIX_MAP_ID as rtPrefixMapId,
+	t1.PPS_IN as ppsIn,
+	t1.SERVICE_VERSION_ID as serviceVersionId,
+	t1.PPS_OUT as ppsOut,
+	t3.DISPLAY_VALUE as sid
+from
+	RT_PREFIX_MAP t1
+	left outer join GENERIC_ENUMERATION_REF t2 on t2.enumeration_key = lower(''SID'')
+		and t2.value = t1.SID
+	left outer join GENERIC_ENUMERATION_VALUES t3 on t3.enumeration_key = t2.enumeration_key
+		and t3.value = t2.value
+		and t3.LANGUAGE_CODE = {2}
+where
+	t1.SERVICE_VERSION_ID = {1}

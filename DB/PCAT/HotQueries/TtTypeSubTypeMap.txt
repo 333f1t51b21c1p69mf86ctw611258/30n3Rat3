@@ -1,0 +1,13 @@
+select
+	t3.DISPLAY_VALUE as ttTypeRef,
+	t1.TT_TYPE_ID as ttTypeId,
+	t5.DISPLAY_VALUE as ttSubTypeRef,
+	t1.TT_SUB_TYPE_ID as ttSubTypeId
+from
+	TT_TYPE_SUB_TYPE_MAP t1
+	inner join TT_TYPE_REF t2 on t1.TT_TYPE_ID = t2.TT_TYPE_ID
+	inner join TT_TYPE_VALUES t3 on t2.TT_TYPE_ID = t3.TT_TYPE_ID
+		and t3.LANGUAGE_CODE = {2}
+	inner join TT_SUB_TYPE_REF t4 on t1.TT_SUB_TYPE_ID = t4.TT_SUB_TYPE_ID
+	inner join TT_SUB_TYPE_VALUES t5 on t4.TT_SUB_TYPE_ID = t5.TT_SUB_TYPE_ID
+		and t5.LANGUAGE_CODE = t3.LANGUAGE_CODE

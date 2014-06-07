@@ -1,0 +1,8 @@
+select
+	t1.NOTIFICATION_RECIPIENT_ID as notificationRecipientId,
+	t1.RECIPIENT_FILTER_OBJECT as recipientFilterObject,
+	t1.ASYNCH_PROCESSING_EVENT_TYPE as asynchProcessingEventType,
+	t1.RECIPIENT as recipient,
+	t1.NOTIFICATION_EVENT_TYPE as notificationEventType
+from
+	NOTIFICATION_RECIPIENTS t1

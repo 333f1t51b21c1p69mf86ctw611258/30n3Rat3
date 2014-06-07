@@ -1,0 +1,10 @@
+select
+	t1.RC_TERM_ID as rcTermId,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t1.ORIGIN_LOCATION_CODE as originLocationCode,
+	t1.TARGET_LOCATION_CODE as targetLocationCode,
+	t1.JURISDICTION as jurisdiction
+from
+	PRODUCT_JURISDICTION t1
+where
+	t1.RESELLER_VERSION_ID = {0}

@@ -1,0 +1,41 @@
+select
+	t1.CAMPAIGN_TREATMENT_ID as campaignTreatmentId,
+	t2.RESELLER_VERSION_ID as resellerVersionId,
+	t2.TREATMENT_CODE as treatmentCode,
+	t6.DISPLAY_VALUE as offerKey,
+	t2.OFFER_ID as offerId,
+	t9.DISPLAY_VALUE as bundleKey,
+	t2.BUNDLE_ID as bundleId,
+	t2.IS_RESTRICTED as isRestricted,
+	t2.SALES_START_DT as salesStartDt,
+	t2.SALES_END_DT as salesEndDt,
+	t2.SALES_END_OFFSET_DAYS as salesEndOffsetDays,
+	t2.MEASUREMENT_END_DT as measurementEndDt,
+	t2.MESSAGE_ID as messageId,
+	t2.MSG_TRIGGER_ID as msgTriggerId,
+	t2.INSERT_ID as insertId,
+	t2.IS_DEFAULT as isDefault,
+	t2.IS_INTERNAL as isInternal,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	CAMPAIGN_TREATMENT_KEY t1
+	inner join CAMPAIGN_TREATMENT_REF t2 on t1.CAMPAIGN_TREATMENT_ID = t2.CAMPAIGN_TREATMENT_ID
+	inner join CAMPAIGN_TREATMENT_VALUES t3 on t2.CAMPAIGN_TREATMENT_ID = t3.CAMPAIGN_TREATMENT_ID
+		and t2.RESELLER_VERSION_ID = t3.RESELLER_VERSION_ID
+	left outer join OFFER_KEY t4 on t2.OFFER_ID = t4.OFFER_ID
+	left outer join OFFER_REF t5 on t4.OFFER_ID = t5.OFFER_ID
+		and t5.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+	left outer join OFFER_VALUES t6 on t4.OFFER_ID = t6.OFFER_ID
+		and t6.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+		and t6.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join BUNDLE_KEY t7 on t2.BUNDLE_ID = t7.BUNDLE_ID
+	left outer join BUNDLE_REF t8 on t7.BUNDLE_ID = t8.BUNDLE_ID
+		and t8.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+	left outer join BUNDLE_VALUES t9 on t7.BUNDLE_ID = t9.BUNDLE_ID
+		and t9.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+		and t9.LANGUAGE_CODE = t3.LANGUAGE_CODE
+where
+	t2.RESELLER_VERSION_ID = {0}
+	and t3.LANGUAGE_CODE = {2}

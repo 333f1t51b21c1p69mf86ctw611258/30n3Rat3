@@ -1,0 +1,9 @@
+select
+	t1.DIAMETER_MERCHANT_ACCT_ID as diameterMerchantAcctId,
+	t1.SERVICE_VERSION_ID as serviceVersionId,
+	t1.DIAMETER_ACCT_ID as diameterAcctId,
+	t1.MERCHANT_NAME as merchantName
+from
+	DIAMETER_MERCHANT_ACCT_ID t1
+where
+	t1.SERVICE_VERSION_ID = {1}

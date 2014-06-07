@@ -1,0 +1,16 @@
+select
+	t1.REGION_ID as regionId,
+	t2.SERVICE_VERSION_ID as serviceVersionId,
+	t2.IS_DEFAULT as isDefault,
+	t2.IS_INTERNAL as isInternal,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	REGION_KEY t1
+	inner join REGION_REF t2 on t1.REGION_ID = t2.REGION_ID
+	inner join REGION_VALUES t3 on t2.REGION_ID = t3.REGION_ID
+		and t2.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+where
+	t2.SERVICE_VERSION_ID = {1}
+	and t3.LANGUAGE_CODE = {2}

@@ -1,0 +1,37 @@
+select
+	t1.CURRENCY_CODE as currencyCode,
+	t2.SERVICE_VERSION_ID as serviceVersionId,
+	t5.DISPLAY_VALUE as currencyTypeRef,
+	t2.CURRENCY_TYPE as currencyType,
+	t2.IMPLIED_DECIMAL as impliedDecimal,
+	t2.ACTIVE_DATE as activeDate,
+	t2.INACTIVE_DATE as inactiveDate,
+	t2.FORMAT_CODE as formatCode,
+	t2.ROUNDING_FACTOR as roundingFactor,
+	t7.DISPLAY_VALUE as roundingMethod,
+	t2.IS_CONVERSION_DEFAULT as isConversionDefault,
+	t2.IS_SYMBOL_FIRST as isSymbolFirst,
+	t2.IS_DEFAULT as isDefault,
+	t2.IS_INTERNAL as isInternal,
+	t2.EXT_DISPLAY_IMPLIED_DECIMAL as extDisplayImpliedDecimal,
+	t2.ISO_CODE as isoCode,
+	t2.ISO_NUMBER as isoNumber,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	RATE_CURRENCY_KEY t1
+	inner join RATE_CURRENCY_REF t2 on t1.CURRENCY_CODE = t2.CURRENCY_CODE
+	inner join RATE_CURRENCY_VALUES t3 on t2.CURRENCY_CODE = t3.CURRENCY_CODE
+		and t2.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+	inner join CURRENCY_TYPE_REF t4 on t2.CURRENCY_TYPE = t4.CURRENCY_TYPE
+	inner join CURRENCY_TYPE_VALUES t5 on t4.CURRENCY_TYPE = t5.CURRENCY_TYPE
+		and t5.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join GENERIC_ENUMERATION_REF t6 on t6.enumeration_key = lower(''ROUNDING_METHOD'')
+		and t6.value = t2.ROUNDING_METHOD
+	left outer join GENERIC_ENUMERATION_VALUES t7 on t7.enumeration_key = t6.enumeration_key
+		and t7.value = t6.value
+		and t7.LANGUAGE_CODE = t3.LANGUAGE_CODE
+where
+	t2.SERVICE_VERSION_ID = {1}
+	and t3.LANGUAGE_CODE = {2}

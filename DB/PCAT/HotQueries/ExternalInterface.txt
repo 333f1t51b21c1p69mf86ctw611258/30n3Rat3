@@ -1,0 +1,23 @@
+select
+	t1.INTERFACE_ID as interfaceId,
+	t2.SERVICE_VERSION_ID as serviceVersionId,
+	t2.DRIVER as driver,
+	t2.PROTOCOL as protocol,
+	t2.USERNAME as username,
+	t2.PASSWORD as password,
+	t2.RETRY_COUNT as retryCount,
+	t2.RETRY_INTERVAL as retryInterval,
+	t2.MULTIPLE_CONNECTION as multipleConnection,
+	t2.BYPASS_ALLOWED as bypassAllowed,
+	t2.PROTOCOL_PREFIX as protocolPrefix,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	EXTERNAL_INTERFACE_KEY t1
+	inner join EXTERNAL_INTERFACE_REF t2 on t1.INTERFACE_ID = t2.INTERFACE_ID
+	inner join EXTERNAL_INTERFACE_VALUES t3 on t2.INTERFACE_ID = t3.INTERFACE_ID
+		and t2.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+where
+	t2.SERVICE_VERSION_ID = {1}
+	and t3.LANGUAGE_CODE = {2}

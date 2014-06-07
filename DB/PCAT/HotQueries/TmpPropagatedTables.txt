@@ -1,0 +1,4 @@
+select
+	t1.TABLE_NAME as tableName
+from
+	TMP_PROPAGATED_TABLES t1

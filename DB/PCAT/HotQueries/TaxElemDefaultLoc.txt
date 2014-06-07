@@ -1,0 +1,42 @@
+select
+	t1.TAX_ELEM_DEFAULT_LOC_ID as taxElemDefaultLocId,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t3.DISPLAY_VALUE as chargeEltType,
+	t1.CHARGE_ELT_ID as chargeEltId,
+	t5.DISPLAY_VALUE as pointNumber,
+	t1.TAX_PKG_INST_ID as taxPkgInstId,
+	t7.DISPLAY_VALUE as ptLocationCode,
+	t1.PT_DEFAULT_GEOCODE as ptDefaultGeocode,
+        CASE
+            WHEN t1.TAX_PKG_INST_ID=0 THEN {3}
+            ELSE t10.DISPLAY_VALUE
+        END as taxPkgInstIdValues
+from
+	TAX_ELEM_DEFAULT_LOC t1
+	left outer join GENERIC_ENUMERATION_REF t2 on t2.enumeration_key = lower(''CHARGE_ELT_TYPE'')
+		and t2.value = t1.CHARGE_ELT_TYPE
+	left outer join GENERIC_ENUMERATION_VALUES t3 on t3.enumeration_key = t2.enumeration_key
+		and t3.value = t2.value
+		and t3.LANGUAGE_CODE = {2}
+	left outer join GUI_INDICATOR_REF t4 on t4.table_name = ''TAX_ELEM_DEFAULT_LOC''
+		and t4.field_name = lower(''POINT_NUMBER'')
+		and t4.integer_value = t1.POINT_NUMBER
+	left outer join GUI_INDICATOR_VALUES t5 on t5.table_name = t4.table_name
+		and t5.field_name = t4.field_name
+		and t5.integer_value = t4.integer_value
+		and t5.LANGUAGE_CODE = {2}
+	left outer join GUI_INDICATOR_REF t6 on t6.table_name = ''TAX_ELEM_DEFAULT_LOC''
+		and t6.field_name = lower(''PT_LOCATION_CODE'')
+		and t6.integer_value = t1.PT_LOCATION_CODE
+	left outer join GUI_INDICATOR_VALUES t7 on t7.table_name = t6.table_name
+		and t7.field_name = t6.field_name
+		and t7.integer_value = t6.integer_value
+		and t7.LANGUAGE_CODE = {2}
+        left outer join TAX_PKG_INST_ID_KEY t8 on t8.TAX_PKG_INST_ID = t1.TAX_PKG_INST_ID
+        left outer join TAX_PKG_INST_ID_REF t9 on t9.TAX_PKG_INST_ID = t1.TAX_PKG_INST_ID
+                and t9.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+        left outer join TAX_PKG_INST_ID_VALUES t10 on t10.TAX_PKG_INST_ID = t1.TAX_PKG_INST_ID
+                and t10.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+                and t10.LANGUAGE_CODE = t3.LANGUAGE_CODE
+where
+	t1.RESELLER_VERSION_ID = {0}

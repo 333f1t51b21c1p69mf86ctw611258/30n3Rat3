@@ -1,0 +1,53 @@
+select
+	t1.SUBSCR_NO as subscrNo,
+	t1.SUBSCR_NO_RESETS as subscrNoResets,
+	t1.OWNING_ACCOUNT_NO as owningAccountNo,
+	t1.TRANS_CODE as transCode,
+	t1.ORIG_BILL_REF_NO as origBillRefNo,
+	t1.ORIG_BILL_REF_RESETS as origBillRefResets,
+	t1.ORIG_BILL_INVOICE_ROW as origBillInvoiceRow,
+	t3.DISPLAY_VALUE as origType,
+	t1.ORIG_SUBTYPE as origSubtype,
+	t1.TRACKING_ID as trackingId,
+	t1.TRACKING_ID_SERV as trackingIdServ,
+	t1.TRANSACT_DATE as transactDate,
+	t1.EFFECTIVE_DATE as effectiveDate,
+	t1.END_DATE as endDate,
+	t1.TAX_TYPE_CODE as taxTypeCode,
+	t1.ADJ_REASON as adjReason,
+	t1.ORIG_STATEMENT_DATE as origStatementDate,
+	t1.ORIG_FROM_DATE as origFromDate,
+	t1.ORIG_TO_DATE as origToDate,
+	t1.ORIG_TRANS_DATE as origTransDate,
+	t1.ORIG_AMOUNT as origAmount,
+	t1.ORIG_AMOUNT_PREPAID as origAmountPrepaid,
+	t1.ORIG_AMOUNT_POSTPAID as origAmountPostpaid,
+	t1.ORIG_TOTAL_DISCOUNT_AMT as origTotalDiscountAmt,
+	t1.ORIG_TOTAL_DST_AMT_POSTPAID as origTotalDstAmtPostpaid,
+	t1.ORIG_TOTAL_DST_AMT_PREPAID as origTotalDstAmtPrepaid,
+	t1.ORIG_TOTAL_TAX as origTotalTax,
+	t1.ORIG_TOTAL_TAX_POSTPAID as origTotalTaxPostpaid,
+	t1.ORIG_TOTAL_TAX_PREPAID as origTotalTaxPrepaid,
+	t1.ORIG_DESCRIPTION as origDescription,
+	t1.ORIG_MSG_ID as origMsgId,
+	t1.ORIG_MSG_ID2 as origMsgId2,
+	t1.OPEN_ITEM_ID as openItemId,
+	t1.BILL_REF_NO as billRefNo,
+	t1.BILL_REF_RESETS as billRefResets,
+	t1.TAX_CLASS as taxClass,
+	t1.ANNOTATION as annotation,
+	t1.ADJ_REASON_CODE as adjReasonCode,
+	t5.DISPLAY_VALUE as requestStatus,
+	t1.ORIG_SPLIT_ROW_NUM as origSplitRowNum
+from
+	IGEN_TEMP_ADJ t1
+	left outer join GENERIC_ENUMERATION_REF t2 on t2.enumeration_key = lower(''ORIG_TYPE'')
+		and t2.value = t1.ORIG_TYPE
+	left outer join GENERIC_ENUMERATION_VALUES t3 on t3.enumeration_key = t2.enumeration_key
+		and t3.value = t2.value
+		and t3.LANGUAGE_CODE = {2}
+	left outer join GENERIC_ENUMERATION_REF t4 on t4.enumeration_key = lower(''REQUEST_STATUS'')
+		and t4.value = t1.REQUEST_STATUS
+	left outer join GENERIC_ENUMERATION_VALUES t5 on t5.enumeration_key = t4.enumeration_key
+		and t5.value = t4.value
+		and t5.LANGUAGE_CODE = {2}

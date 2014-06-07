@@ -1,0 +1,23 @@
+select
+	t1.SCENARIO_ID as scenarioId,
+	t1.EXT_EVENT_ID as extEventId,
+	t1.EXT_EVENT_TYPE as extEventType,
+	t1.CURRENCY_CODE as currencyCode,
+        t4.DISPLAY_VALUE as rateCurrencyKey, 
+	t1.UPPER_AMOUNT as upperAmount,
+	t1.LOWER_AMOUNT as lowerAmount,
+	t1.UPPER_CREDIT_SCORE as upperCreditScore,
+	t1.LOWER_CREDIT_SCORE as lowerCreditScore,
+	t1.VIP_CODE as vipCode,
+        t6.DISPLAY_VALUE as vipCodeRef        
+from
+	ARM_EXT_EVENT_SCEN_PARAMS t1
+        left outer join RATE_CURRENCY_KEY t2 on t1.CURRENCY_CODE = t2.CURRENCY_CODE
+		left outer join RATE_CURRENCY_REF t3 on t2.CURRENCY_CODE = t3.CURRENCY_CODE
+			and t3.SERVICE_VERSION_ID = {1}
+		left outer join RATE_CURRENCY_VALUES t4 on t2.CURRENCY_CODE = t4.CURRENCY_CODE
+			and t4.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+			and t4.LANGUAGE_CODE = {2}
+        left outer join VIP_CODE_REF t5 on t1.VIP_CODE = t5.VIP_CODE 
+        left outer join VIP_CODE_VALUES t6 on t5.VIP_CODE = t6.VIP_CODE 
+          and t6.LANGUAGE_CODE = {2}

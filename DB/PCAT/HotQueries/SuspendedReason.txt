@@ -1,0 +1,11 @@
+select
+	t1.SUSPENDED_CODE as suspendedCode,
+	t1.IS_DEFAULT as isDefault,
+	t1.IS_INTERNAL as isInternal,
+	t2.LANGUAGE_CODE as languageCode,
+	t2.DISPLAY_VALUE as displayValue
+from
+	SUSPENDED_REASON_REF t1
+	inner join SUSPENDED_REASON_VALUES t2 on t1.SUSPENDED_CODE = t2.SUSPENDED_CODE
+where
+	t2.LANGUAGE_CODE = {2}

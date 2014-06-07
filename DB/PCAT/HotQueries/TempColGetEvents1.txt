@@ -1,0 +1,19 @@
+select
+	t1.NUM as num,
+	t1.ACCOUNT_NO as accountNo,
+	t1.BILL_REF_NO as billRefNo,
+	t1.BILL_REF_RESETS as billRefResets,
+	t1.OPEN_ITEM_ID as openItemId,
+	t1.DIFF as diff,
+	t1.PROCESS_DATE as processDate,
+	t3.DISPLAY_VALUE as queueStatus,
+	t1.TRACKING_ID as trackingId,
+	t1.TRACKING_ID_SERV as trackingIdServ,
+	t1.SESSION_ID as sessionId
+from
+	TEMP_COL_GET_EVENTS1 t1
+	left outer join GENERIC_ENUMERATION_REF t2 on t2.enumeration_key = lower(''QUEUE_STATUS'')
+		and t2.value = t1.QUEUE_STATUS
+	left outer join GENERIC_ENUMERATION_VALUES t3 on t3.enumeration_key = t2.enumeration_key
+		and t3.value = t2.value
+		and t3.LANGUAGE_CODE = {2}

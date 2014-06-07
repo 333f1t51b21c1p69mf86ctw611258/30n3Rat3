@@ -1,0 +1,16 @@
+select
+	t1.SERVICE_VERSION_ID as serviceVersionId,
+	t1.EXTERNAL_TYPE as externalType,
+	t4.DISPLAY_VALUE as unitsTypeKey,
+	t1.UNIT_TYPE as unitType,
+	t1.EXTERNAL_TYPE_DESC as externalTypeDesc
+from
+	OSA_UNIT_TYPE_MAPPING t1
+	inner join UNITS_TYPE_KEY t2 on t1.UNIT_TYPE = t2.UNIT_TYPE
+	inner join UNITS_TYPE_REF t3 on t2.UNIT_TYPE = t3.UNIT_TYPE
+		and t3.SERVICE_VERSION_ID = t1.SERVICE_VERSION_ID
+	inner join UNITS_TYPE_VALUES t4 on t2.UNIT_TYPE = t4.UNIT_TYPE
+		and t4.SERVICE_VERSION_ID = t1.SERVICE_VERSION_ID
+		and t4.LANGUAGE_CODE = {2}
+where
+	t1.SERVICE_VERSION_ID = {1}

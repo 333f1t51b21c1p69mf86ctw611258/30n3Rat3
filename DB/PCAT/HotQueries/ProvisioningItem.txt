@@ -1,0 +1,22 @@
+select
+	t1.PROVISIONING_ITEM_ID as provisioningItemId,
+	t2.SERVICE_VERSION_ID as serviceVersionId,
+	t5.DISPLAY_VALUE as paramDef,
+	t2.PARAM_ID as paramId,
+	t2.PROPAGATE_TO_PARENT as propagateToParent,
+	t2.IS_DEFAULT as isDefault,
+	t2.IS_INTERNAL as isInternal,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	PROVISIONING_ITEM_KEY t1
+	inner join PROVISIONING_ITEM_REF t2 on t1.PROVISIONING_ITEM_ID = t2.PROVISIONING_ITEM_ID
+	inner join PROVISIONING_ITEM_VALUES t3 on t2.PROVISIONING_ITEM_ID = t3.PROVISIONING_ITEM_ID
+		and t2.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+	left outer join PARAM_DEF t4 on t2.PARAM_ID = t4.PARAM_ID
+	left outer join PARAM_VALUES t5 on t4.PARAM_ID = t5.PARAM_ID
+		and t5.LANGUAGE_CODE = t3.LANGUAGE_CODE
+where
+	t2.SERVICE_VERSION_ID = {1}
+	and t3.LANGUAGE_CODE = {2}

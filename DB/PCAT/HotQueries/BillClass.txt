@@ -1,0 +1,24 @@
+select
+	t1.BILL_CLASS as billClass,
+	t2.SERVICE_VERSION_ID as serviceVersionId,
+	t5.DISPLAY_VALUE as billClassType,
+	t2.IS_DEFAULT as isDefault,
+	t2.IS_INTERNAL as isInternal,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	BILL_CLASS_KEY t1
+	inner join BILL_CLASS_REF t2 on t1.BILL_CLASS = t2.BILL_CLASS
+	inner join BILL_CLASS_VALUES t3 on t2.BILL_CLASS = t3.BILL_CLASS
+		and t2.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+	left outer join GUI_INDICATOR_REF t4 on t4.table_name = ''BILL_CLASS_REF''
+		and t4.field_name = lower(''BILL_CLASS_TYPE'')
+		and t4.integer_value = t2.BILL_CLASS_TYPE
+	left outer join GUI_INDICATOR_VALUES t5 on t5.table_name = t4.table_name
+		and t5.field_name = t4.field_name
+		and t5.integer_value = t4.integer_value
+		and t5.LANGUAGE_CODE = t3.LANGUAGE_CODE
+where
+	t2.SERVICE_VERSION_ID = {1}
+	and t3.LANGUAGE_CODE = {2}

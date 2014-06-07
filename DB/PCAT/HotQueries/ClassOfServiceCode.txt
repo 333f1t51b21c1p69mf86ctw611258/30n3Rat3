@@ -1,0 +1,15 @@
+select
+	t1.CLASS_OF_SERVICE_CODE as classOfServiceCode,
+	t1.CLASS_OF_SERVICE_VALUE as classOfServiceValue,
+	t1.SERVICE_GROUP as serviceGroup,
+	t1.FOREIGN_CODE as foreignCode,
+	t1.IS_DEFAULT as isDefault,
+	t1.IS_INTERNAL as isInternal,
+	t2.LANGUAGE_CODE as languageCode,
+	t2.DISPLAY_VALUE as displayValue,
+	t2.DESCRIPTION as description
+from
+	CLASS_OF_SERVICE_CODE_REF t1
+	inner join CLASS_OF_SERVICE_CODE_VALUES t2 on t1.CLASS_OF_SERVICE_CODE = t2.CLASS_OF_SERVICE_CODE
+where
+	t2.LANGUAGE_CODE = {2}

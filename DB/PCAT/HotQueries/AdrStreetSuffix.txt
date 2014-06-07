@@ -1,0 +1,5 @@
+select
+	t1.STREET_SUFFIX as streetSuffix,
+	t1.STREET_SUFFIX_DESC as streetSuffixDesc
+from
+	ADR_STREET_SUFFIX t1

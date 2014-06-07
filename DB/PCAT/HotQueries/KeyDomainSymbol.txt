@@ -1,0 +1,11 @@
+select
+	t1.DOMAIN_ID as domainId,
+	t1.SYMBOL as symbol,
+	t2.LANGUAGE_CODE as languageCode,
+	t2.DISPLAY_VALUE as displayValue
+from
+	KEY_DOMAIN_SYMBOL_REF t1
+	inner join KEY_DOMAIN_SYMBOL_VALUES t2 on t1.DOMAIN_ID = t2.DOMAIN_ID
+		and t1.SYMBOL = t2.SYMBOL
+where
+	t2.LANGUAGE_CODE = {2}

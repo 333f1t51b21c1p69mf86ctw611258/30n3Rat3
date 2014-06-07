@@ -1,0 +1,10 @@
+select
+	t1.EXPRESSION_GROUP_ID as expressionGroupId,
+	t2.RESELLER_VERSION_ID as resellerVersionId,
+	t2.DOMAIN as domain,
+	t2.LOGICAL_OPERATOR as logicalOperator
+from
+	EXPRESSION_GROUP_KEY t1
+	inner join EXPRESSION_GROUP t2 on t1.EXPRESSION_GROUP_ID = t2.EXPRESSION_GROUP_ID
+where
+	t2.RESELLER_VERSION_ID = {0}

@@ -1,0 +1,20 @@
+select
+	t1.ARCH_TABLE_ID as archTableId,
+	t3.DISPLAY_VALUE as archTypeRef,
+	t1.ARCH_TYPE_ID as archTypeId,
+	t1.IS_MASTER as isMaster,
+	t1.IS_DELETABLE as isDeletable,
+	t1.ARCH_TABLE_NM as archTableNm,
+	t1.ARCH_KEY_FLD_NM as archKeyFldNm,
+	t1.ARCH_KEY_RESETS_FLD_NM as archKeyResetsFldNm,
+	t1.IS_ACTIVE as isActive,
+	t1.DEL_SEQ as delSeq,
+	t1.DELETION_DETECTION_QUERY as deletionDetectionQuery,
+	t1.DROP_DETECTION_QUERY as dropDetectionQuery,
+	t1.ARCHIVE_AND_DELETE_QUERY as archiveAndDeleteQuery,
+	t1.PARTITION_DROP_QUERY as partitionDropQuery
+from
+	ARCH_TABLE_DEPENDS_REF t1
+	inner join ARCH_TYPE_REF t2 on t1.ARCH_TYPE_ID = t2.ARCH_TYPE_ID
+	inner join ARCH_TYPE_VALUES t3 on t2.ARCH_TYPE_ID = t3.ARCH_TYPE_ID
+		and t3.LANGUAGE_CODE = {2}

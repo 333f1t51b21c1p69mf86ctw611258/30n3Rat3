@@ -1,0 +1,7 @@
+select
+	t1.TABLE_NAME as tableName,
+	t1.COLUMN1 as column1,
+	t1.COLUMN2 as column2,
+	t1.CONSUMER as consumer
+from
+	TABLE_USE_MAP t1

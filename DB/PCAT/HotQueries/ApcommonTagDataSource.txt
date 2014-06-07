@@ -1,0 +1,9 @@
+select
+	t1.COMMON_TAG_ID as commonTagId,
+	t1.OBJECT_TYPEID_NAME as objectTypeidName,
+	t1.FIELD_TAG as fieldTag,
+	t1.DATA_SOURCE as dataSource,
+	t1.IS_NATIVE as isNative,
+	t1.DESCRIPTION as description
+from
+	APCOMMON_TAG_DATA_SOURCE t1

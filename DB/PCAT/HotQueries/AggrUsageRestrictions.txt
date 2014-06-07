@@ -1,0 +1,11 @@
+select
+	t3.DISPLAY_VALUE as aggrUsageDefinitionsRef,
+	t1.AGGR_USAGE_ID as aggrUsageId,
+	t1.RESTRICTION_TYPE as restrictionType,
+	t1.RESTRICTED_ID as restrictedId,
+	t1.IS_EXCLUSION as isExclusion
+from
+	AGGR_USAGE_RESTRICTIONS t1
+	inner join AGGR_USAGE_DEFINITIONS_REF t2 on t1.AGGR_USAGE_ID = t2.AGGR_USAGE_ID
+	inner join AGGR_USAGE_DEFINITIONS_VALUES t3 on t2.AGGR_USAGE_ID = t3.AGGR_USAGE_ID
+		and t3.LANGUAGE_CODE = {2}

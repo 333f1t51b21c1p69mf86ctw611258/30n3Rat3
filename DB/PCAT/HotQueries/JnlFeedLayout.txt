@@ -1,0 +1,15 @@
+select
+	t1.JNL_FIELD_POSITION as jnlFieldPosition,
+	t1.JNL_FIELD_DB_CR as jnlFieldDbCr,
+	t1.JNL_FEED_CODE as jnlFeedCodeCode,
+	t1.JNL_TABLE as jnlTable,
+	t1.JNL_FIELD as jnlField,
+	t1.JNL_FIELD_SIZE as jnlFieldSize,
+	t1.JNL_HARDCODED_VALUE as jnlHardcodedValue,
+	t1.JNL_FIELD_FORMAT as jnlFieldFormat,
+	t1.JNL_FIELD_TRIM as jnlFieldTrim,
+	t1.JNL_FIELD_DESCRIPTION as jnlFieldDescription,
+	t1.IN_FEED_REPORT as inFeedReport
+from
+	JNL_FEED_LAYOUT t1
+	inner join JNL_FEED_CODE t2 on t1.JNL_FEED_CODE = t2.JNL_FEED_CODE

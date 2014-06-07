@@ -1,0 +1,15 @@
+select
+	t1.TRANSITION_RULE_MAP_ID as transitionRuleMapId,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t1.TRANSITION_RULE_ID as transitionRuleId,
+	t1.BUNDLE_ID as bundleId,
+	t2.DISPLAY_VALUE as name,
+	t2.DESCRIPTION as description
+from
+	TRANSITION_RULE_MEMBER_MAP t1
+	left outer join BUNDLE_VALUES t2 on t1.BUNDLE_ID = t2.BUNDLE_ID
+		and t2.LANGUAGE_CODE = {2}
+		and t2.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+where
+	t1.RESELLER_VERSION_ID = {0}
+		and t1.BUNDLE_ID is not null

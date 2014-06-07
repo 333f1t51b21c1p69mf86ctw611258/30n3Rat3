@@ -1,0 +1,22 @@
+select
+	t1.TIMEZONE as timezone,
+	t2.SERVICE_VERSION_ID as serviceVersionId,
+	t2.UNIX_TZ as unixTz,
+	t2.WINDOWS_TZ as windowsTz,
+	t2.ISDST as isdst,
+	t2.IS_DESELECTED as isDeselected,
+	t2.IS_DEFAULT as isDefault,
+	t2.IS_INTERNAL as isInternal,
+	t2.ORACLE_TZ as oracleTz,
+	t2.IS_PROVISIONABLE as isProvisionable,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	TIMEZONE_KEY t1
+	inner join TIMEZONE_REF t2 on t1.TIMEZONE = t2.TIMEZONE
+	inner join TIMEZONE_VALUES t3 on t2.TIMEZONE = t3.TIMEZONE
+		and t2.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+where
+	t2.SERVICE_VERSION_ID = {1}
+	and t3.LANGUAGE_CODE = {2}

@@ -1,0 +1,18 @@
+select
+	t1.SLE_SERVICE_ID as sleServiceId,
+	t2.SERVICE_VERSION_ID as serviceVersionId,
+	t2.SLE_SERVICE_NAME as sleServiceName,
+	t2.TOTAL_PARAMETERS as totalParameters,
+	t2.IS_DEFAULT as isDefault,
+	t2.IS_INTERNAL as isInternal,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	DIAM_FLEXSLE_SERVICE_KEY t1
+	inner join DIAM_FLEXSLE_SERVICE_REF t2 on t1.SLE_SERVICE_ID = t2.SLE_SERVICE_ID
+	inner join DIAM_FLEXSLE_SERVICE_VALUES t3 on t2.SLE_SERVICE_ID = t3.SLE_SERVICE_ID
+		and t2.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+where
+	t2.SERVICE_VERSION_ID = {1}
+	and t3.LANGUAGE_CODE = {2}

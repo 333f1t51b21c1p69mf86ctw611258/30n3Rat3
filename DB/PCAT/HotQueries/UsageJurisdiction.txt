@@ -1,0 +1,38 @@
+select
+	t1.SEQNUM as seqnum,
+	t3.SERVICE_VERSION_ID as serviceVersionId,
+	t4.DISPLAY_VALUE as jurisdictionsKey,
+	t1.JURISDICTION as jurisdiction,
+	t1.AUT_ID as autId,
+	t1.RATE_CLASS as rateClass,
+	t1.EQUIP_TYPE_CODE as equipTypeCode,
+	t1.EQUIP_CLASS_CODE as equipClassCode,
+	t1.CLASS_OF_SERVICE_CODE as classOfServiceCode,
+	t1.POINT_ORIGIN as pointOrigin,
+	t1.POINT_TARGET as pointTarget,
+	t1.POINT_CLASS_ORIGIN as pointClassOrigin,
+	t1.POINT_CLASS_TARGET as pointClassTarget,
+	t1.POINT_REGION_ORIGIN as pointRegionOrigin,
+	t1.POINT_REGION_TARGET as pointRegionTarget,
+	t1.STATE_ORIGIN as stateOrigin,
+	t1.STATE_ORIGIN_EXCLUDE as stateOriginExclude,
+	t1.STATE_TARGET as stateTarget,
+	t1.STATE_TARGET_EXCLUDE as stateTargetExclude,
+	t1.EXCLUDE_GROUP as excludeGroup,
+	t1.ACCESS_REGION_ORIGIN as accessRegionOrigin,
+	t1.ACCESS_REGION_TARGET as accessRegionTarget,
+	t1.PRIORITY as priority,
+	t1.COUNTRY_CODE_ORIGIN as countryCodeOrigin,
+	t1.COUNTRY_CODE_TARGET as countryCodeTarget,
+	t1.ACTIVE_DT as activeDt,
+	t1.INACTIVE_DT as inactiveDt,
+	t1.BILL_CLASS as billClass,
+	t1.ZONE_CLASS as zoneClass
+from
+	USAGE_JURISDICTION t1
+	inner join JURISDICTIONS_KEY t2 on t1.JURISDICTION = t2.JURISDICTION
+	inner join JURISDICTIONS_REF t3 on t2.JURISDICTION = t3.JURISDICTION
+		and t3.SERVICE_VERSION_ID = {1}
+	inner join JURISDICTIONS_VALUES t4 on t2.JURISDICTION = t4.JURISDICTION
+		and t4.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+		and t4.LANGUAGE_CODE = {2}

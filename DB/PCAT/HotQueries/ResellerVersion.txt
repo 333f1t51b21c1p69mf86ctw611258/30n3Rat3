@@ -1,0 +1,21 @@
+select
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t4.DISPLAY_VALUE as resellerKey,
+	t1.RESELLER_ID as resellerId,
+	t1.MAJOR_VERSION_NUM as majorVersionNum,
+	t1.MINOR_VERSION_NUM as minorVersionNum,
+	t1.ACTIVE_DATE as activeDate,
+	t1.INACTIVE_DATE as inactiveDate,
+	t1.SERVICE_VERSION_ID as serviceVersionId,
+	t1.STATUS as status
+from
+	RESELLER_VERSION t1
+	inner join RESELLER_KEY t2 on t1.RESELLER_ID = t2.RESELLER_ID
+	inner join RESELLER_REF t3 on t2.RESELLER_ID = t3.RESELLER_ID
+		and t3.SERVICE_VERSION_ID = t1.SERVICE_VERSION_ID
+	inner join RESELLER_VALUES t4 on t2.RESELLER_ID = t4.RESELLER_ID
+		and t4.SERVICE_VERSION_ID = t1.SERVICE_VERSION_ID
+		and t4.LANGUAGE_CODE = {2}
+where
+	t1.RESELLER_VERSION_ID = {0}
+	and t1.SERVICE_VERSION_ID = {1}

@@ -1,0 +1,5 @@
+select
+	t1.STREET_DIRECTIONAL as streetDirectional,
+	t1.STREET_DIRECTIONAL_DESC as streetDirectionalDesc
+from
+	ADR_STREET_DIRECTIONAL t1

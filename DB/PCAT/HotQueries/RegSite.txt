@@ -1,0 +1,6 @@
+select
+	t1.SITE_ID as siteId,
+	t1.SITE_NAME as siteName,
+	t1.SITE_LOCATION as siteLocation
+from
+	REG_SITE t1

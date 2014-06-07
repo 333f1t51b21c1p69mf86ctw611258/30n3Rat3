@@ -1,0 +1,14 @@
+select
+	t1.MOG_ID as mogId,
+	t2.RESELLER_VERSION_ID as resellerVersionId,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	MARKET_OFFER_GROUP_KEY t1
+	inner join MARKET_OFFER_GROUP_REF t2 on t1.MOG_ID = t2.MOG_ID
+	inner join MARKET_OFFER_GROUP_VALUES t3 on t2.MOG_ID = t3.MOG_ID
+		and t2.RESELLER_VERSION_ID = t3.RESELLER_VERSION_ID
+where
+	t2.RESELLER_VERSION_ID = {0}
+	and t3.LANGUAGE_CODE = {2}

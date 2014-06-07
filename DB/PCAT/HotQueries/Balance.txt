@@ -1,0 +1,31 @@
+select
+	t1.BALANCE_ID as balanceId,
+	t2.RESELLER_VERSION_ID as resellerVersionId,
+	t5.SERVICE_VERSION_ID as serviceVersionId,
+	t6.DISPLAY_VALUE as unitsTypeKey,
+	t2.UNIT_TYPE as unitType,
+	t8.DISPLAY_VALUE as anncTypePromptRef,
+	t2.ANNC_TYPE_ID as anncTypeId,
+	t2.IS_EXT_EXPOSABLE as isExtExposable,
+	t2.IS_INTERNAL as isInternal,
+	t2.IS_DEFAULT as isDefault,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description        
+from
+	BALANCE_KEY t1
+	inner join BALANCE_REF t2 on t1.BALANCE_ID = t2.BALANCE_ID
+	inner join BALANCE_VALUES t3 on t2.BALANCE_ID = t3.BALANCE_ID
+		and t2.RESELLER_VERSION_ID = t3.RESELLER_VERSION_ID
+	inner join UNITS_TYPE_KEY t4 on t2.UNIT_TYPE = t4.UNIT_TYPE
+	inner join UNITS_TYPE_REF t5 on t4.UNIT_TYPE = t5.UNIT_TYPE
+		and t5.SERVICE_VERSION_ID = {1}
+	inner join UNITS_TYPE_VALUES t6 on t4.UNIT_TYPE = t6.UNIT_TYPE
+		and t6.SERVICE_VERSION_ID = t5.SERVICE_VERSION_ID
+		and t6.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join ANNC_TYPE_PROMPT_REF t7 on t2.ANNC_TYPE_ID = t7.ANNC_TYPE_ID
+	left outer join ANNC_TYPE_PROMPT_VALUES t8 on t7.ANNC_TYPE_ID = t8.ANNC_TYPE_ID
+		and t8.LANGUAGE_CODE = t3.LANGUAGE_CODE
+where
+	t2.RESELLER_VERSION_ID = {0}
+	and t3.LANGUAGE_CODE = {2}

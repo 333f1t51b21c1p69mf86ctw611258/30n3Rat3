@@ -1,0 +1,5 @@
+select
+	t1.JNL_SUBCYCLE_START_DT as jnlSubcycleStartDt,
+	t1.JNL_SUBCYCLE_END_DT as jnlSubcycleEndDt
+from
+	JNL_SUBCYCLE t1

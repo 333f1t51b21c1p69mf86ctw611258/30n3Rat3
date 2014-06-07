@@ -1,0 +1,16 @@
+select
+	t1.PC_KEYWORD_ID as pcKeywordId,
+	t2.RESELLER_VERSION_ID as resellerVersionId,
+	t2.ENTITY_NAME as entityName,
+	t2.ENTITY_ID as entityId,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	PC_KEYWORD_KEY t1
+	inner join PC_KEYWORD_REF t2 on t1.PC_KEYWORD_ID = t2.PC_KEYWORD_ID
+	inner join PC_KEYWORD_VALUES t3 on t2.PC_KEYWORD_ID = t3.PC_KEYWORD_ID
+		and t2.RESELLER_VERSION_ID = t3.RESELLER_VERSION_ID
+where
+	t2.RESELLER_VERSION_ID = {0}
+	and t3.LANGUAGE_CODE = {2}

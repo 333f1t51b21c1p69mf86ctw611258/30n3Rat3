@@ -1,0 +1,7 @@
+select
+	t1.ATTRIB_NAME as attribName,
+	t1.ATTRIB_INTERNAL_NAME as attribInternalName,
+	t1.EXTENSION_INDEX as extensionIndex,
+	t1.IN_USE as inUse
+from
+	INVS_DYNEXTENSION t1

@@ -1,0 +1,16 @@
+select
+	t1.POINT_CATEGORY as pointCategory,
+	t2.SERVICE_VERSION_ID as serviceVersionId,
+	t2.IS_DEFAULT as isDefault,
+	t2.IS_INTERNAL as isInternal,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	POINT_CATEGORY_KEY t1
+	inner join POINT_CATEGORY_REF t2 on t1.POINT_CATEGORY = t2.POINT_CATEGORY
+	inner join POINT_CATEGORY_VALUES t3 on t2.POINT_CATEGORY = t3.POINT_CATEGORY
+		and t2.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+where
+	t2.SERVICE_VERSION_ID = {1}
+	and t3.LANGUAGE_CODE = {2}

@@ -1,0 +1,23 @@
+select
+	t1.ITEM_ID as itemId,
+	t4.DISPLAY_VALUE as languageCodeRef,
+	t1.LANG_CODE as langCode,
+	t1.DISPLAY_NAME as displayName,
+	t1.DESCRIPTION as description,
+	t1.EXT_DESCRIPTION as extDescription,
+	t1.MARKETING_MSG as marketingMsg,
+	t1.RELEASE_DATE as releaseDate,
+	t1.RELEASE_LANGUAGE as releaseLanguage,
+	t1.RELEASE_COUNTRY as releaseCountry,
+	t1.STARRING as starring,
+	t1.SUPPORTING_CAST as supportingCast,
+	t1.DIRECTOR as director,
+	t1.PRODUCER as producer,
+	t1.PRODUCTION_COMPANY as productionCompany,
+	t1.DISTRIBUTOR as distributor
+from
+	CTC_ITEM_DESC t1
+	inner join CTC_ITEM t2 on t1.ITEM_ID = t2.ITEM_ID
+	inner join LANGUAGE_CODE_REF t3 on t1.LANG_CODE = t3.LANGUAGE_CODE
+	inner join LANGUAGE_CODE_VALUES t4 on t3.LANGUAGE_CODE = t4.INPUT_LANGUAGE
+		and t4.LANGUAGE_CODE = {2}

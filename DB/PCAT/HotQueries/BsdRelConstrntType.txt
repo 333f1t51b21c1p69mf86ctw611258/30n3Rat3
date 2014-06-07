@@ -1,0 +1,13 @@
+select
+	t1.REL_CONSTRAINT_TYPE_ID as relConstraintTypeId,
+	t1.NAME as name,
+	t1.UPD_CNT as updCnt,
+	t1.CHG_WHO as chgWho,
+	t1.CHG_DT as chgDt,
+	t2.LANGUAGE_CODE as languageCode,
+	t2.DISPLAY_VALUE as displayValue
+from
+	BSD_REL_CONSTRNT_TYPE_REF t1
+	inner join BSD_REL_CONSTRNT_TYPE_VALUES t2 on t1.REL_CONSTRAINT_TYPE_ID = t2.REL_CONSTRAINT_TYPE_ID
+where
+	t2.LANGUAGE_CODE = {2}

@@ -1,0 +1,5 @@
+select
+	t1.TARGET_DB_ID as targetDbId,
+	t1.ID as id
+from
+	PT_TMP_LOCK t1

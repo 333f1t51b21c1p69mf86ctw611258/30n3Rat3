@@ -1,0 +1,13 @@
+select
+	t1.INVENTORY_PREFIX_ID as inventoryPrefixId,
+	t3.DISPLAY_VALUE as invsTypeRef,
+	t1.INVENTORY_TYPE_ID as inventoryTypeId,
+	t1.PRIMARY_CODE_PREFIX as primaryCodePrefix,
+	t1.SECONDARY_CODE_PREFIX as secondaryCodePrefix,
+	t1.TERTIARY_CODE_PREFIX as tertiaryCodePrefix,
+	t1.SERIAL_NUMBER_PREFIX as serialNumberPrefix
+from
+	INVS_TYPE_PREFIX t1
+	inner join INVS_TYPE_REF t2 on t1.INVENTORY_TYPE_ID = t2.INVENTORY_TYPE_ID
+	inner join INVS_TYPE_VALUES t3 on t2.INVENTORY_TYPE_ID = t3.INVENTORY_TYPE_ID
+		and t3.LANGUAGE_CODE = {2}

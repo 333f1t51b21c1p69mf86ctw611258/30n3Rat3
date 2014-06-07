@@ -1,0 +1,48 @@
+/* Formatted on 3/15/2014 5:24:47 PM (QP5 v5.215.12089.38647) */
+SELECT t1.DISCOUNT_ITEM_ID AS discountItemId,
+       t2.RESELLER_VERSION_ID AS resellerVersionId,
+       t6.DISPLAY_VALUE AS rtDiscountKey,
+       t2.RT_DISCOUNT_ID AS rtDiscountId,
+       t9.DISPLAY_VALUE AS autFinalKey,
+       t2.AUT_ID AS autId,
+       t12.DISPLAY_VALUE AS autGroupKey,
+       t2.AUT_GROUP_ID AS autGroupId,
+       t2.IS_DEFAULT AS isDefault,
+       t2.IS_INTERNAL AS isInternal,
+       t3.LANGUAGE_CODE AS languageCode,
+       t3.DISPLAY_VALUE AS displayValue,
+       t3.DESCRIPTION AS description
+  FROM cbs_owner.RT_DISCOUNT_ITEM_KEY t1
+       INNER JOIN cbs_owner.RT_DISCOUNT_ITEM_REF t2
+          ON t1.DISCOUNT_ITEM_ID = t2.DISCOUNT_ITEM_ID
+       INNER JOIN cbs_owner.RT_DISCOUNT_ITEM_VALUES t3
+          ON     t2.DISCOUNT_ITEM_ID = t3.DISCOUNT_ITEM_ID
+             AND t2.RESELLER_VERSION_ID = t3.RESELLER_VERSION_ID
+       INNER JOIN cbs_owner.RT_DISCOUNT_KEY t4
+          ON t2.RT_DISCOUNT_ID = t4.RT_DISCOUNT_ID
+       INNER JOIN cbs_owner.RT_DISCOUNT_REF t5
+          ON     t4.RT_DISCOUNT_ID = t5.RT_DISCOUNT_ID
+             AND t5.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+       INNER JOIN cbs_owner.RT_DISCOUNT_VALUES t6
+          ON     t4.RT_DISCOUNT_ID = t6.RT_DISCOUNT_ID
+             AND t6.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+             AND t6.LANGUAGE_CODE = t3.LANGUAGE_CODE
+       LEFT OUTER JOIN cbs_owner.AUT_FINAL_KEY t7
+          ON t2.AUT_ID = t7.AUT_ID
+       LEFT OUTER JOIN cbs_owner.AUT_FINAL_REF t8
+          ON     t7.AUT_ID = t8.AUT_ID
+             AND t8.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+       LEFT OUTER JOIN cbs_owner.AUT_FINAL_VALUES t9
+          ON     t7.AUT_ID = t9.AUT_ID
+             AND t9.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+             AND t9.LANGUAGE_CODE = t3.LANGUAGE_CODE
+       LEFT OUTER JOIN cbs_owner.AUT_GROUP_KEY t10
+          ON t2.AUT_GROUP_ID = t10.AUT_GROUP_ID
+       LEFT OUTER JOIN cbs_owner.AUT_GROUP_REF t11
+          ON     t10.AUT_GROUP_ID = t11.AUT_GROUP_ID
+             AND t11.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+       LEFT OUTER JOIN cbs_owner.AUT_GROUP_VALUES t12
+          ON     t10.AUT_GROUP_ID = t12.AUT_GROUP_ID
+             AND t12.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+             AND t12.LANGUAGE_CODE = t3.LANGUAGE_CODE
+ WHERE t2.RESELLER_VERSION_ID = 2 AND t3.LANGUAGE_CODE = 1;

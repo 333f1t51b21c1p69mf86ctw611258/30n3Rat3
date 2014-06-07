@@ -1,0 +1,23 @@
+select
+	t3.DISPLAY_VALUE as eventCategory,
+	t1.ACTION as action,
+	t1.EVENT_PROCESS as eventProcess,
+	t1.IS_SYSTEM_COMPLETE as isSystemComplete,
+	t1.PROCESS_IF_DISC as processIfDisc,
+	t1.QUOTA as quota,
+	t5.DISPLAY_VALUE as period,
+	t1.RESCHEDULE_DELAY as rescheduleDelay,
+	t1.ACTION_CLASS_MEMBERSHIP as actionClassMembership,
+	t1.PEER_ACTION as peerAction
+from
+	ARM_ACTION_DEFINITION t1
+	left outer join GENERIC_ENUMERATION_REF t2 on t2.enumeration_key = lower(''EVENT_CATEGORY'')
+		and t2.value = t1.EVENT_CATEGORY
+	left outer join GENERIC_ENUMERATION_VALUES t3 on t3.enumeration_key = t2.enumeration_key
+		and t3.value = t2.value
+		and t3.LANGUAGE_CODE = {2}
+	left outer join GENERIC_ENUMERATION_REF t4 on t4.enumeration_key = lower(''PERIOD'')
+		and t4.value = t1.PERIOD
+	left outer join GENERIC_ENUMERATION_VALUES t5 on t5.enumeration_key = t4.enumeration_key
+		and t5.value = t4.value
+		and t5.LANGUAGE_CODE = {2}

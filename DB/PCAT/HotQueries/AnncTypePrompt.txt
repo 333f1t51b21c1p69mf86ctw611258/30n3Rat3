@@ -1,0 +1,24 @@
+select
+	t1.ANNC_TYPE_ID as anncTypeId,
+	t1.BAL_PROMPT as balPrompt,
+	t1.BAL_CHANGE_PROMPT as balChangePrompt,
+	t1.BAL_SINGLE_UNIT_PROMPT as balSingleUnitPrompt,
+	t1.BAL_MULTI_UNITS_PROMPT as balMultiUnitsPrompt,
+	t1.SHADOW_BAL_PROMPT as shadowBalPrompt,
+	t1.SHADOW_BAL_CHANGE_PROMPT as shadowBalChangePrompt,
+	t1.PREPAID_BAL_PROMPT as prepaidBalPrompt,
+	t1.PREPAID_BAL_CHANGE_PROMPT as prepaidBalChangePrompt,
+	t1.POSTPAID_BAL_PROMPT as postpaidBalPrompt,
+	t1.POSTPAID_BAL_CHANGE_PROMPT as postpaidBalChangePrompt,
+	t1.NEG_BAL_PROMPT as negBalPrompt,
+	t1.NEG_SHADOW_BAL_PROMPT as negShadowBalPrompt,
+	t1.NEG_PREPAID_BAL_PROMPT as negPrepaidBalPrompt,
+	t1.NEG_POSTPAID_BAL_PROMPT as negPostpaidBalPrompt,
+	t2.LANGUAGE_CODE as languageCode,
+	t2.DISPLAY_VALUE as displayValue,
+	t2.DESCRIPTION as description
+from
+	ANNC_TYPE_PROMPT_REF t1
+	inner join ANNC_TYPE_PROMPT_VALUES t2 on t1.ANNC_TYPE_ID = t2.ANNC_TYPE_ID
+where
+	t2.LANGUAGE_CODE = {2}

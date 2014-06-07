@@ -1,0 +1,54 @@
+select
+	t1.RESELLER_ID as resellerId,
+	t2.SERVICE_VERSION_ID as serviceVersionId,
+	t2.RESELLER_CONTACT_LNAME as resellerContactLname,
+	t2.RESELLER_CONTACT_FNAME as resellerContactFname,
+	t2.RESELLER_CONTACT_MINIT as resellerContactMinit,
+	t2.RESELLER_CONTACT_TITLE as resellerContactTitle,
+	t2.RESELLER_CONTACT_PHONE as resellerContactPhone,
+	t2.RESELLER_CONTACT_EMAIL as resellerContactEmail,
+	t2.RESELLER_ADDRESS1 as resellerAddress1,
+	t2.RESELLER_ADDRESS2 as resellerAddress2,
+	t2.RESELLER_ADDRESS3 as resellerAddress3,
+	t2.RESELLER_CITY as resellerCity,
+	t2.RESELLER_STATE as resellerState,
+	t2.RESELLER_ZIP as resellerZip,
+	t5.DISPLAY_VALUE as countryCodeRef,
+	t2.RESELLER_COUNTRY_CODE as resellerCountryCode,
+	t2.RESELLER_COUNTY as resellerCounty,
+	t2.RESELLER_ANNOTATION as resellerAnnotation,
+	t2.GENERATE_CDR as generateCdr,
+	t2.INTERCEPT_CSR_IDLE as interceptCsrIdle,
+	t2.INTERCEPT_CSR_RECHG as interceptCsrRechg,
+	t2.INTERCEPT_CSR_SUSPNDT as interceptCsrSuspndt,
+	t2.INTERCEPT_CSR_DISABLE as interceptCsrDisable,
+	t2.ACCESS_RECHG_SERVER as accessRechgServer,
+	t2.MAX_ADMIN_CALLS_RETRY as maxAdminCallsRetry,
+	t2.MAX_RECHG_CALLS_RETRY as maxRechgCallsRetry,
+	t2.NUM_BALANCE_THRES as numBalanceThres,
+	t2.NUM_TIME_THRES as numTimeThres,
+	t2.PLAY_MAX_CALL_DURTN as playMaxCallDurtn,
+	t2.MAX_CARD_ATTEMPTS as maxCardAttempts,
+	t2.VOICE_MAIL_NUMBER as voiceMailNumber,
+	t7.DISPLAY_VALUE as resvHandleSet,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	RESELLER_KEY t1
+	inner join RESELLER_REF t2 on t1.RESELLER_ID = t2.RESELLER_ID
+	inner join RESELLER_VALUES t3 on t2.RESELLER_ID = t3.RESELLER_ID
+		and t2.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+	inner join COUNTRY_CODE_REF t4 on t2.RESELLER_COUNTRY_CODE = t4.COUNTRY_CODE
+	inner join COUNTRY_CODE_VALUES t5 on t4.COUNTRY_CODE = t5.COUNTRY_CODE
+		and t5.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join GUI_INDICATOR_REF t6 on t6.table_name = ''RESELLER_REF''
+		and t6.field_name = lower(''RESV_HANDLE_SET'')
+		and t6.integer_value = t2.RESV_HANDLE_SET
+	left outer join GUI_INDICATOR_VALUES t7 on t7.table_name = t6.table_name
+		and t7.field_name = t6.field_name
+		and t7.integer_value = t6.integer_value
+		and t7.LANGUAGE_CODE = t3.LANGUAGE_CODE
+where
+	t2.SERVICE_VERSION_ID = {1}
+	and t3.LANGUAGE_CODE = {2}

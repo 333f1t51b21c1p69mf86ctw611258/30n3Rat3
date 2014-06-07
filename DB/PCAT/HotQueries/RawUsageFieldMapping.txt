@@ -1,0 +1,12 @@
+select
+	t1.RECORD_TYPE as recordType,
+	t1.FIELD_FROM_POS as fieldFromPos,
+	t1.FIELD_FROM_NAME as fieldFromName,
+	t1.FIELD_FROM_SIZE as fieldFromSize,
+	t1.FIELD_FROM_TYPE as fieldFromType,
+	t1.IS_REQUIRED as isRequired,
+	t1.IS_IGNORED as isIgnored,
+	t1.DATE_FORMAT as dateFormat,
+	t1.FIELD_TO_NAME as fieldToName
+from
+	RAW_USAGE_FIELD_MAPPING t1

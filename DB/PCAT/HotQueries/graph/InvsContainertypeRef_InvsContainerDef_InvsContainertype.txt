@@ -1,0 +1,13 @@
+select
+	t1.CONTAINER_DEF_ID as containerDefId,
+	t1.CONTAINERTYPE_ID as containertypeId,
+	t1.CONTAINED_CONTAINERTYPE_ID as containedContainertypeId,
+	t1.INVENTORY_TYPE_ID as inventoryTypeId,
+	t5.DISPLAY_VALUE as name,
+	t1.MINIMUM_COUNT as minimumCount,
+	t1.MAXIMUM_COUNT as maximumCount
+from
+	INVS_CONTAINER_DEF t1
+	inner join INVS_CONTAINERTYPE_REF t4 on t1.CONTAINED_CONTAINERTYPE_ID = t4.CONTAINERTYPE_ID
+	inner join INVS_CONTAINERTYPE_VALUES t5 on t4.CONTAINERTYPE_ID = t5.CONTAINERTYPE_ID
+		and t5.LANGUAGE_CODE = {2}

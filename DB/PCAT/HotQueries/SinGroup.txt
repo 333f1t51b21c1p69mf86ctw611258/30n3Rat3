@@ -1,0 +1,19 @@
+select
+	t1.GROUP_ID as groupId,
+	t1.RESET_FREQUENCY as resetFrequency,
+	t1.RESET_FINANCIAL_DATE as resetFinancialDate,
+	t1.RESET_OPTION as resetOption,
+	t1.START_VALUE as startValue,
+	t1.END_VALUE as endValue,
+	t1.SIN_SEQ_NO_LEN as sinSeqNoLen,
+	t1.ACTIVE_DATE as activeDate,
+	t1.INACTIVE_DATE as inactiveDate,
+	t1.PRIORITY as priority,
+	t1.IS_EXTERNAL as isExternal,
+	t2.LANGUAGE_CODE as languageCode,
+	t2.DISPLAY_VALUE as displayValue
+from
+	SIN_GROUP_REF t1
+	inner join SIN_GROUP_VALUES t2 on t1.GROUP_ID = t2.GROUP_ID
+where
+	t2.LANGUAGE_CODE = {2}

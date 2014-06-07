@@ -1,0 +1,13 @@
+select
+	t1.TABLE_MOVE_ID as tableMoveId,
+	t1.TABLE_NAME as tableName,
+	t1.TABLE_ALIAS as tableAlias,
+	t1.FROM_TABLES as fromTables,
+	t1.WHERE_CLAUSE as whereClause,
+	t1.RUN_ORDER as runOrder,
+	t1.DELETE_ORDER as deleteOrder,
+	t1.DISTINCT_FLAG as distinctFlag,
+	t1.ACTION_FLAG as actionFlag,
+	t1.SERVER_TYPE_FLAG as serverTypeFlag
+from
+	ACCOUNT_MOVE_TABLES t1

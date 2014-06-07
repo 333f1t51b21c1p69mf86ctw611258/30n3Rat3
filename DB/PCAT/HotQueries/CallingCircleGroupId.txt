@@ -1,0 +1,16 @@
+select
+	t1.CIRCLE_GROUP_ID as circleGroupId,
+	t2.RESELLER_VERSION_ID as resellerVersionId,
+	t2.IS_INTERNAL as isInternal,
+	t2.IS_DEFAULT as isDefault,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	CALLING_CIRCLE_GROUP_ID_KEY t1
+	inner join CALLING_CIRCLE_GROUP_ID_REF t2 on t1.CIRCLE_GROUP_ID = t2.CIRCLE_GROUP_ID
+	inner join CALLING_CIRCLE_GROUP_ID_VALUES t3 on t2.CIRCLE_GROUP_ID = t3.CIRCLE_GROUP_ID
+		and t2.RESELLER_VERSION_ID = t3.RESELLER_VERSION_ID
+where
+	t2.RESELLER_VERSION_ID = {0}
+	and t3.LANGUAGE_CODE = {2}

@@ -1,0 +1,10 @@
+select
+	t1.TARGET_DB_ID as targetDbId,
+	t1.TARGET_GROUP_ID as targetGroupId,
+	t1.REGION_ID as regionId
+from
+	DP_TARGET_GROUP_MAP t1
+	inner join DP_TARGET_DB t2 on t1.TARGET_DB_ID = t2.TARGET_DB_ID
+	inner join DP_TARGET_GROUP_REF t3 on t1.TARGET_GROUP_ID = t3.TARGET_GROUP_ID
+	inner join DP_TARGET_GROUP_VALUES t4 on t3.TARGET_GROUP_ID = t4.TARGET_GROUP_ID
+		and t4.LANGUAGE_CODE = {2}

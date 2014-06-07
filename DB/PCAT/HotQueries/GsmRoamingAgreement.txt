@@ -1,0 +1,46 @@
+select
+	t3.DISPLAY_VALUE as roamingOperatorRef,
+	t1.OPERATOR_ID as operatorId,
+	t1.RATE_KEY_ID as rateKeyId,
+	t1.PLMN_NAME as plmnName,
+	t1.MOBILE_COUNTRY_CODE as mobileCountryCode,
+	t1.MOBILE_NETWORK_CODE as mobileNetworkCode,
+	t1.NATIONAL_DESTINATION_CODE as nationalDestinationCode,
+	t1.VERSION_IN as versionIn,
+	t1.VERSION_OUT as versionOut,
+	t1.TAX_TREATMENT as taxTreatment,
+	t1.MAX_DAYS_IN as maxDaysIn,
+	t1.MAX_DAYS_OUT as maxDaysOut,
+	t1.PLMN_TAPE_VOLSER_NAME as plmnTapeVolserName,
+	t1.PLMN_TYPE as plmnType,
+	t1.PLMN_ADDRESS1 as plmnAddress1,
+	t1.PLMN_ADDRESS2 as plmnAddress2,
+	t1.PLMN_ADDRESS3 as plmnAddress3,
+	t1.PLMN_CITY as plmnCity,
+	t1.PLMN_STATE as plmnState,
+	t1.PLMN_ZIP as plmnZip,
+	t1.PLMN_CONTACT_NAME as plmnContactName,
+	t1.PLMN_CONTACT_PHONE as plmnContactPhone,
+	t1.PLMN_CONTACT_FAXNO as plmnContactFaxno,
+	t1.PLMN_DESCRIPTION as plmnDescription,
+	t6.DISPLAY_VALUE as countryCodeRef,
+	t1.COUNTRY_CODE as countryCode,
+	t1.CURRENCY_CODE as currencyCode,
+	t1.EXT_CONTACT_ID_IN as extContactIdIn,
+	t1.EXT_CONTACT_ID_OUT as extContactIdOut,
+	t1.ACTIVE_DT as activeDt,
+	t1.INACTIVE_DT as inactiveDt,
+	t1.COMPOSITE_FILE as compositeFile,
+	t1.NOTIFICATION_INTERVAL as notificationInterval,
+	t1.NEWLINE_TERMINATE_RECORDS as newlineTerminateRecords
+from
+	GSM_ROAMING_AGREEMENT t1
+	inner join ROAMING_OPERATOR_REF t2 on t1.OPERATOR_ID = t2.OPERATOR_ID
+	inner join ROAMING_OPERATOR_VALUES t3 on t2.OPERATOR_ID = t3.OPERATOR_ID
+		and t3.LANGUAGE_CODE = {2}
+	inner join ROAMING_RATE_KEYS t4 on t1.RATE_KEY_ID = t4.RATE_KEY_ID
+	inner join COUNTRY_CODE_REF t5 on t1.COUNTRY_CODE = t5.COUNTRY_CODE
+	inner join COUNTRY_CODE_VALUES t6 on t5.COUNTRY_CODE = t6.COUNTRY_CODE
+		and t6.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join EXT_CONTACTS t7 on t1.EXT_CONTACT_ID_IN = t7.EXT_CONTACT_ID
+	left outer join EXT_CONTACTS t8 on t1.EXT_CONTACT_ID_OUT = t8.EXT_CONTACT_ID

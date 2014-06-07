@@ -1,0 +1,6 @@
+select
+	t1.ENTITY_ID as entityId,
+	t1.ENTITY_NAME as entityName,
+	t1.ACTUAL_TABLE_NAME as actualTableName
+from
+	ENTITY_ID_LIST t1

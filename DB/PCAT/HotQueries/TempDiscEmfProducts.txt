@@ -1,0 +1,6 @@
+select
+	t1.TRACKING_ID as trackingId,
+	t1.TRACKING_ID_SERV as trackingIdServ,
+	t1.SESSION_ID as sessionId
+from
+	TEMP_DISC_EMF_PRODUCTS t1

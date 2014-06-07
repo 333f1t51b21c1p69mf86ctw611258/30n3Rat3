@@ -1,0 +1,13 @@
+select
+	t1.ERROR_ID as errorId,
+	t1.IS_DEFAULT as isDefault,
+	t1.IS_INTERNAL as isInternal,
+	t1.ERROR_NAME as errorName,
+	t1.MODULE_NAME as moduleName,
+	t2.LANGUAGE_CODE as languageCode,
+	t2.DISPLAY_VALUE as displayValue
+from
+	OM_ERROR_MESSAGE_REF t1
+	inner join OM_ERROR_MESSAGE_VALUES t2 on t1.ERROR_ID = t2.ERROR_ID
+where
+	t2.LANGUAGE_CODE = {2}
