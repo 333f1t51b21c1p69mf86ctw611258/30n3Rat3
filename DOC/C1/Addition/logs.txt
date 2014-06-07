@@ -1,0 +1,1610 @@
+VNPC1RT-sdp1:/# hostname
+sdp1
+VNPC1RT-sdp1:/# username -M
+ksh: username:  not found.
+VNPC1RT-sdp1:/# uname -M
+IBM,8233-E8B
+VNPC1RT-sdp1:/# cat $JBOSS_HOME/conf/version.properties| grep -v '^#'
+
+base.package=4.18.0.0
+command.package=4.18.0.0
+configuration.package=4.18.0.0
+inventory.package=4.18.0.0
+job.package=4.18.0.0
+monitor.package=4.18.0.0
+process.package=4.18.0.0
+rules.package=4.18.0.0
+sysaudit.package=4.18.0.0
+workflow.package=4.18.0.0
+
+VNPC1RT-sdp1:/# mshell secadmin/passw0rd version
+COMMAND :
+
+NodeClass NodeName       NodeInstance      Platform       OS Version               OS Model    OS Arch   App Version  TC     Build Count         Build Date
+SDP       MAIN1          172.17.201.48     AIX            6.1                      E8B         ppc       4.18.0       1.0.0  1                   09/14/2012 10:34
+
+
+
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+
+
+VNPC1RT-sdp1:/# grep emc /etc/hosts| grep -v ^#
+10.149.3.76 cla480-1a emc1
+10.149.3.77 cla480-1b emc2
+10.149.3.78 emc-sw1a fcswa
+10.149.3.79 emc-sw1b fcswb
+VNPC1RT-sdp1:/# navicli -h emc1 getagent
+
+Agent Rev:           7.30.15 (0.44)
+Name:                K10
+Desc:
+Node:                A-CKM00120300838
+Physical Node:       K10
+Signature:           2727840
+Peer Signature:      2895960
+Revision:            4.30.0.5.524
+SCSI Id:             0
+Model:               CX4-480
+Model Type:          Rackmount
+Prom Rev:            5.30.00
+SP Memory:           8160
+Serial No:           CKM00120300838
+SP Identifier:       A
+Cabinet:             SPE5
+
+
+
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/# cat /etc/BaseOS_version
+NextGen SDP NGSCORE V3.0                DISK#1          (Wed Sep 18 06:47:15 EDT 2013)
+NextGen SDP NGSCORE V3.0.1 TC1          300GB_SUPPORT           (Wed Sep 18 07:14:06 EDT 2013)
+NextGen SDP NGSCORE_ORA V3.0.1  ORACLE_10G_DVD#1        (Wed Sep 18 07:32:15 EDT 2013)
+NextGen SDP NGSCORE_ORA V3.0.1  ORACLE_11G_DVD#1        (Wed Sep 18 07:57:17 EDT 2013)
+NextGen SDP NGSCORE_ORA V3.0.2 ORACLE_10G_patches 13343471 (Wed Oct  2 07:33:25 EDT 2013)
+NextGen SDP NGSCORE_UPDATE V3.0 KP_HBA_BKP_FIX for NGSCORE_3.0.3 Wed Oct  2 08:01:21 EDT 2013
+NextGen SDP NGSCORE  V3.0.4 KPS (Wed Oct  2 08:59:17 EDT 2013)
+VNPC1RT-sdp1:/# lsdev | grep rmt
+rmt0            Available 05-00-02    Other FC SCSI Tape Drive
+rmt1            Available 05-00-02    Other FC SCSI Tape Drive
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/# cat /etc/motd
+*******************************************************************************
+*                                                                             *
+*                                                                             *
+*  Welcome to AIX Version 6.1!                                                *
+*                                                                             *
+*                                                                             *
+*  Please see the README file in /usr/lpp/bos for information pertinent to    *
+*  this release of the AIX Operating System.                                  *
+*                                                                             *
+*                                                                             *
+*******************************************************************************
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+
+
+
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/# lsattr -l sys0 -E
+SW_dist_intr    false              Enable SW distribution of interrupts              True
+autorestart     true               Automatically REBOOT OS after a crash             True
+boottype        disk               N/A                                               False
+capacity_inc    1.00               Processor capacity increment                      False
+capped          true               Partition is capped                               False
+conslogin       enable             System Console Login                              False
+cpuguard        enable             CPU Guard                                         True
+dedicated       true               Partition is dedicated                            False
+enhanced_RBAC   true               Enhanced RBAC Mode                                True
+ent_capacity    8.00               Entitled processor capacity                       False
+frequency       6400000000         System Bus Frequency                              False
+fullcore        false              Enable full CORE dump                             True
+fwversion       IBM,AL730_114      Firmware version and revision levels              False
+ghostdev        0                  Recreate devices in ODM on system change          True
+id_to_partition 0X80001077D4900001 Partition ID                                      False
+id_to_system    0X80001077D4900000 System ID                                         False
+iostat          false              Continuously maintain DISK I/O history            True
+keylock         normal             State of system keylock at boot time              False
+log_pg_dealloc  true               Log predictive memory page deallocation events    True
+max_capacity    8.00               Maximum potential processor capacity              False
+max_logname     9                  Maximum login name length at boot time            True
+maxbuf          20                 Maximum number of pages in block I/O BUFFER CACHE True
+maxmbuf         0                  Maximum Kbytes of real memory allowed for MBUFS   True
+maxpout         8193               HIGH water mark for pending write I/Os per file   True
+maxuproc        8192               Maximum number of PROCESSES allowed per user      True
+min_capacity    1.00               Minimum potential processor capacity              False
+minpout         4096               LOW water mark for pending write I/Os per file    True
+modelname       IBM,8233-E8B       Machine name                                      False
+ncargs          256                ARG/ENV list size in 4K byte blocks               True
+nfs4_acl_compat secure             NFS4 ACL Compatibility Mode                       True
+pre430core      false              Use pre-430 style CORE dump                       True
+pre520tune      disable            Pre-520 tuning compatibility mode                 True
+realmem         65011712           Amount of usable physical memory in Kbytes        False
+rtasversion     1                  Open Firmware RTAS version                        False
+sed_config      select             Stack Execution Disable (SED) Mode                True
+systemid        IBM,0206AA43T      Hardware system identifier                        False
+variable_weight 0                  Variable processor capacity weight                False
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+
+
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/# no -a|grep -v thewall
+                 arpqsize = 12
+               arpt_killc = 20
+              arptab_bsiz = 7
+                arptab_nb = 149
+                bcastping = 0
+      clean_partial_conns = 0
+                 delayack = 0
+            delayackports = {}
+         dgd_packets_lost = 3
+            dgd_ping_time = 5
+           dgd_retry_time = 5
+       directed_broadcast = 0
+                 fasttimo = 200
+        icmp6_errmsg_rate = 10
+          icmpaddressmask = 0
+ie5_old_multicast_mapping = 0
+                   ifsize = 256
+           igmpv2_deliver = 0
+               ip6_defttl = 64
+                ip6_prune = 1
+            ip6forwarding = 0
+       ip6srcrouteforward = 1
+       ip_ifdelete_notify = 0
+                 ip_nfrag = 200
+             ipforwarding = 0
+                ipfragttl = 2
+        ipignoreredirects = 0
+                ipqmaxlen = 512
+          ipsendredirects = 1
+        ipsrcrouteforward = 1
+           ipsrcrouterecv = 1
+           ipsrcroutesend = 1
+          llsleep_timeout = 3
+                  lo_perf = 1
+                lowthresh = 90
+                 main_if6 = 0
+               main_site6 = 0
+                 maxnip6q = 20
+                   maxttl = 255
+                medthresh = 95
+               mpr_policy = 1
+              multi_homed = 1
+                nbc_limit = 8126464
+            nbc_max_cache = 131072
+            nbc_min_cache = 1
+         nbc_ofile_hashsz = 12841
+                 nbc_pseg = 0
+           nbc_pseg_limit = 16252928
+           ndd_event_name = {all}
+        ndd_event_tracing = 0
+            ndp_mmaxtries = 3
+            ndp_umaxtries = 3
+                 ndpqsize = 50
+                ndpt_down = 3
+                ndpt_keep = 120
+               ndpt_probe = 5
+           ndpt_reachable = 30
+             ndpt_retrans = 1
+             net_buf_size = {all}
+             net_buf_type = {all}
+     net_malloc_frag_mask = {0}
+        netm_page_promote = 1
+           nonlocsrcroute = 1
+                 nstrpush = 8
+              passive_dgd = 0
+         pmtu_default_age = 10
+              pmtu_expire = 10
+ pmtu_rediscover_interval = 30
+              poolbuckets = 4
+              psebufcalls = 20
+                 psecache = 1
+                psetimers = 20
+           rfc1122addrchk = 0
+                  rfc1323 = 1
+                  rfc2414 = 1
+             route_expire = 1
+          routerevalidate = 1
+     rtentry_lock_complex = 0
+                 rto_high = 64
+               rto_length = 13
+                rto_limit = 7
+                  rto_low = 1
+                     sack = 0
+                   sb_max = 1048576
+       send_file_duration = 300
+              site6_index = 0
+               sockthresh = 85
+                  sodebug = 0
+              sodebug_env = 0
+                somaxconn = 1024
+                 strctlsz = 1024
+                 strmsgsz = 0
+                strthresh = 85
+               strturncnt = 15
+          subnetsarelocal = 1
+       tcp_bad_port_limit = 0
+                  tcp_ecn = 0
+       tcp_ephemeral_high = 65535
+        tcp_ephemeral_low = 32768
+             tcp_finwait2 = 1200
+           tcp_icmpsecure = 0
+          tcp_init_window = 0
+    tcp_inpcb_hashtab_siz = 24499
+              tcp_keepcnt = 8
+             tcp_keepidle = 600
+             tcp_keepinit = 150
+            tcp_keepintvl = 150
+     tcp_limited_transmit = 1
+              tcp_low_rto = 0
+             tcp_maxburst = 0
+              tcp_mssdflt = 1460
+          tcp_nagle_limit = 65535
+        tcp_nagleoverride = 0
+               tcp_ndebug = 100
+              tcp_newreno = 1
+           tcp_nodelayack = 1
+        tcp_pmtu_discover = 1
+            tcp_recvspace = 131072
+            tcp_sendspace = 131072
+            tcp_tcpsecure = 0
+             tcp_timewait = 1
+                  tcp_ttl = 60
+           tcprexmtthresh = 3
+             tcptr_enable = 0
+         timer_wheel_tick = 0
+                tn_filter = 1
+       udp_bad_port_limit = 0
+       udp_ephemeral_high = 65535
+        udp_ephemeral_low = 32768
+    udp_inpcb_hashtab_siz = 24499
+        udp_pmtu_discover = 1
+            udp_recvspace = 655360
+            udp_sendspace = 65536
+                  udp_ttl = 30
+                 udpcksum = 1
+           use_sndbufpool = 1
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+
+
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/# ping -c 20 -f localhost
+PING loopback: (127.0.0.1): 56 data bytes
+.
+----loopback PING Statistics----
+20 packets transmitted, 20 packets received, 0% packet loss
+round-trip min/avg/max = 0/0/0 ms
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/# grep -vE "#|peer" /etc/ntp.conf;grep -i "peer" /etc/ntp.conf
+broadcastclient
+driftfile /etc/ntp.drift
+tracefile /etc/ntp.trace
+server  172.17.201.7    version 3
+server  172.17.201.8    version 3
+peer    sdp2_cross      version 3
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+
+
+
+***Request timed out
+VNPC1RT-sdp1:/# grep TZ /etc/environment| grep -v '^#';date +"%a %b %d %H:%M %Z %Y"
+TZ=ICT-07:00:00
+Thu Mar 20 11:03 ICT 2014
+VNPC1RT-sdp1:/# lslpp -L| grep -i hacmp
+  cluster.license            5.5.0.0    C     F    HACMP Electronic License
+  cluster.msg.En_US.cspoc    5.5.0.0    C     F    HACMP CSPOC Messages - U.S.
+  rsct.basic.hacmp           3.1.0.0    C     F    RSCT Basic Function (HACMP/ES
+  rsct.compat.basic.hacmp    3.1.0.1    C     F    RSCT Event Management Basic
+                                                   Function (HACMP/ES Support)
+  rsct.compat.clients.hacmp  3.1.0.0    C     F    RSCT Event Management Client
+                                                   Function (HACMP/ES Support)
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/# df -g
+Filesystem    GB blocks      Free %Used    Iused %Iused Mounted on
+/dev/hd4           3.00      2.86    5%     5446     1% /
+/dev/hd2           7.00      1.79   75%    65124    14% /usr
+/dev/hd9var        7.00      6.69    5%      998     1% /var
+/dev/hd3           3.00      2.77    8%      650     1% /tmp
+/dev/fwdump        1.00      0.99    2%        7     1% /var/adm/ras/platform
+/dev/hd1           0.25      0.25    1%       32     1% /home
+/proc                 -         -    -         -     -  /proc
+/dev/hd10opt       1.00      0.52   48%     9414     8% /opt
+/dev/livedump      0.25      0.25    1%       11     1% /var/adm/ras/livedump
+/dev/oravol       20.00      7.45   63%   229080    12% /oracle
+/dev/oradumpvol      3.00      2.98    1%     5286     1% /oradump
+/dev/arcvol     2047.00   2015.43    2%     1929     1% /archive
+/dev/bkpvol     2047.00   1993.69    3%     6993     1% /backup_vol
+/dev/Hbkpvol     799.50    799.37    1%       12     1% /history_vol
+/dev/ora8vol     255.75    255.68    1%     1411     1% /oracle/oracle8
+/dev/workvol     479.75    476.59    1%      579     1% /staging
+/dev/nsrvol        9.75      9.74    1%      397     1% /nsr_cluster
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+
+
+
+VNPC1RT-sdp1:/# clear
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/# lsps -a
+Page Space      Physical Volume   Volume Group Size %Used Active  Auto  Type Chksum
+hd6             hdisk0            rootvg       32768MB     1   yes   yes    lv     0
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/# lsattr -El inet0|grep ^route|wc -l;lsattr -El inet0
+       2
+authm         65536                                                            Authentication Methods              True
+bootup_option no                                                               Use BSD-style Network Configuration True
+gateway                                                                        Gateway                             True
+hostname      sdp1                                                             Host Name                           True
+rout6                                                                          IPv6 Route                          True
+route         net,-hopcount,0,-netmask,255.255.255.192,10.149.3.192,10.149.3.1 Route                               True
+route         net,-hopcount,0,,0,172.17.201.1                                  Route                               True
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/# netstat -nr
+Routing tables
+Destination        Gateway           Flags   Refs     Use  If   Exp  Groups
+
+Route Tree for Protocol Family 2 (Internet):
+default            172.17.201.1      UG        0         3 en7      -      -
+10.0.0.0           10.149.3.66       UHSb      0         0 en8      -      -   =>
+10/8               10.149.3.66       U         2  14004906 en8      -      -
+10.134.238.0       10.134.238.1      UHSb      0         0 en6      -      -   =>
+10.134.238/24      10.134.238.1      U         1   4236539 en6      -      -
+10.134.238.1       127.0.0.1         UGHS      0   1071690 lo0      -      -
+10.134.238.255     10.134.238.1      UHSb      0         1 en6      -      -
+10.149.3.0         10.149.3.67       UHSb      0         0 en8      -      -   =>
+10.149.3/24        10.149.3.67       U         2  10585265 en8      -      -
+10.149.3.66        127.0.0.1         UGHS      0         0 lo0      -      -
+10.149.3.67        127.0.0.1         UGHS      0      9347 lo0      -      -
+10.149.3.192/26    10.149.3.1        UG        0         0 en8      -      -
+10.149.3.255       10.149.3.67       UHSb      0         1 en8      -      -
+10.255.255.255     10.149.3.66       UHSb      0         0 en8      -      -
+12.12.12.0         12.12.12.2        UHSb      0         0 en7      -      -   =>
+12.12.12/24        12.12.12.2        U         2   4508564 en7      -      -
+12.12.12.2         127.0.0.1         UGHS     36  35980523 lo0      -      -
+12.12.12.255       12.12.12.2        UHSb      0         1 en7      -      -
+13.0.0.0           13.13.13.2        UHSb      0         0 en8      -      -   =>
+13/8               13.13.13.2        U         2   6217460 en8      -      -
+13.13.13.2         127.0.0.1         UGHS      0   2328261 lo0      -      -
+13.255.255.255     13.13.13.2        UHSb      0         1 en8      -      -
+127/8              127.0.0.1         U       113  63709437 lo0      -      -
+172.17.201.0       172.17.201.48     UHSb      0         0 en7      -      -   =>
+172.17.201/24      172.17.201.48     U       427 156853676 en7      -      -
+172.17.201.47      127.0.0.1         UGHS      0         1 lo0      -      -
+172.17.201.48      127.0.0.1         UGHS     16   2985445 lo0      -      -
+172.17.201.255     172.17.201.48     UHSb      0         1 en7      -      -
+
+Route Tree for Protocol Family 24 (Internet v6):
+::1%1              ::1%1             UH        0   2513307 lo0      -      -
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+
+
+
+VNPC1RT-sdp1:/# alog -t console -o | tail -100
+         0 Tue Mar 18 22:00:34 ICT 2014 Mar 18 22:00:34 sdp1 daemon:notice root:
+         0 Tue Mar 18 22:00:34 ICT 2014 Mar 18 22:00:34 sdp1 daemon:notice root: * sdp_nsr:index 75146:save: Saving files modified since Sun Mar 16 22:00:22 2014
+         0 Tue Mar 18 22:00:34 ICT 2014 Mar 18 22:00:34 sdp1 daemon:notice root: * sdp_nsr:index /nsr_cluster/nsr/index/sdp_nsr/db6/
+         0 Tue Mar 18 22:00:34 ICT 2014 Mar 18 22:00:34 sdp1 daemon:notice root: * sdp_nsr:index /nsr_cluster/nsr/index/sdp_nsr/
+         0 Tue Mar 18 22:00:34 ICT 2014 Mar 18 22:00:34 sdp1 daemon:notice root: * sdp_nsr:index
+         0 Tue Mar 18 22:00:34 ICT 2014 Mar 18 22:00:34 sdp1 daemon:notice root:   sdp_nsr: index:sdp_nsr            level=9,         1 KB 00:00:00      2 files
+         0 Tue Mar 18 22:00:34 ICT 2014 Mar 18 22:00:34 sdp1 daemon:notice root: * sdp_nsr:bootstrap savegrp: suppressed 248 lines of output.
+         0 Tue Mar 18 22:00:34 ICT 2014 Mar 18 22:00:34 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/01/
+         0 Tue Mar 18 22:00:34 ICT 2014 Mar 18 22:00:34 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/02/
+         0 Tue Mar 18 22:00:34 ICT 2014 Mar 18 22:00:34 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/03/000300b40000000000000000524d238b
+         0 Tue Mar 18 22:00:34 ICT 2014 Mar 18 22:00:34 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/03/
+         0 Tue Mar 18 22:00:34 ICT 2014 Mar 18 22:00:34 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/04/
+         0 Tue Mar 18 22:00:34 ICT 2014 Mar 18 22:00:34 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/05/
+         0 Tue Mar 18 22:00:34 ICT 2014 Mar 18 22:00:34 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/06/
+         0 Tue Mar 18 22:00:39 ICT 2014 Mar 18 22:00:39 sdp1 daemon:notice root: NetWorker index: (notice) checking index for 'sdp_nsr'
+         0 Tue Mar 18 22:00:39 ICT 2014 Mar 18 22:00:39 sdp1 daemon:notice root: NetWorker index: (notice) /nsr_cluster/nsr/index/sdp_nsr contains 0 records occupying 0 KB
+         0 Tue Mar 18 22:00:40 ICT 2014 Mar 18 22:00:40 sdp1 daemon:notice root: NetWorker index: (notice) Completed checking 1 client(s)
+         0 Tue Mar 18 22:00:40 ICT 2014 Mar 18 22:00:40 sdp1 daemon:notice root: NetWorker index: (notice) nsrim has finished crosschecking the media db
+         0 Wed Mar 19 03:00:18 ICT 2014 Mar 19 03:00:18 sdp1 daemon:notice root: NetWorker savegroup: (info) starting bootstrap (with 1 client(s))
+         0 Wed Mar 19 03:00:20 ICT 2014 Mar 19 03:00:20 sdp1 daemon:notice root: NetWorker savegroup: (info) bootstrap running on sdp_nsr
+         0 Wed Mar 19 03:00:31 ICT 2014 Mar 19 03:00:25 sdp1 daemon:notice root: NetWorker savegroup: (info) bootstrap running on sdp_nsr
+         0 Wed Mar 19 03:00:31 ICT 2014 Mar 19 03:00:31 sdp1 daemon:notice root: NetWorker savegroup: (notice) bootstrap completed, Total 1 client(s), 1 Succeeded. Please see group completion details for more information.
+         0 Wed Mar 19 03:00:31 ICT 2014 Mar 19 03:00:31 sdp1 daemon:notice root:
+         0 Wed Mar 19 03:00:31 ICT 2014 Mar 19 03:00:31 sdp1 daemon:notice root: Succeeded: sdp_nsr
+         0 Wed Mar 19 03:00:31 ICT 2014 Mar 19 03:00:31 sdp1 daemon:notice root:
+         0 Wed Mar 19 03:00:31 ICT 2014 Mar 19 03:00:31 sdp1 daemon:notice root: Start time:   Wed Mar 19 03:00:18 2014
+         0 Wed Mar 19 03:00:31 ICT 2014 Mar 19 03:00:31 sdp1 daemon:notice root: End time:     Wed Mar 19 03:00:31 2014
+         0 Wed Mar 19 03:00:31 ICT 2014 Mar 19 03:00:31 sdp1 daemon:notice root:
+         0 Wed Mar 19 03:00:31 ICT 2014 Mar 19 03:00:31 sdp1 daemon:notice root:
+         0 Wed Mar 19 03:00:31 ICT 2014 Mar 19 03:00:31 sdp1 daemon:notice root: --- Successful Save Sets ---
+         0 Wed Mar 19 03:00:31 ICT 2014 Mar 19 03:00:31 sdp1 daemon:notice root:
+         0 Wed Mar 19 03:00:31 ICT 2014 Mar 19 03:00:31 sdp1 daemon:notice root: * sdp_nsr:index 75146:save: Saving files modified since Sun Mar 16 22:00:22 2014
+         0 Wed Mar 19 03:00:31 ICT 2014 Mar 19 03:00:31 sdp1 daemon:notice root: * sdp_nsr:index /nsr_cluster/nsr/index/sdp_nsr/db6/
+         0 Wed Mar 19 03:00:31 ICT 2014 Mar 19 03:00:31 sdp1 daemon:notice root: * sdp_nsr:index /nsr_cluster/nsr/index/sdp_nsr/
+         0 Wed Mar 19 03:00:31 ICT 2014 Mar 19 03:00:31 sdp1 daemon:notice root: * sdp_nsr:index
+         0 Wed Mar 19 03:00:31 ICT 2014 Mar 19 03:00:31 sdp1 daemon:notice root:   sdp_nsr: index:sdp_nsr            level=9,         1 KB 00:00:00      2 files
+         0 Wed Mar 19 03:00:31 ICT 2014 Mar 19 03:00:31 sdp1 daemon:notice root: * sdp_nsr:bootstrap savegrp: suppressed 255 lines of output.
+         0 Wed Mar 19 03:00:31 ICT 2014 Mar 19 03:00:31 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/01/
+         0 Wed Mar 19 03:00:31 ICT 2014 Mar 19 03:00:31 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/02/
+         0 Wed Mar 19 03:00:31 ICT 2014 Mar 19 03:00:31 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/03/000300b40000000000000000524d238b
+         0 Wed Mar 19 03:00:31 ICT 2014 Mar 19 03:00:31 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/03/
+         0 Wed Mar 19 03:00:31 ICT 2014 Mar 19 03:00:31 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/04/
+         0 Wed Mar 19 03:00:31 ICT 2014 Mar 19 03:00:31 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/05/
+         0 Wed Mar 19 03:00:31 ICT 2014 Mar 19 03:00:31 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/06/
+         0 Wed Mar 19 22:00:21 ICT 2014 Mar 19 22:00:21 sdp1 daemon:notice root: NetWorker savegroup: (info) starting bootstrap (with 1 client(s))
+         0 Wed Mar 19 22:00:24 ICT 2014 Mar 19 22:00:24 sdp1 daemon:notice root: NetWorker savegroup: (info) bootstrap running on sdp_nsr
+         0 Wed Mar 19 22:00:29 ICT 2014 Mar 19 22:00:29 sdp1 daemon:notice root: NetWorker savegroup: (info) bootstrap running on sdp_nsr
+         0 Wed Mar 19 22:00:36 ICT 2014 Mar 19 22:00:36 sdp1 daemon:notice root: NetWorker savegroup: (notice) bootstrap completed, Total 1 client(s), 1 Succeeded. Please see group completion details for more information.
+         0 Wed Mar 19 22:00:36 ICT 2014 Mar 19 22:00:36 sdp1 daemon:notice root:
+         0 Wed Mar 19 22:00:36 ICT 2014 Mar 19 22:00:36 sdp1 daemon:notice root: Succeeded: sdp_nsr
+         0 Wed Mar 19 22:00:36 ICT 2014 Mar 19 22:00:36 sdp1 daemon:notice root:
+         0 Wed Mar 19 22:00:36 ICT 2014 Mar 19 22:00:36 sdp1 daemon:notice root: Start time:   Wed Mar 19 22:00:21 2014
+         0 Wed Mar 19 22:00:36 ICT 2014 Mar 19 22:00:36 sdp1 daemon:notice root: End time:     Wed Mar 19 22:00:36 2014
+         0 Wed Mar 19 22:00:36 ICT 2014 Mar 19 22:00:36 sdp1 daemon:notice root:
+         0 Wed Mar 19 22:00:36 ICT 2014 Mar 19 22:00:36 sdp1 daemon:notice root:
+         0 Wed Mar 19 22:00:36 ICT 2014 Mar 19 22:00:36 sdp1 daemon:notice root: --- Successful Save Sets ---
+         0 Wed Mar 19 22:00:36 ICT 2014 Mar 19 22:00:36 sdp1 daemon:notice root:
+         0 Wed Mar 19 22:00:36 ICT 2014 Mar 19 22:00:36 sdp1 daemon:notice root: * sdp_nsr:index 75146:save: Saving files modified since Sun Mar 16 22:00:22 2014
+         0 Wed Mar 19 22:00:36 ICT 2014 Mar 19 22:00:36 sdp1 daemon:notice root: * sdp_nsr:index /nsr_cluster/nsr/index/sdp_nsr/db6/
+         0 Wed Mar 19 22:00:36 ICT 2014 Mar 19 22:00:36 sdp1 daemon:notice root: * sdp_nsr:index /nsr_cluster/nsr/index/sdp_nsr/
+         0 Wed Mar 19 22:00:36 ICT 2014 Mar 19 22:00:36 sdp1 daemon:notice root: * sdp_nsr:index
+         0 Wed Mar 19 22:00:36 ICT 2014 Mar 19 22:00:36 sdp1 daemon:notice root:   sdp_nsr: index:sdp_nsr            level=9,         1 KB 00:00:01      2 files
+         0 Wed Mar 19 22:00:36 ICT 2014 Mar 19 22:00:36 sdp1 daemon:notice root: * sdp_nsr:bootstrap savegrp: suppressed 249 lines of output.
+         0 Wed Mar 19 22:00:36 ICT 2014 Mar 19 22:00:36 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/01/
+         0 Wed Mar 19 22:00:36 ICT 2014 Mar 19 22:00:36 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/02/
+         0 Wed Mar 19 22:00:36 ICT 2014 Mar 19 22:00:36 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/03/000300b40000000000000000524d238b
+         0 Wed Mar 19 22:00:36 ICT 2014 Mar 19 22:00:36 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/03/
+         0 Wed Mar 19 22:00:36 ICT 2014 Mar 19 22:00:36 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/04/
+         0 Wed Mar 19 22:00:36 ICT 2014 Mar 19 22:00:36 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/05/
+         0 Wed Mar 19 22:00:36 ICT 2014 Mar 19 22:00:36 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/06/
+         0 Wed Mar 19 22:00:41 ICT 2014 Mar 19 22:00:41 sdp1 daemon:notice root: NetWorker index: (notice) checking index for 'sdp_nsr'
+         0 Wed Mar 19 22:00:41 ICT 2014 Mar 19 22:00:41 sdp1 daemon:notice root: NetWorker index: (notice) /nsr_cluster/nsr/index/sdp_nsr contains 0 records occupying 0 KB
+         0 Wed Mar 19 22:00:41 ICT 2014 Mar 19 22:00:41 sdp1 daemon:notice root: NetWorker index: (notice) Completed checking 1 client(s)
+         0 Wed Mar 19 22:00:41 ICT 2014 Mar 19 22:00:41 sdp1 daemon:notice root: NetWorker index: (notice) nsrim has finished crosschecking the media db
+         0 Thu Mar 20 03:00:18 ICT 2014 Mar 20 03:00:18 sdp1 daemon:notice root: NetWorker savegroup: (info) starting bootstrap (with 1 client(s))
+         0 Thu Mar 20 03:00:20 ICT 2014 Mar 20 03:00:20 sdp1 daemon:notice root: NetWorker savegroup: (info) bootstrap running on sdp_nsr
+         0 Thu Mar 20 03:00:32 ICT 2014 Mar 20 03:00:25 sdp1 daemon:notice root: NetWorker savegroup: (info) bootstrap running on sdp_nsr
+         0 Thu Mar 20 03:00:32 ICT 2014 Mar 20 03:00:32 sdp1 daemon:notice root: NetWorker savegroup: (notice) bootstrap completed, Total 1 client(s), 1 Succeeded. Please see group completion details for more information.
+         0 Thu Mar 20 03:00:32 ICT 2014 Mar 20 03:00:32 sdp1 daemon:notice root:
+         0 Thu Mar 20 03:00:32 ICT 2014 Mar 20 03:00:32 sdp1 daemon:notice root: Succeeded: sdp_nsr
+         0 Thu Mar 20 03:00:32 ICT 2014 Mar 20 03:00:32 sdp1 daemon:notice root:
+         0 Thu Mar 20 03:00:32 ICT 2014 Mar 20 03:00:32 sdp1 daemon:notice root: Start time:   Thu Mar 20 03:00:18 2014
+         0 Thu Mar 20 03:00:32 ICT 2014 Mar 20 03:00:32 sdp1 daemon:notice root: End time:     Thu Mar 20 03:00:32 2014
+         0 Thu Mar 20 03:00:32 ICT 2014 Mar 20 03:00:32 sdp1 daemon:notice root:
+         0 Thu Mar 20 03:00:32 ICT 2014 Mar 20 03:00:32 sdp1 daemon:notice root:
+         0 Thu Mar 20 03:00:32 ICT 2014 Mar 20 03:00:32 sdp1 daemon:notice root: --- Successful Save Sets ---
+         0 Thu Mar 20 03:00:32 ICT 2014 Mar 20 03:00:32 sdp1 daemon:notice root:
+         0 Thu Mar 20 03:00:32 ICT 2014 Mar 20 03:00:32 sdp1 daemon:notice root: * sdp_nsr:index 75146:save: Saving files modified since Sun Mar 16 22:00:22 2014
+         0 Thu Mar 20 03:00:32 ICT 2014 Mar 20 03:00:32 sdp1 daemon:notice root: * sdp_nsr:index /nsr_cluster/nsr/index/sdp_nsr/db6/
+         0 Thu Mar 20 03:00:32 ICT 2014 Mar 20 03:00:32 sdp1 daemon:notice root: * sdp_nsr:index /nsr_cluster/nsr/index/sdp_nsr/
+         0 Thu Mar 20 03:00:32 ICT 2014 Mar 20 03:00:32 sdp1 daemon:notice root: * sdp_nsr:index
+         0 Thu Mar 20 03:00:32 ICT 2014 Mar 20 03:00:32 sdp1 daemon:notice root:   sdp_nsr: index:sdp_nsr            level=9,         1 KB 00:00:00      2 files
+         0 Thu Mar 20 03:00:32 ICT 2014 Mar 20 03:00:32 sdp1 daemon:notice root: * sdp_nsr:bootstrap savegrp: suppressed 255 lines of output.
+         0 Thu Mar 20 03:00:32 ICT 2014 Mar 20 03:00:32 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/01/
+         0 Thu Mar 20 03:00:32 ICT 2014 Mar 20 03:00:32 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/02/
+         0 Thu Mar 20 03:00:32 ICT 2014 Mar 20 03:00:32 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/03/000300b40000000000000000524d238b
+         0 Thu Mar 20 03:00:32 ICT 2014 Mar 20 03:00:32 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/03/
+         0 Thu Mar 20 03:00:32 ICT 2014 Mar 20 03:00:32 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/04/
+         0 Thu Mar 20 03:00:32 ICT 2014 Mar 20 03:00:32 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/05/
+         0 Thu Mar 20 03:00:32 ICT 2014 Mar 20 03:00:32 sdp1 daemon:notice root: * sdp_nsr:bootstrap /nsr_cluster/nsr/res/nsrladb/06/
+VNPC1RT-sdp1:/#
+
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/# ls -lrt /dev|grep '^-'
+-rw-------    1 root     system            0 Sep 18 2013  null0
+-rw-------    1 root     system            0 Sep 18 2013  nul
+-rw-------    1 root     system            0 Dec 30 15:34 nulll
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/# bootinfo -r
+65011712
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/# lscfg -vp |grep -E 'DIMM|Size'
+      Memory DIMM:
+        Size........................8192
+      Memory DIMM:
+        Size........................8192
+      Memory DIMM:
+        Size........................8192
+      Memory DIMM:
+        Size........................8192
+      Memory DIMM:
+        Size........................8192
+      Memory DIMM:
+        Size........................8192
+      Memory DIMM:
+        Size........................8192
+      Memory DIMM:
+        Size........................8192
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+
+
+
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/# cldump
+
+Obtaining information via SNMP from Node: sdp1...
+
+_____________________________________________________________________________
+Cluster Name: sdp
+Cluster State: UP
+Cluster Substate: STABLE
+_____________________________________________________________________________
+
+Node Name: sdp1                 State: UP
+
+  Network Name: ADMIN_CONNECT      State: UP
+
+    Address: 10.149.3.66     Label: sdp_nsr            State: UP
+    Address: 13.13.13.2      Label: sdp1_admin         State: UP
+
+  Network Name: CROSS_CONNECT      State: UP
+
+    Address: 10.134.238.1    Label: sdp1_cross         State: UP
+
+  Network Name: HSBN               State: UP
+
+    Address: 12.12.12.2      Label: sdp1               State: UP
+    Address: 172.17.201.47   Label: sdp                State: UP
+
+Node Name: sdp2                 State: UP
+
+  Network Name: ADMIN_CONNECT      State: UP
+
+    Address: 13.13.13.3      Label: sdp2_admin         State: UP
+
+  Network Name: CROSS_CONNECT      State: UP
+
+    Address: 10.134.238.2    Label: sdp2_cross         State: UP
+
+  Network Name: HSBN               State: UP
+
+    Address: 12.12.12.3      Label: sdp2               State: UP
+
+
+Cluster Name: sdp
+
+Resource Group Name: Database_RG
+Startup Policy: Online On First Available Node
+Fallover Policy: Fallover To Next Priority Node In The List
+Fallback Policy: Never Fallback
+Site Policy: ignore
+Node                         Group State
+---------------------------- ---------------
+sdp1                         ONLINE
+sdp2                         OFFLINE
+
+Resource Group Name: NetWorker_RG
+Startup Policy: Online On First Available Node
+Fallover Policy: Fallover To Next Priority Node In The List
+Fallback Policy: Never Fallback
+Site Policy: ignore
+Node                         Group State
+---------------------------- ---------------
+sdp1                         ONLINE
+sdp2                         OFFLINE
+VNPC1RT-sdp1:/#
+
+
+
+Cluster Name: sdp
+Cluster Connection Authentication Mode: Standard
+Cluster Message Authentication Mode: None
+Cluster Message Encryption: None
+Use Persistent Labels for Communication: No
+There are 2 node(s) and 3 network(s) defined
+NODE sdp1:
+        Network ADMIN_CONNECT
+                sdp_nsr 10.149.3.66
+                sdp1_admin      13.13.13.2
+        Network CROSS_CONNECT
+                sdp1_cross      10.134.238.1
+        Network HSBN
+                sdp     172.17.201.47
+                sdp1    12.12.12.2
+NODE sdp2:
+        Network ADMIN_CONNECT
+                sdp_nsr 10.149.3.66
+                sdp2_admin      13.13.13.3
+        Network CROSS_CONNECT
+                sdp2_cross      10.134.238.2
+        Network HSBN
+                sdp     172.17.201.47
+                sdp2    12.12.12.3
+
+Resource Group Database_RG
+        Startup Policy   Online On First Available Node
+        Fallover Policy  Fallover To Next Priority Node In The List
+        Fallback Policy  Never Fallback
+        Participating Nodes      sdp1 sdp2
+        Service IP Label                 sdp
+
+Resource Group NetWorker_RG
+        Startup Policy   Online On First Available Node
+        Fallover Policy  Fallover To Next Priority Node In The List
+        Fallback Policy  Never Fallback
+        Participating Nodes      sdp1 sdp2
+        Service IP Label                 sdp_nsr
+
+
+
+
+Cluster: sdp
+   Cluster services: active
+   State of cluster: up
+      Substate: stable
+
+#############
+APPLICATIONS
+#############
+   Cluster sdp provides the following applications: sdp_nw sdp_ora sdp_ora_env
+      Application: sdp_nw
+         sdp_nw is started by /usr/ngscore/hacmp/scripts/sdp_nw_start
+         sdp_nw is stopped by /usr/ngscore/hacmp/scripts/sdp_nw_stop
+         Application monitors for sdp_nw:
+         sdp_nw_app
+         sdp_nw_dep
+            Monitor name: sdp_nw_app
+               Type: custom
+               Monitor method: user
+               Monitor interval: 60 seconds
+               Hung monitor signal: 9
+               Stabilization interval: 360 seconds
+               Retry count: 3 tries
+               Restart interval: 1386 seconds
+               Failure action: notify
+               Notify method: /usr/ngscore/hacmp/notifiers/sdp_nw_notify
+               Cleanup method: /usr/ngscore/hacmp/scripts/sdp_nw_app_stop
+               Restart method: /usr/ngscore/hacmp/scripts/sdp_nw_app_start
+            Monitor name: sdp_nw_dep
+               Type: custom
+               Monitor method: user
+               Monitor interval: 60 seconds
+               Hung monitor signal: 9
+               Stabilization interval: 360 seconds
+               Retry count: 0 tries
+               Restart interval: 792 seconds
+               Failure action: fallover
+               Cleanup method: /usr/ngscore/hacmp/scripts/sdp_nw_stop
+               Restart method: /usr/ngscore/hacmp/scripts/sdp_nw_start
+         This application is part of resource group 'NetWorker_RG'.
+            Resource group policies:
+               Startup: on first available node
+               Fallover: to next priority node in the list
+               Fallback: never
+            State of sdp_nw: online
+            Nodes configured to provide sdp_nw: sdp1 {up}  sdp2 {up}
+               Node currently providing sdp_nw: sdp1 {up}
+               The node that will provide sdp_nw if sdp1 fails is: sdp2
+            Resources associated with sdp_nw:
+               Service Labels
+                  sdp_nsr(10.149.3.66)
+                     Interfaces configured to provide sdp_nsr:
+                        sdp1_admin
+                           with IP address: 13.13.13.2
+                           on interface: en8
+                           on node: sdp1
+                           on network: ADMIN_CONNECT
+                        sdp2_admin
+                           with IP address: 13.13.13.3
+                           on interface: en8
+                           on node: sdp2
+                           on network: ADMIN_CONNECT
+               Shared Volume Groups:
+                  nsrvg
+
+      Application: sdp_ora
+         sdp_ora is started by /opt/sdpmon/scripts/sdp_ora_start
+         sdp_ora is stopped by /opt/sdpmon/scripts/sdp_ora_stop
+         Application monitors for sdp_ora:
+         sdp_ora_lsnr
+         sdp_ora_main
+         sdp_ora_hist
+         sdp_ora_ccdb
+         sdp_ora_pcat
+            Monitor name: sdp_ora_lsnr
+               Type: custom
+               Monitor method: user
+               Monitor interval: 60 seconds
+               Hung monitor signal: 9
+               Stabilization interval: 300 seconds
+               Retry count: 3 tries
+               Restart interval: 1188 seconds
+               Failure action: fallover
+               Cleanup method: /opt/sdpmon/scripts/sdp_ora_lsnr_stop
+               Restart method: /opt/sdpmon/scripts/sdp_ora_lsnr_start
+            Monitor name: sdp_ora_main
+               Type: custom
+               Monitor method: user
+               Monitor interval: 60 seconds
+               Hung monitor signal: 9
+               Stabilization interval: 300 seconds
+               Retry count: 2 tries
+               Restart interval: 792 seconds
+               Failure action: fallover
+               Cleanup method: /opt/sdpmon/scripts/sdp_ora_main_stop
+               Restart method: /opt/sdpmon/scripts/sdp_ora_main_start
+            Monitor name: sdp_ora_hist
+               Type: custom
+               Monitor method: user
+               Monitor interval: 60 seconds
+               Hung monitor signal: 9
+               Stabilization interval: 300 seconds
+               Retry count: 3 tries
+               Restart interval: 1188 seconds
+               Failure action: notify
+               Notify method: /opt/sdpmon/notifiers/sdp_ora_notify
+               Cleanup method: /opt/sdpmon/scripts/sdp_ora_hist_stop
+               Restart method: /opt/sdpmon/scripts/sdp_ora_hist_start
+            Monitor name: sdp_ora_ccdb
+               Type: custom
+               Monitor method: user
+               Monitor interval: 60 seconds
+               Hung monitor signal: 9
+               Stabilization interval: 300 seconds
+               Retry count: 2 tries
+               Restart interval: 792 seconds
+               Failure action: fallover
+               Cleanup method: /opt/sdpmon/scripts/sdp_ora_ccdb_stop
+               Restart method: /opt/sdpmon/scripts/sdp_ora_ccdb_start
+            Monitor name: sdp_ora_pcat
+               Type: custom
+               Monitor method: user
+               Monitor interval: 60 seconds
+               Hung monitor signal: 9
+               Stabilization interval: 300 seconds
+               Retry count: 3 tries
+               Restart interval: 1188 seconds
+               Failure action: notify
+               Notify method: /opt/sdpmon/notifiers/sdp_ora_notify
+               Cleanup method: /opt/sdpmon/scripts/sdp_ora_pcat_stop
+               Restart method: /opt/sdpmon/scripts/sdp_ora_pcat_start
+         This application is part of resource group 'Database_RG'.
+            Resource group policies:
+               Startup: on first available node
+               Fallover: to next priority node in the list
+               Fallback: never
+            State of sdp_ora: online
+            Nodes configured to provide sdp_ora: sdp1 {up}  sdp2 {up}
+               Node currently providing sdp_ora: sdp1 {up}
+               The node that will provide sdp_ora if sdp1 fails is: sdp2
+            Resources associated with sdp_ora:
+               Service Labels
+                  sdp(172.17.201.47)
+                     Interfaces configured to provide sdp:
+                        sdp1
+                           with IP address: 12.12.12.2
+                           on interface: en7
+                           on node: sdp1
+                           on network: HSBN
+                        sdp2
+                           with IP address: 12.12.12.3
+                           on interface: en7
+                           on node: sdp2
+                           on network: HSBN
+               Shared Volume Groups:
+                  Hdatavg
+                  arcvg
+                  logvg
+                  bkpvg
+                  datavg
+                  workvg
+                  Hbkpvg
+                  oravg
+
+      Application: sdp_ora_env
+         sdp_ora_env is started by /usr/bin/true
+         sdp_ora_env is stopped by /usr/bin/true
+         Application monitors for sdp_ora_env:
+         sdp_ora_pgsp
+         sdp_ora_nmon
+            Monitor name: sdp_ora_pgsp
+               Type: custom
+               Monitor method: user
+               Monitor interval: 60 seconds
+               Hung monitor signal: 9
+               Stabilization interval: 300 seconds
+               Retry count: 2 tries
+               Restart interval: 792 seconds
+               Failure action: fallover
+               Cleanup method: /opt/sdpmon/scripts/sdp_ora_stop
+               Restart method: /opt/sdpmon/scripts/sdp_ora_start
+            Monitor name: sdp_ora_nmon
+               Type: custom
+               Monitor method: user
+               Monitor interval: 60 seconds
+               Hung monitor signal: 9
+               Stabilization interval: 300 seconds
+               Retry count: 0 tries
+               Restart interval: 0 seconds
+               Failure action: fallover
+               Cleanup method:
+               Restart method:
+         This application is part of resource group 'Database_RG'.
+            Resource group policies:
+               Startup: on first available node
+               Fallover: to next priority node in the list
+               Fallback: never
+            State of sdp_ora_env: online
+            Nodes configured to provide sdp_ora_env: sdp1 {up}  sdp2 {up}
+               Node currently providing sdp_ora_env: sdp1 {up}
+               The node that will provide sdp_ora_env if sdp1 fails is: sdp2
+            Resources associated with sdp_ora_env:
+               Service Labels
+                  sdp(172.17.201.47)
+                     Interfaces configured to provide sdp:
+                        sdp1
+                           with IP address: 12.12.12.2
+                           on interface: en7
+                           on node: sdp1
+                           on network: HSBN
+                        sdp2
+                           with IP address: 12.12.12.3
+                           on interface: en7
+                           on node: sdp2
+                           on network: HSBN
+               Shared Volume Groups:
+                  Hdatavg
+                  arcvg
+                  logvg
+                  bkpvg
+                  datavg
+                  workvg
+                  Hbkpvg
+                  oravg
+
+#############
+TOPOLOGY
+#############
+   sdp consists of the following nodes: sdp1 sdp2
+      sdp1
+         Network interfaces:
+            sdp1_admin
+               with IP address: 13.13.13.2
+               on interface: en8
+               on network: ADMIN_CONNECT
+            sdp1_cross
+               with IP address: 10.134.238.1
+               on interface: en6
+               on network: CROSS_CONNECT
+            sdp1
+               with IP address: 12.12.12.2
+               on interface: en7
+               on network: HSBN
+      sdp2
+         Network interfaces:
+            sdp2_admin
+               with IP address: 13.13.13.3
+               on interface: en8
+               on network: ADMIN_CONNECT
+            sdp2_cross
+               with IP address: 10.134.238.2
+               on interface: en6
+               on network: CROSS_CONNECT
+            sdp2
+               with IP address: 12.12.12.3
+               on interface: en7
+               on network: HSBN
+VNPC1RT-sdp1:/#
+
+
+VNPC1RT-sdp1:/# cat /etc/inittab|grep cluster
+harc:2:wait:/usr/es/sbin/cluster/etc/harc.net # HACMP for AIX network startup
+hacmp:2:once:/usr/es/sbin/cluster/etc/rc.init >/dev/console 2>&1
+:hacmp6000:2:wait:/usr/es/sbin/cluster/etc/rc.cluster -boot -i -b -A  # Bring up Cluster
+hacmp6000:2:wait:/usr/es/sbin/cluster/etc/rc.cluster -boot -i -b -A  # Bring up Cluster
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/#
+
+
+VNPC1RT-sdp1:/#
+VNPC1RT-sdp1:/# navicli -h emc1 getcrus
+SPE5 Enclosure SPE
+SP A State:                 Present
+SP B State:                 Present
+Enclosure SPE Power A0 State: Present
+Enclosure SPE Power A1 State: Present
+Enclosure SPE Power B0 State: Present
+Enclosure SPE Power B1 State: Present
+Enclosure SPE SPS A State:  Present
+Enclosure SPE SPS B State:  Present
+Enclosure SPE SPS A Cabling State: Valid
+Enclosure SPE SPS B Cabling State: Valid
+
+DAE3P Bus 0 Enclosure 0
+Bus 0 Enclosure 0 Fan A State: Present
+Bus 0 Enclosure 0 Fan B State: Present
+Bus 0 Enclosure 0 Power A State: Present
+Bus 0 Enclosure 0 Power B State: Present
+Bus 0 Enclosure 0 LCC A State: Present
+Bus 0 Enclosure 0 LCC B State: Present
+Bus 0 Enclosure 0 LCC A Revision: 7.84
+Bus 0 Enclosure 0 LCC B Revision: 7.84
+Bus 0 Enclosure 0 LCC A Serial #: FCNLL122900203
+Bus 0 Enclosure 0 LCC B Serial #: FCNLL122900367
+
+DAE3P Bus 1 Enclosure 0
+Bus 1 Enclosure 0 Fan A State: Present
+Bus 1 Enclosure 0 Fan B State: Present
+Bus 1 Enclosure 0 Power A State: Present
+Bus 1 Enclosure 0 Power B State: Present
+Bus 1 Enclosure 0 LCC A State: Present
+Bus 1 Enclosure 0 LCC B State: Present
+Bus 1 Enclosure 0 LCC A Revision: 7.84
+Bus 1 Enclosure 0 LCC B Revision: 7.84
+Bus 1 Enclosure 0 LCC A Serial #: FCNLL131101358
+Bus 1 Enclosure 0 LCC B Serial #: FCNLL131101534
+
+DAE3P Bus 0 Enclosure 1
+Bus 0 Enclosure 1 Fan A State: Present
+Bus 0 Enclosure 1 Fan B State: Present
+Bus 0 Enclosure 1 Power A State: Present
+Bus 0 Enclosure 1 Power B State: Present
+Bus 0 Enclosure 1 LCC A State: Present
+Bus 0 Enclosure 1 LCC B State: Present
+Bus 0 Enclosure 1 LCC A Revision: 7.84
+Bus 0 Enclosure 1 LCC B Revision: 7.84
+Bus 0 Enclosure 1 LCC A Serial #: FCNLL131100101
+Bus 0 Enclosure 1 LCC B Serial #: FCNLL131100251
+
+DAE3P Bus 1 Enclosure 1
+Bus 1 Enclosure 1 Fan A State: Present
+Bus 1 Enclosure 1 Fan B State: Present
+Bus 1 Enclosure 1 Power A State: Present
+Bus 1 Enclosure 1 Power B State: Present
+Bus 1 Enclosure 1 LCC A State: Present
+Bus 1 Enclosure 1 LCC B State: Present
+Bus 1 Enclosure 1 LCC A Revision: 7.84
+Bus 1 Enclosure 1 LCC B Revision: 7.84
+Bus 1 Enclosure 1 LCC A Serial #: FCNLL131102314
+Bus 1 Enclosure 1 LCC B Serial #: FCNLL131000387
+
+DAE3P Bus 0 Enclosure 2
+Bus 0 Enclosure 2 Fan A State: Present
+Bus 0 Enclosure 2 Fan B State: Present
+Bus 0 Enclosure 2 Power A State: Present
+Bus 0 Enclosure 2 Power B State: Present
+Bus 0 Enclosure 2 LCC A State: Present
+Bus 0 Enclosure 2 LCC B State: Present
+Bus 0 Enclosure 2 LCC A Revision: 7.84
+Bus 0 Enclosure 2 LCC B Revision: 7.84
+Bus 0 Enclosure 2 LCC A Serial #: FCNLL122402679
+Bus 0 Enclosure 2 LCC B Serial #: FCNLL122402361
+
+DAE3P Bus 1 Enclosure 2
+Bus 1 Enclosure 2 Fan A State: Present
+Bus 1 Enclosure 2 Fan B State: Present
+Bus 1 Enclosure 2 Power A State: Present
+Bus 1 Enclosure 2 Power B State: Present
+Bus 1 Enclosure 2 LCC A State: Present
+Bus 1 Enclosure 2 LCC B State: Present
+Bus 1 Enclosure 2 LCC A Revision: 7.84
+Bus 1 Enclosure 2 LCC B Revision: 7.84
+Bus 1 Enclosure 2 LCC A Serial #: FCNLL131102675
+Bus 1 Enclosure 2 LCC B Serial #: FCNLL131100136
+
+DAE3P Bus 0 Enclosure 3
+Bus 0 Enclosure 3 Fan A State: Present
+Bus 0 Enclosure 3 Fan B State: Present
+Bus 0 Enclosure 3 Power A State: Present
+Bus 0 Enclosure 3 Power B State: Present
+Bus 0 Enclosure 3 LCC A State: Present
+Bus 0 Enclosure 3 LCC B State: Present
+Bus 0 Enclosure 3 LCC A Revision: 7.84
+Bus 0 Enclosure 3 LCC B Revision: 7.84
+Bus 0 Enclosure 3 LCC A Serial #: FCNLL131101839
+Bus 0 Enclosure 3 LCC B Serial #: FCNLL131102871
+
+DAE3P Bus 1 Enclosure 3
+Bus 1 Enclosure 3 Fan A State: Present
+Bus 1 Enclosure 3 Fan B State: Present
+Bus 1 Enclosure 3 Power A State: Present
+Bus 1 Enclosure 3 Power B State: Present
+Bus 1 Enclosure 3 LCC A State: Present
+Bus 1 Enclosure 3 LCC B State: Present
+Bus 1 Enclosure 3 LCC A Revision: 7.84
+Bus 1 Enclosure 3 LCC B Revision: 7.84
+Bus 1 Enclosure 3 LCC A Serial #: FCNLL131102721
+Bus 1 Enclosure 3 LCC B Serial #: FCNLL131102754
+
+VNPC1RT-sdp1:/#
+
+
+VNPC1RT-sdp1:/# navicli -h emc1 getdisk -capacity -state
+Bus 0 Enclosure 0  Disk 0
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 0  Disk 1
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 0  Disk 2
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 0  Disk 3
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 0  Disk 4
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 0  Disk 5
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 0  Disk 6
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 0  Disk 7
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 0  Disk 8
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 0  Disk 9
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 0  Disk 10
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 0  Disk 11
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 0  Disk 12
+Capacity:                274845
+State:                   Unbound
+
+Bus 0 Enclosure 0  Disk 13
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 0  Disk 14
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 0  Disk 0
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 0  Disk 1
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 0  Disk 2
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 0  Disk 3
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 0  Disk 4
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 0  Disk 5
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 0  Disk 6
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 0  Disk 7
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 0  Disk 8
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 0  Disk 9
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 0  Disk 10
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 0  Disk 11
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 0  Disk 12
+Capacity:                274845
+State:                   Unbound
+
+Bus 1 Enclosure 0  Disk 13
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 0  Disk 14
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 1  Disk 0
+Capacity:                274845
+State:                   Hot Spare Ready
+
+Bus 0 Enclosure 1  Disk 1
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 1  Disk 2
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 1  Disk 3
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 1  Disk 4
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 1  Disk 5
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 1  Disk 6
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 1  Disk 7
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 1  Disk 8
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 1  Disk 9
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 1  Disk 10
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 1  Disk 11
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 1  Disk 12
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 1  Disk 13
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 1  Disk 14
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 1  Disk 0
+Capacity:                274845
+State:                   Hot Spare Ready
+
+Bus 1 Enclosure 1  Disk 1
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 1  Disk 2
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 1  Disk 3
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 1  Disk 4
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 1  Disk 5
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 1  Disk 6
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 1  Disk 7
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 1  Disk 8
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 1  Disk 9
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 1  Disk 10
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 1  Disk 11
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 1  Disk 12
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 1  Disk 13
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 1  Disk 14
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 2  Disk 0
+Capacity:                274845
+State:                   Hot Spare Ready
+
+Bus 0 Enclosure 2  Disk 1
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 2  Disk 2
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 2  Disk 3
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 2  Disk 4
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 2  Disk 5
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 2  Disk 6
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 2  Disk 7
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 2  Disk 8
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 2  Disk 9
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 2  Disk 10
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 2  Disk 11
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 2  Disk 12
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 2  Disk 13
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 2  Disk 14
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 2  Disk 0
+Capacity:                274845
+State:                   Hot Spare Ready
+
+Bus 1 Enclosure 2  Disk 1
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 2  Disk 2
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 2  Disk 3
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 2  Disk 4
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 2  Disk 5
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 2  Disk 6
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 2  Disk 7
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 2  Disk 8
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 2  Disk 9
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 2  Disk 10
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 2  Disk 11
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 2  Disk 12
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 2  Disk 13
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 2  Disk 14
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 3  Disk 0
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 3  Disk 1
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 3  Disk 2
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 3  Disk 3
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 3  Disk 4
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 3  Disk 5
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 3  Disk 6
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 3  Disk 7
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 3  Disk 8
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 3  Disk 9
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 3  Disk 10
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 3  Disk 11
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 3  Disk 12
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 3  Disk 13
+Capacity:                274845
+State:                   Enabled
+
+Bus 0 Enclosure 3  Disk 14
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 3  Disk 0
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 3  Disk 1
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 3  Disk 2
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 3  Disk 3
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 3  Disk 4
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 3  Disk 5
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 3  Disk 6
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 3  Disk 7
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 3  Disk 8
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 3  Disk 9
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 3  Disk 10
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 3  Disk 11
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 3  Disk 12
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 3  Disk 13
+Capacity:                274845
+State:                   Enabled
+
+Bus 1 Enclosure 3  Disk 14
+Capacity:                274845
+State:                   Enabled
+
+VNPC1RT-sdp1:/#
+
+
+
+VNPC1RT-sdp1:/# navicli -h emc1 getcache
+SP Read Cache State                 Enabled
+SP Write Cache State                Enabled
+Cache Page size:                    8
+Write Cache Mirrored:               YES
+Low Watermark:                      40
+High Watermark:                     60
+SPA Cache pages:                    241663
+SPB Cache pages:                    241664
+Unassigned Cache Pages:             0
+Read Hit Ratio:                     N/A
+Write Hit Ratio:                    N/A
+Prct Dirty Cache Pages =            0
+Prct Cache Pages Owned =            0
+SPA Read Cache State                Enabled
+SPB Read Cache State                Enabled
+SPA Write Cache State               Enabled
+SPB Write Cache State               Enabled
+System Buffer (spA):                3662 MB
+System Buffer (spB):                3662 MB
+SPS Test Day:                       Sunday
+SPS Test Time:                      08:00
+SPA Physical Memory Size =          8160
+SPB Physical Memory Size =          8160
+Physical memory size of Front-End = Switch not supported
+Physical memory size of Back-End =  Switch not supported
+SPA Free Memory Size =              0
+SPB Free Memory Size =              0
+Free Memory Size of Front-End =     Switch not supported
+Free Memory Size of Back-End =      Switch not supported
+SPA Read Cache Size =               600
+SPB Read Cache Size =               600
+SPA Write Cache Size =              3898
+SPB Write Cache Size =              3898
+SPA Optimized Raid 3 Memory Size =  0
+SPB Optimized Raid 3 Memory Size =  0
+
+VNPC1RT-sdp1:/#
+
+sdp1:/oracle/node1> dbschema
+
+*****   ERROR   *****
+*****   Invalid ORACLE_SID --> sdpa
+*****
+---------------------------------------------------------
+These are the currently running instances on this machine
+main
+hist
+ccdb
+pcat
+---------------------------------------------------------
+Hit CTRL C to cancel this exeuction
+             OR
+Enter ORACLE_SID from above list :
+User request cancel operation...
+sdp1:/oracle/node1>
+sdp1:/oracle/node1>
+sdp1:/oracle/node1>
+sdp1:/oracle/node1> exit
+VNPC1RT-sdp1:/# mshell secamin/passw0rd maintenance_mode
+Login unsuccessful
+VNPC1RT-sdp1:/# mshel secadmin/passw0rd maintenace_mode
+ksh: mshel:  not found.
+VNPC1RT-sdp1:/# mshell secamin/passw0rd maintanace_mode
+Login unsuccessful
+VNPC1RT-sdp1:/# mshell secadmin/passw0rd maintanace_mode
+Can't locate object method "do_maintanace_mode" via package "msa::shell" at /usr/local/jboss/bin/mshell line 73.
+VNPC1RT-sdp1:/# mshell secadmin/passw0rd maintenance_mode
+COMMAND :
+Site name NodeClass NodeName       NodeInstance      Message
+VNPC1RT   SDP       MAIN1          172.17.201.48     Maintenance Mode is disabled
+
+
+VNPC1RT-sdp1:/# mshell secadmin/passw0rd maintenance_mode
+COMMAND :
+Site name NodeClass NodeName       NodeInstance      Message
+VNPC1RT   SDP       MAIN1          172.17.201.48     Maintenance Mode is disabled
+
+
+VNPC1RT-sdp1:/#
+
+
+
+
+
+
+
+
