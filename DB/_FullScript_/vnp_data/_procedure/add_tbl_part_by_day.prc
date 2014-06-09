@@ -49,6 +49,18 @@ BEGIN
          || v_tmp2
          || ''', ''dd/mm/yyyy''))';
 
+      FOR v_index IN 0 .. 9
+      LOOP
+         v_sql :=
+               v_sql + '(SUBPARTITION P'
+            || v_tmp1
+            || '_'
+            || v_index
+            || ' VALUES LESS THAN ('
+            || (v_index + 1)
+            || '))';
+      END LOOP;
+
       EXECUTE IMMEDIATE (v_sql);
 
       --      DBMS_OUTPUT.put_line (v_sql);

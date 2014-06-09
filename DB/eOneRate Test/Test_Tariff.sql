@@ -1,7 +1,16 @@
-/* Formatted on 22/05/2014 16:37:31 (QP5 v5.227.12220.39754) */
+/* Formatted on 09/06/2014 14:42:14 (QP5 v5.227.12220.39754) */
+  SELECT *
+    FROM vnp_data.hot_rated_cdr
+   WHERE a_number = '84914632111'
+ORDER BY cdr_start_time;
+
 SELECT *
-  FROM vnp_data.hot_rated_cdr
+  FROM hot_aggregated_cdr
  WHERE a_number = '84914632111';
+
+BEGIN
+   VNP_DATA.STUFF.COMPENSATE_PREVIOUS_MONTH;
+END;
 
 SELECT *
   FROM vnp_data.rated_cdr

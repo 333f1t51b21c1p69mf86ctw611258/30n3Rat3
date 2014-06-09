@@ -1,4 +1,14 @@
-/* Formatted on 30/05/2014 18:44:51 (QP5 v5.227.12220.39754) */
+/* Formatted on 09/06/2014 14:42:10 (QP5 v5.227.12220.39754) */
+TRUNCATE TABLE hot_rated_cdr;
+
+INSERT INTO hot_rated_cdr
+   SELECT * FROM hot_rated_cdr_bak1;
+
+TRUNCATE TABLE hot_aggregated_cdr;
+
+INSERT INTO hot_aggregated_cdr
+   SELECT * FROM hot_aggregated_cdr_bak1;
+
 TRUNCATE TABLE rated_cdr;
 TRUNCATE TABLE balance_counter;
 
