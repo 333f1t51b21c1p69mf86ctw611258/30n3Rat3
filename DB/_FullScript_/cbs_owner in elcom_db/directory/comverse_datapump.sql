@@ -1,0 +1,1 @@
+CREATE DIRECTORY comverse_datapump AS '/home/comverse/pcat/todo';
