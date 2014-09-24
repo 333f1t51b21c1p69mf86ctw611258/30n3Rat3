@@ -1,0 +1,11 @@
+
+   SELECT RESELLER_VERSION_ID,
+          RESELLER_ID,
+          MAJOR_VERSION_NUM,
+          MINOR_VERSION_NUM,
+          ACTIVE_DATE,
+          INACTIVE_DATE,
+          SERVICE_VERSION_ID,
+          STATUS
+     FROM CBS_OWNER.RESELLER_VERSION
+    WHERE reseller_id = 9;
