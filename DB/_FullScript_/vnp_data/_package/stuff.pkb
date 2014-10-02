@@ -263,10 +263,13 @@ AS
                            INTERNAL_FREE_BLOCK
                          - TBL_COMPENSATION_SUM (j).INTERNAL_FREE_BLOCK
                          + TBL_COMPENSATION_SUM (j).RATED_INTERNAL_FREE_BLOCK
-                WHERE     A_NUMBER = TBL_COMPENSATION_SUM (j).A_NUMBER
+                WHERE     DATA_PART = i
+                      AND A_NUMBER = TBL_COMPENSATION_SUM (j).A_NUMBER
                       AND AUT_FINAL_ID =
                              TBL_COMPENSATION_SUM (j).AUT_FINAL_ID
-                      AND BILL_MONTH = v_time; --         FOR j IN TBL_COMPENSATION_SUM.FIRST .. TBL_COMPENSATION_SUM.LAST
+                      AND BILL_MONTH = v_time;
+         --
+         --         FOR j IN TBL_COMPENSATION_SUM.FIRST .. TBL_COMPENSATION_SUM.LAST
          --         LOOP
          --            UPDATE VNP_DATA.HOT_AGGREGATED_CDR
          --               SET A_NUMBER = :A_NUMBER,
@@ -289,7 +292,8 @@ AS
 
          UPDATE RATED_CDR
             SET RERATE_FLAG = 51
-          WHERE MAP_ID IN (SELECT MAP_ID FROM COMPENSATION_CDR);
+          WHERE     DATA_PART = i
+                AND MAP_ID IN (SELECT MAP_ID FROM COMPENSATION_CDR);
 
          --      OPEN C_COMPENSATION_CDR;
          --
