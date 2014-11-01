@@ -1,0 +1,40 @@
+/* Formatted on 30/05/2014 17:05:30 (QP5 v5.227.12220.39754) */
+DROP TABLE VNP_DATA.TEMP_RATED_CDR;
+
+CREATE TABLE VNP_DATA.TEMP_RATED_CDR
+(
+   A_NUMBER               VARCHAR2 (15 BYTE),
+   CDR_TYPE               NUMBER (2),
+   CREATED_TIME           DATE DEFAULT SYSDATE,
+   CDR_START_TIME         DATE,
+   DURATION               NUMBER (11),
+   TOTAL_USAGE            NUMBER (11),
+   B_NUMBER               VARCHAR2 (15 BYTE),
+   B_ZONE                 VARCHAR2 (127 BYTE),
+   NW_GROUP               VARCHAR2 (15 BYTE),
+   SERVICE_FEE            NUMBER (15, 3),
+   SERVICE_FEE_ID         NUMBER (3),
+   CHARGE_FEE             NUMBER (15, 3),
+   CHARGE_FEE_ID          NUMBER (5),
+   LAC                    VARCHAR2 (23 BYTE),
+   CELL_ID                VARCHAR2 (23 BYTE),
+   SUBSCRIBER_UNBILL      CHAR (2 BYTE),
+   BU_ID                  NUMBER (3),
+   OLD_BU_ID              NUMBER (3),
+   OFFER_COST             NUMBER (15, 3),
+   OFFER_FREE_BLOCK       NUMBER (21),
+   INTERNAL_COST          NUMBER (15, 3),
+   INTERNAL_FREE_BLOCK    NUMBER (11),
+   DIAL_DIGIT             VARCHAR2 (31 BYTE),
+   CDR_RECORD_HEADER_ID   NUMBER (11),
+   CDR_SEQUENCE_NUMBER    NUMBER (11),
+   LOCATION_NO            VARCHAR2 (31 BYTE),
+   MSC_ID                 VARCHAR2 (31 BYTE),
+   UNIT_TYPE_ID           NUMBER (2) NOT NULL,
+   PRIMARY_OFFER_ID       NUMBER (10),
+   DISCOUNT_ITEM_ID       NUMBER (6),
+   BALANCE_CHANGE         VARCHAR2 (500 BYTE),
+   RERATE_FLAG            NUMBER (1),
+   AUT_FINAL_ID           NUMBER (6),
+   TARIFF_PLAN_ID         NUMBER (6)
+);

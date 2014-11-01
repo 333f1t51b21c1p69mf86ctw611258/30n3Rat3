@@ -1,0 +1,14 @@
+/* Formatted on 3/29/2014 11:54:15 AM (QP5 v5.227.12220.39754) */
+SELECT t21.EXPRESSION_ID AS expressionId,
+       t22.RESELLER_VERSION_ID AS resellerVersionId,
+       t22.EXPRESSION_GROUP_ID AS expressionGroupId,
+       t22.ATTRIBUTE_ID AS attributeId,
+       t22.ATTRIBUTE_QUALIFIER AS attributeQualifier,
+       t22.VALUE AS VALUE,
+       t22.ATTR_SRC AS attrSrc
+  FROM cbs_owner.EXPRESSION_KEY t21
+       INNER JOIN cbs_owner.EXPRESSION t22
+          ON t21.EXPRESSION_ID = t22.EXPRESSION_ID
+       INNER JOIN cbs_owner.EXPRESSION_GROUP_KEY t23
+          ON t22.EXPRESSION_GROUP_ID = t23.EXPRESSION_GROUP_ID
+ WHERE t22.RESELLER_VERSION_ID = 2

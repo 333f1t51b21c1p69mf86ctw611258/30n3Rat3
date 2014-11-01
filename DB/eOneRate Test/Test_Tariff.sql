@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Formatted on 09/06/2014 14:42:14 (QP5 v5.227.12220.39754) */
   SELECT *
     FROM vnp_data.hot_rated_cdr
@@ -23,6 +24,24 @@ SELECT *
 SELECT *
   FROM PRODUCT_SELECT
  WHERE SUBSCRIBER_NO = '84914632111';
+=======
+/* Formatted on 22/05/2014 16:37:31 (QP5 v5.227.12220.39754) */
+SELECT *
+  FROM vnp_data.hot_rated_cdr
+ WHERE a_number = '84906271271';
+
+SELECT *
+  FROM vnp_data.rated_cdr
+ WHERE a_number = '84906271271';
+
+SELECT *
+  FROM subscriber
+ WHERE subscriber_no = '84906271271';
+
+SELECT *
+  FROM PRODUCT_SELECT
+ WHERE SUBSCRIBER_NO = '84906271271';
+>>>>>>> 66872b756674f793a2fe6d9ac12de74c6051fa7d
 
 --51004286    PO_Data_Postpaid Broadband EZcom
 --51004350    SO_Data_Postpaid_EZ50_Ipad
@@ -80,4 +99,8 @@ SELECT *
 INSERT INTO VNP_DATA.HOT_RATED_CDR_DEV
    SELECT *
      FROM VNP_DATA.HOT_RATED_CDR
+<<<<<<< HEAD
     WHERE a_number = '84914632111' AND cdr_type = 7;
+=======
+    WHERE a_number = '84935379525' AND cdr_type = 7;
+>>>>>>> 66872b756674f793a2fe6d9ac12de74c6051fa7d

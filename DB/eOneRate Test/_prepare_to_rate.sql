@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Formatted on 09/06/2014 14:42:10 (QP5 v5.227.12220.39754) */
 TRUNCATE TABLE hot_rated_cdr;
 
@@ -11,6 +12,11 @@ INSERT INTO hot_aggregated_cdr
 
 TRUNCATE TABLE rated_cdr;
 TRUNCATE TABLE balance_counter;
+=======
+/* Formatted on 30/05/2014 18:44:51 (QP5 v5.227.12220.39754) */
+TRUNCATE TABLE rated_cdr_dev;
+TRUNCATE TABLE balance_counter_dev;
+>>>>>>> 66872b756674f793a2fe6d9ac12de74c6051fa7d
 
 --TRUNCATE TABLE rated_cdr;
 --TRUNCATE TABLE balance_counter;
@@ -44,7 +50,11 @@ TRUNCATE TABLE balance_counter;
 -- WHERE a_number = '84935379525' AND cdr_type = 4;
 
 
+<<<<<<< HEAD
 UPDATE hot_rated_cdr
+=======
+UPDATE hot_rated_cdr_dev
+>>>>>>> 66872b756674f793a2fe6d9ac12de74c6051fa7d
    SET rerate_flag = 0;
 
 COMMIT;
