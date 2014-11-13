@@ -1,0 +1,30 @@
+#!/usr/bin/expect -f
+# Use data from tmp file
+
+set nlist {}
+set vlist {}
+set fd [open tmp r]
+while { [gets $fd line] >= 0 } {
+  set lst [split "$line" "="]
+  lappend nlist [lindex $lst 0]
+  lappend vlist [lindex $lst 1]
+}
+close $fd
+
+set rec ""
+set fd [open orp.map r]
+while { [gets $fd line] >= 0 } {
+  set val ""
+  set idx 0
+  while { $idx < [llength $nlist] } {
+    if { $line == [lindex $nlist $idx] } {
+      set val [lindex $vlist $idx]
+      break
+    }
+    incr idx
+  }
+  append rec $val "|"
+}
+close $fd
+send_user "$rec\n"
+exit 0

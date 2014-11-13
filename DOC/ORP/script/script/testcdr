@@ -1,0 +1,25 @@
+#!/bin/bash
+
+if [ ! -f cdr.dat ]; then
+  echo "No record found"
+  exit 1
+fi
+
+HOST=`head -1 cdr.dat | cut -f8 -d'|'`
+RCNT=`wc -l cdr.dat | cut -f1 -d' '`
+SEQ=`head -1 cdr.dat | cut -f2 -d'|'`
+FROM=$(expr $SEQ + 0)
+
+echo $HOST $RCNT $FROM
+
+TT=`date +%s`
+orfile="IPor.$TT.$HOST.$FROM.bill"
+echo $orfile
+
+./orpcap $HOST $FROM $RCNT cdr.dat
+rm -f cdr.dat
+mv -f tmp $orfile
+
+cp $orfile /staging/billing/data/usage/remote/ready/
+/home/cbsuser/orptest.sh $orfile
+
