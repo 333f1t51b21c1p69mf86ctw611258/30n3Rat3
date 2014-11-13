@@ -1,0 +1,18 @@
+﻿SET DEFINE OFF;
+Insert into VNP_COMMON.SUBSCRIBER_STATUS
+   (STATUS_ID, STATUS_NAME, CURRENCY_ID)
+ Values
+   (1, 'Bình thường', 267);
+Insert into VNP_COMMON.SUBSCRIBER_STATUS
+   (STATUS_ID, STATUS_NAME, CURRENCY_ID)
+ Values
+   (2, 'Khóa 1 chiều', 267);
+Insert into VNP_COMMON.SUBSCRIBER_STATUS
+   (STATUS_ID, STATUS_NAME, CURRENCY_ID)
+ Values
+   (3, 'Khóa 2 chiều', 267);
+Insert into VNP_COMMON.SUBSCRIBER_STATUS
+   (STATUS_ID, STATUS_NAME, CURRENCY_ID)
+ Values
+   (4, 'Hủy đăng ký', 267);
+COMMIT;
