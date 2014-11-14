@@ -1,0 +1,51 @@
+select
+	t1.FF_LIST_TEMPLATE_ID as ffListTemplateId,
+	t2.RESELLER_VERSION_ID as resellerVersionId,
+	t6.DISPLAY_VALUE as bwListKey,
+	t2.BW_LIST_ID as bwListId,
+	t2.REQUIRE_ON_NET as requireOnNet,
+	t2.ALLOW_WILD_CARDS as allowWildCards,
+	t2.MAX_LIST_SIZE as maxListSize,
+	t2.MAX_MATCH_LENGTH as maxMatchLength,
+	t9.DISPLAY_VALUE as rcTermKey,
+	t2.RC_TERM_ID as rcTermId,
+	t11.DISPLAY_VALUE as anncTypeId,
+	t13.SERVICE_VERSION_ID as serviceVersionId,
+	t14.DISPLAY_VALUE as ffListTypeKey,
+	t2.FF_LIST_TYPE_ID as ffListTypeId,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	FF_LIST_TEMPLATE_KEY t1
+	inner join FF_LIST_TEMPLATE_REF t2 on t1.FF_LIST_TEMPLATE_ID = t2.FF_LIST_TEMPLATE_ID
+	inner join FF_LIST_TEMPLATE_VALUES t3 on t2.FF_LIST_TEMPLATE_ID = t3.FF_LIST_TEMPLATE_ID
+		and t2.RESELLER_VERSION_ID = t3.RESELLER_VERSION_ID
+	inner join BW_LIST_KEY t4 on t2.BW_LIST_ID = t4.BW_LIST_ID
+	inner join BW_LIST_REF t5 on t4.BW_LIST_ID = t5.BW_LIST_ID
+		and t5.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+	inner join BW_LIST_VALUES t6 on t4.BW_LIST_ID = t6.BW_LIST_ID
+		and t6.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+		and t6.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join RC_TERM_KEY t7 on t2.RC_TERM_ID = t7.RC_TERM_ID
+	left outer join RC_TERM_REF t8 on t7.RC_TERM_ID = t8.RC_TERM_ID
+		and t8.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+	left outer join RC_TERM_VALUES t9 on t7.RC_TERM_ID = t9.RC_TERM_ID
+		and t9.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+		and t9.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join GUI_INDICATOR_REF t10 on t10.table_name = ''FF_LIST_TEMPLATE_REF''
+		and t10.field_name = lower(''ANNC_TYPE_ID'')
+		and t10.integer_value = t2.ANNC_TYPE_ID
+	left outer join GUI_INDICATOR_VALUES t11 on t11.table_name = t10.table_name
+		and t11.field_name = t10.field_name
+		and t11.integer_value = t10.integer_value
+		and t11.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	inner join FF_LIST_TYPE_KEY t12 on t2.FF_LIST_TYPE_ID = t12.FF_LIST_TYPE_ID
+	inner join FF_LIST_TYPE_REF t13 on t12.FF_LIST_TYPE_ID = t13.FF_LIST_TYPE_ID
+		and t13.SERVICE_VERSION_ID = {1}
+	inner join FF_LIST_TYPE_VALUES t14 on t12.FF_LIST_TYPE_ID = t14.FF_LIST_TYPE_ID
+		and t14.SERVICE_VERSION_ID = t13.SERVICE_VERSION_ID
+		and t14.LANGUAGE_CODE = t3.LANGUAGE_CODE
+where
+	t2.RESELLER_VERSION_ID = {0}
+	and t3.LANGUAGE_CODE = {2}

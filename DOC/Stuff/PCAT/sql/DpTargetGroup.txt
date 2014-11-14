@@ -1,0 +1,18 @@
+select
+	t1.TARGET_GROUP_ID as targetGroupId,
+	t1.IS_DEFAULT as isDefault,
+	t1.IS_INTERNAL as isInternal,
+	t4.DISPLAY_VALUE as targetSystemType,
+	t2.LANGUAGE_CODE as languageCode,
+	t2.DESCRIPTION as description,
+	t2.DISPLAY_VALUES as displayValue
+from
+	DP_TARGET_GROUP_REF t1
+	inner join DP_TARGET_GROUP_VALUES t2 on t1.TARGET_GROUP_ID = t2.TARGET_GROUP_ID
+	left outer join GENERIC_ENUMERATION_REF t3 on t3.enumeration_key = lower(''TARGET_SYSTEM_TYPE'')
+		and t3.value = t1.TARGET_SYSTEM_TYPE
+	left outer join GENERIC_ENUMERATION_VALUES t4 on t4.enumeration_key = t3.enumeration_key
+		and t4.value = t3.value
+		and t4.LANGUAGE_CODE = t2.LANGUAGE_CODE
+where
+	t2.LANGUAGE_CODE = {2}

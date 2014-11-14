@@ -1,0 +1,47 @@
+select
+	t1.TARIFF_ID as tariffId,
+	t2.RESELLER_VERSION_ID as resellerVersionId,
+	t5.SERVICE_VERSION_ID as serviceVersionId,
+	t6.DISPLAY_VALUE as unitsTypeKey,
+	t2.UNIT_TYPE as unitType,
+	t8.ISO_CODE as currencyIsoCode,
+	t8.IMPLIED_DECIMAL as currencyImpliedDecimal,
+	t9.DISPLAY_VALUE as rateCurrencyKey,
+	t2.CURRENCY_CODE as currencyCode,
+	t2.FIRST_CON_AMOUNT as firstConAmount,
+	t2.FIRST_CON_CHARGE as firstConCharge,
+	t2.ADD_CON_AMOUNT as addConAmount,
+	t2.ADD_CON_CHARGE as addConCharge,
+	t2.ALLOW_DISCOUNT as allowDiscount,
+	t2.IS_CHARGEBLE as isChargeble,
+	t2.CONVERSION_RQD as conversionRqd,
+	t11.DISPLAY_VALUE as tariffCategory,
+	t2.NON_MON_ALLOWED as nonMonAllowed,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	TARIFF_KEY t1
+	inner join TARIFF_REF t2 on t1.TARIFF_ID = t2.TARIFF_ID
+	inner join TARIFF_VALUES t3 on t2.TARIFF_ID = t3.TARIFF_ID
+		and t2.RESELLER_VERSION_ID = t3.RESELLER_VERSION_ID
+	inner join UNITS_TYPE_KEY t4 on t2.UNIT_TYPE = t4.UNIT_TYPE
+	inner join UNITS_TYPE_REF t5 on t4.UNIT_TYPE = t5.UNIT_TYPE
+		and t5.SERVICE_VERSION_ID = {1}
+	inner join UNITS_TYPE_VALUES t6 on t4.UNIT_TYPE = t6.UNIT_TYPE
+		and t6.SERVICE_VERSION_ID = t5.SERVICE_VERSION_ID
+		and t6.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	inner join RATE_CURRENCY_KEY t7 on t2.CURRENCY_CODE = t7.CURRENCY_CODE
+	inner join RATE_CURRENCY_REF t8 on t7.CURRENCY_CODE = t8.CURRENCY_CODE
+		and t8.SERVICE_VERSION_ID = t5.SERVICE_VERSION_ID
+	inner join RATE_CURRENCY_VALUES t9 on t7.CURRENCY_CODE = t9.CURRENCY_CODE
+		and t9.SERVICE_VERSION_ID = t5.SERVICE_VERSION_ID
+		and t9.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join GENERIC_ENUMERATION_REF t10 on t10.enumeration_key = lower(''TARIFF_CATEGORY'')
+		and t10.value = t2.TARIFF_CATEGORY
+	left outer join GENERIC_ENUMERATION_VALUES t11 on t11.enumeration_key = t10.enumeration_key
+		and t11.value = t10.value
+		and t11.LANGUAGE_CODE = t3.LANGUAGE_CODE
+where
+	t2.RESELLER_VERSION_ID = {0}
+	and t3.LANGUAGE_CODE = {2}

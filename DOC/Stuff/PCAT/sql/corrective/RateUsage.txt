@@ -1,0 +1,84 @@
+select
+	t1.SEQNUM as seqnum,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t1.RATE_CLASS as rateClass,
+	t4.DISPLAY_VALUE as autFinalKey,
+	t1.AUT_ID as autId,
+	t1.BILL_CLASS as billClass,
+	t1.JURISDICTION as jurisdiction,
+	t1.POINT_CLASS_TARGET as pointClassTarget,
+	t1.POINT_CLASS_ORIGIN as pointClassOrigin,
+	t6.DISPLAY_VALUE as displayValue1,
+	t1.PROVIDER_CLASS as providerClass,
+	t1.TIME_TYPE_ID as timeTypeId,
+	t1.CURRENCY_CODE as currencyCode,
+	t1.USAGE_PLAN_ID as usagePlanId,
+	t1.OFFER_ID as offerId,
+	t9.DISPLAY_VALUE as equipTypeCodeRef,
+	t1.EQUIP_TYPE_CODE as equipTypeCode,
+	t11.DISPLAY_VALUE as equipClassCodeRef,
+	t1.EQUIP_CLASS_CODE as equipClassCode,
+	t13.DISPLAY_VALUE as classOfServiceCodeRef,
+	t1.CLASS_OF_SERVICE_CODE as classOfServiceCode,
+	t1.FIXED_CHARGE_AMT as fixedChargeAmt,
+	t1.ADD_FIXED_AMT as addFixedAmt,
+	t1.ADD_UNIT_RATE as addUnitRate,
+	t1.CREATE_DT as createDt,
+	t1.CHANGE_DT as changeDt,
+	t1.CHANGE_WHO as changeWho,
+	t1.INCREMENTAL_BANDS as incrementalBands,
+	t15.SERVICE_VERSION_ID as serviceVersionId,
+	t16.DISPLAY_VALUE as unitsTypeKey,
+	t1.RATE_UNIT_TYPE as rateUnitType,
+	t1.DISTANCE_BAND_ID as distanceBandId,
+	t1.ZONE_CLASS as zoneClass,
+	t1.ADD_IMPLIED_DECIMAL as addImpliedDecimal,
+	t1.IS_DEFAULT_RATE as isDefaultRate,
+	t20.DISPLAY_VALUE as unitsTypeKey,
+	t1.BILLING_UNIT_TYPE as billingUnitType,
+	t1.MIN_CHARGE_AMT as minChargeAmt,
+	t1.ADD_MIN_AMT as addMinAmt
+from
+	RATE_USAGE t1
+	inner join AUT_FINAL_KEY t2 on t1.AUT_ID = t2.AUT_ID
+	inner join AUT_FINAL_REF t3 on t3.AUT_ID = t2.AUT_ID  
+        inner join (select reseller_id, major_version_num, reseller_version_id from reseller_version where reseller_version_id = {0}) tReseller on t3.reseller_version_id = tReseller.Reseller_Version_Id
+        inner join (select reseller_version_id, service_version_id, major_version_num, minor_version_num, reseller_id from reseller_version)  tBaseVersion on tReseller.Reseller_Id = tBaseVersion.Reseller_Id
+                and tReseller.Major_Version_Num = tBaseVersion.Major_Version_Num 
+                and tBaseVersion.Minor_Version_Num = 0     
+	inner join AUT_FINAL_VALUES t4 on t3.AUT_ID = t4.AUT_ID		
+		and t4.RESELLER_VERSION_ID = tBaseVersion.RESELLER_VERSION_ID
+	left outer join GENERIC_ENUMERATION_REF t5 on t5.enumeration_key = lower(''UNITS_INDICATOR'')
+		and t5.value = t1.UNITS_INDICATOR
+	left outer join GENERIC_ENUMERATION_VALUES t6 on t6.enumeration_key = t5.enumeration_key
+		and t6.value = t5.value
+		and t6.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	inner join RATE_USAGE_IMPLIED_DECIMALS t7 on t1.CURRENCY_CODE = t7.CURRENCY_CODE
+		and t1.ADD_IMPLIED_DECIMAL = t7.ADD_IMPLIED_DECIMAL
+		and t1.RESELLER_VERSION_ID = t7.RESELLER_VERSION_ID
+	inner join EQUIP_TYPE_CODE_REF t8 on t1.EQUIP_TYPE_CODE = t8.EQUIP_TYPE_CODE
+	inner join EQUIP_TYPE_CODE_VALUES t9 on t1.EQUIP_TYPE_CODE = t9.EQUIP_TYPE_CODE
+		and t9.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	inner join EQUIP_CLASS_CODE_REF t10 on t1.EQUIP_CLASS_CODE = t10.EQUIP_CLASS_CODE
+	inner join EQUIP_CLASS_CODE_VALUES t11 on t1.EQUIP_CLASS_CODE = t11.EQUIP_CLASS_CODE
+		and t11.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	inner join CLASS_OF_SERVICE_CODE_REF t12 on t1.CLASS_OF_SERVICE_CODE = t12.CLASS_OF_SERVICE_CODE
+	inner join CLASS_OF_SERVICE_CODE_VALUES t13 on t1.CLASS_OF_SERVICE_CODE = t13.CLASS_OF_SERVICE_CODE
+		and t13.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	inner join UNITS_TYPE_KEY t14 on t1.RATE_UNIT_TYPE = t14.UNIT_TYPE
+	inner join UNITS_TYPE_REF t15 on t1.RATE_UNIT_TYPE = t15.UNIT_TYPE
+		and t15.SERVICE_VERSION_ID = tBaseVersion.SERVICE_VERSION_ID
+	inner join UNITS_TYPE_VALUES t16 on t1.RATE_UNIT_TYPE = t16.UNIT_TYPE
+		and t16.LANGUAGE_CODE = t4.LANGUAGE_CODE
+		and t16.SERVICE_VERSION_ID = t15.SERVICE_VERSION_ID
+	inner join RATE_USAGE_IMPLIED_DECIMALS t17 on t1.CURRENCY_CODE = t17.CURRENCY_CODE
+		and t1.ADD_IMPLIED_DECIMAL = t17.ADD_IMPLIED_DECIMAL
+		and t1.RESELLER_VERSION_ID = t17.RESELLER_VERSION_ID
+	left outer join UNITS_TYPE_KEY t18 on t1.BILLING_UNIT_TYPE = t18.UNIT_TYPE
+	left outer join UNITS_TYPE_REF t19 on t1.BILLING_UNIT_TYPE = t19.UNIT_TYPE
+		and t19.SERVICE_VERSION_ID = t15.SERVICE_VERSION_ID
+	left outer join UNITS_TYPE_VALUES t20 on t1.BILLING_UNIT_TYPE = t20.UNIT_TYPE
+		and t20.LANGUAGE_CODE = t4.LANGUAGE_CODE
+		and t20.SERVICE_VERSION_ID = t15.SERVICE_VERSION_ID
+where
+	t4.LANGUAGE_CODE = {2} 

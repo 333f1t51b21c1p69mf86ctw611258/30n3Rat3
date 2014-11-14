@@ -1,0 +1,78 @@
+select
+	t1.TAX_THRESHS_ID as taxThreshsId,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t4.DISPLAY_VALUE as taxThresholdKey,
+	t1.TAX_THRESHOLD_ID as taxThresholdId,
+	t6.DISPLAY_VALUE as taxPkgInstIdKey,
+	t1.TAX_PKG_INST_ID as taxPkgInstId,
+	t1.TAX_TYPE_CODE as taxTypeCode,
+	t1.ACCOUNT_CATEGORY as accountCategory,
+	t9.DISPLAY_VALUE as displayValue1,
+	t1.CHARGE_ELT_ID as chargeEltId,
+	t1.COUNTRY_CODE as countryCode,
+	t1.FRANCHISE_CODE as franchiseCode,
+	t1.STATE_CODE as stateCode,
+	t1.COUNTY_CODE as countyCode,
+	t1.CITY_CODE as cityCode, 
+        (case t1.TAX_TYPE_CODE
+          when 0 then {3}
+          else t12.DISPLAY_VALUE
+        end) taxTypeCodeValues,
+        (case t1.COUNTRY_CODE
+          when 0 then {3}
+          else t14.DISPLAY_VALUE
+        end) countryCodeRef,
+       (case t1.ACCOUNT_CATEGORY
+          when 0 then {3}
+          else t17.DISPLAY_VALUE
+        end) accountCategoryValues, 
+       (case t1.FRANCHISE_CODE
+          when 0 then {3}
+          else t20.DISPLAY_VALUE
+        end) franchiseCodeValues 
+from
+	TAX_THRESHOLDS t1
+        inner join (select reseller_id, major_version_num, reseller_version_id from reseller_version where reseller_version_id = {0}) tReseller on t1.reseller_version_id = tReseller.Reseller_Version_Id
+        inner join (select reseller_version_id, service_version_id, major_version_num, minor_version_num, reseller_id from reseller_version) tBaseVersion on tReseller.Reseller_Id = tBaseVersion.Reseller_Id  
+            and tReseller.Major_Version_Num = tBaseVersion.Major_Version_Num 
+            and tBaseVersion.Minor_Version_Num = 0 	
+        inner join TAX_THRESHOLD_KEY t2 on t1.TAX_THRESHOLD_ID = t2.TAX_THRESHOLD_ID
+	inner join TAX_THRESHOLD_REF t3 on t1.TAX_THRESHOLD_ID = t3.TAX_THRESHOLD_ID
+		and t3.RESELLER_VERSION_ID = tBaseVersion.RESELLER_VERSION_ID
+	inner join TAX_THRESHOLD_VALUES t4 on t1.TAX_THRESHOLD_ID = t4.TAX_THRESHOLD_ID
+		and t4.LANGUAGE_CODE = {2}
+		and t4.RESELLER_VERSION_ID = tBaseVersion.RESELLER_VERSION_ID
+	inner join TAX_PKG_INST_ID_KEY t5 on t1.TAX_PKG_INST_ID = t5.TAX_PKG_INST_ID
+	inner join TAX_PKG_INST_ID_VALUES t6 on t1.TAX_PKG_INST_ID = t6.TAX_PKG_INST_ID
+		and t6.LANGUAGE_CODE = t4.LANGUAGE_CODE
+		and t6.RESELLER_VERSION_ID = tBaseVersion.RESELLER_VERSION_ID
+	inner join TAX_PKG_INST_ID_REF t7 on t1.TAX_PKG_INST_ID = t7.TAX_PKG_INST_ID
+		and t7.RESELLER_VERSION_ID = tBaseVersion.RESELLER_VERSION_ID
+	left outer join GENERIC_ENUMERATION_REF t8 on t8.enumeration_key = lower(''CHARGE_ELT_TYPE'')
+		and t8.value = t1.CHARGE_ELT_TYPE
+	left outer join GENERIC_ENUMERATION_VALUES t9 on t9.enumeration_key = t8.enumeration_key
+		and t9.value = t8.value
+		and t9.LANGUAGE_CODE = t4.LANGUAGE_CODE
+        left outer join TAX_TYPE_CODE_KEY t10 on t1.tax_type_code = t10.tax_type_code
+        left outer join TAX_TYPE_CODE_REF t11 on t10.tax_type_code = t11.tax_type_code
+                and t11.reseller_version_id = tBaseVersion.RESELLER_VERSION_ID
+        left outer join TAX_TYPE_CODE_VALUES t12 on t11.tax_type_code = t12.tax_type_code 
+                and t12.reseller_version_id = t11.reseller_version_id 
+                and t12.language_code = t4.language_code 
+        inner join country_code_ref t13 on t1.country_code = t13.country_code 
+        inner join country_code_values t14 on t1.country_code = t14.country_code 
+                and t14.language_code = t4.language_code
+        inner join account_category_key t15 on t1.account_category = t15.account_category 
+        inner join account_category_ref t16 on t15.account_category = t16.account_category 
+                and t16.service_version_id = tBaseVersion.service_version_id 
+        inner join account_category_values t17 on t16.account_category = t17.account_category 
+                and t17.service_version_id = t16.service_version_id 
+                and t17.language_code = t4.language_code 
+        inner join franchise_code_key t18 on t1.franchise_code = t18.franchise_code 
+        inner join franchise_code_ref t19 on t18.franchise_code = t19.franchise_code 
+                and t19.reseller_version_id = tBaseVersion.RESELLER_VERSION_ID 
+        inner join franchise_code_values t20 on t19.franchise_code = t20.franchise_code 
+                and t20.reseller_version_id = t19.reseller_version_id 
+                and t20.language_code = t4.language_code 
+where
+	t4.LANGUAGE_CODE = {2}

@@ -1,0 +1,21 @@
+select
+	t1.TML_DEFAULT_LIMIT_ID as tmlDefaultLimitId,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t1.ATTRIBUTE_NAME as attributeName,
+	t1.ATTRIBUTE_VALUE as attributeValue,
+	t1.TML_DEFAULT_LIMIT as tmlDefaultLimit,
+	t3.SERVICE_VERSION_ID as serviceVersionId,
+	t3.ISO_CODE as currencyIsoCode,
+	t3.IMPLIED_DECIMAL as currencyImpliedDecimal,
+	t4.DISPLAY_VALUE as rateCurrencyKey,
+	t1.CURRENCY_CODE as currencyCode
+from
+	TML_DEFAULT_LIMIT t1
+	inner join RATE_CURRENCY_KEY t2 on t1.CURRENCY_CODE = t2.CURRENCY_CODE
+	inner join RATE_CURRENCY_REF t3 on t2.CURRENCY_CODE = t3.CURRENCY_CODE
+		and t3.SERVICE_VERSION_ID = {1}
+	inner join RATE_CURRENCY_VALUES t4 on t2.CURRENCY_CODE = t4.CURRENCY_CODE
+		and t4.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+		and t4.LANGUAGE_CODE = {2}
+where
+	t1.RESELLER_VERSION_ID = {0}

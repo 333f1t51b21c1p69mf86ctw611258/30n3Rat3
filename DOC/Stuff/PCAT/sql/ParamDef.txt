@@ -1,0 +1,26 @@
+select
+	t1.PARAM_ID as paramId,
+	t1.PARAM_NAME as paramName,
+        t4.DISPLAY_VALUE as displayValue,
+	t3.DISPLAY_VALUE as paramDefDatatype,
+	t1.ASSOC_ENUMERATION_NAME as assocEnumerationName,
+	t1.IS_ADDRESSABLE as isAddressable,
+	t1.PARAM_EXTERNAL_ID as paramExternalId,
+	t1.VALIDATION_RULES as validationRules,
+	t1.DEFAULT_VALUE as defaultValue,
+	t1.IS_REQUIRED as isRequired,
+        CASE
+            WHEN t1.ASSOC_ENUMERATION_NAME is null THEN 0
+            ELSE 1
+        END as isEnumeration,
+	t1.EXPOSE_TO_SELF_SERVICE as exposeToSelfService,
+	t1.EXPOSE_TO_CSR as exposeToCsr
+from
+	PARAM_DEF t1
+        inner join PARAM_VALUES t4 on t1.PARAM_ID = t4.PARAM_ID
+                and t4.LANGUAGE_CODE = {2}
+	left outer join GENERIC_ENUMERATION_REF t2 on t2.enumeration_key = lower(''PARAM_DEF_DATATYPE'')
+		and t2.value = t1.PARAM_DATATYPE
+	left outer join GENERIC_ENUMERATION_VALUES t3 on t3.enumeration_key = t2.enumeration_key
+		and t3.value = t2.value
+		and t3.LANGUAGE_CODE = {2}

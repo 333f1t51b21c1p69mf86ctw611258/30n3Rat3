@@ -1,0 +1,10 @@
+select
+	t3.DISPLAY_VALUE as cardTypeCodeRef,
+	t1.CARD_TYPE_CODE as cardTypeCode,
+	t1.MINIMUM_RANGE_VALUE as minimumRangeValue,
+	t1.MAXIMUM_RANGE_VALUE as maximumRangeValue
+from
+	CARD_TYPE_CODE_RANGE t1
+	inner join CARD_TYPE_CODE_REF t2 on t1.CARD_TYPE_CODE = t2.CARD_TYPE_CODE
+	inner join CARD_TYPE_CODE_VALUES t3 on t2.CARD_TYPE_CODE = t3.CARD_TYPE_CODE
+		and t3.LANGUAGE_CODE = {2}

@@ -1,0 +1,77 @@
+select
+	t1.ACCUMULATOR_EXC_INC_ID as accumulatorExcIncId,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t4.DISPLAY_VALUE as accumulatorKey,
+	t1.ACCUMULATOR_ID as accumulatorId,
+	t7.DISPLAY_VALUE as autFinalKey,
+	t1.AUT_ID as autId,
+	t10.DISPLAY_VALUE as autGroupKey,
+	t1.AUT_GROUP_ID as autGroupId,
+	t1.EXCL_INCL_FLAG as exclInclFlag,
+	t1.RATE as rate,
+	t12.DISPLAY_VALUE as rateType,
+	t1.ORDER_NO as orderNo,
+	t15.DISPLAY_VALUE as timeTypeKey,
+	t1.TIME_TYPE_ID as timeTypeId,
+	t1.MIN_CONSUMPTION_THRESHOLD as minConsumptionThreshold,
+	t1.MAX_CONSUMPTION_THRESHOLD as maxConsumptionThreshold,
+	t17.SERVICE_VERSION_ID as serviceVersionId,
+	t18.DISPLAY_VALUE as unitsTypeKey,
+	t1.UNIT_TYPE as unitType,
+	t20.DISPLAY_VALUE as comparisonOperator,
+	t22.DISPLAY_VALUE as rechargeOriginatorRef,
+	t1.RECH_TYPE_1 as rechType1,
+	t24.DISPLAY_VALUE as rechargeOriginatorRefByRechTyp,
+	t1.RECH_TYPE_2 as rechType2
+from
+	ACCUMULTR_EXCLUSION_INCLUSION t1
+	inner join ACCUMULATOR_KEY t2 on t1.ACCUMULATOR_ID = t2.ACCUMULATOR_ID
+	inner join ACCUMULATOR_REF t3 on t2.ACCUMULATOR_ID = t3.ACCUMULATOR_ID
+		and t3.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+	inner join ACCUMULATOR_VALUES t4 on t2.ACCUMULATOR_ID = t4.ACCUMULATOR_ID
+		and t4.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+		and t4.LANGUAGE_CODE = {2}
+	left outer join AUT_FINAL_KEY t5 on t1.AUT_ID = t5.AUT_ID
+	left outer join AUT_FINAL_REF t6 on t5.AUT_ID = t6.AUT_ID
+		and t6.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+	left outer join AUT_FINAL_VALUES t7 on t5.AUT_ID = t7.AUT_ID
+		and t7.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+		and t7.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join AUT_GROUP_KEY t8 on t1.AUT_GROUP_ID = t8.AUT_GROUP_ID
+	left outer join AUT_GROUP_REF t9 on t8.AUT_GROUP_ID = t9.AUT_GROUP_ID
+		and t9.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+	left outer join AUT_GROUP_VALUES t10 on t8.AUT_GROUP_ID = t10.AUT_GROUP_ID
+		and t10.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+		and t10.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join GENERIC_ENUMERATION_REF t11 on t11.enumeration_key = lower(''RATE_TYPE'')
+		and t11.value = t1.RATE_TYPE
+	left outer join GENERIC_ENUMERATION_VALUES t12 on t12.enumeration_key = t11.enumeration_key
+		and t12.value = t11.value
+		and t12.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join TIME_TYPE_KEY t13 on t1.TIME_TYPE_ID = t13.TIME_TYPE_ID
+	left outer join TIME_TYPE_REF t14 on t13.TIME_TYPE_ID = t14.TIME_TYPE_ID
+		and t14.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+	left outer join TIME_TYPE_VALUES t15 on t13.TIME_TYPE_ID = t15.TIME_TYPE_ID
+		and t15.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+		and t15.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join UNITS_TYPE_KEY t16 on t1.UNIT_TYPE = t16.UNIT_TYPE
+	left outer join UNITS_TYPE_REF t17 on t16.UNIT_TYPE = t17.UNIT_TYPE
+		and t17.SERVICE_VERSION_ID = {1}
+	left outer join UNITS_TYPE_VALUES t18 on t16.UNIT_TYPE = t18.UNIT_TYPE
+		and t18.SERVICE_VERSION_ID = {1}
+		and t18.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join GUI_INDICATOR_REF t19 on t19.table_name = ''ACCUMULTR_EXCLUSION_INCLUSION''
+		and t19.field_name = lower(''COMPARISON_OPERATOR'')
+		and t19.integer_value = t1.COMPARISON_OPERATOR
+	left outer join GUI_INDICATOR_VALUES t20 on t20.table_name = t19.table_name
+		and t20.field_name = t19.field_name
+		and t20.integer_value = t19.integer_value
+		and t20.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join RECHARGE_ORIGINATOR_REF t21 on t1.RECH_TYPE_1 = t21.ORIGIN_ID
+	left outer join RECHARGE_ORIGINATOR_VALUES t22 on t21.ORIGIN_ID = t22.ORIGIN_ID
+		and t22.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join RECHARGE_ORIGINATOR_REF t23 on t1.RECH_TYPE_2 = t23.ORIGIN_ID
+	left outer join RECHARGE_ORIGINATOR_VALUES t24 on t23.ORIGIN_ID = t24.ORIGIN_ID
+		and t24.LANGUAGE_CODE = t4.LANGUAGE_CODE
+where
+	t1.RESELLER_VERSION_ID = {0}

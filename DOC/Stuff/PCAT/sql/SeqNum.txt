@@ -1,0 +1,5 @@
+select
+	t1.TABLE_NAME as tableName,
+	t1.SEQ_NUM as seqNum
+from
+	SEQ_NUM t1

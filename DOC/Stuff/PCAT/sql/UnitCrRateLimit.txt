@@ -1,0 +1,70 @@
+select
+	t1.SEQNUM as seqnum,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t4.DISPLAY_VALUE as autFinalKey,
+	t1.AUT_ID as autId,
+	t1.TIME_TYPE_ID as timeTypeId,
+	t6.SERVICE_VERSION_ID as serviceVersionId,
+	t7.DISPLAY_VALUE as jurisdictionsKey,
+	t1.JURISDICTION as jurisdiction,
+	t10.DISPLAY_VALUE as rateClassKey,
+	t1.RATE_CLASS as rateClass,
+	t13.DISPLAY_VALUE as billClassKey,
+	t1.BILL_CLASS as billClass,
+	t16.DISPLAY_VALUE as pointClassKey,
+	t1.POINT_CLASS_ORIGIN as pointClassOrigin,
+	t19.DISPLAY_VALUE as pointClassKeyByPointClassTarge,
+	t1.POINT_CLASS_TARGET as pointClassTarget,
+	t21.DISPLAY_VALUE as equipClassCodeRef,
+	t1.EQUIP_CLASS_CODE as equipClassCode,
+	t1.OFFER_ID as offerId,
+	t1.CURRENCY_CODE as currencyCode,
+	t1.RATE_LIMIT_PERCENT as rateLimitPercent,
+	t1.IMPLIED_DECIMALS as impliedDecimals,
+	t1.RATE_LIMIT_AMOUNT as rateLimitAmount,
+	t1.CHG_WHO as chgWho,
+	t1.CHG_DT as chgDt,
+	t1.CREATE_DT as createDt
+from
+	UNIT_CR_RATE_LIMIT t1
+	inner join AUT_FINAL_KEY t2 on t1.AUT_ID = t2.AUT_ID
+	inner join AUT_FINAL_REF t3 on t2.AUT_ID = t3.AUT_ID
+		and t3.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+	inner join AUT_FINAL_VALUES t4 on t2.AUT_ID = t4.AUT_ID
+		and t4.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+		and t4.LANGUAGE_CODE = {2}
+	left outer join JURISDICTIONS_KEY t5 on t1.JURISDICTION = t5.JURISDICTION
+	left outer join JURISDICTIONS_REF t6 on t5.JURISDICTION = t6.JURISDICTION
+		and t6.SERVICE_VERSION_ID = {1}
+	left outer join JURISDICTIONS_VALUES t7 on t5.JURISDICTION = t7.JURISDICTION
+		and t7.SERVICE_VERSION_ID = {1}
+		and t7.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join RATE_CLASS_KEY t8 on t1.RATE_CLASS = t8.RATE_CLASS
+	left outer join RATE_CLASS_REF t9 on t8.RATE_CLASS = t9.RATE_CLASS
+		and t9.SERVICE_VERSION_ID = {1}
+	left outer join RATE_CLASS_VALUES t10 on t8.RATE_CLASS = t10.RATE_CLASS
+		and t10.SERVICE_VERSION_ID = {1}
+		and t10.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join BILL_CLASS_KEY t11 on t1.BILL_CLASS = t11.BILL_CLASS
+	left outer join BILL_CLASS_REF t12 on t11.BILL_CLASS = t12.BILL_CLASS
+		and t12.SERVICE_VERSION_ID = {1}
+	left outer join BILL_CLASS_VALUES t13 on t11.BILL_CLASS = t13.BILL_CLASS
+		and t13.SERVICE_VERSION_ID = {1}
+		and t13.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join POINT_CLASS_KEY t14 on t1.POINT_CLASS_ORIGIN = t14.POINT_CLASS
+	left outer join POINT_CLASS_REF t15 on t14.POINT_CLASS = t15.POINT_CLASS
+		and t15.SERVICE_VERSION_ID = {1}
+	left outer join POINT_CLASS_VALUES t16 on t14.POINT_CLASS = t16.POINT_CLASS
+		and t16.SERVICE_VERSION_ID = {1}
+		and t16.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join POINT_CLASS_KEY t17 on t1.POINT_CLASS_TARGET = t17.POINT_CLASS
+	left outer join POINT_CLASS_REF t18 on t17.POINT_CLASS = t18.POINT_CLASS
+		and t18.SERVICE_VERSION_ID = {1}
+	left outer join POINT_CLASS_VALUES t19 on t17.POINT_CLASS = t19.POINT_CLASS
+		and t19.SERVICE_VERSION_ID = {1}
+		and t19.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join EQUIP_CLASS_CODE_REF t20 on t1.EQUIP_CLASS_CODE = t20.EQUIP_CLASS_CODE
+	left outer join EQUIP_CLASS_CODE_VALUES t21 on t20.EQUIP_CLASS_CODE = t21.EQUIP_CLASS_CODE
+		and t21.LANGUAGE_CODE = t4.LANGUAGE_CODE
+where
+	t1.RESELLER_VERSION_ID = {0}

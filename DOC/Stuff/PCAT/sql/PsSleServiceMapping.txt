@@ -1,0 +1,41 @@
+select
+	t1.PS_SLE_SERVICE_MAPPING_ID as psSleServiceMappingId,
+	t1.SERVICE_VERSION_ID as serviceVersionId,
+	t4.DISPLAY_VALUE as applicationIdKey,
+	t1.APPLICATION_ID as applicationId,
+	t7.DISPLAY_VALUE as subTypeIdKey,
+	t1.SUB_TYPE_ID as subTypeId,
+	t8.PARAM_VALUE as serviceContextId,
+	t9.PARAM_VALUE as apn,
+	t10.PARAM_VALUE as qos,
+	t11.PARAM_VALUE as radioType,
+	t12.PARAM_VALUE as ratingGroup,
+	t13.PARAM_VALUE as serviceIdentifier	
+from
+	PS_SLE_SERVICE_MAPPING t1
+	inner join APPLICATION_ID_KEY t2 on t1.APPLICATION_ID = t2.APPLICATION_ID
+	inner join APPLICATION_ID_REF t3 on t2.APPLICATION_ID = t3.APPLICATION_ID
+		and t3.SERVICE_VERSION_ID = t1.SERVICE_VERSION_ID
+	inner join APPLICATION_ID_VALUES t4 on t2.APPLICATION_ID = t4.APPLICATION_ID
+		and t4.SERVICE_VERSION_ID = t1.SERVICE_VERSION_ID
+		and t4.LANGUAGE_CODE = {2}
+	inner join SUB_TYPE_ID_KEY t5 on t1.SUB_TYPE_ID = t5.SUB_TYPE_ID
+	inner join SUB_TYPE_ID_REF t6 on t5.SUB_TYPE_ID = t6.SUB_TYPE_ID
+		and t6.SERVICE_VERSION_ID = t1.SERVICE_VERSION_ID
+	inner join SUB_TYPE_ID_VALUES t7 on t5.SUB_TYPE_ID = t7.SUB_TYPE_ID
+		and t7.SERVICE_VERSION_ID = t1.SERVICE_VERSION_ID
+		and t7.LANGUAGE_CODE = t4.LANGUAGE_CODE
+        left outer join PS_SLE_PARAMETER t8 on t1.SERVICE_CONTEXT_ID = t8.param_id
+                and t8.SERVICE_VERSION_ID = t1.SERVICE_VERSION_ID
+        left outer join PS_SLE_PARAMETER t9 on t1.APN = t9.param_id
+                and t9.SERVICE_VERSION_ID = t1.SERVICE_VERSION_ID
+        left outer join PS_SLE_PARAMETER t10 on t1.QOS = t10.param_id
+                and t10.SERVICE_VERSION_ID = t1.SERVICE_VERSION_ID
+        left outer join PS_SLE_PARAMETER t11 on t1.RADIO_TYPE = t11.param_id
+                and t11.SERVICE_VERSION_ID = t1.SERVICE_VERSION_ID
+        left outer join PS_SLE_PARAMETER t12 on t1.RATING_GROUP = t12.param_id
+                and t12.SERVICE_VERSION_ID = t1.SERVICE_VERSION_ID
+        left outer join PS_SLE_PARAMETER t13 on t1.SERVICE_IDENTIFIER = t13.param_id
+                and t13.SERVICE_VERSION_ID = t1.SERVICE_VERSION_ID
+where
+	t1.SERVICE_VERSION_ID = {1}

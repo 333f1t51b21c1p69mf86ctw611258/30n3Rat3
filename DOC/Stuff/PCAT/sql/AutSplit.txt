@@ -1,0 +1,37 @@
+select
+	t1.AUT_SPLIT_ID as autSplitId,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t4.DISPLAY_VALUE as autFinalKey,
+	t1.AUT_ID_IN as autIdIn,
+	t1.EQUIP_TYPE_CODE as equipTypeCode,
+	t1.EQUIP_CLASS_CODE as equipClassCode,
+	t1.CLASS_OF_SERVICE_CODE as classOfServiceCode,
+	t1.RATE_CLASS as rateClass,
+	t7.DISPLAY_VALUE as autFinalKeyByAutIdOut,
+	t1.AUT_ID_OUT as autIdOut,
+	t1.SPLIT_TYPE as splitType,
+	t1.IS_PRIMARY as isPrimary,
+	t10.DISPLAY_VALUE as usagePlanKey,
+	t1.USAGE_PLAN_ID as usagePlanId
+from
+	AUT_SPLIT t1
+	inner join AUT_FINAL_KEY t2 on t1.AUT_ID_IN = t2.AUT_ID
+	inner join AUT_FINAL_REF t3 on t2.AUT_ID = t3.AUT_ID
+		and t3.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+	inner join AUT_FINAL_VALUES t4 on t2.AUT_ID = t4.AUT_ID
+		and t4.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+		and t4.LANGUAGE_CODE = {2}
+	inner join AUT_FINAL_KEY t5 on t1.AUT_ID_OUT = t5.AUT_ID
+	inner join AUT_FINAL_REF t6 on t5.AUT_ID = t6.AUT_ID
+		and t6.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+	inner join AUT_FINAL_VALUES t7 on t5.AUT_ID = t7.AUT_ID
+		and t7.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+		and t7.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	inner join USAGE_PLAN_KEY t8 on t1.USAGE_PLAN_ID = t8.USAGE_PLAN_ID
+	inner join USAGE_PLAN_REF t9 on t8.USAGE_PLAN_ID = t9.USAGE_PLAN_ID
+		and t9.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+	inner join USAGE_PLAN_VALUES t10 on t8.USAGE_PLAN_ID = t10.USAGE_PLAN_ID
+		and t10.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+		and t10.LANGUAGE_CODE = t4.LANGUAGE_CODE
+where
+	t1.RESELLER_VERSION_ID = {0}

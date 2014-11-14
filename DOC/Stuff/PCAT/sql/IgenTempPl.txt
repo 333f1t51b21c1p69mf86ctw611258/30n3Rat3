@@ -1,0 +1,8 @@
+select
+	t1.PRODUCT_LINE_ID as productLineId,
+	t1.PRODUCT_LINE_DESCRIPTION as productLineDescription,
+	t1.LANGUAGE_CODE as languageCode,
+	t1.PRODUCT_GROUP_ID as productGroupId,
+	t1.PRODUCT_GROUP_DESCRIPTION as productGroupDescription
+from
+	IGEN_TEMP_PL t1

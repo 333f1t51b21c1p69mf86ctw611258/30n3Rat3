@@ -1,0 +1,11 @@
+select
+	t1.SERVICE_ORDER_TYPE_ID as serviceOrderTypeId,
+	t1.IS_DEFAULT as isDefault,
+	t1.IS_INTERNAL as isInternal,
+	t2.LANGUAGE_CODE as languageCode,
+	t2.DISPLAY_VALUE as displayValue
+from
+	ORD_SERVICE_ORDER_TYPE_REF t1
+	inner join ORD_SERVICE_ORDER_TYPE_VALUES t2 on t1.SERVICE_ORDER_TYPE_ID = t2.SERVICE_ORDER_TYPE_ID
+where
+	t2.LANGUAGE_CODE = {2}

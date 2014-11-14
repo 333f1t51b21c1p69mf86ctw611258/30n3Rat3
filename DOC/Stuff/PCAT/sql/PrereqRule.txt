@@ -1,0 +1,22 @@
+select
+	t1.PREREQ_RULE_ID as prereqRuleId,
+	t2.RESELLER_VERSION_ID as resellerVersionId,
+	t5.DISPLAY_VALUE as levelCode,
+	t2.IS_DEFAULT as isDefault,
+	t2.IS_INTERNAL as isInternal,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	PREREQ_RULE_KEY t1
+	inner join PREREQ_RULE_REF t2 on t1.PREREQ_RULE_ID = t2.PREREQ_RULE_ID
+	inner join PREREQ_RULE_VALUES t3 on t2.PREREQ_RULE_ID = t3.PREREQ_RULE_ID
+		and t2.RESELLER_VERSION_ID = t3.RESELLER_VERSION_ID
+	left outer join GENERIC_ENUMERATION_REF t4 on t4.enumeration_key = lower(''LEVEL_CODE'')
+		and t4.value = t2.LEVEL_CODE
+	left outer join GENERIC_ENUMERATION_VALUES t5 on t5.enumeration_key = t4.enumeration_key
+		and t5.value = t4.value
+		and t5.LANGUAGE_CODE = t3.LANGUAGE_CODE
+where
+	t2.RESELLER_VERSION_ID = {0}
+	and t3.LANGUAGE_CODE = {2}

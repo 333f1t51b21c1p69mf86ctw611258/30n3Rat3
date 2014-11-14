@@ -1,0 +1,5 @@
+select
+	t1.ORIGINAL_NUMBER as originalNumber,
+	t1.PORTED_NUMBER as portedNumber
+from
+	PORTED_NUMBER t1

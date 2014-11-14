@@ -1,0 +1,29 @@
+select
+	t1.WORK_ID as workId,
+	t1.ACTIVITY_ID as activityId,
+	t1.TARGET_DB_ID as targetDbId,
+	t1.REPID as repid,
+	t1.START_DT as startDt,
+	t1.END_DT as endDt,
+	t1.IS_BLOCKING as isBlocking,
+	t1.PROPAGATION_SEQ as propagationSeq,
+	t4.DISPLAY_VALUE as dpStatusRef,
+	t1.STATUS_ID as statusId,
+	t1.EXIT_CODE as exitCode,
+	t1.ERROR_MESSAGE as errorMessage,
+	t1.ACTIVITY_DESC as activityDesc,
+        t6.DS_DATABASE as targetDB,
+        t8.DISPLAY_VALUE as targetDBType,
+        t6.HOSTNAME as hostName        
+from
+	DP_WORK_HISTORY t1
+	left outer join DP_TARGET_DB t6 on t6.TARGET_DB_ID = t1.TARGET_DB_ID
+	left outer join GENERIC_ENUMERATION_REF t7 on t7.enumeration_key = lower(''TARGET_DB_TYPE'')
+		and t7.value = t6.TARGET_DB_TYPE
+	left outer join GENERIC_ENUMERATION_VALUES t8 on t8.enumeration_key = t7.enumeration_key
+		and t8.value = t7.value
+		and t8.LANGUAGE_CODE = {2}
+	inner join DP_WORK t2 on t1.WORK_ID = t2.WORK_ID
+	inner join DP_STATUS_REF t3 on t1.STATUS_ID = t3.STATUS_ID
+	inner join DP_STATUS_VALUES t4 on t3.STATUS_ID = t4.STATUS_ID
+		and t4.LANGUAGE_CODE = {2}

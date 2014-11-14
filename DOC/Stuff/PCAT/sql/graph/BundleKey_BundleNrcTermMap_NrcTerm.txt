@@ -1,0 +1,25 @@
+select
+	t1.NRC_TERM_ID as nrcTermId,
+	t1.BUNDLE_ID as bundleId,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t7.DISPLAY_VALUE as name,
+	t1.OFFER_OVERRIDE as isOverride,
+	t9.DISPLAY_VALUE as assocType,
+    ''{3}'' as termType
+from
+	BUNDLE_NRC_TERM_MAP t1
+	inner join BUNDLE_VALUES t4 on t1.BUNDLE_ID = t4.BUNDLE_ID
+		and t4.LANGUAGE_CODE = {2}
+		and t4.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+	inner join NRC_TERM_VALUES t7 on t1.NRC_TERM_ID = t7.NRC_TERM_ID
+		and t7.LANGUAGE_CODE = t4.LANGUAGE_CODE
+		and t7.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+	left outer join GUI_INDICATOR_REF t8 on t8.table_name = ''BUNDLE_NRC_TERM_MAP''
+		and t8.field_name = lower(''ASSOCIATION_TYPE'')
+		and t8.integer_value = t1.ASSOCIATION_TYPE
+	left outer join GUI_INDICATOR_VALUES t9 on t9.table_name = t8.table_name
+		and t9.field_name = t8.field_name
+		and t9.integer_value = t8.integer_value
+		and t9.LANGUAGE_CODE = t4.LANGUAGE_CODE
+where
+	t1.RESELLER_VERSION_ID = {0}

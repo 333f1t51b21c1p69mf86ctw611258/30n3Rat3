@@ -1,0 +1,22 @@
+select
+	t1.FRANCHISE_CODE as franchiseCode,
+	t2.RESELLER_VERSION_ID as resellerVersionId,
+	t2.IS_DEFAULT as isDefault,
+	t2.IS_INTERNAL as isInternal,
+	t5.DISPLAY_VALUE as taxException,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	FRANCHISE_CODE_KEY t1
+	inner join FRANCHISE_CODE_REF t2 on t1.FRANCHISE_CODE = t2.FRANCHISE_CODE
+	inner join FRANCHISE_CODE_VALUES t3 on t2.FRANCHISE_CODE = t3.FRANCHISE_CODE
+		and t2.RESELLER_VERSION_ID = t3.RESELLER_VERSION_ID
+	left outer join GENERIC_ENUMERATION_REF t4 on t4.enumeration_key = lower(''TAX_EXCEPTION'')
+		and t4.value = t2.TAX_EXCEPTION
+	left outer join GENERIC_ENUMERATION_VALUES t5 on t5.enumeration_key = t4.enumeration_key
+		and t5.value = t4.value
+		and t5.LANGUAGE_CODE = t3.LANGUAGE_CODE
+where
+	t2.RESELLER_VERSION_ID = {0}
+	and t3.LANGUAGE_CODE = {2}

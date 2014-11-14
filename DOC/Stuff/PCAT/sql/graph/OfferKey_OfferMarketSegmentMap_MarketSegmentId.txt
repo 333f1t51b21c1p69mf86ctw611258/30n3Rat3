@@ -1,0 +1,13 @@
+select
+	t3.DISPLAY_VALUE as name,
+	t3.DESCRIPTION as description,
+	t1.MARKET_SEG_ID as marketSegId,
+	t1.OFFER_ID as offerId,
+	t1.RESELLER_VERSION_ID as resellerVersionId
+from
+	OFFER_MARKET_SEGMENT_MAP t1
+	inner join MARKET_SEGMENT_ID_VALUES t3 on t1.MARKET_SEG_ID = t3.MARKET_SEG_ID
+		and t3.LANGUAGE_CODE = {2}
+		and t3.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+where
+	t1.RESELLER_VERSION_ID = {0}

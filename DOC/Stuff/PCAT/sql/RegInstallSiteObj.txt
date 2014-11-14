@@ -1,0 +1,13 @@
+select
+	t1.ISO_ID as isoId,
+	t1.INSTALL_ID as installId,
+	t1.SITE_ID as siteId,
+	t1.OBJECT_ID as objectId,
+	t1.ISO_START as isoStart,
+	t1.ISO_STATUS as isoStatus,
+	t1.ISO_END as isoEnd
+from
+	REG_INSTALL_SITE_OBJ t1
+	inner join REG_INSTALL t2 on t1.INSTALL_ID = t2.INSTALL_ID
+	inner join REG_SITE t3 on t1.SITE_ID = t3.SITE_ID
+	inner join REG_OBJECT t4 on t1.OBJECT_ID = t4.OBJECT_ID

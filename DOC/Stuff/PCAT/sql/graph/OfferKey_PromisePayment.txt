@@ -1,0 +1,16 @@
+select
+	t4.PP_ID as ppId,
+	t2.RESELLER_VERSION_ID as resellerVersionId,
+	t3.DISPLAY_VALUE as name,
+	t3.DESCRIPTION as description,
+	t1.OFFER_ID as offerId,
+        ''{3}'' as ruleType
+from
+	PROMISE_PAYMENT_KEY t4
+	inner join PROMISE_PAYMENT_REF t2 on t4.PP_ID = t2.PP_ID
+	inner join PROMISE_PAYMENT_VALUES t3 on t2.PP_ID = t3.PP_ID
+		and t2.RESELLER_VERSION_ID = t3.RESELLER_VERSION_ID
+	inner join OFFER_REF t1 on t1.PP_ID = t4.PP_ID
+where
+	t2.RESELLER_VERSION_ID = {0}
+	and t3.LANGUAGE_CODE = {2}

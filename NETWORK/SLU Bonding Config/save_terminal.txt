@@ -1,0 +1,370 @@
+[root@localhost ~]# ifconfig -a
+bond0     Link encap:Ethernet  HWaddr 40:F2:E9:3A:41:4C  
+          inet6 addr: fe80::42f2:e9ff:fe3a:414c/64 Scope:Link
+          UP BROADCAST RUNNING MASTER MULTICAST  MTU:1500  Metric:1
+          RX packets:16924 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:2510 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:1754896 (1.6 MiB)  TX bytes:738734 (721.4 KiB)
+
+bond0.101 Link encap:Ethernet  HWaddr 40:F2:E9:3A:41:4C  
+          inet addr:10.149.3.116  Bcast:10.149.3.127  Mask:255.255.255.128
+          inet6 addr: fe80::42f2:e9ff:fe3a:414c/64 Scope:Link
+          UP BROADCAST RUNNING MASTER MULTICAST  MTU:1500  Metric:1
+          RX packets:4834 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:44 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:435149 (424.9 KiB)  TX bytes:6482 (6.3 KiB)
+
+bond0.102 Link encap:Ethernet  HWaddr 40:F2:E9:3A:41:4C  
+          inet addr:172.17.201.37  Bcast:172.17.201.255  Mask:255.255.255.0
+          inet6 addr: fe80::42f2:e9ff:fe3a:414c/64 Scope:Link
+          UP BROADCAST RUNNING MASTER MULTICAST  MTU:1500  Metric:1
+          RX packets:5117 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:44 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:474826 (463.6 KiB)  TX bytes:6488 (6.3 KiB)
+
+bond0.103 Link encap:Ethernet  HWaddr 40:F2:E9:3A:41:4C  
+          inet addr:172.17.202.39  Bcast:172.17.202.255  Mask:255.255.255.0
+          inet6 addr: fe80::42f2:e9ff:fe3a:414c/64 Scope:Link
+          UP BROADCAST RUNNING MASTER MULTICAST  MTU:1500  Metric:1
+          RX packets:3900 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:44 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:263876 (257.6 KiB)  TX bytes:6488 (6.3 KiB)
+
+eth0      Link encap:Ethernet  HWaddr 40:F2:E9:3A:41:4C  
+          UP BROADCAST RUNNING SLAVE MULTICAST  MTU:1500  Metric:1
+          RX packets:16924 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:2510 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:1754896 (1.6 MiB)  TX bytes:738734 (721.4 KiB)
+          Interrupt:193 Memory:fa000000-fa012800 
+
+eth1      Link encap:Ethernet  HWaddr 40:F2:E9:3A:41:4C  
+          UP BROADCAST SLAVE MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 b)  TX bytes:0 (0.0 b)
+          Interrupt:130 Memory:92000000-92012800 
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:16436  Metric:1
+          RX packets:1871 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:1871 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:5745200 (5.4 MiB)  TX bytes:5745200 (5.4 MiB)
+
+sit0      Link encap:IPv6-in-IPv4  
+          NOARP  MTU:1480  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:0 (0.0 b)  TX bytes:0 (0.0 b)
+
+usb0      Link encap:Ethernet  HWaddr 42:F2:E9:3A:DE:E3  
+          BROADCAST MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 b)  TX bytes:0 (0.0 b)
+
+[root@localhost ~]# ping 10.149.3.13
+PING 10.149.3.13 (10.149.3.13) 56(84) bytes of data.
+64 bytes from 10.149.3.13: icmp_seq=1 ttl=128 time=1.61 ms
+64 bytes from 10.149.3.13: icmp_seq=2 ttl=128 time=0.070 ms
+64 bytes from 10.149.3.13: icmp_seq=3 ttl=128 time=0.073 ms
+64 bytes from 10.149.3.13: icmp_seq=4 ttl=128 time=0.078 ms
+64 bytes from 10.149.3.13: icmp_seq=5 ttl=128 time=0.070 ms
+
+--- 10.149.3.13 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4000ms
+rtt min/avg/max/mdev = 0.070/0.380/1.610/0.615 ms
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# network service restart
+bash: network: command not found
+[root@localhost ~]# service network restart
+Shutting down interface bond0.101:  Removed VLAN -:bond0.101:-
+                                                           [  OK  ]
+Shutting down interface bond0.102:  Removed VLAN -:bond0.102:-
+                                                           [  OK  ]
+Shutting down interface bond0.103:  Removed VLAN -:bond0.103:-
+                                                           [  OK  ]
+Shutting down interface bond0:                             [  OK  ]
+Shutting down loopback interface:                          [  OK  ]
+Bringing up loopback interface:                            [  OK  ]
+Bringing up interface bond0:                               [  OK  ]
+Bringing up interface bond0.101:  Added VLAN with VID == 101 to IF -:bond0:-
+                                                           [  OK  ]
+Bringing up interface bond0.102:  Added VLAN with VID == 102 to IF -:bond0:-
+                                                           [  OK  ]
+Bringing up interface bond0.103:  Added VLAN with VID == 103 to IF -:bond0:-
+                                                           [  OK  ]
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# 
+[root@localhost ~]# cd /etc/sysconfig/network-scripts/
+ifcfg-bond0             ifdown-ipv6             ifup-isdn
+ifcfg-bond0.101         ifdown-isdn             ifup-plip
+ifcfg-bond0.102         ifdown-post             ifup-plusb
+ifcfg-bond0.103         ifdown-ppp              ifup-post
+ifcfg-bond0.orig        ifdown-routes           ifup-ppp
+ifcfg-eth0              ifdown-sit              ifup-routes
+ifcfg-eth0.orig         ifdown-sl               ifup-sit
+ifcfg-eth1              ifdown-tunnel           ifup-sl
+ifcfg-eth1.orig         ifup                    ifup-tunnel
+ifcfg-lo                ifup-aliases            ifup-wireless
+ifcfg-usb0              ifup-bnep               init.ipv6-global
+ifdown                  ifup-eth                net.hotplug
+ifdown-bnep             ifup-ippp               network-functions
+ifdown-eth              ifup-ipsec              network-functions-ipv6
+ifdown-ippp             ifup-ipv6               orig_ifcfg/
+ifdown-ipsec            ifup-ipx                
+[root@localhost ~]# cd /etc/sysconfig/network-scripts/
+You have new mail in /var/spool/mail/root
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# vi ifcfg-
+ifcfg-bond0       ifcfg-bond0.103   ifcfg-eth0.orig   ifcfg-lo
+ifcfg-bond0.101   ifcfg-bond0.orig  ifcfg-eth1        ifcfg-usb0
+ifcfg-bond0.102   ifcfg-eth0        ifcfg-eth1.orig   
+[root@localhost network-scripts]# vi ifcfg-
+ifcfg-bond0       ifcfg-bond0.103   ifcfg-eth0.orig   ifcfg-lo
+ifcfg-bond0.101   ifcfg-bond0.orig  ifcfg-eth1        ifcfg-usb0
+ifcfg-bond0.102   ifcfg-eth0        ifcfg-eth1.orig   
+[root@localhost network-scripts]# vi ifcfg-eth0
+ifcfg-eth0       ifcfg-eth0.orig  
+[root@localhost network-scripts]# vi ifcfg-eth0
+ifcfg-eth0       ifcfg-eth0.orig  
+[root@localhost network-scripts]# vi ifcfg-eth0
+ifcfg-eth0       ifcfg-eth0.orig  
+[root@localhost network-scripts]# vi ifcfg-eth0.orig 
+ifcfg-bond0             ifdown-ipv6             ifup-isdn
+ifcfg-bond0.101         ifdown-isdn             ifup-plip
+ifcfg-bond0.102         ifdown-post             ifup-plusb
+ifcfg-bond0.103         ifdown-ppp              ifup-post
+ifcfg-bond0.orig        ifdown-routes           ifup-ppp
+ifcfg-eth0              ifdown-sit              ifup-routes
+ifcfg-eth0.orig         ifdown-sl               ifup-sit
+ifcfg-eth1              ifdown-tunnel           ifup-sl
+ifcfg-eth1.orig         ifup                    ifup-tunnel
+ifcfg-lo                ifup-aliases            ifup-wireless
+ifcfg-usb0              ifup-bnep               init.ipv6-global
+ifdown                  ifup-eth                net.hotplug
+ifdown-bnep             ifup-ippp               network-functions
+ifdown-eth              ifup-ipsec              network-functions-ipv6
+ifdown-ippp             ifup-ipv6               orig_ifcfg/
+ifdown-ipsec            ifup-ipx                
+[root@localhost network-scripts]# vi ifcfg-eth0.orig 
+ifcfg-bond0             ifdown-ipv6             ifup-isdn
+ifcfg-bond0.101         ifdown-isdn             ifup-plip
+ifcfg-bond0.102         ifdown-post             ifup-plusb
+ifcfg-bond0.103         ifdown-ppp              ifup-post
+ifcfg-bond0.orig        ifdown-routes           ifup-ppp
+ifcfg-eth0              ifdown-sit              ifup-routes
+ifcfg-eth0.orig         ifdown-sl               ifup-sit
+ifcfg-eth1              ifdown-tunnel           ifup-sl
+ifcfg-eth1.orig         ifup                    ifup-tunnel
+ifcfg-lo                ifup-aliases            ifup-wireless
+ifcfg-usb0              ifup-bnep               init.ipv6-global
+ifdown                  ifup-eth                net.hotplug
+ifdown-bnep             ifup-ippp               network-functions
+ifdown-eth              ifup-ipsec              network-functions-ipv6
+ifdown-ippp             ifup-ipv6               orig_ifcfg/
+ifdown-ipsec            ifup-ipx                
+[root@localhost network-scripts]# vi ifcfg-eth0
+[root@localhost network-scripts]# vi ifcfg-bond0
+[root@localhost network-scripts]# vi ifcfg-
+ifcfg-bond0       ifcfg-bond0.103   ifcfg-eth0.orig   ifcfg-lo
+ifcfg-bond0.101   ifcfg-bond0.orig  ifcfg-eth1        ifcfg-usb0
+ifcfg-bond0.102   ifcfg-eth0        ifcfg-eth1.orig   
+[root@localhost network-scripts]# vi ifcfg-
+ifcfg-bond0       ifcfg-bond0.103   ifcfg-eth0.orig   ifcfg-lo
+ifcfg-bond0.101   ifcfg-bond0.orig  ifcfg-eth1        ifcfg-usb0
+ifcfg-bond0.102   ifcfg-eth0        ifcfg-eth1.orig   
+[root@localhost network-scripts]# vi ifcfg-eth1
+[root@localhost network-scripts]# clear
+
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# ifconfig -a
+bond0     Link encap:Ethernet  HWaddr 40:F2:E9:3A:41:4C  
+          inet6 addr: fe80::42f2:e9ff:fe3a:414c/64 Scope:Link
+          UP BROADCAST RUNNING MASTER MULTICAST  MTU:1500  Metric:1
+          RX packets:882711 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:60467 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:92430350 (88.1 MiB)  TX bytes:7825494 (7.4 MiB)
+
+bond0.101 Link encap:Ethernet  HWaddr 40:F2:E9:3A:41:4C  
+          inet addr:10.149.3.116  Bcast:10.149.3.127  Mask:255.255.255.128
+          inet6 addr: fe80::42f2:e9ff:fe3a:414c/64 Scope:Link
+          UP BROADCAST RUNNING MASTER MULTICAST  MTU:1500  Metric:1
+          RX packets:271648 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:36 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:24487182 (23.3 MiB)  TX bytes:6270 (6.1 KiB)
+
+bond0.102 Link encap:Ethernet  HWaddr 40:F2:E9:3A:41:4C  
+          inet addr:172.17.201.37  Bcast:172.17.201.255  Mask:255.255.255.0
+          inet6 addr: fe80::42f2:e9ff:fe3a:414c/64 Scope:Link
+          UP BROADCAST RUNNING MASTER MULTICAST  MTU:1500  Metric:1
+          RX packets:291808 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:29 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:27126459 (25.8 MiB)  TX bytes:5938 (5.7 KiB)
+
+bond0.103 Link encap:Ethernet  HWaddr 40:F2:E9:3A:41:4C  
+          inet addr:172.17.202.39  Bcast:172.17.202.255  Mask:255.255.255.0
+          inet6 addr: fe80::42f2:e9ff:fe3a:414c/64 Scope:Link
+          UP BROADCAST RUNNING MASTER MULTICAST  MTU:1500  Metric:1
+          RX packets:223723 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:31 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:15149448 (14.4 MiB)  TX bytes:5925 (5.7 KiB)
+
+eth0      Link encap:Ethernet  HWaddr 40:F2:E9:3A:41:4C  
+          UP BROADCAST RUNNING SLAVE MULTICAST  MTU:1500  Metric:1
+          RX packets:882711 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:60467 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:92430350 (88.1 MiB)  TX bytes:7825494 (7.4 MiB)
+          Interrupt:193 Memory:fa000000-fa012800 
+
+eth1      Link encap:Ethernet  HWaddr 40:F2:E9:3A:41:4C  
+          UP BROADCAST SLAVE MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 b)  TX bytes:0 (0.0 b)
+          Interrupt:130 Memory:92000000-92012800 
+
+lo        Link encap:Local Loopback  
+          inet addr:127.0.0.1  Mask:255.0.0.0
+          inet6 addr: ::1/128 Scope:Host
+          UP LOOPBACK RUNNING  MTU:16436  Metric:1
+          RX packets:4821 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:4821 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:6006758 (5.7 MiB)  TX bytes:6006758 (5.7 MiB)
+
+sit0      Link encap:IPv6-in-IPv4  
+          NOARP  MTU:1480  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:0 
+          RX bytes:0 (0.0 b)  TX bytes:0 (0.0 b)
+
+usb0      Link encap:Ethernet  HWaddr 42:F2:E9:3A:DE:E3  
+          BROADCAST MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:0 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000 
+          RX bytes:0 (0.0 b)  TX bytes:0 (0.0 b)
+
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# route -rn
+route: invalid option -- r
+Usage: route [-nNvee] [-FC] [<AF>]           List kernel routing tables
+       route [-v] [-FC] {add|del|flush} ...  Modify routing table for AF.
+
+       route {-h|--help} [<AF>]              Detailed usage syntax for specified AF.
+       route {-V|--version}                  Display version/author and exit.
+
+        -v, --verbose            be verbose
+        -n, --numeric            don't resolve names
+        -e, --extend             display other/more information
+        -F, --fib                display Forwarding Information Base (default)
+        -C, --cache              display routing cache instead of FIB
+
+  <AF>=Use '-A <af>' or '--<af>'; default: inet
+  List of possible address families (which support routing):
+    inet (DARPA Internet) inet6 (IPv6) ax25 (AMPR AX.25) 
+    netrom (AMPR NET/ROM) ipx (Novell IPX) ddp (Appletalk DDP) 
+    x25 (CCITT X.25) 
+[root@localhost network-scripts]# route -n
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+10.149.3.0      0.0.0.0         255.255.255.128 U     0      0        0 bond0.101
+172.17.201.0    0.0.0.0         255.255.255.0   U     0      0        0 bond0.102
+172.17.202.0    0.0.0.0         255.255.255.0   U     0      0        0 bond0.103
+169.254.0.0     0.0.0.0         255.255.0.0     U     0      0        0 bond0.103
+[root@localhost network-scripts]# vi /etc/sysconfig/network
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# service network restart
+Shutting down interface bond0.101:  Removed VLAN -:bond0.101:-
+                                                           [  OK  ]
+Shutting down interface bond0.102:  Removed VLAN -:bond0.102:-
+                                                           [  OK  ]
+Shutting down interface bond0.103:  Removed VLAN -:bond0.103:-
+                                                           [  OK  ]
+Shutting down interface bond0:                             [  OK  ]
+Shutting down loopback interface:                          [  OK  ]
+Bringing up loopback interface:                            [  OK  ]
+Bringing up interface bond0:                               [  OK  ]
+Bringing up interface bond0.101:  Added VLAN with VID == 101 to IF -:bond0:-
+                                                           [  OK  ]
+Bringing up interface bond0.102:  Added VLAN with VID == 102 to IF -:bond0:-
+                                                           [  OK  ]
+Bringing up interface bond0.103:  Added VLAN with VID == 103 to IF -:bond0:-
+                                                           [  OK  ]
+[root@localhost network-scripts]# ping 10.149.91.215
+PING 10.149.91.215 (10.149.91.215) 56(84) bytes of data.
+
+--- 10.149.91.215 ping statistics ---
+3 packets transmitted, 0 received, 100% packet loss, time 1999ms
+
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+10.149.3.0      *               255.255.255.128 U     0      0        0 bond0.101
+172.17.201.0    *               255.255.255.0   U     0      0        0 bond0.102
+172.17.202.0    *               255.255.255.0   U     0      0        0 bond0.103
+169.254.0.0     *               255.255.0.0     U     0      0        0 bond0.103
+default         10.149.3.1      0.0.0.0         UG    0      0        0 bond0.101
+[root@localhost network-scripts]# ping 10.149.3.217
+PING 10.149.3.217 (10.149.3.217) 56(84) bytes of data.
+
+--- 10.149.3.217 ping statistics ---
+2 packets transmitted, 0 received, 100% packet loss, time 999ms
+
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# ping 10.149.91.217
+PING 10.149.91.217 (10.149.91.217) 56(84) bytes of data.
+64 bytes from 10.149.91.217: icmp_seq=1 ttl=125 time=0.546 ms
+64 bytes from 10.149.91.217: icmp_seq=2 ttl=125 time=0.527 ms
+
+--- 10.149.91.217 ping statistics ---
+2 packets transmitted, 2 received, 0% packet loss, time 1000ms
+rtt min/avg/max/mdev = 0.527/0.536/0.546/0.025 ms
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# 
+[root@localhost network-scripts]# 
+

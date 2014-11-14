@@ -1,0 +1,21 @@
+select
+	t1.DECIMAL_CODE as decimalCode,
+	t1.INNER_DECIMAL_COUNT as innerDecimalCount,
+	t1.DECIMAL_COUNT as decimalCount,
+	t1.DECIMAL_STRING as decimalString,
+	t1.SEPARATOR_COUNT as separatorCount,
+	t1.SEPARATOR_STRING as separatorString,
+	t4.DISPLAY_VALUE as roundingUp,
+	t1.PAD_ZERO as padZero,
+	t2.LANGUAGE_CODE as languageCode,
+	t2.DISPLAY_VALUE as displayValue
+from
+	DECIMAL_FORMAT_REF t1
+	inner join DECIMAL_FORMAT_VALUES t2 on t1.DECIMAL_CODE = t2.DECIMAL_CODE
+	left outer join GENERIC_ENUMERATION_REF t3 on t3.enumeration_key = lower(''ROUNDING_UP'')
+		and t3.value = t1.ROUNDING_UP
+	left outer join GENERIC_ENUMERATION_VALUES t4 on t4.enumeration_key = t3.enumeration_key
+		and t4.value = t3.value
+		and t4.LANGUAGE_CODE = t2.LANGUAGE_CODE
+where
+	t2.LANGUAGE_CODE = {2}

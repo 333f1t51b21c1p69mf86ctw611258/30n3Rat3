@@ -1,0 +1,14 @@
+select
+	t1.CSR_NAME as csrName,
+	t3.SERVICE_VERSION_ID as serviceVersionId,
+	t4.DISPLAY_VALUE as resellerKey,
+	t1.RESELLER_ID as resellerId,
+	t1.IS_CSR_DEFAULT as isCsrDefault
+from
+	CSR_RESELLER_MAP t1
+	inner join RESELLER_KEY t2 on t1.RESELLER_ID = t2.RESELLER_ID
+	inner join RESELLER_REF t3 on t2.RESELLER_ID = t3.RESELLER_ID
+		and t3.SERVICE_VERSION_ID = {1}
+	inner join RESELLER_VALUES t4 on t2.RESELLER_ID = t4.RESELLER_ID
+		and t4.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+		and t4.LANGUAGE_CODE = {2}

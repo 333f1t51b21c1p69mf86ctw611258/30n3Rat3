@@ -1,0 +1,20 @@
+select
+	t1.OFFER_ID as offerId,
+        t3.DISPLAY_VALUE as displayValue,
+        t2.SALES_EFFECTIVE_DT as salesEffectiveDt,
+        t2.IS_SELLABLE as isSellable,
+        t2.IS_GENERALLY_AVAILABLE as isGenerallyAvailable,
+        t2.IS_GLOBAL as isGlobal,
+        t46.DISPLAY_VALUE as serviceCategoryKey
+from
+	OFFER_KEY t1
+	inner join OFFER_REF t2 on t1.OFFER_ID = t2.OFFER_ID
+	inner join OFFER_VALUES t3 on t2.OFFER_ID = t3.OFFER_ID
+                and t3.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+        inner join SERVICE_CATEGORY_KEY t45 on t2.SERVICE_CATEGORY_ID = t45.SERVICE_CATEGORY_ID
+	inner join SERVICE_CATEGORY_VALUES t46 on t2.SERVICE_CATEGORY_ID = t46.SERVICE_CATEGORY_ID
+		and t46.LANGUAGE_CODE = t3.LANGUAGE_CODE
+                and t46.service_version_id = {1}
+where
+	t2.RESELLER_VERSION_ID = {0}
+	and t3.LANGUAGE_CODE = {2}

@@ -1,0 +1,9 @@
+select
+	t1.OPTION_ID as optionId,
+	t1.INSTALL_ID as installId,
+	t1.OPTION_NAME as optionName,
+	t1.OPTION_VALUE as optionValue,
+	t1.OPTION_DEFAULT as optionDefault
+from
+	REG_INSTALL_OPTIONS t1
+	inner join REG_INSTALL t2 on t1.INSTALL_ID = t2.INSTALL_ID

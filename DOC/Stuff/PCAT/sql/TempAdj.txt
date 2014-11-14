@@ -1,0 +1,78 @@
+select
+	t1.ACCOUNT_NO as accountNo,
+	t1.ACCT_EXTERNAL_ID as acctExternalId,
+	t1.SUBSCR_NO as subscrNo,
+	t1.SUBSCR_NO_RESETS as subscrNoResets,
+	t1.EQUIP_EXTERNAL_ID as equipExternalId,
+	t1.ADJ_TRANS_CODE as adjTransCode,
+	t1.ANNOTATION as annotation,
+	t1.PRIMARY_UNIT_TYPE as primaryUnitType,
+	t1.PRIMARY_UNITS as primaryUnits,
+	t1.TRANSACT_DATE as transactDate,
+	t1.EFFECTIVE_DATE as effectiveDate,
+	t1.END_DATE as endDate,
+	t1.TRACKING_ID as trackingId,
+	t1.TRACKING_ID_SERV as trackingIdServ,
+	t3.DISPLAY_VALUE as requestStatus,
+	t1.REVIEW_DATE as reviewDate,
+	t1.SUPERVISOR_NAME as supervisorName,
+	t1.NO_BILL as noBill,
+	t1.CURRENCY_CODE as currencyCode,
+	t1.TOTAL_AMT as totalAmt,
+	t1.ORIG_PROVIDER_ID as origProviderId,
+	t1.ORIG_BILL_REF_NO as origBillRefNo,
+	t1.ORIG_BILL_REF_RESETS as origBillRefResets,
+	t1.ORIG_BILL_INVOICE_ROW as origBillInvoiceRow,
+	t5.DISPLAY_VALUE as origType,
+	t1.ORIG_SUBTYPE as origSubtype,
+	t1.ORIG_MSG_ID as origMsgId,
+	t1.ORIG_MSG_ID2 as origMsgId2,
+	t1.ORIG_SPLIT_ROW_NUM as origSplitRowNum,
+	t1.ORIG_TRACKING_ID as origTrackingId,
+	t1.ORIG_TRACKING_ID_SERV as origTrackingIdServ,
+	t1.ORIG_TRACKING_DT as origTrackingDt,
+	t1.ORIG_RC_FROM_DATE as origRcFromDate,
+	t1.BILL_REF_NO as billRefNo,
+	t1.BILL_REF_RESETS as billRefResets,
+	t1.TAX_CLASS as taxClass,
+	t1.GEOCODE as geocode,
+	t1.AUX_TAX_INFO as auxTaxInfo,
+	t1.COMB_TAX_RATE as combTaxRate,
+	t1.TAX_PKG_INST_ID as taxPkgInstId,
+	t1.TAX_TYPE_CODE as taxTypeCode,
+	t1.FEDERAL_TAX as federalTax,
+	t1.STATE_TAX as stateTax,
+	t1.COUNTY_TAX as countyTax,
+	t1.CITY_TAX as cityTax,
+	t1.OTHER_TAX as otherTax,
+	t1.DISCOUNT_AMT as discountAmt,
+	t1.PROFILE_ID as profileId,
+	t1.ADJ_REASON_CODE as adjReasonCode,
+	t1.FRAUD_INDICATOR as fraudIndicator,
+	t1.REV_RCV_COST_CTR as revRcvCostCtr,
+	t1.B_REV_RCV_COST_CTR as bRevRcvCostCtr,
+	t1.CHG_WHO as chgWho,
+	t1.IS_REFINANCE as isRefinance,
+	t1.CHG_DATE as chgDate,
+	t1.TRANS_SIGN as transSign,
+	t1.IS_VIEWABLE as isViewable,
+	t1.DESCRIPTION_TEXT as descriptionText,
+	t1.TRANS_TARGET_TYPE as transTargetType,
+	t1.JURISDICTION as jurisdiction,
+	t1.TRACKING_ID_COUNTER as trackingIdCounter,
+	t1.OPEN_ITEM_ID as openItemId,
+	t1.ORIG_SUBMITTER_NAME as origSubmitterName,
+	t1.BILL_ORDER_NUMBER as billOrderNumber,
+	t1.TAX_ON_INVOICE as taxOnInvoice
+from
+	TEMP_ADJ t1
+	left outer join GENERIC_ENUMERATION_REF t2 on t2.enumeration_key = lower(''REQUEST_STATUS'')
+		and t2.value = t1.REQUEST_STATUS
+	left outer join GENERIC_ENUMERATION_VALUES t3 on t3.enumeration_key = t2.enumeration_key
+		and t3.value = t2.value
+		and t3.LANGUAGE_CODE = {2}
+	left outer join GENERIC_ENUMERATION_REF t4 on t4.enumeration_key = lower(''ORIG_TYPE'')
+		and t4.value = t1.ORIG_TYPE
+	left outer join GENERIC_ENUMERATION_VALUES t5 on t5.enumeration_key = t4.enumeration_key
+		and t5.value = t4.value
+		and t5.LANGUAGE_CODE = {2}

@@ -1,0 +1,10 @@
+select
+	t1.PRODUCT_ID as productId,
+	t3.DISPLAY_VALUE as invsProfileRef,
+	t1.PROFILE_ID as profileId,
+	t1.IS_DEFAULT as isDefault
+from
+	INVS_PROFILE_PRODUCT_ASSOC t1
+	inner join INVS_PROFILE_REF t2 on t1.PROFILE_ID = t2.PROFILE_ID
+	inner join INVS_PROFILE_VALUES t3 on t2.PROFILE_ID = t3.PROFILE_ID
+		and t3.LANGUAGE_CODE = {2}

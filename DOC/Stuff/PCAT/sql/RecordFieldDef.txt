@@ -1,0 +1,27 @@
+select
+	t1.RECORD_ID as recordId,
+	t1.FIELD_POS as fieldPos,
+	t1.FIELD_NAME as fieldName,
+	t1.FIELD_SIZE as fieldSize,
+	t1.FIELD_TYPE as fieldType,
+	t1.FIELD_CATEGORY as fieldCategory,
+	t1.IS_EBCDIC as isEbcdic,
+	t1.BIT_START as bitStart,
+	t1.BIT_END as bitEnd,
+	t1.IS_REQUIRED as isRequired,
+	t1.IS_INDEX_KEY as isIndexKey,
+	t1.DATA_FORMAT as dataFormat,
+	t1.EDIT_TYPE as editType,
+	t1.EDIT_TABLE as editTable,
+	t1.EDIT_TABLE_FIELD as editTableField,
+	t1.EDIT_TABLE_FIELD_TYPE as editTableFieldType,
+	t1.TRANSLATE_TABLE as translateTable,
+	t1.TRANSLATE_FIELD as translateField,
+	t1.TRANSLATE_FIELD_TYPE as translateFieldType,
+	t1.FILL_CHAR as fillChar,
+	t1.JUSTIFY_TYPE as justifyType,
+	t1.DEFAULT_VALUE as defaultValue,
+	t1.DEFAULT_TYPE as defaultType,
+	t1.IS_VARIABLE_SIZE as isVariableSize
+from
+	RECORD_FIELD_DEF t1

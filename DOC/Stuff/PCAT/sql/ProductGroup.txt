@@ -1,0 +1,16 @@
+select
+	t1.PRODUCT_GROUP_ID as productGroupId,
+	t2.RESELLER_VERSION_ID as resellerVersionId,
+	t2.IS_INTERNAL as isInternal,
+	t2.IS_DEFAULT as isDefault,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	PRODUCT_GROUP_KEY t1
+	inner join PRODUCT_GROUP_REF t2 on t1.PRODUCT_GROUP_ID = t2.PRODUCT_GROUP_ID
+	inner join PRODUCT_GROUP_VALUES t3 on t2.PRODUCT_GROUP_ID = t3.PRODUCT_GROUP_ID
+		and t2.RESELLER_VERSION_ID = t3.RESELLER_VERSION_ID
+where
+	t2.RESELLER_VERSION_ID = {0}
+	and t3.LANGUAGE_CODE = {2}

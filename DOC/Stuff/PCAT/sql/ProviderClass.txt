@@ -1,0 +1,38 @@
+select
+	t1.PROVIDER_CLASS as providerClass,
+	t2.SERVICE_VERSION_ID as serviceVersionId,
+	t2.RATE_CLASS as rateClass,
+        t2.EQUIP_TYPE_CODE as equipTypeCode, 
+        t4.display_value as equipTypeCodeRef, 
+        t2.EQUIP_CLASS_CODE as equipClassCode, 
+        t5.display_value as equipClassCodeRef, 
+	t2.CLASS_OF_SERVICE_CODE as classOfServiceCode,
+	t2.CURRENCY_CODE as currencyCode,
+	t2.USAGE_PLAN_ID as usagePlanId,
+  t6.display_value as usagePlanKey, 
+	t2.OFFER_ID as offerId,
+  t7.display_value as offerKey, 
+	t2.IS_DEFAULT as isDefault,
+	t2.IS_INTERNAL as isInternal,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	PROVIDER_CLASS_KEY t1
+	inner join PROVIDER_CLASS_REF t2 on t1.PROVIDER_CLASS = t2.PROVIDER_CLASS
+	inner join PROVIDER_CLASS_VALUES t3 on t2.PROVIDER_CLASS = t3.PROVIDER_CLASS
+		and t2.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+        left outer join EQUIP_TYPE_CODE_VALUES t4 on t2.equip_type_code = t4.equip_type_code 
+               and t3.language_code = t4.language_code 
+        left outer join EQUIP_CLASS_CODE_VALUES t5 on t2.equip_class_code = t5.equip_class_code
+               and t3.language_code = t5.language_code     
+        left outer join usage_plan_values t6 on t2.usage_plan_id = t6.usage_plan_id 
+               and t3.language_code = t6.language_code 
+               and t6.reseller_version_id = {0} 
+        left outer join offer_values t7 on t2.offer_id = t7.offer_id 
+               and t3.language_code = t7.language_code 
+               and t7.reseller_version_id = {0} 
+               
+where
+	t2.SERVICE_VERSION_ID = {1}
+	and t3.LANGUAGE_CODE = {2}

@@ -1,0 +1,16 @@
+select
+	t1.BARRED_NUM_SET_ID as barredNumSetId,
+	t2.RESELLER_VERSION_ID as resellerVersionId,
+	t2.IS_DEFAULT as isDefault,
+	t2.IS_INTERNAL as isInternal,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	BARRED_NUMS_SET_ID_KEY t1
+	inner join BARRED_NUMS_SET_ID_REF t2 on t1.BARRED_NUM_SET_ID = t2.BARRED_NUM_SET_ID
+	inner join BARRED_NUMS_SET_ID_VALUES t3 on t2.BARRED_NUM_SET_ID = t3.BARRED_NUM_SET_ID
+		and t2.RESELLER_VERSION_ID = t3.RESELLER_VERSION_ID
+where
+	t2.RESELLER_VERSION_ID = {0}
+	and t3.LANGUAGE_CODE = {2}

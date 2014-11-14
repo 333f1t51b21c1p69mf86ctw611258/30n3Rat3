@@ -1,0 +1,11 @@
+select
+	t3.DISPLAY_VALUE as countryCodeRef,
+	t1.COUNTRY_CODE as countryCode,
+	t1.COUNTRY_DIAL_CODE as countryDialCode,
+	t1.INTL_DIAL_CODE as intlDialCode,
+	t1.INTL_DIAL_ACCESS as intlDialAccess
+from
+	COUNTRY_DIAL_CODES t1
+	inner join COUNTRY_CODE_REF t2 on t1.COUNTRY_CODE = t2.COUNTRY_CODE
+	inner join COUNTRY_CODE_VALUES t3 on t2.COUNTRY_CODE = t3.COUNTRY_CODE
+		and t3.LANGUAGE_CODE = {2}

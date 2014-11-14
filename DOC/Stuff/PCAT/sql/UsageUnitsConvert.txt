@@ -1,0 +1,30 @@
+select
+	t4.DISPLAY_VALUE as unitsTypeKey,
+	t1.IN_UNIT_TYPE as inUnitType,
+	t7.DISPLAY_VALUE as unitsTypeKeyByOutUnitType,
+	t1.OUT_UNIT_TYPE as outUnitType,
+	t1.SERVICE_VERSION_ID as serviceVersionId,
+	t1.CONVERT_FACTOR as convertFactor,
+	t9.DISPLAY_VALUE as operator,
+	t1.IMPLIED_DECIMAL as impliedDecimal
+from
+	USAGE_UNITS_CONVERT t1
+	inner join UNITS_TYPE_KEY t2 on t1.IN_UNIT_TYPE = t2.UNIT_TYPE
+	inner join UNITS_TYPE_REF t3 on t2.UNIT_TYPE = t3.UNIT_TYPE
+		and t3.SERVICE_VERSION_ID = t1.SERVICE_VERSION_ID
+	inner join UNITS_TYPE_VALUES t4 on t2.UNIT_TYPE = t4.UNIT_TYPE
+		and t4.SERVICE_VERSION_ID = t1.SERVICE_VERSION_ID
+		and t4.LANGUAGE_CODE = {2}
+	inner join UNITS_TYPE_KEY t5 on t1.OUT_UNIT_TYPE = t5.UNIT_TYPE
+	inner join UNITS_TYPE_REF t6 on t5.UNIT_TYPE = t6.UNIT_TYPE
+		and t6.SERVICE_VERSION_ID = t1.SERVICE_VERSION_ID
+	inner join UNITS_TYPE_VALUES t7 on t5.UNIT_TYPE = t7.UNIT_TYPE
+		and t7.SERVICE_VERSION_ID = t1.SERVICE_VERSION_ID
+		and t7.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join GENERIC_ENUMERATION_REF t8 on t8.enumeration_key = lower(''OPERATOR'')
+		and t8.value = t1.OPERATOR
+	left outer join GENERIC_ENUMERATION_VALUES t9 on t9.enumeration_key = t8.enumeration_key
+		and t9.value = t8.value
+		and t9.LANGUAGE_CODE = t4.LANGUAGE_CODE
+where
+	t1.SERVICE_VERSION_ID = {1}

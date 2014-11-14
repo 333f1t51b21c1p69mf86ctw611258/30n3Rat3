@@ -1,0 +1,12 @@
+select
+	t1.EQUIP_CHARGE_CODE as equipChargeCode,
+	t1.IS_INTERNAL as isInternal,
+	t1.IS_DEFAULT as isDefault,
+	t2.LANGUAGE_CODE as languageCode,
+	t2.DISPLAY_VALUE as displayValue,
+	t2.DESCRIPTION as description
+from
+	INVS_EQUIP_CHARGE_CODE_REF t1
+	inner join INVS_EQUIP_CHARGE_CODE_VALUES t2 on t1.EQUIP_CHARGE_CODE = t2.EQUIP_CHARGE_CODE
+where
+	t2.LANGUAGE_CODE = {2}

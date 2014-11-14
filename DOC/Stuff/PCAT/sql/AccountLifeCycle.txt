@@ -1,0 +1,24 @@
+select
+	t1.OFFER_ID as offerId,
+	t1.STATE_ID as stateId,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t1.TIMEOUT as timeout,
+	t1.IS_TERMINAL_STATE as isTerminalState,
+	t1.RETURNING_ACTIVE_CHARGE as returningActiveCharge,
+	t1.CHARGE_CODE as chargeCode,
+	t7.DISPLAY_VALUE as offerKeyByDestOfferId,
+	t1.DEST_OFFER_ID as destOfferId,
+        t2.DISPLAY_VALUE as subscriberStateIdRef
+from
+	ACCOUNT_LIFE_CYCLE t1
+        inner join SUBSCRIBER_STATE_ID_VALUES t2 on t1.STATE_ID = t2.STATE_ID
+		and t1.LEVEL_CODE = t2.LEVEL_CODE
+		and t2.LANGUAGE_CODE = {2}
+	left outer join OFFER_KEY t5 on t1.DEST_OFFER_ID = t5.OFFER_ID
+	left outer join OFFER_REF t6 on t1.DEST_OFFER_ID = t6.OFFER_ID
+		and t6.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+	left outer join OFFER_VALUES t7 on t1.DEST_OFFER_ID = t7.OFFER_ID
+		and t7.LANGUAGE_CODE = {2}
+		and t7.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+where
+	t1.RESELLER_VERSION_ID = {0}

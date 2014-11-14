@@ -1,0 +1,10 @@
+select
+	t1.SERVING_SID_BID as servingSidBid,
+	t1.ORIG_CELL_ID as origCellId,
+	t1.CIBER_CALL_DIRECTION as ciberCallDirection,
+	t1.CIBER_REC_TYPE as ciberRecType,
+	t1.TYPE_ID_USG as typeIdUsg,
+	t1.PRIORITY as priority,
+	t1.MAPPING_DIRECTION as mappingDirection
+from
+	CIBER_ARBOR_USAGE_TYPE_XREF t1

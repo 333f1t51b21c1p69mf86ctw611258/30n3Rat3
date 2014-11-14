@@ -1,0 +1,11 @@
+select
+	t1.SOURCE_TYPE as sourceType,
+	t1.IS_DEFAULT as isDefault,
+	t1.IS_INTERNAL as isInternal,
+	t2.LANGUAGE_CODE as languageCode,
+	t2.DISPLAY_VALUE as displayValue
+from
+	EXT_SOURCE_TYPE_REF t1
+	inner join EXT_SOURCE_TYPE_VALUES t2 on t1.SOURCE_TYPE = t2.SOURCE_TYPE
+where
+	t2.LANGUAGE_CODE = {2}

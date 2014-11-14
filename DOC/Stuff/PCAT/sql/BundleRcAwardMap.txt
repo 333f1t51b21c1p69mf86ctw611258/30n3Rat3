@@ -1,0 +1,110 @@
+select
+	t1.BUNDLE_RC_AWARD_MAP_ID as bundleRcAwardMapId,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t4.DISPLAY_VALUE as bundleKey,
+	t1.BUNDLE_ID as bundleId,
+	t7.DISPLAY_VALUE as rcTermKey,
+	t1.RC_TERM_ID as rcTermId,
+	t10.DISPLAY_VALUE as balanceKey,
+	t1.BALANCE_ID as balanceId,
+	t1.PRO_AWARD_INSF_RC_BAL as proAwardInsfRcBal,
+	t1.APPLY_DAY as applyDay,
+	t1.GENERATION_PERIOD_FREQUENCY as periodFrequency,
+	t1.BILL_PERIOD as billPeriod,
+	t1.AMOUNT as amount,
+	t14.SERVICE_VERSION_ID as serviceVersionId,
+	t14.ISO_CODE as currencyIsoCode,
+	t14.IMPLIED_DECIMAL as currencyImpliedDecimal,
+	t15.DISPLAY_VALUE as rateCurrencyKey,
+	t1.CURRENCY_CODE as currencyCode,
+	t18.DISPLAY_VALUE as unitsTypeKey,
+	t1.UNIT_TYPE as unitType,
+	t20.DISPLAY_VALUE as grantOrder,
+	t22.DISPLAY_VALUE as action,
+	t24.DISPLAY_VALUE as awardActivationType,
+	t1.AWARD_ACTIVATION_OFFSET as awardActivationOffset,
+	t26.DISPLAY_VALUE as awardExpiryType,
+	t28.DISPLAY_VALUE as awardExpiryOffsetType,
+	t1.AWARD_EXPIRY_OFFSET as awardExpiryOffset,
+	t1.AWARD_EXPIRY_DATE as awardExpiryDate,
+	t1.IS_ROLLABLE as isRollable,
+	t30.DISPLAY_VALUE as rolloverGrouping,
+	t1.MAXIMUM_GRANT_ROLLOVER as maximumGrantRollover,
+	t1.MAXIMUM_TOTAL_ROLLOVER as maximumTotalRollover,
+	t1.RC_MULTIPLICATIONS as rcMultiplications,
+	t1.CYCLES_ROLLOVER_EXPIRE as cyclesRolloverExpire,
+	t1.DEFAULT_SET_FUNCTION as defaultSetFunction
+from
+	BUNDLE_RC_AWARD_MAP t1
+	inner join BUNDLE_KEY t2 on t1.BUNDLE_ID = t2.BUNDLE_ID
+	inner join BUNDLE_REF t3 on t2.BUNDLE_ID = t3.BUNDLE_ID
+		and t3.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+	inner join BUNDLE_VALUES t4 on t2.BUNDLE_ID = t4.BUNDLE_ID
+		and t4.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+		and t4.LANGUAGE_CODE = {2}
+	inner join RC_TERM_KEY t5 on t1.RC_TERM_ID = t5.RC_TERM_ID
+	inner join RC_TERM_REF t6 on t5.RC_TERM_ID = t6.RC_TERM_ID
+		and t6.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+	inner join RC_TERM_VALUES t7 on t5.RC_TERM_ID = t7.RC_TERM_ID
+		and t7.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+		and t7.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	inner join BALANCE_KEY t8 on t1.BALANCE_ID = t8.BALANCE_ID
+	inner join BALANCE_REF t9 on t8.BALANCE_ID = t9.BALANCE_ID
+		and t9.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+	inner join BALANCE_VALUES t10 on t8.BALANCE_ID = t10.BALANCE_ID
+		and t10.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+		and t10.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join RATE_CURRENCY_KEY t13 on t1.CURRENCY_CODE = t13.CURRENCY_CODE
+	left outer join RATE_CURRENCY_REF t14 on t13.CURRENCY_CODE = t14.CURRENCY_CODE
+		and t14.SERVICE_VERSION_ID = {1}
+	left outer join RATE_CURRENCY_VALUES t15 on t13.CURRENCY_CODE = t15.CURRENCY_CODE
+		and t15.SERVICE_VERSION_ID = {1}
+		and t15.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	inner join UNITS_TYPE_KEY t16 on t1.UNIT_TYPE = t16.UNIT_TYPE
+	inner join UNITS_TYPE_REF t17 on t16.UNIT_TYPE = t17.UNIT_TYPE
+		and t17.SERVICE_VERSION_ID = {1}
+	inner join UNITS_TYPE_VALUES t18 on t16.UNIT_TYPE = t18.UNIT_TYPE
+		and t18.SERVICE_VERSION_ID = t17.SERVICE_VERSION_ID
+		and t18.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join GUI_INDICATOR_REF t19 on t19.table_name = ''BUNDLE_RC_AWARD_MAP''
+		and t19.field_name = lower(''GRANT_ORDER'')
+		and t19.integer_value = t1.GRANT_ORDER
+	left outer join GUI_INDICATOR_VALUES t20 on t20.table_name = t19.table_name
+		and t20.field_name = t19.field_name
+		and t20.integer_value = t19.integer_value
+		and t20.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join GUI_INDICATOR_REF t21 on t21.table_name = ''BUNDLE_RC_AWARD_MAP''
+		and t21.field_name = lower(''ACTION'')
+		and t21.integer_value = t1.ACTION
+	left outer join GUI_INDICATOR_VALUES t22 on t22.table_name = t21.table_name
+		and t22.field_name = t21.field_name
+		and t22.integer_value = t21.integer_value
+		and t22.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join GUI_INDICATOR_REF t23 on t23.table_name = ''BUNDLE_RC_AWARD_MAP''
+		and t23.field_name = lower(''AWARD_ACTIVATION_TYPE'')
+		and t23.integer_value = t1.AWARD_ACTIVATION_TYPE
+	left outer join GUI_INDICATOR_VALUES t24 on t24.table_name = t23.table_name
+		and t24.field_name = t23.field_name
+		and t24.integer_value = t23.integer_value
+		and t24.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join GUI_INDICATOR_REF t25 on t25.table_name = ''BUNDLE_RC_AWARD_MAP''
+		and t25.field_name = lower(''AWARD_EXPIRY_TYPE'')
+		and t25.integer_value = t1.AWARD_EXPIRY_TYPE
+	left outer join GUI_INDICATOR_VALUES t26 on t26.table_name = t25.table_name
+		and t26.field_name = t25.field_name
+		and t26.integer_value = t25.integer_value
+		and t26.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join GUI_INDICATOR_REF t27 on t27.table_name = ''BUNDLE_RC_AWARD_MAP''
+		and t27.field_name = lower(''AWARD_EXPIRY_OFFSET_TYPE'')
+		and t27.integer_value = t1.AWARD_EXPIRY_OFFSET_TYPE
+	left outer join GUI_INDICATOR_VALUES t28 on t28.table_name = t27.table_name
+		and t28.field_name = t27.field_name
+		and t28.integer_value = t27.integer_value
+		and t28.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join GENERIC_ENUMERATION_REF t29 on t29.enumeration_key = lower(''ROLLOVER_GROUPING'')
+		and t29.value = t1.ROLLOVER_GROUPING
+	left outer join GENERIC_ENUMERATION_VALUES t30 on t30.enumeration_key = t29.enumeration_key
+		and t30.value = t29.value
+		and t30.LANGUAGE_CODE = t4.LANGUAGE_CODE
+where
+	t1.RESELLER_VERSION_ID = {0}

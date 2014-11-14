@@ -1,0 +1,5 @@
+select
+	t1.FONT_FILE_ID as fontFileId,
+	t1.FILENAME as filename
+from
+	BILL_FONT_FILES t1

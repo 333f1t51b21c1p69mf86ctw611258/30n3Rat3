@@ -1,0 +1,19 @@
+select
+	t3.DISPLAY_VALUE as billFontRef,
+	t1.FONT_ID as fontId,
+	t5.DISPLAY_VALUE as billFontRefByFontId,
+	t1.TEST_FLAG as testFlag,
+	t1.CHAR_CODE as charCode,
+	t1.WIDTH as width
+from
+	BILL_FONT_WIDTH t1
+	inner join BILL_FONT_REF t2 on t1.FONT_ID = t2.FONT_ID
+		and t1.TEST_FLAG = t2.TEST_FLAG
+	inner join BILL_FONT_VALUES t3 on t2.FONT_ID = t3.FONT_ID
+		and t2.TEST_FLAG = t3.TEST_FLAG
+		and t3.LANGUAGE_CODE = {2}
+	inner join BILL_FONT_REF t4 on t1.FONT_ID = t4.FONT_ID
+		and t1.TEST_FLAG = t4.TEST_FLAG
+	inner join BILL_FONT_VALUES t5 on t4.FONT_ID = t5.FONT_ID
+		and t4.TEST_FLAG = t5.TEST_FLAG
+		and t5.LANGUAGE_CODE = t3.LANGUAGE_CODE

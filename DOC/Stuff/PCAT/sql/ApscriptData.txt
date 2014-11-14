@@ -1,0 +1,6 @@
+select
+	t1.SCRIPT_ID as scriptId,
+	t1.NAME as name,
+	t1.LOCATION as location
+from
+	APSCRIPT_DATA t1

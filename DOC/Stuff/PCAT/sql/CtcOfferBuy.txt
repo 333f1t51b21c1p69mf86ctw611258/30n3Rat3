@@ -1,0 +1,31 @@
+select
+	t1.OFFER_BUY_ID as offerBuyId,
+	t1.OFFER_ID as offerId,
+	t1.FIRST_ORDER_DT as firstOrderDt,
+	t1.LAST_ORDER_DT as lastOrderDt,
+	t1.CURRENCY_PRICE as currencyPrice,
+	t4.SERVICE_VERSION_ID as serviceVersionId,
+	t4.ISO_CODE as currencyIsoCode,
+	t4.IMPLIED_DECIMAL as currencyImpliedDecimal,
+	t5.DISPLAY_VALUE as rateCurrencyKey,
+	t1.CURRENCY_CODE as currencyCode,
+	t1.TOKEN_VALUE as tokenValue,
+	t1.QUICK_ORDER_CODE as quickOrderCode,
+	t7.DISPLAY_VALUE as chargeType,
+	t1.CHARGE_ID1 as chargeId1,
+	t1.CHARGE_ID2 as chargeId2,
+	t1.USE_CODE as useCode
+from
+	CTC_OFFER_BUY t1
+	inner join CTC_OFFER t2 on t1.OFFER_ID = t2.OFFER_ID
+	left outer join RATE_CURRENCY_KEY t3 on t1.CURRENCY_CODE = t3.CURRENCY_CODE
+	left outer join RATE_CURRENCY_REF t4 on t3.CURRENCY_CODE = t4.CURRENCY_CODE
+		and t4.SERVICE_VERSION_ID = {1}
+	left outer join RATE_CURRENCY_VALUES t5 on t3.CURRENCY_CODE = t5.CURRENCY_CODE
+		and t5.SERVICE_VERSION_ID = {1}
+		and t5.LANGUAGE_CODE = {2}
+	left outer join GENERIC_ENUMERATION_REF t6 on t6.enumeration_key = lower(''CHARGE_TYPE'')
+		and t6.value = t1.CHARGE_TYPE
+	left outer join GENERIC_ENUMERATION_VALUES t7 on t7.enumeration_key = t6.enumeration_key
+		and t7.value = t6.value
+		and t7.LANGUAGE_CODE = {2}

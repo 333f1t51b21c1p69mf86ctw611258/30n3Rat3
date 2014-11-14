@@ -1,0 +1,9 @@
+select
+	t1.QOS_ID as qosId,
+	t2.SERVICE_VERSION_ID as serviceVersionId,
+	t2.QOS as qos
+from
+	GPRS_QOS_NAME_ID_KEY t1
+	inner join GPRS_QOS_NAME_ID t2 on t1.QOS_ID = t2.QOS_ID
+where
+	t2.SERVICE_VERSION_ID = {1}

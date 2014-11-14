@@ -1,0 +1,11 @@
+select
+	t1.MODULE as module,
+        t1.RESPONSE_CODE as responseCode,
+	t5.DISPLAY_VALUE as clearingHouseIdRef,
+	t1.CLEARING_HOUSE_ID as clearingHouseId,
+	t1.EXT_EVENT_TYPE as extEventType
+from
+	ARM_PAYMENT_CODES t1
+	inner join CLEARING_HOUSE_ID_REF t4 on t1.CLEARING_HOUSE_ID = t4.CLEARING_HOUSE_ID
+	inner join CLEARING_HOUSE_ID_VALUES t5 on t4.CLEARING_HOUSE_ID = t5.CLEARING_HOUSE_ID
+		and t5.LANGUAGE_CODE = {2}

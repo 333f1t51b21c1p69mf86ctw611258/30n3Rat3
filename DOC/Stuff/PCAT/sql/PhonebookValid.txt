@@ -1,0 +1,10 @@
+select
+	t1.PHONEBOOK_VALID_ID as phonebookValidId,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t1.SUBSCRIBER_PREFIX as subscriberPrefix,
+	t1.PHONEBOOK_PREFIX as phonebookPrefix,
+	t1.IS_ALLOWED as isAllowed
+from
+	PHONEBOOK_VALID t1
+where
+	t1.RESELLER_VERSION_ID = {0}

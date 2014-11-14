@@ -1,0 +1,7 @@
+select
+	t1.ZIP as zip,
+	t1.STATE_CODE as stateCode,
+	t1.COUNTY_CODE as countyCode,
+	t1.CITY_CODE as cityCode
+from
+	ZIPCODE t1

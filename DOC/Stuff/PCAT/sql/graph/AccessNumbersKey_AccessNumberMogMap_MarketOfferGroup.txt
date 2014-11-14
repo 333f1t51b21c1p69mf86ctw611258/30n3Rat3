@@ -1,0 +1,11 @@
+select
+	t1.MOG_ID as mogId,
+	t7.DISPLAY_VALUE as name,
+	t7.DESCRIPTION as description
+from
+	ACCESS_NUMBER_MOG_MAP t1
+	inner join MARKET_OFFER_GROUP_VALUES t7 on t1.MOG_ID = t7.MOG_ID
+        and t7.LANGUAGE_CODE = {2}
+        and t7.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+where
+	t1.RESELLER_VERSION_ID = {0}

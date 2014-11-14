@@ -1,0 +1,9 @@
+select
+	t1.SDP_ID as sdpId,
+	t1.ID as id,
+	t1.NAME as name,
+	t1.VALUE as value,
+	t1.MAX_PERCENT as maxPercent,
+	t1.DESCRIPTION as description
+from
+	SUBS_PARAMETER t1

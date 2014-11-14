@@ -1,0 +1,29 @@
+select
+	t3.DISPLAY_VALUE as roamingOperatorRef,
+	t1.OPERATOR_ID as operatorId,
+	t1.RATE_KEY_ID as rateKeyId,
+	t1.CIBER_OPERATOR_TYPE as ciberOperatorType,
+	t1.OPERATOR_ADDRESS_1 as operatorAddress1,
+	t1.OPERATOR_ADDRESS_2 as operatorAddress2,
+	t1.OPERATOR_ADDRESS_3 as operatorAddress3,
+	t1.OPERATOR_CITY as operatorCity,
+	t1.OPERATOR_STATE as operatorState,
+	t1.OPERATOR_COUNTY as operatorCounty,
+	t1.OPERATOR_ZIP as operatorZip,
+	t1.OPERATOR_CONTACT_NAME as operatorContactName,
+	t1.OPERATOR_CONTACT_PHONE as operatorContactPhone,
+	t1.OPERATOR_CONTACT_FAXNO as operatorContactFaxno,
+	t1.OPERATOR_DESCRIPTION as operatorDescription,
+	t1.RATE as rate,
+	t1.RC_CHARGE_TYPE as rcChargeType,
+	t1.COUNTRY_CODE as countryCode,
+	t1.CURRENCY_CODE as currencyCode,
+	t1.EXT_CONTACT_ID_IN as extContactIdIn,
+	t1.EXT_CONTACT_ID_OUT as extContactIdOut,
+	t1.ACTIVE_DT as activeDt,
+	t1.INACTIVE_DT as inactiveDt
+from
+	CIBER_ROAMING_AGREEMENT t1
+	inner join ROAMING_OPERATOR_REF t2 on t1.OPERATOR_ID = t2.OPERATOR_ID
+	inner join ROAMING_OPERATOR_VALUES t3 on t2.OPERATOR_ID = t3.OPERATOR_ID
+		and t3.LANGUAGE_CODE = {2}

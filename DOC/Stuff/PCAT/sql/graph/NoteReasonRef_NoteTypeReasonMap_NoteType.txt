@@ -1,0 +1,9 @@
+select
+	t1.NOTE_TYPE_ID as noteTypeId,
+	t1.NOTE_REASON_ID as noteReasonId,
+	t3.DISPLAY_VALUE as name
+from
+	NOTE_TYPE_REASON_MAP t1
+        inner join NOTE_TYPE_REF t2 on t2.NOTE_TYPE_ID = t1.NOTE_TYPE_ID
+	inner join NOTE_TYPE_VALUES t3 on t3.NOTE_TYPE_ID = t1.NOTE_TYPE_ID
+		and t3.LANGUAGE_CODE = {2}

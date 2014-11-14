@@ -1,0 +1,13 @@
+select
+	t1.BUSINESS_UNIT_ID as businessUnitId,
+	t1.NAME as name,
+	t1.UPD_CNT as updCnt,
+	t1.CHG_WHO as chgWho,
+	t1.CHG_DT as chgDt,
+	t2.LANGUAGE_CODE as languageCode,
+	t2.DISPLAY_VALUE as displayValue
+from
+	BSD_BUSINESS_UNIT_REF t1
+	inner join BSD_BUSINESS_UNIT_VALUES t2 on t1.BUSINESS_UNIT_ID = t2.BUSINESS_UNIT_ID
+where
+	t2.LANGUAGE_CODE = {2}

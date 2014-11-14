@@ -1,0 +1,11 @@
+select
+	t1.INSERT_FOREIGN_KEY as insertForeignKey,
+	t1.IS_DEFAULT as isDefault,
+	t1.IS_INTERNAL as isInternal,
+	t2.LANGUAGE_CODE as languageCode,
+	t2.DISPLAY_VALUE as displayValue
+from
+	INSERT_FOREIGN_KEY_REF t1
+	inner join INSERT_FOREIGN_KEY_VALUES t2 on t1.INSERT_FOREIGN_KEY = t2.INSERT_FOREIGN_KEY
+where
+	t2.LANGUAGE_CODE = {2}

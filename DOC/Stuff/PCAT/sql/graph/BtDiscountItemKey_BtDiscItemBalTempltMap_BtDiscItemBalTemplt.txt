@@ -1,0 +1,14 @@
+select
+	t1.OFFER_ID as offerId,
+	t1.BAL_TEMPLATE_ID as balTemplateId,
+	t1.DISCOUNT_ID as discountId,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t2.DISPLAY_VALUE as name,
+	t2.DESCRIPTION as description
+from
+	BT_DISC_ITEM_BAL_TEMPLT_MAP t1
+	inner join BT_DISC_ITEM_BAL_TEMPLT_VALUES t2 on t1.BAL_TEMPLATE_ID = t2.BAL_TEMPLATE_ID
+		and t2.LANGUAGE_CODE = {2}
+		and t2.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+where
+	t1.RESELLER_VERSION_ID = {0}

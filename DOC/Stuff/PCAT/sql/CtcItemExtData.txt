@@ -1,0 +1,17 @@
+select
+	t1.ITEM_ID as itemId,
+	t4.DISPLAY_VALUE as paramDef,
+	t1.PARAM_ID as paramId,
+	t1.PARAM_VALUE as paramValue,
+	t6.DISPLAY_VALUE as paramDatatype
+from
+	CTC_ITEM_EXT_DATA t1
+	inner join CTC_ITEM t2 on t1.ITEM_ID = t2.ITEM_ID
+	inner join PARAM_DEF t3 on t1.PARAM_ID = t3.PARAM_ID
+	inner join PARAM_VALUES t4 on t3.PARAM_ID = t4.PARAM_ID
+		and t4.LANGUAGE_CODE = {2}
+	left outer join GENERIC_ENUMERATION_REF t5 on t5.enumeration_key = lower(''PARAM_DATATYPE'')
+		and t5.value = t1.PARAM_DATATYPE
+	left outer join GENERIC_ENUMERATION_VALUES t6 on t6.enumeration_key = t5.enumeration_key
+		and t6.value = t5.value
+		and t6.LANGUAGE_CODE = t4.LANGUAGE_CODE

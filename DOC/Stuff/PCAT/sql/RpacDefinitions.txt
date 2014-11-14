@@ -1,0 +1,10 @@
+select
+	t1.RPAC_ID as rpacId,
+	t1.RPAC_CLUSTER_ID as rpacClusterId,
+	t1.RPAC_HOSTNAME as rpacHostname,
+	t1.RPAC_PORT as rpacPort,
+	t1.RPAC_REPLICATE_ORDER as rpacReplicateOrder,
+	t1.RPAC_QUERY_ORDER as rpacQueryOrder
+from
+	RPAC_DEFINITIONS t1
+	inner join RPAC_CLUSTER_DEFINITIONS t2 on t1.RPAC_CLUSTER_ID = t2.RPAC_CLUSTER_ID

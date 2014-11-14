@@ -1,0 +1,5 @@
+select
+	t1.CODE as code,
+	t1.TEXT as text
+from
+	CALL_HISTORY_RC_MAP t1

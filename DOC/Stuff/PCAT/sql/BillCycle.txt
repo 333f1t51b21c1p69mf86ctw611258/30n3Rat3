@@ -1,0 +1,19 @@
+select
+	t3.DISPLAY_VALUE as billPeriodRef,
+	t1.BILL_PERIOD as billPeriod,
+	t1.PPDD_DATE as ppddDate,
+	t5.DISPLAY_VALUE as billingFrequencyRef,
+	t1.BILLING_FREQUENCY as billingFrequency,
+	t1.NEXT_PPDD_DATE as nextPpddDate,
+	t1.STATEMENT_DATE as statementDate,
+	t1.CUTOFF_DATE as cutoffDate,
+	t1.PREP_DELAY as prepDelay,
+	t1.PREP_DATE as prepDate
+from
+	BILL_CYCLE t1
+	inner join BILL_PERIOD_REF t2 on t1.BILL_PERIOD = t2.BILL_PERIOD
+	inner join BILL_PERIOD_VALUES t3 on t2.BILL_PERIOD = t3.BILL_PERIOD
+		and t3.LANGUAGE_CODE = {2}
+	inner join BILLING_FREQUENCY_REF t4 on t1.BILLING_FREQUENCY = t4.BILLING_FREQUENCY
+	inner join BILLING_FREQUENCY_VALUES t5 on t4.BILLING_FREQUENCY = t5.BILLING_FREQUENCY
+		and t5.LANGUAGE_CODE = t3.LANGUAGE_CODE

@@ -1,0 +1,46 @@
+select
+	t1.WORK_ID as workId,
+	t1.NEW_MAJOR_PC_VERSION_NUM as newMajorPcVersionNum,
+	t1.NEW_MINOR_PC_VERSION_NUM as newMinorPcVersionNum,
+	t1.CURRENT_MAJOR_PC_VERSION_NUM as currentMajorPcVersionNum,
+	t1.CURRENT_MINOR_PC_VERSION_NUM as currentMinorPcVersionNum,
+	t3.DISPLAY_VALUE as propagationLevel,
+	t1.XML_FILE as xmlFile,
+	t1.USER_ID as userId,
+	t1.CREATE_DT as createDt,
+	t1.WP_PROCESS_ID as wpProcessId,
+	t1.WP_JOB_ID as wpJobId,
+	t1.START_DT as startDt,
+	t1.END_DT as endDt,
+	t5.DISPLAY_VALUE as dpStatusRef,
+	t1.STATUS_ID as statusId,
+	t1.NO_CANCEL as noCancel,
+	t7.DISPLAY_VALUE as startFlag,
+	t1.TARGET_GROUP_ID as targetGroupId,
+	t11.DISPLAY_VALUE as workType,
+	t1.PARENT_WORK_ID as parentWorkId,
+	t1.NONVERSIONED_FLAG as nonversionedFlag,
+	t1.FAILURE_OVERRIDE as failureOverride
+from
+	DP_WORK t1
+	left outer join GENERIC_ENUMERATION_REF t2 on t2.enumeration_key = lower(''PROPAGATION_LEVEL'')
+		and t2.value = t1.PROPAGATION_LEVEL
+	left outer join GENERIC_ENUMERATION_VALUES t3 on t3.enumeration_key = t2.enumeration_key
+		and t3.value = t2.value
+		and t3.LANGUAGE_CODE = {2}
+	inner join DP_STATUS_REF t4 on t1.STATUS_ID = t4.STATUS_ID
+	inner join DP_STATUS_VALUES t5 on t4.STATUS_ID = t5.STATUS_ID
+		and t5.LANGUAGE_CODE = {2}
+	left outer join GENERIC_ENUMERATION_REF t6 on t6.enumeration_key = lower(''START_FLAG'')
+		and t6.value = t1.START_FLAG
+	left outer join GENERIC_ENUMERATION_VALUES t7 on t7.enumeration_key = t6.enumeration_key
+		and t7.value = t6.value
+		and t7.LANGUAGE_CODE = t5.LANGUAGE_CODE
+	inner join DP_TARGET_GROUP_REF t8 on t1.TARGET_GROUP_ID = t8.TARGET_GROUP_ID
+	inner join DP_TARGET_GROUP_VALUES t9 on t8.TARGET_GROUP_ID = t9.TARGET_GROUP_ID
+		and t9.LANGUAGE_CODE = t5.LANGUAGE_CODE
+	left outer join GENERIC_ENUMERATION_REF t10 on t10.enumeration_key = lower(''WORK_TYPE'')
+		and t10.value = t1.WORK_TYPE
+	left outer join GENERIC_ENUMERATION_VALUES t11 on t11.enumeration_key = t10.enumeration_key
+		and t11.value = t10.value
+		and t11.LANGUAGE_CODE = t5.LANGUAGE_CODE

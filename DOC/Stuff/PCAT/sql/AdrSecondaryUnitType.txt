@@ -1,0 +1,5 @@
+select
+	t1.SECONDARY_UNIT_TYPE as secondaryUnitType,
+	t1.SECONDARY_UNIT_TYPE_DESC as secondaryUnitTypeDesc
+from
+	ADR_SECONDARY_UNIT_TYPE t1

@@ -1,0 +1,5 @@
+select
+	t1.RELEASE_REASON as releaseReason,
+	t1.RELEASE_CODE as releaseCode
+from
+	RELEASE_DETAIL t1

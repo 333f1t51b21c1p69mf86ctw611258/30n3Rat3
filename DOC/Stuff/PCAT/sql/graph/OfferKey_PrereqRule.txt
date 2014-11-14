@@ -1,0 +1,16 @@
+select
+	t1.PREREQ_RULE_ID as prereqRuleId,
+	t2.RESELLER_VERSION_ID as resellerVersionId,
+	t3.DISPLAY_VALUE as name,
+	t3.DESCRIPTION as description,
+	t1.OFFER_ID as offerId,
+    ''{3}'' as ruleType
+from
+	PREREQ_RULE_KEY t4
+	inner join PREREQ_RULE_REF t2 on t4.PREREQ_RULE_ID = t2.PREREQ_RULE_ID
+	inner join PREREQ_RULE_VALUES t3 on t2.PREREQ_RULE_ID = t3.PREREQ_RULE_ID
+		and t2.RESELLER_VERSION_ID = t3.RESELLER_VERSION_ID
+	inner join OFFER_REF t1 on t4.PREREQ_RULE_ID = t1.PREREQ_RULE_ID
+where
+	t2.RESELLER_VERSION_ID = {0}
+	and t3.LANGUAGE_CODE = {2}

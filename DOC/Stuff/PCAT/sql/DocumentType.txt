@@ -1,0 +1,40 @@
+select
+	t1.DOCUMENT_TYPE_ID as documentTypeId,
+	t4.DISPLAY_VALUE as sourceType,
+	t1.MAX_INSTANCES as maxInstances,
+	t6.DISPLAY_VALUE as documentCategory,
+	t1.DISPATCH_FLAG as dispatchFlag,
+	t1.MAX_AGE as maxAge,
+	t8.DISPLAY_VALUE as maxAgeUnits,
+	t1.DOCUMENT_LOCATION as documentLocation,
+	t10.DISPLAY_VALUE as prodnMode,
+	t1.USE_DOCUMENT_REPOSITORY as useDocumentRepository,
+	t1.REPOSITORY_LOCATION as repositoryLocation,
+	t1.USE_DOCUMENT_LOCATION as useDocumentLocation,
+	t2.LANGUAGE_CODE as languageCode,
+	t2.DISPLAY_VALUE as displayValue
+from
+	DOCUMENT_TYPE_REF t1
+	inner join DOCUMENT_TYPE_VALUES t2 on t1.DOCUMENT_TYPE_ID = t2.DOCUMENT_TYPE_ID
+	left outer join GENERIC_ENUMERATION_REF t3 on t3.enumeration_key = lower(''SOURCE_TYPE'')
+		and t3.value = t1.SOURCE_TYPE
+	left outer join GENERIC_ENUMERATION_VALUES t4 on t4.enumeration_key = t3.enumeration_key
+		and t4.value = t3.value
+		and t4.LANGUAGE_CODE = t2.LANGUAGE_CODE
+	left outer join GENERIC_ENUMERATION_REF t5 on t5.enumeration_key = lower(''DOCUMENT_CATEGORY'')
+		and t5.value = t1.DOCUMENT_CATEGORY
+	left outer join GENERIC_ENUMERATION_VALUES t6 on t6.enumeration_key = t5.enumeration_key
+		and t6.value = t5.value
+		and t6.LANGUAGE_CODE = t2.LANGUAGE_CODE
+	left outer join GENERIC_ENUMERATION_REF t7 on t7.enumeration_key = lower(''MAX_AGE_UNITS'')
+		and t7.value = t1.MAX_AGE_UNITS
+	left outer join GENERIC_ENUMERATION_VALUES t8 on t8.enumeration_key = t7.enumeration_key
+		and t8.value = t7.value
+		and t8.LANGUAGE_CODE = t2.LANGUAGE_CODE
+	left outer join GENERIC_ENUMERATION_REF t9 on t9.enumeration_key = lower(''PRODN_MODE'')
+		and t9.value = t1.PRODN_MODE
+	left outer join GENERIC_ENUMERATION_VALUES t10 on t10.enumeration_key = t9.enumeration_key
+		and t10.value = t9.value
+		and t10.LANGUAGE_CODE = t2.LANGUAGE_CODE
+where
+	t2.LANGUAGE_CODE = {2}

@@ -1,0 +1,9 @@
+select
+	t1.SERVER_ID as serverId,
+	t1.USAGE_TYPE as usageType,
+	t1.USAGE_DESC as usageDesc,
+	t1.DEVICE_ID as deviceId,
+	t1.DEVICE_CLASS as deviceClass,
+	t1.DEVICE_OPTIONS as deviceOptions
+from
+	IO_DEVICES t1

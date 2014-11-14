@@ -1,0 +1,17 @@
+select
+	t1.LOCATION_CODE as locationCode,
+	t2.RESELLER_VERSION_ID as resellerVersionId,
+	t2.LOCATION_TYPE as locationType,
+	t2.IS_DEFAULT as isDefault,
+	t2.IS_INTERNAL as isInternal,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	LOCATION_CODE_KEY t1
+	inner join LOCATION_CODE_REF t2 on t1.LOCATION_CODE = t2.LOCATION_CODE
+	inner join LOCATION_CODE_VALUES t3 on t2.LOCATION_CODE = t3.LOCATION_CODE
+		and t2.RESELLER_VERSION_ID = t3.RESELLER_VERSION_ID
+where
+	t2.RESELLER_VERSION_ID = {0}
+	and t3.LANGUAGE_CODE = {2}

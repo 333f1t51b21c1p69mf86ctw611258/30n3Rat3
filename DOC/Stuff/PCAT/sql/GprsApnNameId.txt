@@ -1,0 +1,9 @@
+select
+	t1.APN_ID as apnId,
+	t2.SERVICE_VERSION_ID as serviceVersionId,
+	t2.APN as apn
+from
+	GPRS_APN_NAME_ID_KEY t1
+	inner join GPRS_APN_NAME_ID t2 on t1.APN_ID = t2.APN_ID
+where
+	t2.SERVICE_VERSION_ID = {1}

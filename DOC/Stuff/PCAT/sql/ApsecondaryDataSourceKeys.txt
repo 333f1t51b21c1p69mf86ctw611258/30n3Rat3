@@ -1,0 +1,13 @@
+select
+	t3.DISPLAY_VALUE as apactionRef,
+	t1.ACTION_ID as actionId,
+	t1.PREV_DATA_SOURCE as prevDataSource,
+	t1.NEXT_DATA_SOURCE as nextDataSource,
+	t1.SEQNO as seqno,
+	t1.COMMON_TAG_ID as commonTagId
+from
+	APSECONDARY_DATA_SOURCE_KEYS t1
+	inner join APACTION_REF t2 on t1.ACTION_ID = t2.ACTION_ID
+	inner join APACTION_VALUES t3 on t2.ACTION_ID = t3.ACTION_ID
+		and t3.LANGUAGE_CODE = {2}
+	inner join APCOMMON_TAG_DATA_SOURCE t4 on t1.COMMON_TAG_ID = t4.COMMON_TAG_ID

@@ -1,0 +1,17 @@
+select
+	t1.BT_PROMOTION_PLAN_ITEM_MAP_ID as btPromotionPlanItemMapId,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t1.BT_PROMOTION_PLAN_ID as btPromotionPlanId,
+	t1.UNIT_CR_ID as unitCrId,
+	t2.DISPLAY_VALUE as name,
+	t2.DESCRIPTION as description,
+	t1.PLAN_ORDER as planOrder,
+	t1.DEF_ORDER as defOrder
+from
+	BT_PROMOTION_PLAN_ITEM_MAP t1
+	left outer join UNIT_CR_ITEM_VALUES t2 on t1.UNIT_CR_ID = t2.UNIT_CR_ID
+		and t2.LANGUAGE_CODE = {2}
+		and t2.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+where
+	t1.RESELLER_VERSION_ID = {0}
+		and t1.UNIT_CR_ID is not null

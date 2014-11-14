@@ -1,0 +1,13 @@
+cp ifcfg-eth0 ifcfg-eth0.101
+vi ifcfg-eth0.101
+
+DEVICE=eth0.101
+BOOTPROTO=static
+
+ONBOOT=yes
+VLAN=yes
+IPADDR=10.149.3.117
+NETMASK=255.255.255.128
+GATEWAY=10.149.3.1
+
+service network restart

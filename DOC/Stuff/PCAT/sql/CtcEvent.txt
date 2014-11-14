@@ -1,0 +1,10 @@
+select
+	t1.EVENT_ID as eventId,
+	t1.ITEM_ID as itemId,
+	t1.P_EVENT_ID as pEventId,
+	t1.CHANNEL as channel,
+	t1.EVENT_START_DT as eventStartDt,
+	t1.FREE_PREVIEW_MINUTES as freePreviewMinutes
+from
+	CTC_EVENT t1
+	inner join CTC_ITEM t2 on t1.ITEM_ID = t2.ITEM_ID

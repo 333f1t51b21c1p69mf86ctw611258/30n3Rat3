@@ -1,0 +1,39 @@
+select
+	t4.DISPLAY_VALUE as offerKey,
+	t1.OFFER_ID as offerId,
+	t7.DISPLAY_VALUE as nrcTermKey,
+	t1.NRC_TERM_ID as nrcTermId,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t1.ASSOCIATION_TYPE as associationType,
+	t9.DISPLAY_VALUE as autoActivationOverride,
+	t11.DISPLAY_VALUE as chargePostactive,
+	t1.RECOVERY_DURATION as recoveryDuration,
+	t1.IS_SUBSCRIPTION as isSubscription
+from
+	OFFER_NRC_TERM_MAP t1
+	inner join OFFER_KEY t2 on t1.OFFER_ID = t2.OFFER_ID
+	inner join OFFER_REF t3 on t2.OFFER_ID = t3.OFFER_ID
+		and t3.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+	inner join OFFER_VALUES t4 on t2.OFFER_ID = t4.OFFER_ID
+		and t4.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+		and t4.LANGUAGE_CODE = {2}
+	inner join NRC_TERM_KEY t5 on t1.NRC_TERM_ID = t5.NRC_TERM_ID
+	inner join NRC_TERM_REF t6 on t5.NRC_TERM_ID = t6.NRC_TERM_ID
+		and t6.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+	inner join NRC_TERM_VALUES t7 on t5.NRC_TERM_ID = t7.NRC_TERM_ID
+		and t7.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+		and t7.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join GUI_INDICATOR_REF t8 on t8.table_name = ''OFFER_NRC_TERM_MAP''
+		and t8.field_name = lower(''AUTO_ACTIVATION_OVERRIDE'')
+		and t8.integer_value = t1.AUTO_ACTIVATION_OVERRIDE
+	left outer join GUI_INDICATOR_VALUES t9 on t9.table_name = t8.table_name
+		and t9.field_name = t8.field_name
+		and t9.integer_value = t8.integer_value
+		and t9.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join GENERIC_ENUMERATION_REF t10 on t10.enumeration_key = lower(''CHARGE_POSTACTIVE'')
+		and t10.value = t1.CHARGE_POSTACTIVE
+	left outer join GENERIC_ENUMERATION_VALUES t11 on t11.enumeration_key = t10.enumeration_key
+		and t11.value = t10.value
+		and t11.LANGUAGE_CODE = t4.LANGUAGE_CODE
+where
+	t1.RESELLER_VERSION_ID = {0}

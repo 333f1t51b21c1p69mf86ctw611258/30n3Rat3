@@ -1,0 +1,18 @@
+select
+	t1.THRESHOLD_ID as thresholdId,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t4.DISPLAY_VALUE as offerKey,
+	t1.OFFER_ID as offerId,
+	t1.THRESHOLD_NUMBER as thresholdNumber,
+	t1.THRESHOLD_VALUE as thresholdValue,
+	t1.NUMBER_BEEPS as numberBeeps
+from
+	OFFER_MID_THRESHOLD t1
+	inner join OFFER_KEY t2 on t1.OFFER_ID = t2.OFFER_ID
+	inner join OFFER_REF t3 on t2.OFFER_ID = t3.OFFER_ID
+		and t3.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+	inner join OFFER_VALUES t4 on t2.OFFER_ID = t4.OFFER_ID
+		and t4.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+		and t4.LANGUAGE_CODE = {2}
+where
+	t1.RESELLER_VERSION_ID = {0}

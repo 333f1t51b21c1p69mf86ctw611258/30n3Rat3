@@ -1,0 +1,30 @@
+select
+	t1.NETWORK_RESOURCE_ID as networkResourceId,
+	t2.SERVICE_VERSION_ID as serviceVersionId,
+	t5.DISPLAY_VALUE as resourceType,
+	DECODE(t2.RESELLER_ID,-1,''ANY'',t8.DISPLAY_VALUE) as resellerId,
+        t2.RESELLER_ID as resellerIdNum,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	NETWORK_RESOURCE_KEY t1
+	inner join NETWORK_RESOURCE_REF t2 on t1.NETWORK_RESOURCE_ID = t2.NETWORK_RESOURCE_ID
+	inner join NETWORK_RESOURCE_VALUES t3 on t2.NETWORK_RESOURCE_ID = t3.NETWORK_RESOURCE_ID
+	      and t2.SERVICE_VERSION_ID = t3.SERVICE_VERSION_ID
+          left outer join GENERIC_ENUMERATION_REF t4 on t4.enumeration_key = lower(''RESOURCE_TYPE'')
+		and t4.value = t2.RESOURCE_TYPE
+	left outer join GENERIC_ENUMERATION_VALUES t5 on t5.enumeration_key = t4.enumeration_key
+		and t5.value = t4.value
+		and t5.LANGUAGE_CODE = t3.LANGUAGE_CODE
+      left outer join RESELLER_KEY t6 on t2.RESELLER_ID = t6.RESELLER_ID
+      left outer join RESELLER_REF t7 on t2.RESELLER_ID = t7.RESELLER_ID
+                and t7.SERVICE_VERSION_ID = t2.SERVICE_VERSION_ID
+      left outer join RESELLER_VALUES t8 on t2.RESELLER_ID = t8.RESELLER_ID
+                and t8.LANGUAGE_CODE = t3.LANGUAGE_CODE
+                and t8.SERVICE_VERSION_ID = t2.SERVICE_VERSION_ID
+
+
+where
+	t2.SERVICE_VERSION_ID = {1}
+	and t3.LANGUAGE_CODE = {2}

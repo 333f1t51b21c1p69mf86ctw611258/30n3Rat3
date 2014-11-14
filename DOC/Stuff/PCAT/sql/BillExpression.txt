@@ -1,0 +1,16 @@
+select
+	t1.EXPRESSION_ID as expressionId,
+	t1.TAG as tag,
+	t1.EXPRESSION_TYPE as expressionType,
+	t1.RETURN_TYPE as returnType,
+	t1.TABLES_USED as tablesUsed,
+	t1.ARGUMENTS as arguments,
+	t1.IS_INTERNAL as isInternal,
+	t1.IS_HIDDEN as isHidden,
+	t2.LANGUAGE_CODE as languageCode,
+	t2.DISPLAY_VALUE as displayValue
+from
+	BILL_EXPRESSION_REF t1
+	inner join BILL_EXPRESSION_VALUES t2 on t1.EXPRESSION_ID = t2.EXPRESSION_ID
+where
+	t2.LANGUAGE_CODE = {2}

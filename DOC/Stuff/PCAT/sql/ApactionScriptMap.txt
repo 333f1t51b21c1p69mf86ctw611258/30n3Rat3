@@ -1,0 +1,6 @@
+select
+	t1.CLIENT_ACTION_ID as clientActionId,
+	t1.SCRIPT_ID as scriptId,
+	t1.SCRIPT_ORDER as scriptOrder
+from
+	APACTION_SCRIPT_MAP t1

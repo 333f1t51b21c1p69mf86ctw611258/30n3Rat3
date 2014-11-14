@@ -1,0 +1,16 @@
+select
+	t1.RESPONSE_CODE as responseCode,
+	t1.RESPONSE_CATEGORY as responseCategory,
+	t1.CLEARING_HOUSE_ID as clearingHouseId,
+	t1.TREATMENT_IND as treatmentInd,
+	t1.RESEND_DELAY as resendDelay,
+	t1.IS_DEFAULT as isDefault,
+	t1.IS_INTERNAL as isInternal,
+	t2.LANGUAGE_CODE as languageCode,
+	t2.DISPLAY_VALUE as displayValue
+from
+	CCARD_RESPONSE_CODE_REF t1
+	inner join CCARD_RESPONSE_CODE_VALUES t2 on t1.RESPONSE_CODE = t2.RESPONSE_CODE
+		and t1.CLEARING_HOUSE_ID = t2.CLEARING_HOUSE_ID
+where
+	t2.LANGUAGE_CODE = {2}

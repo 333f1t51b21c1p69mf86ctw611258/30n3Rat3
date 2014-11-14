@@ -1,0 +1,16 @@
+select
+	t1.UNICODE_TEXT_MAP_ID as unicodeTextMapId,
+	t3.DISPLAY_VALUE as notifIvrLanguageRef,
+	t1.NOTIF_IVR_LANGUAGE_ID as notifIvrLanguageId,
+	t5.DISPLAY_VALUE as defaultText,
+	t1.UNICODE_TEXT as unicodeText
+from
+	UNICODE_TEXT_MAP t1
+	inner join NOTIF_IVR_LANGUAGE_REF t2 on t1.NOTIF_IVR_LANGUAGE_ID = t2.NOTIF_IVR_LANGUAGE_ID
+	inner join NOTIF_IVR_LANGUAGE_VALUES t3 on t2.NOTIF_IVR_LANGUAGE_ID = t3.NOTIF_IVR_LANGUAGE_ID
+		and t3.LANGUAGE_CODE = {2}
+	left outer join GENERIC_ENUMERATION_REF t4 on t4.enumeration_key = lower(''DEFAULT_TEXT'')
+		and t4.value = t1.DEFAULT_TEXT
+	left outer join GENERIC_ENUMERATION_VALUES t5 on t5.enumeration_key = t4.enumeration_key
+		and t5.value = t4.value
+		and t5.LANGUAGE_CODE = t3.LANGUAGE_CODE

@@ -1,0 +1,29 @@
+select
+	t1.GLOBAL_LOCATION_ID as globalLocationId,
+	t1.LOCATION as location,
+	t1.SERVICE_VERSION_ID as serviceVersionId,
+	t1.LI as li,
+	t1.PART_OF as partOf,
+	t4.DISPLAY_VALUE as timezoneKey,
+	t1.TIMEZONE as timezone,
+	t1.SORT_BY as sortBy,
+	t1.GLL_LEVEL as gllLevel,
+	t1.IS_FA_ELIGIBLE as isFaEligible,
+	t7.DISPLAY_VALUE as locationHierarchyKey,
+	t1.HIERARCHY_LEVEL_ID as hierarchyLevelId
+from
+	GLOBAL_LOCATION t1
+	left outer join TIMEZONE_KEY t2 on t1.TIMEZONE = t2.TIMEZONE
+	left outer join TIMEZONE_REF t3 on t2.TIMEZONE = t3.TIMEZONE
+		and t3.SERVICE_VERSION_ID = t1.SERVICE_VERSION_ID
+	left outer join TIMEZONE_VALUES t4 on t2.TIMEZONE = t4.TIMEZONE
+		and t4.SERVICE_VERSION_ID = t1.SERVICE_VERSION_ID
+		and t4.LANGUAGE_CODE = {2}
+	left outer join LOCATION_HIERARCHY_KEY t5 on t1.HIERARCHY_LEVEL_ID = t5.HIERARCHY_LEVEL_ID
+	left outer join LOCATION_HIERARCHY_REF t6 on t5.HIERARCHY_LEVEL_ID = t6.HIERARCHY_LEVEL_ID
+		and t6.SERVICE_VERSION_ID = t1.SERVICE_VERSION_ID
+	left outer join LOCATION_HIERARCHY_VALUES t7 on t5.HIERARCHY_LEVEL_ID = t7.HIERARCHY_LEVEL_ID
+		and t7.SERVICE_VERSION_ID = t1.SERVICE_VERSION_ID
+		and t7.LANGUAGE_CODE = {2}
+where
+	t1.SERVICE_VERSION_ID = {1}

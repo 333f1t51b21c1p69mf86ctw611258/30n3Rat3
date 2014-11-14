@@ -1,0 +1,20 @@
+select
+	t1.BILL_PERIOD as billPeriod,
+	t4.DISPLAY_VALUE as contractUseCode,
+	t1.IS_DEFAULT as isDefault,
+	t1.IS_INTERNAL as isInternal,
+	t1.BILL_PERIOD_HASH as billPeriodHash,
+	t2.LANGUAGE_CODE as languageCode,
+	t2.DISPLAY_VALUE as displayValue
+from
+	BILL_PERIOD_REF t1
+	inner join BILL_PERIOD_VALUES t2 on t1.BILL_PERIOD = t2.BILL_PERIOD 
+	left outer join GUI_INDICATOR_REF t3 on t3.table_name = ''BILL_PERIOD_REF''
+		and t3.field_name = lower(''CONTRACT_USE_CODE'')
+		and t3.integer_value = t1.CONTRACT_USE_CODE
+	left outer join GUI_INDICATOR_VALUES t4 on t4.table_name = t3.table_name
+		and t4.field_name = t3.field_name
+		and t4.integer_value = t3.integer_value
+		and t4.LANGUAGE_CODE = t2.LANGUAGE_CODE
+where
+	t2.LANGUAGE_CODE = {2}

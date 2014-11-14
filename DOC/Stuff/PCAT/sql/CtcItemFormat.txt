@@ -1,0 +1,10 @@
+select
+	t1.ITEM_ID as itemId,
+	t4.DISPLAY_VALUE as ctcFormatRef,
+	t1.FORMAT_ID as formatId
+from
+	CTC_ITEM_FORMAT t1
+	inner join CTC_ITEM t2 on t1.ITEM_ID = t2.ITEM_ID
+	inner join CTC_FORMAT_REF t3 on t1.FORMAT_ID = t3.FORMAT_ID
+	inner join CTC_FORMAT_VALUES t4 on t3.FORMAT_ID = t4.FORMAT_ID
+		and t4.LANGUAGE_CODE = {2}

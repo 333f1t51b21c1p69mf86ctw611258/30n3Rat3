@@ -1,0 +1,57 @@
+select
+	t1.SEQNUM as seqnum,
+	t1.CHARGE_MODIFIER_NAME as chargeModifierName,
+	t1.CHARGE_MODIFIER_VALUE as chargeModifierValue,
+	t3.SERVICE_VERSION_ID as serviceVersionId,
+	t4.DISPLAY_VALUE as rateClassKey,
+	t1.RATE_CLASS as rateClass,
+	t7.DISPLAY_VALUE as accountCategoryKey,
+	t1.ACCOUNT_CATEGORY as accountCategory,
+	t9.ISO_CODE as currencyIsoCode,
+	t9.IMPLIED_DECIMAL as currencyImpliedDecimal,
+	t10.DISPLAY_VALUE as rateCurrencyKey,
+	t1.CURRENCY_CODE as currencyCode,
+	t1.PERCENT_MODIFIER as percentModifier,
+	t1.FIXED_MODIFIER as fixedModifier,
+	t1.PRETAX as pretax,
+	t1.PRIORITY as priority,
+	t12.RESELLER_VERSION_ID as resellerVersionId,
+	t13.DISPLAY_VALUE as autFinalKey,
+	t1.TYPE_ID_USG as typeIdUsg,
+	t1.TIME_TYPE_ID as timeTypeId,
+	t16.DISPLAY_VALUE as jurisdictionsKey,
+	t1.JURISDICTION as jurisdiction,
+	t1.ACTIVE_DT as activeDt,
+	t1.INACTIVE_DT as inactiveDt
+from
+	RE_CHARGE_MODIFIER t1
+	left outer join RATE_CLASS_KEY t2 on t1.RATE_CLASS = t2.RATE_CLASS
+	left outer join RATE_CLASS_REF t3 on t2.RATE_CLASS = t3.RATE_CLASS
+		and t3.SERVICE_VERSION_ID = {1}
+	left outer join RATE_CLASS_VALUES t4 on t2.RATE_CLASS = t4.RATE_CLASS
+		and t4.SERVICE_VERSION_ID = {1}
+		and t4.LANGUAGE_CODE = {2}
+	left outer join ACCOUNT_CATEGORY_KEY t5 on t1.ACCOUNT_CATEGORY = t5.ACCOUNT_CATEGORY
+	left outer join ACCOUNT_CATEGORY_REF t6 on t5.ACCOUNT_CATEGORY = t6.ACCOUNT_CATEGORY
+		and t6.SERVICE_VERSION_ID = {1}
+	left outer join ACCOUNT_CATEGORY_VALUES t7 on t5.ACCOUNT_CATEGORY = t7.ACCOUNT_CATEGORY
+		and t7.SERVICE_VERSION_ID = {1}
+		and t7.LANGUAGE_CODE = {2}
+	inner join RATE_CURRENCY_KEY t8 on t1.CURRENCY_CODE = t8.CURRENCY_CODE
+	inner join RATE_CURRENCY_REF t9 on t8.CURRENCY_CODE = t9.CURRENCY_CODE
+		and t9.SERVICE_VERSION_ID = {1}
+	inner join RATE_CURRENCY_VALUES t10 on t8.CURRENCY_CODE = t10.CURRENCY_CODE
+		and t10.SERVICE_VERSION_ID = t9.SERVICE_VERSION_ID
+		and t10.LANGUAGE_CODE = {2}
+	left outer join AUT_FINAL_KEY t11 on t1.TYPE_ID_USG = t11.AUT_ID
+	left outer join AUT_FINAL_REF t12 on t11.AUT_ID = t12.AUT_ID
+		and t12.RESELLER_VERSION_ID = {0}
+	left outer join AUT_FINAL_VALUES t13 on t11.AUT_ID = t13.AUT_ID
+		and t13.RESELLER_VERSION_ID = {0}
+		and t13.LANGUAGE_CODE = t10.LANGUAGE_CODE
+	left outer join JURISDICTIONS_KEY t14 on t1.JURISDICTION = t14.JURISDICTION
+	left outer join JURISDICTIONS_REF t15 on t14.JURISDICTION = t15.JURISDICTION
+		and t15.SERVICE_VERSION_ID = t9.SERVICE_VERSION_ID
+	left outer join JURISDICTIONS_VALUES t16 on t14.JURISDICTION = t16.JURISDICTION
+		and t16.SERVICE_VERSION_ID = t9.SERVICE_VERSION_ID
+		and t16.LANGUAGE_CODE = t10.LANGUAGE_CODE

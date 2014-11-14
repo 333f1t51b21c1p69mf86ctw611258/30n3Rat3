@@ -1,0 +1,4 @@
+select
+	t1.TIMESTAMP as timestamp
+from
+	NON_VER_TIMESTAMP t1

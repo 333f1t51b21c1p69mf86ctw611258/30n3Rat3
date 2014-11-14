@@ -1,0 +1,16 @@
+select
+	t4.CONTRACT_TERM_ID as contractTermId,
+	t2.RESELLER_VERSION_ID as resellerVersionId,
+	t3.DISPLAY_VALUE as name,
+	t3.DESCRIPTION as description,
+    ''{3}'' as termType
+from
+	CONTRACT_TERM_KEY t4
+	inner join CONTRACT_TERM_REF t2 on t4.CONTRACT_TERM_ID = t2.CONTRACT_TERM_ID
+	inner join CONTRACT_TERM_VALUES t3 on t2.CONTRACT_TERM_ID = t3.CONTRACT_TERM_ID
+		and t2.RESELLER_VERSION_ID = t3.RESELLER_VERSION_ID
+        inner join OFFER_REF t1 on t4.CONTRACT_TERM_ID = t1.CONTRACT_TERM_ID
+                and t1.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
+where
+	t2.RESELLER_VERSION_ID = {0}
+	and t3.LANGUAGE_CODE = {2}

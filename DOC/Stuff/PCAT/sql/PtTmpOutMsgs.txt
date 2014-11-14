@@ -1,0 +1,6 @@
+select
+	t1.SERVER as server,
+	t1.MSG as msg,
+	t1.INSTIME as instime
+from
+	PT_TMP_OUT_MSGS t1

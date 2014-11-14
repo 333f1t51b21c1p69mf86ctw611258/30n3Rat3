@@ -1,0 +1,71 @@
+select
+	t1.RATE_RC_ID as rateRcId,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t4.DISPLAY_VALUE as rcTermKey,
+	t1.RC_TERM_ID as rcTermId,
+	t1.RATE_CLASS as rateClass,
+	t1.OFFER_ID as offerId,
+	t6.DISPLAY_VALUE as equipTypeCodeRef,
+	t1.EQUIP_TYPE_CODE as equipTypeCode,
+	t8.DISPLAY_VALUE as equipClassCodeRef,
+	t1.EQUIP_CLASS_CODE as equipClassCode,
+	t10.DISPLAY_VALUE as classOfServiceCodeRef,
+	t1.CLASS_OF_SERVICE_CODE as classOfServiceCode,
+	t12.DISPLAY_VALUE as typeIdRc,
+	t14.DISPLAY_VALUE as periodFrequency,
+	t16.SERVICE_VERSION_ID as serviceVersionId,
+	t16.ISO_CODE as currencyIsoCode,
+	t16.IMPLIED_DECIMAL as currencyImpliedDecimal,
+	t17.DISPLAY_VALUE as rateCurrencyKey,
+	t1.CURRENCY_CODE as currencyCode,
+	t1.RATE as rate,
+	t1.JURISDICTION as jurisdiction,
+	t1.DISTANCE_INCREMENT as distanceIncrement,
+	t1.UNIT_TYPE as unitType,
+	t1.UNITS_LOWER_LIMIT as unitsLowerLimit,
+	t1.UNITS_UPPER_LIMIT as unitsUpperLimit,
+	t1.UNITS_RATE as unitsRate,
+	t1.POP_LOWER_LIMIT as popLowerLimit,
+	t1.POP_UPPER_LIMIT as popUpperLimit,
+	t1.DISTANCE_RATE as distanceRate,
+	t1.ADD_IMPLIED_DECIMALS as addImpliedDecimals,
+	t1.DATE_CREATED as dateCreated,
+	t1.FOREIGN_CODE as foreignCode,
+	t1.IS_DEFAULT_RATE as isDefaultRate
+from
+	RATE_RC t1
+	inner join RC_TERM_KEY t2 on t1.RC_TERM_ID = t2.RC_TERM_ID
+	inner join RC_TERM_REF t3 on t2.RC_TERM_ID = t3.RC_TERM_ID
+		and t3.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+	inner join RC_TERM_VALUES t4 on t2.RC_TERM_ID = t4.RC_TERM_ID
+		and t4.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+		and t4.LANGUAGE_CODE = {2}
+	left outer join EQUIP_TYPE_CODE_REF t5 on t1.EQUIP_TYPE_CODE = t5.EQUIP_TYPE_CODE
+	left outer join EQUIP_TYPE_CODE_VALUES t6 on t5.EQUIP_TYPE_CODE = t6.EQUIP_TYPE_CODE
+		and t6.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join EQUIP_CLASS_CODE_REF t7 on t1.EQUIP_CLASS_CODE = t7.EQUIP_CLASS_CODE
+	left outer join EQUIP_CLASS_CODE_VALUES t8 on t7.EQUIP_CLASS_CODE = t8.EQUIP_CLASS_CODE
+		and t8.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join CLASS_OF_SERVICE_CODE_REF t9 on t1.CLASS_OF_SERVICE_CODE = t9.CLASS_OF_SERVICE_CODE
+	left outer join CLASS_OF_SERVICE_CODE_VALUES t10 on t9.CLASS_OF_SERVICE_CODE = t10.CLASS_OF_SERVICE_CODE
+		and t10.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join GENERIC_ENUMERATION_REF t11 on t11.enumeration_key = lower(''TYPE_ID_RC'')
+		and t11.value = t1.TYPE_ID_RC
+	left outer join GENERIC_ENUMERATION_VALUES t12 on t12.enumeration_key = t11.enumeration_key
+		and t12.value = t11.value
+		and t12.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join GUI_INDICATOR_REF t13 on t13.table_name = ''RATE_RC''
+		and t13.field_name = lower(''PERIOD_FREQUENCY'')
+		and t13.integer_value = t1.PERIOD_FREQUENCY
+	left outer join GUI_INDICATOR_VALUES t14 on t14.table_name = t13.table_name
+		and t14.field_name = t13.field_name
+		and t14.integer_value = t13.integer_value
+		and t14.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	inner join RATE_CURRENCY_KEY t15 on t1.CURRENCY_CODE = t15.CURRENCY_CODE
+	inner join RATE_CURRENCY_REF t16 on t15.CURRENCY_CODE = t16.CURRENCY_CODE
+		and t16.SERVICE_VERSION_ID = {1}
+	inner join RATE_CURRENCY_VALUES t17 on t15.CURRENCY_CODE = t17.CURRENCY_CODE
+		and t17.SERVICE_VERSION_ID = t16.SERVICE_VERSION_ID
+		and t17.LANGUAGE_CODE = t4.LANGUAGE_CODE
+where
+	t1.RESELLER_VERSION_ID = {0}

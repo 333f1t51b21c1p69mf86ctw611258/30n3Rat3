@@ -1,0 +1,25 @@
+select
+	t1.USAGE_PLAN_ID as usagePlanId,
+	t2.RESELLER_VERSION_ID as resellerVersionId,
+	t2.RECOMMENDED_RC_VALUE as recommendedRcValue,
+	t2.RATE_ZONE as rateZone,
+	t5.SERVICE_VERSION_ID as serviceVersionId,
+	t6.DISPLAY_VALUE as serviceProvidersKey,
+	t2.PROVIDER_ID as providerId,
+	t3.LANGUAGE_CODE as languageCode,
+	t3.DISPLAY_VALUE as displayValue,
+	t3.DESCRIPTION as description
+from
+	USAGE_PLAN_KEY t1
+	inner join USAGE_PLAN_REF t2 on t1.USAGE_PLAN_ID = t2.USAGE_PLAN_ID
+	inner join USAGE_PLAN_VALUES t3 on t2.USAGE_PLAN_ID = t3.USAGE_PLAN_ID
+		and t2.RESELLER_VERSION_ID = t3.RESELLER_VERSION_ID
+	left outer join SERVICE_PROVIDERS_KEY t4 on t2.PROVIDER_ID = t4.PROVIDER_ID
+	left outer join SERVICE_PROVIDERS_REF t5 on t4.PROVIDER_ID = t5.PROVIDER_ID
+		and t5.SERVICE_VERSION_ID = {1}
+	left outer join SERVICE_PROVIDERS_VALUES t6 on t4.PROVIDER_ID = t6.PROVIDER_ID
+		and t6.SERVICE_VERSION_ID = {1}
+		and t6.LANGUAGE_CODE = t3.LANGUAGE_CODE
+where
+	t2.RESELLER_VERSION_ID = {0}
+	and t3.LANGUAGE_CODE = {2}

@@ -1,0 +1,10 @@
+select
+	t1.VERSION_ID as versionId,
+	t1.INSTALL_ID as installId,
+	t1.VERSION_NAME as versionName,
+	t1.VERSION_NUMBER as versionNumber,
+	t1.DROP_NUMBER as dropNumber,
+	t1.TR_NUMBER as trNumber
+from
+	REG_VERSION t1
+	inner join REG_INSTALL t2 on t1.INSTALL_ID = t2.INSTALL_ID

@@ -1,0 +1,18 @@
+select
+	t1.SERVICE_VERSION_CHG_ID as serviceVersionChgId,
+	t1.PREV_SERVICE_VERSION_CHG_ID as prevServiceVersionChgId,
+	t1.SERVICE_VERSION_ID as serviceVersionId,
+	t1.TABLE_NAME as tableName,
+	t1.CHANGE_ID1 as changeId1,
+	t1.CHANGE_ID2 as changeId2,
+	t1.MAJOR_PC_VERSION_NUM_START as majorPcVersionNumStart,
+	t1.MAJOR_PC_VERSION_NUM_END as majorPcVersionNumEnd,
+	t1.MINOR_PC_VERSION_NUM as minorPcVersionNum,
+	t1.LOCK_USER as lockUser,
+	t1.CHG_WHO as chgWho,
+	t1.CHG_DT as chgDt
+from
+	SERVICE_VERSION_CHG_LOG t1
+	left outer join SERVICE_VERSION_CHG_LOG t2 on t1.PREV_SERVICE_VERSION_CHG_ID = t2.SERVICE_VERSION_CHG_ID
+where
+	t1.SERVICE_VERSION_ID = {1}

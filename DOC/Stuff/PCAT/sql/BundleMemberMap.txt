@@ -1,0 +1,36 @@
+select
+	t1.BUNDLE_MEMBER_MAP_ID as bundleMemberMapId,
+	t4.DISPLAY_VALUE as bundleKey,
+	t1.BUNDLE_ID as bundleId,
+	t1.MEMBER_ID as memberId,
+	t6.DISPLAY_VALUE as memberType,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t8.DISPLAY_VALUE as memberSelectionType,
+	t1.IS_DEFAULT as isDefault,
+	t1.TARIFF_PRIORITY as tariffPriority,
+	t1.RC_PRIORITY as rcPriority,
+	t1.DISCOUNT_PRIORITY as discountPriority,
+	t1.BALANCE_PRIORITY as balancePriority,
+	t1.DISPLAY_PRIORITY as displayPriority
+from
+	BUNDLE_MEMBER_MAP t1
+	inner join BUNDLE_KEY t2 on t1.BUNDLE_ID = t2.BUNDLE_ID
+	inner join BUNDLE_REF t3 on t2.BUNDLE_ID = t3.BUNDLE_ID
+		and t3.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+	inner join BUNDLE_VALUES t4 on t2.BUNDLE_ID = t4.BUNDLE_ID
+		and t4.RESELLER_VERSION_ID = t1.RESELLER_VERSION_ID
+		and t4.LANGUAGE_CODE = {2}
+	left outer join GENERIC_ENUMERATION_REF t5 on t5.enumeration_key = lower(''MEMBER_TYPE'')
+		and t5.value = t1.MEMBER_TYPE
+	left outer join GENERIC_ENUMERATION_VALUES t6 on t6.enumeration_key = t5.enumeration_key
+		and t6.value = t5.value
+		and t6.LANGUAGE_CODE = t4.LANGUAGE_CODE
+	left outer join GUI_INDICATOR_REF t7 on t7.table_name = ''BUNDLE_MEMBER_MAP''
+		and t7.field_name = lower(''MEMBER_SELECTION_TYPE'')
+		and t7.integer_value = t1.MEMBER_SELECTION_TYPE
+	left outer join GUI_INDICATOR_VALUES t8 on t8.table_name = t7.table_name
+		and t8.field_name = t7.field_name
+		and t8.integer_value = t7.integer_value
+		and t8.LANGUAGE_CODE = t4.LANGUAGE_CODE
+where
+	t1.RESELLER_VERSION_ID = {0}

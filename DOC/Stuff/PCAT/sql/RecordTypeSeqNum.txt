@@ -1,0 +1,8 @@
+select
+	t1.RECORD_TYPE as recordType,
+	t1.TASK_NAME as taskName,
+	t1.FIELD_NAME as fieldName,
+	t1.FIELD_VALUE as fieldValue,
+	t1.SEQ_NUM as seqNum
+from
+	RECORD_TYPE_SEQ_NUM t1

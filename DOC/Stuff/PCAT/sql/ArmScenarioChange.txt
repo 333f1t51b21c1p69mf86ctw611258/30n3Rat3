@@ -1,0 +1,8 @@
+select
+	t1.OLD_SCENARIO_NO as oldScenarioNo,
+	t1.COMP_EVENT_NO as compEventNo,
+	t1.NEW_SCENARIO_NO as newScenarioNo,
+	t1.NEXT_EVENT_NO as nextEventNo,
+	t1.SCHEDULE_DELAY as scheduleDelay
+from
+	ARM_SCENARIO_CHANGE t1

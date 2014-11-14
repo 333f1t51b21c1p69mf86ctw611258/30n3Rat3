@@ -1,0 +1,7 @@
+select
+	t1.SID_BID as sidBid,
+	t1.MARKET_CITY as marketCity,
+	t1.MARKET_STATE_ABBR as marketStateAbbr,
+	t1.MARKET_COUNTRY_CODE as marketCountryCode
+from
+	CIBER_SID_BID_MARKET t1

@@ -1,0 +1,71 @@
+select
+	t1.RATE_NRC_ID as rateNrcId,
+	t1.RESELLER_VERSION_ID as resellerVersionId,
+	t3.SERVICE_VERSION_ID as serviceVersionId,
+	t4.DISPLAY_VALUE as rateClassKey,
+	t1.RATE_CLASS as rateClass,
+	t7.DISPLAY_VALUE as nrcTermKey,
+	t1.NRC_TERM_ID as nrcTermId,
+	t1.RATE as rate,
+	t9.ISO_CODE as currencyIsoCode,
+	t9.IMPLIED_DECIMAL as currencyImpliedDecimal,
+	t10.DISPLAY_VALUE as rateCurrencyKey,
+	t1.CURRENCY_CODE as currencyCode,
+	t1.DATE_CREATED as dateCreated,
+	t1.OFFER_ID as offerId,
+	t12.DISPLAY_VALUE as equipTypeCodeRef,
+	t1.EQUIP_TYPE_CODE as equipTypeCode,
+	t14.DISPLAY_VALUE as equipClassCodeRef,
+	t1.EQUIP_CLASS_CODE as equipClassCode,
+	t16.DISPLAY_VALUE as classOfServiceCodeRef,
+	t1.CLASS_OF_SERVICE_CODE as classOfServiceCode,
+	t19.DISPLAY_VALUE as geoAreaKey,
+	t1.GEO_AREA_ID as geoAreaId,
+	t1.IS_DEFAULT_RATE as isDefaultRate,
+	t21.DISPLAY_VALUE as channelType
+from
+	RATE_NRC t1	
+        inner join (select reseller_id, major_version_num, reseller_version_id from reseller_version where reseller_version_id = {0}) tReseller on t1.reseller_version_id = tReseller.Reseller_Version_Id
+        inner join (select reseller_version_id, service_version_id, major_version_num, minor_version_num, reseller_id from reseller_version) tBaseVersion on tReseller.Reseller_Id = tBaseVersion.Reseller_Id  
+                and tReseller.Major_Version_Num = tBaseVersion.Major_Version_Num 
+                and tBaseVersion.Minor_Version_Num = 0   
+        left outer join RATE_CLASS_KEY t2 on t1.RATE_CLASS = t2.RATE_CLASS
+	left outer join RATE_CLASS_REF t3 on t2.RATE_CLASS = t3.RATE_CLASS
+		and t3.SERVICE_VERSION_ID = tBaseVersion.service_version_id
+	left outer join RATE_CLASS_VALUES t4 on t2.RATE_CLASS = t4.RATE_CLASS
+		and t4.SERVICE_VERSION_ID = tBaseVersion.service_version_id
+		and t4.LANGUAGE_CODE = {2}
+	inner join NRC_TERM_KEY t5 on t1.NRC_TERM_ID = t5.NRC_TERM_ID
+	inner join NRC_TERM_REF t6 on t5.NRC_TERM_ID = t6.NRC_TERM_ID
+		and t6.RESELLER_VERSION_ID = tBaseVersion.reseller_version_id
+	inner join NRC_TERM_VALUES t7 on t5.NRC_TERM_ID = t7.NRC_TERM_ID
+		and t7.RESELLER_VERSION_ID = t6.RESELLER_VERSION_ID
+		and t7.LANGUAGE_CODE = {2}
+	inner join RATE_CURRENCY_KEY t8 on t1.CURRENCY_CODE = t8.CURRENCY_CODE
+	inner join RATE_CURRENCY_REF t9 on t8.CURRENCY_CODE = t9.CURRENCY_CODE
+		and t9.SERVICE_VERSION_ID = tBaseVersion.service_version_id
+	inner join RATE_CURRENCY_VALUES t10 on t8.CURRENCY_CODE = t10.CURRENCY_CODE
+		and t10.SERVICE_VERSION_ID = t9.SERVICE_VERSION_ID
+		and t10.LANGUAGE_CODE = t7.LANGUAGE_CODE
+	left outer join EQUIP_TYPE_CODE_REF t11 on t1.EQUIP_TYPE_CODE = t11.EQUIP_TYPE_CODE
+	left outer join EQUIP_TYPE_CODE_VALUES t12 on t11.EQUIP_TYPE_CODE = t12.EQUIP_TYPE_CODE
+		and t12.LANGUAGE_CODE = t7.LANGUAGE_CODE
+	left outer join EQUIP_CLASS_CODE_REF t13 on t1.EQUIP_CLASS_CODE = t13.EQUIP_CLASS_CODE
+	left outer join EQUIP_CLASS_CODE_VALUES t14 on t13.EQUIP_CLASS_CODE = t14.EQUIP_CLASS_CODE
+		and t14.LANGUAGE_CODE = t7.LANGUAGE_CODE
+	left outer join CLASS_OF_SERVICE_CODE_REF t15 on t1.CLASS_OF_SERVICE_CODE = t15.CLASS_OF_SERVICE_CODE
+	left outer join CLASS_OF_SERVICE_CODE_VALUES t16 on t15.CLASS_OF_SERVICE_CODE = t16.CLASS_OF_SERVICE_CODE
+		and t16.LANGUAGE_CODE = t7.LANGUAGE_CODE
+	left outer join GEO_AREA_KEY t17 on t1.GEO_AREA_ID = t17.GEO_AREA_ID
+	left outer join GEO_AREA_REF t18 on t17.GEO_AREA_ID = t18.GEO_AREA_ID
+		and t18.SERVICE_VERSION_ID = t9.SERVICE_VERSION_ID
+	left outer join GEO_AREA_VALUES t19 on t17.GEO_AREA_ID = t19.GEO_AREA_ID
+		and t19.SERVICE_VERSION_ID = t9.SERVICE_VERSION_ID
+		and t19.LANGUAGE_CODE = t7.LANGUAGE_CODE
+	left outer join GENERIC_ENUMERATION_REF t20 on t20.enumeration_key = lower(''CHANNEL_TYPE'')
+		and t20.value = t1.CHANNEL_TYPE
+	left outer join GENERIC_ENUMERATION_VALUES t21 on t21.enumeration_key = t20.enumeration_key
+		and t21.value = t20.value
+		and t21.LANGUAGE_CODE = t7.LANGUAGE_CODE
+where
+	t7.LANGUAGE_CODE = {2}

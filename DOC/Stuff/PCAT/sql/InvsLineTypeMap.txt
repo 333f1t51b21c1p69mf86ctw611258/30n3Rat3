@@ -1,0 +1,30 @@
+select
+	t3.DISPLAY_VALUE as invsLineRef,
+	t1.INVENTORY_LINE_ID as inventoryLineId,
+	t5.DISPLAY_VALUE as invsTypeRef,
+	t1.INVENTORY_TYPE_ID as inventoryTypeId,
+	t1.IS_CSR_INSERT as isCsrInsert,
+	t7.DISPLAY_VALUE as manageAsPlaceholder,
+	t9.DISPLAY_VALUE as isAnnotationRequired
+from
+	INVS_LINE_TYPE_MAP t1
+	inner join INVS_LINE_REF t2 on t1.INVENTORY_LINE_ID = t2.INVENTORY_LINE_ID
+	inner join INVS_LINE_VALUES t3 on t2.INVENTORY_LINE_ID = t3.INVENTORY_LINE_ID
+		and t3.LANGUAGE_CODE = {2}
+	inner join INVS_TYPE_REF t4 on t1.INVENTORY_TYPE_ID = t4.INVENTORY_TYPE_ID
+	inner join INVS_TYPE_VALUES t5 on t4.INVENTORY_TYPE_ID = t5.INVENTORY_TYPE_ID
+		and t5.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join GUI_INDICATOR_REF t6 on t6.table_name = ''INVS_LINE_TYPE_MAP''
+		and t6.field_name = lower(''MANAGE_AS_PLACEHOLDER'')
+		and t6.integer_value = t1.MANAGE_AS_PLACEHOLDER
+	left outer join GUI_INDICATOR_VALUES t7 on t7.table_name = t6.table_name
+		and t7.field_name = t6.field_name
+		and t7.integer_value = t6.integer_value
+		and t7.LANGUAGE_CODE = t3.LANGUAGE_CODE
+	left outer join GUI_INDICATOR_REF t8 on t8.table_name = ''INVS_LINE_TYPE_MAP''
+		and t8.field_name = lower(''IS_ANNOTATION_REQUIRED'')
+		and t8.integer_value = t1.IS_ANNOTATION_REQUIRED
+	left outer join GUI_INDICATOR_VALUES t9 on t9.table_name = t8.table_name
+		and t9.field_name = t8.field_name
+		and t9.integer_value = t8.integer_value
+		and t9.LANGUAGE_CODE = t3.LANGUAGE_CODE
