@@ -1,5 +1,0 @@
-select
-	t1.AUDIT_LOG_CONFIG_ID as auditLogConfigId,
-	t1.TABLE_NAME as tableName
-from
-	AUDIT_LOG_CONFIG t1

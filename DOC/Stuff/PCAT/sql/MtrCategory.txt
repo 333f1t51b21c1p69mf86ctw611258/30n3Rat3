@@ -1,9 +1,0 @@
-select
-	t1.MTR_CATEGORY_ID as mtrCategoryId,
-	t2.LANGUAGE_CODE as languageCode,
-	t2.DISPLAY_VALUE as displayValue
-from
-	MTR_CATEGORY_REF t1
-	inner join MTR_CATEGORY_VALUES t2 on t1.MTR_CATEGORY_ID = t2.MTR_CATEGORY_ID
-where
-	t2.LANGUAGE_CODE = {2}

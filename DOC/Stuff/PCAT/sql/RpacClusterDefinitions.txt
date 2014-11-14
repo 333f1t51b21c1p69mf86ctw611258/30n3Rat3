@@ -1,5 +1,0 @@
-select
-	t1.RPAC_CLUSTER_ID as rpacClusterId,
-	t1.RPAC_CLUSTER_TYPE as rpacClusterType
-from
-	RPAC_CLUSTER_DEFINITIONS t1

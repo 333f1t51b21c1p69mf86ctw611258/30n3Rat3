@@ -1,6 +1,0 @@
-select
-	t1.OPERATOR_ID as operatorId,
-	t1.OPERATOR_TYPE as operatorType,
-	t1.RATE_KEY_ID as rateKeyId
-from
-	JNL_TMP_OPERATOR_KEYS t1

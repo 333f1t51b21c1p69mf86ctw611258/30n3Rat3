@@ -1,6 +1,0 @@
-select
-	t1.TBL_NAME as tblName,
-	t1.TO_DB_TYPE as toDbType,
-	t1.TBL_VERSION_TYPE as tblVersionType
-from
-	PROPAGATE_RULES t1

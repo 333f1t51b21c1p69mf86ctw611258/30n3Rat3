@@ -1,8 +1,0 @@
-select
-	t1.RANGE_ID as rangeId,
-	t1.RATING_DB_ID as ratingDbId,
-	t1.RANGE_END as rangeEnd,
-	t1.RANGE_START as rangeStart
-from
-	RANGE_MAP t1
-	inner join DP_TARGET_DB t2 on t1.RATING_DB_ID = t2.TARGET_DB_ID

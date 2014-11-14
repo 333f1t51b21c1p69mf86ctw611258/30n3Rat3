@@ -1,8 +1,0 @@
-select
-	t1.ROUTING_MSC_ID as routingMscId,
-	t1.MSCID as mscid,
-	t1.SERVICE_VERSION_ID as serviceVersionId
-from
-	ROUTING_MSC_ID t1
-where
-	t1.SERVICE_VERSION_ID = {1}

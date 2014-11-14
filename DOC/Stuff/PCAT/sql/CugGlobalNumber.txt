@@ -1,8 +1,0 @@
-select
-	t1.CUG_GLOBAL_NUMBER_ID as cugGlobalNumberId,
-	t1.DESTINATION_NUMBER as destinationNumber,
-	t1.SERVICE_VERSION_ID as serviceVersionId
-from
-	CUG_GLOBAL_NUMBER t1
-where
-	t1.SERVICE_VERSION_ID = {1}

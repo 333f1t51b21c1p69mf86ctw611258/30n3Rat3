@@ -1,6 +1,0 @@
-select
-	t1.COLLECTOR_ID as collectorId,
-	t1.CNT as cnt,
-	t1.SESSION_ID as sessionId
-from
-	TEMP_COL_SELECT_COLLECTOR t1

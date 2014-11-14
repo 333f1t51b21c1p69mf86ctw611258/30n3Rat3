@@ -1,6 +1,0 @@
-select
-	t1.SUPER_CUG_CODE as superCugCode,
-	t1.SUPER_CUG_NAME as superCugName,
-	t1.PASSWORD as password
-from
-	SUPER_CUG_DEFINITION t1

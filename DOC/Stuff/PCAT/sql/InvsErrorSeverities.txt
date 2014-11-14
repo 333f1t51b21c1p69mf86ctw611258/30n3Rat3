@@ -1,6 +1,0 @@
-select
-	t1.MESSAGE_LANGUAGE as messageLanguage,
-	t1.MESSAGE_SEVERITY as messageSeverity,
-	t1.CODE as code
-from
-	INVS_ERROR_SEVERITIES t1

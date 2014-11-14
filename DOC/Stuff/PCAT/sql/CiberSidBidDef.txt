@@ -1,6 +1,0 @@
-select
-	t1.SID_BID as sidBid,
-	t1.BAND as band,
-	t1.CARRIER as carrier
-from
-	CIBER_SID_BID_DEF t1

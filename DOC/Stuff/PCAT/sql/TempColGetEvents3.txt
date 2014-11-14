@@ -1,7 +1,0 @@
-select
-	t1.ACCOUNT_NO as accountNo,
-	t1.OPEN_ITEM_ID as openItemId,
-	t1.AMT_DUE as amtDue,
-	t1.SESSION_ID as sessionId
-from
-	TEMP_COL_GET_EVENTS3 t1

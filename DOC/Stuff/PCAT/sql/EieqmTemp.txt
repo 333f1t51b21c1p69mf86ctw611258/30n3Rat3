@@ -1,7 +1,0 @@
-select
-	t1.EXTERNAL_ID as externalId,
-	t1.EXTERNAL_ID_TYPE as externalIdType,
-	t1.HIERARCHY_LOOKUP as hierarchyLookup,
-	t1.ROW_NUM as rowNum
-from
-	EIEQM_TEMP t1

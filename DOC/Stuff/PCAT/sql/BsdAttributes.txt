@@ -1,8 +1,0 @@
-select
-	t1.ATTRIBUTE_ID as attributeId,
-	t1.ATTRIBUTE_NAME as attributeName,
-	t1.ATTRIBUTE_TYPE as attributeType,
-	t1.ATTRIBUTE_LENGTH as attributeLength,
-	t1.PARENT_NAME as parentName
-from
-	BSD_ATTRIBUTES t1

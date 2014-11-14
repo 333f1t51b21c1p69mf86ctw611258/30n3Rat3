@@ -1,9 +1,0 @@
-select
-	t1.SERVER_ID as serverId,
-	t1.PRIMARY_HOSTNAME as primaryHostname,
-	t1.PRIMARY_PORT as primaryPort,
-	t1.BACKUP_HOSTNAME as backupHostname,
-	t1.BACKUP_PORT as backupPort
-from
-	RECHARGE_CONFIGURATION t1
-	inner join DP_TARGET_DB t2 on t1.SERVER_ID = t2.TARGET_DB_ID

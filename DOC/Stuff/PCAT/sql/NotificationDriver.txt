@@ -1,4 +1,0 @@
-select
-	t1.NAME as name
-from
-	NOTIFICATION_DRIVER t1

@@ -1,6 +1,0 @@
-select
-	t1.FIELD_NAME as fieldName,
-	t1.AUT_INITIAL as autInitial,
-	t1.FIELD_ORDER as fieldOrder
-from
-	CDR_DUP_CHECK_FIELDS t1

@@ -1,9 +1,0 @@
-select
-	t1.CLIENT_ACTION as clientAction,
-	t3.DISPLAY_VALUE as casClientActionRef,
-	t1.CLIENT_ACTION_ID as clientActionId
-from
-	CAS_CLIENT_ACTION_MAP t1
-	inner join CAS_CLIENT_ACTION_REF t2 on t1.CLIENT_ACTION_ID = t2.CLIENT_ACTION_ID
-	inner join CAS_CLIENT_ACTION_VALUES t3 on t2.CLIENT_ACTION_ID = t3.CLIENT_ACTION_ID
-		and t3.LANGUAGE_CODE = {2}

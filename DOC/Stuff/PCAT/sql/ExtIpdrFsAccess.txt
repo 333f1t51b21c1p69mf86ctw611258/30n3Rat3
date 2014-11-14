@@ -1,7 +1,0 @@
-select
-	t1.EXT_CONTACT_ID as extContactId,
-	t1.CAPABILITY_URL as capabilityUrl,
-	t1.SUBSCR_GROUP_ID as subscrGroupId
-from
-	EXT_IPDR_FS_ACCESS t1
-	inner join EXT_CONTACTS t2 on t1.EXT_CONTACT_ID = t2.EXT_CONTACT_ID

@@ -1,8 +1,0 @@
-select
-	t1.ENUM_ID as enumId,
-	t1.FIELD_NAME as fieldName,
-	t1.SORT_ORDER as sortOrder,
-	t1.IS_ASCENDING as isAscending
-from
-	BSD_ENUM_DEFINITION_SORT t1
-	inner join BSD_ENUM_DEFINITION t2 on t1.ENUM_ID = t2.ENUM_ID

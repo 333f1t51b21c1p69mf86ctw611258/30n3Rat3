@@ -1,4 +1,0 @@
-select
-	t1.TABLE_NAME as tableName
-from
-	CACHED_REMOTE_TABLES t1

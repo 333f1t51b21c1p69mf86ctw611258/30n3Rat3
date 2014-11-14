@@ -1,5 +1,0 @@
-select
-	t1.ATTRIB_TYPE_ID as attribTypeId,
-	t1.ATTRIB_INTERNAL_NAME as attribInternalName
-from
-	INVS_FIELD_TYPE t1

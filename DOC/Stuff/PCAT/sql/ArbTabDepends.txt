@@ -1,9 +1,0 @@
-select
-	t1.DEPEND_ID as dependId,
-	t1.KEY_NM as keyNm,
-	t1.PARENT_NM as parentNm,
-	t1.CHILD_NM as childNm,
-	t1.PARENT_COLS as parentCols,
-	t1.CHILD_COLS as childCols
-from
-	ARB_TAB_DEPENDS t1

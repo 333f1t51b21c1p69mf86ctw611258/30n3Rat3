@@ -1,5 +1,0 @@
-select
-	t1.SUPERVISOR_NAME as supervisorName,
-	t1.USER_NAME as userName
-from
-	CSR_SUPERVISORS t1

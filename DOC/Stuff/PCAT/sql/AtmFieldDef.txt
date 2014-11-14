@@ -1,9 +1,0 @@
-select
-	t1.TABLE_NAME as tableName,
-	t1.FIELD_NAME as fieldName,
-	t1.FIELD_TYPE as fieldType,
-	t1.CROSS_TABLE_NAME as crossTableName,
-	t1.CROSS_FIELD_NAME as crossFieldName,
-	t1.POPLIST_TYPE as poplistType
-from
-	ATM_FIELD_DEF t1

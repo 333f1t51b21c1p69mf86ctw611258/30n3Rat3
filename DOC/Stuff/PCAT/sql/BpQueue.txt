@@ -1,5 +1,0 @@
-select
-	t1.QUEUE_ID as queueId,
-	t1.COMMAND as command
-from
-	BP_QUEUE t1

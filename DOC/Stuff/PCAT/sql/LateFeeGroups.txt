@@ -1,7 +1,0 @@
-select
-	t1.LATE_FEE_GRP_ID as lateFeeGrpId,
-	t1.LATE_FEE_TYPE_ID as lateFeeTypeId,
-	t1.ACTIVE_DT as activeDt,
-	t1.INACTIVE_DT as inactiveDt
-from
-	LATE_FEE_GROUPS t1

@@ -1,6 +1,0 @@
-select
-	t1.FIELD_NAME as fieldName,
-	t1.IS_CONSOLIDATION_KEY as isConsolidationKey,
-	t1.IS_EMPTY as isEmpty
-from
-	CDR_CONSOLIDATION_KEYS t1

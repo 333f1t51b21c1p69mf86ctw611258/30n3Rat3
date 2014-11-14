@@ -1,9 +1,0 @@
-select
-	t3.DISPLAY_VALUE as apactionRef,
-	t1.ACTION_ID as actionId,
-	t1.DATA_SOURCE as dataSource
-from
-	APPRIMARY_DATA_SOURCE t1
-	inner join APACTION_REF t2 on t1.ACTION_ID = t2.ACTION_ID
-	inner join APACTION_VALUES t3 on t2.ACTION_ID = t3.ACTION_ID
-		and t3.LANGUAGE_CODE = {2}

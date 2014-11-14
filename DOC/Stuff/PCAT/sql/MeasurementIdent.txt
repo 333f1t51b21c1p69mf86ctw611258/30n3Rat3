@@ -1,6 +1,0 @@
-select
-	t1.MEASUREMENT_ID as measurementId,
-	t1.MEASURE_SET_NAME as measureSetName,
-	t1.MEASUREMENT_DESC as measurementDesc
-from
-	MEASUREMENT_IDENT t1

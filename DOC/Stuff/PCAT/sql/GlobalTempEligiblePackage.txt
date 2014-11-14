@@ -1,5 +1,0 @@
-select
-	t1.PACKAGE_ID as packageId,
-	t1.DISPLAY_VALUE as displayValue
-from
-	GLOBAL_TEMP_ELIGIBLE_PACKAGE t1

@@ -1,8 +1,0 @@
-select
-	t1.MODULE_NAME as moduleName,
-	t1.CARDINALITY as cardinality,
-	t1.KEY1 as key1,
-	t1.KEY2 as key2,
-	t1.KEY3 as key3
-from
-	PROCESS_WORK_CM_NAME_PREFIX t1

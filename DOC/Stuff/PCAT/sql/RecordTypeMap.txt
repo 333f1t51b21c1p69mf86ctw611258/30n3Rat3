@@ -1,7 +1,0 @@
-select
-	t1.TASK_NAME as taskName,
-	t1.RECORD_ID_FROM as recordIdFrom,
-	t1.RECORD_ID_TO as recordIdTo,
-	t1.IS_CONDITIONAL_MAP as isConditionalMap
-from
-	RECORD_TYPE_MAP t1

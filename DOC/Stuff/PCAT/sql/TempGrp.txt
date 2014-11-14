@@ -1,4 +1,0 @@
-select
-	t1.GROUP_NAME as groupName
-from
-	TEMP_GRP t1

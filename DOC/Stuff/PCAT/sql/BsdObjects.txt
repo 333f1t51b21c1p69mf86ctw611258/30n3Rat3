@@ -1,5 +1,0 @@
-select
-	t1.OBJECT_ID as objectId,
-	t1.OBJECT_NAME as objectName
-from
-	BSD_OBJECTS t1

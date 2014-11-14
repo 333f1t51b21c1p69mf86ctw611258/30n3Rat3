@@ -1,6 +1,0 @@
-select
-	t1.FIELD_NAME as fieldName,
-	t1.ERROR_CODE as errorCode,
-	t1.REASON_CODE as reasonCode
-from
-	CIBER_FLD_ERROR_CODES t1

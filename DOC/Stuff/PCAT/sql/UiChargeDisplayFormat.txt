@@ -1,6 +1,0 @@
-select
-	t1.CHARGE_DOMAIN as chargeDomain,
-	t1.CHARGE_ID as chargeId,
-	t1.UI_FORMAT_TAG as uiFormatTag
-from
-	UI_CHARGE_DISPLAY_FORMAT t1

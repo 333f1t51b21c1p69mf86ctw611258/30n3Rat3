@@ -1,9 +1,0 @@
-select
-	t1.JNL_FEED_CODE as jnlFeedCode,
-	t1.RESELLER_ID as resellerId,
-	t1.SQL_QUERY as sqlQuery,
-	t1.FILE_NAME_FMT as fileNameFmt,
-	t1.IS_DEFAULT as isDefault,
-	t1.FEED_TYPE as feedType
-from
-	JNL_FEED_CODE t1

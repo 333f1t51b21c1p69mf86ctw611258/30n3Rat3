@@ -1,4 +1,0 @@
-select
-	t1.TMP_FIELD as tmpField
-from
-	TMP_LOCK_MP t1

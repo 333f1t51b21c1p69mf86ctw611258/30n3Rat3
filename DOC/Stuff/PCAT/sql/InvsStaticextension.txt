@@ -1,8 +1,0 @@
-select
-	t1.INVS_STATICEXTENSION_ID as invsStaticextensionId,
-	t1.REF_TABLE as refTable,
-	t1.VALUES_TABLE as valuesTable,
-	t1.ASSOC_TABLE as assocTable,
-	t1.ATTRIBUTE_NAME as attributeName
-from
-	INVS_STATICEXTENSION t1

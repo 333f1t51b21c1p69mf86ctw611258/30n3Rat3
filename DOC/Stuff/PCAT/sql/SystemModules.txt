@@ -1,4 +1,0 @@
-select
-	t1.MODULE_NAME as moduleName
-from
-	SYSTEM_MODULES t1

@@ -1,6 +1,0 @@
-select
-	t1.ENTITY_NAME as entityName,
-	t1.META_DATA_CHUNK as metaDataChunk,
-	t1.META_DATA as metaData
-from
-	PC_ENTITY_META_DATA t1

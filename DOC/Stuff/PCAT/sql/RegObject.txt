@@ -1,6 +1,0 @@
-select
-	t1.OBJECT_ID as objectId,
-	t1.OBJECT_TYPE as objectType,
-	t1.OBJECT_DB_TYPE as objectDbType
-from
-	REG_OBJECT t1

@@ -1,9 +1,0 @@
-select
-	t1.ENUM_ID as enumId,
-	t1.FIELD_NAME as fieldName,
-	t1.OPERATOR_TYPE as operatorType,
-	t1.IS_EXTERNAL as isExternal,
-	t1.FIELD_VALUE as fieldValue
-from
-	BSD_ENUM_DEFINITION_FILTER t1
-	inner join BSD_ENUM_DEFINITION t2 on t1.ENUM_ID = t2.ENUM_ID

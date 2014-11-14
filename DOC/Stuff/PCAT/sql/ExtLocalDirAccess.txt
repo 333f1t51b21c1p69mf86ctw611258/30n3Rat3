@@ -1,7 +1,0 @@
-select
-	t1.EXT_CONTACT_ID as extContactId,
-	t1.REMOTE_READY as remoteReady,
-	t1.REMOTE_WORK as remoteWork,
-	t1.REMOTE_DONE as remoteDone
-from
-	EXT_LOCAL_DIR_ACCESS t1

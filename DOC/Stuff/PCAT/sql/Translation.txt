@@ -1,7 +1,0 @@
-select
-	t1.TABLE_NAME as tableName,
-	t1.LANGUAGE_CODE as languageCode,
-	t1.ORIGIN_VALUE as originValue,
-	t1.TARGET_VALUE as targetValue
-from
-	TRANSLATION t1

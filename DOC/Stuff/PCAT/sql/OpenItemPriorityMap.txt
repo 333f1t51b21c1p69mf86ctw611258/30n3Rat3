@@ -1,9 +1,0 @@
-select
-	t1.OPEN_ITEM_PRIOR_MAP_ID as openItemPriorMapId,
-	t1.OPEN_ITEM_ID_MAP_KEY as openItemIdMapKey,
-	t1.RESELLER_VERSION_ID as resellerVersionId,
-	t1.KEY_ORDER_LEVEL as keyOrderLevel
-from
-	OPEN_ITEM_PRIORITY_MAP t1
-where
-	t1.RESELLER_VERSION_ID = {0}

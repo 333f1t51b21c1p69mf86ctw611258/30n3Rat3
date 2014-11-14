@@ -1,8 +1,0 @@
-select
-	t1.PORT_ELIG_LIST_ID as portEligListId,
-	t1.PREFIX as prefix,
-	t1.SERVICE_VERSION_ID as serviceVersionId
-from
-	PORTABILITY_ELIGIBLE_LIST t1
-where
-	t1.SERVICE_VERSION_ID = {1}

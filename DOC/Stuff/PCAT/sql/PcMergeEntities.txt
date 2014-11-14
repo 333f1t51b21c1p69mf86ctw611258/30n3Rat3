@@ -1,9 +1,0 @@
-select
-	t1.MERGE_COUNTER as mergeCounter,
-	t1.ENTITY_ID1 as entityId1,
-	t1.ENTITY_ID1_COLUMN as entityId1Column,
-	t1.ENTITY_ID2 as entityId2,
-	t1.ENTITY_ID2_COLUMN as entityId2Column,
-	t1.TABLE_NAME as tableName
-from
-	PC_MERGE_ENTITIES t1

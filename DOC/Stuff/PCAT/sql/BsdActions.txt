@@ -1,5 +1,0 @@
-select
-	t1.ACTION_ID as actionId,
-	t1.ACTION_NAME as actionName
-from
-	BSD_ACTIONS t1

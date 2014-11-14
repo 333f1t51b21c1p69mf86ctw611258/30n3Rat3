@@ -1,7 +1,0 @@
-select 
-    distinct t1.enum_name as entityId,
-    t1.enum_name as displayValue
-from 
-    bsd_enum_definition t1
-order by 
-    displayValue

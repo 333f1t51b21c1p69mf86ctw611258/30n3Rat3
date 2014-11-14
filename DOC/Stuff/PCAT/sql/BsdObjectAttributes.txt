@@ -1,7 +1,0 @@
-select
-	t1.OBJECT_ID as objectId,
-	t1.ATTRIBUTE_ID as attributeId
-from
-	BSD_OBJECT_ATTRIBUTES t1
-	inner join BSD_OBJECTS t2 on t1.OBJECT_ID = t2.OBJECT_ID
-	inner join BSD_ATTRIBUTES t3 on t1.ATTRIBUTE_ID = t3.ATTRIBUTE_ID

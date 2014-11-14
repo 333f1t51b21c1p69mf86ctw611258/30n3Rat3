@@ -1,8 +1,0 @@
-select
-	t1.IR_ID as irId,
-	t1.INSTALL_ID as installId,
-	t1.RELEASE_ID as releaseId
-from
-	REG_INSTALL_RELEASE t1
-	inner join REG_INSTALL t2 on t1.INSTALL_ID = t2.INSTALL_ID
-	inner join REG_RELEASE t3 on t1.RELEASE_ID = t3.RELEASE_ID
