@@ -1,0 +1,43 @@
+PCAT
+	+ Thay thế vnp_common.subs_offer_map
+		Check lại việc sử dụng PCAT offer.offer_id thay cho việc sử dụng vnp_common product_offer_version_id
+	+ Vẫn giữ nguyên Subscriber từ vnp_common
+	+ 
+	
+VNP
+	Tìm hiểu lại thế nào gọi là gói thuê bao, thế nào gọi là gói dung lượng
+
+1. Bảng Zone
+	+ Lấy dành cho cuộc gọi sms vas, sms tới đầu số dịch vụ
+		loadZoneGroupToMap(mapSMSVAS, "SELECT code, zone, nw_group FROM " + schemaCommon + "zone_map WHERE service_id= " + id_sms + " AND nw_group = '" + zoneVAS + "'");
+	+ Lấy dành cho sms thường, các subs nhắn tin cho nhau
+		loadZoneGroupToMap(mapSMSNormal, "SELECT code, zone, nw_group FROM " + schemaCommon + "zone_map WHERE service_id= " + id_sms + " AND nw_group <> '" + zoneVAS + "'");
+    + Lấy dành cho voice thường
+		loadZoneGroupToMap(mapCallNormal, "SELECT code, zone, nw_group FROM " + schemaCommon + "zone_map WHERE service_id= " + id_voice
+		
+		
+		
+2. Lấy toàn bộ gói cước một subs đăng ký
+	sql = "SELECT a.product_offer_version_id, b.subscriber_no " +
+         "FROM " + dbconfig.getDb_Common() + "subs_offer_map a, " +
+        dbconfig.getDb_Common() + "subscriber b " +
+        "WHERE (a.subscriber_id = b.subscriber_id)";
+		
+		
+3. Lấy những gói cước thuê bao thay đổi
+	sql = "SELECT a.product_offer_version_id, b.subscriber_no, c.change_type,c.MODIFIED_DATE " +
+         "FROM " + dbconfig.getDb_Common() + "subs_offer_map a, " +
+          dbconfig.getDb_Common() + "subscriber b, " +
+          dbconfig.getDb_Common() + "subs_offer_change c " +
+        "WHERE (a.subscriber_id = b.subscriber_id) AND (a.subscriber_id = c.subscriber_id) AND  
+		c.MODIFIED_DATE > to_date('" + Max_Modify_Time + "', 'mm/dd/yyyy hh24:mi:ss')";
+	
+4. Lấy toàn bộ Balance của Offer
+	SELECT (balance_id || '_' || product_offer_version_id) key, offer_cost, internal_cost,rerate_flag 
+	FROM vnp_common.po_balance_map
+	
+5. Load toàn bộ gói mà có B_Number = null => Dùng cho Data
+	SELECT b.product_offer_version_id, a.b_number_enrich zone, a.product_group_type nw_group 
+	FROM vnp_common.product_offer a, vnp_common.product_offer_version b 
+	WHERE a.product_offer_id = b.product_offer_id 
+	AND (a.b_number_enrich is not null AND a.product_group_type is not null)
