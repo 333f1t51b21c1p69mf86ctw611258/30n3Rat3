@@ -28,7 +28,7 @@ ORDER BY cdr_start_time;
 
 UPDATE vnp_data.hot_rated_cdr_dev
    SET rerate_flag = 0
- WHERE cdr_type = 1 AND a_number = '841247494428';
+ WHERE cdr_type = 4 AND a_number = '841247494428';
 
 -- SMS Onnet
 
@@ -52,3 +52,5 @@ SELECT * FROM vnp_data.rated_cdr_dev;
 SELECT *
   FROM vnp_data.hot_rated_cdr_dev
  WHERE aut_final_id = 30411;
+ 
+ 

@@ -2,61 +2,61 @@
 DROP TABLE VNP_DATA.HOT_RATED_CDR;
 
 CREATE TABLESPACE hot_rated_p0
-  DATAFILE '/u01/app/oracle/oradata/eonerate/hot_rated_p0.dbf'
+  DATAFILE '+DATA/eonerate/datafile/hot_rated_p0.dbf'
     SIZE 50M
     REUSE
     AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
 
 CREATE TABLESPACE hot_rated_p1
-  DATAFILE '/u01/app/oracle/oradata/eonerate/hot_rated_p1.dbf'
+  DATAFILE '+DATA/eonerate/datafile/hot_rated_p1.dbf'
     SIZE 50M
     REUSE
     AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
 
 CREATE TABLESPACE hot_rated_p2
-  DATAFILE '/u01/app/oracle/oradata/eonerate/hot_rated_p2.dbf'
+  DATAFILE '+DATA/eonerate/datafile/hot_rated_p2.dbf'
     SIZE 50M
     REUSE
     AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
 
 CREATE TABLESPACE hot_rated_p3
-  DATAFILE '/u01/app/oracle/oradata/eonerate/hot_rated_p3.dbf'
+  DATAFILE '+DATA/eonerate/datafile/hot_rated_p3.dbf'
     SIZE 50M
     REUSE
     AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
 
 CREATE TABLESPACE hot_rated_p4
-  DATAFILE '/u01/app/oracle/oradata/eonerate/hot_rated_p4.dbf'
+  DATAFILE '+DATA/eonerate/datafile/hot_rated_p4.dbf'
     SIZE 50M
     REUSE
     AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
 
 CREATE TABLESPACE hot_rated_p5
-  DATAFILE '/u01/app/oracle/oradata/eonerate/hot_rated_p5.dbf'
+  DATAFILE '+DATA/eonerate/datafile/hot_rated_p5.dbf'
     SIZE 50M
     REUSE
     AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
 
 CREATE TABLESPACE hot_rated_p6
-  DATAFILE '/u01/app/oracle/oradata/eonerate/hot_rated_p6.dbf'
+  DATAFILE '+DATA/eonerate/datafile/hot_rated_p6.dbf'
     SIZE 50M
     REUSE
     AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
 
 CREATE TABLESPACE hot_rated_p7
-  DATAFILE '/u01/app/oracle/oradata/eonerate/hot_rated_p7.dbf'
+  DATAFILE '+DATA/eonerate/datafile/hot_rated_p7.dbf'
     SIZE 50M
     REUSE
     AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
 
 CREATE TABLESPACE hot_rated_p8
-  DATAFILE '/u01/app/oracle/oradata/eonerate/hot_rated_p8.dbf'
+  DATAFILE '+DATA/eonerate/datafile/hot_rated_p8.dbf'
     SIZE 50M
     REUSE
     AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
 
 CREATE TABLESPACE hot_rated_p9
-  DATAFILE '/u01/app/oracle/oradata/eonerate/hot_rated_p9.dbf'
+  DATAFILE '+DATA/eonerate/datafile/hot_rated_p9.dbf'
     SIZE 50M
     REUSE
     AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
