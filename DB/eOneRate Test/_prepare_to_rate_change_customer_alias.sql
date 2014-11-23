@@ -1,4 +1,4 @@
-/* Formatted on 16/11/2014 4:59:57 PM (QP5 v5.215.12089.38647) */
+/* Formatted on 21/11/2014 1:49:42 PM (QP5 v5.215.12089.38647) */
 SELECT ACCOUNT_VERSION_ID,
        ALIAS,
        ACCOUNT_ID,
@@ -7,6 +7,9 @@ SELECT ACCOUNT_VERSION_ID,
        TO_DATE,
        MODIFIED_DATE
   FROM VNP_COMMON.ALIAS_SELECT;
+
+SELECT * FROM subscriber;
+select * from account_version;
 
 SELECT ACCOUNT_VERSION_ID,
        SUBSCRIBER_NO AS ALIAS,
