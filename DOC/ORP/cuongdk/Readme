@@ -1,0 +1,9 @@
+1. Edit opps.sh to change call parameters if necesary
+2. ./opps.sh
+   ./opps.sh
+   ./cap3sms.sh
+3. ./testcdr
+
+If coredump while testing ORP file, run "./cleancdr <filename>" to cleanup
+
+4. SSH to urp1 and execute /home/omni/bin/start_ccap.sh, then check latest log from /home/omni/Logs
