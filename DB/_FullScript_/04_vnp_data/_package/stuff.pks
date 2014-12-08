@@ -1,6 +1,6 @@
-DROP PACKAGE VNP_DATA.STUFF;
+DROP PACKAGE STUFF;
 
-CREATE OR REPLACE PACKAGE VNP_DATA.STUFF
+CREATE OR REPLACE PACKAGE          STUFF
 AS
    /******************************************************************************
       NAME:       STUFF
@@ -17,5 +17,12 @@ AS
    PROCEDURE COMPENSATE_THIS_MONTH;
 
    PROCEDURE COMPENSATE_PREVIOUS_MONTH;
+
+   PROCEDURE ADD_PART_BY_DAY (I_TABLE_NAME          VARCHAR2,
+                              I_TABLESPACE_NAME     VARCHAR2,
+                              I_PARTITION_PREFIX    VARCHAR2,
+                              I_DATAFILE_DIR        VARCHAR2,
+                              I_DATAFILE_PREFIX     VARCHAR2);
 END STUFF;
+
 /

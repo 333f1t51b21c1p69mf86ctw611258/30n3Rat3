@@ -1,6 +1,6 @@
-DROP PACKAGE BODY VNP_DATA.STUFF;
+DROP PACKAGE BODY STUFF;
 
-CREATE OR REPLACE PACKAGE BODY VNP_DATA.STUFF
+CREATE OR REPLACE PACKAGE BODY          STUFF
 AS
    /******************************************************************************
       NAME:       STUFF
@@ -159,9 +159,15 @@ AS
         INTO t_start_time
         FROM DUAL;
 
+
+
       SELECT ADD_MONTHS (t_start_time, 1) INTO t_end_time FROM DUAL;
 
+
+
       SELECT TO_CHAR (t_start_time, 'YYMM') INTO v_time FROM DUAL;
+
+
 
       FOR i IN 0 .. 9
       LOOP
@@ -198,8 +204,10 @@ AS
                    RATED.INTERNAL_COST AS RATED_INTERNAL_COST,
                    RATED.INTERNAL_FREE_BLOCK AS RATED_INTERNAL_FREE_BLOCK -- ,
               --               RATED.RERATE_FLAG
-              FROM HOT_RATED_CDR HOT
-                   INNER JOIN RATED_CDR RATED ON (HOT.MAP_ID = RATED.MAP_ID)
+              FROM    HOT_RATED_CDR HOT
+                   INNER JOIN
+                      RATED_CDR RATED
+                   ON (HOT.MAP_ID = RATED.MAP_ID)
              WHERE     HOT.DATA_PART = i
                    AND RATED.DATA_PART = i
                    AND RATED.RERATE_FLAG = 50
@@ -207,6 +215,8 @@ AS
                    AND HOT.CDR_START_TIME < t_end_time;
 
          SELECT COUNT (1) INTO n_tmp FROM VNP_DATA.COMPENSATION_CDR;
+
+
 
          n_input := n_input + n_tmp;
 
@@ -231,8 +241,8 @@ AS
 
          LOOP
             FETCH C_COMPENSATION_SUM
-               BULK COLLECT INTO TBL_COMPENSATION_SUM
-               LIMIT 1000;
+            BULK COLLECT INTO TBL_COMPENSATION_SUM
+            LIMIT 1000;
 
             EXIT WHEN TBL_COMPENSATION_SUM.COUNT = 0;
 
@@ -387,7 +397,11 @@ AS
    BEGIN
       SELECT TO_CHAR (SYSDATE, 'MM') INTO V_MONTH FROM DUAL;
 
+
+
       SELECT TO_CHAR (SYSDATE, 'YYYY') INTO V_YEAR FROM DUAL;
+
+
 
       COMPENSATE (V_MONTH, V_YEAR);
    EXCEPTION
@@ -417,7 +431,11 @@ AS
    BEGIN
       SELECT TO_CHAR (ADD_MONTHS (SYSDATE, -1), 'MM') INTO V_MONTH FROM DUAL;
 
+
+
       SELECT TO_CHAR (ADD_MONTHS (SYSDATE, -1), 'YYYY') INTO V_YEAR FROM DUAL;
+
+
 
       COMPENSATE (V_MONTH, V_YEAR);
    EXCEPTION
@@ -437,5 +455,180 @@ AS
                       'ERROR: ' || v_err_msg,
                       3);
    END;
+
+   PROCEDURE ADD_PART_BY_DAY (I_TABLE_NAME          VARCHAR2,
+                              I_TABLESPACE_NAME     VARCHAR2,
+                              I_PARTITION_PREFIX    VARCHAR2,
+                              I_DATAFILE_DIR        VARCHAR2,
+                              I_DATAFILE_PREFIX     VARCHAR2)
+   IS
+      /******************************************************************************
+           NAME:       ADD_PART_BY_DAY
+           PURPOSE:
+
+           REVISIONS:
+           Ver        Date        Author           Description
+           ---------  ----------  ---------------  ------------------------------------
+           1.0        02/01/2014      manucian86       1. Created this procedure.
+
+           I_PARTITION_PREFIX   = 'VNP_DATA_HRC'
+           I_DATAFILE_DIR       = '/u01/app/oracle/oradata/eonerate/vnp_data'
+           I_DATAFILE_PREFIX    = 'hot_rated_cdr'
+        ******************************************************************************/
+
+      v_err_msg                 VARCHAR2 (1023);
+      v_max_part                VARCHAR2 (20);
+      v_sql                     VARCHAR2 (1023);
+
+      d_date                    DATE;
+      v_tmp1                    VARCHAR2 (31);
+      v_tmp2                    VARCHAR2 (31);
+      v_to_date                 DATE;
+      v_partition_name_format   VARCHAR2 (31) := 'yyMMdd';
+   BEGIN
+      v_to_date := SYSDATE + 2;
+
+      SELECT SUBSTR (MAX (a.partition_name), 2)
+        INTO v_max_part
+        FROM user_tab_partitions a
+       WHERE table_name = I_TABLE_NAME;
+
+
+
+      d_date := TO_DATE (v_max_part, v_partition_name_format);
+
+      -- d_date := d_date + 1;
+
+      WHILE d_date < v_to_date
+      LOOP
+         SELECT TO_CHAR (d_date + 1, v_partition_name_format)
+           INTO v_tmp1
+           FROM DUAL;
+
+
+
+         SELECT TO_CHAR (d_date + 2, v_partition_name_format)
+           INTO v_tmp2
+           FROM DUAL;
+
+
+
+         --      SELECT TO_CHAR (d_date + 2, 'dd/mm/yyyy') INTO v_tmp2 FROM DUAL;
+
+         FOR v_index IN 0 .. 9
+         LOOP
+            DECLARE
+               TablespaceExistsExcep   EXCEPTION;
+               PRAGMA EXCEPTION_INIT (TablespaceExistsExcep, -1543);
+            BEGIN
+               v_sql :=
+                     'CREATE TABLESPACE '
+                  || I_PARTITION_PREFIX
+                  || '_P'
+                  || v_tmp1
+                  || '_'
+                  || v_index
+                  || ' DATAFILE '''
+                  || I_DATAFILE_DIR
+                  || I_DATAFILE_PREFIX
+                  || '_P'
+                  || v_tmp1
+                  || '_'
+                  || v_index
+                  || '_1.dbf'' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED, '''
+                  || I_DATAFILE_DIR
+                  || I_DATAFILE_PREFIX
+                  || '_P'
+                  || v_tmp1
+                  || '_'
+                  || v_index
+                  || '_2.dbf'' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED, '''
+                  || I_DATAFILE_DIR
+                  || I_DATAFILE_PREFIX
+                  || '_P'
+                  || v_tmp1
+                  || '_'
+                  || v_index
+                  || '_3.dbf'' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED, '''
+                  || I_DATAFILE_DIR
+                  || I_DATAFILE_PREFIX
+                  || '_P'
+                  || v_tmp1
+                  || '_'
+                  || v_index
+                  || '_4.dbf'' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED';
+
+               EXECUTE IMMEDIATE (v_sql);
+            EXCEPTION
+               WHEN TablespaceExistsExcep
+               THEN
+                  --                  DBMS_OUTPUT.PUT_LINE ('Do something here....');
+                  NULL;
+            END;
+         END LOOP;
+
+         v_sql :=
+               'ALTER TABLE '
+            || I_TABLE_NAME
+            || ' ADD PARTITION P'
+            || v_tmp1
+            || ' VALUES LESS THAN (TO_DATE(''20'
+            || v_tmp2
+            || ''',''yyyyMMdd''))'
+            || ' TABLESPACE '
+            || I_TABLESPACE_NAME
+            || ' (';
+
+         FOR v_index IN 0 .. 9
+         LOOP
+            v_sql :=
+                  v_sql
+               || 'SUBPARTITION P'
+               || v_tmp1
+               || '_'
+               || v_index
+               || ' VALUES LESS THAN ('
+               || (v_index + 1)
+               || ') TABLESPACE '
+               || I_TABLESPACE_NAME
+               || '_P'
+               || v_tmp1
+               || '_'
+               || v_index;
+
+            IF v_index <> 9
+            THEN
+               v_sql := v_sql || ', ';
+            END IF;
+         END LOOP;
+
+         v_sql := v_sql || ')';
+
+         EXECUTE IMMEDIATE (v_sql);
+
+         --      DBMS_OUTPUT.put_line (v_sql);
+
+         d_date := d_date + 1;
+      END LOOP;
+
+      INS_ACT_LOG ('DATABASE',
+                   'ADD_PART_BY_DAY: ' || I_TABLE_NAME,
+                   'DONE: ADD_PART_BY_DAY: ' || I_TABLE_NAME,
+                   0);
+   EXCEPTION
+      WHEN OTHERS
+      THEN
+         v_err_msg :=
+            SUBSTR (
+               SQLERRM || CHR (10) || DBMS_UTILITY.format_error_backtrace,
+               1,
+               1023);
+
+         INS_ACT_LOG ('DATABASE',
+                      'ADD_PART_BY_DAY: ' || I_TABLE_NAME,
+                      'ERROR: ' || v_err_msg,
+                      3);
+   END;
 END STUFF;
+
 /

@@ -1,9 +1,15 @@
-/* Formatted on 26/11/2014 5:56:53 PM (QP5 v5.215.12089.38647) */
+/* Formatted on 01/12/2014 3:33:13 PM (QP5 v5.215.12089.38647) */
 TRUNCATE TABLE vnp_data.rated_cdr_dev;
 
-UPDATE vnp_data.hot_rated_cdr_dev
+SELECT COUNT (1)
+  FROM vnp_data.hot_rated_cdr
+ WHERE rerate_flag = 0;
+
+-- 4779784
+
+UPDATE vnp_data.hot_rated_cdr
    SET rerate_flag = 0
- WHERE a_number = '84914251186';
+ WHERE a_number = '841247494428';
 
 
 ------------- VOICE
@@ -44,7 +50,7 @@ UPDATE vnp_data.hot_rated_cdr_dev
    SET rerate_flag = 0
  WHERE cdr_type = 4 AND a_number = '84914251186' AND map_id = 1489;
 
-DELETE FROM vnp_data.rated_cdr_dev
+DELETE FROM vnp_data.rated_cdr
       WHERE 1 = 1;
 
 COMMIT;
@@ -56,5 +62,5 @@ SELECT *
  WHERE a_number = '841247494428';
 
 SELECT *
-  FROM vnp_data.rated_cdr_dev
+  FROM vnp_data.rated_cdr
  WHERE a_number = '84914251186';

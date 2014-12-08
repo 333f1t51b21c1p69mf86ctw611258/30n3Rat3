@@ -1,5 +1,14 @@
 DROP TABLE VNP_COMMON.PRODUCT_OFFER CASCADE CONSTRAINTS;
 
+ALTER TABLE VNP_COMMON.PRODUCT_OFFER
+COLUMN (
+  IS_INTERNAL               NUMBER(1) DEFAULT 0,
+  RC                        NUMBER(15,3),
+  NRC                       NUMBER(15,3),
+  VAT_RATE                  NUMBER(15,3),
+  UNBILL                    CHAR(1 BYTE),
+)
+
 CREATE TABLE VNP_COMMON.PRODUCT_OFFER
 (
   OFFER_ID                  NUMBER(10)          NOT NULL,
@@ -11,7 +20,7 @@ CREATE TABLE VNP_COMMON.PRODUCT_OFFER
   CURRENCY_NAME             VARCHAR2(720 BYTE),
   CURRENCY_CODE             NUMBER(6),
   UPSELL_TEMPLATE_ID        NUMBER(10),
-  IS_INTERNAL               NUMBER(1),
+  IS_INTERNAL               NUMBER(1) DEFAULT 0,
   RC                        NUMBER(15,3),
   NRC                       NUMBER(15,3),
   VAT_RATE                  NUMBER(15,3),
