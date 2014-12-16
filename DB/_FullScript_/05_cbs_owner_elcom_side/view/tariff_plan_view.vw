@@ -1,7 +1,7 @@
-DROP VIEW TARIFF_PLAN_VIEW;
+DROP VIEW CBS_OWNER.TARIFF_PLAN_VIEW;
 
-/* Formatted on 05/12/2014 9:43:56 PM (QP5 v5.215.12089.38647) */
-CREATE OR REPLACE FORCE VIEW TARIFF_PLAN_VIEW
+/* Formatted on 10/12/2014 9:03:03 AM (QP5 v5.215.12089.38647) */
+CREATE OR REPLACE FORCE VIEW CBS_OWNER.TARIFF_PLAN_VIEW
 (
    TARIFF_PLAN_MAPPING_ID,
    RESELLER_VERSION_ID,
@@ -11,7 +11,6 @@ CREATE OR REPLACE FORCE VIEW TARIFF_PLAN_VIEW
    DEFAULT_CURRENCY_CODE,
    CALENDAR_NAME,
    CALENDAR_ID,
-   UNIT_TYPE_NAME,
    UNIT_TYPE_ID,
    TARIFF_SET_NAME,
    TARIFF_SET_ID,
@@ -27,7 +26,7 @@ AS
           T8.CURRENCY_CODE AS default_currency_code,
           T23.DISPLAY_VALUE AS calendar_name,
           T3.CALENDAR_ID,
-          t43.DISPLAY_VALUE AS unit_type_name,
+          --          t43.DISPLAY_VALUE AS unit_type_name,
           T3.UNIT_TYPE AS UNIT_TYPE_ID,
           -- ### add
           t7.DISPLAY_VALUE AS tariff_set_name,              -- tariffSetIdKey,
@@ -65,11 +64,15 @@ AS
           INNER JOIN cbs_owner.CALENDAR_VALUES t23
              ON     t22.CALENDAR_ID = t23.CALENDAR_ID
                 AND t22.RESELLER_VERSION_ID = t23.RESELLER_VERSION_ID
-          -- add unit type
-          INNER JOIN cbs_owner.UNITS_TYPE_REF t42
-             ON     t3.UNIT_TYPE = t42.UNIT_TYPE
-                AND t42.SERVICE_VERSION_ID = t8.SERVICE_VERSION_ID
-          INNER JOIN cbs_owner.UNITS_TYPE_VALUES t43
-             ON     t42.UNIT_TYPE = t43.UNIT_TYPE
-                AND t42.SERVICE_VERSION_ID = t43.SERVICE_VERSION_ID
-                AND t43.LANGUAGE_CODE = t4.LANGUAGE_CODE;
+--          -- add unit type
+--          INNER JOIN cbs_owner.UNITS_TYPE_REF t42
+--             ON     t3.UNIT_TYPE = t42.UNIT_TYPE
+--                AND t42.SERVICE_VERSION_ID = t8.SERVICE_VERSION_ID
+--          INNER JOIN cbs_owner.UNITS_TYPE_VALUES t43
+--             ON     t42.UNIT_TYPE = t43.UNIT_TYPE
+--                AND t42.SERVICE_VERSION_ID = t43.SERVICE_VERSION_ID
+--                AND t43.LANGUAGE_CODE = t4.LANGUAGE_CODE
+;
+
+
+GRANT SELECT ON CBS_OWNER.TARIFF_PLAN_VIEW TO VNP_COMMON;
