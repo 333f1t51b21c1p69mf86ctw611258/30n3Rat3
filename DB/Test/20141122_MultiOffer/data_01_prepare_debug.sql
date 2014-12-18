@@ -1,5 +1,7 @@
-/* Formatted on 13/12/2014 12:47:59 AM (QP5 v5.215.12089.38647) */
+/* Formatted on 17/12/2014 5:12:20 PM (QP5 v5.215.12089.38647) */
 TRUNCATE TABLE vnp_data.rated_cdr_dev;
+
+SELECT * FROM vnp_data.hot_rated_cdr;
 
 SELECT COUNT (1)
   FROM vnp_data.hot_rated_cdr
@@ -61,6 +63,12 @@ SELECT COUNT (1)
   FROM vnp_data.hot_rated_cdr
  WHERE a_number = '841247494428';
 
+SELECT * FROM vnp_data.hot_rated_cdr;
+
 SELECT *
   FROM vnp_data.rated_cdr
  WHERE a_number = '841247494428';
+
+SELECT COUNT (1) FROM vnp_data.hot_rated_cdr;
+
+SELECT COUNT (1) FROM vnp_data.rated_cdr;
