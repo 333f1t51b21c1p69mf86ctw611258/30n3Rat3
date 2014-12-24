@@ -9,8 +9,11 @@ SELECT COUNT (1)
 
 -- 4779784
 
-INSERT INTO vnp_data.hot_rated_cdr_dev
-   SELECT * FROM vnp_data.hot_rated_cdr;
+INSERT INTO vnp_data.hot_rated_cdr
+   SELECT * FROM vnp_data.hot_rated_cdr_dev;
+
+UPDATE vnp_data.hot_rated_cdr
+   SET rerate_flag = 0;
 
 UPDATE vnp_data.hot_rated_cdr_dev
    SET rerate_flag = 0
@@ -59,7 +62,7 @@ UPDATE vnp_data.hot_rated_cdr_dev
    SET rerate_flag = 0
  WHERE cdr_type = 4 AND a_number = '84914251186' AND map_id = 1489;
 
-DELETE FROM vnp_data.rated_cdr_dev
+DELETE FROM vnp_data.rated_cdr
       WHERE 1 = 1;
 
 COMMIT;
