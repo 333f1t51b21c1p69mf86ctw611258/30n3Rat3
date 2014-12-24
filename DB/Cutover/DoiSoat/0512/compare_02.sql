@@ -1,4 +1,4 @@
-/* Formatted on 16/12/2014 4:47:29 PM (QP5 v5.215.12089.38647) */
+/* Formatted on 19/12/2014 16:21:12 (QP5 v5.227.12220.39754) */
 DECLARE
    CURSOR CUR_VNP_0512
    IS
@@ -53,8 +53,17 @@ DECLARE
    CURSOR CUR_ELC_0512
    IS
         SELECT *
-          FROM VNP_VIEW.ELC_0512
-          WHERE DURATION > 0
+          FROM VNP_VIEW.ELC_0512 a
+         WHERE     a.DURATION > 0
+               AND a.ROWID >
+                      ANY (SELECT b.ROWID
+                             FROM elc_0512 b
+                            WHERE     a.a_number = b.a_number
+                                  AND (   a.b_number = b.b_number
+                                       OR (    a.b_number IS NULL
+                                           AND b.b_number IS NULL))
+                                  AND A.CDR_START_TIME = B.CDR_START_TIME
+                                  AND A.duration = B.duration)
       ORDER BY A_NUMBER, CDR_START_TIME;
 
    C1REC     CUR_ELC_0512%ROWTYPE;
