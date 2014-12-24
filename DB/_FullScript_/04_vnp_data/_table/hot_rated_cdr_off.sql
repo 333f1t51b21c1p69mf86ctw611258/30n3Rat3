@@ -1,70 +1,68 @@
-/* Formatted on 12/22/2014 11:04:37 AM (QP5 v5.215.12089.38647) */
-DROP TABLE VNP_DATA.HOT_RATED_CDR_DEV;
-
-CREATE TABLESPACE hot_rated_dev_p0
-  DATAFILE '+DATA/eonerate/datafile/vnp_data/hot_rated_dev_p0.dbf'
-    SIZE 100M
-    REUSE
-    AUTOEXTEND ON NEXT 100 M MAXSIZE UNLIMITED;
-
-CREATE TABLESPACE hot_rated_dev_p1
-  DATAFILE '+DATA/eonerate/datafile/vnp_data/hot_rated_dev_p1.dbf'
-    SIZE 100M
+/* Formatted on 12/21/2014 2:56:54 PM (QP5 v5.215.12089.38647) */
+CREATE TABLESPACE hot_rated_off_p0
+  DATAFILE '+DATA/eonerate/datafile/vnp_data/hot_rated_off_p0.dbf'
+    SIZE 50M
     REUSE
     AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
 
-CREATE TABLESPACE hot_rated_dev_p2
-  DATAFILE '+DATA/eonerate/datafile/vnp_data/hot_rated_dev_p2.dbf'
-    SIZE 100M
+CREATE TABLESPACE hot_rated_off_p1
+  DATAFILE '+DATA/eonerate/datafile/vnp_data/hot_rated_off_p1.dbf'
+    SIZE 50M
     REUSE
     AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
 
-CREATE TABLESPACE hot_rated_dev_p3
-  DATAFILE '+DATA/eonerate/datafile/vnp_data/hot_rated_dev_p3.dbf'
-    SIZE 100M
+CREATE TABLESPACE hot_rated_off_p2
+  DATAFILE '+DATA/eonerate/datafile/vnp_data/hot_rated_off_p2.dbf'
+    SIZE 50M
     REUSE
     AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
 
-CREATE TABLESPACE hot_rated_dev_p4
-  DATAFILE '+DATA/eonerate/datafile/vnp_data/hot_rated_dev_p4.dbf'
-    SIZE 100M
+CREATE TABLESPACE hot_rated_off_p3
+  DATAFILE '+DATA/eonerate/datafile/vnp_data/hot_rated_off_p3.dbf'
+    SIZE 50M
     REUSE
     AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
 
-CREATE TABLESPACE hot_rated_dev_p5
-  DATAFILE '+DATA/eonerate/datafile/vnp_data/hot_rated_dev_p5.dbf'
-    SIZE 100M
+CREATE TABLESPACE hot_rated_off_p4
+  DATAFILE '+DATA/eonerate/datafile/vnp_data/hot_rated_off_p4.dbf'
+    SIZE 50M
     REUSE
     AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
 
-CREATE TABLESPACE hot_rated_dev_p6
-  DATAFILE '+DATA/eonerate/datafile/vnp_data/hot_rated_dev_p6.dbf'
-    SIZE 100M
+CREATE TABLESPACE hot_rated_off_p5
+  DATAFILE '+DATA/eonerate/datafile/vnp_data/hot_rated_off_p5.dbf'
+    SIZE 50M
     REUSE
     AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
 
-CREATE TABLESPACE hot_rated_dev_p7
-  DATAFILE '+DATA/eonerate/datafile/vnp_data/hot_rated_dev_p7.dbf'
-    SIZE 100M
+CREATE TABLESPACE hot_rated_off_p6
+  DATAFILE '+DATA/eonerate/datafile/vnp_data/hot_rated_off_p6.dbf'
+    SIZE 50M
     REUSE
     AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
 
-CREATE TABLESPACE hot_rated_dev_p8
-  DATAFILE '+DATA/eonerate/datafile/vnp_data/hot_rated_dev_p8.dbf'
-    SIZE 100M
+CREATE TABLESPACE hot_rated_off_p7
+  DATAFILE '+DATA/eonerate/datafile/vnp_data/hot_rated_off_p7.dbf'
+    SIZE 50M
     REUSE
     AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
 
-CREATE TABLESPACE hot_rated_dev_p9
-  DATAFILE '+DATA/eonerate/datafile/vnp_data/hot_rated_dev_p9.dbf'
-    SIZE 100M
+CREATE TABLESPACE hot_rated_off_p8
+  DATAFILE '+DATA/eonerate/datafile/vnp_data/hot_rated_off_p8.dbf'
+    SIZE 50M
+    REUSE
+    AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
+
+CREATE TABLESPACE hot_rated_off_p9
+  DATAFILE '+DATA/eonerate/datafile/vnp_data/hot_rated_off_p9.dbf'
+    SIZE 50M
     REUSE
     AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
 
 
-CREATE TABLE VNP_DATA.HOT_RATED_CDR_DEV
+CREATE TABLE VNP_DATA.HOT_RATED_CDR_OFF
 (
-   MAP_ID                 NUMBER (9),
+   -- MAP_ID                 NUMBER (9),
    A_NUMBER               VARCHAR2 (15 BYTE),
    CDR_TYPE               NUMBER (2),
    CREATED_TIME           DATE DEFAULT SYSDATE,
@@ -94,7 +92,7 @@ CREATE TABLE VNP_DATA.HOT_RATED_CDR_DEV
    LOCATION_NO            VARCHAR2 (31 BYTE),
    MSC_ID                 VARCHAR2 (31 BYTE),
    UNIT_TYPE_ID           NUMBER (2) NOT NULL,
-   PRIMARY_ONER_ID        NUMBER (10),
+   PRIMARY_OFFER_ID       NUMBER (10),
    DISCOUNT_ITEM_ID       NUMBER (6),
    BALANCE_CHANGE         VARCHAR2 (500 BYTE),
    RERATE_FLAG            NUMBER (2),
@@ -105,31 +103,22 @@ CREATE TABLE VNP_DATA.HOT_RATED_CDR_DEV
 )
 PARTITION BY RANGE (DATA_PART)
    (PARTITION P0 VALUES LESS THAN (1)
-       TABLESPACE hot_rated_dev_p0,
+       TABLESPACE hot_rated_off_p0,
     PARTITION P1 VALUES LESS THAN (2)
-       TABLESPACE hot_rated_dev_p1,
+       TABLESPACE hot_rated_off_p1,
     PARTITION P2 VALUES LESS THAN (3)
-       TABLESPACE hot_rated_dev_p2,
+       TABLESPACE hot_rated_off_p2,
     PARTITION P3 VALUES LESS THAN (4)
-       TABLESPACE hot_rated_dev_p3,
+       TABLESPACE hot_rated_off_p3,
     PARTITION P4 VALUES LESS THAN (5)
-       TABLESPACE hot_rated_dev_p4,
+       TABLESPACE hot_rated_off_p4,
     PARTITION P5 VALUES LESS THAN (6)
-       TABLESPACE hot_rated_dev_p5,
+       TABLESPACE hot_rated_off_p5,
     PARTITION P6 VALUES LESS THAN (7)
-       TABLESPACE hot_rated_dev_p6,
+       TABLESPACE hot_rated_off_p6,
     PARTITION P7 VALUES LESS THAN (8)
-       TABLESPACE hot_rated_dev_p7,
+       TABLESPACE hot_rated_off_p7,
     PARTITION P8 VALUES LESS THAN (9)
-       TABLESPACE hot_rated_dev_p8,
+       TABLESPACE hot_rated_off_p8,
     PARTITION P9 VALUES LESS THAN (10)
-       TABLESPACE hot_rated_dev_p9);
-
-CREATE INDEX IDX_HRC_DEV_A_NUMBER
-   ON HOT_RATED_CDR_DEV (A_NUMBER)
-   TABLESPACE VNP_DATA_HRC;
-
-
-CREATE INDEX IDX_HRC_DEV_CDR_REC_HEAD_ID
-   ON HOT_RATED_CDR_DEV (CDR_RECORD_HEADER_ID)
-   TABLESPACE VNP_DATA_HRC;
+       TABLESPACE hot_rated_off_p9);
