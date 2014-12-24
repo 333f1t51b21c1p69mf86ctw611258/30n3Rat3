@@ -13,7 +13,7 @@ BEGIN
       ,end_date        => NULL
       ,job_class       => 'DEFAULT_JOB_CLASS'
       ,job_type        => 'PLSQL_BLOCK'
-      ,job_action      => 'BEGIN VNP_DATA.STUFF.ADD_PART_BY_DAY ( ''HOT_RATED_CDR'', ''vnp_data_hrc'', ''VNP_DATA_HRC'', ''+DATA/eonerate/datafile/vnp_data/'', ''hot_rated_cdr'' ); END;'
+      ,job_action      => 'BEGIN VNP_DATA.STUFF.ADD_PART_BY_DAY ( ''HOT_RATED_CDR'', ''vnp_data_hrc'', ''VNP_DATA_HRC'', ''/u01/app/oracle/oradata/eonerate/vnp_data/'', ''hot_rated_cdr'' ); END;'
       ,comments        => 'PREPARE HOT_RATED_CDR PARTITION'
     );
   SYS.DBMS_SCHEDULER.SET_ATTRIBUTE

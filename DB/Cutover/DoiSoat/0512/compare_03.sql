@@ -1,4 +1,4 @@
-/* Formatted on 18/12/2014 8:03:44 AM (QP5 v5.215.12089.38647) */
+/* Formatted on 20/12/2014 12:40:36 AM (QP5 v5.215.12089.38647) */
   SELECT *
     FROM VNP_0512_TMP
 ORDER BY A_NUMBER, RECORD_ID;
@@ -11,7 +11,9 @@ SELECT * FROM D_V_E_0512;
 
 SELECT COUNT (1) FROM VNP_0512_TMP;
 
-SELECT COUNT (1) FROM ELC_0512_TMP;
+SELECT COUNT (1)
+  FROM ELC_0512_TMP
+ WHERE b_number IS NULL;
 
 SELECT COUNT (1) FROM D_V_E_0512;
 
@@ -34,6 +36,10 @@ AS
                ELC_0512_TMP E
             ON (V.A_NUMBER = E.A_NUMBER AND V.RECORD_ID = E.RECORD_ID)
    ORDER BY V.A_NUMBER, V.RECORD_ID;
+
+SELECT COUNT (*)
+  FROM D_V_E_0512
+ WHERE elc_b_number IS NULL;
 
 -- filter1: Loc DURATION > |TIME_DELTA|
 
@@ -83,6 +89,14 @@ AS
 
 SELECT * FROM D_V_E_0512_FIL4;
 
+  SELECT *
+    FROM D_V_E_0512_FIL4
+ORDER BY a_number,
+         vnp_b_number,
+         elc_b_number,
+         vnp_start_time,
+         elc_start_time;
+
 SELECT *
   FROM D_V_E_0512_FIL2
  WHERE ELC_B_NUMBER IS NULL;
@@ -91,4 +105,4 @@ SELECT * FROM VNP_0512_TMP;
 
 SELECT *
   FROM ELC_0512_TMP
- WHERE B_NUMBER IS NULL;                                                                                                                                                                                               --and duration != 0;
+ WHERE B_NUMBER IS NULL;                                                                                                                                                                                                                                                                       --and duration != 0;

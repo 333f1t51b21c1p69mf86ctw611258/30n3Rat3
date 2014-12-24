@@ -6,115 +6,115 @@ DROP TABLE VNP_DATA.HOT_RATED_CDR CASCADE CONSTRAINTS;
 DROP TABLESPACE VNP_DATA_HRC INCLUDING CONTENTS AND DATAFILES;
 
 CREATE TABLESPACE VNP_DATA_HRC DATAFILE 
-  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr01.dbf' SIZE 100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED;
+  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr01.dbf' SIZE 100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED;
 
 --CREATE TABLESPACE VNP_DATA_HRC_P141201_0 DATAFILE 
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_0.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_0_2.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_0_3.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_0_4.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_0.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_0_2.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_0_3.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_0_4.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
 --
 --
 --CREATE TABLESPACE VNP_DATA_HRC_P141201_1 DATAFILE 
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_1.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_1_2.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_1_3.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_1_4.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_1.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_1_2.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_1_3.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_1_4.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
 --
 --
 --CREATE TABLESPACE VNP_DATA_HRC_P141201_2 DATAFILE 
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_2.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_2_2.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_2_3.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_2_4.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_2.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_2_2.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_2_3.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_2_4.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
 --
 --
 --CREATE TABLESPACE VNP_DATA_HRC_P141201_3 DATAFILE 
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_3.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_3_2.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_3_3.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_3_4.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_3.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_3_2.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_3_3.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_3_4.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
 --
 --
 --CREATE TABLESPACE VNP_DATA_HRC_P141201_4 DATAFILE 
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_4.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_4_2.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_4_3.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_4_4.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_4.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_4_2.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_4_3.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_4_4.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
 --
 --
 --CREATE TABLESPACE VNP_DATA_HRC_P141201_5 DATAFILE 
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_5.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_5_2.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_5_3.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_5_4.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_5.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_5_2.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_5_3.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_5_4.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
 --
 --
 --CREATE TABLESPACE VNP_DATA_HRC_P141201_6 DATAFILE 
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_6.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_6_2.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_6_3.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_6_4.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_6.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_6_2.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_6_3.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_6_4.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
 --
 --
 --CREATE TABLESPACE VNP_DATA_HRC_P141201_7 DATAFILE 
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_7.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_7_2.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_7_3.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_7_4.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_7.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_7_2.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_7_3.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_7_4.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
 --
 --
 --CREATE TABLESPACE VNP_DATA_HRC_P141201_8 DATAFILE 
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_8.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_8_2.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_8_3.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_8_4.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_8.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_8_2.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_8_3.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_8_4.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
 --
 --
 --CREATE TABLESPACE VNP_DATA_HRC_P141201_9 DATAFILE 
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_9.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_9_2.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_9_3.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
---  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_9_4.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_9.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_9_2.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_9_3.dbf' SIZE 1100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED,
+--  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_9_4.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
 
 CREATE TABLESPACE VNP_DATA_HRC_P141201_0 DATAFILE 
-  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_0.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_0.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
 
 
 CREATE TABLESPACE VNP_DATA_HRC_P141201_1 DATAFILE 
-  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_1.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_1.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
 
 
 CREATE TABLESPACE VNP_DATA_HRC_P141201_2 DATAFILE 
-  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_2.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_2.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
 
 
 CREATE TABLESPACE VNP_DATA_HRC_P141201_3 DATAFILE 
-  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_3.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_3.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
 
 
 CREATE TABLESPACE VNP_DATA_HRC_P141201_4 DATAFILE 
-  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_4.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_4.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
 
 
 CREATE TABLESPACE VNP_DATA_HRC_P141201_5 DATAFILE 
-  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_5.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_5.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
 
 
 CREATE TABLESPACE VNP_DATA_HRC_P141201_6 DATAFILE 
-  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_6.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_6.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
 
 
 CREATE TABLESPACE VNP_DATA_HRC_P141201_7 DATAFILE 
-  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_7.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_7.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
 
 
 CREATE TABLESPACE VNP_DATA_HRC_P141201_8 DATAFILE 
-  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_8.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_8.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
 
 
 CREATE TABLESPACE VNP_DATA_HRC_P141201_9 DATAFILE 
-  '+DATA/eonerate/datafile/vnp_data/hot_rated_cdr_P141201_9.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_9.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
 
 CREATE TABLE VNP_DATA.HOT_RATED_CDR
 (
@@ -191,6 +191,9 @@ ALTER TABLE VNP_DATA.HOT_RATED_CDR
     SUBPARTITION P141201_8 VALUES LESS THAN (9)      TABLESPACE VNP_DATA_HRC_P141201_8,
     SUBPARTITION P141201_9 VALUES LESS THAN (10)      TABLESPACE VNP_DATA_HRC_P141201_9 );
 
+
+CREATE TABLESPACE VNP_DATA_HRC_MAP_ID_IDX DATAFILE 
+  '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_map_id_idx01.dbf' SIZE 100M AUTOEXTEND ON NEXT 100M MAXSIZE UNLIMITED;
 
 CREATE UNIQUE INDEX VNP_DATA.IDX_HOT_RATED_CDR_PK ON VNP_DATA.HOT_RATED_CDR
 (MAP_ID)

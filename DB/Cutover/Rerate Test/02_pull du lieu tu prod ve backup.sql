@@ -1,4 +1,4 @@
-/* Formatted on 17/12/2014 4:44:59 PM (QP5 v5.215.12089.38647) */
+/* Formatted on 12/20/2014 2:46:31 AM (QP5 v5.215.12089.38647) */
 --TRUNCATE TABLE vnp_common.account_version;
 --TRUNCATE TABLE vnp_common.account;
 --TRUNCATE TABLE vnp_common.subscriber;
@@ -14,11 +14,17 @@ SELECT COUNT (1) FROM VNP_COMMON.ACCOUNT;
 
 SELECT COUNT (1) FROM VNP_COMMON.SUBS_OFFER_MAP;
 
+
 SELECT COUNT (1) FROM vnp_data.hot_rated_cdr;
 
 SELECT * FROM vnp_common.subscriber;
 
-SELECT * FROM VNP_COMMON.SUBS_OFFER_MAP;
+SELECT *
+  FROM    VNP_COMMON.SUBS_OFFER_MAP som
+       INNER JOIN
+          product_offer po
+       ON (som.product_offer_id = po.offer_id)
+ WHERE po.reseller_version_id = 2;
 
 -- 5 THUE BAO CHI SU DONG 1 PO VA 1 SO: ALO
 

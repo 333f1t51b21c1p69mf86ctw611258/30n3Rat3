@@ -1,7 +1,7 @@
-DROP VIEW VNP_COMMON.AUDIT_SEGMENT_SELECT;
+DROP VIEW AUDIT_SEGMENT_SELECT;
 
-/* Formatted on 09/05/2014 18:31:51 (QP5 v5.227.12220.39754) */
-CREATE OR REPLACE FORCE VIEW VNP_COMMON.AUDIT_SEGMENT_SELECT
+/* Formatted on 12/20/2014 2:52:19 AM (QP5 v5.215.12089.38647) */
+CREATE OR REPLACE FORCE VIEW AUDIT_SEGMENT_SELECT
 (
    ACCOUNT_VERSION_ID,
    ACCOUNT_ID,
@@ -13,7 +13,8 @@ CREATE OR REPLACE FORCE VIEW VNP_COMMON.AUDIT_SEGMENT_SELECT
    TO_DATE_TEST,
    TO_DATE,
    MODIFIED_DATE_TEST,
-   MODIFIED_DATE
+   MODIFIED_DATE,
+   DATA_PART
 )
 AS
    SELECT ACCOUNT_VERSION_ID,
@@ -32,17 +33,31 @@ AS
           * 60
           * 60
              AS FROM_DATE,
-          ACCOUNT_VERSION.TO_DATE AS TO_DATE_TEST,
-            (ACCOUNT_VERSION.TO_DATE - TO_DATE ('1970-01-01', 'yyyy-mm-dd'))
+          NVL (ACCOUNT_VERSION.TO_DATE, TO_DATE ('2030-01-01', 'yyyy-mm-dd'))
+             AS TO_DATE_TEST,
+            (  NVL (ACCOUNT_VERSION.TO_DATE,
+                    TO_DATE ('2030-01-01', 'yyyy-mm-dd'))
+             - TO_DATE ('1970-01-01', 'yyyy-mm-dd'))
           * 24
           * 60
           * 60
              AS TO_DATE,
+          --       ACCOUNT_VERSION.TO_DATE AS TO_DATE_TEST,
+          --         (ACCOUNT_VERSION.TO_DATE - TO_DATE ('1970-01-01', 'yyyy-mm-dd'))
+          --       * 24
+          --       * 60
+          --       * 60
+          --          AS TO_DATE,
+
           ACCOUNT_VERSION.MODIFIED_DATE AS MODIFIED_DATE_TEST,
             (  ACCOUNT_VERSION.MODIFIED_DATE
              - TO_DATE ('1970-01-01', 'yyyy-mm-dd'))
           * 24
           * 60
           * 60
-             AS MODIFIED_DATE
-     FROM ACCOUNT_VERSION;
+             AS MODIFIED_DATE,
+          DATA_PART
+     FROM    SUBSCRIBER
+          INNER JOIN
+             ACCOUNT_VERSION
+          ON (SUBSCRIBER.SUBSCRIBER_ID = ACCOUNT_VERSION.SUBSCRIBER_ID);
