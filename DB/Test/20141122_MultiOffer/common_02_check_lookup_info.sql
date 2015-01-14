@@ -1,4 +1,4 @@
-/* Formatted on 22/11/2014 4:48:33 PM (QP5 v5.215.12089.38647) */
+/* Formatted on 12/28/2014 2:14:37 PM (QP5 v5.215.12089.38647) */
 SELECT *
   FROM usage_activity
  WHERE ua_id = 30048;
@@ -44,7 +44,9 @@ SELECT OFFER_RC_AWARD_MAP_ID,
           VNP_COMMON.BALANCE b
        ON (    oba.reseller_version_id = b.reseller_version_id
            AND oba.balance_id = b.balance_id)
- WHERE AMOUNT > 0 AND OFFER_ID = 51004508;
+ WHERE OFFER_RC_AWARD_MAP_ID = 1508;
+
+-- WHERE AMOUNT > 0 AND OFFER_ID = 51004508;
 
 SELECT *
   FROM usage_activity_group

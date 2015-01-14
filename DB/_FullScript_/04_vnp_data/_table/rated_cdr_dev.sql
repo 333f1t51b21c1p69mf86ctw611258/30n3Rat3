@@ -1,4 +1,4 @@
-/* Formatted on 12/23/2014 2:53:39 PM (QP5 v5.215.12089.38647) */
+/* Formatted on 12/28/2014 2:07:29 PM (QP5 v5.215.12089.38647) */
 DROP TABLE VNP_DATA.RATED_CDR_DEV;
 
 CREATE TABLESPACE rated_dev_p0
@@ -67,7 +67,7 @@ CREATE TABLE RATED_CDR_DEV
    MAP_ID                 NUMBER (9),
    A_NUMBER               VARCHAR2 (15 BYTE),
    CDR_TYPE               NUMBER (2),
-   CREATED_TIME           DATE,
+   CREATED_TIME           DATE DEFAULT SYSDATE,
    CDR_START_TIME         DATE,
    DATA_PART              NUMBER (2),
    DURATION               NUMBER (11),
@@ -75,9 +75,9 @@ CREATE TABLE RATED_CDR_DEV
    B_NUMBER               VARCHAR2 (31 BYTE),
    B_ZONE                 VARCHAR2 (127 BYTE),
    NW_GROUP               VARCHAR2 (15 BYTE),
-   SERVICE_FEE            NUMBER (15, 3),
+   SERVICE_FEE            NUMBER (31, 3),
    SERVICE_FEE_ID         NUMBER (3),
-   CHARGE_FEE             NUMBER (15, 3),
+   CHARGE_FEE             NUMBER (31, 3),
    CHARGE_FEE_ID          NUMBER (5),
    LAC                    VARCHAR2 (23 BYTE),
    CELL_ID                VARCHAR2 (23 BYTE),
@@ -93,7 +93,7 @@ CREATE TABLE RATED_CDR_DEV
    CDR_SEQUENCE_NUMBER    NUMBER (11),
    LOCATION_NO            VARCHAR2 (31 BYTE),
    MSC_ID                 VARCHAR2 (31 BYTE),
-   UNIT_TYPE_ID           NUMBER (2) NOT NULL,
+   UNIT_TYPE_ID           NUMBER (2),
    PRIMARY_OFFER_ID       NUMBER (10),
    DISCOUNT_ITEM_ID       NUMBER (6),
    RERATE_FLAG            NUMBER (2),

@@ -1,4 +1,4 @@
-/* Formatted on 13/12/2014 6:02:01 PM (QP5 v5.215.12089.38647) */
+/* Formatted on 30/12/2014 20:14:55 (QP5 v5.215.12089.38647) */
 -- *** CBS_OWNER
 
 GRANT EXECUTE ON ELC_USER.CBS_OWNER_FILTER TO cbs_owner;
@@ -53,6 +53,20 @@ BEGIN
 END;
 
 BEGIN
+   FOR R IN (SELECT OWNER, VIEW_NAME
+               FROM ALL_VIEWS
+              WHERE OWNER = 'CBS_OWNER')
+   LOOP
+      EXECUTE IMMEDIATE
+            'GRANT SELECT ON '
+         || R.OWNER
+         || '.'
+         || R.VIEW_NAME
+         || ' TO VNP_COMMON';
+   END LOOP;
+END;
+
+BEGIN
    FOR R IN (SELECT OWNER, TABLE_NAME
                FROM ALL_TABLES
               WHERE OWNER = 'VNP_DATA')
@@ -66,19 +80,7 @@ BEGIN
    END LOOP;
 END;
 
-BEGIN
-   FOR R IN (SELECT OWNER, VIEW_NAME
-               FROM ALL_VIEWS
-              WHERE OWNER = 'CBS_OWNER')
-   LOOP
-      EXECUTE IMMEDIATE
-            'GRANT SELECT ON '
-         || R.OWNER
-         || '.'
-         || R.VIEW_NAME
-         || ' TO VNP_COMMON';
-   END LOOP;
-END;
+
 
 BEGIN
    FOR R IN (SELECT OWNER, TABLE_NAME
