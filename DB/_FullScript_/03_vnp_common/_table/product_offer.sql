@@ -10,24 +10,25 @@ ADD (
   UNBILL                    CHAR(1 BYTE)
 );
 
-CREATE TABLE VNP_COMMON.PRODUCT_OFFER
+CREATE TABLE PRODUCT_OFFER
 (
-   OFFER_ID                   NUMBER (10) NOT NULL,
-   OFFER_NAME                 VARCHAR2 (720 BYTE) NOT NULL,
-   OFFER_TYPE                 VARCHAR2 (93 BYTE),
-   RESELLER_VERSION_ID        NUMBER (18) NOT NULL,
-   SALES_EFFECTIVE_TIME       DATE NOT NULL,
-   SALES_EXPIRATION_TIME      DATE,
-   CURRENCY_NAME              VARCHAR2 (720 BYTE),
-   CURRENCY_CODE              NUMBER (6),
-   UPSELL_TEMPLATE_ID         NUMBER (10),
-   IS_INTERNAL                NUMBER (1) DEFAULT 0,
-   RC                         NUMBER (15, 3),
-   NRC                        NUMBER (15, 3),
-   VAT_RATE                   NUMBER (15, 3),
-   UNBILL                     CHAR (1 BYTE),
-   AUTO_EXPIRATION_DURATION   NUMBER (6),
-   AUTO_EXPIRATION_UNIT       VARCHAR2 (11 BYTE)
+  OFFER_ID                  NUMBER(10)          NOT NULL,
+  OFFER_NAME                VARCHAR2(240 BYTE)  NOT NULL,
+  OFFER_TYPE                CHAR(2 BYTE),
+  RESELLER_VERSION_ID       NUMBER(18)          NOT NULL,
+  SALES_EFFECTIVE_TIME      DATE                NOT NULL,
+  SALES_EXPIRATION_TIME     DATE,
+  CURRENCY_NAME             VARCHAR2(240 BYTE)  NOT NULL,
+  CURRENCY_CODE             NUMBER(6)           NOT NULL,
+  UPSELL_TEMPLATE_ID        NUMBER(10),
+  AUTO_EXPIRATION_DURATION  NUMBER(6),
+  AUTO_EXPIRATION_UNIT      VARCHAR2(7 BYTE),
+  IS_INTERNAL               NUMBER(1)           DEFAULT 0,
+  RC                        NUMBER(15,3),
+  NRC                       NUMBER(15,3),
+  VAT_RATE                  NUMBER(15,3),
+  UNBILL                    CHAR(1 BYTE),
+  FROM_FIRST                NUMBER(1)           DEFAULT 0
 )
 TABLESPACE VNP_COMMON
 RESULT_CACHE (MODE DEFAULT)

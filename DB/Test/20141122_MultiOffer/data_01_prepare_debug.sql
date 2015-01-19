@@ -1,4 +1,4 @@
-/* Formatted on 12/23/2014 2:56:37 PM (QP5 v5.215.12089.38647) */
+/* Formatted on 12/28/2014 2:16:20 PM (QP5 v5.215.12089.38647) */
 TRUNCATE TABLE vnp_data.rated_cdr_dev;
 
 SELECT * FROM vnp_data.hot_rated_cdr;
@@ -15,9 +15,16 @@ INSERT INTO vnp_data.hot_rated_cdr
 UPDATE vnp_data.hot_rated_cdr
    SET rerate_flag = 0;
 
-UPDATE vnp_data.hot_rated_cdr_dev
+-- alo: 161623162
+-- data: 378060914
+
+SELECT *
+  FROM VNP_DATA.HOT_RATED_CDR
+ WHERE map_id = 161623162;
+
+UPDATE vnp_data.hot_rated_cdr
    SET rerate_flag = 0
- WHERE map_id = 334890090;
+ WHERE map_id = 161623162;
 
 UPDATE vnp_data.hot_rated_cdr
    SET rerate_flag = 0
