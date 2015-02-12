@@ -1,0 +1,746 @@
+2014-11-19 06:38:52,227 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 06:38:52,227 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 06:38:52,242 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-19 06:38:52,492 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@//192.168.6.207:1521/eonerate>
+2014-11-19 06:39:12,522 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-19 06:39:12,538 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-19 06:39:12,538 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-19 06:39:12,554 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-19 06:39:12,554 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-19 06:39:12,632 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-19 06:39:12,725 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-19 06:39:12,725 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-19 06:39:12,725 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-19 06:39:12,725 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-19 06:39:12,725 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-19 06:39:12,772 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-19 06:39:14,472 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-19 06:39:14,472 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-19 06:39:14,488 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-19 06:39:14,488 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-19 06:39:14,504 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-19 06:39:14,535 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-19 06:39:14,831 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <70> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-19 06:39:14,831 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-19 06:39:14,847 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-19 06:39:14,847 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-19 06:39:14,847 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-19 06:39:14,847 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-19 06:39:14,847 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-19 06:39:14,847 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-19 06:39:14,847 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 2309ms.
+2014-11-19 06:39:14,847 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformation> ***
+2014-11-19 06:39:14,878 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformation>
+2014-11-19 06:39:14,878 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-19 07:37:37,602 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 07:37:37,602 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 07:37:37,618 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-19 07:37:37,711 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@//192.168.6.207:1521/eonerate>
+2014-11-19 07:37:56,244 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-19 07:37:56,244 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-19 07:37:56,244 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-19 07:37:56,260 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-19 07:37:56,260 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-19 07:37:56,322 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-19 07:37:56,416 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-19 07:37:56,432 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-19 07:37:56,432 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-19 07:37:56,432 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-19 07:37:56,432 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-19 07:37:56,463 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-19 07:37:58,475 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-19 07:37:58,475 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-19 07:37:58,475 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-19 07:37:58,491 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-19 07:37:58,491 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-19 07:37:58,522 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-19 07:37:58,756 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <70> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-19 07:37:58,756 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-19 07:37:58,756 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-19 07:37:58,756 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-19 07:37:58,756 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-19 07:37:58,756 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-19 07:37:58,756 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-19 07:37:58,756 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-19 07:37:58,772 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 2528ms.
+2014-11-19 07:37:58,772 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformation> ***
+2014-11-19 07:37:58,803 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformation>
+2014-11-19 07:37:58,803 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-19 10:29:39,387 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 10:29:39,414 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 10:29:39,424 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-19 10:29:39,552 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-19 10:29:48,263 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-19 10:29:48,267 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-19 10:29:48,268 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-19 10:29:48,272 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-19 10:29:48,274 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-19 10:29:48,291 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-19 10:29:48,332 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-19 10:29:48,333 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-19 10:29:48,335 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-19 10:29:48,336 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-19 10:29:48,337 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-19 10:29:48,352 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-19 10:29:48,493 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-19 10:29:48,494 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-19 10:29:48,494 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-19 10:29:48,495 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-19 10:29:48,496 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-19 10:29:48,499 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-19 10:29:48,512 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <70> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-19 10:29:48,512 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-19 10:29:48,513 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-19 10:29:48,513 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-19 10:29:48,513 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-19 10:29:48,514 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-19 10:29:48,514 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-19 10:29:48,514 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-19 10:29:48,515 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 248ms.
+2014-11-19 10:29:48,521 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformation> ***
+2014-11-19 10:29:48,527 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformation>
+2014-11-19 10:29:48,528 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-19 15:56:15,775 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 15:56:15,780 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 15:56:15,828 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-19 15:56:16,096 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-19 15:56:17,148 BCPDataSource.java            [ 282] ERROR - Connection test failed for connection <eOneRateDB>
+2014-11-19 15:56:17,150 ElcRate.java                  [ 655] ERROR - Exception thrown in module <Framework>
+2014-11-19 15:56:17,159 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <Connection test failed for connection <eOneRateDB>>
+2014-11-19 15:56:17,160 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-19 15:56:17,165 ElcRateSocket.java            [ 191] INFO  - Closing <Listener>
+2014-11-19 15:56:39,196 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 15:56:39,200 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 15:56:39,213 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-19 15:56:39,362 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-19 15:56:48,403 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-19 15:56:48,420 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-19 15:56:48,420 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-19 15:56:48,427 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-19 15:56:48,429 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-19 15:56:48,446 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-19 15:56:48,488 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-19 15:56:48,488 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-19 15:56:48,489 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-19 15:56:48,490 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-19 15:56:48,491 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-19 15:56:48,493 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-19 15:56:48,587 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-19 15:56:48,588 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-19 15:56:48,589 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-19 15:56:48,589 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-19 15:56:48,590 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-19 15:56:48,595 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <4> and Result = <1>
+2014-11-19 15:56:48,596 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-19 15:56:48,596 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-19 15:56:48,597 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-19 15:56:48,597 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-19 15:56:48,598 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-19 15:56:48,598 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-19 15:56:48,599 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-19 15:56:48,599 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-19 15:56:48,600 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 180ms.
+2014-11-19 15:56:48,611 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformation> ***
+2014-11-19 15:56:48,633 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformation>
+2014-11-19 15:56:48,634 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-19 16:01:22,780 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 16:01:22,784 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 16:01:22,797 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-19 16:01:22,933 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-19 16:01:31,785 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-19 16:01:31,789 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-19 16:01:31,790 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-19 16:01:31,796 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-19 16:01:31,798 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-19 16:01:31,816 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-19 16:01:31,852 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-19 16:01:31,852 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-19 16:01:31,853 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-19 16:01:31,854 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-19 16:01:31,854 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-19 16:01:31,857 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-19 16:01:31,967 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-19 16:01:31,968 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-19 16:01:31,972 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-19 16:01:31,972 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-19 16:01:31,973 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-19 16:01:31,975 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <4> and Result = <1>
+2014-11-19 16:01:31,976 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-19 16:01:31,977 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-19 16:01:31,978 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-19 16:01:31,978 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-19 16:01:31,979 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-19 16:01:31,980 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-19 16:01:31,980 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-19 16:01:31,980 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-19 16:01:31,982 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 192ms.
+2014-11-19 16:01:31,988 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformation> ***
+2014-11-19 16:01:32,001 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformation>
+2014-11-19 16:01:32,004 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-19 16:06:14,896 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 16:06:14,899 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 16:06:14,911 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-19 16:06:15,042 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-19 16:06:23,927 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-19 16:06:23,933 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-19 16:06:23,934 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-19 16:06:23,941 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-19 16:06:23,942 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-19 16:06:23,961 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-19 16:06:23,995 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-19 16:06:23,996 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-19 16:06:23,997 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-19 16:06:23,998 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-19 16:06:23,998 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-19 16:06:24,002 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-19 16:06:24,121 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-19 16:06:24,122 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-19 16:06:24,122 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-19 16:06:24,123 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-19 16:06:24,124 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-19 16:06:24,126 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <4> and Result = <1>
+2014-11-19 16:06:24,127 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-19 16:06:24,127 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-19 16:06:24,127 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-19 16:06:24,128 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-19 16:06:24,128 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-19 16:06:24,130 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-19 16:06:24,131 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-19 16:06:24,131 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-19 16:06:24,133 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 200ms.
+2014-11-19 16:06:24,139 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformation> ***
+2014-11-19 16:06:24,151 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformation>
+2014-11-19 16:06:24,154 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-19 16:08:12,770 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 16:08:12,775 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 16:08:12,858 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-19 16:08:13,168 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-19 16:08:22,252 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-19 16:08:22,261 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-19 16:08:22,262 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-19 16:08:22,274 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-19 16:08:22,276 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-19 16:08:22,303 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-19 16:08:22,345 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-19 16:08:22,347 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-19 16:08:22,348 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-19 16:08:22,349 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-19 16:08:22,350 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-19 16:08:22,353 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-19 16:08:22,459 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-19 16:08:22,460 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-19 16:08:22,461 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-19 16:08:22,464 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-19 16:08:22,465 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-19 16:08:22,471 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <4> and Result = <1>
+2014-11-19 16:08:22,473 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-19 16:08:22,474 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-19 16:08:22,474 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-19 16:08:22,475 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-19 16:08:22,475 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-19 16:08:22,476 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-19 16:08:22,476 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-19 16:08:22,477 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-19 16:08:22,477 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 216ms.
+2014-11-19 16:08:22,485 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformation> ***
+2014-11-19 16:08:22,503 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformation>
+2014-11-19 16:08:22,508 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-19 16:11:38,279 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 16:11:38,284 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 16:11:38,301 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-19 16:11:38,511 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-19 16:11:47,436 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-19 16:11:47,441 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-19 16:11:47,441 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-19 16:11:47,449 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-19 16:11:47,451 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-19 16:11:47,468 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-19 16:11:47,497 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-19 16:11:47,498 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-19 16:11:47,499 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-19 16:11:47,499 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-19 16:11:47,500 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-19 16:11:47,502 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-19 16:11:47,588 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-19 16:11:47,588 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-19 16:11:47,589 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-19 16:11:47,590 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-19 16:11:47,591 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-19 16:11:47,593 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <4> and Result = <1>
+2014-11-19 16:11:47,593 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-19 16:11:47,594 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-19 16:11:47,594 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-19 16:11:47,595 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-19 16:11:47,595 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-19 16:11:47,595 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-19 16:11:47,596 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-19 16:11:47,596 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-19 16:11:47,596 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 155ms.
+2014-11-19 16:11:47,601 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformation> ***
+2014-11-19 16:11:47,612 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformation>
+2014-11-19 16:11:47,614 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-19 16:15:43,883 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 16:15:43,887 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 16:15:43,903 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-19 16:15:44,103 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-19 16:16:04,641 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 16:16:04,645 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 16:16:04,661 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-19 16:16:04,861 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-19 16:16:13,714 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-19 16:16:13,720 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-19 16:16:13,721 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-19 16:16:13,726 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-19 16:16:13,728 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-19 16:16:13,743 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-19 16:16:13,774 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-19 16:16:13,774 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-19 16:16:13,774 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-19 16:16:13,775 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-19 16:16:13,776 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-19 16:16:13,778 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-19 16:16:13,870 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-19 16:16:13,870 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-19 16:16:13,870 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-19 16:16:13,871 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-19 16:16:13,871 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-19 16:16:13,874 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <4> and Result = <1>
+2014-11-19 16:16:13,874 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-19 16:16:13,875 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-19 16:16:13,875 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-19 16:16:13,875 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-19 16:16:13,875 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-19 16:16:13,876 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-19 16:16:13,876 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-19 16:16:13,876 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-19 16:16:13,876 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 156ms.
+2014-11-19 16:16:13,881 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformation> ***
+2014-11-19 16:16:13,891 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformation>
+2014-11-19 16:16:13,893 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-19 16:19:13,917 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 16:19:13,921 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 16:19:13,938 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-19 16:19:14,084 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-19 16:19:22,883 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-19 16:19:22,887 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-19 16:19:22,888 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-19 16:19:22,894 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-19 16:19:22,895 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-19 16:19:22,909 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-19 16:19:22,938 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-19 16:19:22,938 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-19 16:19:22,938 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-19 16:19:22,939 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-19 16:19:22,940 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-19 16:19:22,942 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-19 16:19:23,013 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-19 16:19:23,014 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-19 16:19:23,014 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-19 16:19:23,015 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-19 16:19:23,015 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-19 16:19:23,020 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <4> and Result = <1>
+2014-11-19 16:19:23,047 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-19 16:19:23,048 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-19 16:19:23,048 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-19 16:19:23,048 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-19 16:19:23,048 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-19 16:19:23,049 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-19 16:19:23,049 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-19 16:19:23,049 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-19 16:19:23,050 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 163ms.
+2014-11-19 16:19:23,055 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformation> ***
+2014-11-19 16:19:23,064 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformation>
+2014-11-19 16:19:23,065 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-19 16:25:36,993 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 16:25:36,997 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 16:25:37,016 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-19 16:25:37,192 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-19 16:25:46,003 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-19 16:25:46,008 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-19 16:25:46,009 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-19 16:25:46,015 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-19 16:25:46,016 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-19 16:25:46,031 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-19 16:25:46,060 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-19 16:25:46,061 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-19 16:25:46,061 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-19 16:25:46,062 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-19 16:25:46,063 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-19 16:25:46,065 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-19 16:25:46,138 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-19 16:25:46,138 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-19 16:25:46,138 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-19 16:25:46,146 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-19 16:25:46,147 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-19 16:25:46,149 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <4> and Result = <1>
+2014-11-19 16:25:46,150 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-19 16:25:46,150 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-19 16:25:46,150 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-19 16:25:46,151 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-19 16:25:46,151 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-19 16:25:46,151 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-19 16:25:46,152 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-19 16:25:46,152 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-19 16:25:46,152 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 144ms.
+2014-11-19 16:25:46,157 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformation> ***
+2014-11-19 16:25:46,166 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformation>
+2014-11-19 16:25:46,167 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-19 16:25:59,848 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 16:25:59,851 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 16:25:59,862 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-19 16:25:59,995 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-19 16:26:08,748 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-19 16:26:08,753 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-19 16:26:08,753 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-19 16:26:08,759 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-19 16:26:08,760 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-19 16:26:08,774 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-19 16:26:08,800 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-19 16:26:08,800 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-19 16:26:08,801 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-19 16:26:08,801 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-19 16:26:08,802 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-19 16:26:08,805 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-19 16:26:08,894 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-19 16:26:08,895 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-19 16:26:08,896 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-19 16:26:08,896 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-19 16:26:08,897 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-19 16:26:08,898 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <4> and Result = <1>
+2014-11-19 16:26:08,899 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-19 16:26:08,899 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-19 16:26:08,900 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-19 16:26:08,900 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-19 16:26:08,900 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-19 16:26:08,901 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-19 16:26:08,901 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-19 16:26:08,901 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-19 16:26:08,901 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 148ms.
+2014-11-19 16:26:08,906 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformation> ***
+2014-11-19 16:26:08,917 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformation>
+2014-11-19 16:26:08,918 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-19 16:31:22,619 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 16:31:22,622 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 16:31:22,635 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-19 16:31:22,776 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-19 16:31:31,624 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-19 16:31:31,629 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-19 16:31:31,630 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-19 16:31:31,635 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-19 16:31:31,637 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-19 16:31:31,650 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-19 16:31:31,679 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-19 16:31:31,680 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-19 16:31:31,681 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-19 16:31:31,681 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-19 16:31:31,682 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-19 16:31:31,684 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-19 16:31:31,769 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-19 16:31:31,769 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-19 16:31:31,769 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-19 16:31:31,770 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-19 16:31:31,770 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-19 16:31:31,773 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <4> and Result = <1>
+2014-11-19 16:31:31,774 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-19 16:31:31,774 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-19 16:31:31,774 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-19 16:31:31,774 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-19 16:31:31,774 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-19 16:31:31,775 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-19 16:31:31,775 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-19 16:31:31,775 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-19 16:31:31,775 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 146ms.
+2014-11-19 16:31:31,779 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-11-19 16:31:31,787 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-11-19 16:31:31,788 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-19 16:31:50,651 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 16:31:50,654 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 16:31:50,669 ElcRate.java                  [ 655] ERROR - Exception thrown in module <Framework>
+2014-11-19 16:31:50,676 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <ElcRateSocket.getServerSocket(): Could not listen on port <8198>. Message = <Address already in use: JVM_Bind>. Aborting.>
+2014-11-19 16:31:50,676 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-19 16:35:30,326 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 16:35:30,329 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 16:35:30,344 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-19 16:35:30,485 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-19 16:35:39,287 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-19 16:35:39,292 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-19 16:35:39,292 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-19 16:35:39,298 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-19 16:35:39,300 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-19 16:35:39,317 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-19 16:35:39,344 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-19 16:35:39,345 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-19 16:35:39,346 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-19 16:35:39,346 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-19 16:35:39,347 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-19 16:35:39,349 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-19 16:35:39,431 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-19 16:35:39,432 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-19 16:35:39,432 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-19 16:35:39,433 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-19 16:35:39,433 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-19 16:35:39,436 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <4> and Result = <1>
+2014-11-19 16:35:39,437 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-19 16:35:39,437 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-19 16:35:39,437 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-19 16:35:39,438 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-19 16:35:39,438 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-19 16:35:39,438 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-19 16:35:39,438 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-19 16:35:39,438 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-19 16:35:39,439 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 147ms.
+2014-11-19 16:35:39,444 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-11-19 16:35:39,453 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-11-19 16:35:39,454 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-19 17:47:33,242 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 17:47:33,244 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 17:47:33,254 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-19 17:47:33,362 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-19 17:47:42,123 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-19 17:47:42,127 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-19 17:47:42,127 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-19 17:47:42,131 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-19 17:47:42,132 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-19 17:47:42,146 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-19 17:47:42,168 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-19 17:47:42,169 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-19 17:47:42,169 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-19 17:47:42,170 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-19 17:47:42,171 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-19 17:47:42,173 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-19 17:47:42,254 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-19 17:47:42,254 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-19 17:47:42,254 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-19 17:47:42,255 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-19 17:47:42,256 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-19 17:47:42,259 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <4> and Result = <1>
+2014-11-19 17:47:42,259 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-19 17:47:42,260 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-19 17:47:42,260 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-19 17:47:42,260 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-19 17:47:42,260 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-19 17:47:42,260 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-19 17:47:42,261 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-19 17:47:42,261 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-19 17:47:42,261 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 134ms.
+2014-11-19 17:47:42,264 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-11-19 17:47:42,272 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-11-19 17:47:42,274 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-19 18:44:21,002 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 18:44:21,005 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 18:44:21,025 ElcRate.java                  [ 655] ERROR - Exception thrown in module <Framework>
+2014-11-19 18:44:21,034 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <ElcRateSocket.getServerSocket(): Could not listen on port <8198>. Message = <Address already in use: JVM_Bind>. Aborting.>
+2014-11-19 18:44:21,034 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-19 18:44:37,497 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 18:44:37,503 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 18:44:37,542 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-19 18:44:37,781 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-19 18:44:47,062 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-19 18:44:47,067 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-19 18:44:47,068 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-19 18:44:47,075 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-19 18:44:47,076 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-19 18:44:47,095 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-19 18:44:47,137 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-19 18:44:47,139 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-19 18:44:47,139 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-19 18:44:47,140 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-19 18:44:47,141 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-19 18:44:47,143 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-19 18:44:47,259 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-19 18:44:47,259 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-19 18:44:47,260 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-19 18:44:47,260 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-19 18:44:47,261 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-19 18:44:47,265 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <4> and Result = <1>
+2014-11-19 18:44:47,266 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-19 18:44:47,266 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-19 18:44:47,267 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-19 18:44:47,267 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-19 18:44:47,268 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-19 18:44:47,268 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-19 18:44:47,269 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-19 18:44:47,269 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-19 18:44:47,270 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 203ms.
+2014-11-19 18:44:47,277 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-11-19 18:44:47,289 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-11-19 18:44:47,291 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-19 18:46:54,797 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 18:46:54,801 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 18:46:54,819 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-19 18:46:55,004 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-19 18:47:04,253 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-19 18:47:04,260 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-19 18:47:04,261 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-19 18:47:04,272 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-19 18:47:04,274 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-19 18:47:04,299 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-19 18:47:04,353 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-19 18:47:04,355 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-19 18:47:04,356 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-19 18:47:04,356 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-19 18:47:04,357 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-19 18:47:04,363 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-19 18:47:04,501 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-19 18:47:04,502 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-19 18:47:04,502 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-19 18:47:04,503 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-19 18:47:04,504 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-19 18:47:04,508 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <4> and Result = <1>
+2014-11-19 18:47:04,509 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-19 18:47:04,510 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-19 18:47:04,510 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-19 18:47:04,511 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-19 18:47:04,511 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-19 18:47:04,512 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-19 18:47:04,512 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-19 18:47:04,512 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-19 18:47:04,513 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 253ms.
+2014-11-19 18:47:04,519 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-11-19 18:47:04,531 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-11-19 18:47:04,533 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-19 18:48:16,756 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 18:48:16,759 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 18:48:16,780 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-19 18:48:16,991 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-19 18:48:26,143 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-19 18:48:26,149 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-19 18:48:26,150 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-19 18:48:26,159 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-19 18:48:26,160 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-19 18:48:26,181 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-19 18:48:26,223 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-19 18:48:26,223 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-19 18:48:26,224 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-19 18:48:26,225 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-19 18:48:26,225 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-19 18:48:26,228 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-19 18:48:26,326 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-19 18:48:26,327 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-19 18:48:26,327 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-19 18:48:26,328 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-19 18:48:26,329 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-19 18:48:26,333 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <4> and Result = <1>
+2014-11-19 18:48:26,335 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-19 18:48:26,335 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-19 18:48:26,336 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-19 18:48:26,336 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-19 18:48:26,337 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-19 18:48:26,337 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-19 18:48:26,338 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-19 18:48:26,338 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-19 18:48:26,339 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 190ms.
+2014-11-19 18:48:26,347 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-11-19 18:48:26,364 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-11-19 18:48:26,366 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-19 19:36:32,544 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 19:36:32,546 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 19:36:32,555 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-19 19:36:32,675 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-19 19:36:41,297 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-19 19:36:41,300 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-19 19:36:41,301 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-19 19:36:41,307 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-19 19:36:41,309 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-19 19:36:41,321 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-19 19:36:41,346 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-19 19:36:41,346 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-19 19:36:41,347 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-19 19:36:41,347 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-19 19:36:41,348 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-19 19:36:41,350 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-19 19:36:41,430 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-19 19:36:41,431 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-19 19:36:41,431 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-19 19:36:41,432 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-19 19:36:41,432 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-19 19:36:41,434 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <4> and Result = <1>
+2014-11-19 19:36:41,435 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-19 19:36:41,435 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-19 19:36:41,435 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-19 19:36:41,436 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-19 19:36:41,436 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-19 19:36:41,436 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-19 19:36:41,436 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-19 19:36:41,436 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-19 19:36:41,436 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 136ms.
+2014-11-19 19:36:41,439 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-11-19 19:36:41,445 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-11-19 19:36:41,447 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-19 19:36:41,584 Pipeline.java                 [1287] ERROR - Exception thrown in pipeline <OrpTransformationPipeline>, see Error Log.
+2014-11-19 19:36:41,593 Pipeline.java                 [1308] ERROR - Pipeline <OrpTransformationPipeline> configured to shut down on exception. Shutting down.
+2014-11-19 19:36:42,462 ElcRate.java                  [1108] INFO  - Shutdown command received. Shutting down pipelines as soon as possible.
+2014-11-19 19:36:42,463 Pipeline.java                 [1074] WARN  - Pipeline <OrpTransformationPipeline> received Stop Command. Will exit after the current Transaction
+2014-11-19 19:36:43,464 ElcRate.java                  [1108] INFO  - Shutdown command received. Shutting down pipelines as soon as possible.
+2014-11-19 19:36:43,464 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-19 19:36:43,469 ElcRateSocket.java            [ 191] INFO  - Closing <Listener>
+2014-11-19 19:36:43,571 ElcRate.java                  [1108] INFO  - Shutdown command received. Shutting down pipelines as soon as possible.
+2014-11-19 19:36:43,572 ElcRate.java                  [1138] INFO  - Shutdown command called
+2014-11-19 19:40:15,070 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 19:40:15,074 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 19:40:15,085 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-19 19:40:15,196 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-19 19:40:23,968 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-19 19:40:23,972 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-19 19:40:23,973 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-19 19:40:23,979 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-19 19:40:23,981 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-19 19:40:23,997 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-19 19:40:24,025 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-19 19:40:24,027 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-19 19:40:24,027 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-19 19:40:24,027 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-19 19:40:24,028 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-19 19:40:24,030 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-19 19:40:24,132 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-19 19:40:24,132 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-19 19:40:24,133 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-19 19:40:24,133 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-19 19:40:24,133 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-19 19:40:24,138 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <4> and Result = <1>
+2014-11-19 19:40:24,138 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-19 19:40:24,139 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-19 19:40:24,139 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-19 19:40:24,139 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-19 19:40:24,139 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-19 19:40:24,139 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-19 19:40:24,140 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-19 19:40:24,140 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-19 19:40:24,140 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 168ms.
+2014-11-19 19:40:24,144 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-11-19 19:40:24,152 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-11-19 19:40:24,155 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-19 19:44:29,989 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-19 19:44:29,992 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-19 19:44:30,001 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-19 19:44:30,146 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-19 19:44:38,742 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-19 19:44:38,747 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-19 19:44:38,748 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-19 19:44:38,752 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-19 19:44:38,753 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-19 19:44:38,766 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-19 19:44:38,790 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-19 19:44:38,790 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-19 19:44:38,791 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-19 19:44:38,792 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-19 19:44:38,792 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-19 19:44:38,795 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-19 19:44:38,872 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-19 19:44:38,872 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-19 19:44:38,873 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-19 19:44:38,874 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-19 19:44:38,874 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-19 19:44:38,882 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-19 19:44:38,883 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-19 19:44:38,883 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-19 19:44:38,884 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-19 19:44:38,884 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-19 19:44:38,884 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-19 19:44:38,884 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-19 19:44:38,885 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-19 19:44:38,885 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-19 19:44:38,886 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 138ms.
+2014-11-19 19:44:38,890 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-11-19 19:44:38,898 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-11-19 19:44:38,899 TransactionManager.java       [ 206] INFO  - TransactionManager initialised

@@ -1,0 +1,83 @@
+package e1reformat.entity.cdr.sub;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.math.NumberUtils;
+
+public class AccountAccmulator {
+
+    private static final String SUB_FIELD_DELIMITER = "\\*";
+    private static final int FULL_ACCOUNT_ACCUMULATOR_FIELDS = 4;
+
+    private String ACCOUNT_ACCUMULATOR_ID;
+    private String ACCOUNT_ACCUMULATOR_NAME;
+    private String ACCOUNT_ACCUMULATOR;
+    private String ACCOUNT_ACCUMULATOR_CHANGE;
+
+    public String getACCOUNT_ACCUMULATOR_ID() {
+        return ACCOUNT_ACCUMULATOR_ID;
+    }
+
+    public void setACCOUNT_ACCUMULATOR_ID(String aCCOUNT_ACCUMULATOR_ID) {
+        ACCOUNT_ACCUMULATOR_ID = aCCOUNT_ACCUMULATOR_ID;
+    }
+
+    public String getACCOUNT_ACCUMULATOR_NAME() {
+        return ACCOUNT_ACCUMULATOR_NAME;
+    }
+
+    public void setACCOUNT_ACCUMULATOR_NAME(String aCCOUNT_ACCUMULATOR_NAME) {
+        ACCOUNT_ACCUMULATOR_NAME = aCCOUNT_ACCUMULATOR_NAME;
+    }
+
+    public String getACCOUNT_ACCUMULATOR() {
+        return ACCOUNT_ACCUMULATOR;
+    }
+
+    public void setACCOUNT_ACCUMULATOR(String aCCOUNT_ACCUMULATOR) {
+        ACCOUNT_ACCUMULATOR = aCCOUNT_ACCUMULATOR;
+    }
+
+    public String getACCOUNT_ACCUMULATOR_CHANGE() {
+        return ACCOUNT_ACCUMULATOR_CHANGE;
+    }
+
+    public void setACCOUNT_ACCUMULATOR_CHANGE(String aCCOUNT_ACCUMULATOR_CHANGE) {
+        ACCOUNT_ACCUMULATOR_CHANGE = aCCOUNT_ACCUMULATOR_CHANGE;
+    }
+
+    public AccountAccmulator(List<String> listValue) {
+        if (listValue.size() == FULL_ACCOUNT_ACCUMULATOR_FIELDS) {
+            this.ACCOUNT_ACCUMULATOR_ID = listValue.get(0);
+            this.ACCOUNT_ACCUMULATOR_NAME = listValue.get(1);
+            this.ACCOUNT_ACCUMULATOR = listValue.get(2);
+            this.ACCOUNT_ACCUMULATOR_CHANGE = listValue.get(3);
+        }
+    }
+
+    public static ArrayList<AccountAccmulator> getlistAccountAccumulator(String numberOfAccountAccumulator, String accountAccumulatorInfo) {
+        ArrayList<AccountAccmulator> listAccountAccumulator = new ArrayList<AccountAccmulator>();
+
+        String[] accountAccumulatorInfoArray = accountAccumulatorInfo.split(SUB_FIELD_DELIMITER);
+        int countIndex = FULL_ACCOUNT_ACCUMULATOR_FIELDS;
+        int numberOfAccountAccmulators = NumberUtils.toInt(numberOfAccountAccumulator);
+
+        while (true) {
+            List<String> aa = new ArrayList<String>();
+            for (int i = 0; i < countIndex; i++) {
+                aa.add(accountAccumulatorInfoArray[numberOfAccountAccmulators * 4 + i]);
+            }
+
+            AccountAccmulator newAccountAccumulator = new AccountAccmulator(aa);
+            listAccountAccumulator.add(newAccountAccumulator);
+            numberOfAccountAccmulators++;
+
+            if (numberOfAccountAccmulators * FULL_ACCOUNT_ACCUMULATOR_FIELDS >= accountAccumulatorInfoArray.length) {
+                break;
+            }
+        }
+        return listAccountAccumulator;
+    }
+
+}

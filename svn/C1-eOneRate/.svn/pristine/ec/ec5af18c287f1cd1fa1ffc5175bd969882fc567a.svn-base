@@ -1,0 +1,218 @@
+package e1reformat.db.dao;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+import org.apache.log4j.Logger;
+
+import e1reformat.db.pool.DBConfig;
+import e1reformat.entity.output.ReformatCdrOutput;
+import e1reformat.util.DateUtils;
+
+public class RatedCdrDAO {
+
+    private static Logger logger = Logger.getLogger("RatedCdrDAO");
+
+    public static void insert2Accurate(final ReformatCdrOutput reformatResult, final DBConfig dbconfig, final Connection conn) {
+        ExecutorService threadPool = Executors.newSingleThreadExecutor();
+        threadPool.submit(new Runnable() {
+            CallableStatement cstmt = null;
+
+            public void run() {
+                try {
+                    logger.info("[start] insert2Accurate at : " + DateUtils.getCurrentDateTime(DateUtils.MMddyyyyHHmmss_FULL_SLASH));
+                    cstmt = conn.prepareCall("{call "+ dbconfig.getDb_schema()+dbconfig.getMedTempToHot()+"(?,?)}");
+                    cstmt.setInt(1, reformatResult.getCdrRecordHeaderId()); // kieu IN. sá»­ dá»¥ng tham sá»‘ Set Ä‘á»ƒ truyá»�n tham sá»‘ vÃ o. 
+                    cstmt.registerOutParameter(2, java.sql.Types.INTEGER); // kiá»ƒu OUT. Ä�Äƒng kÃ­ Ä‘áº§u ra trÆ°á»›c khi thá»±c thi. 
+                    cstmt.executeUpdate();
+                    reformatResult.setInsertAccurateDone(true);
+                    logger.info("[end] insert2Accurate at : " + DateUtils.getCurrentDateTime(DateUtils.MMddyyyyHHmmss_FULL_SLASH));
+
+                } catch (SQLException e) {
+                    //Hinh set error code 12 Mar 2014
+                    reformatResult.setInsertAccurateDone(false);
+                    reformatResult.setErrorCode(e.getErrorCode());
+                    reformatResult.setErrorMessage(e.getMessage());
+                    logger.error("SQLException", e);
+                } finally {
+                    try {
+                        cstmt.close();
+                    } catch (SQLException ex) {
+                        ex.fillInStackTrace();
+                    }
+                }
+            }
+        });
+        threadPool.shutdown();
+    }
+    /*
+     * return aggregatedCDR
+     * @param cdr_record_header_id
+     * Date: 26 - 03 - 2014
+     */
+
+    public static void aggregatedCDR(final ReformatCdrOutput reformatResult, final DBConfig dbconfig, final Connection conn, final int cdr_record_header_id) {
+
+        final String vQuery = "  (SELECT COUNT (1) total_cdr, a_number, TO_NUMBER (SUBSTR (A_NUMBER, LENGTH (A_NUMBER), 1)) data_part, TO_CHAR ( (cdr_start_time), 'yyMM') BILL_MONTH,"
+                + " CDR_TYPE,"
+                //                + "AUT_FINAL_ID,"
+                + "SUM (TOTAL_USAGE) AS TOTAL_USAGE,"
+                + "SUM (SERVICE_FEE) AS SERVICE_FEE,"
+                + "SUM (CHARGE_FEE) AS CHARGE_FEE,"
+                + "SUM (OFFER_COST) AS OFFER_COST,"
+                + "SUM (OFFER_FREE_BLOCK) AS OFFER_FREE_BLOCK,"
+                + "SUM (INTERNAL_COST) AS INTERNAL_COST,"
+                + "SUM (INTERNAL_FREE_BLOCK) INTERNAL_FREE_BLOCK"
+                + ", PAYMENT_ID"
+                + " FROM "
+                + dbconfig.getLoadTableName()
+                + " WHERE CDR_RECORD_HEADER_ID="
+                + cdr_record_header_id
+                + " GROUP BY A_NUMBER,"
+                + "       CDR_TYPE,"
+                //                + "      AUT_FINAL_ID,"
+                + "     TO_CHAR ( (cdr_start_time), 'yyMM'),payment_id) ";
+
+        ExecutorService threadPool = Executors.newSingleThreadExecutor();
+        threadPool.submit(new Runnable() {
+
+            public void run() {
+                String updateQuery = "";
+                String insertQuery = "";
+                Statement st = null;
+                try {
+                    logger.info("[Start] aggregatedCDR at : " + DateUtils.getCurrentDateTime(DateUtils.MMddyyyyHHmmss_FULL_SLASH));
+                    st = conn.createStatement();
+//                    updateQuery = " UPDATE " + dbconfig.getDb_schema() + dbconfig.getAggregatedTableName() + " ag "
+//                            + "	 SET (ag.total_cdr, ag.total_usage, ag.service_fee, ag.charge_fee, ag.offer_cost, ag.offer_free_block, ag.internal_cost, ag.internal_free_block) ="
+//                            + "	 (SELECT "
+//                            + "			ag.total_cdr + nvl(v.total_cdr,0),"
+//                            + "			ag.total_usage + nvl(v.total_usage,0),"
+//                            + "			ag.service_fee + nvl(v.service_fee,0),"
+//                            + "			ag.charge_fee + nvl(v.charge_fee,0),"
+//                            + "			ag.offer_cost + nvl(v.offer_cost,0),"
+//                            + "			ag.offer_free_block + nvl(v.offer_free_block,0),"
+//                            + "			ag.internal_cost + nvl(v.internal_cost,0),"
+//                            + "			ag.internal_free_block + nvl(v.internal_free_block,0)"
+//                            + "    FROM " + vQuery + " v "
+//                            + "	   WHERE ag.a_number = v.a_number"
+//                            + "	   	 AND ag.bill_month = v.bill_month"
+//                            + "	     AND ag.cdr_type = v.cdr_type"
+//                            + "	     AND ag.payment_id = v.payment_id and ROWNUM <= 1)" //thaiha: fix SInger Row: and ROWNUM <= 1
+//                            + " WHERE EXISTS  (SELECT 1 FROM " + vQuery + " x "
+//                            + "				 WHERE  x.a_number = ag.a_number AND x.bill_month = ag.bill_month AND x.cdr_type = ag.cdr_type AND x.payment_id = ag.payment_id"
+//                            + "			    )";
+                    updateQuery = updateQuery = "MERGE INTO " + dbconfig.getDb_schema() + dbconfig.getAggregatedTableName() + " ag "
+                            + " USING (SELECT   COUNT (1) total_cdr,"
+                            + " a_number,TO_NUMBER (SUBSTR (a_number, LENGTH (a_number), 1))"
+                            + " data_part, TO_CHAR ( (cdr_start_time), 'yyMM') bill_month,"
+                            + " cdr_type, SUM (total_usage) AS total_usage,"
+                            + " SUM (service_fee) AS service_fee,"
+                            + " SUM (charge_fee) AS charge_fee,"
+                            + " SUM (offer_cost) AS offer_cost,"
+                            + " SUM (offer_free_block) AS offer_free_block,"
+                            + " SUM (internal_cost) AS internal_cost,"
+                            + " SUM (internal_free_block) internal_free_block,"
+                            + " payment_id "
+                            + " FROM " + dbconfig.getLoadTableName()
+                            + " WHERE   cdr_record_header_id = " + cdr_record_header_id
+                            + " GROUP BY   a_number,"
+                            + " cdr_type,"
+                            + " TO_CHAR ( (cdr_start_time), 'yyMM'),"
+                            + " payment_id) v "
+                            + " ON (ag.a_number = v.a_number "
+                            + " AND ag.bill_month = v.bill_month "
+                            + " AND ag.cdr_type = v.cdr_type "
+                            + " AND ag.payment_id = v.payment_id) "
+                            + " WHEN MATCHED THEN "
+                            + " UPDATE SET ag.total_cdr= ag.total_cdr + NVL (v.total_cdr, 0),"
+                            + " ag.total_usage= ag.total_usage + NVL (v.total_usage, 0), "
+                            + " ag.service_fee= ag.service_fee + NVL (v.service_fee, 0), "
+                            + " ag.charge_fee= ag.charge_fee + NVL (v.charge_fee, 0), "
+                            + " ag.offer_cost= ag.offer_cost + NVL (v.offer_cost, 0), "
+                            + " ag.offer_free_block= ag.offer_free_block + NVL (v.offer_free_block, 0), "
+                            + " ag.internal_cost= ag.internal_cost + NVL (v.internal_cost, 0), "
+                            + " ag.internal_free_block= ag.internal_free_block + NVL (v.internal_free_block, 0) ";
+
+                    insertQuery = " INSERT  /*+ PARALLEL(, 2) */ INTO " + dbconfig.getDb_schema() + dbconfig.getAggregatedTableName() + "(a_number, data_part, cdr_type, total_cdr, bill_month, total_usage, service_fee, charge_fee, offer_cost, offer_free_block, internal_cost, internal_free_block,payment_id)"
+                            + " SELECT a_number, data_part, cdr_type, total_cdr, bill_month, total_usage, service_fee, charge_fee, offer_cost, offer_free_block, internal_cost, internal_free_block,payment_id"
+                            + " FROM  " + vQuery + " a "
+                            + " WHERE NOT EXISTS"
+                            + "	 (SELECT 1 FROM " + dbconfig.getDb_schema() + dbconfig.getAggregatedTableName() + " x WHERE x.a_number = a.a_number AND x.bill_month=a.bill_month AND x.cdr_type= a.cdr_type AND x.payment_id = a.payment_id)";
+                    st.execute(updateQuery);
+                    st.execute(insertQuery);
+                    reformatResult.setAggregatedDone(true);
+                    logger.info("[End] aggregatedCDR at : " + DateUtils.getCurrentDateTime(DateUtils.MMddyyyyHHmmss_FULL_SLASH));
+                } catch (SQLException e) {
+                    //Hinh set error code 12 Mar 2014
+                    reformatResult.setAggregatedDone(false);
+                    reformatResult.setErrorCode(e.getErrorCode());
+                    reformatResult.setErrorMessage(e.getMessage());
+                    logger.error("SQLException", e);
+                } finally {
+                    try {
+                        if (st != null) {
+                            st.close();
+                        }
+                    } catch (SQLException ex) {
+                        ex.fillInStackTrace();
+                    }
+
+                }
+            }
+        });
+        threadPool.shutdown();
+    }
+
+    /*
+     * Delete all records in TEMP_RATED_CDR_01 where cdr_record_header_id
+     */
+    public static void deleteTempRatedCDR(final ReformatCdrOutput reformatResult, final DBConfig dbconfig, final Connection conn) {
+
+        ExecutorService threadPool = Executors.newSingleThreadExecutor();
+        threadPool.submit(new Runnable() {
+
+            public void run() {
+                Statement st = null;
+                try {
+                    int cdr_record_header_id = reformatResult.getCdrRecordHeaderId();
+
+                    //Reset error message
+                    reformatResult.setErrorCode(0);
+                    reformatResult.setErrorMessage(null);
+
+                    st = conn.createStatement();
+
+                    String deleteSql = "DELETE FROM " + dbconfig.getDb_schema() + dbconfig.getLoadTableName();
+                    deleteSql = deleteSql + " WHERE cdr_record_header_id = " + cdr_record_header_id;
+
+                    st.execute(deleteSql);
+
+                    reformatResult.setDeletedTempRatedCdrDone(true);
+
+                } catch (SQLException e) {
+                    //Hinh set error code 12 Mar 2014
+                    reformatResult.setDeletedTempRatedCdrDone(false);
+                    reformatResult.setErrorCode(e.getErrorCode());
+                    reformatResult.setErrorMessage(e.getMessage());
+
+                    logger.error("SQLException", e);
+                } finally {
+                    try {
+                        if (st != null) {
+                            st.close();
+                        }
+                    } catch (SQLException ex) {
+                        ex.fillInStackTrace();
+                    }
+                }
+            }
+        });
+        threadPool.shutdown();
+    }
+
+}

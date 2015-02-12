@@ -1,0 +1,188 @@
+2014-12-29 10:42:14,071 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-12-29 10:42:14,142 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-12-29 10:42:14,196 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-12-29 10:42:14,314 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-12-29 10:42:16,657 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-12-29 10:42:16,662 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-12-29 10:42:16,663 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-12-29 10:42:16,670 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-12-29 10:42:16,672 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-12-29 10:42:16,708 RegexMatchCache.java          [1063] INFO  - Using defined key factor for regex cache <NormalizeCache>. Using Key = <1> and Result = <2>
+2014-12-29 10:42:16,734 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <7> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-12-29 10:42:16,735 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-12-29 10:42:16,735 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-12-29 10:42:16,736 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-12-29 10:42:16,737 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-12-29 10:42:16,749 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-12-29 10:42:16,890 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-12-29 10:42:16,890 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-12-29 10:42:16,891 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-12-29 10:42:16,891 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-12-29 10:42:16,892 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-12-29 10:42:16,965 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-12-29 10:42:16,984 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <75> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-12-29 10:42:16,984 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-12-29 10:42:16,985 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <SDPCache>...
+2014-12-29 10:42:16,985 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <SDPCache>
+2014-12-29 10:42:16,986 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <SDPCache>
+2014-12-29 10:42:17,039 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-12-29 10:42:17,249 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <1000> configurations loaded for <SDPCache> from <eOneRateDB>
+2014-12-29 10:42:17,412 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <2000> configurations loaded for <SDPCache> from <eOneRateDB>
+2014-12-29 10:42:17,479 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <3000> configurations loaded for <SDPCache> from <eOneRateDB>
+2014-12-29 10:42:17,535 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <3686> configuration lines loaded for <SDPCache> from <eOneRateDB>
+2014-12-29 10:42:17,535 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <SDPCache>...
+2014-12-29 10:42:17,535 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <OCGCache>...
+2014-12-29 10:42:17,536 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <OCGCache>
+2014-12-29 10:42:17,536 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <OCGCache>
+2014-12-29 10:42:17,552 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-12-29 10:42:17,626 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <1000> configurations loaded for <OCGCache> from <eOneRateDB>
+2014-12-29 10:42:17,796 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <2000> configurations loaded for <OCGCache> from <eOneRateDB>
+2014-12-29 10:42:17,866 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <3000> configurations loaded for <OCGCache> from <eOneRateDB>
+2014-12-29 10:42:17,942 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <4000> configurations loaded for <OCGCache> from <eOneRateDB>
+2014-12-29 10:42:18,004 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <5000> configurations loaded for <OCGCache> from <eOneRateDB>
+2014-12-29 10:42:18,084 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <6000> configurations loaded for <OCGCache> from <eOneRateDB>
+2014-12-29 10:42:18,158 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <7000> configurations loaded for <OCGCache> from <eOneRateDB>
+2014-12-29 10:42:18,208 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <8000> configurations loaded for <OCGCache> from <eOneRateDB>
+2014-12-29 10:42:18,259 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <9000> configurations loaded for <OCGCache> from <eOneRateDB>
+2014-12-29 10:42:18,311 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <10000> configurations loaded for <OCGCache> from <eOneRateDB>
+2014-12-29 10:42:18,356 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <10831> configuration lines loaded for <OCGCache> from <eOneRateDB>
+2014-12-29 10:42:18,356 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <OCGCache>...
+2014-12-29 10:42:18,357 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-12-29 10:42:18,358 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-12-29 10:42:18,358 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-12-29 10:42:18,359 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-12-29 10:42:18,359 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-12-29 10:42:18,359 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-12-29 10:42:18,359 CacheFactory.java             [ 411] INFO  - Cache <SDPCache> is set to auto reload with a period of <0>
+2014-12-29 10:42:18,360 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <SDPCache>
+2014-12-29 10:42:18,360 CacheFactory.java             [ 411] INFO  - Cache <OCGCache> is set to auto reload with a period of <0>
+2014-12-29 10:42:18,360 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <OCGCache>
+2014-12-29 10:42:18,360 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 1698ms.
+2014-12-29 10:42:18,365 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-12-29 10:42:18,374 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-12-29 10:42:18,374 TransactionManager.java       [ 360] INFO  - Request Start for Transaction manager.
+2014-12-29 10:42:18,375 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-12-29 10:43:33,424 TransactionManager.java       [ 228] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-12-29 10:43:33,426 TransactionManager.java       [ 229] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-12-29 10:43:33,426 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <TAP_VOICE.0001.20141228110422.txt> for transaction <1>
+2014-12-29 10:43:33,948 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <13> ms
+2014-12-29 10:43:33,959 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <2> events in <10> ms
+2014-12-29 10:43:34,244 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <10000> events in <296> ms
+2014-12-29 10:43:34,253 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <2> events in <9> ms
+2014-12-29 10:43:34,256 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <10000> events in <12> ms
+2014-12-29 10:43:34,264 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <2> events in <8> ms
+2014-12-29 10:43:34,266 AbstractPlugIn.java           [ 451] INFO  - Plugin <OCGTranslation.Inst-0> processed <10000> events in <10> ms
+2014-12-29 10:43:34,274 AbstractPlugIn.java           [ 451] INFO  - Plugin <OCGTranslation.Inst-0> processed <2> events in <8> ms
+2014-12-29 10:43:34,309 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <10000> events in <43> ms
+2014-12-29 10:43:34,409 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <2> events in <0> ms
+2014-12-29 10:43:34,413 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <10000> events from a batch of <10000> events in <104> ms
+2014-12-29 10:43:34,414 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <2> events from a batch of <2> events in <1> ms
+2014-12-29 10:43:34,415 TransactionManager.java       [ 265] INFO  - Transaction <1> closed
+2014-12-29 10:43:34,415 TransactionManager.java       [ 266] INFO  - Transaction <1> closed
+2014-12-29 10:43:34,415 TransactionManager.java       [ 267] INFO  - Statistics: Records  <10000>
+2014-12-29 10:43:34,415 TransactionManager.java       [ 268] INFO  -             Duration <991> ms
+2014-12-29 10:43:34,415 TransactionManager.java       [ 270] INFO  -             Speed    <10090> records /sec
+2014-12-29 10:46:49,413 TransactionManager.java       [ 228] INFO  - Opened transaction <2> for pipeline <OrpTransformationPipeline>
+2014-12-29 10:46:49,414 TransactionManager.java       [ 229] INFO  - Opened transaction <2> for pipeline <OrpTransformationPipeline>
+2014-12-29 10:46:49,414 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <TAP_VOICE.0002.20141228110422.txt> for transaction <2>
+2014-12-29 10:46:49,692 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <11> ms
+2014-12-29 10:46:49,701 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <2> events in <9> ms
+2014-12-29 10:46:49,972 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <10000> events in <280> ms
+2014-12-29 10:46:49,980 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <2> events in <8> ms
+2014-12-29 10:46:49,981 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <10000> events in <9> ms
+2014-12-29 10:46:49,989 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <2> events in <7> ms
+2014-12-29 10:46:49,990 AbstractPlugIn.java           [ 451] INFO  - Plugin <OCGTranslation.Inst-0> processed <10000> events in <8> ms
+2014-12-29 10:46:50,003 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <10000> events in <13> ms
+2014-12-29 10:46:50,106 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <2> events in <0> ms
+2014-12-29 10:46:50,106 AbstractPlugIn.java           [ 451] INFO  - Plugin <OCGTranslation.Inst-0> processed <2> events in <0> ms
+2014-12-29 10:46:50,125 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <10000> events from a batch of <10000> events in <122> ms
+2014-12-29 10:46:50,125 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <2> events from a batch of <2> events in <0> ms
+2014-12-29 10:46:50,127 TransactionManager.java       [ 265] INFO  - Transaction <2> closed
+2014-12-29 10:46:50,127 TransactionManager.java       [ 266] INFO  - Transaction <2> closed
+2014-12-29 10:46:50,127 TransactionManager.java       [ 267] INFO  - Statistics: Records  <10000>
+2014-12-29 10:46:50,127 TransactionManager.java       [ 268] INFO  -             Duration <714> ms
+2014-12-29 10:46:50,127 TransactionManager.java       [ 270] INFO  -             Speed    <14005> records /sec
+2014-12-29 11:14:58,154 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-12-29 11:14:58,156 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-12-29 11:14:58,169 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-12-29 11:14:58,270 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-12-29 11:15:00,724 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-12-29 11:15:00,729 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-12-29 11:15:00,730 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-12-29 11:15:00,735 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-12-29 11:15:00,737 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-12-29 11:15:00,767 RegexMatchCache.java          [1063] INFO  - Using defined key factor for regex cache <NormalizeCache>. Using Key = <1> and Result = <2>
+2014-12-29 11:15:00,792 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <7> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-12-29 11:15:00,793 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-12-29 11:15:00,793 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-12-29 11:15:00,794 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-12-29 11:15:00,795 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-12-29 11:15:00,808 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-12-29 11:15:00,882 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-12-29 11:15:00,883 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-12-29 11:15:00,883 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-12-29 11:15:00,884 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-12-29 11:15:00,885 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-12-29 11:15:00,896 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-12-29 11:15:00,906 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <75> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-12-29 11:15:00,906 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-12-29 11:15:00,906 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <SDPCache>...
+2014-12-29 11:15:00,907 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <SDPCache>
+2014-12-29 11:15:00,908 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <SDPCache>
+2014-12-29 11:15:00,919 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-12-29 11:15:01,073 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <1000> configurations loaded for <SDPCache> from <eOneRateDB>
+2014-12-29 11:15:01,352 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <2000> configurations loaded for <SDPCache> from <eOneRateDB>
+2014-12-29 11:15:01,458 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <3000> configurations loaded for <SDPCache> from <eOneRateDB>
+2014-12-29 11:15:01,518 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <3686> configuration lines loaded for <SDPCache> from <eOneRateDB>
+2014-12-29 11:15:01,518 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <SDPCache>...
+2014-12-29 11:15:01,519 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <OCGCache>...
+2014-12-29 11:15:01,519 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <OCGCache>
+2014-12-29 11:15:01,520 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <OCGCache>
+2014-12-29 11:15:01,534 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-12-29 11:15:01,599 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <1000> configurations loaded for <OCGCache> from <eOneRateDB>
+2014-12-29 11:15:01,752 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <2000> configurations loaded for <OCGCache> from <eOneRateDB>
+2014-12-29 11:15:01,814 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <3000> configurations loaded for <OCGCache> from <eOneRateDB>
+2014-12-29 11:15:01,905 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <4000> configurations loaded for <OCGCache> from <eOneRateDB>
+2014-12-29 11:15:01,966 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <5000> configurations loaded for <OCGCache> from <eOneRateDB>
+2014-12-29 11:15:02,023 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <6000> configurations loaded for <OCGCache> from <eOneRateDB>
+2014-12-29 11:15:02,100 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <7000> configurations loaded for <OCGCache> from <eOneRateDB>
+2014-12-29 11:15:02,154 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <8000> configurations loaded for <OCGCache> from <eOneRateDB>
+2014-12-29 11:15:02,217 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <9000> configurations loaded for <OCGCache> from <eOneRateDB>
+2014-12-29 11:15:02,272 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <10000> configurations loaded for <OCGCache> from <eOneRateDB>
+2014-12-29 11:15:02,314 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <10831> configuration lines loaded for <OCGCache> from <eOneRateDB>
+2014-12-29 11:15:02,315 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <OCGCache>...
+2014-12-29 11:15:02,315 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-12-29 11:15:02,315 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-12-29 11:15:02,316 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-12-29 11:15:02,316 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-12-29 11:15:02,316 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-12-29 11:15:02,317 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-12-29 11:15:02,317 CacheFactory.java             [ 411] INFO  - Cache <SDPCache> is set to auto reload with a period of <0>
+2014-12-29 11:15:02,317 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <SDPCache>
+2014-12-29 11:15:02,317 CacheFactory.java             [ 411] INFO  - Cache <OCGCache> is set to auto reload with a period of <0>
+2014-12-29 11:15:02,318 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <OCGCache>
+2014-12-29 11:15:02,318 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 1589ms.
+2014-12-29 11:15:02,322 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-12-29 11:15:02,331 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-12-29 11:15:02,331 TransactionManager.java       [ 360] INFO  - Request Start for Transaction manager.
+2014-12-29 11:15:02,332 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-12-29 11:15:17,368 TransactionManager.java       [ 228] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-12-29 11:15:17,369 TransactionManager.java       [ 229] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-12-29 11:15:17,369 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <TAP_VOICE.0004.20141228110422.txt> for transaction <1>
+2014-12-29 11:15:17,957 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <20> ms
+2014-12-29 11:15:18,058 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <2> events in <0> ms
+2014-12-29 11:15:18,442 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <10000> events in <484> ms
+2014-12-29 11:15:18,453 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <2> events in <10> ms
+2014-12-29 11:15:18,456 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <10000> events in <14> ms
+2014-12-29 11:15:18,466 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <2> events in <10> ms
+2014-12-29 11:15:18,471 AbstractPlugIn.java           [ 451] INFO  - Plugin <OCGTranslation.Inst-0> processed <10000> events in <15> ms
+2014-12-29 11:15:18,482 AbstractPlugIn.java           [ 451] INFO  - Plugin <OCGTranslation.Inst-0> processed <2> events in <11> ms
+2014-12-29 11:15:18,512 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <10000> events in <41> ms
+2014-12-29 11:15:18,612 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <2> events in <0> ms
+2014-12-29 11:15:18,669 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <10000> events from a batch of <10000> events in <157> ms
+2014-12-29 11:15:18,671 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <2> events from a batch of <2> events in <1> ms
+2014-12-29 11:15:18,672 TransactionManager.java       [ 265] INFO  - Transaction <1> closed
+2014-12-29 11:15:18,672 TransactionManager.java       [ 266] INFO  - Transaction <1> closed
+2014-12-29 11:15:18,672 TransactionManager.java       [ 267] INFO  - Statistics: Records  <10000>
+2014-12-29 11:15:18,672 TransactionManager.java       [ 268] INFO  -             Duration <1304> ms
+2014-12-29 11:15:18,672 TransactionManager.java       [ 270] INFO  -             Speed    <7668> records /sec

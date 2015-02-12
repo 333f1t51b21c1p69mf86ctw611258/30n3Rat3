@@ -1,0 +1,65 @@
+package e1reformat.entity.enrich;
+
+public class MapCheckSumReport {
+
+    private String cdr_log_process_id;
+    private String start_time;
+    private String source_file_url;
+    private String number_of_record;
+    private String is_handle;
+
+    public String getCdr_log_process_id() {
+        return cdr_log_process_id;
+    }
+
+    public String getIs_handle() {
+        return is_handle;
+    }
+
+    public void setIs_handle(String is_handle) {
+        this.is_handle = is_handle;
+    }
+
+    public String getStart_time() {
+        return start_time;
+    }
+
+    public String getSource_file_url() {
+        return source_file_url;
+    }
+
+    public String getNumber_of_record() {
+        return number_of_record;
+    }
+
+    public void setCdr_log_process_id(String cdr_log_process_id) {
+        this.cdr_log_process_id = cdr_log_process_id;
+    }
+
+    public void setStart_time(String start_time) {
+        this.start_time = start_time;
+    }
+
+    public void setSource_file_url(String source_file_url) {
+        this.source_file_url = source_file_url;
+    }
+
+    public void setNumber_of_record(String number_of_record) {
+        this.number_of_record = number_of_record;
+    }
+
+    public MapCheckSumReport(String cdr_log_process_id, String start_time, String source_file_url, String number_of_record, String is_handle) {
+        super();
+
+        this.cdr_log_process_id = cdr_log_process_id;
+        this.start_time = start_time;
+        this.source_file_url = source_file_url;
+        this.number_of_record = number_of_record;
+        this.is_handle = is_handle;
+    }
+
+    public MapCheckSumReport() {
+        super();
+    }
+
+}

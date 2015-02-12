@@ -1,0 +1,303 @@
+2014-12-03 19:08:12,586 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.AbstractInputAdapter.push(AbstractInputAdapter.java:239)
+	at ElcRate.Pipeline.run(Pipeline.java:918)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.FileVNPInputAdapter.procValidRecord(FileVNPInputAdapter.java:193)
+	at ElcRate.adapter.file.FlatFileInputAdapter.loadBatch(FlatFileInputAdapter.java:426)
+	at ElcRate.adapter.AbstractInputAdapter.push(AbstractInputAdapter.java:193)
+	... 2 more
+2014-12-03 19:08:43,136 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:451)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:442)
+	... 3 more
+2014-12-03 19:08:43,140 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:451)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:442)
+	... 3 more
+2014-12-03 19:08:43,141 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:451)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:442)
+	... 3 more
+2014-12-03 19:10:54,769 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.AbstractInputAdapter.push(AbstractInputAdapter.java:239)
+	at ElcRate.Pipeline.run(Pipeline.java:918)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.FileVNPInputAdapter.procValidRecord(FileVNPInputAdapter.java:193)
+	at ElcRate.adapter.file.FlatFileInputAdapter.loadBatch(FlatFileInputAdapter.java:426)
+	at ElcRate.adapter.AbstractInputAdapter.push(AbstractInputAdapter.java:193)
+	... 2 more
+2014-12-03 19:10:54,978 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:451)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:442)
+	... 3 more
+2014-12-03 19:10:54,979 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:451)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:442)
+	... 3 more
+2014-12-03 19:10:54,980 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:451)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:442)
+	... 3 more
+2014-12-03 19:13:53,569 FATAL - InitializationException thrown. Message <ElcRateSocket.getServerSocket(): Could not listen on port <8198>. Message = <Address already in use: JVM_Bind>. Aborting.>
+ElcRate.exception.InitializationException: ElcRateSocket.getServerSocket(): Could not listen on port <8198>. Message = <Address already in use: JVM_Bind>. Aborting.
+	at ElcRate.configurationmanager.ElcRateSocket.<init>(ElcRateSocket.java:143)
+	at ElcRate.configurationmanager.EventHandler.init(EventHandler.java:164)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-12-03 19:35:08,530 FATAL - InitializationException thrown. Message <ElcRateSocket.getServerSocket(): Could not listen on port <8198>. Message = <Address already in use: JVM_Bind>. Aborting.>
+ElcRate.exception.InitializationException: ElcRateSocket.getServerSocket(): Could not listen on port <8198>. Message = <Address already in use: JVM_Bind>. Aborting.
+	at ElcRate.configurationmanager.ElcRateSocket.<init>(ElcRateSocket.java:143)
+	at ElcRate.configurationmanager.EventHandler.init(EventHandler.java:164)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-12-03 19:35:29,745 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.AbstractInputAdapter.push(AbstractInputAdapter.java:239)
+	at ElcRate.Pipeline.run(Pipeline.java:918)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.FileVNPInputAdapter.procValidRecord(FileVNPInputAdapter.java:193)
+	at ElcRate.adapter.file.FlatFileInputAdapter.loadBatch(FlatFileInputAdapter.java:426)
+	at ElcRate.adapter.AbstractInputAdapter.push(AbstractInputAdapter.java:193)
+	... 2 more
+2014-12-03 19:35:29,979 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:451)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:442)
+	... 3 more
+2014-12-03 19:35:29,980 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:451)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:442)
+	... 3 more
+2014-12-03 19:35:29,981 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:451)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:442)
+	... 3 more
+2014-12-03 19:41:54,182 FATAL - InitializationException thrown. Message <ElcRateSocket.getServerSocket(): Could not listen on port <8198>. Message = <Address already in use: JVM_Bind>. Aborting.>
+ElcRate.exception.InitializationException: ElcRateSocket.getServerSocket(): Could not listen on port <8198>. Message = <Address already in use: JVM_Bind>. Aborting.
+	at ElcRate.configurationmanager.ElcRateSocket.<init>(ElcRateSocket.java:143)
+	at ElcRate.configurationmanager.EventHandler.init(EventHandler.java:164)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-12-03 19:42:13,727 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.AbstractInputAdapter.push(AbstractInputAdapter.java:239)
+	at ElcRate.Pipeline.run(Pipeline.java:918)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.FileVNPInputAdapter.procValidRecord(FileVNPInputAdapter.java:193)
+	at ElcRate.adapter.file.FlatFileInputAdapter.loadBatch(FlatFileInputAdapter.java:426)
+	at ElcRate.adapter.AbstractInputAdapter.push(AbstractInputAdapter.java:193)
+	... 2 more
+2014-12-03 19:42:38,302 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:451)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:442)
+	... 3 more
+2014-12-03 19:42:38,304 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:451)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:442)
+	... 3 more
+2014-12-03 19:42:38,306 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:451)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:442)
+	... 3 more
+2014-12-03 19:44:45,505 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.AbstractInputAdapter.push(AbstractInputAdapter.java:239)
+	at ElcRate.Pipeline.run(Pipeline.java:918)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.FileVNPInputAdapter.procValidRecord(FileVNPInputAdapter.java:193)
+	at ElcRate.adapter.file.FlatFileInputAdapter.loadBatch(FlatFileInputAdapter.java:426)
+	at ElcRate.adapter.AbstractInputAdapter.push(AbstractInputAdapter.java:193)
+	... 2 more
+2014-12-03 19:44:45,723 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:451)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:442)
+	... 3 more
+2014-12-03 19:44:45,725 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:451)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:442)
+	... 3 more
+2014-12-03 19:44:45,726 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:451)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:442)
+	... 3 more
+2014-12-03 19:51:58,799 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.AbstractInputAdapter.push(AbstractInputAdapter.java:239)
+	at ElcRate.Pipeline.run(Pipeline.java:918)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.FileVNPInputAdapter.procValidRecord(FileVNPInputAdapter.java:193)
+	at ElcRate.adapter.file.FlatFileInputAdapter.loadBatch(FlatFileInputAdapter.java:426)
+	at ElcRate.adapter.AbstractInputAdapter.push(AbstractInputAdapter.java:193)
+	... 2 more
+2014-12-03 19:51:59,024 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepErrorRecord(MyFlatFileOutputAdapter.java:498)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:322)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepErrorRecord(MyFlatFileOutputAdapter.java:489)
+	... 3 more
+2014-12-03 19:51:59,025 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:451)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:442)
+	... 3 more
+2014-12-03 19:51:59,026 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:451)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:442)
+	... 3 more
+2014-12-03 19:53:49,763 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.AbstractInputAdapter.push(AbstractInputAdapter.java:239)
+	at ElcRate.Pipeline.run(Pipeline.java:918)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.FileVNPInputAdapter.procValidRecord(FileVNPInputAdapter.java:193)
+	at ElcRate.adapter.file.FlatFileInputAdapter.loadBatch(FlatFileInputAdapter.java:426)
+	at ElcRate.adapter.AbstractInputAdapter.push(AbstractInputAdapter.java:193)
+	... 2 more
+2014-12-03 19:58:39,249 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.AbstractInputAdapter.push(AbstractInputAdapter.java:239)
+	at ElcRate.Pipeline.run(Pipeline.java:918)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.FileVNPInputAdapter.procValidRecord(FileVNPInputAdapter.java:193)
+	at ElcRate.adapter.file.FlatFileInputAdapter.loadBatch(FlatFileInputAdapter.java:426)
+	at ElcRate.adapter.AbstractInputAdapter.push(AbstractInputAdapter.java:193)
+	... 2 more
+2014-12-03 20:00:13,860 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.AbstractInputAdapter.push(AbstractInputAdapter.java:239)
+	at ElcRate.Pipeline.run(Pipeline.java:918)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.FileVNPInputAdapter.procValidRecord(FileVNPInputAdapter.java:193)
+	at ElcRate.adapter.file.FlatFileInputAdapter.loadBatch(FlatFileInputAdapter.java:426)
+	at ElcRate.adapter.AbstractInputAdapter.push(AbstractInputAdapter.java:193)
+	... 2 more
+2014-12-03 20:00:14,078 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepErrorRecord(MyFlatFileOutputAdapter.java:498)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:322)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepErrorRecord(MyFlatFileOutputAdapter.java:489)
+	... 3 more
+2014-12-03 20:00:14,080 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:451)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:442)
+	... 3 more
+2014-12-03 20:00:14,081 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:451)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepValidRecord(MyFlatFileOutputAdapter.java:442)
+	... 3 more

@@ -1,0 +1,229 @@
+package e1reformat.util;
+
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.log4j.Logger;
+
+//import sun.security.action.GetBooleanAction;
+public class DateUtils {
+
+    private static Logger logger = Logger.getLogger("DateUtils");
+    public static final String MMddyyyyHHmmss_FULL_SLASH = "MM/dd/yyyy HH:mm:ss";
+    public static final String MMddyyyyHHmmss_sss_FULL_SLASH = "MM/dd/yyyy HH:mm:ss.sss";
+    public static final String yyyyMMddHHmmss_NO_SLASH = "yyyy-MM-dd HH:mm:ss";
+    public static final String ddMMyyyyHHmmss_FULL_SLASH = "dd-MM-yyyy HH:mm:ss";
+    public static final String ddMMyyyyHHmmss_FULL_SLASH1 = "dd/MM/yyyy HH:mm:ss";
+    public static final String MMddYYYY_FULL_SLASH = "MM/dd/yyyy";
+    public static final String ddMMYYYY_FULL_SLASH = "dd/MM/yyyy";
+    public static final String MMddYY_NO_SLASH = "MM-dd-yy";
+    public static final String hhmmss_sss = "hh:mm:ss";
+    public static final String hhmmss = "hh:mm:ss";
+
+    public static final String MM_dd_yyhhmmss = "MM-dd-yy HH:mm:ss";
+
+    /**
+     *
+     * @param format
+     * @return String getCurrentDateTime
+     */
+    public static String getCurrentDateTime(String format) {
+        try {
+            DateFormat dateFormat = new SimpleDateFormat(format);
+            Date date = new Date();
+            return dateFormat.format(date).toString();
+        } catch (Exception e) {
+            logger.error("Exception", e);
+            return "";
+        }
+    }
+
+    /**
+     *
+     * @param format
+     * @param timeInCdr
+     *
+     * @return timeInCdr in input format
+     */
+    public static String convert(String format, String timeInCdr) {
+        try {
+            SimpleDateFormat dfInput = new SimpleDateFormat(format);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTimeInMillis(NumberUtils.toLong(timeInCdr + "000"));
+            return dfInput.format(calendar.getTime());
+        } catch (Exception e) {
+            logger.error("Exception", e);
+            return "";
+        }
+    }
+
+    /**
+     *
+     * @param inputFormat
+     * @param outputFormat
+     * @param dateString
+     *
+     *
+     * @return dateString in output fomat
+     */
+    public static String convertDate(String inputFormat, String outputFormat, String dateString) throws Exception{
+        DateFormat inputDF = new SimpleDateFormat(inputFormat);
+        DateFormat outputDF = new SimpleDateFormat(outputFormat);
+
+//        try {
+
+            Date date = inputDF.parse(dateString);
+            String output = outputDF.format(date);
+            return output;
+
+//        } catch (Exception e) {
+//            logger.error("Exception", e);
+//            return "invalid format";
+//        }
+    }
+
+    public static boolean checkFormatDate(String inputFormat, String dateString) {
+        DateFormat inputDF = new SimpleDateFormat(inputFormat);
+        try {
+            Date date = inputDF.parse(dateString);
+        } catch (Exception e) {
+            logger.error("Wrong format date");
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     *
+     * @param hoursInput
+     * @return EnrichString (HoursInput)
+     */
+    public static String correctHoursString(String hoursInput) throws Exception{
+
+        if (hoursInput.length() > 8) {
+
+            return enrichString(hoursInput.substring(0, 2)) + ":" + enrichString(hoursInput.substring(3, 5)) + ":" + enrichString(hoursInput.substring(6, 8));
+
+        } else {
+
+            return "";
+        }
+    }
+
+    /*
+     * getDateStringInformat
+     */
+    public static String getDateStringInformat(Date dateInput, String format) {
+        try {
+            DateFormat dateFormat = new SimpleDateFormat(format);
+            return dateFormat.format(dateInput).toString();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    /**
+     *
+     * @param input
+     * @return input.trim()
+     */
+    public static String enrichString(String input) {
+
+        if (input.trim().length() >= 2) {
+
+            return input;
+
+        } else {
+
+            return "0" + input.trim();
+        }
+    }
+
+    /**
+     * @param time1
+     * @param time2
+     * @return
+     * @throws ParseException
+     */
+    public static Integer minusDate(String time1, String time2) {
+
+        SimpleDateFormat sf = new SimpleDateFormat(MM_dd_yyhhmmss);
+
+        Date sDt1;
+        Integer result = 0;
+        try {
+
+            sDt1 = sf.parse(time1);
+            Date sDt2 = sf.parse(time2);
+            long ld1 = sDt1.getTime() / 1000;
+            long ld2 = sDt2.getTime() / 1000;
+            result = new Integer((int) (ld1 - ld2));
+
+        } catch (ParseException e) {
+            logger.error("Exception", e);
+        }
+        return result;
+    }
+
+    public static Boolean compareDate(String StartDate, String EnDate, String input) {
+        SimpleDateFormat sf = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+        Date sDt1, sDt2, sDt3;
+        try {
+            sDt1 = sf.parse(StartDate);
+            sDt2 = sf.parse(EnDate);
+            sDt3 = sf.parse(input);
+            if (sDt3.before(sDt1) && sDt3.after(sDt2)) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (ParseException e) {
+            logger.error("Exception", e);
+            return false;
+        }
+    }
+
+    public static Date getDateFromFormat(String dateInString, String format) {
+        SimpleDateFormat formatter = new SimpleDateFormat(format);
+        try {
+            Date date = formatter.parse(dateInString);
+            return date;
+        } catch (ParseException e) {
+            logger.error("ParseException", e);
+        }
+        return null;
+    }
+
+    public static void main(String args[]) {
+        logger.info(getDateFromFormat(getCurrentDateTime(MMddyyyyHHmmss_sss_FULL_SLASH), DateUtils.MMddyyyyHHmmss_FULL_SLASH));
+    }
+
+    public static Integer validateDate(String fromDate, String toDate) {
+        try {
+            if (fromDate == null || fromDate.length() == 0 || toDate == null || toDate.length() == 0) {
+                return -2;
+            }
+            SimpleDateFormat sdf = new SimpleDateFormat(ddMMYYYY_FULL_SLASH);
+            Date fromDateTime = sdf.parse(fromDate);
+            Date toDateTime = sdf.parse(toDate);
+            Date now = new Date();
+            if (fromDateTime.compareTo(toDateTime) > 0) {
+                return 1;
+            }
+            if (fromDateTime.compareTo(now) > 0) {
+                return 2;
+            }
+            if (toDateTime.compareTo(now) > 0) {
+                return 3;
+            }
+        } catch (Exception e) {
+            logger.error("Exception validateDate", e);
+            return -1;
+        }
+        return 0;
+    }
+}

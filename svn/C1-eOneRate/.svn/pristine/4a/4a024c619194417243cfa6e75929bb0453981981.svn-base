@@ -1,0 +1,144 @@
+2014-11-17 22:41:40,664 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-17 22:41:40,666 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-17 22:41:40,676 ElcRateSocket.java            [ 155] INFO  - Listener on port <8668> is running...
+2014-11-17 22:41:40,854 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@//192.168.6.207:1521/eonerate>
+2014-11-17 22:41:42,766 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-17 22:41:42,770 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-17 22:41:42,770 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-17 22:41:42,774 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-17 22:41:42,775 BestMatchCache.java           [ 282] INFO  - Starting Best Match Cache Loading from DB for <GPRSCache>
+2014-11-17 22:41:42,919 ElcRate.java                  [ 655] ERROR - Exception thrown in module <Framework>
+2014-11-17 22:41:42,925 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <Error Adding Prefix <m3-world> to group <DEF> in module <GPRSCache>>
+2014-11-17 22:41:42,925 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <Startup failed. Aborting.>
+2014-11-17 22:41:42,925 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-17 22:41:42,926 ElcRateSocket.java            [ 191] INFO  - Closing <Listener>
+2014-11-17 22:45:22,980 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-17 22:45:22,983 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-17 22:45:22,993 ElcRateSocket.java            [ 155] INFO  - Listener on port <8668> is running...
+2014-11-17 22:45:23,096 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@//192.168.6.207:1521/eonerate>
+2014-11-17 22:45:24,166 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-17 22:45:24,169 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-17 22:45:24,170 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-17 22:45:24,173 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-17 22:45:24,174 BestMatchCache.java           [ 282] INFO  - Starting Best Match Cache Loading from DB for <GPRSCache>
+2014-11-17 22:45:24,206 ElcRate.java                  [ 655] ERROR - Exception thrown in module <Framework>
+2014-11-17 22:45:24,209 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <Error Adding Prefix <m3-world3001> to group <DEF> in module <GPRSCache>>
+2014-11-17 22:45:24,210 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <Startup failed. Aborting.>
+2014-11-17 22:45:24,210 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-17 22:45:24,211 ElcRateSocket.java            [ 191] INFO  - Closing <Listener>
+2014-11-17 23:01:21,841 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-17 23:01:21,843 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-17 23:01:21,852 ElcRateSocket.java            [ 155] INFO  - Listener on port <8668> is running...
+2014-11-17 23:01:21,948 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@//192.168.6.207:1521/eonerate>
+2014-11-17 23:01:23,006 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-17 23:01:23,010 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-17 23:01:23,010 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-17 23:01:23,015 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-17 23:01:23,016 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-17 23:01:23,031 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-17 23:01:23,077 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <70> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-17 23:01:23,077 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-17 23:01:23,078 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-17 23:01:23,079 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-17 23:01:23,082 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-17 23:01:23,088 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-17 23:01:23,174 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-17 23:01:23,175 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-17 23:01:23,175 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-17 23:01:23,176 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-17 23:01:23,177 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-17 23:01:23,177 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-17 23:01:23,181 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 171ms.
+2014-11-17 23:01:23,188 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformation> ***
+2014-11-17 23:01:23,195 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformation>
+2014-11-17 23:01:23,196 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-17 23:01:23,209 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <Could not find cache entry for <null>>
+2014-11-17 23:01:23,210 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-17 23:01:23,211 ElcRateSocket.java            [ 191] INFO  - Closing <Listener>
+2014-11-17 23:05:24,521 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-17 23:05:24,523 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-17 23:05:24,533 ElcRateSocket.java            [ 155] INFO  - Listener on port <8668> is running...
+2014-11-17 23:05:24,697 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@//192.168.6.207:1521/eonerate>
+2014-11-17 23:05:25,870 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-17 23:05:25,874 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-17 23:05:25,874 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-17 23:05:25,879 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-17 23:05:25,880 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-17 23:05:25,893 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-17 23:05:25,928 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <70> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-17 23:05:25,928 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-17 23:05:25,929 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-17 23:05:25,929 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-17 23:05:25,931 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-17 23:05:25,933 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-17 23:05:26,008 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-17 23:05:26,008 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-17 23:05:26,008 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-17 23:05:26,009 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-17 23:05:26,009 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-17 23:05:26,009 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-17 23:05:26,009 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 135ms.
+2014-11-17 23:05:26,013 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformation> ***
+2014-11-17 23:05:26,018 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformation>
+2014-11-17 23:05:26,019 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-17 23:05:26,029 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <Could not find cache entry for <null>>
+2014-11-17 23:05:26,030 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-17 23:05:26,030 ElcRateSocket.java            [ 191] INFO  - Closing <Listener>
+2014-11-17 23:13:33,346 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-17 23:13:33,348 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-17 23:13:33,358 ElcRateSocket.java            [ 155] INFO  - Listener on port <8086> is running...
+2014-11-17 23:13:33,451 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@//192.168.6.207:1521/eonerate>
+2014-11-17 23:13:34,551 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-17 23:13:34,555 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-17 23:13:34,555 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-17 23:13:34,560 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-17 23:13:34,561 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-17 23:13:34,575 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-17 23:13:34,608 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <70> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-17 23:13:34,609 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-17 23:13:34,609 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-17 23:13:34,610 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-17 23:13:34,612 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-17 23:13:34,616 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-17 23:13:34,689 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-17 23:13:34,689 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-17 23:13:34,689 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-17 23:13:34,690 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-17 23:13:34,690 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-17 23:13:34,690 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-17 23:13:34,690 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 135ms.
+2014-11-17 23:13:34,693 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformation> ***
+2014-11-17 23:13:34,699 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformation>
+2014-11-17 23:13:34,700 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-17 23:13:34,710 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <Could not find cache entry for <null>>
+2014-11-17 23:13:34,710 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-17 23:13:34,711 ElcRateSocket.java            [ 191] INFO  - Closing <Listener>
+2014-11-17 23:21:24,070 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-17 23:21:24,072 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-17 23:21:24,081 ElcRateSocket.java            [ 155] INFO  - Listener on port <8086> is running...
+2014-11-17 23:21:24,196 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@//192.168.6.207:1521/eonerate>
+2014-11-17 23:21:25,246 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-17 23:21:25,250 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-17 23:21:25,251 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-17 23:21:25,256 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-17 23:21:25,257 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-17 23:21:25,273 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-17 23:21:25,316 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <70> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-17 23:21:25,316 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-17 23:21:25,317 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-17 23:21:25,317 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-17 23:21:25,318 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-17 23:21:25,320 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-17 23:21:25,396 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-17 23:21:25,397 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-17 23:21:25,397 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-17 23:21:25,398 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-17 23:21:25,398 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-17 23:21:25,398 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-17 23:21:25,398 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 148ms.
+2014-11-17 23:21:25,403 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformation> ***
+2014-11-17 23:21:25,410 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformation>
+2014-11-17 23:21:25,412 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-17 23:21:25,423 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <Could not find cache entry for <null>>
+2014-11-17 23:21:25,424 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-17 23:21:25,424 ElcRateSocket.java            [ 191] INFO  - Closing <Listener>

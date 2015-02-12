@@ -1,0 +1,53 @@
+package e1reformat.entity.enrich;
+
+public class PrefixB_Number {
+
+    String prefix = "";
+    String change = "";
+    Integer id;
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(String _prefix) {
+        this.prefix = _prefix;
+    }
+
+    public String getChange() {
+        return change;
+    }
+
+    public void setChange(String _change) {
+        this.change = _change;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setID(Integer _id) {
+        this.id = _id;
+    }
+
+    public PrefixB_Number(String prefix, String change) {
+        super();
+
+        this.prefix = prefix;
+        this.change = change;
+
+    }
+
+    public PrefixB_Number(String prefix, String change, Integer _id) {
+        super();
+
+        this.prefix = prefix;
+        this.change = change;
+        this.id = _id;
+
+    }
+
+    public PrefixB_Number() {
+        super();
+    }
+}

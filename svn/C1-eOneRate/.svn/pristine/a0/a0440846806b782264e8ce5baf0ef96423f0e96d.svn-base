@@ -1,0 +1,84 @@
+package e1reformat.db.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.log4j.Logger;
+import e1reformat.db.pool.DBConfig;
+import e1reformat.util.DateUtils;
+
+public class CdrRecordHeaderDAO {
+
+    private static Logger logger = Logger.getLogger("CdrLogProcessDAO");
+    private static DBConfig dbconfig = new DBConfig();
+
+    /**
+     * TODO cut CDR_Record_Header
+     *
+     * @param valid_Id
+     * @param
+     * @return CDR_Record_Header in JDBC
+     *
+     * @Author TRUONGDH
+     * @Date 05 Nov 2013
+     */
+    public static void insertHeader(String sHeader, String checkSum, Connection conn, String fileName, String cdrRecordHeaderId) throws SQLException {
+        PreparedStatement stmt = null;
+        String sSQL = "INSERT INTO " + dbconfig.getDb_schema() + "cdr_record_header"
+                + "(cdr_record_header_id, Record_ID , Xor_Checksum , host_Name, start_Rcd_Seq, end_Rcd_Seq, file_Creation_Timestamp,"
+                + "file_LastUpdate_Timestamp,number_Of_Record, Checksum_Valid, Cdr_FileName) "
+                + "VALUES ('"
+                + cdrRecordHeaderId
+                + "'"
+                + ","
+                + "'"
+                + sHeader.substring(0, 3)
+                + "',"
+                + "'"
+                + (int) sHeader.substring(3, 4).charAt(0)
+                + "'"
+                + ",'"
+                + sHeader.substring(4, 36).trim()
+                + "'"
+                + ",'"
+                + sHeader.substring(37, 47)
+                + "'"
+                + ",'"
+                + sHeader.substring(48, 58)
+                + "'"
+                + ",'"
+                + DateUtils.convert(DateUtils.MMddyyyyHHmmss_FULL_SLASH,
+                        sHeader.substring(59, 69))
+                + "'"
+                + ",'"
+                + DateUtils.convert(DateUtils.MMddyyyyHHmmss_FULL_SLASH,
+                        sHeader.substring(70, 80))
+                + "'"
+                + ",'"
+                + sHeader.substring(81, 91)
+                + "'"
+                + ","
+                + NumberUtils.createNumber(checkSum)
+                + ","
+                + "'"
+                + fileName
+                + "')";
+
+//		System.out.println(" insertHeader  " + sSQL);
+        try {
+            stmt = conn.prepareStatement(sSQL);
+            stmt.executeUpdate();
+        } catch (SQLException sqe) {
+            logger.error("SQLException", sqe);
+        } catch (Exception e) {
+            logger.error("Exception", e);
+        } finally {
+            try {
+                stmt.close();
+            } catch (SQLException e) {
+                logger.error("SQLException", e);
+            }
+        }
+    }
+}

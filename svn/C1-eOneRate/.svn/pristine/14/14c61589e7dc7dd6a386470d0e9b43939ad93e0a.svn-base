@@ -1,0 +1,39 @@
+OPTIONS (DIRECT=false,ERRORS=9999)
+LOAD DATA
+APPEND
+INTO TABLE TEMP_RATED_CDR
+FIELDS TERMINATED BY ";" OPTIONALLY ENCLOSED BY '"'
+(
+        a_number,
+        cdr_type ,
+        cdr_start_time DATE "mm/dd/yyyy hh24:mi:ss",
+        duration,
+        total_usage,
+        b_number,
+        b_zone,
+        nw_group,
+        service_fee,
+        service_fee_id,
+        charge_fee,
+        charge_fee_id,
+        lac,
+        cell_id,
+        subscriber_unbill,
+        bu_id,
+        old_bu_id,
+        offer_cost,
+        internal_free_block,
+        internal_cost,
+        offer_free_block,
+        dial_digit,
+        cdr_record_header_id, 
+        cdr_sequence_number, 
+        location_no, 
+        msc_id, 
+        unit_type_id, 
+        primary_offer_id,
+        discount_item_id,
+        rerate_flag,
+        aut_final_id, 
+        tariff_plan_id,
+	error_code,payment_id)

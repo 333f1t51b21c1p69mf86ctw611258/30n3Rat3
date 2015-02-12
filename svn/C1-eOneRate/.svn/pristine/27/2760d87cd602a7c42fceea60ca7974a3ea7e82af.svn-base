@@ -1,0 +1,184 @@
+package e1reformat.controller;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Properties;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+
+import e1reformat.db.dao.CdrLogProcessDAO;
+import e1reformat.db.dao.SummaryReportDAO;
+import e1reformat.db.dao.UserAccountDAO;
+import e1reformat.entity.output.SummaryReportObject;
+import e1reformat.entity.output.UserAccount;
+import e1reformat.gui.util.LogItem;
+import e1reformat.util.DateUtils;
+import e1reformat.util.IConstant;
+import e1reformat.util.Log4jUtils;
+import e1reformat.util.SecurityUtils;
+
+public class MainProcessor {
+
+    private static Logger logger = Logger.getLogger("MainProcessor");
+    public static CdrLogProcessDAO iCdrLogProcessDAO;
+    public final static int SUCCESS = 0;
+    public static Properties props = new Properties();
+    public static String sqlloader_ctl;
+    public static String sqlloader_log;
+    public static String sqlloader_ussid;
+    public static String application_id;
+    public static int buffer_size;
+    public static String look_and_feel;
+    public static String encryptedKey;
+//    public static String listSluScan;
+
+    public static String readDataFromCsv(String fileUrl) {
+        return "00";
+    }
+
+    public static int process(Integer method, boolean isExportCsv, String sourceBehavior, List<File> listOfFiles, File destinationFile, File movedFile, Connection conn, boolean onCOnsole) throws SQLException {
+        try {
+            MainProcessor.loadProperties();
+        } catch (IOException ee) {
+            logger.error("Exception: MainProcessor.loadProperties(): " + ee.getMessage());
+        }
+            CSVProcess.scanFolder(method, isExportCsv, listOfFiles, destinationFile, movedFile, sourceBehavior,conn);
+//        if (onCOnsole) {
+//            CSVProcess.scanFolder(method, isExportCsv, listOfFiles, destinationFile, movedFile, sourceBehavior, conn);
+//        } else {
+//            CSVProcessInCommand.scanFolder(method, isExportCsv, listOfFiles, destinationFile, movedFile, sourceBehavior, conn);
+//        }
+        return SUCCESS;
+    }
+
+    /**
+     *
+     * @param fileDestination
+     */
+    public static int loadSqlLoader(File fileDestination) {
+        logger.info("Start using sql loader, fileName = " + fileDestination.getName());
+        logger.info("[SQL Loader] StartTime = " + DateUtils.getCurrentDateTime(DateUtils.MMddyyyyHHmmss_sss_FULL_SLASH));
+        int result = 0;
+
+        Process p = null;
+
+        try {
+            //loadProperties();
+            StringBuilder loaderCommand = new StringBuilder();
+            loaderCommand.append("sqlldr " + sqlloader_ussid + " ");
+            loaderCommand.append("control = '" + sqlloader_ctl + "' ");
+            loaderCommand.append("log = '" + sqlloader_log+"' ");
+            loaderCommand.append("data = '" + fileDestination.getAbsolutePath() + "'");
+            p = Runtime.getRuntime().exec(loaderCommand.toString());
+            BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            BufferedReader stdError = new BufferedReader(new InputStreamReader(p.getErrorStream()));
+            // read the output from the command./ru 
+            String s = null;
+            int count = 0;
+            while ((s = stdInput.readLine()) != null) {
+                count++;
+                if (count == 1000) {
+                    logger.info(s);
+                    count = 0;
+                }
+            }
+            if (stdInput.readLine() == null) {
+                logger.info("[SQL Loader] FinishTime  = " + DateUtils.getCurrentDateTime(DateUtils.MMddyyyyHHmmss_sss_FULL_SLASH));
+                result = 0;
+            }
+            // read any errors from the attempted command
+            while ((s = stdError.readLine()) != null) {
+                System.out.println(s);
+                logger.info(s);
+                result = 1;
+            }
+        } catch (IOException e) {
+            logger.info("exception happened - here's what I know: ");
+            logger.error("IOException", e);
+        } finally {
+
+            if (p != null) {
+                p.destroy();
+            }
+
+        }
+        return result;
+    }
+
+    public static void loadProperties() throws IOException {
+        FileInputStream fi = null;
+        try {
+            String fileName = IConstant.ROOT_CONFIG.CONFIG_FOLDER_PATH + "program.conf";
+            logger.info(fileName);
+            fi = new FileInputStream(fileName);
+            props.load(fi);
+            sqlloader_ctl = props.getProperty("sqlloader_ctl", sqlloader_ctl);
+            sqlloader_log = props.getProperty("sqlloader_log", sqlloader_log);
+            sqlloader_ussid = props.getProperty("sqlloader_ussid", sqlloader_ussid);
+            application_id = props.getProperty("application_id", application_id);
+            String buffer = props.getProperty("buffer_size");
+            buffer_size = (StringUtils.isNumeric(buffer)) ? Integer.parseInt(buffer) : 1000;
+            look_and_feel = props.getProperty("look_and_feel", look_and_feel);
+            encryptedKey = props.getProperty("encrypted_key", encryptedKey);
+        } finally {
+            if (fi != null) {
+                fi.close();
+            }
+        }
+    }
+
+    /**
+     * @TODO To load all username from previous input
+     *
+     * @return
+     *
+     * @author sonph
+     * @Date 04 Dec 2013
+     */
+    public static List<String> loadUsernamesFromLog() {
+        return Log4jUtils.loadUsernamesFromLog();
+    }
+
+    /**
+     * TODO authenticate user to login the system
+     *
+     * @param username
+     * @param password
+     * @return login status
+     *
+     * @author Son.Pham.Hong
+     * @date 12 Nov 2013
+     */
+    public static UserAccount login(String username, String password) {
+        String encryptedPass = SecurityUtils.encryptedPass(username, password, encryptedKey);
+        UserAccount userAccount = UserAccountDAO.getUserAccount(username, encryptedPass);
+        return userAccount;
+    }
+
+    /**
+     * TODO to get summary report of CDR process
+     *
+     * @param fromDate
+     * @param toDate
+     *
+     * @author Son.Pham.Hong
+     * @date 12 May 2014
+     */
+    public static SummaryReportObject getSummaryReport(Date fromDate, Date toDate) {
+        return SummaryReportDAO.getListSummaryReport(fromDate, toDate);
+    }
+
+    public static int updateToCdrProcess(ArrayList<LogItem> listUpdateItem) {
+        return CdrLogProcessDAO.updateToCdrProcess(listUpdateItem);
+    }
+
+}

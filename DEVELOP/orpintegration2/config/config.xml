@@ -1,0 +1,18 @@
+<config>
+	<srcOsFileSeparator>/</srcOsFileSeparator>
+	<srcFolderPath>D:\Download</srcFolderPath>
+	
+	<descHostName>10.149.3.15</descHostName>
+	<descUserName>elcom</descUserName>
+	<descPassword>elcom@123</descPassword>
+	<descDirectory>/orvol/re-rate</descDirectory>
+	
+	<retryCount>3</retryCount>
+	<retryPushFileSleepTime>3000</retryPushFileSleepTime>
+	
+	<scanInterval>60</scanInterval>
+	
+	<corePoolSize>8</corePoolSize>
+	<maximumPoolSize>16</maximumPoolSize>
+	<instancePort>8681</instancePort>
+</config>

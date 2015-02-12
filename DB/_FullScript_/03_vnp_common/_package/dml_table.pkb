@@ -12,13 +12,36 @@ IS
       in_NOTE        IN VNP_COMMON.SFTP_FILE.NOTE%TYPE)
       RETURN NUMBER
    IS
-      n_count    PLS_INTEGER;
-      n_result   PLS_INTEGER := 0;
+      n_count        PLS_INTEGER;
+      -- cho truong hop cdr dang processing
+      -- nhung bi kill chuong trinh
+      -- chay lai chuong trinh phai xu ly lai cho file nay
+      n_processing   PLS_INTEGER;
+      n_result       PLS_INTEGER := 0;
    BEGIN
       SELECT COUNT (1)
         INTO n_count
         FROM sftp_file
        WHERE sftp_file = in_sftp_file;
+
+      IF n_count = 1
+      THEN
+         SELECT COUNT (1)
+           INTO n_processing
+           FROM sftp_file
+          WHERE sftp_file = in_sftp_file AND status = 1;         -- processing
+
+         IF n_processing = 1
+         THEN
+            DELETE sftp_file
+             WHERE sftp_file = in_sftp_file AND status = 1;
+
+            n_count := 0;
+         ELSE
+            n_result := 99;
+         END IF;
+      END IF;
+
 
       IF n_count = 0
       THEN
@@ -42,8 +65,6 @@ IS
                       SYSDATE);
 
          n_result := SQL%ROWCOUNT;
-      ELSE
-         n_result := 99;
       END IF;
 
       RETURN n_result;

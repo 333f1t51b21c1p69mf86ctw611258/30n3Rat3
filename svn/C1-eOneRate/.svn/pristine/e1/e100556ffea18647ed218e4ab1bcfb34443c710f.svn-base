@@ -1,0 +1,83 @@
+package e1reformat.gui.menu.log;
+
+import java.awt.EventQueue;
+import java.util.Date;
+
+import javax.swing.JFrame;
+
+import e1reformat.gui.main.MainUI;
+
+public class ChecksumDialog extends JFrame {
+
+    private static final long serialVersionUID = -8709099923747210009L;
+    private Date fromDate;
+    private Date toDate;
+    private String status;
+
+    public Date getFromDate() {
+        return fromDate;
+    }
+
+    public void setFromDate(Date fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public Date getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(Date toDate) {
+        this.toDate = toDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    ChecksumDialog frame = new ChecksumDialog();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the frame.
+     */
+    public ChecksumDialog() {
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setTitle("Checksum Error");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                MainUI.checksumDialog = null;
+                dispose();
+            }
+        });
+    }
+
+    public void fireDataUpdate() {
+        ChecksumPanel checksumPanel = new ChecksumPanel(fromDate, toDate, status);
+        getContentPane().add(checksumPanel);
+        pack();
+        setLocation(200, 50);
+        setSize(800, 600);
+        setVisible(true);
+        setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        repaint();
+    }
+
+}

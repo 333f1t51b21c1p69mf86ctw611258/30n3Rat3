@@ -1,0 +1,81 @@
+
+SQL*Loader: Release 11.2.0.2.0 - Production on Tue Jan 6 09:09:51 2015
+
+Copyright (c) 1982, 2009, Oracle and/or its affiliates.  All rights reserved.
+
+Control File:   D:\C1\C1_Reformat_ver_2.0\config\sqlldr_config\rated_cdr.ctl
+Data File:      D:\C1\data\output\app1_IPbill.slu4.4881_new.1419670759.csv
+  Bad File:     D:\C1\C1_Reformat_ver_2.0\config\sqlldr_config\app1_IPbill.slu4.4881_new.1419670759.bad
+  Discard File:  none specified
+ 
+ (Allow all discards)
+
+Number to load: ALL
+Number to skip: 0
+Errors allowed: 9999
+Bind array:     64 rows, maximum of 256000 bytes
+Continuation:    none specified
+Path used:      Conventional
+
+Table TEMP_RATED_CDR, loaded from every logical record.
+Insert option in effect for this table: APPEND
+
+   Column Name                  Position   Len  Term Encl Datatype
+------------------------------ ---------- ----- ---- ---- ---------------------
+A_NUMBER                            FIRST     *   ;  O(") CHARACTER            
+CDR_TYPE                             NEXT     *   ;  O(") CHARACTER            
+CDR_START_TIME                       NEXT     *   ;  O(") DATE mm/dd/yyyy hh24:mi:ss
+DURATION                             NEXT     *   ;  O(") CHARACTER            
+TOTAL_USAGE                          NEXT     *   ;  O(") CHARACTER            
+B_NUMBER                             NEXT     *   ;  O(") CHARACTER            
+B_ZONE                               NEXT     *   ;  O(") CHARACTER            
+NW_GROUP                             NEXT     *   ;  O(") CHARACTER            
+SERVICE_FEE                          NEXT     *   ;  O(") CHARACTER            
+SERVICE_FEE_ID                       NEXT     *   ;  O(") CHARACTER            
+CHARGE_FEE                           NEXT     *   ;  O(") CHARACTER            
+CHARGE_FEE_ID                        NEXT     *   ;  O(") CHARACTER            
+LAC                                  NEXT     *   ;  O(") CHARACTER            
+CELL_ID                              NEXT     *   ;  O(") CHARACTER            
+SUBSCRIBER_UNBILL                    NEXT     *   ;  O(") CHARACTER            
+BU_ID                                NEXT     *   ;  O(") CHARACTER            
+OLD_BU_ID                            NEXT     *   ;  O(") CHARACTER            
+OFFER_COST                           NEXT     *   ;  O(") CHARACTER            
+INTERNAL_FREE_BLOCK                  NEXT     *   ;  O(") CHARACTER            
+INTERNAL_COST                        NEXT     *   ;  O(") CHARACTER            
+OFFER_FREE_BLOCK                     NEXT     *   ;  O(") CHARACTER            
+DIAL_DIGIT                           NEXT     *   ;  O(") CHARACTER            
+CDR_RECORD_HEADER_ID                 NEXT     *   ;  O(") CHARACTER            
+CDR_SEQUENCE_NUMBER                  NEXT     *   ;  O(") CHARACTER            
+LOCATION_NO                          NEXT     *   ;  O(") CHARACTER            
+MSC_ID                               NEXT     *   ;  O(") CHARACTER            
+UNIT_TYPE_ID                         NEXT     *   ;  O(") CHARACTER            
+PRIMARY_OFFER_ID                     NEXT     *   ;  O(") CHARACTER            
+DISCOUNT_ITEM_ID                     NEXT     *   ;  O(") CHARACTER            
+RERATE_FLAG                          NEXT     *   ;  O(") CHARACTER            
+AUT_FINAL_ID                         NEXT     *   ;  O(") CHARACTER            
+TARIFF_PLAN_ID                       NEXT     *   ;  O(") CHARACTER            
+ERROR_CODE                           NEXT     *   ;  O(") CHARACTER            
+PAYMENT_ID                           NEXT     *   ;  O(") CHARACTER            
+
+value used for ROWS parameter changed from 64 to 29
+
+Table TEMP_RATED_CDR:
+  3 Rows successfully loaded.
+  0 Rows not loaded due to data errors.
+  0 Rows not loaded because all WHEN clauses were failed.
+  0 Rows not loaded because all fields were null.
+
+
+Space allocated for bind array:                 254388 bytes(29 rows)
+Read   buffer bytes: 1048576
+
+Total logical records skipped:          0
+Total logical records read:             3
+Total logical records rejected:         0
+Total logical records discarded:        0
+
+Run began on Tue Jan 06 09:09:51 2015
+Run ended on Tue Jan 06 09:09:52 2015
+
+Elapsed time was:     00:00:00.54
+CPU time was:         00:00:00.06

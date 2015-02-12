@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" info="true">
+
+  <appender name="console" class="org.apache.log4j.ConsoleAppender">
+    <param name="threshold" value="info"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%-4r [%t] %-5p %c %x - %m%n"/>
+    </layout>
+  </appender>
+
+  <appender name="ErrorLogAppender" class="org.apache.log4j.FileAppender">
+    <param name="file" value="log/Error.log"/>
+    <param name="append" value="false"/>
+    <param name="threshold" value="info"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d %-5p - %m%n"/>
+    </layout>
+  </appender>
+
+  <appender name="FrameworkAppender" class="org.apache.log4j.FileAppender">
+    <param name="file" value="log/ELCFramework.log"/>
+    <param name="append" value="false"/>
+    <param name="threshold" value="info"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d %-5p - %m%n"/>
+    </layout>
+  </appender>
+
+  <appender name="ELCAppender" class="org.apache.log4j.FileAppender">
+    <param name="file" value="log/ELCPipe.log"/>
+    <param name="append" value="false"/>
+    <param name="threshold" value="info"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d %-5p - %m%n"/>
+    </layout>
+  </appender>
+
+  <appender name="StatisticsAppender" class="org.apache.log4j.RollingFileAppender">
+    <param name="file" value="log/ELCStatistics.log"/>
+    <param name="MaxFileSize" value="1000KB"/>
+    <param name="append" value="false"/>
+    <param name="threshold" value="info"/>
+    <layout class="org.apache.log4j.PatternLayout">
+      <param name="ConversionPattern" value="%d %-5p - %m%n"/>
+    </layout>
+  </appender>
+
+  <!-- set up the log outputs -->
+  <logger name="Console">
+    <appender-ref ref="console" />
+  </logger>
+
+  <logger name="ErrorLog">
+    <appender-ref ref="ErrorLogAppender" />
+  </logger>
+
+  <category name="Framework">
+    <appender-ref ref="FrameworkAppender" />
+  </category>
+
+  <logger name="ELCPipeline">
+    <appender-ref ref="ELCAppender" />
+  </logger>
+
+  <logger name="Statistics">
+    <appender-ref ref="StatisticsAppender" />
+  </logger>
+
+  <root>
+    <priority value ="info" />
+    <appender-ref ref="FrameworkAppender" />
+  </root>
+  
+</log4j:configuration>

@@ -1,0 +1,234 @@
+2014-11-18 08:31:15,961 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:31:15,972 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:31:15,974 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:31:15,975 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:31:15,977 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:31:15,978 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:31:15,979 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:50:26,856 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:50:26,860 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:50:26,860 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:50:26,861 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:50:26,861 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:50:26,862 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:50:26,862 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:59:04,201 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:59:04,209 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:59:04,210 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:59:04,210 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:59:04,211 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:59:04,212 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:59:04,212 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 09:19:42,526 FATAL - InitializationException thrown. Message <ElcRateSocket.getServerSocket(): Could not listen on port <8086>. Message = <Address already in use: JVM_Bind>. Aborting.>
+ElcRate.exception.InitializationException: ElcRateSocket.getServerSocket(): Could not listen on port <8086>. Message = <Address already in use: JVM_Bind>. Aborting.
+	at ElcRate.configurationmanager.ElcRateSocket.<init>(ElcRateSocket.java:143)
+	at ElcRate.configurationmanager.EventHandler.init(EventHandler.java:164)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-11-18 09:20:28,996 FATAL - InitializationException thrown. Message <ElcRateSocket.getServerSocket(): Could not listen on port <8086>. Message = <Address already in use: JVM_Bind>. Aborting.>
+ElcRate.exception.InitializationException: ElcRateSocket.getServerSocket(): Could not listen on port <8086>. Message = <Address already in use: JVM_Bind>. Aborting.
+	at ElcRate.configurationmanager.ElcRateSocket.<init>(ElcRateSocket.java:143)
+	at ElcRate.configurationmanager.EventHandler.init(EventHandler.java:164)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-11-18 09:21:33,860 FATAL - InitializationException thrown. Message <ElcRateSocket.getServerSocket(): Could not listen on port <8086>. Message = <Address already in use: JVM_Bind>. Aborting.>
+ElcRate.exception.InitializationException: ElcRateSocket.getServerSocket(): Could not listen on port <8086>. Message = <Address already in use: JVM_Bind>. Aborting.
+	at ElcRate.configurationmanager.ElcRateSocket.<init>(ElcRateSocket.java:143)
+	at ElcRate.configurationmanager.EventHandler.init(EventHandler.java:164)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)

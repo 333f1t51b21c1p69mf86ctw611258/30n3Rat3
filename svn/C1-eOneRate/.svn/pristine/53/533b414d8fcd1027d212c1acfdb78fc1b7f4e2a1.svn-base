@@ -1,0 +1,153 @@
+package Test;
+
+import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.zip.Checksum;
+
+public class Test {
+
+    /**
+     * @param args
+     */
+//	public static void main(String[] args) {
+//		File fileTest = new File("E:\\IPbill.slu1.0853.1382594400");
+//		Path path = Paths.get("E://IPbill.slu1.0853.1382594400");
+//		byte[] data = Files.readAllBytes(path);
+//	}
+    private static byte bChecksum1 = 0;
+
+    public static void main1(String[] args) {
+
+        FileInputStream fileInputStream = null;
+
+        File file = new File("E:\\test\\IPbill.slu1.0853.1382594400");
+
+        byte[] bFile = new byte[(int) file.length()];
+
+        try {
+            //convert file into array of bytes
+            fileInputStream = new FileInputStream(file);
+            fileInputStream.read(bFile);
+            fileInputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //bFile is array byte get from file
+        byte bChecksum = 0;
+
+        for (int i = 0; i < bFile.length; i++) {
+            bChecksum ^= bFile[i];
+        }
+
+        System.out.println("\n");
+        System.out.println("Gia tri check sum = " + bChecksum);
+
+    }
+
+    public static void checkSumFile() throws IOException {
+        try {
+            File file = new File("E:\\test\\IPbill.slu1.0853.1382594400");
+            BufferedReader br = new BufferedReader(new FileReader(file.getAbsolutePath()));
+
+            String content = readFile(file.getAbsolutePath());
+            System.out.println(content);
+			//checkSum(content);
+			/*while ((sLine = br.readLine()) != null) {
+             checkSum(sLine);
+             }*/
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    /* public static void checkSum(byte[] buffer){
+     for (int i = 0; i < buffer.length; i++){
+     bChecksum1 ^= buffer[i];
+     }
+     }
+	 
+     public static void checkSum(String str) {
+     byte[] b = str.getBytes();
+     for (int i = 0; i < b.length; i++){
+     bChecksum1 ^= b[i];
+     }
+     }*/
+    public static void main(String args[]) throws IOException {
+		 //checkSumFile();
+        //System.out.println("Check sum value = " + bChecksum);
+//		 File file = new File("E:\\test\\IPbill.slu1.0853.1382594400");
+//		 byte check = checkSumAllFile(file);
+//		 System.out.println("Check sum value = " + check);
+        String name = "app1_abc";
+        if(name.matches("app")){
+            System.out.println("ok");
+        }
+        DateFormat outputDF = new SimpleDateFormat("MM/dd/yyyy");
+        DateFormat inputDF = new SimpleDateFormat("MM-dd-yy");
+        try {
+            Date date = inputDF.parse("32:01-89");
+            System.out.println(outputDF.format(date));
+        } catch (Exception e) {
+            e.fillInStackTrace();
+        }
+
+    }
+
+    public static String readFile(String fileName) throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(fileName));
+        try {
+            StringBuilder sb = new StringBuilder();
+            String line = br.readLine();
+
+            while (line != null) {
+                sb.append(line);
+                sb.append("\n");
+                line = br.readLine();
+            }
+            return sb.toString();
+        } finally {
+            br.close();
+        }
+    }
+
+    public static byte checkSumAllFile(File file) throws IOException {
+        byte checkSumValue = 0;
+        InputStream ios = null;
+        try {
+            byte[] buffer = new byte[4096];
+            ios = new FileInputStream(file);
+            int read = 0;
+            while ((read = ios.read(buffer)) != -1) {
+                checkSumValue = checkSum(buffer, checkSumValue);
+            }
+        } finally {
+            try {
+                if (ios != null) {
+                    ios.close();
+                }
+            } catch (IOException e) {
+            }
+        }
+        return checkSumValue;
+    }
+
+    public static byte checkSum(byte[] buffer, byte bCheckSum) {
+        for (int i = 0; i < buffer.length; i++) {
+            bCheckSum ^= buffer[i];
+        }
+        return bCheckSum;
+    }
+
+}

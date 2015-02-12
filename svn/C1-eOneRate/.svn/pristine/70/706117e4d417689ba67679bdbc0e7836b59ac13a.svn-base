@@ -1,0 +1,64 @@
+package e1reformat.util;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+
+public class ChecksumValid {
+
+    public static void main(String[] args) {
+
+        String sourceFilePath = "D:\\eOneReformat\\ScanCDRs\\ScanCDRs_28022014\\pcat_filter_Data.00N";
+        String destFilePath = "D:\\eOneReformat\\ScanCDRs\\CheckSumFinal\\pcat_filter_Data.00N";
+
+        // Replace checksum value
+        replaceChecksum(sourceFilePath, destFilePath);
+
+    }
+
+    /*
+     * ReplaceCheckSum
+     */
+    private static void replaceChecksum(String fileSource, String fileDest) {
+        byte checks;
+        try {
+            RandomAccessFile f = new RandomAccessFile(fileSource, "r");
+            byte[] b = new byte[(int) f.length()];
+            f.read(b);
+
+            // Replace byte 3
+            System.out.println("Old byte 3 : " + b[3]);
+            b[3] = Byte.parseByte("0");
+
+            // Checksum
+            checks = checkSum(b);
+            System.out.println("Check sum: " + checks);
+
+            // Insert new checksum value
+            b[3] = checks;
+            checks = checkSum(b);
+            System.out.println("Checksum after replace: " + checks);
+
+            FileOutputStream dest = new FileOutputStream(fileDest);
+            dest.write(b);
+            dest.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*
+     * Byte Checksum
+     */
+    public static final byte checkSum(byte[] bytes) {
+        byte sum = 0;
+
+        for (byte b : bytes) {
+
+            sum ^= b;
+        }
+        return sum;
+    }
+
+}

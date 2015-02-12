@@ -1,0 +1,151 @@
+package e1reformat.util;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.apache.log4j.Logger;
+
+public class ProgramLog {
+
+    private static Logger logger = Logger.getLogger("ProgramLog");
+    /**
+     * @param args
+     */
+    public static String first_time_running = "";
+    public static String source_folder = "";
+    public static String output_folder = "";
+    public static String moved_folder = "";
+    public static String user = "";
+    public static String password = "";
+    public static String host = "";
+    public static String port = "";
+    public static String service_name = "";
+    public static String source_behavior = "";
+    public static String minuteInput = "";
+
+    public static String method = "";
+
+    public static final String lastInputLog = IConstant.ROOT_CONFIG.LOG_FOLDER_PATH + "lastInput.log";
+
+    public static Properties props = new Properties();
+
+    public ProgramLog() {
+        try {
+            loadProperties();
+        } catch (IOException e) {
+        }
+    }
+
+    private void loadProperties() throws FileNotFoundException, IOException {
+        FileInputStream fi = null;
+        try {
+            fi = new FileInputStream(lastInputLog);
+            props.load(fi);
+            first_time_running = props.getProperty("first_time_running", first_time_running);
+            source_folder = props.getProperty("source_folder", source_folder);
+            output_folder = props.getProperty("output_folder", output_folder);
+            moved_folder = props.getProperty("moved_folder", moved_folder);
+            user = props.getProperty("user", user);
+            password = props.getProperty("password", password);
+            host = props.getProperty("host", host);
+            port = props.getProperty("port", port);
+            service_name = props.getProperty("service_name", service_name);
+            method = props.getProperty("method", method);
+            minuteInput = props.getProperty("minuteInput", minuteInput);
+            source_behavior = props.getProperty("source_behavior", source_behavior);
+        } finally {
+            if (fi != null) {
+                fi.close();
+            }
+        }
+    }
+
+    public String getFirst_time_running() {
+        return first_time_running;
+    }
+
+    public String getSource_folder() {
+        return source_folder;
+    }
+
+    public String getOutput_folder() {
+        return output_folder;
+    }
+
+    public String getMoved_folder() {
+        return moved_folder;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public String getPort() {
+        return port;
+    }
+
+    public String getService_name() {
+        return service_name;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public String getSource_behavior() {
+        return source_behavior;
+    }
+
+    public static void setSource_behavior(String source_behavior) {
+        ProgramLog.source_behavior = source_behavior;
+    }
+
+    public void saveInputFromUser(String sourceFolder, String outputFolder, String movedFolder,
+            String username, String password, String host, String port, String serviceName, String method) {
+        try {
+            props.setProperty("first_time_running", "0");
+            props.setProperty("source_folder", sourceFolder);
+            props.setProperty("output_folder", outputFolder);
+            props.setProperty("moved_folder", movedFolder);
+            props.setProperty("user", username);
+            props.setProperty("password", password);
+            props.setProperty("host", host);
+            props.setProperty("port", port);
+            props.setProperty("service_name", serviceName);
+            props.setProperty("method", method);
+            props.setProperty("source_behavior", source_behavior);
+            props.setProperty("minuteInput", minuteInput);
+            props.store(new FileOutputStream(lastInputLog), null);
+        } catch (IOException ex) {
+            logger.error("IOException", ex);
+        }
+
+    }
+
+    public void saveInputFromUser(String sourceFolder, String outputFolder, String sourceBehavior, String movedFolder, String method, String minuteInput) {
+        try {
+            props.setProperty("first_time_running", "0");
+            props.setProperty("source_folder", sourceFolder);
+            props.setProperty("output_folder", outputFolder);
+            props.setProperty("moved_folder", movedFolder);
+            props.setProperty("source_behavior", sourceBehavior);
+            props.setProperty("method", method);
+            props.setProperty("minuteInput", minuteInput);
+            props.store(new FileOutputStream(lastInputLog), null);
+        } catch (IOException ex) {
+            logger.error("IOException", ex);
+        }
+    }
+
+}

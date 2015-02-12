@@ -1,0 +1,214 @@
+package e1reformat.util;
+
+public class IConstant {
+
+    public interface METHODS {
+
+        public static final Integer ON_DEMAND = 1;
+        public static final Integer AUTOMATION = 2;
+        public static final String ON_DEMAND_TEXT = "On demand";
+        public static final String AUTOMATION_TEXT = "Automatically";
+
+    }
+
+    public interface SOURCE_BEHAVIOR {
+
+        public static final Integer DELETE_SOURCE_FOLDER = 1;
+        public static final Integer MOVE_TO_OTHER_FOLDER = 2;
+        public static final String DELETED = "Deleted source file";
+        public static final String MOVED = "Moved source file";
+    }
+
+    public interface ERROR_MESSAGE {
+
+        public static final String REFORMAT_SAVE_CONFIG_SUCCESS = "Configuration is saved successfully!\nThe config will be approved next time";
+        public static final String SUCCESSFUL_PROCESS = "Completed process successfully";
+        public static final String SOURCE_FOLDER_NULL = "Please choose the source folder directory!";
+        public static final String DESTINATION_FOLDER_NULL = "Please choose the destination folder directory!";
+        public static final String MOVED_FOLDER_NULL = "Please choose the moved folder directory!";
+        public static final String UNCHECK_TIME_SELECTION = "Please choose the time for automation method!";
+        public static final String INVALID_TIME_NUMBER = "Please choose the valid time number!";
+        public static final String INVALID_INPUT_CONNECTION = "Connection configuation input cannot be null!";
+        public static final String INVALID_PORT_NUMBER = "Port must be a number!";
+        public static final String SAVING_CHECKSUM_SUCCESS = "Transactions are updated successfully";
+        public static final String SAVING_CHECKSUM_FAIL = "Transactions are updated fail";
+        public static final String USERNAME_EMPTY = "Username cannot be empty!";
+        public static final String USERNAME_INVALID = "Username contains special characters!";
+        public static final String EMPTY_PASSWORD = "Password cannot be empty!";
+        public static final String PASSWORD_INVALID = "Password contains special characters!";
+        public static final String ROLE_EMPTY = "Please grant role for user!";
+        public static final String EXISTED_USER = "Username has existed!";
+        public static final String CREATE_USER_SUCCESSFUL = "Create user successfully!";
+        public static final String CREATE_USER_FAIL = "Create user fail!";
+        public static final String DELETE_USER_SUCCESSFUL = "Delete User successfully!";
+        public static final String DELETE_USER_FAIL = "Delete user fail";
+        public static final String RESET_PASSWORD_SUCCESS = "Reset user's password successfully!";
+        public static final String RESET_PASSWORD_FAIL = "Reset user's password fail";
+        public static final String UPDATE_USER_SUCCESSFUL = "Update user's role successfully!";
+        public static final String UPDATE_USER_FAIL = "Update user's role fail!";
+
+    }
+
+    public interface WARNING_MESSAGE {
+
+        public static final String PROGRAM_IN_RUNNING = "Please wait until current program is finished running!";
+        public static final String PROGRAM_IS_OPENED = "Please close the processing window before shut down the program!";
+        public static final String FORCE_CLOSED = "The application was closed unexpectedly last time! \nThe last file was interupted is: ";
+        public static final String MOVE_FOLDER = "\nThis file is moved to the folder: ";
+        public static final String FILE_IN_PROCESSING = "File in processing! Please wait until current file is finished running";
+        public static final String FIRST_TIME_RUNNING = "This is the first time the program is running, please configuate reformat setting in advance!";
+        public static final String ASK_FOR_LOGOUT = "Do you want to log out from system ?";
+        public static final String INVALID_INPUT_DATE = "Invalid input date. To Date must be equal or after From Date";
+        public static final String INVALID_DATE_FORMAT = "Invalid Date Format. Please input in format dd/MM/yyyy";
+    }
+
+    public interface EXPORT_CSV {
+
+        public static boolean ENABLE = true;
+        public static boolean DISABLE = false;
+        public static String SPLITTER = ";";
+    }
+
+    public interface REFORMATING_ERROR_CODE {
+
+        public static final Integer SUCCESS = 0;
+        public static final Integer FAIL = -1;
+        public static final Integer EXCEPTION = -2;
+        public static final Integer SOURCE_FOLDER_NOT_FOUND = -3;
+        public static final Integer DESTINATION_FOLDER_NOT_FOUND = -4;
+        public static final Integer INVALID_CHECKSUM_VALUE = -5;
+        public static final Integer INVALID_HEADER_CONTENT = -6;
+    }
+
+    public interface EXPORT_CSV_ERROR_CODE {
+
+        public static final int SUCCESS = 0;
+        public static final int FAIL = -1;
+    }
+
+    public interface REFORMATING_ERROR_MESSAGE {
+
+        public static final String SUCCESS = "Reformating successfully!";
+        public static final String FAIL = "Reformating fail!";
+        public static final String EXCEPTION = "Exception when reformating file!";
+        public static final String SOURCE_FOLDER_NOT_FOUND = "Source file folder not found!";
+        public static final String DESTINATION_FOLDER_NOT_FOUND = "Destination file folder not found!";
+        public static final String INVALID_CHECKSUM_VALUE = "Invalid checksum value";
+    }
+
+    public interface LOG_CDR_PROCESSING {
+
+        public static final int INSERT_CDR_PROCESS_RECORD = 0;
+    }
+
+    public interface CDR_PROCESSING_STATUS {
+
+        public static final Integer LOADED = 1;
+        public static final Integer CONVERTED = 2;
+        public static final Integer FINISHED = 3;
+        public static final Integer ERROR = -1;
+    }
+
+    public interface FILE_IS_HANDLE {
+
+        public static final String IS_HANDLE = "1";
+        public static final String IS_NOT_HANDLE = "0";
+    }
+
+    public interface SYSTEM_LOG {
+
+        public static final String FIRST_TIME_RUNING = "1";
+        public static final String IS_RUNNING = "1";
+        public static final String STOPED = "0";
+    }
+
+    public interface RECORD_TYPE {
+
+        public static final int VOICE = 1;
+        public static final int PMT = 2; // MMS
+        public static final int USSD = 3; // Not used
+        public static final int SMS = 4;
+        public static final int GPRS = 5; // GPRS offline
+        public static final int OSA = 6; //not used
+        public static final int OCS = 7; // DATA diameter
+    }
+
+    public interface BALANCE_CHANGE {
+
+        public static final int START_NO = 0;
+        public static final int END_NO = 1;
+    }
+
+    public interface XML_TAG {
+
+        public static final String voice = "voice";
+        public static final String sms = "sms";
+        public static final String osa = "osa";
+        public static final String ocs = "ocs";
+        public static final String pmt = "pmt";
+        public static final String gprs = "gprs";
+
+        public static final String column = "column";
+        public static final String index = "index";
+        public static final String coloumn_name = "coloumn_name";
+        public static final String vinaphone = "vinaphone";
+
+        // For Balance info
+        public static final String BALANCE_INFO = "Balance_info";
+        public static final String START_NO = "StartNo";
+        public static final String END_NO = "EndNo";
+        public static final String ARRAY_IDX = "ArrayIDX";
+        public static final String BALANCE_NAME = "BalanceName";
+    }
+
+    public static interface ROOT_CONFIG {
+		//public static final String HOME_DIR = System.getProperty("user.home");
+        //public static final String PROJECT = "eonerate";
+        //public static final String MODULE = "reformat";
+
+        public static final String PROGRAM_DIR = System.getProperty("user.dir");
+        public static final String SEPARATOR = System.getProperty("file.separator");
+        public static final String CONFIG_FOLDER = "config";
+        public static final String LOG_FOLDER = "log";
+        public static final String ERRORS_FOLDER = "error";
+
+        public static final String CONFIG_FOLDER_PATH = PROGRAM_DIR + SEPARATOR + CONFIG_FOLDER + SEPARATOR;
+        public static final String LOG_FOLDER_PATH = PROGRAM_DIR + SEPARATOR + LOG_FOLDER + SEPARATOR;
+        public static final String ERRORS_FOLDER_PATH = PROGRAM_DIR + SEPARATOR + ERRORS_FOLDER + SEPARATOR;
+
+    }
+
+    public static interface SUMMARY_TABLE_INFO {
+
+        public static final String FROM_DATE = "From Date";
+        public static final String TO_DATE = "To Date";
+        public static final String TOTAL_FILE = "Total files";
+        public static final String TOTAL_FILE_IN_PROCESS = "Total files in process";
+        public static final String TOTAL_FILE_SUCCESS = "Total files success";
+        public static final String TOTAL_FILE_CHECKSUM_ERROR = "Total files checksum error";
+        public static final String TOTAL_FILES_CONTENT_ERROR = "Total files content error";
+        public static final String TOTAL_FILE_ERROR = "Total files error";
+
+    }
+
+    public static interface IS_HANDLED {
+
+        public static final String NO = "0";
+        public static final String YES = "1";
+    }
+
+    public static interface SUMMARY_TABLE_SEARCH {
+
+        public static final String IN_PROCESS = "In Process";
+        public static final String CONTENT_ERROR = "Content Error";
+        public static final String ERROR = "Error";
+    }
+
+    public interface USER_ROLE_CODE {
+
+        public static final int ADMIN = 1;
+        public static final int MONITOR = 2;
+        public static final int RATING_RC = 3;
+        public static final int VIEWER = 4;
+    }
+}

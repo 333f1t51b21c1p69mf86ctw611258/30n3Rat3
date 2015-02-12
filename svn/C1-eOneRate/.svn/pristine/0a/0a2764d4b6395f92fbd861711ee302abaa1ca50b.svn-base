@@ -1,0 +1,31 @@
+#error_backup_folder = /home/eonerate/deploy/mediation/error
+#sqlloader_ctl = /home/eonerate/deploy/mediation/config/sqlldr_config/rated_cdr.ctl
+#sqlloader_log =/home/eonerate/deploy/mediation/config/sqlldr_config/rated_cdr.log
+
+error_backup_folder = D:\\C1\\C1_Reformat_ver_2.0\\error\\error
+sqlloader_ctl = D:\\C1\\C1_Reformat_ver_2.0\\config\\sqlldr_config\\rated_cdr.ctl
+sqlloader_log =D:\\C1\\C1_Reformat_ver_2.0\\config\\sqlldr_config\\rated_cdr.log
+path_error_cdr=D:\\C1\\data\\error
+path_error_checksum_cdr=D:\\C1\\data\\errorChecksum
+#sqlloader_ussid = vnp_data/vnp_data@VNP_RAC_EONERATE
+sqlloader_ussid = vnp_data/vnp_data@EONERATE.157
+
+
+application_id = app1_
+buffer_size = 1000
+
+# Encryption key for authenticate user
+encrypted_key = elcom123
+
+#set look and feel for program
+#sample look and feel:
+##
+#[Metal: javax.swing.plaf.metal.MetalLookAndFeel]
+#[Nimbus: com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel]
+#[CDE/Motif: com.sun.java.swing.plaf.motif.MotifLookAndFeel]
+#[Windows: com.sun.java.swing.plaf.windows.WindowsLookAndFeel]
+#[Windows: Classic com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel]
+#[GTK+: com.sun.java.swing.plaf.gtk.GTKLookAndFeel]
+##
+
+look_and_feel = com.sun.java.swing.plaf.windows.WindowsLookAndFeel

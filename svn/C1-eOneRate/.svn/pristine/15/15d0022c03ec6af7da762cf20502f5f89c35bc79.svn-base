@@ -1,0 +1,150 @@
+package Test;
+
+import java.io.BufferedReader;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+
+public class ChecksumValid {
+	public static void main(String[] args) {
+		
+//        String sourceFilePath = "D:\\eOneReformat\\ScanCDRs\\ScanCDRs_28022014\\01032014\\Mrs Mai\\IPbill.slu1.0211.Mrs.Mai.2";
+//        String destFilePath = "D:\\eOneReformat\\ScanCDRs\\IPbill.slu1.0211 - Copy.1337594336_dest";
+		
+		 String sourceFilePath = "D:\\eOneReformat\\ScanCDRs\\ScanCDRs_28022014\\TestBalanceChange.0011";
+		 String destFilePath = "D:\\eOneReformat\\ScanCDRs\\CheckSumFinal\\TestBalanceChange.0011";
+		
+        //Replace checksum value
+        replaceChecksum(sourceFilePath,destFilePath);
+        
+        //makeSMSCDR("");
+        //enrich values
+    }
+
+	
+	/*
+	 * MakeSMSCDR
+	 */
+	
+    private static void makeSMSCDR(String fileName){
+        String file1="D:/Workstation/Document/CDR format/Reformat/IPbill.slu1.0909.12345687_dest";
+        String file2="D:/Workstation/Document/CDR format/Reformat/openIPbill.slu7.0093.1393320273";
+        try{
+             RandomAccessFile f = new RandomAccessFile(file1, "r");
+            byte[] b = new byte[(int) f.length()];
+            f.read(b);
+
+            RandomAccessFile f1 = new RandomAccessFile(file2, "r");
+            byte[] b1 = new byte[(int) f1.length()];
+            f1.read(b1);
+
+            byte[] b2 = new byte[92];
+
+            for(int i=0;i<91;i++){
+                b2[i]=b[i];
+            }
+
+            FileOutputStream dest=new FileOutputStream(file2+"_dest");
+            dest.write(b2);
+            dest.write(b1);
+            dest.close();
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    
+    /*
+     * ReplaceCheckSum
+     */
+    
+    private static void replaceChecksum(String fileSource, String fileDest){
+        byte checks;
+        try {
+            RandomAccessFile f = new RandomAccessFile(fileSource, "r");
+            byte[] b = new byte[(int) f.length()];
+            f.read(b);
+
+            //Replace byte 3
+            System.out.println("Old byte 3 : "+b[3]);
+            b[3]=Byte.parseByte("0");
+
+            //Checksum
+            checks = checkSum(b);
+            System.out.println("Check sum: "+checks);
+
+            //Insert new checksum value
+            b[3]=checks;
+            checks = checkSum(b);
+            System.out.println("Checksum after replace: "+checks);
+
+            FileOutputStream dest=new FileOutputStream(fileDest);
+            dest.write(b);
+            dest.close();
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /*
+     * ReplaceData
+     */
+    
+    private static void replaceData(String fileName){
+       try{
+        
+           BufferedReader br = new BufferedReader( new FileReader(fileName));
+
+           String sLine=null;
+           boolean isFirst=true;
+           String[] vArray;
+
+           while ((sLine = br.readLine()) != null) {
+               if (isFirst) {
+                   sLine = sLine.substring(93);
+                   isFirst = false;
+               }
+               vArray=sLine.split("\\|");
+               
+                //Replace A_number
+
+                //Replace B_number
+
+                //Replace ACTUAL_DESTINATION_NUMBER
+
+           }
+
+       } catch(IOException ioe){
+           ioe.printStackTrace();
+       }
+
+    }
+
+//     public static void getConfig(){
+//         try{
+//         PropertyUtils.getPropertyUtils().loadPropertiesXML("C:/Users/Admin/Documents/NetBeansProjects/eOnePromotion/properties/eOnePromotion.properties.xml","Resource");
+//         System.out.println(PropertyUtils.getPropertyUtils().getPipelinePropertyValue("PipelineList", "eOnePromotionPipeline", "Active"));
+//         }catch(InitializationException th){
+//             th.printStackTrace();
+//         }
+//     }
+    
+    
+    /*
+     * Byte Checksum
+     */
+    
+     public static final byte checkSum(byte[] bytes) {
+       byte sum = 0;
+       
+       for (byte b : bytes) {
+          
+           sum ^= b;
+       }
+        return sum;
+    }
+}

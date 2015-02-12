@@ -1,0 +1,17 @@
+2014-12-29 11:15:17,369 TransactionManager.java       [ 229] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-12-29 11:15:17,957 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <20> ms
+2014-12-29 11:15:18,058 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <2> events in <0> ms
+2014-12-29 11:15:18,442 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <10000> events in <484> ms
+2014-12-29 11:15:18,453 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <2> events in <10> ms
+2014-12-29 11:15:18,456 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <10000> events in <14> ms
+2014-12-29 11:15:18,466 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <2> events in <10> ms
+2014-12-29 11:15:18,471 AbstractPlugIn.java           [ 451] INFO  - Plugin <OCGTranslation.Inst-0> processed <10000> events in <15> ms
+2014-12-29 11:15:18,482 AbstractPlugIn.java           [ 451] INFO  - Plugin <OCGTranslation.Inst-0> processed <2> events in <11> ms
+2014-12-29 11:15:18,512 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <10000> events in <41> ms
+2014-12-29 11:15:18,612 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <2> events in <0> ms
+2014-12-29 11:15:18,669 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <10000> events from a batch of <10000> events in <157> ms
+2014-12-29 11:15:18,671 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <2> events from a batch of <2> events in <1> ms
+2014-12-29 11:15:18,672 TransactionManager.java       [ 266] INFO  - Transaction <1> closed
+2014-12-29 11:15:18,672 TransactionManager.java       [ 267] INFO  - Statistics: Records  <10000>
+2014-12-29 11:15:18,672 TransactionManager.java       [ 268] INFO  -             Duration <1304> ms
+2014-12-29 11:15:18,672 TransactionManager.java       [ 270] INFO  -             Speed    <7668> records /sec

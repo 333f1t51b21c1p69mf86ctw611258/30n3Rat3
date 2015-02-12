@@ -1,0 +1,1477 @@
+2014-11-23 14:17:52,048 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-23 14:17:52,087 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-23 14:17:52,114 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-23 14:17:52,516 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-23 14:18:08,400 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-23 14:18:08,404 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-23 14:18:08,426 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-23 14:18:08,540 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-23 14:18:17,610 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-23 14:18:17,628 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-23 14:18:17,628 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-23 14:18:17,639 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-23 14:18:17,640 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-23 14:18:17,653 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-23 14:18:17,686 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-23 14:18:17,687 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-23 14:18:17,688 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-23 14:18:17,688 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-23 14:18:17,689 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-23 14:18:17,693 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-23 14:18:17,771 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-23 14:18:17,771 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-23 14:18:17,772 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-23 14:18:17,772 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-23 14:18:17,773 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-23 14:18:17,776 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 14:18:17,776 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-23 14:18:17,777 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-23 14:18:17,777 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <SDPCache>...
+2014-11-23 14:18:17,777 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <SDPCache>
+2014-11-23 14:18:17,778 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <SDPCache>
+2014-11-23 14:18:17,782 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 14:18:17,959 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <1000> configurations loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 14:18:17,960 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1012> configuration lines loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 14:18:17,960 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <SDPCache>...
+2014-11-23 14:18:17,961 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-23 14:18:17,961 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-23 14:18:17,961 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-23 14:18:17,961 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-23 14:18:17,962 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-23 14:18:17,962 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-23 14:18:17,962 CacheFactory.java             [ 411] INFO  - Cache <SDPCache> is set to auto reload with a period of <0>
+2014-11-23 14:18:17,962 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <SDPCache>
+2014-11-23 14:18:17,963 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 334ms.
+2014-11-23 14:18:17,967 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-11-23 14:18:18,020 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-11-23 14:18:18,021 TransactionManager.java       [ 360] INFO  - Request Start for Transaction manager.
+2014-11-23 14:18:18,023 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-23 14:18:18,200 TransactionManager.java       [ 228] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 14:18:18,200 TransactionManager.java       [ 229] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 14:18:18,201 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <GPRS.1111.20141118131500.txt> for transaction <1>
+2014-11-23 14:18:18,245 FileVNPInputAdapter.java      [  46] ERROR - Error data input java.lang.NumberFormatException: For input string: "O"
+2014-11-23 14:18:18,258 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <11> events in <9> ms
+2014-11-23 14:18:18,258 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <11> events in <2> ms
+2014-11-23 14:18:18,276 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <11> events in <11> ms
+2014-11-23 14:18:18,277 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <11> events in <0> ms
+2014-11-23 14:18:18,285 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <11> events from a batch of <11> events in <7> ms
+2014-11-23 14:18:18,286 TransactionManager.java       [ 265] INFO  - Transaction <1> closed
+2014-11-23 14:18:18,286 TransactionManager.java       [ 266] INFO  - Transaction <1> closed
+2014-11-23 14:18:18,286 TransactionManager.java       [ 267] INFO  - Statistics: Records  <9>
+2014-11-23 14:18:18,286 TransactionManager.java       [ 268] INFO  -             Duration <86> ms
+2014-11-23 14:18:18,286 TransactionManager.java       [ 270] INFO  -             Speed    <104> records /sec
+2014-11-23 14:22:21,284 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-23 14:22:21,286 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-23 14:22:21,297 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-23 14:22:21,402 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-23 14:22:30,173 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-23 14:22:30,176 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-23 14:22:30,177 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-23 14:22:30,181 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-23 14:22:30,182 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-23 14:22:30,194 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-23 14:22:30,217 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-23 14:22:30,218 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-23 14:22:30,218 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-23 14:22:30,219 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-23 14:22:30,220 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-23 14:22:30,222 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-23 14:22:30,302 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-23 14:22:30,303 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-23 14:22:30,303 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-23 14:22:30,304 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-23 14:22:30,305 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-23 14:22:30,306 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 14:22:30,307 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-23 14:22:30,307 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-23 14:22:30,307 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <SDPCache>...
+2014-11-23 14:22:30,308 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <SDPCache>
+2014-11-23 14:22:30,308 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <SDPCache>
+2014-11-23 14:22:30,311 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 14:22:30,411 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <1000> configurations loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 14:22:30,415 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1012> configuration lines loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 14:22:30,415 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <SDPCache>...
+2014-11-23 14:22:30,416 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-23 14:22:30,416 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-23 14:22:30,417 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-23 14:22:30,417 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-23 14:22:30,417 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-23 14:22:30,417 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-23 14:22:30,418 CacheFactory.java             [ 411] INFO  - Cache <SDPCache> is set to auto reload with a period of <0>
+2014-11-23 14:22:30,418 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <SDPCache>
+2014-11-23 14:22:30,418 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 242ms.
+2014-11-23 14:22:30,423 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-11-23 14:22:30,430 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-11-23 14:22:30,430 TransactionManager.java       [ 360] INFO  - Request Start for Transaction manager.
+2014-11-23 14:22:30,431 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-23 14:22:30,466 TransactionManager.java       [ 228] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 14:22:30,466 TransactionManager.java       [ 229] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 14:22:30,467 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <GPRS.1111.20141118131500.txt> for transaction <1>
+2014-11-23 14:22:30,476 FileVNPInputAdapter.java      [  46] ERROR - Error data input java.lang.NumberFormatException: For input string: "O"
+2014-11-23 14:22:30,481 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <11> events in <3> ms
+2014-11-23 14:22:30,485 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <11> events in <4> ms
+2014-11-23 14:22:30,491 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <11> events in <6> ms
+2014-11-23 14:22:30,491 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <11> events in <0> ms
+2014-11-23 14:22:30,495 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <11> events from a batch of <11> events in <4> ms
+2014-11-23 14:22:30,496 TransactionManager.java       [ 265] INFO  - Transaction <1> closed
+2014-11-23 14:22:30,496 TransactionManager.java       [ 266] INFO  - Transaction <1> closed
+2014-11-23 14:22:30,496 TransactionManager.java       [ 267] INFO  - Statistics: Records  <9>
+2014-11-23 14:22:30,496 TransactionManager.java       [ 268] INFO  -             Duration <30> ms
+2014-11-23 14:22:30,496 TransactionManager.java       [ 270] INFO  -             Speed    <300> records /sec
+2014-11-23 14:44:00,659 TransactionManager.java       [ 228] INFO  - Opened transaction <2> for pipeline <OrpTransformationPipeline>
+2014-11-23 14:44:00,662 TransactionManager.java       [ 229] INFO  - Opened transaction <2> for pipeline <OrpTransformationPipeline>
+2014-11-23 14:44:00,662 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <GPRS.1111.20141118131500.txt.done> for transaction <2>
+2014-11-23 14:44:00,671 FileVNPInputAdapter.java      [  46] ERROR - Error data input java.lang.NumberFormatException: For input string: "O"
+2014-11-23 14:44:00,673 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <11> events in <1> ms
+2014-11-23 14:44:00,677 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <11> events in <4> ms
+2014-11-23 14:44:00,686 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <11> events in <9> ms
+2014-11-23 14:44:00,686 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <11> events in <0> ms
+2014-11-23 14:44:00,689 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <11> events from a batch of <11> events in <3> ms
+2014-11-23 14:44:00,694 TransactionManager.java       [ 265] INFO  - Transaction <2> closed
+2014-11-23 14:44:00,694 TransactionManager.java       [ 266] INFO  - Transaction <2> closed
+2014-11-23 14:44:00,694 TransactionManager.java       [ 267] INFO  - Statistics: Records  <9>
+2014-11-23 14:44:00,694 TransactionManager.java       [ 268] INFO  -             Duration <35> ms
+2014-11-23 14:44:00,695 TransactionManager.java       [ 270] INFO  -             Speed    <257> records /sec
+2014-11-23 14:52:45,718 TransactionManager.java       [ 228] INFO  - Opened transaction <3> for pipeline <OrpTransformationPipeline>
+2014-11-23 14:52:45,719 TransactionManager.java       [ 229] INFO  - Opened transaction <3> for pipeline <OrpTransformationPipeline>
+2014-11-23 14:52:45,719 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <GPRS.1111.20141118131500.txt.done.done> for transaction <3>
+2014-11-23 14:52:45,775 FileVNPInputAdapter.java      [  46] ERROR - Error data input java.lang.NumberFormatException: For input string: "O"
+2014-11-23 14:52:45,776 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <11> events in <0> ms
+2014-11-23 14:52:45,780 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <11> events in <3> ms
+2014-11-23 14:52:45,788 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <11> events in <7> ms
+2014-11-23 14:52:45,788 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <11> events in <0> ms
+2014-11-23 14:52:45,791 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <11> events from a batch of <11> events in <3> ms
+2014-11-23 14:52:45,792 TransactionManager.java       [ 265] INFO  - Transaction <3> closed
+2014-11-23 14:52:45,792 TransactionManager.java       [ 266] INFO  - Transaction <3> closed
+2014-11-23 14:52:45,792 TransactionManager.java       [ 267] INFO  - Statistics: Records  <9>
+2014-11-23 14:52:45,792 TransactionManager.java       [ 268] INFO  -             Duration <74> ms
+2014-11-23 14:52:45,792 TransactionManager.java       [ 270] INFO  -             Speed    <121> records /sec
+2014-11-23 14:55:06,021 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-23 14:55:06,024 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-23 14:55:06,032 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-23 14:55:06,129 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-23 14:55:14,870 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-23 14:55:14,873 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-23 14:55:14,874 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-23 14:55:14,878 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-23 14:55:14,879 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-23 14:55:14,890 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-23 14:55:14,915 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-23 14:55:14,916 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-23 14:55:14,917 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-23 14:55:14,917 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-23 14:55:14,917 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-23 14:55:14,920 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-23 14:55:14,989 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-23 14:55:14,990 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-23 14:55:14,990 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-23 14:55:14,990 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-23 14:55:14,991 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-23 14:55:14,992 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 14:55:14,992 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-23 14:55:14,993 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-23 14:55:14,993 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <SDPCache>...
+2014-11-23 14:55:14,993 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <SDPCache>
+2014-11-23 14:55:14,994 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <SDPCache>
+2014-11-23 14:55:14,995 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 14:55:15,107 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <1000> configurations loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 14:55:15,109 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1012> configuration lines loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 14:55:15,109 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <SDPCache>...
+2014-11-23 14:55:15,110 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-23 14:55:15,110 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-23 14:55:15,110 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-23 14:55:15,110 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-23 14:55:15,111 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-23 14:55:15,111 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-23 14:55:15,111 CacheFactory.java             [ 411] INFO  - Cache <SDPCache> is set to auto reload with a period of <0>
+2014-11-23 14:55:15,112 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <SDPCache>
+2014-11-23 14:55:15,112 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 239ms.
+2014-11-23 14:55:15,116 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-11-23 14:55:15,122 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-11-23 14:55:15,122 TransactionManager.java       [ 360] INFO  - Request Start for Transaction manager.
+2014-11-23 14:55:15,122 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-23 14:55:15,153 TransactionManager.java       [ 228] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 14:55:15,153 TransactionManager.java       [ 229] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 14:55:15,154 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <GPRS.1111.20141118131500.txt> for transaction <1>
+2014-11-23 14:55:15,162 FileVNPInputAdapter.java      [  46] ERROR - Error data input java.lang.NumberFormatException: For input string: "O"
+2014-11-23 14:55:15,167 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <11> events in <1> ms
+2014-11-23 14:55:15,170 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <11> events in <3> ms
+2014-11-23 14:55:15,175 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <11> events in <5> ms
+2014-11-23 14:55:15,176 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <11> events in <1> ms
+2014-11-23 14:55:15,180 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <11> events from a batch of <11> events in <4> ms
+2014-11-23 14:55:15,181 TransactionManager.java       [ 265] INFO  - Transaction <1> closed
+2014-11-23 14:55:15,181 TransactionManager.java       [ 266] INFO  - Transaction <1> closed
+2014-11-23 14:55:15,181 TransactionManager.java       [ 267] INFO  - Statistics: Records  <9>
+2014-11-23 14:55:15,181 TransactionManager.java       [ 268] INFO  -             Duration <28> ms
+2014-11-23 14:55:15,181 TransactionManager.java       [ 270] INFO  -             Speed    <321> records /sec
+2014-11-23 15:17:42,437 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-23 15:17:42,440 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-23 15:17:42,452 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-23 15:17:42,550 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-23 15:17:51,310 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-23 15:17:51,313 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-23 15:17:51,314 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-23 15:17:51,318 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-23 15:17:51,319 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-23 15:17:51,331 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-23 15:17:51,353 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-23 15:17:51,354 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-23 15:17:51,355 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-23 15:17:51,355 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-23 15:17:51,356 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-23 15:17:51,357 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-23 15:17:51,435 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-23 15:17:51,436 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-23 15:17:51,436 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-23 15:17:51,437 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-23 15:17:51,438 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-23 15:17:51,441 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 15:17:51,441 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-23 15:17:51,441 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-23 15:17:51,442 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <SDPCache>...
+2014-11-23 15:17:51,442 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <SDPCache>
+2014-11-23 15:17:51,443 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <SDPCache>
+2014-11-23 15:17:51,445 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 15:17:51,575 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <1000> configurations loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 15:17:51,577 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1012> configuration lines loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 15:17:51,578 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <SDPCache>...
+2014-11-23 15:17:51,578 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-23 15:17:51,578 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-23 15:17:51,579 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-23 15:17:51,579 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-23 15:17:51,579 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-23 15:17:51,579 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-23 15:17:51,579 CacheFactory.java             [ 411] INFO  - Cache <SDPCache> is set to auto reload with a period of <0>
+2014-11-23 15:17:51,580 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <SDPCache>
+2014-11-23 15:17:51,580 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 267ms.
+2014-11-23 15:17:51,585 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-11-23 15:17:51,592 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-11-23 15:17:51,592 TransactionManager.java       [ 360] INFO  - Request Start for Transaction manager.
+2014-11-23 15:17:51,593 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-23 15:17:51,628 TransactionManager.java       [ 228] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 15:17:51,629 TransactionManager.java       [ 229] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 15:17:51,629 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <GPRS.1111.20141118131500.txt> for transaction <1>
+2014-11-23 15:17:51,639 FileVNPInputAdapter.java      [  48] ERROR - Error data input java.lang.NumberFormatException: For input string: "HH"
+2014-11-23 15:17:51,642 FileVNPInputAdapter.java      [  48] ERROR - Error data input java.lang.NumberFormatException: For input string: "O"
+2014-11-23 15:17:51,645 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <12> events in <1> ms
+2014-11-23 15:17:51,649 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <12> events in <4> ms
+2014-11-23 15:17:51,655 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <12> events in <6> ms
+2014-11-23 15:17:51,656 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <12> events in <1> ms
+2014-11-23 15:17:51,661 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <12> events from a batch of <12> events in <5> ms
+2014-11-23 15:17:51,662 TransactionManager.java       [ 265] INFO  - Transaction <1> closed
+2014-11-23 15:17:51,662 TransactionManager.java       [ 266] INFO  - Transaction <1> closed
+2014-11-23 15:17:51,663 TransactionManager.java       [ 267] INFO  - Statistics: Records  <10>
+2014-11-23 15:17:51,663 TransactionManager.java       [ 268] INFO  -             Duration <34> ms
+2014-11-23 15:17:51,663 TransactionManager.java       [ 270] INFO  -             Speed    <294> records /sec
+2014-11-23 15:17:51,744 Pipeline.java                 [1287] ERROR - Exception thrown in pipeline <OrpTransformationPipeline>, see Error Log.
+2014-11-23 15:17:51,745 Pipeline.java                 [1296] ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepErrorRecord(MyFlatFileOutputAdapter.java:498)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:322)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepErrorRecord(MyFlatFileOutputAdapter.java:489)
+	... 3 more
+2014-11-23 15:17:51,789 Pipeline.java                 [1297] ERROR - java.lang.NullPointerException
+2014-11-23 15:17:51,789 Pipeline.java                 [1296] ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepErrorRecord(MyFlatFileOutputAdapter.java:498)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:322)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepErrorRecord(MyFlatFileOutputAdapter.java:489)
+	... 3 more
+2014-11-23 15:17:51,791 Pipeline.java                 [1297] ERROR - java.lang.NullPointerException
+2014-11-23 15:17:51,792 Pipeline.java                 [1308] ERROR - Pipeline <OrpTransformationPipeline> configured to shut down on exception. Shutting down.
+2014-11-23 15:17:52,612 ElcRate.java                  [1108] INFO  - Shutdown command received. Shutting down pipelines as soon as possible.
+2014-11-23 15:17:52,613 Pipeline.java                 [1074] WARN  - Pipeline <OrpTransformationPipeline> received Stop Command. Will exit after the current Transaction
+2014-11-23 15:17:53,614 ElcRate.java                  [1108] INFO  - Shutdown command received. Shutting down pipelines as soon as possible.
+2014-11-23 15:17:53,616 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-23 15:17:53,621 ElcRateSocket.java            [ 191] INFO  - Closing <Listener>
+2014-11-23 15:17:53,724 ElcRate.java                  [1108] INFO  - Shutdown command received. Shutting down pipelines as soon as possible.
+2014-11-23 15:17:53,724 ElcRate.java                  [1138] INFO  - Shutdown command called
+2014-11-23 15:20:48,208 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-23 15:20:48,210 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-23 15:20:48,220 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-23 15:20:48,326 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-23 15:20:57,049 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-23 15:20:57,052 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-23 15:20:57,053 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-23 15:20:57,057 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-23 15:20:57,059 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-23 15:20:57,070 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-23 15:20:57,092 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-23 15:20:57,093 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-23 15:20:57,093 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-23 15:20:57,094 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-23 15:20:57,094 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-23 15:20:57,096 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-23 15:20:57,164 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-23 15:20:57,164 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-23 15:20:57,167 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-23 15:20:57,167 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-23 15:20:57,167 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-23 15:20:57,170 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 15:20:57,170 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-23 15:20:57,170 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-23 15:20:57,171 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <SDPCache>...
+2014-11-23 15:20:57,171 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <SDPCache>
+2014-11-23 15:20:57,171 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <SDPCache>
+2014-11-23 15:20:57,174 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 15:20:57,289 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <1000> configurations loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 15:20:57,290 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1012> configuration lines loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 15:20:57,291 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <SDPCache>...
+2014-11-23 15:20:57,291 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-23 15:20:57,291 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-23 15:20:57,292 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-23 15:20:57,293 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-23 15:20:57,293 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-23 15:20:57,293 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-23 15:20:57,294 CacheFactory.java             [ 411] INFO  - Cache <SDPCache> is set to auto reload with a period of <0>
+2014-11-23 15:20:57,294 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <SDPCache>
+2014-11-23 15:20:57,294 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 242ms.
+2014-11-23 15:20:57,299 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-11-23 15:20:57,306 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-11-23 15:20:57,306 TransactionManager.java       [ 360] INFO  - Request Start for Transaction manager.
+2014-11-23 15:20:57,307 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-23 15:20:57,333 TransactionManager.java       [ 228] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 15:20:57,333 TransactionManager.java       [ 229] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 15:20:57,333 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <GPRS.1111.20141118131500.txt> for transaction <1>
+2014-11-23 15:20:57,341 FileVNPInputAdapter.java      [  48] ERROR - Error data input java.lang.NumberFormatException: For input string: "HH"
+2014-11-23 15:20:57,344 FileVNPInputAdapter.java      [  48] ERROR - Error data input java.lang.NumberFormatException: For input string: "O"
+2014-11-23 15:20:57,346 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <12> events in <1> ms
+2014-11-23 15:20:57,350 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <12> events in <4> ms
+2014-11-23 15:20:57,356 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <12> events in <6> ms
+2014-11-23 15:20:57,357 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <12> events in <1> ms
+2014-11-23 15:20:57,360 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <12> events from a batch of <12> events in <3> ms
+2014-11-23 15:20:57,361 TransactionManager.java       [ 265] INFO  - Transaction <1> closed
+2014-11-23 15:20:57,361 TransactionManager.java       [ 266] INFO  - Transaction <1> closed
+2014-11-23 15:20:57,361 TransactionManager.java       [ 267] INFO  - Statistics: Records  <10>
+2014-11-23 15:20:57,362 TransactionManager.java       [ 268] INFO  -             Duration <28> ms
+2014-11-23 15:20:57,362 TransactionManager.java       [ 270] INFO  -             Speed    <357> records /sec
+2014-11-23 15:23:22,380 TransactionManager.java       [ 228] INFO  - Opened transaction <2> for pipeline <OrpTransformationPipeline>
+2014-11-23 15:23:22,381 TransactionManager.java       [ 229] INFO  - Opened transaction <2> for pipeline <OrpTransformationPipeline>
+2014-11-23 15:23:22,381 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <GPRS.1111.20141118131500.txt> for transaction <2>
+2014-11-23 15:23:22,386 FileVNPInputAdapter.java      [  48] ERROR - Error data input java.lang.NumberFormatException: For input string: "HH"
+2014-11-23 15:23:22,389 FileVNPInputAdapter.java      [  48] ERROR - Error data input java.lang.NumberFormatException: For input string: "O"
+2014-11-23 15:23:22,396 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <12> events in <0> ms
+2014-11-23 15:23:22,401 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <12> events in <4> ms
+2014-11-23 15:23:22,409 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <12> events in <8> ms
+2014-11-23 15:23:22,409 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <12> events in <0> ms
+2014-11-23 15:23:22,412 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <12> events from a batch of <12> events in <3> ms
+2014-11-23 15:23:22,417 TransactionManager.java       [ 265] INFO  - Transaction <2> closed
+2014-11-23 15:23:22,417 TransactionManager.java       [ 266] INFO  - Transaction <2> closed
+2014-11-23 15:23:22,417 TransactionManager.java       [ 267] INFO  - Statistics: Records  <10>
+2014-11-23 15:23:22,417 TransactionManager.java       [ 268] INFO  -             Duration <37> ms
+2014-11-23 15:23:22,417 TransactionManager.java       [ 270] INFO  -             Speed    <270> records /sec
+2014-11-23 15:24:35,831 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-23 15:24:35,833 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-23 15:24:35,842 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-23 15:24:35,935 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-23 15:24:44,735 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-23 15:24:44,739 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-23 15:24:44,739 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-23 15:24:44,744 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-23 15:24:44,745 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-23 15:24:44,757 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-23 15:24:44,780 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-23 15:24:44,781 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-23 15:24:44,781 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-23 15:24:44,782 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-23 15:24:44,782 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-23 15:24:44,784 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-23 15:24:44,862 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-23 15:24:44,862 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-23 15:24:44,863 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-23 15:24:44,863 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-23 15:24:44,863 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-23 15:24:44,865 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 15:24:44,866 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-23 15:24:44,866 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-23 15:24:44,867 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <SDPCache>...
+2014-11-23 15:24:44,868 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <SDPCache>
+2014-11-23 15:24:44,869 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <SDPCache>
+2014-11-23 15:24:44,872 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 15:24:44,978 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <1000> configurations loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 15:24:44,981 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1012> configuration lines loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 15:24:44,981 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <SDPCache>...
+2014-11-23 15:24:44,981 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-23 15:24:44,982 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-23 15:24:44,982 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-23 15:24:44,982 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-23 15:24:44,982 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-23 15:24:44,983 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-23 15:24:44,984 CacheFactory.java             [ 411] INFO  - Cache <SDPCache> is set to auto reload with a period of <0>
+2014-11-23 15:24:44,984 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <SDPCache>
+2014-11-23 15:24:44,984 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 245ms.
+2014-11-23 15:24:44,988 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-11-23 15:24:44,993 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-11-23 15:24:44,994 TransactionManager.java       [ 360] INFO  - Request Start for Transaction manager.
+2014-11-23 15:24:44,994 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-23 15:24:45,018 TransactionManager.java       [ 228] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 15:24:45,018 TransactionManager.java       [ 229] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 15:24:45,019 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <GPRS.1111.20141118131500.txt> for transaction <1>
+2014-11-23 15:24:45,025 FileVNPInputAdapter.java      [  48] ERROR - Error data input java.lang.NumberFormatException: For input string: "HH"
+2014-11-23 15:24:45,028 FileVNPInputAdapter.java      [  48] ERROR - Error data input java.lang.NumberFormatException: For input string: "O"
+2014-11-23 15:24:45,031 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <12> events in <1> ms
+2014-11-23 15:24:45,040 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <12> events in <8> ms
+2014-11-23 15:24:45,045 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <12> events in <5> ms
+2014-11-23 15:24:45,046 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <12> events in <1> ms
+2014-11-23 15:24:45,049 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <12> events from a batch of <12> events in <3> ms
+2014-11-23 15:24:45,050 TransactionManager.java       [ 265] INFO  - Transaction <1> closed
+2014-11-23 15:24:45,050 TransactionManager.java       [ 266] INFO  - Transaction <1> closed
+2014-11-23 15:24:45,050 TransactionManager.java       [ 267] INFO  - Statistics: Records  <10>
+2014-11-23 15:24:45,050 TransactionManager.java       [ 268] INFO  -             Duration <32> ms
+2014-11-23 15:24:45,051 TransactionManager.java       [ 270] INFO  -             Speed    <312> records /sec
+2014-11-23 16:31:08,300 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-23 16:31:08,304 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-23 16:31:08,323 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-23 16:31:08,560 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-23 16:31:17,449 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-23 16:31:17,452 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-23 16:31:17,453 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-23 16:31:17,457 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-23 16:31:17,458 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-23 16:31:17,470 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 16:31:17,487 RegexMatchCache.java          [1110] FATAL - Error opening Search Map Data for <NormalizeCache> in config <1>
+2014-11-23 16:31:17,489 ElcRate.java                  [ 655] ERROR - Exception thrown in module <Framework>
+2014-11-23 16:31:17,490 ElcRate.java                  [ 705] FATAL - InitializationException thrown. Message <Error opening Search Map Data for <NormalizeCache> in config <1>>
+ElcRate.exception.InitializationException: Error opening Search Map Data for <NormalizeCache> in config <1>
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1111)
+	at ElcRate.cache.AbstractSyncLoaderCache.loadCache(AbstractSyncLoaderCache.java:302)
+	at ElcRate.cache.RegexMatchCache.loadCache(RegexMatchCache.java:234)
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:245)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+Caused by: java.lang.NullPointerException
+	at ElcRate.cache.RegexMatchCache.addEntry(RegexMatchCache.java:292)
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1089)
+	... 7 more
+2014-11-23 16:31:17,493 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <Error opening Search Map Data for <NormalizeCache> in config <1>>
+2014-11-23 16:31:17,493 ElcRate.java                  [ 705] FATAL - InitializationException thrown. Message <Startup failed. Aborting.>
+ElcRate.exception.InitializationException: Startup failed. Aborting.
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:343)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-11-23 16:31:17,494 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <Startup failed. Aborting.>
+2014-11-23 16:31:17,496 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-23 16:31:17,498 ElcRateSocket.java            [ 191] INFO  - Closing <Listener>
+2014-11-23 16:39:00,088 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-23 16:39:00,090 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-23 16:39:00,098 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-23 16:39:00,198 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-23 16:39:08,987 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-23 16:39:08,991 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-23 16:39:08,991 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-23 16:39:08,995 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-23 16:39:08,997 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-23 16:39:09,009 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 16:39:09,025 RegexMatchCache.java          [1110] FATAL - Error opening Search Map Data for <NormalizeCache> in config <1>
+2014-11-23 16:39:09,028 ElcRate.java                  [ 655] ERROR - Exception thrown in module <Framework>
+2014-11-23 16:39:09,028 ElcRate.java                  [ 705] FATAL - InitializationException thrown. Message <Error opening Search Map Data for <NormalizeCache> in config <1>>
+ElcRate.exception.InitializationException: Error opening Search Map Data for <NormalizeCache> in config <1>
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1111)
+	at ElcRate.cache.AbstractSyncLoaderCache.loadCache(AbstractSyncLoaderCache.java:302)
+	at ElcRate.cache.RegexMatchCache.loadCache(RegexMatchCache.java:234)
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:245)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+Caused by: java.lang.NullPointerException
+	at ElcRate.cache.RegexMatchCache.addEntry(RegexMatchCache.java:292)
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1089)
+	... 7 more
+2014-11-23 16:39:09,032 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <Error opening Search Map Data for <NormalizeCache> in config <1>>
+2014-11-23 16:39:09,032 ElcRate.java                  [ 705] FATAL - InitializationException thrown. Message <Startup failed. Aborting.>
+ElcRate.exception.InitializationException: Startup failed. Aborting.
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:343)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-11-23 16:39:09,032 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <Startup failed. Aborting.>
+2014-11-23 16:39:09,034 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-23 16:39:09,035 ElcRateSocket.java            [ 191] INFO  - Closing <Listener>
+2014-11-23 16:53:23,821 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-23 16:53:23,823 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-23 16:53:23,833 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-23 16:53:23,974 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-23 16:53:32,787 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-23 16:53:32,791 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-23 16:53:32,791 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-23 16:53:32,795 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-23 16:53:32,797 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-23 16:53:32,810 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 16:53:32,828 RegexMatchCache.java          [1110] FATAL - Error opening Search Map Data for <NormalizeCache> in config <1>
+2014-11-23 16:53:32,830 ElcRate.java                  [ 655] ERROR - Exception thrown in module <Framework>
+2014-11-23 16:53:32,831 ElcRate.java                  [ 705] FATAL - InitializationException thrown. Message <Error opening Search Map Data for <NormalizeCache> in config <1>>
+ElcRate.exception.InitializationException: Error opening Search Map Data for <NormalizeCache> in config <1>
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1111)
+	at ElcRate.cache.AbstractSyncLoaderCache.loadCache(AbstractSyncLoaderCache.java:302)
+	at ElcRate.cache.RegexMatchCache.loadCache(RegexMatchCache.java:234)
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:245)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+Caused by: java.lang.NullPointerException
+	at ElcRate.cache.RegexMatchCache.addEntry(RegexMatchCache.java:292)
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1089)
+	... 7 more
+2014-11-23 16:53:32,834 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <Error opening Search Map Data for <NormalizeCache> in config <1>>
+2014-11-23 16:53:32,834 ElcRate.java                  [ 705] FATAL - InitializationException thrown. Message <Startup failed. Aborting.>
+ElcRate.exception.InitializationException: Startup failed. Aborting.
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:343)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-11-23 16:53:32,835 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <Startup failed. Aborting.>
+2014-11-23 16:53:32,836 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-23 16:53:32,837 ElcRateSocket.java            [ 191] INFO  - Closing <Listener>
+2014-11-23 16:58:58,939 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-23 16:58:58,942 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-23 16:58:58,954 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-23 16:58:59,059 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-23 16:59:07,969 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-23 16:59:07,973 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-23 16:59:07,973 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-23 16:59:07,979 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-23 16:59:07,981 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-23 16:59:07,995 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 16:59:08,012 RegexMatchCache.java          [1110] FATAL - Error opening Search Map Data for <NormalizeCache> in config <1>
+2014-11-23 16:59:08,014 ElcRate.java                  [ 655] ERROR - Exception thrown in module <Framework>
+2014-11-23 16:59:08,015 ElcRate.java                  [ 705] FATAL - InitializationException thrown. Message <Error opening Search Map Data for <NormalizeCache> in config <1>>
+ElcRate.exception.InitializationException: Error opening Search Map Data for <NormalizeCache> in config <1>
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1111)
+	at ElcRate.cache.AbstractSyncLoaderCache.loadCache(AbstractSyncLoaderCache.java:302)
+	at ElcRate.cache.RegexMatchCache.loadCache(RegexMatchCache.java:234)
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:245)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+Caused by: java.lang.NullPointerException
+	at ElcRate.cache.RegexMatchCache.addEntry(RegexMatchCache.java:292)
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1089)
+	... 7 more
+2014-11-23 16:59:08,018 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <Error opening Search Map Data for <NormalizeCache> in config <1>>
+2014-11-23 16:59:08,018 ElcRate.java                  [ 705] FATAL - InitializationException thrown. Message <Startup failed. Aborting.>
+ElcRate.exception.InitializationException: Startup failed. Aborting.
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:343)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-11-23 16:59:08,019 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <Startup failed. Aborting.>
+2014-11-23 16:59:08,021 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-23 16:59:08,022 ElcRateSocket.java            [ 191] INFO  - Closing <Listener>
+2014-11-23 17:05:28,784 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-23 17:05:28,786 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-23 17:05:28,796 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-23 17:05:28,894 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-23 17:05:37,645 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-23 17:05:37,649 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-23 17:05:37,649 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-23 17:05:37,653 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-23 17:05:37,655 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-23 17:05:37,668 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:05:37,685 RegexMatchCache.java          [1110] FATAL - Error opening Search Map Data for <NormalizeCache> in config <1>
+2014-11-23 17:05:37,687 ElcRate.java                  [ 655] ERROR - Exception thrown in module <Framework>
+2014-11-23 17:05:37,688 ElcRate.java                  [ 705] FATAL - InitializationException thrown. Message <Error opening Search Map Data for <NormalizeCache> in config <1>>
+ElcRate.exception.InitializationException: Error opening Search Map Data for <NormalizeCache> in config <1>
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1111)
+	at ElcRate.cache.AbstractSyncLoaderCache.loadCache(AbstractSyncLoaderCache.java:302)
+	at ElcRate.cache.RegexMatchCache.loadCache(RegexMatchCache.java:234)
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:245)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+Caused by: java.lang.NullPointerException
+	at ElcRate.cache.RegexMatchCache.addEntry(RegexMatchCache.java:292)
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1089)
+	... 7 more
+2014-11-23 17:05:37,691 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <Error opening Search Map Data for <NormalizeCache> in config <1>>
+2014-11-23 17:05:37,691 ElcRate.java                  [ 705] FATAL - InitializationException thrown. Message <Startup failed. Aborting.>
+ElcRate.exception.InitializationException: Startup failed. Aborting.
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:343)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-11-23 17:05:37,692 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <Startup failed. Aborting.>
+2014-11-23 17:05:37,694 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-23 17:05:37,695 ElcRateSocket.java            [ 191] INFO  - Closing <Listener>
+2014-11-23 17:06:56,704 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-23 17:06:56,706 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-23 17:06:56,715 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-23 17:06:56,825 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-23 17:07:05,554 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-23 17:07:05,558 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-23 17:07:05,558 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-23 17:07:05,562 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-23 17:07:05,563 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-23 17:07:05,575 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:07:05,597 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-23 17:07:05,597 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-23 17:07:05,597 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-23 17:07:05,598 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-23 17:07:05,598 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-23 17:07:05,600 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-23 17:07:05,679 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-23 17:07:05,679 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-23 17:07:05,679 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-23 17:07:05,680 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-23 17:07:05,680 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-23 17:07:05,683 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:07:05,683 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-23 17:07:05,684 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-23 17:07:05,684 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <SDPCache>...
+2014-11-23 17:07:05,684 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <SDPCache>
+2014-11-23 17:07:05,685 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <SDPCache>
+2014-11-23 17:07:05,688 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:07:05,804 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <1000> configurations loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 17:07:05,806 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1012> configuration lines loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 17:07:05,806 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <SDPCache>...
+2014-11-23 17:07:05,807 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-23 17:07:05,807 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-23 17:07:05,807 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-23 17:07:05,807 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-23 17:07:05,808 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-23 17:07:05,808 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-23 17:07:05,809 CacheFactory.java             [ 411] INFO  - Cache <SDPCache> is set to auto reload with a period of <0>
+2014-11-23 17:07:05,809 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <SDPCache>
+2014-11-23 17:07:05,809 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 251ms.
+2014-11-23 17:07:05,813 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-11-23 17:07:05,820 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-11-23 17:07:05,820 TransactionManager.java       [ 360] INFO  - Request Start for Transaction manager.
+2014-11-23 17:07:05,821 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-23 17:07:05,854 TransactionManager.java       [ 228] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 17:07:05,855 TransactionManager.java       [ 229] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 17:07:05,855 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <SDP.0001.20141114153930.txt.txt> for transaction <1>
+2014-11-23 17:07:05,897 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <154> events in <0> ms
+2014-11-23 17:07:05,934 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <154> events in <38> ms
+2014-11-23 17:07:05,996 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <154> events in <62> ms
+2014-11-23 17:07:05,997 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <154> events in <1> ms
+2014-11-23 17:07:06,005 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <154> events from a batch of <154> events in <8> ms
+2014-11-23 17:07:06,006 TransactionManager.java       [ 265] INFO  - Transaction <1> closed
+2014-11-23 17:07:06,006 TransactionManager.java       [ 266] INFO  - Transaction <1> closed
+2014-11-23 17:07:06,006 TransactionManager.java       [ 267] INFO  - Statistics: Records  <152>
+2014-11-23 17:07:06,007 TransactionManager.java       [ 268] INFO  -             Duration <152> ms
+2014-11-23 17:07:06,007 TransactionManager.java       [ 270] INFO  -             Speed    <1000> records /sec
+2014-11-23 17:11:34,414 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-23 17:11:34,416 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-23 17:11:34,426 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-23 17:11:34,521 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-23 17:11:43,376 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-23 17:11:43,379 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-23 17:11:43,380 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-23 17:11:43,384 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-23 17:11:43,386 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-23 17:11:43,398 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:11:43,415 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <5> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-23 17:11:43,416 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-23 17:11:43,417 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-23 17:11:43,417 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-23 17:11:43,417 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-23 17:11:43,420 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-23 17:11:43,490 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-23 17:11:43,492 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-23 17:11:43,495 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-23 17:11:43,495 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-23 17:11:43,496 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-23 17:11:43,499 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:11:43,500 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-23 17:11:43,500 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-23 17:11:43,500 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <SDPCache>...
+2014-11-23 17:11:43,501 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <SDPCache>
+2014-11-23 17:11:43,501 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <SDPCache>
+2014-11-23 17:11:43,503 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:11:43,629 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <1000> configurations loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 17:11:43,630 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1012> configuration lines loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 17:11:43,630 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <SDPCache>...
+2014-11-23 17:11:43,631 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-23 17:11:43,631 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-23 17:11:43,632 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-23 17:11:43,632 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-23 17:11:43,632 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-23 17:11:43,633 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-23 17:11:43,633 CacheFactory.java             [ 411] INFO  - Cache <SDPCache> is set to auto reload with a period of <0>
+2014-11-23 17:11:43,633 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <SDPCache>
+2014-11-23 17:11:43,633 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 254ms.
+2014-11-23 17:11:43,637 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-11-23 17:11:43,643 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-11-23 17:11:43,644 TransactionManager.java       [ 360] INFO  - Request Start for Transaction manager.
+2014-11-23 17:11:43,644 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-23 17:12:03,675 TransactionManager.java       [ 228] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 17:12:03,675 TransactionManager.java       [ 229] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 17:12:03,676 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <VMS.0001.20141113110000.txt> for transaction <1>
+2014-11-23 17:12:04,044 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <6> ms
+2014-11-23 17:12:04,047 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <1> events in <3> ms
+2014-11-23 17:12:04,326 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <5> ms
+2014-11-23 17:12:04,802 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <758> ms
+2014-11-23 17:12:04,892 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <5> ms
+2014-11-23 17:12:05,523 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <720> ms
+2014-11-23 17:12:05,621 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <5> ms
+2014-11-23 17:12:05,904 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <1102> ms
+2014-11-23 17:12:05,953 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <49> ms
+2014-11-23 17:12:06,082 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <558> ms
+2014-11-23 17:12:06,096 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <147> ms
+2014-11-23 17:12:06,170 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <15> ms
+2014-11-23 17:12:07,016 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <934> ms
+2014-11-23 17:12:07,114 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <16> ms
+2014-11-23 17:12:09,705 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <3801> ms
+2014-11-23 17:12:09,715 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <10> ms
+2014-11-23 17:12:09,753 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <38> ms
+2014-11-23 17:12:09,786 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <2570> ms
+2014-11-23 17:12:09,848 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <14> ms
+2014-11-23 17:12:11,156 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <1450> ms
+2014-11-23 17:12:11,171 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <16> ms
+2014-11-23 17:12:11,199 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <28> ms
+2014-11-23 17:12:11,202 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <507> ms
+2014-11-23 17:12:11,302 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <16> ms
+2014-11-23 17:12:12,077 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <921> ms
+2014-11-23 17:12:12,083 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <6> ms
+2014-11-23 17:12:12,110 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <27> ms
+2014-11-23 17:12:12,110 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <394> ms
+2014-11-23 17:12:12,131 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <16> ms
+2014-11-23 17:12:12,997 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <920> ms
+2014-11-23 17:12:13,004 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <7> ms
+2014-11-23 17:12:13,022 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <404> ms
+2014-11-23 17:12:13,030 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <26> ms
+2014-11-23 17:12:13,057 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <16> ms
+2014-11-23 17:12:14,279 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <1282> ms
+2014-11-23 17:12:14,285 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <6> ms
+2014-11-23 17:12:14,314 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <29> ms
+2014-11-23 17:12:14,314 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <415> ms
+2014-11-23 17:12:14,414 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <15> ms
+2014-11-23 17:12:15,314 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <1035> ms
+2014-11-23 17:12:15,320 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <6> ms
+2014-11-23 17:12:15,345 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <25> ms
+2014-11-23 17:12:15,345 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <414> ms
+2014-11-23 17:12:15,368 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <26> ms
+2014-11-23 17:12:16,231 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <917> ms
+2014-11-23 17:12:16,240 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <9> ms
+2014-11-23 17:12:16,262 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <387> ms
+2014-11-23 17:12:16,273 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <33> ms
+2014-11-23 17:12:16,283 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <15> ms
+2014-11-23 17:12:17,245 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <1007> ms
+2014-11-23 17:12:17,252 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <7> ms
+2014-11-23 17:12:17,287 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <35> ms
+2014-11-23 17:12:17,339 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <466> ms
+2014-11-23 17:12:17,439 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <14> ms
+2014-11-23 17:12:18,356 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <1111> ms
+2014-11-23 17:12:18,362 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <6> ms
+2014-11-23 17:12:18,391 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <29> ms
+2014-11-23 17:12:18,465 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <426> ms
+2014-11-23 17:12:18,487 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <15> ms
+2014-11-23 17:12:19,436 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <1080> ms
+2014-11-23 17:12:19,442 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <6> ms
+2014-11-23 17:12:19,814 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <498> ms
+2014-11-23 17:12:19,817 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <375> ms
+2014-11-23 17:12:19,914 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <16> ms
+2014-11-23 17:12:20,698 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <1261> ms
+2014-11-23 17:12:20,704 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <6> ms
+2014-11-23 17:12:20,731 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <27> ms
+2014-11-23 17:12:20,731 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <396> ms
+2014-11-23 17:12:20,732 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <14> ms
+2014-11-23 17:12:21,653 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <955> ms
+2014-11-23 17:12:21,659 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <6> ms
+2014-11-23 17:12:21,692 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <419> ms
+2014-11-23 17:12:21,709 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <50> ms
+2014-11-23 17:12:21,792 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <15> ms
+2014-11-23 17:12:22,627 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <973> ms
+2014-11-23 17:12:22,633 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <6> ms
+2014-11-23 17:12:22,652 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <418> ms
+2014-11-23 17:12:22,660 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <27> ms
+2014-11-23 17:12:22,660 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <15> ms
+2014-11-23 17:12:23,601 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <974> ms
+2014-11-23 17:12:23,606 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <5> ms
+2014-11-23 17:12:23,616 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <440> ms
+2014-11-23 17:12:23,640 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <34> ms
+2014-11-23 17:12:23,673 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <13> ms
+2014-11-23 17:12:24,887 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <1286> ms
+2014-11-23 17:12:24,893 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <6> ms
+2014-11-23 17:12:24,919 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <26> ms
+2014-11-23 17:12:24,920 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <454> ms
+2014-11-23 17:12:25,020 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <14> ms
+2014-11-23 17:12:25,783 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <895> ms
+2014-11-23 17:12:25,789 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <6> ms
+2014-11-23 17:12:25,827 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <38> ms
+2014-11-23 17:12:25,827 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <396> ms
+2014-11-23 17:12:25,834 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <13> ms
+2014-11-23 17:12:26,722 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <939> ms
+2014-11-23 17:12:26,728 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <6> ms
+2014-11-23 17:12:26,753 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <25> ms
+2014-11-23 17:12:26,753 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <415> ms
+2014-11-23 17:12:26,762 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <15> ms
+2014-11-23 17:12:27,713 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <991> ms
+2014-11-23 17:12:27,718 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <5> ms
+2014-11-23 17:12:27,745 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <27> ms
+2014-11-23 17:12:27,773 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <412> ms
+2014-11-23 17:12:27,777 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <15> ms
+2014-11-23 17:12:28,691 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <978> ms
+2014-11-23 17:12:28,696 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <5> ms
+2014-11-23 17:12:28,727 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <31> ms
+2014-11-23 17:12:28,804 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <431> ms
+2014-11-23 17:12:28,894 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <17> ms
+2014-11-23 17:12:30,028 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <1337> ms
+2014-11-23 17:12:30,033 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <5> ms
+2014-11-23 17:12:30,062 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <27> ms
+2014-11-23 17:12:30,064 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <511> ms
+2014-11-23 17:12:30,164 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <17> ms
+2014-11-23 17:12:30,980 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <952> ms
+2014-11-23 17:12:31,007 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <27> ms
+2014-11-23 17:12:31,033 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <26> ms
+2014-11-23 17:12:31,075 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <401> ms
+2014-11-23 17:12:31,077 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <13> ms
+2014-11-23 17:12:31,906 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <926> ms
+2014-11-23 17:12:31,911 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <5> ms
+2014-11-23 17:12:31,941 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <30> ms
+2014-11-23 17:12:31,981 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <400> ms
+2014-11-23 17:12:32,049 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <15> ms
+2014-11-23 17:12:32,929 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <1023> ms
+2014-11-23 17:12:32,934 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <5> ms
+2014-11-23 17:12:32,952 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <471> ms
+2014-11-23 17:12:32,970 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <36> ms
+2014-11-23 17:12:32,971 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <15> ms
+2014-11-23 17:12:33,901 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <972> ms
+2014-11-23 17:12:33,907 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <6> ms
+2014-11-23 17:12:33,933 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <26> ms
+2014-11-23 17:12:34,022 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <442> ms
+2014-11-23 17:12:34,047 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <13> ms
+2014-11-23 17:12:35,151 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <1250> ms
+2014-11-23 17:12:35,157 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <6> ms
+2014-11-23 17:12:35,182 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <25> ms
+2014-11-23 17:12:35,182 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <731> ms
+2014-11-23 17:12:35,224 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <13> ms
+2014-11-23 17:12:36,054 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <903> ms
+2014-11-23 17:12:36,060 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <6> ms
+2014-11-23 17:12:36,085 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <25> ms
+2014-11-23 17:12:36,148 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <366> ms
+2014-11-23 17:12:36,244 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <16> ms
+2014-11-23 17:12:36,957 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <902> ms
+2014-11-23 17:12:36,963 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <6> ms
+2014-11-23 17:12:36,990 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <27> ms
+2014-11-23 17:12:37,060 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <391> ms
+2014-11-23 17:12:37,090 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <28> ms
+2014-11-23 17:12:37,940 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <982> ms
+2014-11-23 17:12:37,945 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <5> ms
+2014-11-23 17:12:37,970 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <25> ms
+2014-11-23 17:12:37,982 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <421> ms
+2014-11-23 17:12:38,012 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <12> ms
+2014-11-23 17:12:38,899 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <959> ms
+2014-11-23 17:12:38,905 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <6> ms
+2014-11-23 17:12:38,931 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <26> ms
+2014-11-23 17:12:39,033 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <418> ms
+2014-11-23 17:12:39,062 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <15> ms
+2014-11-23 17:12:39,923 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <1024> ms
+2014-11-23 17:12:39,928 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <5> ms
+2014-11-23 17:12:39,960 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <32> ms
+2014-11-23 17:12:40,001 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <440> ms
+2014-11-23 17:12:40,405 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <15> ms
+2014-11-23 17:12:41,147 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <1224> ms
+2014-11-23 17:12:41,153 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <6> ms
+2014-11-23 17:12:41,179 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <26> ms
+2014-11-23 17:12:41,224 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <714> ms
+2014-11-23 17:12:41,234 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <15> ms
+2014-11-23 17:12:42,063 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <916> ms
+2014-11-23 17:12:42,069 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <6> ms
+2014-11-23 17:12:42,095 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <26> ms
+2014-11-23 17:12:42,108 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <384> ms
+2014-11-23 17:12:42,157 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <12> ms
+2014-11-23 17:12:43,035 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <972> ms
+2014-11-23 17:12:43,040 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <5> ms
+2014-11-23 17:12:43,065 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <24> ms
+2014-11-23 17:12:43,136 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <427> ms
+2014-11-23 17:12:43,172 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <13> ms
+2014-11-23 17:12:43,957 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <922> ms
+2014-11-23 17:12:43,962 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <5> ms
+2014-11-23 17:12:43,987 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <25> ms
+2014-11-23 17:12:44,045 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <409> ms
+2014-11-23 17:12:44,096 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <11> ms
+2014-11-23 17:12:44,896 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <939> ms
+2014-11-23 17:12:44,901 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <5> ms
+2014-11-23 17:12:44,965 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <64> ms
+2014-11-23 17:12:44,969 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <421> ms
+2014-11-23 17:12:45,055 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <5000> events in <4> ms
+2014-11-23 17:12:45,056 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <3617> events in <1> ms
+2014-11-23 17:12:46,067 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <1171> ms
+2014-11-23 17:12:46,073 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <6> ms
+2014-11-23 17:12:46,087 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <400> ms
+2014-11-23 17:12:46,102 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <29> ms
+2014-11-23 17:12:46,947 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <880> ms
+2014-11-23 17:12:46,953 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <6> ms
+2014-11-23 17:12:46,977 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <24> ms
+2014-11-23 17:12:46,978 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <5000> events in <380> ms
+2014-11-23 17:12:47,809 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <862> ms
+2014-11-23 17:12:47,815 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <6> ms
+2014-11-23 17:12:47,840 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <25> ms
+2014-11-23 17:12:47,852 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <3618> events in <274> ms
+2014-11-23 17:12:48,555 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <746> ms
+2014-11-23 17:12:48,560 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <5> ms
+2014-11-23 17:12:48,584 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <24> ms
+2014-11-23 17:12:49,315 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <5000> events in <760> ms
+2014-11-23 17:12:49,320 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <5000> events in <5> ms
+2014-11-23 17:12:49,345 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <5000> events from a batch of <5000> events in <24> ms
+2014-11-23 17:12:49,863 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <3618> events in <548> ms
+2014-11-23 17:12:49,867 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <3618> events in <4> ms
+2014-11-23 17:12:49,885 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <3618> events from a batch of <3618> events in <18> ms
+2014-11-23 17:12:49,886 TransactionManager.java       [ 265] INFO  - Transaction <1> closed
+2014-11-23 17:12:49,886 TransactionManager.java       [ 266] INFO  - Transaction <1> closed
+2014-11-23 17:12:49,887 TransactionManager.java       [ 267] INFO  - Statistics: Records  <208616>
+2014-11-23 17:12:49,887 TransactionManager.java       [ 268] INFO  -             Duration <46211> ms
+2014-11-23 17:12:49,887 TransactionManager.java       [ 270] INFO  -             Speed    <4514> records /sec
+2014-11-23 17:16:41,549 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-23 17:16:41,551 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-23 17:16:41,560 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-23 17:16:41,665 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-23 17:16:50,441 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-23 17:16:50,445 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-23 17:16:50,446 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-23 17:16:50,450 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-23 17:16:50,451 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-23 17:16:50,465 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:16:50,483 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <4> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-23 17:16:50,484 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-23 17:16:50,485 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-23 17:16:50,485 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-23 17:16:50,486 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-23 17:16:50,488 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-23 17:16:50,562 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-23 17:16:50,563 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-23 17:16:50,564 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-23 17:16:50,565 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-23 17:16:50,565 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-23 17:16:50,567 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:16:50,568 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-23 17:16:50,568 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-23 17:16:50,569 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <SDPCache>...
+2014-11-23 17:16:50,569 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <SDPCache>
+2014-11-23 17:16:50,569 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <SDPCache>
+2014-11-23 17:16:50,572 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:16:50,686 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <1000> configurations loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 17:16:50,690 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1012> configuration lines loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 17:16:50,690 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <SDPCache>...
+2014-11-23 17:16:50,690 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-23 17:16:50,691 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-23 17:16:50,691 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-23 17:16:50,691 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-23 17:16:50,691 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-23 17:16:50,691 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-23 17:16:50,691 CacheFactory.java             [ 411] INFO  - Cache <SDPCache> is set to auto reload with a period of <0>
+2014-11-23 17:16:50,692 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <SDPCache>
+2014-11-23 17:16:50,692 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 247ms.
+2014-11-23 17:16:50,695 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-11-23 17:16:50,702 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-11-23 17:16:50,702 TransactionManager.java       [ 360] INFO  - Request Start for Transaction manager.
+2014-11-23 17:16:50,703 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-23 17:16:50,733 TransactionManager.java       [ 228] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 17:16:50,733 TransactionManager.java       [ 229] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 17:16:50,733 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <VMS.0001.20141113110000.txt> for transaction <1>
+2014-11-23 17:16:51,200 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <15> ms
+2014-11-23 17:16:51,211 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <1> events in <11> ms
+2014-11-23 17:16:52,929 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <10000> events in <1729> ms
+2014-11-23 17:16:52,933 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <15> ms
+2014-11-23 17:16:55,161 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <10000> events in <2232> ms
+2014-11-23 17:16:55,253 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <50> ms
+2014-11-23 17:16:55,950 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <10000> events in <3021> ms
+2014-11-23 17:16:56,013 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <10000> events in <64> ms
+2014-11-23 17:16:56,073 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <10000> events in <912> ms
+2014-11-23 17:16:56,113 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <37> ms
+2014-11-23 17:16:56,385 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <10000> events from a batch of <10000> events in <372> ms
+2014-11-23 17:16:58,662 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <10000> events in <2711> ms
+2014-11-23 17:16:58,675 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <10000> events in <14> ms
+2014-11-23 17:16:58,735 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <10000> events from a batch of <10000> events in <59> ms
+2014-11-23 17:16:58,748 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <10000> events in <1874> ms
+2014-11-23 17:16:58,840 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <68> ms
+2014-11-23 17:17:00,178 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <10000> events in <1516> ms
+2014-11-23 17:17:00,191 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <10000> events in <13> ms
+2014-11-23 17:17:00,250 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <10000> events from a batch of <10000> events in <59> ms
+2014-11-23 17:17:00,253 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <10000> events in <805> ms
+2014-11-23 17:17:00,331 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <38> ms
+2014-11-23 17:17:01,806 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <10000> events in <1628> ms
+2014-11-23 17:17:01,819 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <10000> events in <13> ms
+2014-11-23 17:17:01,852 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <10000> events in <887> ms
+2014-11-23 17:17:01,862 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <35> ms
+2014-11-23 17:17:01,898 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <10000> events from a batch of <10000> events in <79> ms
+2014-11-23 17:17:03,857 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <10000> events in <2051> ms
+2014-11-23 17:17:03,871 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <10000> events in <14> ms
+2014-11-23 17:17:03,902 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <10000> events in <1333> ms
+2014-11-23 17:17:03,941 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <41> ms
+2014-11-23 17:17:03,985 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <10000> events from a batch of <10000> events in <114> ms
+2014-11-23 17:17:05,383 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <10000> events in <1526> ms
+2014-11-23 17:17:05,397 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <10000> events in <14> ms
+2014-11-23 17:17:05,488 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <10000> events from a batch of <10000> events in <90> ms
+2014-11-23 17:17:05,497 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <10000> events in <784> ms
+2014-11-23 17:17:05,531 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <48> ms
+2014-11-23 17:17:07,015 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <10000> events in <1632> ms
+2014-11-23 17:17:07,028 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <10000> events in <13> ms
+2014-11-23 17:17:07,117 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <10000> events in <843> ms
+2014-11-23 17:17:07,153 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <10000> events from a batch of <10000> events in <124> ms
+2014-11-23 17:17:07,217 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <34> ms
+2014-11-23 17:17:08,955 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <10000> events in <1940> ms
+2014-11-23 17:17:08,975 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <10000> events in <20> ms
+2014-11-23 17:17:09,034 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <10000> events from a batch of <10000> events in <58> ms
+2014-11-23 17:17:09,062 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <10000> events in <1141> ms
+2014-11-23 17:17:09,109 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <34> ms
+2014-11-23 17:17:10,572 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <10000> events in <1617> ms
+2014-11-23 17:17:10,594 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <10000> events in <22> ms
+2014-11-23 17:17:10,671 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <10000> events from a batch of <10000> events in <77> ms
+2014-11-23 17:17:10,690 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <10000> events in <828> ms
+2014-11-23 17:17:10,784 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <48> ms
+2014-11-23 17:17:12,900 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <10000> events in <2328> ms
+2014-11-23 17:17:12,919 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <10000> events in <19> ms
+2014-11-23 17:17:13,001 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <10000> events from a batch of <10000> events in <82> ms
+2014-11-23 17:17:13,028 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <10000> events in <1538> ms
+2014-11-23 17:17:13,096 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <37> ms
+2014-11-23 17:17:14,671 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <10000> events in <1771> ms
+2014-11-23 17:17:14,686 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <10000> events in <15> ms
+2014-11-23 17:17:14,776 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <10000> events from a batch of <10000> events in <90> ms
+2014-11-23 17:17:14,777 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <10000> events in <999> ms
+2014-11-23 17:17:14,811 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <37> ms
+2014-11-23 17:17:16,607 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <10000> events in <1935> ms
+2014-11-23 17:17:16,627 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <10000> events in <20> ms
+2014-11-23 17:17:16,649 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <10000> events in <1016> ms
+2014-11-23 17:17:16,731 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <10000> events from a batch of <10000> events in <104> ms
+2014-11-23 17:17:16,742 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <36> ms
+2014-11-23 17:17:19,009 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <10000> events in <2402> ms
+2014-11-23 17:17:19,025 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <10000> events in <15> ms
+2014-11-23 17:17:19,081 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <10000> events in <1623> ms
+2014-11-23 17:17:19,149 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <10000> events from a batch of <10000> events in <124> ms
+2014-11-23 17:17:19,149 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <36> ms
+2014-11-23 17:17:20,820 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <10000> events in <1811> ms
+2014-11-23 17:17:20,841 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <10000> events in <22> ms
+2014-11-23 17:17:20,910 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <10000> events from a batch of <10000> events in <69> ms
+2014-11-23 17:17:20,945 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <10000> events in <1056> ms
+2014-11-23 17:17:20,996 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <39> ms
+2014-11-23 17:17:22,734 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <10000> events in <1914> ms
+2014-11-23 17:17:22,752 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <10000> events in <17> ms
+2014-11-23 17:17:22,827 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <10000> events from a batch of <10000> events in <76> ms
+2014-11-23 17:17:22,859 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <10000> events in <1070> ms
+2014-11-23 17:17:22,922 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <37> ms
+2014-11-23 17:17:24,654 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <10000> events in <1919> ms
+2014-11-23 17:17:24,668 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <10000> events in <14> ms
+2014-11-23 17:17:24,692 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <10000> events in <1225> ms
+2014-11-23 17:17:24,708 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <38> ms
+2014-11-23 17:17:24,789 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <10000> events from a batch of <10000> events in <113> ms
+2014-11-23 17:17:26,092 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <10000> events in <1437> ms
+2014-11-23 17:17:26,105 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <10000> events in <13> ms
+2014-11-23 17:17:26,153 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <10000> events in <761> ms
+2014-11-23 17:17:26,164 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <10000> events from a batch of <10000> events in <59> ms
+2014-11-23 17:17:26,184 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <68> ms
+2014-11-23 17:17:26,192 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <8617> events in <8> ms
+2014-11-23 17:17:27,518 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <10000> events in <1426> ms
+2014-11-23 17:17:27,545 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <10000> events in <27> ms
+2014-11-23 17:17:27,604 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <10000> events in <743> ms
+2014-11-23 17:17:27,609 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <10000> events from a batch of <10000> events in <64> ms
+2014-11-23 17:17:28,927 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <10000> events in <1402> ms
+2014-11-23 17:17:28,940 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <10000> events in <13> ms
+2014-11-23 17:17:28,955 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <8618> events in <649> ms
+2014-11-23 17:17:29,004 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <10000> events from a batch of <10000> events in <64> ms
+2014-11-23 17:17:30,228 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <10000> events in <1301> ms
+2014-11-23 17:17:30,242 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <10000> events in <14> ms
+2014-11-23 17:17:30,295 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <10000> events from a batch of <10000> events in <53> ms
+2014-11-23 17:17:31,332 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <8618> events in <1104> ms
+2014-11-23 17:17:31,342 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <8618> events in <10> ms
+2014-11-23 17:17:31,395 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <8618> events from a batch of <8618> events in <53> ms
+2014-11-23 17:17:31,396 TransactionManager.java       [ 265] INFO  - Transaction <1> closed
+2014-11-23 17:17:31,396 TransactionManager.java       [ 266] INFO  - Transaction <1> closed
+2014-11-23 17:17:31,396 TransactionManager.java       [ 267] INFO  - Statistics: Records  <208616>
+2014-11-23 17:17:31,396 TransactionManager.java       [ 268] INFO  -             Duration <40663> ms
+2014-11-23 17:17:31,396 TransactionManager.java       [ 270] INFO  -             Speed    <5130> records /sec
+2014-11-23 17:22:54,031 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-23 17:22:54,035 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-23 17:22:54,048 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-23 17:22:54,200 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-23 17:23:03,152 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-23 17:23:03,156 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-23 17:23:03,157 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-23 17:23:03,162 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-23 17:23:03,163 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-23 17:23:03,178 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:23:03,199 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <4> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-23 17:23:03,201 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-23 17:23:03,201 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-23 17:23:03,202 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-23 17:23:03,202 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-23 17:23:03,204 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-23 17:23:03,278 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-23 17:23:03,278 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-23 17:23:03,279 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-23 17:23:03,279 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-23 17:23:03,280 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-23 17:23:03,283 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:23:03,283 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-23 17:23:03,284 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-23 17:23:03,284 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <SDPCache>...
+2014-11-23 17:23:03,285 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <SDPCache>
+2014-11-23 17:23:03,285 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <SDPCache>
+2014-11-23 17:23:03,288 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:23:03,439 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <1000> configurations loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 17:23:03,443 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1012> configuration lines loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 17:23:03,443 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <SDPCache>...
+2014-11-23 17:23:03,443 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-23 17:23:03,444 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-23 17:23:03,444 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-23 17:23:03,444 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-23 17:23:03,444 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-23 17:23:03,445 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-23 17:23:03,445 CacheFactory.java             [ 411] INFO  - Cache <SDPCache> is set to auto reload with a period of <0>
+2014-11-23 17:23:03,445 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <SDPCache>
+2014-11-23 17:23:03,445 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 289ms.
+2014-11-23 17:23:03,451 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-11-23 17:23:03,459 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-11-23 17:23:03,459 TransactionManager.java       [ 360] INFO  - Request Start for Transaction manager.
+2014-11-23 17:23:03,460 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-23 17:23:08,719 TransactionManager.java       [ 228] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 17:23:08,720 TransactionManager.java       [ 229] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 17:23:08,720 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <VMS.0001.20141113110000.txt> for transaction <1>
+2014-11-23 17:23:17,009 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <79> ms
+2014-11-23 17:23:17,061 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <1> events in <52> ms
+2014-11-23 17:23:19,100 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-23 17:23:19,103 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-23 17:23:19,134 ElcRate.java                  [ 655] ERROR - Exception thrown in module <Framework>
+2014-11-23 17:23:19,135 ElcRate.java                  [ 705] FATAL - InitializationException thrown. Message <ElcRateSocket.getServerSocket(): Could not listen on port <8198>. Message = <Address already in use: JVM_Bind>. Aborting.>
+ElcRate.exception.InitializationException: ElcRateSocket.getServerSocket(): Could not listen on port <8198>. Message = <Address already in use: JVM_Bind>. Aborting.
+	at ElcRate.configurationmanager.ElcRateSocket.<init>(ElcRateSocket.java:143)
+	at ElcRate.configurationmanager.EventHandler.init(EventHandler.java:164)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-11-23 17:23:19,144 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <ElcRateSocket.getServerSocket(): Could not listen on port <8198>. Message = <Address already in use: JVM_Bind>. Aborting.>
+2014-11-23 17:23:19,144 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-23 17:23:50,401 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-23 17:23:50,405 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-23 17:23:50,429 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-23 17:23:50,596 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-23 17:23:59,515 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-23 17:23:59,519 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-23 17:23:59,520 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-23 17:23:59,525 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-23 17:23:59,527 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-23 17:23:59,541 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:23:59,566 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <4> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-23 17:23:59,566 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-23 17:23:59,566 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-23 17:23:59,567 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-23 17:23:59,568 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-23 17:23:59,571 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-23 17:23:59,654 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-23 17:23:59,654 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-23 17:23:59,655 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-23 17:23:59,655 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-23 17:23:59,656 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-23 17:23:59,658 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:23:59,658 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-23 17:23:59,658 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-23 17:23:59,659 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <SDPCache>...
+2014-11-23 17:23:59,660 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <SDPCache>
+2014-11-23 17:23:59,660 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <SDPCache>
+2014-11-23 17:23:59,662 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:23:59,811 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <1000> configurations loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 17:23:59,815 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1012> configuration lines loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 17:23:59,815 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <SDPCache>...
+2014-11-23 17:23:59,816 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-23 17:23:59,816 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-23 17:23:59,817 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-23 17:23:59,817 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-23 17:23:59,817 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-23 17:23:59,817 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-23 17:23:59,818 CacheFactory.java             [ 411] INFO  - Cache <SDPCache> is set to auto reload with a period of <0>
+2014-11-23 17:23:59,818 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <SDPCache>
+2014-11-23 17:23:59,818 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 299ms.
+2014-11-23 17:23:59,824 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-11-23 17:23:59,833 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-11-23 17:23:59,833 TransactionManager.java       [ 360] INFO  - Request Start for Transaction manager.
+2014-11-23 17:23:59,834 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-23 17:25:04,397 TransactionManager.java       [ 228] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 17:25:04,401 TransactionManager.java       [ 229] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 17:25:04,403 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <VMS.0001.20141113110000.txt> for transaction <1>
+2014-11-23 17:25:13,184 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <10000> events in <81> ms
+2014-11-23 17:25:13,240 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <1> events in <55> ms
+2014-11-23 17:26:38,724 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-23 17:26:38,727 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-23 17:26:38,740 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-23 17:26:38,861 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-23 17:26:47,877 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-23 17:26:47,881 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-23 17:26:47,881 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-23 17:26:47,886 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-23 17:26:47,888 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-23 17:26:47,901 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:26:47,922 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <4> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-23 17:26:47,923 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-23 17:26:47,924 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-23 17:26:47,924 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-23 17:26:47,925 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-23 17:26:47,927 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-23 17:26:47,999 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-23 17:26:48,003 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-23 17:26:48,003 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-23 17:26:48,004 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-23 17:26:48,004 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-23 17:26:48,007 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:26:48,007 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-23 17:26:48,008 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-23 17:26:48,008 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <SDPCache>...
+2014-11-23 17:26:48,008 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <SDPCache>
+2014-11-23 17:26:48,009 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <SDPCache>
+2014-11-23 17:26:48,012 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:26:48,140 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <1000> configurations loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 17:26:48,141 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1012> configuration lines loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 17:26:48,141 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <SDPCache>...
+2014-11-23 17:26:48,142 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-23 17:26:48,142 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-23 17:26:48,143 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-23 17:26:48,143 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-23 17:26:48,143 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-23 17:26:48,143 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-23 17:26:48,144 CacheFactory.java             [ 411] INFO  - Cache <SDPCache> is set to auto reload with a period of <0>
+2014-11-23 17:26:48,144 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <SDPCache>
+2014-11-23 17:26:48,144 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 263ms.
+2014-11-23 17:26:48,151 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-11-23 17:26:48,162 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-11-23 17:26:48,163 TransactionManager.java       [ 360] INFO  - Request Start for Transaction manager.
+2014-11-23 17:26:48,164 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-23 17:27:18,597 TransactionManager.java       [ 228] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 17:27:18,598 TransactionManager.java       [ 229] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 17:27:18,598 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <VMS.0001.20141113110000.txt> for transaction <1>
+2014-11-23 17:27:18,633 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <4> events in <1> ms
+2014-11-23 17:27:18,653 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <4> events in <19> ms
+2014-11-23 17:27:18,690 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <4> events in <37> ms
+2014-11-23 17:38:42,589 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-23 17:38:42,591 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-23 17:38:42,603 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-23 17:38:42,723 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-23 17:38:51,656 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-23 17:38:51,660 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-23 17:38:51,661 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-23 17:38:51,667 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-23 17:38:51,668 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-23 17:38:51,683 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:38:51,705 RegexMatchCache.java          [1110] FATAL - Error opening Search Map Data for <NormalizeCache> in config <1>
+2014-11-23 17:38:51,707 ElcRate.java                  [ 655] ERROR - Exception thrown in module <Framework>
+2014-11-23 17:38:51,708 ElcRate.java                  [ 705] FATAL - InitializationException thrown. Message <Error opening Search Map Data for <NormalizeCache> in config <1>>
+ElcRate.exception.InitializationException: Error opening Search Map Data for <NormalizeCache> in config <1>
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1111)
+	at ElcRate.cache.AbstractSyncLoaderCache.loadCache(AbstractSyncLoaderCache.java:302)
+	at ElcRate.cache.RegexMatchCache.loadCache(RegexMatchCache.java:234)
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:245)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+Caused by: java.lang.NullPointerException
+	at ElcRate.cache.RegexMatchCache.addEntry(RegexMatchCache.java:292)
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1089)
+	... 7 more
+2014-11-23 17:38:51,712 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <Error opening Search Map Data for <NormalizeCache> in config <1>>
+2014-11-23 17:38:51,712 ElcRate.java                  [ 705] FATAL - InitializationException thrown. Message <Startup failed. Aborting.>
+ElcRate.exception.InitializationException: Startup failed. Aborting.
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:343)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-11-23 17:38:51,713 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <Startup failed. Aborting.>
+2014-11-23 17:38:51,715 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-23 17:38:51,717 ElcRateSocket.java            [ 191] INFO  - Closing <Listener>
+2014-11-23 17:40:12,875 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-23 17:40:12,877 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-23 17:40:12,888 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-23 17:40:13,005 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-23 17:40:21,932 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-23 17:40:21,936 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-23 17:40:21,937 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-23 17:40:21,943 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-23 17:40:21,945 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-23 17:40:21,960 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:40:21,984 RegexMatchCache.java          [1110] FATAL - Error opening Search Map Data for <NormalizeCache> in config <1>
+2014-11-23 17:40:21,987 ElcRate.java                  [ 655] ERROR - Exception thrown in module <Framework>
+2014-11-23 17:40:21,988 ElcRate.java                  [ 705] FATAL - InitializationException thrown. Message <Error opening Search Map Data for <NormalizeCache> in config <1>>
+ElcRate.exception.InitializationException: Error opening Search Map Data for <NormalizeCache> in config <1>
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1111)
+	at ElcRate.cache.AbstractSyncLoaderCache.loadCache(AbstractSyncLoaderCache.java:302)
+	at ElcRate.cache.RegexMatchCache.loadCache(RegexMatchCache.java:234)
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:245)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+Caused by: java.lang.NullPointerException
+	at ElcRate.cache.RegexMatchCache.addEntry(RegexMatchCache.java:292)
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1089)
+	... 7 more
+2014-11-23 17:40:21,992 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <Error opening Search Map Data for <NormalizeCache> in config <1>>
+2014-11-23 17:40:21,992 ElcRate.java                  [ 705] FATAL - InitializationException thrown. Message <Startup failed. Aborting.>
+ElcRate.exception.InitializationException: Startup failed. Aborting.
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:343)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-11-23 17:40:21,992 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <Startup failed. Aborting.>
+2014-11-23 17:40:21,995 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-23 17:40:21,996 ElcRateSocket.java            [ 191] INFO  - Closing <Listener>
+2014-11-23 17:40:45,450 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-23 17:40:45,453 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-23 17:40:45,693 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-23 17:40:45,841 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-23 17:40:54,991 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-23 17:40:54,995 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-23 17:40:54,996 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-23 17:40:55,001 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-23 17:40:55,003 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-23 17:40:55,018 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:40:55,044 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <4> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-23 17:40:55,046 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-23 17:40:55,046 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-23 17:40:55,046 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-23 17:40:55,047 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-23 17:40:55,049 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-23 17:40:55,139 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-23 17:40:55,139 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-23 17:40:55,140 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-23 17:40:55,140 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-23 17:40:55,140 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-23 17:40:55,144 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:40:55,145 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-23 17:40:55,145 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-23 17:40:55,145 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <SDPCache>...
+2014-11-23 17:40:55,146 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <SDPCache>
+2014-11-23 17:40:55,146 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <SDPCache>
+2014-11-23 17:40:55,149 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:40:55,286 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <1000> configurations loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 17:40:55,290 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1012> configuration lines loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 17:40:55,290 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <SDPCache>...
+2014-11-23 17:40:55,291 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-23 17:40:55,291 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-23 17:40:55,291 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-23 17:40:55,292 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-23 17:40:55,292 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-23 17:40:55,292 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-23 17:40:55,293 CacheFactory.java             [ 411] INFO  - Cache <SDPCache> is set to auto reload with a period of <0>
+2014-11-23 17:40:55,293 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <SDPCache>
+2014-11-23 17:40:55,293 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 298ms.
+2014-11-23 17:40:55,299 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-11-23 17:40:55,311 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-11-23 17:40:55,312 TransactionManager.java       [ 360] INFO  - Request Start for Transaction manager.
+2014-11-23 17:40:55,313 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-23 17:41:30,642 TransactionManager.java       [ 228] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 17:41:30,643 TransactionManager.java       [ 229] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 17:41:30,644 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <VMS.0001.20141113110000.txt> for transaction <1>
+2014-11-23 17:41:30,675 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <4> events in <1> ms
+2014-11-23 17:41:30,691 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <4> events in <15> ms
+2014-11-23 17:41:30,719 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <4> events in <28> ms
+2014-11-23 17:45:42,354 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-23 17:45:42,356 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-23 17:45:42,366 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-23 17:45:42,487 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-23 17:45:51,418 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-23 17:45:51,422 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-23 17:45:51,423 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-23 17:45:51,428 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-23 17:45:51,430 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-23 17:45:51,444 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:45:51,469 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <4> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-23 17:45:51,470 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-23 17:45:51,470 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-23 17:45:51,471 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-23 17:45:51,471 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-23 17:45:51,474 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-23 17:45:51,551 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-23 17:45:51,552 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-23 17:45:51,552 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-23 17:45:51,552 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-23 17:45:51,553 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-23 17:45:51,555 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:45:51,555 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-23 17:45:51,555 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-23 17:45:51,555 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <SDPCache>...
+2014-11-23 17:45:51,556 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <SDPCache>
+2014-11-23 17:45:51,556 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <SDPCache>
+2014-11-23 17:45:51,559 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:45:51,679 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <1000> configurations loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 17:45:51,683 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1012> configuration lines loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 17:45:51,683 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <SDPCache>...
+2014-11-23 17:45:51,684 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-23 17:45:51,684 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-23 17:45:51,684 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-23 17:45:51,685 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-23 17:45:51,685 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-23 17:45:51,685 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-23 17:45:51,686 CacheFactory.java             [ 411] INFO  - Cache <SDPCache> is set to auto reload with a period of <0>
+2014-11-23 17:45:51,686 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <SDPCache>
+2014-11-23 17:45:51,686 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 264ms.
+2014-11-23 17:45:51,692 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-11-23 17:45:51,705 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-11-23 17:45:51,705 TransactionManager.java       [ 360] INFO  - Request Start for Transaction manager.
+2014-11-23 17:45:51,707 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-23 17:46:14,922 TransactionManager.java       [ 228] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 17:46:14,922 TransactionManager.java       [ 229] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 17:46:14,923 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <VMS.0001.20141113110000.txt> for transaction <1>
+2014-11-23 17:46:14,943 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <4> events in <1> ms
+2014-11-23 17:46:14,954 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <4> events in <11> ms
+2014-11-23 17:46:14,978 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <4> events in <24> ms
+2014-11-23 17:57:17,919 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-23 17:57:17,922 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-23 17:57:17,932 ElcRateSocket.java            [ 155] INFO  - Listener on port <8198> is running...
+2014-11-23 17:57:18,060 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))>
+2014-11-23 17:57:26,982 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-23 17:57:26,986 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-23 17:57:26,986 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-23 17:57:26,992 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-23 17:57:26,993 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-23 17:57:27,010 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:57:27,038 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <4> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-23 17:57:27,038 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-23 17:57:27,039 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-23 17:57:27,039 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-23 17:57:27,040 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-23 17:57:27,042 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-23 17:57:27,123 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-23 17:57:27,124 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-23 17:57:27,132 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-23 17:57:27,132 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-23 17:57:27,133 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-23 17:57:27,135 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:57:27,136 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <9> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-23 17:57:27,136 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-23 17:57:27,137 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <SDPCache>...
+2014-11-23 17:57:27,138 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <SDPCache>
+2014-11-23 17:57:27,139 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <SDPCache>
+2014-11-23 17:57:27,140 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-23 17:57:27,294 RegexMatchCache.java          [1097] INFO  - Regex Map Data Loading: <1000> configurations loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 17:57:27,295 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1012> configuration lines loaded for <SDPCache> from <eOneRateDB>
+2014-11-23 17:57:27,296 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <SDPCache>...
+2014-11-23 17:57:27,297 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-23 17:57:27,297 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-23 17:57:27,297 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-23 17:57:27,298 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-23 17:57:27,298 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-23 17:57:27,298 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-23 17:57:27,298 CacheFactory.java             [ 411] INFO  - Cache <SDPCache> is set to auto reload with a period of <0>
+2014-11-23 17:57:27,298 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <SDPCache>
+2014-11-23 17:57:27,299 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 313ms.
+2014-11-23 17:57:27,305 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformationPipeline> ***
+2014-11-23 17:57:27,314 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformationPipeline>
+2014-11-23 17:57:27,314 TransactionManager.java       [ 360] INFO  - Request Start for Transaction manager.
+2014-11-23 17:57:27,315 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-23 17:57:58,587 TransactionManager.java       [ 228] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 17:57:58,587 TransactionManager.java       [ 229] INFO  - Opened transaction <1> for pipeline <OrpTransformationPipeline>
+2014-11-23 17:57:58,587 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <VMS.0001.20141113110000.txt> for transaction <1>
+2014-11-23 17:57:58,607 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <4> events in <1> ms
+2014-11-23 17:57:58,616 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <4> events in <10> ms
+2014-11-23 17:57:58,634 AbstractPlugIn.java           [ 451] INFO  - Plugin <SDPTranslation.Inst-0> processed <4> events in <18> ms

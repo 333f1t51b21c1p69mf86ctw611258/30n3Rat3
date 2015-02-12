@@ -1,0 +1,457 @@
+<?xmlversion="1.0"encoding="UTF-8"?>
+
+
+
+
+
+<config>
+
+<!--
+===========================================VOICE===========================================
+-->
+
+<voice>
+	<column id="1">
+		<index>20</index>
+		<coloumn_name>SUBCRIBER_ID</coloumn_name>
+		<vinaphone>A_subs</vinaphone>
+	</column>
+	
+	<column id="2">
+		<index>3</index>	
+		<coloumn_name>ORIGINATE_OFFER_DATE</coloumn_name>
+		<vinaphone>Date</vinaphone>
+	</column>
+	
+	<column id="3">
+		<index>4</index>	
+		<coloumn_name>ORIGINATE_OFFER_TIME</coloumn_name>
+		<vinaphone>Time</vinaphone>
+	</column>
+	
+	<column id="4">
+		<index>180</index>	
+		<coloumn_name>ACTUAL_DESTINATION_NUMBER</coloumn_name>
+		<vinaphone>B_subs</vinaphone>
+	</column>
+	
+	<column id="5">
+		<index>62</index>	
+		<coloumn_name>TIME1_FIFTH_TARIFF_ID</coloumn_name>
+		<vinaphone>Natl_id</vinaphone>
+	</column>
+	
+	<column id="6">
+		<index>161</index>	
+		<coloumn_name>Balance_info</coloumn_name>
+		<vinaphone>national</vinaphone>
+		<Balance_info>
+			<factor>
+				<id>1</id>
+				<index>4</index>
+				<name>Balance_change</name>
+			</factor>
+			<!--	<factor>
+				<id>2</id>
+				<index>4</index>
+				<name>Balance_change</name>
+			</factor>-->
+		</Balance_info>
+	</column>
+	
+	<column id="7">
+		<index>161</index>	
+		<coloumn_name>Balance_info</coloumn_name>
+		<vinaphone>intl_vnd</vinaphone>
+		<Balance_info>
+			<factor>
+				<id>1</id>
+				<index>4</index>
+				<name>Balance_change</name>
+			</factor>			
+		</Balance_info>
+	</column>
+	
+	<column id="8">
+		<index>62</index>	
+		<coloumn_name>TIME1_FIFTH_TARIFF_ID</coloumn_name>
+		<vinaphone>Intl_id</vinaphone>
+	</column>
+	
+	<column id="9">
+		<index>62</index>
+		<coloumn_name>TIME1_FIFTH_TARIFF_ID</coloumn_name>		
+		<vinaphone>Serv_id</vinaphone>
+	</column>
+	
+	<column id="10">
+		<coloumn_name>CELL_ID_OR_LAI</coloumn_name>
+		<index>92</index>	
+		<vinaphone>Lac</vinaphone>
+	</column>
+	
+	<column id="11">		
+		<index>42</index>	
+		<coloumn_name>CELL_ID</coloumn_name>
+		<vinaphone>Cellid</vinaphone>
+	</column>
+	
+	<column id="12">
+		<index>180</index>	
+		<coloumn_name>ACTUAL_DESTINATION_NUMBER</coloumn_name>
+		<vinaphone>Dialdigit</vinaphone>
+	</column>
+	
+	<column id="13">
+		<index>122</index>	
+		<coloumn_name>GSM_PROVIDER_ID</coloumn_name>
+		<vinaphone>Files</vinaphone>
+	</column>
+	
+	<column id="14">
+		<index>29</index>
+		<coloumn_name>TOTAL_USAGE</coloumn_name>
+		<vinaphone>Duration</vinaphone>
+	</column>
+	
+	<column id="15">
+		<index></index>
+		<coloumn_name></coloumn_name>
+		<vinaphone>Free_vnpt</vinaphone>
+	</column>
+	
+</voice>
+
+
+<!--
+===========================================SMS===========================================
+-->
+
+<SMS>
+	<column id="1">
+		<index>20</index>
+		<coloumn_name>SUBCRIBER_ID</coloumn_name>
+		<vinaphone>A_subs</vinaphone>
+	</column>
+	
+	<column id="2">
+		<index>3</index>
+		<coloumn_name>ORIGINATE_OFFER_DATE</coloumn_name>
+		<vinaphone>Date</vinaphone>
+	</column>
+	
+	<column id="3">
+		<index>4</index>
+		<coloumn_name>ORIGINATE_OFFER_TIME</coloumn_name>
+		<vinaphone>Time</vinaphone>
+	</column>
+	
+	<column id="4">
+		<index>62</index>
+		<coloumn_name>TIME1_FIFTH_TARIFF_ID</coloumn_name>
+		<vinaphone>Natl_id</vinaphone>
+	</column>
+	
+	<column id="5">
+		<index>97</index>
+		<coloumn_name>Balance_info</coloumn_name>
+		<vinaphone>national</vinaphone>
+		<Balance_info>
+			<factor>
+				<id>1</id>
+				<index>4</index>
+				<name>Balance_change</name>
+			</factor>			
+		</Balance_info>
+	</column>
+	
+	<column id="6">
+		<index>97</index>
+		<coloumn_name>Balance_info</coloumn_name>
+		<vinaphone>intl_vnd</vinaphone>
+		<Balance_info>
+			<factor>
+				<id>1</id>
+				<index>4</index>
+				<name>Balance_change</name>
+			</factor>			
+		</Balance_info>
+	</column>
+	
+	<column id="7">
+		<index>62</index>
+		<coloumn_name>TIME1_FIFTH_TARIFF_ID</coloumn_name>
+		<vinaphone>Intl_id</vinaphone>
+	</column>
+	
+	<column id="8">
+		<index>62</index>
+		<coloumn_name>TIME1_FIFTH_TARIFF_ID</coloumn_name>
+		<vinaphone>Serv_id</vinaphone>
+	</column>
+	
+	<column id="9">
+		<index>42</index>
+		<coloumn_name>CELL_ID</coloumn_name>
+		<vinaphone>Cellid</vinaphone>
+	</column>
+	
+	<column id="10">
+		<index></index>
+		<coloumn_name></coloumn_name>
+		<vinaphone>Duration</vinaphone>
+	</column>
+	
+	<column id="11">
+		<index></index>
+		<coloumn_name></coloumn_name>
+		<vinaphone>Free_vnpt</vinaphone>
+	</column>
+	
+</SMS>
+
+
+<!--
+===========================================OSA===========================================
+-->
+
+<OSA>
+	<column id="1">
+		<index>2</index>
+		<coloumn_name>SUBCRIBER_ID</coloumn_name>
+		<vinaphone>A_subs</vinaphone>
+	</column>
+	
+	<column id="2">
+		<index>Balance_info</index>
+		<coloumn_name>Balance_info</coloumn_name>
+		<vinaphone>national</vinaphone>
+		<Balance_info>
+			<factor>
+				<id>1</id>
+				<index>4</index>
+				<name>Balance_change</name>
+			</factor>			
+		</Balance_info>
+	</column>
+	
+	<column id="3">
+		<index>75</index>
+		<coloumn_name>Balance_info</coloumn_name>
+		<vinaphone>intl_vnd</vinaphone>
+		<Balance_info>
+			<factor>
+				<id>1</id>
+				<index>4</index>
+				<name>Balance_change</name>
+			</factor>			
+		</Balance_info>
+	</column>
+	
+	<column id="4">
+		<index></index>
+		<coloumn_name></coloumn_name>
+		<vinaphone>Duration</vinaphone>
+	</column>
+	
+	<column id="5">
+		<index></index>
+		<coloumn_name></coloumn_name>
+		<vinaphone>Free_vnpt</vinaphone>
+	</column>
+	
+</OSA>
+
+
+<!--
+===========================================OCS===========================================
+-->
+
+<OCS>
+	<column id="1">
+		<index>20</index>
+		<coloumn_name>SUBCRIBER_ID</coloumn_name>
+		<vinaphone>A_subs</vinaphone>
+	</column>
+	
+	<column id="2">
+		<index>3</index>
+		<coloumn_name>ORIGINATE_OFFER_DATE</coloumn_name>
+		<vinaphone>Date</vinaphone>
+	</column>
+	
+	<column id="3">
+		<index>4</index>
+		<coloumn_name>ORIGINATE_OFFER_TIME</coloumn_name>
+		<vinaphone>Time</vinaphone>
+	</column>
+	
+	<column id="4">
+		<index>29</index>
+		<coloumn_name>TOTAL_USAGE</coloumn_name>
+		<vinaphone>Duration</vinaphone>
+	</column>
+	
+	<column id="5">
+		<index>62</index>
+		<coloumn_name>TIME1_FIFTH_TARIFF_ID</coloumn_name>
+		<vinaphone>Natl_id</vinaphone>
+	</column>
+	
+	<column id="6">
+		<index>62</index>
+		<coloumn_name>TIME1_FIFTH_TARIFF_ID</coloumn_name>
+		<vinaphone>Intl_id</vinaphone>
+	</column>
+	
+	<column id="7">
+		<index>62</index>
+		<coloumn_name>TIME1_FIFTH_TARIFF_ID</coloumn_name>
+		<vinaphone>Serv_id</vinaphone>
+	</column>
+	
+	<column id="8">
+		<index>123</index>
+		<coloumn_name>GSM_PROVIDER_ID</coloumn_name>
+		<vinaphone>Files</vinaphone>
+	</column>
+	
+	<column id="9">
+		<index>160</index>
+		<coloumn_name>Balance_info</coloumn_name>
+		<vinaphone>national</vinaphone>
+		<Balance_info>
+			<factor>
+				<id>1</id>
+				<index>4</index>
+				<name>Balance_change</name>
+			</factor>			
+		</Balance_info>
+		
+	</column>
+	
+	<column id="10">
+		<index>160</index>
+		<coloumn_name>Balance_info</coloumn_name>
+		<vinaphone>intl_vnd</vinaphone>		
+		<Balance_info>
+			<factor>
+				<id>1</id>
+				<index>4</index>
+				<name>Balance_change</name>
+			</factor>			
+		</Balance_info>
+		
+	</column>
+	
+	<column id="11">
+		<index>93</index>
+		<coloumn_name>CELL_ID_OR_LAI</coloumn_name>
+		<vinaphone>Lac</vinaphone>
+	</column>
+	
+	<column id="12">
+		<index>42</index>
+		<coloumn_name>CELL_ID</coloumn_name>
+		<vinaphone>Cellid</vinaphone>
+	</column>
+	
+	<column id="13">
+		<index></index>
+		<coloumn_name></coloumn_name>
+		<vinaphone>Free_vnpt</vinaphone>
+	</column>
+	
+</OCS>
+
+
+<!--
+===========================================PMT===========================================
+-->
+
+<PMT>
+	<column id="1">
+		<index>17</index>
+		<coloumn_name>SUBCRIBER_ID</coloumn_name>
+		<vinaphone>A_subs</vinaphone>
+	</column>
+	
+	<column id="2">
+		<index>3</index>
+		<coloumn_name>ORIGINATE_OFFER_DATE</coloumn_name>
+		<vinaphone>Date</vinaphone>
+	</column>
+	
+	<column id="3">
+		<index>4</index>
+		<coloumn_name>ORIGINATE_OFFER_TIME</coloumn_name>
+		<vinaphone>Time</vinaphone>
+	</column>
+	
+	<column id="4">
+		<index>46</index>
+		<coloumn_name>TIME1_FIFTH_TARIFF_ID</coloumn_name>
+		<vinaphone>Natl_id</vinaphone>
+	</column>
+	
+	<column id="5">
+		<index>141</index>
+		<coloumn_name>Balance_info</coloumn_name>
+		<vinaphone>national</vinaphone>
+		<Balance_info>
+			<factor>
+				<id>1</id>
+				<index>4</index>
+				<name>Balance_change</name>
+			</factor>			
+		</Balance_info>
+		
+	</column>
+	
+	<column id="6">
+		<index>141</index>
+		<coloumn_name>Balance_info</coloumn_name>
+		<vinaphone>intl_vnd</vinaphone>
+		<Balance_info>
+			<factor>
+				<id>1</id>
+				<index>4</index>
+				<name>Balance_change</name>
+			</factor>			
+		</Balance_info>
+	</column>
+	
+	<column id="7">
+		<index>46</index>
+		<coloumn_name>TIME1_FIFTH_TARIFF_ID</coloumn_name>
+		<vinaphone>Intl_id</vinaphone>
+	</column>
+	
+	<column id="8">
+		<index>46</index>
+		<coloumn_name>TIME1_FIFTH_TARIFF_ID</coloumn_name>
+		<vinaphone>Serv_id</vinaphone>
+	</column>
+		
+	<column id="9">
+		<index>122</index>
+		<coloumn_name>GSM_PROVIDER_ID</coloumn_name>
+		<vinaphone>Files</vinaphone>
+	</column>
+	
+	<column id="10">
+		<index></index>
+		<coloumn_name></coloumn_name>
+		<vinaphone>Duration</vinaphone>
+	</column>
+	
+	<column id="11">
+		<index></index>
+		<coloumn_name></coloumn_name>
+		<vinaphone>Free_vnpt</vinaphone>
+	</column>
+	
+	
+</PMT>
+
+</config>

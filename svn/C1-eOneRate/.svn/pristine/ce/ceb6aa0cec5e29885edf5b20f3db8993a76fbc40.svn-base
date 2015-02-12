@@ -1,0 +1,35 @@
+2014-11-19 15:56:17,151 FATAL - InitializationException thrown. Message <Connection test failed for connection <eOneRateDB>>
+ElcRate.exception.InitializationException: Connection test failed for connection <eOneRateDB>
+	at ElcRate.db.BCPDataSource.getDataSource(BCPDataSource.java:283)
+	at ElcRate.resource.DataSourceFactory.init(DataSourceFactory.java:189)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-11-19 16:31:50,670 FATAL - InitializationException thrown. Message <ElcRateSocket.getServerSocket(): Could not listen on port <8198>. Message = <Address already in use: JVM_Bind>. Aborting.>
+ElcRate.exception.InitializationException: ElcRateSocket.getServerSocket(): Could not listen on port <8198>. Message = <Address already in use: JVM_Bind>. Aborting.
+	at ElcRate.configurationmanager.ElcRateSocket.<init>(ElcRateSocket.java:143)
+	at ElcRate.configurationmanager.EventHandler.init(EventHandler.java:164)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-11-19 18:44:21,026 FATAL - InitializationException thrown. Message <ElcRateSocket.getServerSocket(): Could not listen on port <8198>. Message = <Address already in use: JVM_Bind>. Aborting.>
+ElcRate.exception.InitializationException: ElcRateSocket.getServerSocket(): Could not listen on port <8198>. Message = <Address already in use: JVM_Bind>. Aborting.
+	at ElcRate.configurationmanager.ElcRateSocket.<init>(ElcRateSocket.java:143)
+	at ElcRate.configurationmanager.EventHandler.init(EventHandler.java:164)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-11-19 19:36:41,586 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.IndexOutOfBoundsException: Index: 1, Size: 1
+	at ElcRate.process.AbstractPlugIn.process(AbstractPlugIn.java:340)
+	at ElcRate.process.AbstractPlugIn.run(AbstractPlugIn.java:201)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.IndexOutOfBoundsException: Index: 1, Size: 1
+	at java.util.ArrayList.rangeCheck(ArrayList.java:638)
+	at java.util.ArrayList.get(ArrayList.java:414)
+	at eonerate.orptransformation.process.GPRSTranslation.procValidRecord(GPRSTranslation.java:39)
+	at ElcRate.process.AbstractPlugIn.process(AbstractPlugIn.java:284)
+	... 2 more

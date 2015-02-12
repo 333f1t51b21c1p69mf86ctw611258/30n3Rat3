@@ -1,4 +1,4 @@
-/* Formatted on 30/12/2014 20:14:55 (QP5 v5.215.12089.38647) */
+/* Formatted on 2/6/2015 12:20:40 PM (QP5 v5.269.14213.34746) */
 -- *** CBS_OWNER
 
 GRANT EXECUTE ON ELC_USER.CBS_OWNER_FILTER TO cbs_owner;
@@ -9,11 +9,18 @@ GRANT EXECUTE ON VNP_COMMON.ELC_USER_FILTER_2 TO cbs_owner;
 
 GRANT CREATE JOB TO elc_user;
 
+GRANT CREATE JOB TO vnp_common;
+GRANT CREATE JOB TO vnp_data;
+
+GRANT EXECUTE ON sys.DBMS_LOCK TO vnp_data;
+
 -- GRANT MANAGE SCHEDULER TO elc_user;
 
 GRANT CREATE DATABASE LINK TO elc_user;
 GRANT CREATE DATABASE LINK TO vnp_common;
 GRANT CREATE DATABASE LINK TO vnp_data;
+
+GRANT CREATE DATABASE LINK TO vnp_view;
 
 -- cho phep vnp_common truncate tat ca cac bang
 -- phai gan quyen DROP ANY TABLE

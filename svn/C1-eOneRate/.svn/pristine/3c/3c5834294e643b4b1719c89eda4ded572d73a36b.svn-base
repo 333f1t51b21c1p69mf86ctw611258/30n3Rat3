@@ -1,0 +1,231 @@
+package e1reformat.gui.menu.log;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Date;
+
+import javax.swing.Box;
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableRowSorter;
+
+import org.apache.commons.lang3.StringUtils;
+
+import e1reformat.db.dao.CdrLogProcessDAO;
+import e1reformat.entity.output.ChecksumErrorEntity;
+import e1reformat.gui.util.MySortedJTable;
+import e1reformat.gui.util.MyTableModel;
+import e1reformat.gui.util.RadioButtonUI;
+import e1reformat.util.DateUtils;
+import e1reformat.util.IConstant;
+
+public class AuditTransactionPanel extends JPanel {
+
+    private static final long serialVersionUID = 7534490536869952747L;
+    RadioButtonUI ui = new RadioButtonUI();
+    int pageSize = 3;
+    int offSize = 33;
+    private MySortedJTable myTable;
+    private MyTableModel model = new MyTableModel();
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    TableRowSorter sorter = new TableRowSorter(model);
+    private static String[] tableColumn = {"LogId", "Convert Time", "File Name", "Start Sequence", "End Sequence", "Total CDR", "Total CDR Processed", "Status"};
+    Box box = Box.createHorizontalBox();
+    ArrayList<ChecksumErrorEntity> listCdrLogProcesses = new ArrayList<ChecksumErrorEntity>();
+
+    public AuditTransactionPanel(Date fromDate, Date toDate, String status) {
+        super(new BorderLayout());
+        init(fromDate, toDate, status);
+        add(box, BorderLayout.SOUTH);
+        setPreferredSize(new Dimension(800, 600));
+    }
+
+    @SuppressWarnings("unchecked")
+    public void init(Date fromDate, Date toDate, String status) {
+        model.setColumnNames(tableColumn);
+        listCdrLogProcesses = CdrLogProcessDAO.getListProcessDetail(fromDate, toDate, status);
+        int size = listCdrLogProcesses.size();
+
+        if (size > 0) {
+            Object[][] data = new Object[size][tableColumn.length];
+            for (Integer i = 0; i < size; i++) {
+                data[i][0] = listCdrLogProcesses.get(i).getCdrLogProcessId();
+                data[i][1] = DateUtils.getDateStringInformat(listCdrLogProcesses.get(i).getStartTime(), DateUtils.ddMMyyyyHHmmss_FULL_SLASH1);
+                data[i][2] = getFileName(listCdrLogProcesses.get(i).getSourceFileUrl());
+                data[i][3] = listCdrLogProcesses.get(i).getStart_rcd_seq();
+                data[i][4] = listCdrLogProcesses.get(i).getEnd_rcd_seq();
+                data[i][5] = listCdrLogProcesses.get(i).getTotalCdr();
+                data[i][6] = listCdrLogProcesses.get(i).getTotalCdrProcessed();
+                data[i][7] = getStatus(listCdrLogProcesses.get(i).getStatus());
+            }
+            model.setData(data);
+        }
+
+        model.setEditable(false);
+        myTable = new MySortedJTable(model);
+        myTable.getTable().setRowSorter(sorter);
+        DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+        centerRenderer.setHorizontalAlignment(JLabel.CENTER);
+        myTable.getTable().getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
+        myTable.getTable().getColumnModel().getColumn(5).setCellRenderer(centerRenderer);
+        myTable.getTable().getColumnModel().getColumn(6).setCellRenderer(centerRenderer);
+        myTable.getTable().getColumnModel().getColumn(7).setCellRenderer(centerRenderer);
+        myTable.getTable().getColumnModel().getColumn(1).setPreferredWidth(150);
+        myTable.getTable().getColumnModel().getColumn(2).setPreferredWidth(350);
+        myTable.getTable().getColumnModel().getColumn(6).setPreferredWidth(150);
+        add(new JScrollPane(myTable));
+        showPages(offSize, 1);
+
+        /*
+         * STEP 2: add subscriber selection event click
+         */
+        myTable.getTable().setColumnSelectionAllowed(false);
+        myTable.getTable().setRowSelectionAllowed(true);
+        repaint();
+    }
+
+    @SuppressWarnings("unchecked")
+    private void showPages(final int itemsPerPage, final int currentPageIndex) {
+        ArrayList<JRadioButton> list = new ArrayList<JRadioButton>();
+        sorter.setRowFilter(filter(itemsPerPage, currentPageIndex - 1));
+        int startPageIndex = currentPageIndex - pageSize;
+        if (startPageIndex <= 0) {
+            startPageIndex = 1;
+        }
+        int maxPageIndex = (model.getRowCount() / itemsPerPage) + 1;
+        int endPageIndex = currentPageIndex + pageSize - 1;
+        if (endPageIndex > maxPageIndex) {
+            endPageIndex = maxPageIndex;
+        }
+
+        if (currentPageIndex > 1) {
+            list.add(createRadioButtons(itemsPerPage, currentPageIndex - 1,
+                    "Prev"));
+        }
+        for (int i = startPageIndex; i <= endPageIndex; i++) {
+            list.add(createLinks(itemsPerPage, currentPageIndex, i - 1));
+        }
+        if (currentPageIndex < maxPageIndex) {
+            list.add(createRadioButtons(itemsPerPage, currentPageIndex + 1,
+                    "Next"));
+        }
+
+        box.removeAll();
+
+        JLabel input = new JLabel("Total Record: " + String.valueOf(listCdrLogProcesses.size()));
+        box.add(input);
+
+        ButtonGroup bg = new ButtonGroup();
+        box.add(Box.createHorizontalGlue());
+        for (JRadioButton r : list) {
+            box.add(r);
+            bg.add(r);
+        }
+
+        box.revalidate();
+        box.repaint();
+        list.clear();
+    }
+
+    @SuppressWarnings("serial")
+    private JRadioButton createLinks(final int itemsPerPage, final int current,
+            final int target) {
+        JRadioButton radio = new JRadioButton("" + (target + 1)) {
+            protected void fireStateChanged() {
+                ButtonModel model = getModel();
+                if (!model.isEnabled()) {
+                    setForeground(Color.GRAY);
+                } else if (model.isPressed() && model.isArmed()) {
+                    setForeground(Color.GREEN);
+                } else if (model.isSelected()) {
+                    setForeground(Color.RED);
+                }
+                super.fireStateChanged();
+            }
+        };
+        radio.setForeground(Color.BLUE);
+        radio.setUI(ui);
+        if (target + 1 == current) {
+            radio.setSelected(true);
+        }
+        radio.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                showPages(itemsPerPage, target + 1);
+            }
+        });
+        return radio;
+    }
+
+    private JRadioButton createRadioButtons(final int itemsPerPage,
+            final int target, String title) {
+        JRadioButton radio = new JRadioButton(title);
+        radio.setForeground(Color.BLUE);
+        radio.setUI(ui);
+        radio.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showPages(itemsPerPage, target);
+            }
+        });
+        return radio;
+    }
+
+    @SuppressWarnings("rawtypes")
+    private RowFilter filter(final int itemsPerPage, final int target) {
+        return new RowFilter() {
+            public boolean include(Entry entry) {
+                int ei = (Integer) entry.getIdentifier();
+                return (target * itemsPerPage <= ei && ei < target
+                        * itemsPerPage + itemsPerPage);
+            }
+        };
+    }
+
+    public static String getFileName(String sourceFileUrl) {
+        if (StringUtils.isEmpty(sourceFileUrl)) {
+            return "";
+        } else {
+            if (sourceFileUrl.contains("\\")) {
+                return StringUtils.substringAfterLast(sourceFileUrl, "\\");
+            }
+
+            if (sourceFileUrl.contains("/")) {
+                return StringUtils.substringAfterLast(sourceFileUrl, "/");
+            }
+
+            return "";
+        }
+    }
+
+    public static String getStatus(String statusCode) {
+        if (statusCode.equals(IConstant.CDR_PROCESSING_STATUS.FINISHED.toString())) {
+            return "Successed";
+        } else if (statusCode.equals(IConstant.CDR_PROCESSING_STATUS.LOADED.toString())) {
+            return "Loaded";
+        } else if (statusCode.equals(IConstant.CDR_PROCESSING_STATUS.CONVERTED.toString())) {
+            return "Converted";
+        } else if (statusCode.equals(IConstant.CDR_PROCESSING_STATUS.ERROR.toString())) {
+            return "Error";
+        } else if (statusCode.equals(IConstant.REFORMATING_ERROR_CODE.EXCEPTION.toString())) {
+            return "Content Error";
+        } else if (statusCode.equals(IConstant.REFORMATING_ERROR_CODE.INVALID_CHECKSUM_VALUE.toString())) {
+            return "Checksum Error";
+        } else if (statusCode.equals(IConstant.REFORMATING_ERROR_CODE.INVALID_HEADER_CONTENT.toString())) {
+            return "Invalid Header Content";
+        } else {
+            return "";
+        }
+    }
+
+}

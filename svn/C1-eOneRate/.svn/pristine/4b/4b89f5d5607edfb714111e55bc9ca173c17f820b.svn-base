@@ -1,0 +1,635 @@
+package e1reformat.controller;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.LineNumberReader;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import javax.swing.JOptionPane;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+
+import e1reformat.db.dao.CdrLogProcessDAO;
+import e1reformat.db.dao.CdrRecordHeaderDAO;
+import e1reformat.db.dao.RatedCdrDAO;
+import e1reformat.db.pool.DBConfig;
+import e1reformat.db.pool.DBPool;
+import e1reformat.entity.cdr.CdrObject;
+import e1reformat.entity.output.ReformatCdrOutput;
+import e1reformat.gui.main.MainUI;
+import e1reformat.util.DBUtils;
+import e1reformat.util.DateUtils;
+import e1reformat.util.EnrichCDR;
+import e1reformat.util.FileNameComparator;
+import e1reformat.util.FunctionUtils;
+import e1reformat.util.IConstant;
+import e1reformat.util.SystemLog;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
+
+public class CSVProcess {
+
+    private static Logger logger = Logger.getLogger("CSVProcess");
+    public static final int SUCCESS = 0;
+    public static final int FAIL = -1;
+    public static final int EXCEPTION = -2;
+    public static final int INVALID_HEADER = -3;
+    public static int time_scan = 0;
+    public static Boolean isRunning = false;
+    private static ConvertCDRObject converterCDRObject;
+    public static File fileDestination;
+    private static int progressValue = 0;
+    private static int totalCDR;
+    private static final String newline = "\n";
+    private static String sHeader;
+    private static StringBuilder strBr = new StringBuilder();
+
+    public CSVProcess() {
+    }
+
+    /**
+     * @TODO scan CDR Folder to convert all the CDR files
+     *
+     * @param method
+     * @param isExportCsv
+     * @param listOfFiles
+     * @param destinationFolder
+     * @param movedFile
+     * @param sourceBehavior
+     * @param conn
+     * @throws SQLException
+     *
+     * @author sonph
+     * @date 10 December 2013
+     */
+    public static void scanFolder(Integer method, boolean isExportCsv, List<File> listOfFiles, File destinationFolder, File movedFile,
+            String sourceBehavior, Connection conn) throws SQLException {
+
+        //<editor-fold defaultstate="collapsed" desc="Khoi tao,Create connection:conInst,conAggr,conDele">
+        ReformatCdrOutput reformatResult = null;
+        DBConfig dbconfig = new DBConfig();
+        FunctionUtils funcUtils = new FunctionUtils();
+        String status = null;
+        String startTime = null;
+        String endTime = null;
+        DBUtils dbUtils = new DBUtils();
+        int cdrProcessLogId;
+        EnrichCDR enrichController = new EnrichCDR();
+        Connection conInst = null;
+        Connection conAggr = null;
+        Connection conDele = null;
+        if (!listOfFiles.isEmpty()) {
+            enrichController = new EnrichCDR(conn, dbconfig);
+            Collections.sort(listOfFiles, new FileNameComparator());
+            conInst = DBPool.getConnection(dbconfig);
+            conAggr = DBPool.getConnection(dbconfig);
+            conDele = DBPool.getConnection(dbconfig);
+        }
+        //</editor-fold>
+        if (conAggr != null && conDele != null && conInst != null) {
+            try {
+                for (File sourcefile : listOfFiles) {
+                    if (sourcefile.exists() && sourcefile.isFile() && sourcefile.length() > 92 && !sourcefile.getName().contains(MainProcessor.application_id)) {
+                        //check filename including "app_." or not
+                        //<editor-fold defaultstate="collapsed" desc="Step 1: Start Loading CDR File">
+                        MainUI.taskOutput.append(newline);
+                        MainUI.taskOutput.append("############### [Start] " + sourcefile.getName() + " ! ###############");
+                        MainUI.taskOutput.append(newline);
+                        //rename this file
+                        String originalFileUrl = sourcefile.getAbsolutePath();
+                        sourcefile = renameFile(sourcefile);
+                        status = IConstant.CDR_PROCESSING_STATUS.LOADED.toString();
+                        startTime = DateUtils.getCurrentDateTime(DateUtils.MMddyyyyHHmmss_FULL_SLASH);
+                        cdrProcessLogId = CdrLogProcessDAO.logCDRFileProcess(originalFileUrl, null, status, startTime, null, method, sourceBehavior, null, conn);
+                        SystemLog.setLastFileProcessing(sourcefile.getAbsolutePath());
+                        //</editor-fold>
+                        //<editor-fold defaultstate="collapsed" desc="Step 2: Reformat, enrichCDRObject CDR File">
+                        isRunning = true;
+                        reformatResult = reformatCDRFile(isExportCsv, sourcefile, destinationFolder, conn, enrichController, funcUtils);
+                        if (reformatResult.getErrorCode() != IConstant.REFORMATING_ERROR_CODE.SUCCESS) {
+                            try {
+                                if (reformatResult.getErrorCode() == IConstant.REFORMATING_ERROR_CODE.INVALID_CHECKSUM_VALUE) {
+                                    moveFileChecksumError(sourcefile,funcUtils);
+                                } else {
+                                    logger.info("Reformat CDR file FAILURE!!! --> Move file to Folder: " + IConstant.ROOT_CONFIG.ERRORS_FOLDER_PATH);
+                                    moveFileToFolder(sourcefile, new File(IConstant.ROOT_CONFIG.ERRORS_FOLDER_PATH));
+                                }
+                                CdrLogProcessDAO.updateCDRProcess(cdrProcessLogId, originalFileUrl, reformatResult.getCsvFile(), reformatResult.getErrorCode().toString(), startTime, endTime, method, sourceBehavior, null, conn, reformatResult.getIsHandled(), 0, 0);
+                            } catch (Exception ioe) {
+                                ioe.printStackTrace();
+                                logger.error("CANNOT MOVE file to error folder: " + ioe.getMessage());
+                            }
+                        } //</editor-fold>
+                        //<editor-fold defaultstate="collapsed" desc="Step 3: SAVING TO TEMP -> Enrich -> SAVING TO HOT">
+                        else {
+                            logger.info("\tReformat CDR file SUCCESS! --> load SQL*LOADER to Insert TEMP table.");
+                            status = IConstant.CDR_PROCESSING_STATUS.CONVERTED.toString();
+                            endTime = DateUtils.getCurrentDateTime(DateUtils.MMddyyyyHHmmss_FULL_SLASH);
+                            //goi procedure disable index, catch true or false 
+                            dbUtils.unusableIndex(dbconfig, conn);
+                            //--Load file CSV
+                            int csvLoaderResult = MainProcessor.loadSqlLoader(reformatResult.getCsvFile());
+                            //goi procedure enable index
+                            dbUtils.rebuiltIndex(dbconfig, conn);
+                            //Load to Oracle by using SQL*Loader
+                            if (csvLoaderResult == SUCCESS) {
+                                isRunning = false;
+                                MainUI.taskOutput.append("- [Load to DB] : SUCCESS");
+                                MainUI.taskOutput.append(newline);
+                                logger.info("\tFINISH SQL LOADER = " + DateUtils.getCurrentDateTime(DateUtils.MMddyyyyHHmmss_sss_FULL_SLASH));
+                                //<editor-fold defaultstate="collapsed" desc="Neu SQL Loader SUCESS">
+                                try {
+                                    conInst.setAutoCommit(false);
+                                    conAggr.setAutoCommit(false);
+                                    conDele.setAutoCommit(false);
+                                    logger.info("\tStart Enrich BuID = " + DateUtils.getCurrentDateTime(DateUtils.MMddyyyyHHmmss_sss_FULL_SLASH));
+                                    int loadSuccCount = enrichController.enrichRest(reformatResult.getCdrRecordHeaderId());
+                                    logger.info("\tEnd Enrich BuID = " + DateUtils.getCurrentDateTime(DateUtils.MMddyyyyHHmmss_sss_FULL_SLASH));
+                                    reformatResult.setTotalCdrProcessed(loadSuccCount); //thaiha
+                                    CdrLogProcessDAO.updateCDRProcess(cdrProcessLogId, originalFileUrl, reformatResult.getCsvFile(), status, startTime, endTime, method, sourceBehavior, null, conn, reformatResult.getIsHandled(), reformatResult.getTotalCdr(), reformatResult.getTotalCdrProcessed());
+                                    reformatResult.setInsertAccurateDone(false);
+                                    reformatResult.setAggregatedDone(false);
+                                    RatedCdrDAO.insert2Accurate(reformatResult, dbconfig, conInst);
+                                    RatedCdrDAO.aggregatedCDR(reformatResult, dbconfig, conAggr, reformatResult.getCdrRecordHeaderId());
+                                    while (true) {
+                                        if ((reformatResult.isInsertAccurateDone()) && (reformatResult.isAggregatedDone())) {
+                                            logger.info("\tALL DONE = " + DateUtils.getCurrentDateTime(DateUtils.MMddyyyyHHmmss_sss_FULL_SLASH));
+                                            RatedCdrDAO.deleteTempRatedCDR(reformatResult, dbconfig, conDele);
+                                            break;
+                                        } else if (reformatResult.getErrorCode() != 0 && reformatResult.getErrorMessage() != null) {
+                                            logger.info("\tAGGREGATE OR ACCRURATE IS FAILED " + reformatResult.getErrorCode() + " : : " + reformatResult.getErrorMessage());
+                                            //Roll back all aggregate and accucrate
+                                            conInst.rollback();
+                                            conAggr.rollback();
+                                            //Delete temp rated CDR
+                                            reformatResult.setDeletedTempRatedCdrDone(false);
+                                            RatedCdrDAO.deleteTempRatedCDR(reformatResult, dbconfig, conDele);
+                                            //Check xem da delete thanh cong hay chua
+                                            if (reformatResult.getErrorCode() != 0 && !reformatResult.isDeletedTempRatedCdrDone()) {
+                                                conDele.rollback();
+                                            }
+                                            break;
+                                        }
+                                        //set priority cho thread dang chay thap nhat, uu tien 2 thread con lai
+                                        Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
+                                        //set time sleep tranh viec check lien tuc, tang CPU
+                                        Thread.sleep(50);
+                                    }
+                                    conInst.commit();
+                                    conAggr.commit();
+                                    conDele.commit();
+                                } catch (SQLException e) {
+                                    String errorMessage = "\tMove data from temporary table and aggregate fail for file '" + sourcefile.getName() + "'.\nPlease check database connection, and delete data from " + dbconfig.getDb_schema() + dbconfig.getLoadTableName();
+                                    JOptionPane.showMessageDialog(null, errorMessage, "Error", JOptionPane.ERROR_MESSAGE);
+                                    //if error, rollback all, but no delete temp table
+                                    conInst.rollback();
+                                    conAggr.rollback();
+                                    conDele.rollback();
+                                    logger.info(errorMessage);
+                                    reformatResult.setErrorCode(IConstant.REFORMATING_ERROR_CODE.FAIL);
+                                }
+                                //</editor-fold>
+                            } else {
+                                logger.info("\tLoad to DB: SQL*Loader is Fail. Please check File Config or File CDR wrong CDR_TYPE!");
+                                reformatResult.setTotalCdrProcessed(0); //thaiha
+                                reformatResult.setErrorCode(IConstant.REFORMATING_ERROR_CODE.FAIL);
+                                MainUI.taskOutput.append("- [Load to DB] : SQL*Loader is Fail. Please check File Config or File CDR wrong CDR_TYPE!");
+                                MainUI.taskOutput.append(newline);
+                            }
+                        }
+                        //</editor-fold>
+                        //<editor-fold defaultstate="collapsed" desc="Step 4: Reformat SUCCESS -> Delete or move source file">
+                        if (reformatResult.getErrorCode() == IConstant.REFORMATING_ERROR_CODE.SUCCESS) {
+                            isRunning = true;
+                            int updateResult = (sourceBehavior.equalsIgnoreCase(IConstant.SOURCE_BEHAVIOR.DELETE_SOURCE_FOLDER.toString())) ? deleteFile(sourcefile) : moveFileToFolder(sourcefile, movedFile);
+                            String backupFileUrl = (sourceBehavior.equalsIgnoreCase(IConstant.SOURCE_BEHAVIOR.DELETE_SOURCE_FOLDER.toString())) ? null : (movedFile.getAbsolutePath() + IConstant.ROOT_CONFIG.SEPARATOR + sourcefile.getName());
+                            if (updateResult == SUCCESS) {
+                                status = IConstant.CDR_PROCESSING_STATUS.FINISHED.toString();
+                                endTime = DateUtils.getCurrentDateTime(DateUtils.MMddyyyyHHmmss_FULL_SLASH);
+                                CdrLogProcessDAO.updateCDRProcess(cdrProcessLogId, originalFileUrl, reformatResult.getCsvFile(), status, startTime, endTime, method, sourceBehavior, backupFileUrl, conn, reformatResult.getIsHandled(), reformatResult.getTotalCdr(), reformatResult.getTotalCdrProcessed());
+                            }
+                            isRunning = false;
+                        }
+                        //</editor-fold>
+                        MainUI.taskOutput.append("############### [Finished] " + sourcefile.getName() + " ! ###############");
+                        MainUI.taskOutput.append(newline);
+                        MainUI.taskOutput.append(newline);
+                    }
+                }
+            } catch (Exception e) {
+                logger.error("Exception", e);
+            } finally {
+                //<editor-fold defaultstate="collapsed" desc="Close connection: conInst,conAggr,conDele">
+                dbconfig = null;
+                try {
+                    logger.info("Close inserted, aggregated connections");
+                    if (conAggr != null) {
+                        conAggr.close();
+                    }
+                    if (conDele != null) {
+                        conDele.close();
+                    }
+                    if (conInst != null) {
+                        conInst.close();
+                    }
+                } catch (SQLException sql) {
+                    logger.error("Close connection failed " + sql.getErrorCode() + " " + sql.getMessage());
+                }
+                //</editor-fold>
+            }
+        } else {
+            logger.info("Not get connection!");
+        }
+        MainUI.searchSummaryReport();
+    }
+
+    //<editor-fold defaultstate="collapsed" desc="DETAIL FUNCTIONS">
+    /**
+     * @TODO: to reformat the CDR file
+     *
+     * @param isExportCsv
+     * @param sourcefile
+     * @param destinationFolder
+     * @param sourceBehavior
+     * @param conn
+     * @return ReformatCdrOutput
+     * @throws SQLException
+     *
+     * @author truongdh
+     * @date 10 December 2013
+     *
+     */
+    private static ReformatCdrOutput reformatCDRFile(boolean isExportCsv, File sourcefile, File destinationFolder, Connection conn, EnrichCDR enrichController, FunctionUtils funcUtils) throws SQLException {
+        int count = 0;
+        ReformatCdrOutput result = new ReformatCdrOutput(IConstant.REFORMATING_ERROR_CODE.SUCCESS, IConstant.REFORMATING_ERROR_MESSAGE.SUCCESS, null, progressValue, false, false, false);
+        ArrayList<CdrObject> listCdrObjects = new ArrayList<CdrObject>(MainProcessor.buffer_size);
+        converterCDRObject = new ConvertCDRObject();
+        int cdrRecordHeaderId = CdrLogProcessDAO.cdrLogProcessId;
+        BufferedReader br = null;
+        BufferedWriter bw = null;
+        String fileName = sourcefile.getName() + ".csv";
+        fileDestination = new File(destinationFolder.getAbsolutePath() + IConstant.ROOT_CONFIG.SEPARATOR + fileName);
+        deleteFile(fileDestination);
+        time_scan = 0;
+
+        try {
+            br = new BufferedReader(new FileReader(sourcefile.getAbsolutePath()));
+            String sLine = "";
+            progressValue = 0;
+            totalCDR = getTotalCdr(sourcefile);
+            if (totalCDR == INVALID_HEADER) {
+                result.setErrorCode(IConstant.REFORMATING_ERROR_CODE.INVALID_HEADER_CONTENT);
+                result.setCdrRecordHeaderId(cdrRecordHeaderId);
+                result.setIsHandled(IConstant.IS_HANDLED.NO);
+                try {
+                    if (br != null) {
+                        br.close();
+                    }
+                } catch (Exception io) {
+                    io.printStackTrace();
+                }
+                return result;
+            }
+            result.setTotalCdr(totalCDR);
+            byte checkSumValue = checkSumAllFile(sourcefile);
+
+            //Insert CDR header file into DB
+            MainUI.taskOutput.append("- [Insert CDR header to DB] : ");
+            CdrRecordHeaderDAO.insertHeader(sHeader, Byte.toString(checkSumValue), conn, sourcefile.getName(), Integer.toString(cdrRecordHeaderId));
+            MainUI.taskOutput.append("Success");
+            MainUI.taskOutput.append(newline);
+
+            boolean firstLine = true;
+            if (checkSumValue != 0) {
+                result.setErrorCode(IConstant.REFORMATING_ERROR_CODE.INVALID_CHECKSUM_VALUE);
+                result.setErrorMessage(IConstant.REFORMATING_ERROR_MESSAGE.INVALID_CHECKSUM_VALUE);
+                result.setCdrRecordHeaderId(cdrRecordHeaderId);
+                result.setIsHandled(IConstant.IS_HANDLED.NO);
+                try {
+                    if (br != null) {
+                        br.close();
+                    }
+                } catch (Exception io) {
+                    io.printStackTrace();
+                }
+                return result;
+            }
+
+            //Process CDR
+            MainUI.taskOutput.append("- [Convert & EnrichCDR ] : ");
+            strBr.setLength(0);
+            Boolean resultCSV = false;
+            //<editor-fold defaultstate="collapsed" desc="Duyet tung Record">
+            while ((sLine = br.readLine()) != null) {
+                //progressCDR
+                progressValue++;
+                count++;
+                if (firstLine) {
+                    if (sLine.length() < 92) {    // Fix truong hop ki tu ma hoa la ki tu xuong dong
+                        sLine += "\n" + br.readLine();
+                    }
+                    sHeader = sLine.substring(0, 92);
+                    firstLine = false;
+                    try {
+                        sLine = sLine.substring(93);
+                    } catch (StringIndexOutOfBoundsException sobe) {
+                        logger.info("String values out of index");
+                        sLine = null;
+                        break;
+                    }
+                }
+                CdrObject cdrObject = converterCDRObject.convertCDR(sLine, strBr);
+                if (cdrObject != null) {
+                    cdrObject = enrichController.enrichCDRObject(cdrObject);
+                    cdrObject.setCDR_RECORD_HEADER_ID(cdrRecordHeaderId);
+                    listCdrObjects.add(cdrObject);
+                } else {
+                    // thaiha: neu cdr NUL
+                }
+                if (listCdrObjects.size() == MainProcessor.buffer_size) {
+                    resultCSV = true;
+                    flushCDRStoreArray(listCdrObjects, destinationFolder, isExportCsv, fileName, bw);
+                    listCdrObjects.removeAll(listCdrObjects);
+                }
+            }
+            //</editor-fold>
+
+            funcUtils.setMessageToWrite(strBr.toString());
+            logger.info("\tTotal number CDR of File:" + count);
+            MainUI.taskOutput.append("Success");
+            MainUI.taskOutput.append(newline);
+
+            MainUI.taskOutput.append("- [export to CSV] : ");
+            if (listCdrObjects.size() > 0) {
+                resultCSV = true;
+                flushCDRStoreArray(listCdrObjects, destinationFolder, isExportCsv, fileName, bw);
+                listCdrObjects.removeAll(listCdrObjects);
+            }
+            if (br != null) {
+                br.close();
+            }
+
+            result.setCsvFile(fileDestination);
+            result.setCdrRecordHeaderId(cdrRecordHeaderId);
+            result.setTotalCdrProcessed(count);
+            result.setIsHandled(IConstant.IS_HANDLED.YES);
+            if (resultCSV) {
+                MainUI.taskOutput.append("Success");
+            } else {
+                MainUI.taskOutput.append("Not Success");
+                result.setErrorCode(IConstant.REFORMATING_ERROR_CODE.FAIL);
+            }
+            MainUI.taskOutput.append(newline);
+            funcUtils.writeToFileNIO(sourcefile.getName() + ".error");
+        } catch (IOException e) {
+            MainUI.taskOutput.append("- [IOException] : " + e.getMessage());
+            MainUI.taskOutput.append(newline);
+            logger.error("IOException", e);
+
+            result.setCdrRecordHeaderId(cdrRecordHeaderId);
+            result.setIsHandled(IConstant.IS_HANDLED.NO);
+            result.setErrorCode(IConstant.REFORMATING_ERROR_CODE.EXCEPTION);
+
+        } catch (Exception e) {
+            MainUI.taskOutput.append("- [Exception] : " + e.toString());
+            MainUI.taskOutput.append(newline);
+            logger.error("IOException", e);
+
+            result.setCdrRecordHeaderId(cdrRecordHeaderId);
+            result.setIsHandled(IConstant.IS_HANDLED.NO);
+            result.setErrorCode(IConstant.REFORMATING_ERROR_CODE.EXCEPTION);
+        }
+        return result;
+
+    }
+
+    /**
+     * TODO: export CSV & insert database(optional)
+     *
+     * @param listCdrObjects
+     * @param destinationFolder
+     * @param isExportCSV
+     * @param fileName
+     * @param conn
+     * @param bw
+     * @return true of false
+     *
+     * @author truongdh
+     * @date 10 Dec 2013
+     */
+    protected static boolean flushCDRStoreArray(ArrayList<CdrObject> listCdrObjects, File destinationFolder, boolean isExportCSV, String fileName, BufferedWriter bw) {
+        try {
+            //export to csv
+            if (isExportCSV && listCdrObjects.size() > 0) {
+                bw = new BufferedWriter(new FileWriter(fileDestination, true));
+                exportCSV(listCdrObjects, bw);
+                bw.flush();
+                bw.close();
+            } else {
+                logger.info("Not Export file CSV:" + fileDestination.getName());
+                return false;
+            }
+        } catch (Exception e) {
+            logger.error("Exception", e);
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * @Todo Export CSV
+     *
+     * @param cdrArrayList
+     * @param destinationFile
+     * @param bw
+     * @return
+     *
+     * @author truongdh
+     * @date 10 Dec 2013
+     */
+    private static void exportCSV(ArrayList<CdrObject> cdrArrayList, BufferedWriter bw) {
+        String cdrStr = null;
+        try {
+            //Scan array CDR and store to CSV file
+            for (CdrObject cdrObject : cdrArrayList) {
+                cdrStr = cdrObject.toString();
+                if (StringUtils.isNotEmpty(cdrStr)) {
+                    bw.write(cdrStr);
+                    bw.newLine();
+                }
+            }
+        } catch (Exception e) {
+            logger.error("Exception", e);
+        }
+    }
+
+    /**
+     * TODO to move to backup source folder
+     *
+     * @param file CDR, moved Folder
+     * @return
+     * @throws IOException
+     *
+     * @Author Thaiha
+     * @Date 18 Nov 2014
+     */
+    private static int moveFileChecksumError(File fileToMoved,FunctionUtils funcUtils) { //thaiha
+//        logger.info("\tMOVE file: " + fileToMoved.getName() + " TO FOLDER: " + destinationFolder.getAbsolutePath());
+        File destinationFolder = new File(funcUtils.getPathErrorChecksumCdr());
+        Path source = Paths.get(fileToMoved.getAbsolutePath());
+        Path target = Paths.get(destinationFolder.getAbsolutePath() + IConstant.ROOT_CONFIG.SEPARATOR + fileToMoved.getName().replaceAll(funcUtils.getApplication_id(), ""));
+        try {
+            Files.move(source, target, REPLACE_EXISTING);
+        } catch (Exception e) {
+            logger.error("Loi moveFileChecksumError", e);
+            return FAIL;
+        }
+        return SUCCESS;
+    }
+    private static int moveFileToFolder(File fileToMoved, File destinationFolder) { //thaiha
+//        logger.info("\tMOVE file: " + fileToMoved.getName() + " TO FOLDER: " + destinationFolder.getAbsolutePath());
+        Path source = Paths.get(fileToMoved.getAbsolutePath());
+        Path target = Paths.get(destinationFolder.getAbsolutePath() + IConstant.ROOT_CONFIG.SEPARATOR + fileToMoved.getName());
+        try {
+            Files.move(source, target, REPLACE_EXISTING);
+        } catch (Exception e) {
+            logger.error("Loi moveFileToFolder", e);
+            return FAIL;
+        }
+        return SUCCESS;
+    }
+
+    /**
+     * TODO to delete source file
+     *
+     * @param file CDR
+     *
+     * @Author SONPH
+     * @Date 18 Oct 2013
+     */
+    private static int deleteFile(File file) {
+        try {
+            logger.info("\tDELETE file:" + file.getName());
+            if (!file.exists()) {
+                return SUCCESS;
+            }
+            if (file.delete()) {
+                return SUCCESS;
+            } else {
+                return FAIL;
+            }
+        } catch (Exception e) {
+            logger.error("Exception", e);
+            return EXCEPTION;
+        }
+    }
+
+    /**
+     * TODO: to rename a File
+     *
+     * @param oldFile
+     * @return File
+     *
+     * @author
+     * @date 30 Nov 2013
+     */
+    private synchronized static File renameFile(File oldFile) {
+        logger.info("===========================================================================================");
+        logger.info("\tREANAME file:" + oldFile.getName());
+        String directory = oldFile.getParentFile().getAbsolutePath();
+        File newFile = new File(directory + IConstant.ROOT_CONFIG.SEPARATOR + MainProcessor.application_id + oldFile.getName());
+        try {
+            if (oldFile.renameTo(newFile)) {
+                return newFile;
+            } else {
+                logger.info("Rename failed");
+                return oldFile;
+            }
+        } catch (Exception e) {
+            logger.error("Exception", e);
+        }
+        return newFile;
+    }
+
+    public static int getTotalCdr(File sourceFile) {
+        int totalCdr = 0;
+        String firstLine = "";
+        try {
+            if (sourceFile.exists()) {
+                FileReader fr = new FileReader(sourceFile);
+                LineNumberReader ln = new LineNumberReader(fr);
+                while (ln.getLineNumber() == 0) {
+                    firstLine = ln.readLine();
+                    if (firstLine.length() < 92) {
+                        firstLine += "\n" + ln.readLine();
+                    }
+                }
+                sHeader = firstLine.substring(0, 92);
+                if ((StringUtils.isNumeric(sHeader.substring(48, 58))) && (StringUtils.isNumeric(sHeader.substring(37, 47)))) {
+                    totalCdr = Integer.parseInt(sHeader.substring(48, 58)) - Integer.parseInt(sHeader.substring(37, 47));
+                    totalCdr = totalCdr + 1;
+                } else {
+                    MainUI.taskOutput.append("- Invalid Header content : ");
+                    MainUI.taskOutput.append(newline);
+                    totalCdr = INVALID_HEADER;
+                }
+                ln.close();
+                fr.close();
+            }
+        } catch (Exception e) {
+        }
+        return totalCdr;
+    }
+
+    /**
+     * TODO to Checksum all file
+     *
+     * @param file CDR
+     * @return check sum value
+     *
+     * @Author TRUONGDH
+     * @Date 05 Nov 2013
+     */
+    public static byte checkSumAllFile(File file) throws IOException {
+        MainUI.taskOutput.append("- [Checksum process] : ");
+        byte[] bFile = new byte[(int) file.length()];
+        FileInputStream fileInputStream = null;
+
+        //convert file into array of bytes
+        fileInputStream = new FileInputStream(file);
+        fileInputStream.read(bFile);
+        fileInputStream.close();
+
+        //bFile is array byte get from file
+        byte checkSumValue = 0;
+
+        for (int i = 0; i < bFile.length; i++) {
+            checkSumValue ^= bFile[i];
+        }
+        MainUI.taskOutput.append("checkSumValue = " + checkSumValue);
+        MainUI.taskOutput.append(newline);
+        return checkSumValue;
+    }
+
+    //</editor-fold>
+    public static int getProgress() {
+        return progressValue;
+    }
+
+    public static int getTotalCDR() {
+        return totalCDR;
+    }
+
+}

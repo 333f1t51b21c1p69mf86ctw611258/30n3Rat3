@@ -1,0 +1,76 @@
+package e1reformat.entity.output;
+
+public class SummaryReportObject {
+
+    private Integer totalFile;
+    private Integer totalFileInProcess;
+    private Integer totalSuccessFile;
+    private Integer totalErrorFile;
+    private Integer totalChecksumError;
+    private Integer totalContentError;
+
+    public Integer getTotalFile() {
+        return totalFile;
+    }
+
+    public void setTotalFile(Integer totalFile) {
+        this.totalFile = totalFile;
+    }
+
+    public Integer getTotalSuccessFile() {
+        return totalSuccessFile;
+    }
+
+    public void setTotalSuccessFile(Integer totalSuccessFile) {
+        this.totalSuccessFile = totalSuccessFile;
+    }
+
+    public Integer getTotalErrorFile() {
+        return totalErrorFile;
+    }
+
+    public void setTotalErrorFile(Integer totalErrorFile) {
+        this.totalErrorFile = totalErrorFile;
+    }
+
+    public Integer getTotalChecksumError() {
+        return totalChecksumError;
+    }
+
+    public void setTotalChecksumError(Integer totalChecksumError) {
+        this.totalChecksumError = totalChecksumError;
+    }
+
+    public Integer getTotalContentError() {
+        return totalContentError;
+    }
+
+    public void setTotalContentError(Integer totalContentError) {
+        this.totalContentError = totalContentError;
+    }
+
+    public SummaryReportObject() {
+        super();
+    }
+
+    public Integer getTotalFileInProcess() {
+        return totalFileInProcess;
+    }
+
+    public void setTotalFileInProcess(Integer totalFileInProcess) {
+        this.totalFileInProcess = totalFileInProcess;
+    }
+
+    public SummaryReportObject(Integer totalFile, Integer totalFileInProcess,
+            Integer totalSuccessFile, Integer totalErrorFile,
+            Integer totalChecksumError, Integer totalContentError) {
+        super();
+        this.totalFile = totalFile;
+        this.totalFileInProcess = totalFileInProcess;
+        this.totalSuccessFile = totalSuccessFile;
+        this.totalErrorFile = totalErrorFile;
+        this.totalChecksumError = totalChecksumError;
+        this.totalContentError = totalContentError;
+    }
+
+}

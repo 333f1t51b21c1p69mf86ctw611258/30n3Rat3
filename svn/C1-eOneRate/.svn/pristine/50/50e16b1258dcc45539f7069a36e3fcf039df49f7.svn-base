@@ -1,0 +1,372 @@
+package e1reformat.gui.menu.configuration;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
+
+import org.apache.commons.lang3.StringUtils;
+
+import e1reformat.db.dao.PrefixB_NumberDAO;
+import e1reformat.db.pool.DBPool;
+import e1reformat.entity.enrich.PrefixB_Number;
+import e1reformat.gui.util.MySortedJTable;
+import e1reformat.gui.util.MyTableModel;
+
+public class PrefixBNumberDialog extends JDialog {
+
+    private static final long serialVersionUID = 1L;
+    private MySortedJTable listUserJTable;
+    private MyTableModel tableModel;
+    private int size;
+    private ArrayList<PrefixB_Number> listPrefix = new ArrayList<PrefixB_Number>();
+    private JPanel listUserPanel;
+    private JLabel updateResultLbl;
+    private static final String[] columnNames = {"ID", "Prefix", "Change"};
+    static int SUCCESS = 0;
+    static int ERROR = -1;
+    private JTextField prefixTxt;
+    private JLabel lblResult;
+    private JFrame frame;
+    private JTextField changetxt;
+    private int Id = 0;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        try {
+            PrefixBNumberDialog dialog = new PrefixBNumberDialog();
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Create the dialog.
+     */
+    public PrefixBNumberDialog() {
+        setResizable(false);
+        setTitle("Zone Map");
+        setBounds(100, 100, 651, 483);
+        setModalityType(ModalityType.APPLICATION_MODAL);
+        getContentPane().setLayout(null);
+        setLocationRelativeTo(null);
+        PrefixBNumberDialog.setDefaultLookAndFeelDecorated(true);
+
+        listUserPanel = new JPanel();
+        listUserPanel.setBorder(new TitledBorder(null, "List zone map", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        listUserPanel.setBounds(9, 123, 627, 287);
+        getContentPane().add(listUserPanel);
+        listUserPanel.setLayout(null);
+
+        drawTable();
+
+        final JButton btnUpdate = new JButton("Update");
+        btnUpdate.setFont(new Font("Tahoma", Font.PLAIN, 11));
+
+        btnUpdate.setBounds(102, 421, 71, 23);
+        getContentPane().add(btnUpdate);
+
+        updateResultLbl = new JLabel("");
+        updateResultLbl.setBounds(59, 388, 236, 22);
+        getContentPane().add(updateResultLbl);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Create zone map", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+        panel.setBounds(9, 11, 625, 101);
+        getContentPane().add(panel);
+
+        JLabel lblCode = new JLabel("Prefix");
+        lblCode.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        lblCode.setBounds(51, 26, 64, 14);
+        panel.add(lblCode);
+
+        JLabel lblZone = new JLabel("Change");
+        lblZone.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        lblZone.setBounds(51, 59, 46, 14);
+        panel.add(lblZone);
+
+        prefixTxt = new JTextField();
+        prefixTxt.setColumns(10);
+        prefixTxt.setBounds(119, 22, 462, 23);
+        panel.add(prefixTxt);
+
+        changetxt = new JTextField();
+        changetxt.setColumns(10);
+        changetxt.setBounds(119, 55, 462, 23);
+        panel.add(changetxt);
+
+        final JButton btnCreate = new JButton("Create");
+        btnCreate.setFont(new Font("Tahoma", Font.PLAIN, 11));
+
+        btnCreate.setBounds(25, 421, 71, 23);
+        getContentPane().add(btnCreate);
+
+        final JButton btnDelete = new JButton("Delete");
+        btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 11));
+
+        btnDelete.setBounds(183, 421, 71, 23);
+        getContentPane().add(btnDelete);
+
+        lblResult = new JLabel("");
+        lblResult.setBounds(369, 354, 186, 19);
+        getContentPane().add(lblResult);
+
+        JButton btnClose = new JButton("Close");
+        btnClose.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        btnClose.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                PrefixBNumberDialog.this.dispose();
+            }
+        });
+        btnClose.setBounds(564, 421, 71, 23);
+        getContentPane().add(btnClose);
+
+        final JButton btnSearch = new JButton("Search");
+        btnSearch.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        btnSearch.setBounds(264, 421, 71, 23);
+        getContentPane().add(btnSearch);
+
+        btnCreate.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                createZoneMap();
+            }
+        });
+
+        btnSearch.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                searchTable();
+            }
+        });
+
+        btnUpdate.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                updateZoneMap();
+            }
+        });
+        btnDelete.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                deleteZoneMap();
+            }
+        });
+
+    }
+
+    protected void deleteZoneMap() {
+        if (StringUtils.isEmpty(prefixTxt.getText())) {
+            prefixTxt.setBackground(Color.YELLOW);
+            lblResult.setText("username cannot be empty!");
+            lblResult.setForeground(Color.RED);
+            return;
+        }
+
+        if (Id != 0) {
+
+            if (JOptionPane.showConfirmDialog(frame,
+                    "Are you sure to delete the prefix: " + prefixTxt.getText(), "Really Deleteing?",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
+                return;
+            }
+
+            try {
+                Connection conn = DBPool.getConnection();
+                int result = PrefixB_NumberDAO.deleteZoneMap(Id, conn);
+                if (result == SUCCESS) {
+                    prefixTxt.setBackground(Color.WHITE);
+                    lblResult.setText("Delete user successfully!");
+                    lblResult.setForeground(Color.BLUE);
+                } else {
+                    lblResult.setText("Fail to delete user");
+                    lblResult.setForeground(Color.RED);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            JOptionPane.showMessageDialog(frame, "You must chose row for delete");
+        }
+        updateTable();
+    }
+
+    protected void createZoneMap() {
+        if (StringUtils.isEmpty(prefixTxt.getText())) {
+            prefixTxt.setBackground(Color.YELLOW);
+            lblResult.setText("code cannot be empty!");
+            lblResult.setForeground(Color.RED);
+            return;
+        }
+
+        if (StringUtils.isEmpty(changetxt.getText())) {
+            changetxt.setBackground(Color.YELLOW);
+            lblResult.setText("zone cannot be empty!");
+            lblResult.setForeground(Color.RED);
+            return;
+        }
+        PrefixB_Number prefix = new PrefixB_Number(prefixTxt.getText(), changetxt.getText());
+        try {
+            Connection conn = DBPool.getConnection();
+            Boolean isExit = PrefixB_NumberDAO.checkExistCode(prefixTxt.getText().trim(), conn);
+            if (!isExit) {
+                int result = PrefixB_NumberDAO.createPrefix(prefix, conn);
+                if (result == SUCCESS) {
+                    prefixTxt.setBackground(Color.WHITE);
+                    lblResult.setText("Create prefix successfully!");
+                    lblResult.setForeground(Color.BLUE);
+                } else {
+                    lblResult.setText("Fail to create prefix");
+                    lblResult.setForeground(Color.RED);
+                }
+            } else {
+                JOptionPane.showMessageDialog(frame, "Exit prefix in database");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        updateTable();
+    }
+
+    protected void updateZoneMap() {
+        if (StringUtils.isEmpty(prefixTxt.getText())) {
+            prefixTxt.setBackground(Color.YELLOW);
+            lblResult.setText("code cannot be empty!");
+            lblResult.setForeground(Color.RED);
+            return;
+        }
+
+        if (JOptionPane.showConfirmDialog(frame,
+                "Are you sure to update the user: " + prefixTxt.getText(), "Really Updating ?",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
+            return;
+        }
+
+        PrefixB_Number prefix = new PrefixB_Number(prefixTxt.getText(), changetxt.getText(), Id);
+        try {
+            Connection conn = DBPool.getConnection();
+            int result = PrefixB_NumberDAO.updateZoneMap(prefix, conn);
+            if (result == SUCCESS) {
+                prefixTxt.setBackground(Color.WHITE);
+                lblResult.setText("Update prefix successfully!");
+                lblResult.setForeground(Color.BLUE);
+            } else {
+                lblResult.setText("Fail to update prefix");
+                lblResult.setForeground(Color.RED);
+            }
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        updateTable();
+    }
+
+    private void drawTable() {
+        tableModel = new MyTableModel();
+        tableModel.setColumnNames(columnNames);
+        try {
+            Connection conn = DBPool.getConnection();
+            listPrefix = PrefixB_NumberDAO.getListPrefix(conn);
+            size = listPrefix.size();
+            if (size > 0) {
+                Object[][] data = new Object[size][columnNames.length];
+                for (int i = 0; i < size; i++) {
+                    data[i][0] = listPrefix.get(i).getId();
+                    data[i][1] = listPrefix.get(i).getPrefix();
+                    data[i][2] = listPrefix.get(i).getChange();
+                }
+                tableModel.setData(data);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        listUserJTable = new MySortedJTable(tableModel);
+        listUserJTable.setBounds(10, 21, 604, 273);
+        listUserPanel.add(listUserJTable);
+
+        listUserJTable.getTable().addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent me) {
+                JTable table = (JTable) me.getSource();
+                Point p = me.getPoint();
+                int selectedRow = table.rowAtPoint(p);
+                if (me.getClickCount() == 1 && selectedRow != -1) {
+                    String prefix = (String) listUserJTable.getTable().getModel().getValueAt(selectedRow, 1);
+                    String change = (String) listUserJTable.getTable().getModel().getValueAt(selectedRow, 2);
+                    Id = (Integer) listUserJTable.getTable().getModel().getValueAt(selectedRow, 0);
+
+                    setRowValue(prefix, change);
+                }
+            }
+        });
+    }
+
+    public void updateTable() {
+        try {
+            Connection conn = DBPool.getConnection();
+            listPrefix = PrefixB_NumberDAO.getListPrefix(conn);
+            size = listPrefix.size();
+            if (size > 0) {
+                Object[][] data = new Object[size][columnNames.length];
+                for (int i = 0; i < size; i++) {
+                    data[i][0] = listPrefix.get(i).getId();
+                    data[i][1] = listPrefix.get(i).getPrefix();
+                    data[i][2] = listPrefix.get(i).getChange();
+                }
+                tableModel.setData(data);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        listUserJTable.repaint();
+
+        prefixTxt.setText("");
+        changetxt.setText("");
+
+    }
+
+    public void searchTable() {
+        try {
+            Connection conn = DBPool.getConnection();
+            listPrefix = PrefixB_NumberDAO.getSearchPrefix(prefixTxt.getText().trim(), conn);
+            size = listPrefix.size();
+            if (size > 0) {
+                Object[][] data = new Object[size][columnNames.length];
+                for (int i = 0; i < size; i++) {
+                    data[i][0] = listPrefix.get(i).getId();
+                    data[i][1] = listPrefix.get(i).getPrefix();
+                    data[i][2] = listPrefix.get(i).getChange();
+                }
+                tableModel.setData(data);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        listUserJTable.repaint();
+    }
+
+    public void setRowValue(String code, String zone) {
+        prefixTxt.setText(code);
+        changetxt.setText(zone);
+
+    }
+}

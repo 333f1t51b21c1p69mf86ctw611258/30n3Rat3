@@ -1,0 +1,75 @@
+# This is configuration file with default parameters for SMSGateway application.
+# It contains database paramters and is loaded on startup.
+
+database_enabled=0
+
+db_max_connections=4
+db_min_connections=1
+ConnectionWaitTimeout=20
+
+# Database Service
+db_driver_service=oracle.jdbc.driver.OracleDriver
+#db_url_service=jdbc:oracle:thin:@192.168.6.207:1521:eonerate
+db_url_service=jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.33.157)(PORT=1521) ) (CONNECT_DATA=(SERVICE_NAME=eonerate)))
+#db_url_service=jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.113)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.114)(PORT=1521)) ) (CONNECT_DATA= (SERVICE_NAME=eonerate) ))
+
+#db_url_service=jdbc:oracle:thin:@10.149.3.113:1521:eonerate
+# db_url_service=jdbc:oracle:thin:@192.168.6.210:1521:orcl
+db_user_service=vnp_data
+db_pass_service=vnp_data
+#db_user_service=vnp_data
+#db_pass_service=vnp_data
+db_schema = vnp_data
+db_common = vnp_common
+#db_pcat = pcat_filter
+
+# db_pcat = vnp_common
+
+# db_common = VNP_COMMON_2
+
+
+# Mrs. Mai
+
+# aggregatedViewName = TEMP_RATED_CDR_01_VIEW
+# loadTableName = TEMP_RATED_CDR_01
+# aggregatedTableName = HOT_AGGREGATED_CDR
+# ratedTableName = hot_rated_cdr
+
+# TruongDH
+cdrLogProcess = CDR_LOG_PROCESS
+cdrRecordHeader = CDR_RECORD_HEADER
+aggregatedViewName = TEMP_RATED_CDR_VIEW
+loadTableName = TEMP_RATED_CDR
+aggregatedTableName = HOT_AGGREGATED_CDR
+ratedTableName = HOT_RATED_CDR
+medTempToHot = MED_TEMP_2_HOT
+
+
+# Deploy
+
+# aggregatedViewName = TRUONGDH_TEMP_RATED_CDR_VIEW
+# loadTableName = TRUONGDH_TEMP_RATED_CDR
+# aggregatedTableName = TRUONGDH_HOT_AGGREGATED_CDR
+# ratedTableName = TRUONGDH_HOT_RATED_CDR
+
+# aggregatedViewName = TEMP_RATED_CDR_VIEW
+# loadTableName = TEMP_RATED_CDR
+# aggregatedTableName = HOT_AGGREGATED_CDR
+# ratedTableName = HOT_RATED_CDR
+ 
+# Mr. Vinh
+
+# aggregatedViewName = v_rated_cdr_view
+# loadTableName = temp_rated_cdr_v
+# aggregatedTableName = aggregated_cdr_v
+# ratedTableName = hot_rated_cdr_v
+
+
+# Mrs. Huong
+
+# viewName = TEMP_RATED_CDR_02_VIEW
+# tableName = temp_rated_cdr_02
+# tableAggregated = aggregated_cdr
+# tableRatedCdr = hot_rated_cdr_1
+
+

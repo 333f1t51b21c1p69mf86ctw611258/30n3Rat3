@@ -1,0 +1,377 @@
+package e1reformat.gui.menu.reformat;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
+
+import org.apache.commons.lang3.StringUtils;
+
+import e1reformat.gui.main.MainUI;
+import e1reformat.util.IConstant;
+import e1reformat.util.ProgramLog;
+
+public class ReformatConfigDialog extends JDialog {
+
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1541241518592859530L;
+    private JTextField sourceFolderTextField;
+    private JTextField destFolderTextField;
+    private JTextField movedFolderTextField;
+    private JTextField minutesTxtField;
+    private JButton btnAddSourceFileButton;
+    private JButton btnAddDestFileButton;
+    private JRadioButton rdbtnDeleteSourceFiles;
+    private JRadioButton rdbtnMoveToFolderRadioButton;
+    private JButton btnAddMovedFileButton;
+    private JRadioButton onDemandRadioButton;
+    private JRadioButton automationRadioButton;
+    private JCheckBox timeConfigCheckbox;
+    private ButtonGroup methodRadioGroup = new ButtonGroup();
+    private ButtonGroup sourceFileRadioGroup = new ButtonGroup();
+    private File sourceFile;
+    private File destinationFile;
+    private File movedFile;
+    private ProgramLog programLog = new ProgramLog();
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        try {
+            ReformatConfigDialog dialog = new ReformatConfigDialog();
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Create the dialog.
+     */
+    public ReformatConfigDialog() {
+        setTitle("Reformat Configuration");
+        setBounds(100, 100, 686, 366);
+        getContentPane().setLayout(null);
+        {
+            JPanel panel = new JPanel();
+            panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Folder Selection", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
+            panel.setBounds(10, 11, 650, 91);
+            getContentPane().add(panel);
+            panel.setLayout(null);
+            {
+                JLabel label = new JLabel("Source Folder");
+                label.setBounds(29, 21, 76, 23);
+                label.setFont(new Font("Tahoma", Font.PLAIN, 11));
+                panel.add(label);
+            }
+
+            sourceFolderTextField = new JTextField();
+            sourceFolderTextField.setFont(new Font("Tahoma", Font.PLAIN, 11));
+            sourceFolderTextField.setBounds(120, 21, 410, 25);
+            sourceFolderTextField.setColumns(10);
+            panel.add(sourceFolderTextField);
+
+            btnAddSourceFileButton = new JButton("Browser...");
+            btnAddSourceFileButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    //add select source files
+                    JFileChooser fileChooser = new JFileChooser();
+                    JFrame f = new JFrame();
+                    fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                    int returnVal = fileChooser.showOpenDialog(f);
+                    if (returnVal == JFileChooser.APPROVE_OPTION) {
+                        sourceFile = fileChooser.getSelectedFile();
+                        sourceFolderTextField.setText(sourceFile.getAbsolutePath());
+                    }
+                }
+            });
+            btnAddSourceFileButton.setBounds(550, 21, 90, 23);
+            btnAddSourceFileButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
+            panel.add(btnAddSourceFileButton);
+
+            JLabel label = new JLabel("Output Folder");
+            label.setBounds(29, 55, 76, 23);
+            label.setFont(new Font("Tahoma", Font.PLAIN, 11));
+            panel.add(label);
+
+            destFolderTextField = new JTextField();
+            destFolderTextField.setFont(new Font("Tahoma", Font.PLAIN, 11));
+            destFolderTextField.setBounds(120, 55, 410, 25);
+            destFolderTextField.setColumns(10);
+            panel.add(destFolderTextField);
+
+            btnAddDestFileButton = new JButton("Browser...");
+            btnAddDestFileButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    //add select source files
+                    JFileChooser fileChooser = new JFileChooser();
+                    JFrame f = new JFrame();
+                    fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                    int returnVal = fileChooser.showOpenDialog(f);
+                    if (returnVal == JFileChooser.APPROVE_OPTION) {
+                        destinationFile = fileChooser.getSelectedFile();
+                        destFolderTextField.setText(destinationFile.getAbsolutePath());
+                    }
+                }
+            });
+            btnAddDestFileButton.setBounds(550, 55, 90, 23);
+            btnAddDestFileButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
+            panel.add(btnAddDestFileButton);
+        }
+
+        JPanel panel = new JPanel();
+        panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Source File Behavior", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(0, 0, 0)));
+        panel.setBounds(10, 113, 650, 77);
+        getContentPane().add(panel);
+        panel.setLayout(null);
+
+        rdbtnDeleteSourceFiles = new JRadioButton("Delete source files");
+        rdbtnDeleteSourceFiles.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                movedFolderTextField.setEnabled(false);
+                btnAddMovedFileButton.setEnabled(false);
+            }
+        });
+        rdbtnDeleteSourceFiles.setSelected(true);
+        rdbtnDeleteSourceFiles.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        rdbtnDeleteSourceFiles.setActionCommand(IConstant.SOURCE_BEHAVIOR.DELETE_SOURCE_FOLDER.toString());
+        rdbtnDeleteSourceFiles.setBounds(18, 27, 134, 23);
+        panel.add(rdbtnDeleteSourceFiles);
+
+        rdbtnMoveToFolderRadioButton = new JRadioButton("Move to folder");
+        rdbtnMoveToFolderRadioButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                movedFolderTextField.setEnabled(true);
+                btnAddMovedFileButton.setEnabled(true);
+            }
+        });
+        rdbtnMoveToFolderRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        rdbtnMoveToFolderRadioButton.setActionCommand(IConstant.SOURCE_BEHAVIOR.MOVE_TO_OTHER_FOLDER.toString());
+        rdbtnMoveToFolderRadioButton.setBounds(178, 27, 106, 23);
+        panel.add(rdbtnMoveToFolderRadioButton);
+
+        movedFolderTextField = new JTextField();
+        movedFolderTextField.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        movedFolderTextField.setEnabled(false);
+        movedFolderTextField.setColumns(10);
+        movedFolderTextField.setBounds(290, 27, 239, 25);
+        panel.add(movedFolderTextField);
+
+        btnAddMovedFileButton = new JButton("Browser...");
+        btnAddMovedFileButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //add select source files
+                JFileChooser fileChooser = new JFileChooser();
+                JFrame f = new JFrame();
+                fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                int returnVal = fileChooser.showOpenDialog(f);
+                if (returnVal == JFileChooser.APPROVE_OPTION) {
+                    movedFile = fileChooser.getSelectedFile();
+                    movedFolderTextField.setText(movedFile.getAbsolutePath());
+                }
+            }
+        });
+        btnAddMovedFileButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        btnAddMovedFileButton.setEnabled(false);
+        btnAddMovedFileButton.setBounds(550, 27, 90, 23);
+        panel.add(btnAddMovedFileButton);
+
+        JPanel panel_1 = new JPanel();
+        panel_1.setBorder(new TitledBorder(null, "Method", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        panel_1.setBounds(10, 201, 650, 77);
+        getContentPane().add(panel_1);
+        panel_1.setLayout(null);
+
+        onDemandRadioButton = new JRadioButton("On demand");
+        onDemandRadioButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                timeConfigCheckbox.setEnabled(false);
+            }
+        });
+        onDemandRadioButton.setSelected(true);
+        onDemandRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        onDemandRadioButton.setActionCommand(IConstant.METHODS.ON_DEMAND.toString());
+        onDemandRadioButton.setBounds(17, 31, 135, 23);
+        panel_1.add(onDemandRadioButton);
+
+        automationRadioButton = new JRadioButton("Automation");
+        automationRadioButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                timeConfigCheckbox.setEnabled(true);
+            }
+        });
+        automationRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        automationRadioButton.setActionCommand(IConstant.METHODS.AUTOMATION.toString());
+        automationRadioButton.setBounds(177, 31, 89, 23);
+        panel_1.add(automationRadioButton);
+
+        JLabel label = new JLabel("Every");
+        label.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        label.setBounds(303, 31, 46, 23);
+        panel_1.add(label);
+
+        timeConfigCheckbox = new JCheckBox("");
+        timeConfigCheckbox.setSelected(true);
+        timeConfigCheckbox.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        timeConfigCheckbox.setEnabled(false);
+        timeConfigCheckbox.setBounds(272, 31, 25, 23);
+        panel_1.add(timeConfigCheckbox);
+
+        minutesTxtField = new JTextField();
+        minutesTxtField.setText("5");
+        minutesTxtField.setHorizontalAlignment(SwingConstants.CENTER);
+        minutesTxtField.setColumns(10);
+        minutesTxtField.setBounds(348, 31, 24, 23);
+        panel_1.add(minutesTxtField);
+
+        JLabel label_1 = new JLabel("minutes");
+        label_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        label_1.setBounds(386, 31, 57, 23);
+        panel_1.add(label_1);
+
+        JButton btnNewButton = new JButton("Save");
+        btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        btnNewButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                save();
+            }
+        });
+        btnNewButton.setBounds(281, 292, 77, 23);
+        getContentPane().add(btnNewButton);
+
+        JButton btnCancel = new JButton("Cancel");
+        btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        btnCancel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+            }
+        });
+        btnCancel.setVerticalAlignment(SwingConstants.BOTTOM);
+        btnCancel.setBounds(372, 292, 77, 23);
+        getContentPane().add(btnCancel);
+
+        init();
+
+    }
+
+    protected void save() {
+        JFrame frame = new JFrame();
+        String method = methodRadioGroup.getSelection().getActionCommand();
+        String minutesInput = minutesTxtField.getText();
+        String sourceBehavior = sourceFileRadioGroup.getSelection().getActionCommand();
+
+        if (sourceFile == null) {
+            if (StringUtils.isEmpty(sourceFolderTextField.getText())) {
+                JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.SOURCE_FOLDER_NULL, "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            } else {
+                sourceFile = new File(sourceFolderTextField.getText());
+            }
+        }
+
+        if (destinationFile == null) {
+            if (StringUtils.isEmpty(destFolderTextField.getText())) {
+                JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.DESTINATION_FOLDER_NULL, "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            } else {
+                destinationFile = new File(destFolderTextField.getText());
+            }
+        }
+
+        if (sourceBehavior.endsWith(IConstant.SOURCE_BEHAVIOR.MOVE_TO_OTHER_FOLDER.toString())) {
+            if (movedFile == null) {
+                if (StringUtils.isEmpty(movedFolderTextField.getText())) {
+                    JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.MOVED_FOLDER_NULL, "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                } else {
+                    movedFile = new File(movedFolderTextField.getText());
+                }
+            }
+        }
+
+        if (method.equalsIgnoreCase(IConstant.METHODS.AUTOMATION.toString())) {
+            if (!timeConfigCheckbox.isSelected()) {
+                JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.UNCHECK_TIME_SELECTION, "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            } else {
+                if (!isValidNumber(minutesInput)) {
+                    JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.INVALID_TIME_NUMBER, "Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+        }
+
+        String minuteInput = minutesTxtField.getText();
+        programLog.saveInputFromUser(sourceFolderTextField.getText(), destFolderTextField.getText(), sourceBehavior, movedFolderTextField.getText(), method, minuteInput);
+        JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.REFORMAT_SAVE_CONFIG_SUCCESS, "Success", JOptionPane.INFORMATION_MESSAGE);
+        MainUI.loadReformatConfig();
+        dispose();
+    }
+
+    private void init() {
+        /*
+         *[start] Group method radio buttons
+         */
+
+        methodRadioGroup.add(onDemandRadioButton);
+        methodRadioGroup.add(automationRadioButton);
+
+        /*
+         *  [start] Group source folders radio buttons
+         */
+        sourceFileRadioGroup.add(rdbtnDeleteSourceFiles);
+        sourceFileRadioGroup.add(rdbtnMoveToFolderRadioButton);
+
+        String firstTimeRuning = programLog.getFirst_time_running();
+        if (!firstTimeRuning.equalsIgnoreCase(IConstant.SYSTEM_LOG.FIRST_TIME_RUNING)) {
+            sourceFolderTextField.setText(programLog.getSource_folder());
+            destFolderTextField.setText(programLog.getOutput_folder());
+            movedFolderTextField.setText(programLog.getMoved_folder());
+            minutesTxtField.setText(ProgramLog.minuteInput);
+
+            if (programLog.getSource_behavior().equals(IConstant.SOURCE_BEHAVIOR.MOVE_TO_OTHER_FOLDER.toString())) {
+                rdbtnMoveToFolderRadioButton.setSelected(true);
+                movedFolderTextField.setEnabled(true);
+                btnAddMovedFileButton.setEnabled(true);
+            } else {
+                rdbtnDeleteSourceFiles.setSelected(true);
+            }
+
+            if (programLog.getMethod().equals(IConstant.METHODS.ON_DEMAND.toString())) {
+                onDemandRadioButton.setSelected(true);
+            } else {
+                timeConfigCheckbox.setEnabled(true);
+                automationRadioButton.setSelected(true);
+            }
+        }
+
+    }
+
+    private boolean isValidNumber(String minutesInput) {
+        if (minutesInput.equals("0")) {
+            return false;
+        } else {
+            return StringUtils.isNumeric(minutesInput);
+        }
+    }
+}

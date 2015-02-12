@@ -1,0 +1,76 @@
+DROP VIEW VNP_COMMON.BALANCE_EI_VIEW;
+
+/* Formatted on 2/6/2015 9:56:51 AM (QP5 v5.269.14213.34746) */
+CREATE OR REPLACE FORCE VIEW VNP_COMMON.BALANCE_EI_VIEW
+(
+   BALANCE_EI_ID,
+   RESELLER_VERSION_ID,
+   OFFER_NAME,
+   OFFER_ID,
+   BALANCE_NAME,
+   BALANCE_ID,
+   RC_TERM_NAME,
+   RC_TERM_ID,
+   NRC_TERM_NAME,
+   NRC_TERM_ID,
+   EI_FLAG,
+   TIME_TYPE_NAME,
+   TIME_TYPE_ID,
+   UA_NAME,
+   UA_ID,
+   UA_GROUP_NAME,
+   UA_GROUP_ID
+)
+AS
+   SELECT BALANCE_EI_ID,
+          BE.RESELLER_VERSION_ID,
+          OFFER_NAME,
+          OFFER_ID,
+          BE.BALANCE_NAME,
+          BE.BALANCE_ID,
+          RC_TERM_NAME,
+          RC_TERM_ID,
+          NRC_TERM_NAME,
+          NRC_TERM_ID,
+          EI_FLAG,
+          TIME_TYPE_NAME,
+          TIME_TYPE_ID,
+          UA_NAME,
+          UA_ID,
+          UA_GROUP_NAME,
+          UA_GROUP_ID
+     --          , B.UNIT_TYPE_ID
+     FROM BALANCE_EI BE                                         -- , BALANCE B
+    WHERE UA_ID IS NOT NULL
+   --          AND BE.BALANCE_ID = B.BALANCE_ID
+   --          AND BE.RESELLER_VERSION_ID = B.RESELLER_VERSION_ID
+   UNION
+   SELECT BALANCE_EI_ID,
+          BALANCE_EI.RESELLER_VERSION_ID,
+          OFFER_NAME,
+          OFFER_ID,
+          BALANCE_EI.BALANCE_NAME,
+          BALANCE_EI.BALANCE_ID,
+          RC_TERM_NAME,
+          RC_TERM_ID,
+          NRC_TERM_NAME,
+          NRC_TERM_ID,
+          EI_FLAG,
+          TIME_TYPE_NAME,
+          TIME_TYPE_ID,
+          USAGE_ACTIVITY_GROUP.UA_NAME,
+          USAGE_ACTIVITY_GROUP.UA_ID,
+          USAGE_ACTIVITY_GROUP.UA_GROUP_NAME,
+          USAGE_ACTIVITY_GROUP.UA_GROUP_ID
+     --       , BALANCE.UNIT_TYPE_ID
+     FROM USAGE_ACTIVITY_GROUP
+          INNER JOIN BALANCE_EI
+             ON     (USAGE_ACTIVITY_GROUP.RESELLER_VERSION_ID =
+                        BALANCE_EI.RESELLER_VERSION_ID)
+                AND (BALANCE_EI.UA_GROUP_ID =
+                        USAGE_ACTIVITY_GROUP.UA_GROUP_ID)
+    --       INNER JOIN BALANCE
+    --          ON     (BALANCE.RESELLER_VERSION_ID =
+    --                     BALANCE_EI.RESELLER_VERSION_ID)
+    --             AND (BALANCE_EI.BALANCE_ID = BALANCE.BALANCE_ID)
+    WHERE BALANCE_EI.UA_GROUP_ID IS NOT NULL;

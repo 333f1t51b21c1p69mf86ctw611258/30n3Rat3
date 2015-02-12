@@ -1,0 +1,34 @@
+package e1reformat.gui.util;
+
+public class LogItem {
+
+    private Integer cdrLogProcessId;
+    private String isHanlded;
+
+    public Integer getCdrLogProcessId() {
+        return cdrLogProcessId;
+    }
+
+    public void setCdrLogProcessId(Integer cdrLogProcessId) {
+        this.cdrLogProcessId = cdrLogProcessId;
+    }
+
+    public String getIsHanlded() {
+        return isHanlded;
+    }
+
+    public void setIsHanlded(String isHanlded) {
+        this.isHanlded = isHanlded;
+    }
+
+    public LogItem() {
+        super();
+    }
+
+    public LogItem(Integer cdrLogProcessId, String isHanlded) {
+        super();
+        this.cdrLogProcessId = cdrLogProcessId;
+        this.isHanlded = isHanlded;
+    }
+
+}

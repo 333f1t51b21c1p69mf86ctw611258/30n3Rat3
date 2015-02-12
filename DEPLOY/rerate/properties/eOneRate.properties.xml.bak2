@@ -1,0 +1,961 @@
+<?xml version="1.0"?>
+<config>
+	<Application>
+		eOneRate
+	</Application>
+
+	<PipelineList>
+		<elcRateRemote>
+			<Active>true</Active>
+		</elcRateRemote>
+		<eOneRatePipeline>
+			<Active>true</Active> 
+		</eOneRatePipeline>
+		<CDRLoader>
+			<Active>false</Active>
+		</CDRLoader>
+		<BalLoader>
+			<Active>false</Active>
+		</BalLoader>
+	</PipelineList>
+
+	<elcRateRemote>
+		<InputAdapter>
+			<DBInpAdapter>
+				<ClassName>eonerate.data.RemoteDBInput</ClassName>
+				<BatchSize>10000</BatchSize>
+				<DataSource>eOneRateDB</DataSource>
+				<ValidateStatement>
+					SELECT COUNT (1) FROM ELCRATE_FLAG
+				</ValidateStatement>
+				<RecordCountStatement>
+					SELECT COUNT (1)
+					  FROM ELCRATE_FLAG
+					 WHERE FLAG = 0
+				</RecordCountStatement>
+				<InitStatement>
+					UPDATE ELCRATE_FLAG
+					   SET FLAG = 1
+					 WHERE FLAG = 0
+				</InitStatement>
+				<RecordSelectStatement>
+					  SELECT FLAG.CMD_CODE, COMMAND, FLAG.HOST_IP, FLAG.HOST_PORT
+						FROM ELCRATE_CMD CMD
+							 RIGHT OUTER JOIN ELCRATE_FLAG FLAG ON (CMD.CMD_CODE = FLAG.CMD_CODE)
+					   WHERE FLAG = 1
+					ORDER BY CREATED_TIME
+				</RecordSelectStatement>
+				<CommitStatement>
+					UPDATE ELCRATE_FLAG
+					   SET FLAG = 2
+					 WHERE FLAG = 1
+				</CommitStatement>
+				<RollbackStatement>
+					UPDATE ELCRATE_FLAG
+					   SET FLAG = 2
+					 WHERE FLAG = 1
+				</RollbackStatement>
+			</DBInpAdapter>		
+		</InputAdapter>
+		
+		<Process>
+		</Process>
+		
+		<OutputAdapter>
+			<NullOutput>
+				<Active>true</Active>
+				<OutputName>NullOutput</OutputName>
+				<ClassName>ElcRate.adapter.NullOutputAdapter</ClassName>
+				<BatchSize>5000</BatchSize>
+			</NullOutput>
+		</OutputAdapter>
+	</elcRateRemote>
+	
+	<eOneRatePipeline>
+		<InputAdapter>
+			<DBInpAdapter>
+				<ClassName>eonerate.data.DBInput</ClassName>
+				<BatchSize>10000</BatchSize>
+				<DataSource>eOneRateDB</DataSource>
+				<ValidateStatement>
+					SELECT COUNT (*) FROM VNP_DATA.HOT_RATED_CDR
+				</ValidateStatement>
+				<RecordCountStatement>
+					SELECT COUNT (*)
+					  FROM VNP_DATA.HOT_RATED_CDR
+					 WHERE RERATE_FLAG = 0
+				</RecordCountStatement>
+				<InitStatement>
+					UPDATE VNP_DATA.HOT_RATED_CDR
+					   SET RERATE_FLAG = 1
+					 WHERE ROWID IN (SELECT IDS
+									   FROM (  SELECT ROWID IDS
+												 FROM VNP_DATA.HOT_RATED_CDR
+												WHERE RERATE_FLAG = 0
+											 ORDER BY CDR_START_TIME)
+									  WHERE ROWNUM BETWEEN 1 AND 10000)
+				</InitStatement>
+				<RecordSelectStatement>
+					  SELECT A_NUMBER,
+							 CDR_TYPE,
+							 TO_CHAR (DECODE(CREATED_TIME,NULL,SYSDATE,CREATED_TIME), 'DD/MM/YYYY HH24:MI:SS') CREATED_TIME,
+							 TO_CHAR (CDR_START_TIME, 'DD/MM/YYYY HH24:MI:SS') CDR_START_TIME,
+							 DURATION,
+							 TOTAL_USAGE,
+							 B_NUMBER,
+							 B_ZONE,
+							 NW_GROUP,
+							 SERVICE_FEE,
+							 SERVICE_FEE_ID,
+							 CHARGE_FEE,
+							 CHARGE_FEE_ID,
+							 LAC,
+							 CELL_ID,
+							 SUBSCRIBER_UNBILL,
+							 BU_ID,
+							 OLD_BU_ID,
+							 OFFER_COST,
+							 OFFER_FREE_BLOCK,
+							 INTERNAL_COST,
+							 INTERNAL_FREE_BLOCK,
+							 DIAL_DIGIT,
+							 CDR_RECORD_HEADER_ID,
+							 CDR_SEQUENCE_NUMBER,
+							 LOCATION_NO,
+							 RERATE_FLAG,
+							 AUT_FINAL_ID,
+							 -- PAYMENT_ITEM_ID,
+							 MSC_ID,
+							 UNIT_TYPE_ID,
+							 TARIFF_PLAN_ID
+						FROM VNP_DATA.HOT_RATED_CDR
+					   WHERE RERATE_FLAG = 1
+					ORDER BY CDR_START_TIME
+				</RecordSelectStatement>
+				<CommitStatement>UPDATE VNP_DATA.HOT_RATED_CDR set RERATE_FLAG = 2 where RERATE_FLAG = 1</CommitStatement>
+				<RollbackStatement>UPDATE VNP_DATA.HOT_RATED_CDR set RERATE_FLAG = 2 where RERATE_FLAG = 1</RollbackStatement>
+			</DBInpAdapter>
+		</InputAdapter>
+
+		<Process>
+		
+			<ResellerVersionLookup>
+				<Active>true</Active>
+				<ClassName>eonerate.newlookup.ResellerVersionLookup</ClassName>
+				<DataCache>ResellerVersionCache</DataCache>
+				<BatchSize>100</BatchSize>
+			</ResellerVersionLookup>
+			
+			<ZoneLookup>
+				<!-- Existed AUT_FINAL_ID -->
+				<Active>false</Active>
+				<ClassName>eonerate.newlookup.ZoneLookup</ClassName>
+				<DataCache>ZoneCache</DataCache>
+				<BatchSize>10000</BatchSize>
+			</ZoneLookup>
+			
+			<ZoneGroupLookup>
+				<!-- Existed AUT_FINAL_ID -->
+				<Active>false</Active>
+				<ClassName>eonerate.newlookup.ZoneGroupLookup</ClassName>
+				<DataCache>ZoneGroupCache</DataCache>
+				<BatchSize>10000</BatchSize>
+				
+				<ConfigDataSource>eOneRateDB</ConfigDataSource>
+				<SelectStatement>
+					SELECT DISTINCT ZONE_NAME, PART_OF
+					  FROM VNP_COMMON.ZONE
+					 WHERE PART_OF != 'ANYWHERE'
+				</SelectStatement>
+			</ZoneGroupLookup>
+			
+			<UATransLookup>
+				<!-- Existed AUT_FINAL_ID, TARIFF_PLAN_ID -->
+				<Active>false</Active>
+				<ClassName>eonerate.newlookup.UATransLookup</ClassName>
+				<DataCache>UATransCache</DataCache>
+				<BatchSize>10000</BatchSize>
+			</UATransLookup>
+		
+			<CustomerLookup>
+				<Active>true</Active>
+				<ClassName>eonerate.newlookup.CustomerLookup</ClassName>
+				<DataCache>CustomerCache</DataCache>
+				<BatchSize>10000</BatchSize>
+			</CustomerLookup>
+			
+			<OfferPriorityLookup>
+				<Active>true</Active>
+				<ClassName>eonerate.newlookup.OfferPriorityLookup</ClassName>
+				<!-- <DataCache>OfferPriorityCache</DataCache> -->
+				<!-- <BatchSize>10000</BatchSize> -->
+				<!--<BalanceConfig>ConfigData/eOneRate/BalanceConfig.dat</BalanceConfig>-->
+				<ConfigDataSource>eOneRateDB</ConfigDataSource>
+				<SelectStatement>
+					SELECT PO_OFFER_ID,
+						   PO_OFFER_NAME,
+						   RESELLER_VERSION_ID,
+						   UPSELL_TEMPLATE_NAME,
+						   UPSELL_TEMPLATE_ID,
+						   UPSELL_TEMPLATE_MAP_ID,
+						   --       BUNDLE_NAME,
+						   --       BUNDLE_ID,
+						   UPSELL_TMP_OFFER_NAME,
+						   UPSELL_TMP_OFFER_ID,
+						   TARIFF_PRIORITY,
+						   RC_PRIORITY,
+						   DISCOUNT_PRIORITY,
+						   BALANCE_PRIORITY,
+						   DISPLAY_PRIORITY
+					  FROM VNP_COMMON.OFFER_PRIORITY_VIEW
+				</SelectStatement>
+			</OfferPriorityLookup>
+			
+			<!-- <UsageActivityZoneLookup>
+				<Active>true</Active>
+				<ClassName>eonerate.newlookup.UAZoneLookup</ClassName>
+				<DataCache>UAZoneCache</DataCache>
+				<BatchSize>10000</BatchSize>
+			</UsageActivityZoneLookup>
+			
+			<UsageActivityOtherLookup>
+				<Active>true</Active>
+				<ClassName>eonerate.newlookup.UAOtherLookup</ClassName>
+				<DataCache>UAZoneCache</DataCache>
+				<BatchSize>10000</BatchSize>
+			</UsageActivityOtherLookup> -->
+		
+			<TariffTimeMapLookup>
+				<Active>true</Active>
+				<ClassName>eonerate.newlookup.TariffTimeMapLookup</ClassName>
+				<DataCache>TariffTimeMapCache</DataCache>
+				<BatchSize>10000</BatchSize>
+			</TariffTimeMapLookup>
+		
+			<UsagePlanLookup>
+				<Active>true</Active>
+				<ClassName>eonerate.newlookup.UsagePlanLookup</ClassName>
+				<DataCache>UsagePlanCache</DataCache>
+				<BatchSize>10000</BatchSize>
+			</UsagePlanLookup>
+		
+			<TimeLookup>
+				<Active>true</Active>
+				<ClassName>eonerate.newlookup.TimeLookup</ClassName>
+				<DataCache>TimeCache</DataCache>
+				<BatchSize>1000</BatchSize>
+			</TimeLookup>
+			
+			<PriceMapLookup>
+				<!-- Existed TARIFF_PLAN_ID -->
+				<Active>false</Active>
+				<ClassName>eonerate.newlookup.PriceMapLookup</ClassName>
+				<DataCache>PriceMapCache</DataCache>
+				<BatchSize>5000</BatchSize>
+			</PriceMapLookup>
+			
+			<PromoPlanLookup>
+				<Active>true</Active>
+				<ClassName>eonerate.newlookup.PromoPlanLookup</ClassName>
+				<DataCache>PromoPlanCache</DataCache>
+				<BatchSize>5000</BatchSize>
+			</PromoPlanLookup>
+		
+			<PreRating>
+				<Active>true</Active>
+				<ClassName>eonerate.newlookup.PreRating</ClassName>
+				<DataCache>BalCache</DataCache>
+				<BatchSize>5000</BatchSize>
+				<!--<BalanceConfig>ConfigData/eOneRate/BalanceConfig.dat</BalanceConfig>-->
+				<ConfigDataSource>eOneRateDB</ConfigDataSource>
+				<SelectStatement>
+					SELECT OFFER_RC_AWARD_MAP_ID,
+						   RESELLER_VERSION_ID,
+						   OFFER_ID,
+						   RC_TERM_ID,
+						   TERM_FROM_DATE,
+						   TERM_TO_DATE,
+						   TERM_LEVEL_ID,
+						   BALANCE_ID,
+						   PERIOD,
+						   AMOUNT,
+						   CURRENCY_CODE,
+						   UNIT_TYPE_ID,
+						   RUM_ID,
+						   0 AS IS_INTERNAL
+					  FROM VNP_COMMON.OFFER_BALANCE_AWARD_VIEW
+				</SelectStatement>
+			</PreRating>
+		
+			<RateLookup>
+				<Active>true</Active>
+				<ClassName>eonerate.newlookup.RateLookup</ClassName>
+				<DataCache>RateCache</DataCache>
+				<BatchSize>5000</BatchSize>
+				
+				<ConfigDataSource>eOneRateDB</ConfigDataSource>
+				<SelectStatement>
+					  SELECT RESELLER_VERSION_ID,
+							 DISCOUNT_ITEM_ID,
+							 THRESHOLD,
+							 AMOUNT,
+							 RUM_ID,
+							 UA_ID,
+							 PERIOD
+						FROM DISCOUNT_MODEL_RATING_VIEW
+					   WHERE PERIOD = 'A'
+					ORDER BY DISCOUNT_ITEM_ID, THRESHOLD
+				</SelectStatement>
+			</RateLookup>
+			
+			<PostRating>
+				<Active>true</Active>
+				<ClassName>eonerate.newlookup.PostRating</ClassName>
+				<DataCache>BalCache</DataCache>
+				<BatchSize>5000</BatchSize>
+				
+				<ConfigDataSource>eOneRateDB</ConfigDataSource>
+				<SelectStatement>
+					  SELECT RESELLER_VERSION_ID,
+							 DISCOUNT_ITEM_ID,
+							 THRESHOLD,
+							 AMOUNT,
+							 RUM_ID,
+							 UA_ID,
+							 PERIOD
+						FROM DISCOUNT_MODEL_RATING_VIEW
+					   WHERE PERIOD != 'A'
+					ORDER BY DISCOUNT_ITEM_ID, THRESHOLD
+				</SelectStatement>
+			</PostRating>
+			
+			<Rollup>
+				<Active>true</Active>
+				<ClassName>eonerate.newlookup.Rollup</ClassName>				
+				<BatchSize>10000</BatchSize>
+			</Rollup>	
+		
+			<!--<TimeLookup>
+				<Active>true</Active>
+				<ClassName>eonerate.newlookup.TimeLookup</ClassName>
+				<DataCache>TimeCache</DataCache>
+				<BatchSize>5000</BatchSize>
+			</TimeLookup>-->
+		
+			<!--
+			<ZoneLookup>
+				<Active>true</Active>
+				<ClassName>eonerate.newlookup.ZoneLookup</ClassName>
+				<DataCache>ZoneCache</DataCache>
+				<BatchSize>10000</BatchSize>
+			</ZoneLookup>
+			
+			<ZoneGroupLookup>
+				<Active>true</Active>
+				<ClassName>eonerate.newlookup.ZoneGroupLookup</ClassName>
+				<DataCache>ZoneGroupCache</DataCache>
+				<BatchSize>10000</BatchSize>
+			</ZoneGroupLookup>
+
+			<CustomerLookup>
+				<Active>true</Active>
+				<ClassName>eonerate.newlookup.CustomerLookup</ClassName>
+				<DataCache>CustomerCache</DataCache>
+				<BatchSize>10000</BatchSize>
+			</CustomerLookup>
+
+			<UsagePlanLookup>
+				<Active>true</Active>
+				<ClassName>eonerate.newlookup.UsagePlanLookup</ClassName>
+				<DataCache>UsagePlanCache</DataCache>
+				<BatchSize>10000</BatchSize>
+			</UsagePlanLookup>
+			-->
+		</Process>
+
+		<OutputAdapter>
+			<!-- <NullOutput>
+				<Active>true</Active>
+				<OutputName>NullOutput</OutputName>
+				<ClassName>ElcRate.adapter.NullOutputAdapter</ClassName>
+				<BatchSize>5000</BatchSize>
+			</NullOutput> -->
+		
+			<DBOutputAdapter>
+				<ClassName>eonerate.data.DBOutput</ClassName>
+				<OutputName>DBOutput</OutputName>
+				<BatchSize>10000</BatchSize>
+				<MaxSleep>50</MaxSleep>
+				<DataSource>eOneRateDB</DataSource>
+				<ValidateStatement>select count(*) from VNP_DATA.RATED_CDR</ValidateStatement>
+				<InitStatement>select count(*) from VNP_DATA.RATED_CDR</InitStatement>
+				<RecordInsertStatement>
+					INSERT INTO VNP_DATA.RATED_CDR (
+						A_NUMBER, CDR_TYPE, CREATED_TIME,
+						CDR_START_TIME, DURATION, TOTAL_USAGE,
+						B_NUMBER, B_ZONE, NW_GROUP,
+						SERVICE_FEE, SERVICE_FEE_ID, CHARGE_FEE,
+						CHARGE_FEE_ID, LAC, CELL_ID,
+						SUBSCRIBER_UNBILL, BU_ID, OLD_BU_ID,
+						OFFER_COST, OFFER_FREE_BLOCK, INTERNAL_COST,
+						INTERNAL_FREE_BLOCK, DIAL_DIGIT, CDR_RECORD_HEADER_ID,
+						CDR_SEQUENCE_NUMBER, LOCATION_NO, RERATE_FLAG,
+						AUT_FINAL_ID, MSC_ID,UNIT_TYPE_ID,
+						TARIFF_PLAN_ID,
+						ERROR_MESSAGE
+					) VALUES (
+						?,?,SYSDATE,
+						to_date(?,'dd/MM/yyyy hh24:mi:ss'),?,?,
+						?,?,?,
+						?,?,?,
+						?,?,?,
+						?,?,?,
+						?,?,?,
+						?,?,?,
+						?,?,1,
+						?,?,?,
+						?,
+						?
+					)
+				</RecordInsertStatement>
+				<CommitStatement>update VNP_DATA.RATED_CDR set RERATE_FLAG=2 where RERATE_FLAG=1</CommitStatement>
+				<RollbackStatement>delete from VNP_DATA.RATED_CDR where RERATE_FLAG=1</RollbackStatement>
+			</DBOutputAdapter>
+			<!--<TPOutAdapter>
+				<Active>true</Active>
+				<ClassName>eonerate.data.RateOutputFile</ClassName>
+				<OutputName>Record</OutputName>
+				<BatchSize>10000</BatchSize>
+				<MaxSleep>50</MaxSleep>
+				<OutputFilePath>Data/eOneRate</OutputFilePath>
+				<OutputFilePrefix>CDR_</OutputFilePrefix>
+				<OutputFileSuffix>.out</OutputFileSuffix>
+				<ErrFilePath>Data/eOneRate/Err</ErrFilePath>
+				<ErrFilePrefix>CDR_</ErrFilePrefix>
+				<ErrFileSuffix>.err</ErrFileSuffix>
+			</TPOutAdapter>-->
+			<!--<BOOutAdapter>
+				<ClassName>eonerate.data.BalOutputAdapter</ClassName>
+				<OutputName>Balance</OutputName>
+				<BatchSize>10000</BatchSize>
+				<MaxSleep>50</MaxSleep>
+				<OutputFilePath>Data/eOneRate/Balance</OutputFilePath>
+				<OutputFilePrefix>BAL_</OutputFilePrefix>
+				<OutputFileSuffix>.out</OutputFileSuffix>
+				<ErrFilePath>Data/eOneRate/Err</ErrFilePath>
+				<ErrFilePrefix>BAL_</ErrFilePrefix>
+				<ErrFileSuffix>.err</ErrFileSuffix>
+			</BOOutAdapter>-->			
+			<BOOutAdapter>
+				<ClassName>eonerate.data.BalOutputAdapter</ClassName>
+				<OutputName>BalanceOut</OutputName>
+				<BatchSize>10000</BatchSize>
+				<MaxSleep>50</MaxSleep>
+				<DataSource>eOneRateDB</DataSource>
+				
+				<ValidateStatement>SELECT COUNT(*) FROM VNP_DATA.BALANCE_COUNTER</ValidateStatement>
+				
+				<InitStatement>SELECT COUNT(*) FROM VNP_DATA.BALANCE_COUNTER</InitStatement>
+				
+				<RecordInsertStatement>CALL VNP_DATA.RR_UPDATE_COUNTER_2(?,?,?,?,?,?)</RecordInsertStatement>
+				
+				<!-- Sau nay co the update aggregate balance-->
+				<!--<CommitStatement>UDPATE VNP_DATA.BALANCE_COUNTER SET RECORD_ID=0 WHERE RECORD_ID=1</CommitStatement>-->
+				<CommitStatement>SELECT 1 FROM DUAL</CommitStatement>				
+				
+				<RollbackStatement>DELETE FROM VNP_DATA.BALANCE_COUNTER WHERE RECORD_ID=1</RollbackStatement>
+			</BOOutAdapter>
+		</OutputAdapter>
+	</eOneRatePipeline>
+	
+	<CDRLoader>
+		<InputAdapter>
+			<BLInpAdapter>
+				<ClassName>eonerate.data.CDRInputAdapter</ClassName>
+				<BatchSize>10000</BatchSize>
+				<InputFilePath>Data/eOneRate</InputFilePath>
+				<InputFilePrefix>CDR_</InputFilePrefix>
+				<InputFileSuffix>.out</InputFileSuffix>
+				<DoneFilePath>Data/eOneRate/Done</DoneFilePath>
+				<DoneFilePrefix>CDR_</DoneFilePrefix>
+				<DoneFileSuffix>.done</DoneFileSuffix>
+				<ErrFilePath>Data/eOneRate/Err</ErrFilePath>
+				<ErrFilePrefix>CDR_</ErrFilePrefix>
+				<ErrFileSuffix>.err-in</ErrFileSuffix>
+			</BLInpAdapter>
+		</InputAdapter>
+
+		<Process>
+		</Process>
+
+		<OutputAdapter>
+			<DBOutputAdapter>
+				<ClassName>eonerate.data.CDROutputAdapter</ClassName>
+				<OutputName>default</OutputName>
+				<BatchSize>10000</BatchSize>
+				<MaxSleep>50</MaxSleep>
+				<DataSource>eOneRateDB</DataSource>
+				<ValidateStatement>select count(*) from VNP_DATA.RATED_CDR</ValidateStatement>
+				<InitStatement>select count(*) from VNP_DATA.RATED_CDR</InitStatement>
+				<RecordInsertStatement>
+					INSERT INTO VNP_DATA.RATED_CDR (
+								A_NUMBER, CDR_TYPE, CREATED_TIME,
+								CDR_START_TIME, DURATION, TOTAL_USAGE,
+								B_NUMBER, B_ZONE, NW_GROUP,
+								SERVICE_FEE, SERVICE_FEE_ID, CHARGE_FEE,
+								CHARGE_FEE_ID, LAC, CELL_ID,
+								SUBSCRIBER_UNBILL, BU_ID, OLD_BU_ID,
+								OFFER_COST, OFFER_FREE_BLOCK, INTERNAL_COST,
+								INTERNAL_FREE_BLOCK, DIAL_DIGIT, CDR_RECORD_HEADER_ID,
+								CDR_SEQUENCE_NUMBER, LOCATION_NO, RERATE_FLAG,
+								CALL_TYPE_ID, PAYMENT_ITEM_ID, MSC_ID,
+								ERROR_MESSAGE
+					) VALUES (
+						?,?,SYSDATE,
+						to_date(?,'dd/MM/yyyy hh24:mi:ss'),?,?,
+						?,?,?,
+						?,?,?,
+						?,?,?,
+						?,?,?,
+						?,?,?,
+						?,?,?,
+						?,?,?,
+						?,?,?,
+						?
+					)
+				</RecordInsertStatement>
+				<CommitStatement>update VNP_DATA.RATED_CDR set RERATE_FLAG=0 where RERATE_FLAG=1</CommitStatement>
+				<RollbackStatement>delete from VNP_DATA.RATED_CDR where RERATE_FLAG=1</RollbackStatement>
+			</DBOutputAdapter>
+		</OutputAdapter>
+	</CDRLoader>
+	
+	<BalLoader>
+		<!-- Đọc  -->
+		<InputAdapter>
+			<BLInpAdapter>
+				<ClassName>eonerate.data.BalInputAdapter</ClassName>
+				<BatchSize>10000</BatchSize>
+				<InputFilePath>Data/eOneRate/Balance</InputFilePath>
+				<InputFilePrefix>BAL_</InputFilePrefix>
+				<InputFileSuffix>.out</InputFileSuffix>
+				<DoneFilePath>Data/eOneRate/Done</DoneFilePath>
+				<DoneFilePrefix>BAL_</DoneFilePrefix>
+				<DoneFileSuffix>.done</DoneFileSuffix>
+				<ErrFilePath>Data/eOneRate/Err</ErrFilePath>
+				<ErrFilePrefix>BAL_</ErrFilePrefix>
+				<ErrFileSuffix>.err-in</ErrFileSuffix>
+			</BLInpAdapter>
+		</InputAdapter>
+
+		<Process>
+		</Process>
+
+		<OutputAdapter>
+			<DBOutputAdapter>
+				<ClassName>eonerate.data.BalDBOutput</ClassName>
+				<OutputName>default</OutputName>
+				<BatchSize>10000</BatchSize>
+				<MaxSleep>50</MaxSleep>
+				<DataSource>eOneRateDB</DataSource>
+
+				<ValidateStatement>select count(*) from VNP_DATA.BALANCE_COUNTER</ValidateStatement>
+
+				<InitStatement>select count(*) from VNP_DATA.BALANCE_COUNTER</InitStatement>
+
+				<RecordInsertStatement>CALL VNP_DATA.RR_UPDATE_COUNTER(?,?,?,?,?,?)</RecordInsertStatement>
+				
+				<!-- Sau nay co the update aggregate balance-->
+				<!--<CommitStatement>UDPATE VNP_DATA.BALANCE_COUNTER SET RECORD_ID=0 WHERE RECORD_ID=1</CommitStatement>-->
+				<CommitStatement>SELECT 1 FROM DUAL</CommitStatement>
+				
+				<RollbackStatement>DELETE FROM VNP_DATA.BALANCE_COUNTER WHERE RECORD_ID=1</RollbackStatement>
+
+			</DBOutputAdapter>
+		</OutputAdapter>
+	</BalLoader>
+	
+	<Resource>
+		<LogFactory>
+			<ClassName>ElcRate.logging.LogFactory</ClassName>
+			<Properties>log.properties</Properties>
+			<DefaultCategory>eOneRatePipeline</DefaultCategory>
+		</LogFactory>
+
+		<ECI>
+			<ClassName>ElcRate.configurationmanager.EventHandler</ClassName>
+			<Port>8668</Port>
+			<MaxConnection>2</MaxConnection>
+		</ECI>
+
+		<TransactionManagerFactory>
+			<ClassName>ElcRate.transaction.TransactionManagerFactory</ClassName>
+		</TransactionManagerFactory>
+
+		<DataSourceFactory>
+			<ClassName>ElcRate.resource.DataSourceFactory</ClassName>
+			<DataSourceBuilder>
+				<ClassName>ElcRate.db.C3P0DataSource</ClassName>
+			</DataSourceBuilder>
+			<DataSource>
+				<eOneRateDB>
+					<db_url>jdbc:oracle:thin:@//192.168.6.207:1521/eonerate</db_url>
+					<!-- <db_url>jdbc:oracle:thin:@//192.168.68.87:1521/orcl</db_url> -->
+					<!-- <db_url>jdbc:oracle:thin:@//192.168.0.87:1521/orcl</db_url> -->
+					<driver>oracle.jdbc.driver.OracleDriver</driver>
+					<username>vnp_common</username>
+					<password>vnp_common</password>
+					<ValidationQuery>SELECT 1 FROM DUAL</ValidationQuery>
+					<InitQuery>SELECT 1 FROM DUAL</InitQuery>
+					<TestConnectionPeriod>60</TestConnectionPeriod>
+				</eOneRateDB>
+			</DataSource>
+		</DataSourceFactory>
+
+		<CacheFactory>
+			<ClassName>ElcRate.resource.CacheFactory</ClassName>
+			<CacheableClass>
+				<ResellerVersionCache>
+					<ClassName>eonerate.newlookup.ResellerVersionCache</ClassName>
+					<DataSourceType>DB</DataSourceType>
+					<DataSource>eOneRateDB</DataSource>
+					<XrefSelectStatement>
+						  SELECT RESELLER_VERSION_ID,
+								 ACTIVE_DATE,
+								 INACTIVE_DATE,
+								 STATUS
+							FROM VNP_COMMON.RESELLER_VERSION
+						ORDER BY STATUS DESC
+					</XrefSelectStatement>
+				</ResellerVersionCache>
+			
+				<!-- <ResellerVersionCache>
+					<ClassName>ElcRate.cache.BestMatchCache</ClassName>
+					<DataSourceType>DB</DataSourceType>
+					<DataSource>eOneRateDB</DataSource>
+					<SelectStatement>
+						SELECT '8', '8', '8', '8'
+						  FROM DUAL
+					</SelectStatement>
+				</ResellerVersionCache> -->
+				
+				<ZoneCache>
+					<ClassName>ElcRate.cache.BestMatchCache</ClassName>
+					<DataSourceType>DB</DataSourceType>
+					<DataSource>eOneRateDB</DataSource>
+					<!--<SelectStatement>select ZONE_GROUP,CODE,NW_GROUP,ZONE from ZONE_MAP</SelectStatement>-->
+					<SelectStatement>
+						SELECT 'TEMP_SERVICE',
+							   GLT_NUMBER,
+							   ZONE_NAME,
+							   PART_OF
+						  FROM VNP_COMMON.ZONE
+						 WHERE PART_OF != 'ANYWHERE'
+					</SelectStatement>
+				</ZoneCache>
+				
+				<ZoneGroupCache>
+					<ClassName>ElcRate.cache.RegexMatchCache</ClassName>
+					<DataSourceType>DB</DataSourceType>
+					<DataSource>eOneRateDB</DataSource>
+					<SelectStatement>
+						  SELECT RESELLER_VERSION_ID,
+								 ZONE_A,
+								 ZONE_B,
+								 GROUP_ID -- => SK
+							FROM VNP_COMMON.ZONE_GROUP
+						ORDER BY PRIORITY
+					</SelectStatement>
+					<ObjectFields>3</ObjectFields>
+					<IndexFields>1</IndexFields>
+				</ZoneGroupCache>
+				
+				<UATransCache>
+					<ClassName>ElcRate.cache.RegexMatchCache</ClassName>
+					<DataSourceType>DB</DataSourceType>
+					<DataSource>eOneRateDB</DataSource>
+					<SelectStatement>
+						  SELECT RESELLER_VERSION_ID,
+								 UA_ID,
+								 ZONE_GROUP_ID,
+									PRIORITY
+								 || ':'
+								 || ACCOUNT_GROUP_ID
+								 || ':'
+								 || SUBS_GROUP_ID
+								 || ':'
+								 || MARKET_GROUP_ID
+								 || ':'
+								 || ACCESS_METHOD_GROUP_ID
+								 || ':'
+								 || SPECIAL_FEATURE_GROUP_ID
+								 || ':'
+								 || OFFLINE_GROUP_ID
+							FROM VNP_COMMON.USAGE_ACTIVITY_TRANS
+						ORDER BY PRIORITY
+					</SelectStatement>
+					<ObjectFields>3</ObjectFields>
+					<IndexFields>1</IndexFields>
+				</UATransCache>
+				
+				<CustomerCache>
+					<ClassName>eonerate.newlookup.MyCustomerCacheAudited</ClassName>
+					<DataSourceType>DB</DataSourceType>
+					<DataSource>eOneRateDB</DataSource>
+
+					<!--<AliasSelectStatement>select ID,ALIAS,ACCOUNTID,SUBSCRIPTIONID,STARTDATE,ENDDATE,ModT from ALIAS where ModT > ?</AliasSelectStatement>-->
+					<AliasSelectStatement>
+						SELECT ACCOUNT_VERSION_ID,
+							   ALIAS,
+							   ACCOUNT_ID,
+							   SUBSCRIBER_NO,
+							   FROM_DATE,
+							   TO_DATE,
+							   MODIFIED_DATE
+						  FROM VNP_COMMON.ALIAS_SELECT
+						 WHERE MODIFIED_DATE > ?
+					</AliasSelectStatement>
+
+					<!--<AuditSegmentSelectStatement>select ACCOUNTVERID,ACCOUNTID,MSN,EFFECTIVEDATE,STARTDATE,ENDDATE,ModT from ACCOUNT_VERSION where ModT > ? order by EFFECTIVEDATE desc</AuditSegmentSelectStatement>-->
+					<AuditSegmentSelectStatement>
+						SELECT ACCOUNT_VERSION_ID,
+							   ACCOUNT_ID,
+							   MSN,
+							   EFFECTIVE_DATE,
+							   FROM_DATE,
+							   TO_DATE,
+							   MODIFIED_DATE
+						  FROM VNP_COMMON.AUDIT_SEGMENT_SELECT
+						 WHERE MODIFIED_DATE > ?
+					</AuditSegmentSelectStatement>
+
+					<!--<ProductSelectStatement>select ACCOUNTVERID,ID,PRODUCTID,SUBSCRIPTIONID,SERVICE,STARTDATE,ENDDATE,ModT from PRODUCT where ModT > ?</ProductSelectStatement>-->
+					<ProductSelectStatement>
+						SELECT ACCOUNT_VERSION_ID,
+							   ID,
+							   OFFER_ID,
+							   SUBSCRIBER_NO,
+							   RESELLER_VERSION_ID,
+							   FROM_DATE,
+							   TO_DATE,
+							   MODIFIED_DATE
+						  FROM VNP_COMMON.PRODUCT_SELECT
+						 WHERE MODIFIED_DATE > ?
+					 </ProductSelectStatement>
+
+					<!--<ERASelectStatement>select ACCOUNTVERID,ERAKEY,ERAVALUE,ModT from E_R_A where ModT > ?</ERASelectStatement>-->
+					<ERASelectStatement>SELECT * FROM VNP_COMMON.ERA_SELECT WHERE MODIFIED_DATE > ?</ERASelectStatement>
+
+					<UpdateFrequency>10</UpdateFrequency>
+				</CustomerCache>
+				
+				<OfferPriorityCache>
+					<ClassName>ElcRate.cache.BestMatchCache</ClassName>
+					<DataSourceType>DB</DataSourceType>
+					<DataSource>eOneRateDB</DataSource>
+					<SelectStatement>
+						SELECT '8', '8', '8', '8'
+						  FROM DUAL
+					</SelectStatement>
+				</OfferPriorityCache>
+				
+				<!-- <UAZoneCache>
+					<ClassName>ElcRate.cache.RegexMatchCache</ClassName>
+					<DataSourceType>DB</DataSourceType>
+					<DataSource>eOneRateDB</DataSource>
+					<SelectStatement>
+						  SELECT RESELLER_VERSION_ID,
+								 UNIT_TYPE_ID,
+								 ZONE_GROUP_ID,
+									UA_ID
+								 || ':'
+								 || ACCOUNT_GROUP_ID
+								 || ':'
+								 || SUBS_GROUP_ID
+								 || ':'
+								 || MARKET_GROUP_ID
+								 || ':'
+								 || ACCESS_METHOD_GROUP_ID
+								 || ':'
+								 || SPECIAL_FEATURE_GROUP_ID
+								 || ':'
+								 || OFFLINE_GROUP_ID
+							FROM USAGE_ACTIVITY_ZONE
+						ORDER BY PRIORITY
+					</SelectStatement>
+					<ObjectFields>3</ObjectFields>
+					<IndexFields>1</IndexFields>
+				</UAZoneCache>
+				
+				<UAOtherCache>
+					<ClassName>ElcRate.cache.RegexMatchCache</ClassName>
+					<DataSourceType>DB</DataSourceType>
+					<DataSource>eOneRateDB</DataSource>
+					<SelectStatement>
+						SELECT RESELLER_VERSION_ID, UA_INITIAL_ID, UA_ID
+						  FROM USAGE_ACTIVITY
+						 WHERE UA_INITIAL_ID IS NOT NULL
+					</SelectStatement>
+					<ObjectFields>2</ObjectFields>
+					<IndexFields>1</IndexFields>
+				</UAOtherCache> -->
+				
+				<TariffTimeMapCache>
+					<ClassName>ElcRate.cache.RegexMatchCache</ClassName>
+					<DataSourceType>DB</DataSourceType>
+					<DataSource>eOneRateDB</DataSource>
+					<SelectStatement>
+						SELECT RESELLER_VERSION_ID,
+							   TARIFF_PLAN_ID,
+							   CALENDAR_ID
+						  FROM VNP_COMMON.TARIFF_PLAN
+					</SelectStatement>
+				</TariffTimeMapCache>
+				
+				<UsagePlanCache>
+					<ClassName>ElcRate.cache.RegexMatchCache</ClassName>
+					<DataSourceType>DB</DataSourceType>
+					<DataSource>eOneRateDB</DataSource>
+					<!--<SelectStatement>select MAP,PACKET_TYPE,RATE_PLAN,SERVICE,PRIORITY||':'||ZONE_MODEL||':'||TIME_MODEL from rate_plan_info</SelectStatement>-->
+					<SelectStatement>
+						SELECT 'UsagePlan_' || UNIT_TYPE_NAME,
+							   'R',
+							   OFFER_ID,
+							   RESELLER_VERSION_ID,
+							   UA_ID,
+							   TARIFF_PLAN_ID || ':' || OFFER_TYPE
+						  FROM VNP_COMMON.USAGE_PLAN_VIEW
+					</SelectStatement>
+					<ObjectFields>5</ObjectFields>
+					<IndexFields>1</IndexFields>
+				</UsagePlanCache>
+				
+				<TimeCache>
+					<ClassName>ElcRate.cache.TimeModelCache</ClassName>
+					<DataSourceType>DB</DataSourceType>
+					<DataSource>eOneRateDB</DataSource>
+
+					<MappingSelectStatement>
+						SELECT CALENDAR_ID, CALENDAR_ID FROM VNP_COMMON.TIME_MAP
+					</MappingSelectStatement>
+					
+					<ModelSelectStatement>
+						SELECT CALENDAR_ID,
+							   DAY_IN,
+							   FROM_IN,
+							   TO_IN,
+							   TIME_TYPE_ID
+						  FROM VNP_COMMON.TIME_MODEL
+					</ModelSelectStatement>
+				</TimeCache>
+				
+				<PriceMapCache>
+					<ClassName>ElcRate.cache.RegexMatchCache</ClassName>
+					<DataSourceType>DB</DataSourceType>
+					<DataSource>eOneRateDB</DataSource>
+
+					<!--<SelectStatement>select MAP_GROUP,PRODUCT_IN,ZONE_IN,TIME_IN,PRICE_OUT from PRICE_MAP</SelectStatement>-->
+					<SelectStatement>
+						SELECT RESELLER_VERSION_ID,
+							   OFFER_ID,
+							   UA_ID,
+							   CALENDAR_ID,
+							   TARIFF_PLAN_ID
+						  FROM VNP_COMMON.USAGE_PLAN_VIEW
+					</SelectStatement>
+
+				</PriceMapCache>
+				
+				<PromoPlanCache>
+					<ClassName>ElcRate.cache.RegexMatchCache</ClassName>
+					<DataSourceType>DB</DataSourceType>
+					<DataSource>eOneRateDB</DataSource>
+
+					<!--<SelectStatement>select MAP_GROUP,DISCOUNT_IN,ZONE_IN,DISCOUNT_OUT from DISCOUNT_MAP</SelectStatement>-->
+					<SelectStatement>
+						SELECT RESELLER_VERSION_ID, OFFER_ID, REGEX_RESULT FROM PROMO_PLAN_VIEW
+						
+						<!-- SELECT RESELLER_VERSION_ID,
+							   OFFER_ID,
+							   BONUS_ITEM_ID || ':' || DISCOUNT_ITEM_ID
+						  FROM VNP_COMMON.PROMO_PLAN -->
+					</SelectStatement>
+					
+					<ObjectFields>2</ObjectFields>
+					<IndexFields>1</IndexFields>
+				</PromoPlanCache>
+				
+				<RateCache>
+					<ClassName>ElcRate.cache.RUMRateCache</ClassName>
+					<DataSourceType>DB</DataSourceType>
+					<DataSource>eOneRateDB</DataSource>
+
+					<!--<RUMMapStatement>select PRICE_GROUP,PRICE_MODEL,RUM,RESOURCES,RUM_TYPE,RESOURCE_ID,CONSUME_FLAG from RUM_MAP order by STEP</RUMMapStatement>-->
+					<RUMMapStatement>
+						  SELECT TARIFF_PLAN_ID,
+								 TARIFF_MODEL_ID,
+								 RUM_ID,
+								 CURRENCY_NAME AS RESOURCE_NAME,
+								 RUM_TYPE,
+								 CURRENCY_ID AS RESOURCE_ID,
+								 CONSUME_FLAG
+							FROM VNP_COMMON.RUM_MAP
+						ORDER BY STEP
+					</RUMMapStatement>
+					
+					<!--<PriceModelStatement>select PRICE_MODEL,STEP,TIER_FROM,TIER_TO,BEAT,FACTOR,CHARGE_BASE from PRICE_MODEL</PriceModelStatement>-->
+					<PriceModelStatement>
+						  SELECT TARIFF_MODEL_ID,
+								 STEP,
+								 TIER_FROM,
+								 TIER_TO,
+								 BEAT,
+								 FACTOR,
+								 CHARGE_BASE
+							FROM VNP_COMMON.TARIFF_MODEL
+						ORDER BY TARIFF_MODEL_ID, STEP
+					</PriceModelStatement>
+
+				</RateCache>
+				
+				<BalCache>
+					<ClassName>ElcRate.cache.BalanceCache</ClassName>
+					<DataSourceType>DB</DataSourceType>
+					<DataSource>eOneRateDB</DataSource>
+					<DateFormat>integer</DateFormat>
+
+					<!--<SelectStatement>select BALANCE_GROUP,COUNTER_ID,RECORD_ID,VALID_FROM,VALID_TO,CURRENT_BAL from COUNTER_BALS</SelectStatement>-->
+					<SelectStatement>
+					   SELECT BAL_GROUP_ID,
+							  COUNTER_ID,
+							  RECORD_ID,
+							  VALID_FROM,
+							  VALID_TO,
+							  CURRENT_BAL
+						 FROM VNP_DATA.BALANCE_COUNTER
+					</SelectStatement>
+
+				</BalCache>
+				
+				<!-- <DisCache>
+					<ClassName>ElcRate.cache.BalanceCache</ClassName>
+					<DataSourceType>DB</DataSourceType>
+					<DataSource>eOneRateDB</DataSource>
+					<DateFormat>integer</DateFormat>
+
+					<SelectStatement>
+					   SELECT DIS_GROUP_ID,
+							  COUNTER_ID,
+							  RECORD_ID,
+							  VALID_FROM,
+							  VALID_TO,
+							  AMOUNT
+						 FROM VNP_DATA.DISCOUNT_COUNTER
+					</SelectStatement>
+
+				</DisCache> -->
+				
+			</CacheableClass>
+		</CacheFactory>
+	</Resource>
+</config>

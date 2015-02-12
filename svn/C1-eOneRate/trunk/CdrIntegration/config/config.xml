@@ -1,0 +1,28 @@
+<config>
+	<!-- Chi load file tu ngay hom nay -->
+	<onlyToday>true</onlyToday>
+	<slus>slu1;slu3;slu5;slu7;slu9;slu11</slus>
+	<deleteGzipFile>false</deleteGzipFile>
+	<destFolderPath>/cdr</destFolderPath>
+	<extFolderPath>/cdr/ready</extFolderPath>
+	<inputHostName>10.149.3.15</inputHostName>
+	<inputUserName>elcom</inputUserName>
+	<inputPassword>elcom@123</inputPassword>
+	<inputDirectory>/orvol/re-rate</inputDirectory>
+	<inputOsFileSeparator>/</inputOsFileSeparator>
+	<retryCount>3</retryCount>
+	<!-- Sleep khi download qua sftp co loi -->
+	<retryDownloadFileSleepTime>3000</retryDownloadFileSleepTime>
+	<!-- Don vi: Giay -->
+	<scanInterval>60</scanInterval>
+	<!-- Load lai Today, va truong hop Comverse day file cu muon hon file moi -->
+	<!-- Don vi: Phut -->
+	<slowerCdrInterval>15</slowerCdrInterval>
+	<dbConnection>jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))
+	</dbConnection>
+	<dbUserName>vnp_common</dbUserName>
+	<dbPassword>vnp_common</dbPassword>
+	<corePoolSize>8</corePoolSize>
+	<maximumPoolSize>16</maximumPoolSize>
+	<instancePort>8681</instancePort>
+</config>

@@ -23,7 +23,7 @@ BEGIN
    BEGIN
       SELECT COUNT (*)
         INTO rowExist
-        FROM BALANCE_COUNTER
+        FROM VNP_DATA.BALANCE_COUNTER
        WHERE     BAL_GROUP_ID = IN_BAL_GRP
              AND COUNTER_ID = IN_COUNTER
              AND VALID_FROM = IN_VALID_FROM;
@@ -35,7 +35,7 @@ BEGIN
 
    IF rowExist = 0
    THEN
-      INSERT INTO BALANCE_COUNTER (BAL_GROUP_ID,
+      INSERT INTO VNP_DATA.BALANCE_COUNTER (BAL_GROUP_ID,
                                    COUNTER_ID,
                                    RECORD_ID,
                                    VALID_FROM,
@@ -50,14 +50,14 @@ BEGIN
    ELSE
       SELECT CURRENT_BAL
         INTO currentBal
-        FROM BALANCE_COUNTER
+        FROM VNP_DATA.BALANCE_COUNTER
        WHERE     BAL_GROUP_ID = IN_BAL_GRP
              AND COUNTER_ID = IN_COUNTER
              AND VALID_FROM = IN_VALID_FROM;
 
       --      newBal := currentBal + IN_CUR_BAL;
 
-      UPDATE BALANCE_COUNTER
+      UPDATE VNP_DATA.BALANCE_COUNTER
          SET CURRENT_BAL = IN_CUR_BAL                                -- newBal
        WHERE     BAL_GROUP_ID = IN_BAL_GRP
              AND COUNTER_ID = IN_COUNTER
@@ -67,3 +67,6 @@ BEGIN
    COMMIT;
 END;
 /
+
+
+GRANT EXECUTE ON VNP_DATA.RR_UPDATE_COUNTER_2 TO VNP_COMMON;

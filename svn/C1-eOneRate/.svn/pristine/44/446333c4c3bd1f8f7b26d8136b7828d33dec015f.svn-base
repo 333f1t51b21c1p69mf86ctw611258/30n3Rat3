@@ -1,0 +1,116 @@
+package e1reformat.entity.output;
+
+import java.util.Date;
+
+public class CdrLogProcess {
+
+    private int cdrLogProcessId;
+    private String sourceFileUrl;
+    private String outputFileUrl;
+    private Date startTime;
+    private Date endTime;
+    private String status;
+    private String method;
+    private String sourceFileBehavior;
+    private String backupFileUrl;
+    private String isHandled;
+
+    public int getCdrLogProcessId() {
+        return cdrLogProcessId;
+    }
+
+    public void setCdrLogProcessId(int cdrLogProcessId) {
+        this.cdrLogProcessId = cdrLogProcessId;
+    }
+
+    public String getSourceFileUrl() {
+        return sourceFileUrl;
+    }
+
+    public void setSourceFileUrl(String sourceFileUrl) {
+        this.sourceFileUrl = sourceFileUrl;
+    }
+
+    public String getOutputFileUrl() {
+        return outputFileUrl;
+    }
+
+    public void setOutputFileUrl(String outputFileUrl) {
+        this.outputFileUrl = outputFileUrl;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    public String getSourceFileBehavior() {
+        return sourceFileBehavior;
+    }
+
+    public void setSourceFileBehavior(String sourceFileBehavior) {
+        this.sourceFileBehavior = sourceFileBehavior;
+    }
+
+    public String getBackupFileUrl() {
+        return backupFileUrl;
+    }
+
+    public void setBackupFileUrl(String backupFileUrl) {
+        this.backupFileUrl = backupFileUrl;
+    }
+
+    public String getIsHandled() {
+        return isHandled;
+    }
+
+    public void setIsHandled(String isHandled) {
+        this.isHandled = isHandled;
+    }
+
+    public CdrLogProcess() {
+        super();
+    }
+
+    public CdrLogProcess(int cdrLogProcessId, String sourceFileUrl,
+            String outputFileUrl, Date startTime, String method,
+            String sourceFileBehavior, String backupFileUrl, String isHandled) {
+        super();
+        this.cdrLogProcessId = cdrLogProcessId;
+        this.sourceFileUrl = sourceFileUrl;
+        this.outputFileUrl = outputFileUrl;
+        this.startTime = startTime;
+        this.method = method;
+        this.sourceFileBehavior = sourceFileBehavior;
+        this.backupFileUrl = backupFileUrl;
+        this.isHandled = isHandled;
+    }
+
+}

@@ -1,0 +1,164 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Test;
+
+import e1reformat.controller.MainProcessor;
+import e1reformat.db.pool.DBConfig;
+import e1reformat.db.pool.DBPool;
+import e1reformat.util.DateUtils;
+import e1reformat.util.IConstant;
+import e1reformat.util.ProgramLog;
+import e1reformat.util.SystemLog;
+import java.io.File;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Arrays;
+import java.util.List;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.log4j.Logger;
+
+/**
+ *
+ * @author thai
+ */
+public class ReformatThread {
+
+    private static ReformatThread instance;
+    private Logger logger;
+    private Thread t2;
+    private boolean isExportCsv = true;
+    private DBConfig dbconfig;
+    public static File sourceFile;
+    public static File destinationFile;
+    public static File movedFile;
+    public static String minutesInput;
+    public final static int SUCCESS = 0;
+    public static String sourceBehavior;
+    private DBPool dbPool;
+
+    private ReformatThread() {
+        logger = Logger.getLogger(ReformatThread.class);
+        dbconfig = new DBConfig();
+        dbPool = new DBPool();
+        loadReformatConfig();
+    }
+
+    public boolean isExportCsv() {
+        return isExportCsv;
+    }
+
+    public void setExportCsv(boolean isExportCsv) {
+        this.isExportCsv = isExportCsv;
+    }
+
+    public static ReformatThread getInstance() throws Exception {
+        if (instance == null) {
+            instance = new ReformatThread();
+        }
+        return instance;
+    }
+
+    public void start() {
+        doProcess();
+        logger.info("+++  SYSTEM STARTED  +++");
+    }
+
+    public void stop() {
+        t2.stop();
+        logger.info("+++  SYSTEM STOPPED  +++");
+    }
+
+    protected void doProcess() {
+        SystemLog.setLastRunningTime(DateUtils.getCurrentDateTime(DateUtils.ddMMyyyyHHmmss_FULL_SLASH1));
+        SystemLog.setSystemRuning(true);
+        try {
+            SystemLog.loadProperties();
+        } catch (IOException e2) {
+            e2.printStackTrace();
+        }
+        try {
+            t2 = new Thread() {
+                public void run() {
+                    logger.info("RUNNING ON COMMAND...");
+                    File[] listOfFiles = sourceFile.listFiles();
+                    List<File> listFile = Arrays.asList(listOfFiles);
+                    int result = SUCCESS;
+                    int count = 1;
+                    if (!StringUtils.isEmpty(minutesInput)) {
+                        while (true) {
+                            listOfFiles = sourceFile.listFiles();
+                            listFile = Arrays.asList(listOfFiles);
+                            logger.info("- Scan folder automatically");
+                            logger.info("- Run at " + count + " times:");
+                            count++;
+                            int timeRepeat = NumberUtils.toInt(minutesInput);
+                            timeRepeat = timeRepeat * 60 * 1000;
+                            Statement stmt = null;
+                            Connection conn = null;
+                            try {
+                                conn = dbPool.getConnection();
+                                if (conn != null) {
+                                    stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                                    result = MainProcessor.process(IConstant.METHODS.AUTOMATION, isExportCsv, sourceBehavior,
+                                            listFile, destinationFile, movedFile, conn, false);
+                                } else {
+                                    logger.info("Connection is NULL, stopping process CDR");
+                                }
+                            } catch (SQLException e1) {
+                                e1.printStackTrace();
+                            } finally {
+                                try {
+                                    if (conn != null) {
+                                        conn.close();
+                                    }
+                                    if (stmt != null) {
+                                        stmt.close();
+                                    }
+                                } catch (SQLException ex) {
+                                   
+                                }
+
+                            }
+                            try {
+                                logger.info("Sleeping " + timeRepeat + " miliseconds...");
+                                Thread.sleep(timeRepeat);
+                            } catch (InterruptedException e) {
+                                break;
+                            }
+                        }
+                    }
+                    if (result == SUCCESS) {
+                        logger.info("Program finished at " + DateUtils.getCurrentDateTime(DateUtils.MMddyyyyHHmmss_FULL_SLASH));
+                        logger.info("######################## PROGRAM FINISH PROCESS ########################\n\n\n");
+                    }
+                }
+            };
+        } catch (Exception e) {
+            logger.error("ERROR init Thread!", e);
+        }
+        t2.start();
+    }
+
+    public static void loadReformatConfig() {
+        ProgramLog programLog = new ProgramLog();
+        sourceFile = new File(ProgramLog.source_folder);
+        destinationFile = new File(ProgramLog.output_folder);
+        movedFile = new File(ProgramLog.moved_folder);
+        minutesInput = ProgramLog.minuteInput;
+    }
+
+    public static String getSourceBehavior() {
+        return sourceBehavior;
+    }
+
+    public static void setSourceBehavior(String sourceBehavior) {
+        ReformatThread.sourceBehavior = sourceBehavior;
+    }
+}

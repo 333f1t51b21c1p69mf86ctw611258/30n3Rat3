@@ -1,0 +1,486 @@
+package e1reformat.gui.menu.configuration;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
+
+import org.apache.commons.lang3.StringUtils;
+import e1reformat.db.dao.UserAccountDAO;
+import e1reformat.entity.output.UserAccount;
+import e1reformat.gui.main.MainUI;
+import e1reformat.gui.util.MySortedJTable;
+import e1reformat.gui.util.MyTableModel;
+import e1reformat.util.IConstant;
+import e1reformat.util.SecurityUtils;
+
+public class UserManagementDialog extends JDialog {
+
+    private static final long serialVersionUID = 1L;
+    private MySortedJTable listUserJTable;
+    private MyTableModel tableModel;
+    private int size;
+    private ArrayList<UserAccount> listUserAccount = new ArrayList<UserAccount>();
+    private JPanel listUserPanel;
+    private static final String[] columnNames = {"Username", "Admin", "Viewer"};
+    static int SUCCESS = 0;
+    static int ERROR = -1;
+    private JTextField usernameTxt;
+    private JPasswordField passwordField;
+    private JCheckBox isAdminCheckBox;
+    private JCheckBox isViewerCheckBox;
+    private JButton btnResetpassword;
+    private JFrame frame;
+    private static String encryptedKey;
+    public static String userAdmin;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        try {
+            UserManagementDialog dialog = new UserManagementDialog();
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Create the dialog.
+     */
+    public UserManagementDialog() {
+
+        encryptedKey = getEncryptedPass();
+
+        setResizable(false);
+        setTitle("User Management");
+        setBounds(100, 100, 620, 476);
+        setModalityType(ModalityType.APPLICATION_MODAL);
+        getContentPane().setLayout(null);
+        setLocationRelativeTo(null);
+
+        listUserPanel = new JPanel();
+        listUserPanel.setBorder(new TitledBorder(null, "List User", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        listUserPanel.setBounds(9, 111, 596, 292);
+        getContentPane().add(listUserPanel);
+        listUserPanel.setLayout(null);
+
+        drawTable();
+
+        JButton btnUpdate = new JButton("Update Role");
+        btnUpdate.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        btnUpdate.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                updateRoles();
+            }
+        });
+        btnUpdate.setBounds(220, 414, 98, 23);
+        getContentPane().add(btnUpdate);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Create User", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+        panel.setBounds(9, 11, 596, 93);
+        getContentPane().add(panel);
+
+        JLabel label = new JLabel("Username :");
+        label.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        label.setBounds(41, 27, 73, 14);
+        panel.add(label);
+
+        JLabel label_1 = new JLabel("Password :");
+        label_1.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        label_1.setBounds(321, 27, 66, 14);
+        panel.add(label_1);
+
+        usernameTxt = new JTextField();
+        usernameTxt.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        usernameTxt.setColumns(10);
+        usernameTxt.setBounds(120, 23, 180, 23);
+        panel.add(usernameTxt);
+
+        JLabel lblRole = new JLabel("User's role :");
+        lblRole.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        lblRole.setBounds(41, 67, 75, 14);
+        panel.add(lblRole);
+
+        isAdminCheckBox = new JCheckBox("Admin");
+        isAdminCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        isAdminCheckBox.setBounds(120, 63, 80, 23);
+        panel.add(isAdminCheckBox);
+
+        isViewerCheckBox = new JCheckBox("Viewer");
+        isViewerCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        isViewerCheckBox.setBounds(208, 63, 75, 23);
+        panel.add(isViewerCheckBox);
+
+        passwordField = new JPasswordField();
+        passwordField.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        passwordField.setBounds(388, 23, 180, 23);
+        panel.add(passwordField);
+
+        JButton btnCreate = new JButton("Create");
+        btnCreate.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        btnCreate.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                createUser();
+            }
+        });
+        btnCreate.setBounds(139, 414, 71, 23);
+        getContentPane().add(btnCreate);
+
+        JButton btnDelete = new JButton("Delete");
+        btnDelete.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        btnDelete.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                deleteUser();
+            }
+        });
+        btnDelete.setBounds(328, 414, 71, 23);
+        getContentPane().add(btnDelete);
+
+        btnResetpassword = new JButton("Reset password");
+        btnResetpassword.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        btnResetpassword.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                resetPassword();
+            }
+        });
+        btnResetpassword.setBounds(10, 414, 119, 23);
+        getContentPane().add(btnResetpassword);
+
+        JButton btnClose = new JButton("Close");
+        btnClose.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        btnClose.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                UserManagementDialog.this.dispose();
+            }
+        });
+        btnClose.setBounds(532, 414, 71, 23);
+        getContentPane().add(btnClose);
+
+    }
+
+    @SuppressWarnings("deprecation")
+    protected void resetPassword() {
+        if (StringUtils.isEmpty(usernameTxt.getText())) {
+            usernameTxt.setBackground(Color.YELLOW);
+            JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.USERNAME_EMPTY, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (isContainSpecialCharacter(usernameTxt.getText())) {
+            usernameTxt.setBackground(Color.YELLOW);
+            JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.USERNAME_INVALID, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (StringUtils.isEmpty(passwordField.getText())) {
+            passwordField.setBackground(Color.YELLOW);
+            JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.EMPTY_PASSWORD, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (isContainSpecialCharacter(passwordField.getText())) {
+            passwordField.setBackground(Color.YELLOW);
+            JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.PASSWORD_INVALID, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (JOptionPane.showConfirmDialog(frame,
+                "Are you sure to reset password for user: " + usernameTxt.getText(), "Really Reset?",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
+            return;
+        }
+
+        String username = usernameTxt.getText();
+        String password = passwordField.getText();
+        password = SecurityUtils.encryptedPass(username, password, encryptedKey);
+        int result = UserAccountDAO.updatePassword(username, password);
+        if (result == SUCCESS) {
+            usernameTxt.setBackground(Color.WHITE);
+            JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.RESET_PASSWORD_SUCCESS, "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.RESET_PASSWORD_FAIL, "Fail", JOptionPane.ERROR_MESSAGE);
+        }
+        updateTable();
+    }
+
+    protected void deleteUser() {
+        if (StringUtils.isEmpty(usernameTxt.getText())) {
+            usernameTxt.setBackground(Color.YELLOW);
+            JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.USERNAME_EMPTY, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (isContainSpecialCharacter(usernameTxt.getText())) {
+            usernameTxt.setBackground(Color.YELLOW);
+            JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.USERNAME_INVALID, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (JOptionPane.showConfirmDialog(frame,
+                "Are you sure to delete the user: " + usernameTxt.getText(), "Really Deleteing?",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
+            return;
+        }
+
+        UserAccount userAccount = new UserAccount();
+        userAccount.setUsername(usernameTxt.getText());
+        int result = UserAccountDAO.deleteUser(userAccount);
+        if (result == SUCCESS) {
+            usernameTxt.setBackground(Color.WHITE);
+            JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.DELETE_USER_SUCCESSFUL, "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.DELETE_USER_FAIL, "Fail", JOptionPane.ERROR_MESSAGE);
+        }
+        updateTable();
+    }
+
+    @SuppressWarnings("deprecation")
+    protected void createUser() {
+        if (StringUtils.isEmpty(usernameTxt.getText())) {
+            usernameTxt.setBackground(Color.YELLOW);
+            JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.USERNAME_EMPTY, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (isContainSpecialCharacter(usernameTxt.getText())) {
+            usernameTxt.setBackground(Color.YELLOW);
+            JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.USERNAME_INVALID, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (StringUtils.isEmpty(passwordField.getText())) {
+            passwordField.setBackground(Color.YELLOW);
+            JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.EMPTY_PASSWORD, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (isContainSpecialCharacter(passwordField.getText())) {
+            passwordField.setBackground(Color.YELLOW);
+            JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.PASSWORD_INVALID, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (!(isAdminCheckBox.isSelected() || isViewerCheckBox.isSelected())) {
+            JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.ROLE_EMPTY, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (isExistedUser(usernameTxt.getText())) {
+            usernameTxt.setBackground(Color.YELLOW);
+            JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.EXISTED_USER, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (JOptionPane.showConfirmDialog(frame,
+                "Are you sure to create a new user: " + usernameTxt.getText(), "Really Creating ?",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
+            return;
+        }
+
+        String username = usernameTxt.getText();
+        String password = passwordField.getText();
+        password = SecurityUtils.encryptedPass(username, password, encryptedKey);
+        int role = getNewRole(isAdminCheckBox.isSelected(), isViewerCheckBox.isSelected());
+        UserAccount userAccount = new UserAccount(username, password, role, MainUI.username, null);
+        int result = UserAccountDAO.createUser(userAccount);
+        if (result == SUCCESS) {
+            usernameTxt.setBackground(Color.WHITE);
+            JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.CREATE_USER_SUCCESSFUL, "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.CREATE_USER_FAIL, "Fail", JOptionPane.ERROR_MESSAGE);
+        }
+        updateTable();
+    }
+
+    private void drawTable() {
+        tableModel = new MyTableModel();
+        tableModel.setColumnNames(columnNames);
+
+        listUserAccount = UserAccountDAO.getListUserAccount();
+        size = listUserAccount.size();
+        if (size > 0) {
+            Object[][] data = new Object[size][columnNames.length];
+            for (int i = 0; i < size; i++) {
+                data[i][0] = listUserAccount.get(i).getUsername();
+                int role = listUserAccount.get(i).getRole();
+                data[i][1] = (role == 1) ? true : false;
+                data[i][2] = (role == 4) ? true : false;
+            }
+            tableModel.setData(data);
+        }
+
+        listUserJTable = new MySortedJTable(tableModel);
+        listUserJTable.setBounds(10, 26, 577, 255);
+        listUserPanel.add(listUserJTable);
+
+        listUserJTable.getTable().addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent me) {
+                JTable table = (JTable) me.getSource();
+                Point p = me.getPoint();
+                int selectedRow = table.rowAtPoint(p);
+                if ((me.getClickCount() == 1) && (selectedRow != -1)) {
+                    String username = (String) listUserJTable.getTable().getValueAt(selectedRow, 0);
+                    //String password = listUserAccount.get(selectedRow).getPassword();
+                    Boolean isAdmin = (Boolean) listUserJTable.getTable().getValueAt(selectedRow, 1);
+                    Boolean isViewer = (Boolean) listUserJTable.getTable().getValueAt(selectedRow, 2);
+
+                    setRowValue(username, isAdmin, isViewer);
+                }
+            }
+        });
+    }
+
+    public void updateTable() {
+        listUserAccount = UserAccountDAO.getListUserAccount();
+        size = listUserAccount.size();
+        if (size > 0) {
+            Object[][] data = new Object[size][columnNames.length];
+            for (int i = 0; i < size; i++) {
+                data[i][0] = listUserAccount.get(i).getUsername();
+                int role = listUserAccount.get(i).getRole();
+                data[i][1] = (role == 1) ? true : false;
+                data[i][2] = (role == 4) ? true : false;
+            }
+            tableModel.setData(data);
+        }
+        listUserJTable.repaint();
+
+        usernameTxt.setText("");
+        passwordField.setText("");
+        isAdminCheckBox.setSelected(false);
+        isViewerCheckBox.setSelected(false);
+    }
+
+    public void setRowValue(String userName, Boolean isAdmin, Boolean isViewer) {
+        usernameTxt.setText(userName);
+        //passwordField.setText(password);
+        if (isAdmin) {
+            isAdminCheckBox.setSelected(true);
+        } else {
+            isAdminCheckBox.setSelected(false);
+        }
+
+        if (isViewer) {
+            isViewerCheckBox.setSelected(true);
+        } else {
+            isViewerCheckBox.setSelected(false);
+        }
+    }
+
+    protected void updateRoles() {
+        if (StringUtils.isEmpty(usernameTxt.getText())) {
+            usernameTxt.setBackground(Color.YELLOW);
+            JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.USERNAME_EMPTY, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (isContainSpecialCharacter(usernameTxt.getText())) {
+            usernameTxt.setBackground(Color.YELLOW);
+            JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.USERNAME_INVALID, "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (JOptionPane.showConfirmDialog(frame,
+                "Are you sure to update the user: " + usernameTxt.getText(), "Really Updating ?",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
+            return;
+        }
+
+        String username = usernameTxt.getText();
+        int role = getNewRole(isAdminCheckBox.isSelected(), isViewerCheckBox.isSelected());
+        UserAccount userAccount = new UserAccount();
+        userAccount.setUsername(username);
+        userAccount.setRole(role);
+        int result = UserAccountDAO.updateRoleForUser(userAccount);
+        if (result == SUCCESS) {
+            usernameTxt.setBackground(Color.WHITE);
+            JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.UPDATE_USER_SUCCESSFUL, "Success", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(frame, IConstant.ERROR_MESSAGE.UPDATE_USER_FAIL, "Fail", JOptionPane.ERROR_MESSAGE);
+        }
+        updateTable();
+    }
+
+    /**
+     * check the special characters in s.
+     */
+    public static Boolean isContainSpecialCharacter(String s) {
+        Pattern regex = Pattern.compile("['\\/.{}!%^*()$&+,:;=?@#| ]");
+        Matcher matcher = regex.matcher(s);
+        if (matcher.find()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public static int getNewRole(Boolean isAdmin, Boolean isViewer) {
+        if (isAdmin) {
+            return IConstant.USER_ROLE_CODE.ADMIN;
+        } else {
+            return IConstant.USER_ROLE_CODE.VIEWER;
+        }
+    }
+
+    public static String getEncryptedPass() {
+        Properties props = new Properties();
+        FileInputStream fi = null;
+        try {
+            String fileName = IConstant.ROOT_CONFIG.CONFIG_FOLDER_PATH + "program.conf";
+            fi = new FileInputStream(fileName);
+            props.load(fi);
+            return props.getProperty("encrypted_key");
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fi != null) {
+                try {
+                    fi.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return "";
+    }
+
+    private static Boolean isExistedUser(String username) {
+        return UserAccountDAO.checkExistUser(username);
+    }
+
+}

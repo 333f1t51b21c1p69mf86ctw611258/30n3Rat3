@@ -24,6 +24,7 @@ MAXTRANS   255
 STORAGE    (
             INITIAL          64K
             NEXT             1M
+            MAXSIZE          UNLIMITED
             MINEXTENTS       1
             MAXEXTENTS       UNLIMITED
             PCTINCREASE      0
@@ -48,6 +49,7 @@ MAXTRANS   255
 STORAGE    (
             INITIAL          64K
             NEXT             1M
+            MAXSIZE          UNLIMITED
             MINEXTENTS       1
             MAXEXTENTS       UNLIMITED
             PCTINCREASE      0
@@ -57,10 +59,13 @@ STORAGE    (
            )
 NOPARALLEL;
 
-
 ALTER TABLE VNP_COMMON.SFTP_FILE ADD (
   CONSTRAINT SFTP_FILE_PK
   PRIMARY KEY
   (SFTP_FILE)
   USING INDEX VNP_COMMON.SFTP_FILE_PK
   ENABLE VALIDATE);
+
+GRANT DELETE, INSERT, SELECT, UPDATE ON VNP_COMMON.SFTP_FILE TO VNP_DATA;
+
+GRANT SELECT ON VNP_COMMON.SFTP_FILE TO VNP_VIEW;

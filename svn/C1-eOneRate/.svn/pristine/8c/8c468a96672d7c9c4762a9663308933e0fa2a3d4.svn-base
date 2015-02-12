@@ -1,0 +1,32 @@
+package e1reformat.entity.enrich;
+
+public class CallZoneGroup {
+
+    private String zone;
+    private String code;
+    private String nw_group;
+
+    public String getCode() {
+        return this.code;
+    }
+
+    public void setCode(String _code) {
+        this.code = _code;
+    }
+
+    public String getZone() {
+        return this.zone;
+    }
+
+    public void setZone(String _zone) {
+        this.zone = _zone;
+    }
+
+    public String getNwGroup() {
+        return this.nw_group;
+    }
+
+    public void setNwGroup(String _nw_group) {
+        this.nw_group = _nw_group;
+    }
+}

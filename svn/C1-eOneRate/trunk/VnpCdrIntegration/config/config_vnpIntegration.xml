@@ -1,0 +1,22 @@
+<config>
+	<!-- <onlyToday>true</onlyToday> -->
+	<slus>data;irvoicesms;irdata;ocgsmpp;ocgxml;sdp;portal;nrvoice;megvoice;megsms;mms</slus>
+	<!-- <deleteGzipFile>false</deleteGzipFile> -->
+	<destFolderPath>G://vnpIntegrationOutput</destFolderPath>
+	<inputHostName>10.149.33.157</inputHostName>
+	<inputUserName>eonerate</inputUserName>
+	<inputPassword>eonerate</inputPassword>
+	<inputDirectory>/home/eonerate/cdr</inputDirectory>
+	<inputOsFileSeparator>/</inputOsFileSeparator>
+	<inputPattern>.*\.\d{4}.\d{14}\.txt</inputPattern>
+	<retryCount>3</retryCount>
+	<retryDownloadFileSleepTime>3000</retryDownloadFileSleepTime>
+	<scanInterval>20</scanInterval>
+	<dbConnection>jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = 10.149.33.157)(PORT = 1521))(CONNECT_DATA =(SERVER = DEDICATED)(SERVICE_NAME = eonerate)))</dbConnection>
+	<!-- <dbConnection>jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.113)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.114)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))</dbConnection> -->
+	<dbUserName>vnp_common</dbUserName>
+	<dbPassword>vnp_common</dbPassword>
+	<corePoolSize>12</corePoolSize>
+	<maximumPoolSize>16</maximumPoolSize>
+	<instancePort>15755</instancePort>
+</config>

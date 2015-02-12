@@ -1,0 +1,13 @@
+#Mon Jan 05 18:35:11 ICT 2015
+method=2
+port=1521
+moved_folder=D\:\\C1\\data\\move
+user=VNP_DATA
+minuteInput=10
+source_folder=C\:\\Users\\thai\\Desktop\\output
+output_folder=D\:\\C1\\data\\output
+source_behavior=2
+password=123456
+first_time_running=0
+host=192.168.6.207
+service_name=MAGICCALL

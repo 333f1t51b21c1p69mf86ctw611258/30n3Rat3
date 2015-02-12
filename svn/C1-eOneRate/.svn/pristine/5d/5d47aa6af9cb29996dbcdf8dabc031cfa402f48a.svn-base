@@ -1,0 +1,55 @@
+package e1reformat.entity.enrich;
+
+public class MapZone {
+
+    private String zone;
+    private String code;
+    private String nw_group;
+    private String payment_id;
+
+    public String getPayment_id() {
+        return payment_id;
+    }
+
+    public void setPayment_id(String payment_id) {
+        this.payment_id = payment_id;
+    }
+
+    public String getCode() {
+        return this.code;
+    }
+
+    public void setCode(String _code) {
+        this.code = _code;
+    }
+
+    public String getZone() {
+        return this.zone;
+    }
+
+    public void setZone(String _zone) {
+        this.zone = _zone;
+    }
+
+    public String getNwGroup() {
+        return this.nw_group;
+    }
+
+    public void setNwGroup(String _nw_group) {
+        this.nw_group = _nw_group;
+    }
+
+    public MapZone(String code, String zone, String nw_group, String payment_id) {
+        super();
+
+        this.code = code;
+        this.zone = zone;
+        this.nw_group = nw_group;
+        this.payment_id = payment_id;
+    }
+
+    public MapZone() {
+        super();
+    }
+
+}

@@ -1,0 +1,173 @@
+package e1reformat.util;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.apache.log4j.Logger;
+
+public class SystemLog {
+
+    private static Logger logger = Logger.getLogger("SystemLog");
+    /**
+     * @param args
+     */
+    public static String system_running = "";
+    public static String last_file_processing_url = "";
+    public static String error_backup_folder = "";
+    public static String errors_folder = "";
+    public static String lastLoginTime = "";
+    public static String lastRunningTime = "";
+
+    public static final String systemLogUrl = IConstant.ROOT_CONFIG.LOG_FOLDER_PATH + "system.log";
+
+    public static Properties props = new Properties();
+
+    public SystemLog() {
+        try {
+            loadProperties();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String getErrorBackupFolder() throws IOException {
+        String fileName = IConstant.ROOT_CONFIG.CONFIG_FOLDER_PATH + "program.conf";
+        props.load(new FileInputStream(fileName));
+        error_backup_folder = props.getProperty("error_backup_folder", error_backup_folder);
+        return error_backup_folder;
+    }
+
+    /*
+     * errors folder
+     */
+    public static String getErrorsFolder() throws IOException {
+        String fileName = IConstant.ROOT_CONFIG.ERRORS_FOLDER;
+        props.load(new FileInputStream(fileName));
+        errors_folder = props.getProperty("errors_folder", errors_folder);
+        return errors_folder;
+    }
+
+    public static void loadProperties() throws IOException {
+        FileInputStream fi = null;
+        try {
+            fi = new FileInputStream(systemLogUrl);
+            props.load(fi);
+            system_running = props.getProperty("system_running", system_running);
+            lastLoginTime = props.getProperty("lastLoginTime", lastLoginTime);
+            lastRunningTime = props.getProperty("lastRunningTime", lastRunningTime);
+            last_file_processing_url = props.getProperty("last_file_processing_url", last_file_processing_url);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (fi != null) {
+                fi.close();
+            }
+        }
+
+    }
+
+    public static void setSystemRuning(Boolean isRuning) {
+        try {
+            loadProperties();
+            if (isRuning) {
+                props.setProperty("system_running", IConstant.SYSTEM_LOG.IS_RUNNING);
+            } else {
+                props.setProperty("system_running", IConstant.SYSTEM_LOG.STOPED);
+            }
+            props.setProperty("lastLoginTime", lastLoginTime);
+            props.setProperty("last_file_processing_url", last_file_processing_url);
+            props.setProperty("lastRunningTime", lastRunningTime);
+            props.store(new FileOutputStream(systemLogUrl), null);
+
+        } catch (IOException ex) {
+            logger.error("IOException", ex);
+        }
+    }
+
+    public static void setLastLoginTime(String lastLoginTime) {
+        try {
+            loadProperties();
+            props.setProperty("lastLoginTime", lastLoginTime);
+            props.setProperty("system_running", system_running);
+            props.setProperty("last_file_processing_url", last_file_processing_url);
+            props.setProperty("lastRunningTime", lastRunningTime);
+            props.store(new FileOutputStream(systemLogUrl), null);
+        } catch (IOException ex) {
+            logger.error("IOException", ex);
+        }
+    }
+
+    public static void setLastRunningTime(String lastRunningTime) {
+        try {
+            loadProperties();
+            props.setProperty("lastLoginTime", lastLoginTime);
+            props.setProperty("system_running", system_running);
+            props.setProperty("last_file_processing_url", last_file_processing_url);
+            props.setProperty("lastRunningTime", lastRunningTime);
+            props.store(new FileOutputStream(systemLogUrl), null);
+        } catch (IOException ex) {
+            logger.error("IOException", ex);
+        }
+    }
+
+    public static void setLastFileProcessing(String lastFileProcessing) {
+        try {
+            loadProperties();
+            props.setProperty("lastLoginTime", lastLoginTime);
+            props.setProperty("system_running", system_running);
+            props.setProperty("last_file_processing_url", last_file_processing_url);
+            props.setProperty("lastRunningTime", lastRunningTime);
+            props.store(new FileOutputStream(systemLogUrl), null);
+        } catch (IOException ex) {
+            logger.error("IOException", ex);
+        }
+    }
+
+    public static void storeValue(String systemRuning, String lastFileProcessing) {
+        try {
+            props.setProperty("system_running", systemRuning);
+            props.setProperty("last_file_processing_url", lastFileProcessing);
+            props.store(new FileOutputStream(systemLogUrl), null);
+        } catch (IOException ex) {
+            logger.error("IOException", ex);
+        }
+    }
+
+    public static void setFirstTimeRunning(Boolean isFirstRunning) {
+        try {
+            props.setProperty("lastLoginTime", lastLoginTime);
+            props.setProperty("system_running", system_running);
+            props.setProperty("last_file_processing_url", last_file_processing_url);
+            props.setProperty("lastRunningTime", lastRunningTime);
+            props.setProperty("first_time_running", IConstant.SYSTEM_LOG.FIRST_TIME_RUNING);
+            props.store(new FileOutputStream(systemLogUrl), null);
+        } catch (IOException ex) {
+            logger.error("IOException", ex);
+        }
+    }
+
+    public static void setLastSourceFolder(String lastSourceFolder) {
+        try {
+            props.setProperty("last_source_folder", lastSourceFolder);
+            props.store(new FileOutputStream(systemLogUrl), null);
+        } catch (IOException ex) {
+            logger.error("IOException", ex);
+        }
+    }
+
+    public static void main(String args[]) {
+        try {
+            SystemLog.loadProperties();
+            SystemLog.setSystemRuning(true);
+            SystemLog.loadProperties();
+        } catch (Exception e) {
+            logger.error("IOException", e);
+        }
+    }
+
+}

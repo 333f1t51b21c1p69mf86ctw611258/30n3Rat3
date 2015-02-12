@@ -1,0 +1,191 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package e1reformat.util;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.RandomAccessFile;
+import java.lang.reflect.Method;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.Properties;
+import java.util.logging.Level;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+
+/**
+ *
+ * @author thaiha
+ */
+public class FunctionUtils {
+
+    private static Logger logger = Logger.getLogger("FunctionUtils");
+    public static Properties props = new Properties();
+    public static String sqlloader_ctl;
+    public static String sqlloader_log;
+    public static String sqlloader_ussid;
+    public static String application_id;
+    public static int buffer_size;
+    public static String look_and_feel;
+    public static String encryptedKey;
+    public static String pathErrorCdr;
+    public static String pathErrorChecksumCdr;
+    public static String messageToWrite = "";
+
+    public FunctionUtils() {
+        try {
+            loadProperties();
+        } catch (Exception e) {
+            logger.error("Error load Program Properties", e);
+        }
+    }
+
+    public static String getMessageToWrite() {
+        return messageToWrite;
+    }
+
+    public static void setMessageToWrite(String messageToWrite) {
+        FunctionUtils.messageToWrite = messageToWrite;
+    }
+
+    public static String getPathErrorChecksumCdr() {
+        return pathErrorChecksumCdr;
+    }
+
+    public static String getApplication_id() {
+        return application_id;
+    }
+
+    public static void writeToFileNIO(String fileName) throws Exception {
+        if (messageToWrite != null && !messageToWrite.isEmpty()) {
+            File file = new File(pathErrorCdr + IConstant.ROOT_CONFIG.SEPARATOR + fileName);
+            if (file.exists()) {
+                file.delete();
+            }
+            file.createNewFile();
+            byte[] messageBytes = messageToWrite.getBytes(Charset.forName("ISO-8859-1"));
+            RandomAccessFile raf = new RandomAccessFile(file, "rw");
+            raf.seek(raf.length());
+            FileChannel fc = raf.getChannel();
+            MappedByteBuffer mbf = fc.map(FileChannel.MapMode.READ_WRITE, fc.position(), messageBytes.length);
+            fc.close();
+            raf.close();
+            mbf.put(messageBytes);
+            unmap(fc, mbf);
+        }
+    }
+
+    private static void unmap(FileChannel fc, MappedByteBuffer bb) throws Exception {
+        Class<?> fcClass = fc.getClass();
+        Method unmapMethod = fcClass.getDeclaredMethod("unmap", new Class[]{MappedByteBuffer.class});
+        unmapMethod.setAccessible(true);
+        unmapMethod.invoke(null, new Object[]{bb});
+    }
+
+    public static void loadProperties() throws IOException {
+        FileInputStream fi = null;
+        try {
+            String fileName = IConstant.ROOT_CONFIG.CONFIG_FOLDER_PATH + "program.conf";
+            logger.info(fileName);
+            fi = new FileInputStream(fileName);
+            props.load(fi);
+            sqlloader_ctl = props.getProperty("sqlloader_ctl", sqlloader_ctl);
+            sqlloader_log = props.getProperty("sqlloader_log", sqlloader_log);
+            sqlloader_ussid = props.getProperty("sqlloader_ussid", sqlloader_ussid);
+            application_id = props.getProperty("application_id", application_id);
+            String buffer = props.getProperty("buffer_size");
+            buffer_size = (StringUtils.isNumeric(buffer)) ? Integer.parseInt(buffer) : 1000;
+            look_and_feel = props.getProperty("look_and_feel", look_and_feel);
+            encryptedKey = props.getProperty("encrypted_key", encryptedKey);
+            pathErrorChecksumCdr = props.getProperty("path_error_checksum_cdr", pathErrorChecksumCdr);
+        } finally {
+            if (fi != null) {
+                fi.close();
+            }
+        }
+    }
+
+    public static String checksumListFile(String inputPath, String outputPath) {
+        try {
+            File sourceFileErr = new File(inputPath);
+            File[] listOfFiles = sourceFileErr.listFiles();
+            if (listOfFiles.length > 0) {
+                for (File sourcefile : listOfFiles) {
+                    String name = sourcefile.getName();
+                    String result = replaceChecksum(inputPath + IConstant.ROOT_CONFIG.SEPARATOR + name, outputPath + IConstant.ROOT_CONFIG.SEPARATOR + name, name);
+                    if (result.equals("")) {
+                        deleteFile(new File(inputPath + IConstant.ROOT_CONFIG.SEPARATOR + name));
+                    }
+                }
+            } else {
+                return "empty";
+            }
+        } catch (Exception e) {
+            e.fillInStackTrace();
+            return "error";
+        }
+        return "";
+    }
+
+    private static String replaceChecksum(String fileSource, String fileDest, String name) {
+        byte checks;
+        FileOutputStream dest = null;
+        RandomAccessFile f = null;
+        try {
+            f = new RandomAccessFile(fileSource, "r");
+            byte[] b = new byte[(int) f.length()];
+            f.read(b);
+            b[3] = Byte.parseByte("0");
+            // Checksum
+            checks = checkSum(b);
+            // Insert new checksum value
+            b[3] = checks;
+            checks = checkSum(b);
+            dest = new FileOutputStream(fileDest);
+            dest.write(b);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return name;
+        } finally {
+            try {
+                if (dest != null) {
+                    dest.close();
+                    dest = null;
+                }
+                if (f != null) {
+                    f.close();
+                    f = null;
+                }
+            } catch (IOException ex) {
+            }
+        }
+        return "";
+    }
+
+    private static final byte checkSum(byte[] bytes) {
+        byte sum = 0;
+        for (byte b : bytes) {
+            sum ^= b;
+        }
+        return sum;
+    }
+
+    private static void deleteFile(File file) {
+        try {
+            logger.info("\tDELETE file:" + file.getName());
+            if (file.exists()) {
+                file.delete();
+            }
+        } catch (Exception e) {
+            logger.error("Exception", e);
+        }
+    }
+}

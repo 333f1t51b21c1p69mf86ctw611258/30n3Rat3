@@ -1,125 +1,206 @@
-/* Formatted on 29/05/2014 17:36:59 (QP5 v5.227.12220.39754) */
-DROP TABLE VNP_DATA.HOT_RATED_CDR;
+/* Formatted on 2/6/2015 11:10:18 AM (QP5 v5.269.14213.34746) */
+DROP TABLE VNP_DATA.HOT_RATED_CDR CASCADE CONSTRAINTS;
 
-CREATE TABLESPACE hot_rated_p0
-  DATAFILE '+DATA/eonerate/datafile/hot_rated_p0.dbf'
-    SIZE 50M
-    REUSE
-    AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
 
-CREATE TABLESPACE hot_rated_p1
-  DATAFILE '+DATA/eonerate/datafile/hot_rated_p1.dbf'
-    SIZE 50M
-    REUSE
-    AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
 
-CREATE TABLESPACE hot_rated_p2
-  DATAFILE '+DATA/eonerate/datafile/hot_rated_p2.dbf'
-    SIZE 50M
+CREATE TABLESPACE VNP_DATA_HRC
+  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr01.dbf'
+    SIZE 100M
     REUSE
-    AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
+    AUTOEXTEND ON NEXT 100 M MAXSIZE UNLIMITED;
 
-CREATE TABLESPACE hot_rated_p3
-  DATAFILE '+DATA/eonerate/datafile/hot_rated_p3.dbf'
-    SIZE 50M
-    REUSE
-    AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
+CREATE TABLESPACE VNP_DATA_HRC_P150201_0 DATAFILE
+  '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_0.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
 
-CREATE TABLESPACE hot_rated_p4
-  DATAFILE '+DATA/eonerate/datafile/hot_rated_p4.dbf'
-    SIZE 50M
-    REUSE
-    AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
 
-CREATE TABLESPACE hot_rated_p5
-  DATAFILE '+DATA/eonerate/datafile/hot_rated_p5.dbf'
-    SIZE 50M
-    REUSE
-    AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
+CREATE TABLESPACE VNP_DATA_HRC_P150201_1 DATAFILE
+  '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_1.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
 
-CREATE TABLESPACE hot_rated_p6
-  DATAFILE '+DATA/eonerate/datafile/hot_rated_p6.dbf'
-    SIZE 50M
-    REUSE
-    AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
 
-CREATE TABLESPACE hot_rated_p7
-  DATAFILE '+DATA/eonerate/datafile/hot_rated_p7.dbf'
-    SIZE 50M
-    REUSE
-    AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
+CREATE TABLESPACE VNP_DATA_HRC_P150201_2 DATAFILE
+  '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_2.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
 
-CREATE TABLESPACE hot_rated_p8
-  DATAFILE '+DATA/eonerate/datafile/hot_rated_p8.dbf'
-    SIZE 50M
-    REUSE
-    AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
 
-CREATE TABLESPACE hot_rated_p9
-  DATAFILE '+DATA/eonerate/datafile/hot_rated_p9.dbf'
-    SIZE 50M
-    REUSE
-    AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
+CREATE TABLESPACE VNP_DATA_HRC_P150201_3 DATAFILE
+  '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_3.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+
+
+CREATE TABLESPACE VNP_DATA_HRC_P150201_4 DATAFILE
+  '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_4.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+
+
+CREATE TABLESPACE VNP_DATA_HRC_P150201_5 DATAFILE
+  '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_5.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+
+
+CREATE TABLESPACE VNP_DATA_HRC_P150201_6 DATAFILE
+  '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_6.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+
+
+CREATE TABLESPACE VNP_DATA_HRC_P150201_7 DATAFILE
+  '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_7.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+
+
+CREATE TABLESPACE VNP_DATA_HRC_P150201_8 DATAFILE
+  '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_8.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
+
+
+CREATE TABLESPACE VNP_DATA_HRC_P150201_9 DATAFILE
+  '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_cdr_P141201_9.dbf' SIZE 10M AUTOEXTEND ON NEXT 10M MAXSIZE UNLIMITED;
 
 
 CREATE TABLE VNP_DATA.HOT_RATED_CDR
 (
-  MAP_ID                NUMBER(9),
-  A_NUMBER              VARCHAR2(15 BYTE),
-  CDR_TYPE              NUMBER(2),
-  CREATED_TIME          DATE                    DEFAULT SYSDATE,
-  CDR_START_TIME        DATE,
-  DATA_PART             NUMBER(2),
-  DURATION              NUMBER(11),
-  TOTAL_USAGE           NUMBER(11),
-  B_NUMBER              VARCHAR2(15 BYTE),
-  B_ZONE                VARCHAR2(127 BYTE),
-  NW_GROUP              VARCHAR2(15 BYTE),
-  SERVICE_FEE           NUMBER(15,3),
-  SERVICE_FEE_ID        NUMBER(3),
-  CHARGE_FEE            NUMBER(15,3),
-  CHARGE_FEE_ID         NUMBER(5),
-  LAC                   VARCHAR2(23 BYTE),
-  CELL_ID               VARCHAR2(23 BYTE),
-  SUBSCRIBER_UNBILL     CHAR(2 BYTE),
-  BU_ID                 NUMBER(3),
-  OLD_BU_ID             NUMBER(3),
-  OFFER_COST            NUMBER(15,3),
-  OFFER_FREE_BLOCK      NUMBER(21),
-  INTERNAL_COST         NUMBER(15,3),
-  INTERNAL_FREE_BLOCK   NUMBER(11),
-  DIAL_DIGIT            VARCHAR2(31 BYTE),
-  CDR_RECORD_HEADER_ID  NUMBER(11),
-  CDR_SEQUENCE_NUMBER   NUMBER(11),
-  LOCATION_NO           VARCHAR2(31 BYTE),
-  MSC_ID                VARCHAR2(31 BYTE),
-  UNIT_TYPE_ID          NUMBER(2)               NOT NULL,
-  PRIMARY_OFFER_ID      NUMBER(10),
-  DISCOUNT_ITEM_ID      NUMBER(6),
-  BALANCE_CHANGE        VARCHAR2(500 BYTE),
-  RERATE_FLAG           NUMBER(2),
-  AUT_FINAL_ID          NUMBER(6),
-  TARIFF_PLAN_ID        NUMBER(6),
-  ERROR_CODE            VARCHAR2(6 BYTE)        DEFAULT 0
+   MAP_ID                 NUMBER (15),
+   A_NUMBER               VARCHAR2 (15 BYTE),
+   CDR_TYPE               NUMBER (2),
+   CREATED_TIME           DATE DEFAULT SYSDATE,
+   CDR_START_TIME         DATE,
+   DATA_PART              NUMBER (2),
+   DURATION               NUMBER (11),
+   TOTAL_USAGE            NUMBER (11),
+   B_NUMBER               VARCHAR2 (31 BYTE),
+   B_ZONE                 VARCHAR2 (127 BYTE),
+   NW_GROUP               VARCHAR2 (15 BYTE),
+   SERVICE_FEE            NUMBER (17, 3),
+   SERVICE_FEE_ID         NUMBER (3),
+   CHARGE_FEE             NUMBER (31, 3),
+   CHARGE_FEE_ID          NUMBER (5),
+   LAC                    VARCHAR2 (23 BYTE),
+   CELL_ID                VARCHAR2 (23 BYTE),
+   SUBSCRIBER_UNBILL      CHAR (2 BYTE),
+   BU_ID                  VARCHAR2 (3 BYTE),
+   OLD_BU_ID              VARCHAR2 (3 BYTE),
+   OFFER_COST             NUMBER (15, 3),
+   OFFER_FREE_BLOCK       NUMBER (21),
+   INTERNAL_COST          NUMBER (15, 3),
+   INTERNAL_FREE_BLOCK    NUMBER (11),
+   DIAL_DIGIT             VARCHAR2 (31 BYTE),
+   CDR_RECORD_HEADER_ID   NUMBER (11),
+   CDR_SEQUENCE_NUMBER    NUMBER (11),
+   LOCATION_NO            VARCHAR2 (31 BYTE),
+   MSC_ID                 VARCHAR2 (31 BYTE),
+   UNIT_TYPE_ID           NUMBER (2),
+   PRIMARY_OFFER_ID       NUMBER (10),
+   DISCOUNT_ITEM_ID       NUMBER (6),
+   BALANCE_CHANGE         VARCHAR2 (500 BYTE),
+   RERATE_FLAG            NUMBER (2),
+   AUT_FINAL_ID           NUMBER (6),
+   TARIFF_PLAN_ID         NUMBER (6),
+   ERROR_CODE             VARCHAR2 (6 BYTE) DEFAULT 0,
+   PAYMENT_ID             NUMBER (6),
+   SUBSCRIBER_NO          NUMBER (31),
+   SUBSCRIBER_NO_RESETS   NUMBER (7),
+   ACCOUNT_NO             NUMBER (31),
+   PARENT_ACCOUNT_NO      NUMBER (31),
+   INTL_VND               NUMBER (31, 3),
+   INTL_ID                NUMBER (7),
+   CDR_CALL_TYPE          VARCHAR2 (7 BYTE),
+   QOS                    VARCHAR2 (15 BYTE)
 )
-PARTITION BY RANGE (DATA_PART)
-   (PARTITION P0 VALUES LESS THAN (1)
-       TABLESPACE hot_rated_p0,
-    PARTITION P1 VALUES LESS THAN (2)
-       TABLESPACE hot_rated_p1,
-    PARTITION P2 VALUES LESS THAN (3)
-       TABLESPACE hot_rated_p2,
-    PARTITION P3 VALUES LESS THAN (4)
-       TABLESPACE hot_rated_p3,
-    PARTITION P4 VALUES LESS THAN (5)
-       TABLESPACE hot_rated_p4,
-    PARTITION P5 VALUES LESS THAN (6)
-       TABLESPACE hot_rated_p5,
-    PARTITION P6 VALUES LESS THAN (7)
-       TABLESPACE hot_rated_p6,
-    PARTITION P7 VALUES LESS THAN (8)
-       TABLESPACE hot_rated_p7,
-    PARTITION P8 VALUES LESS THAN (9)
-       TABLESPACE hot_rated_p8,
-    PARTITION P9 VALUES LESS THAN (10)
-       TABLESPACE hot_rated_p9);
+NOCOMPRESS
+TABLESPACE VNP_DATA_HRC
+RESULT_CACHE (MODE DEFAULT)
+PCTUSED 0
+PCTFREE 10
+INITRANS 1
+MAXTRANS 255
+STORAGE (BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+PARTITION BY RANGE
+   (CDR_START_TIME)
+   SUBPARTITION BY RANGE (DATA_PART)
+   (
+      PARTITION
+         P150201
+         VALUES LESS THAN
+            (TO_DATE (' 2015-02-02 00:00:00',
+                      'SYYYY-MM-DD HH24:MI:SS',
+                      'NLS_CALENDAR=GREGORIAN'))
+         NOLOGGING
+         NOCOMPRESS
+         TABLESPACE VNP_DATA_HRC
+         PCTFREE 10
+         INITRANS 1
+         MAXTRANS 255
+         STORAGE (MAXSIZE UNLIMITED
+                  BUFFER_POOL DEFAULT
+                  FLASH_CACHE DEFAULT
+                  CELL_FLASH_CACHE DEFAULT)
+         (
+            SUBPARTITION P150201_0
+               VALUES LESS THAN (1)
+               TABLESPACE VNP_DATA_HRC_P150201_0
+            ,
+            SUBPARTITION P150201_1
+               VALUES LESS THAN (2)
+               TABLESPACE VNP_DATA_HRC_P150201_1
+            ,
+            SUBPARTITION P150201_2
+               VALUES LESS THAN (3)
+               TABLESPACE VNP_DATA_HRC_P150201_2
+            ,
+            SUBPARTITION P150201_3
+               VALUES LESS THAN (4)
+               TABLESPACE VNP_DATA_HRC_P150201_3
+            ,
+            SUBPARTITION P150201_4
+               VALUES LESS THAN (5)
+               TABLESPACE VNP_DATA_HRC_P150201_4
+            ,
+            SUBPARTITION P150201_5
+               VALUES LESS THAN (6)
+               TABLESPACE VNP_DATA_HRC_P150201_5
+            ,
+            SUBPARTITION P150201_6
+               VALUES LESS THAN (7)
+               TABLESPACE VNP_DATA_HRC_P150201_6
+            ,
+            SUBPARTITION P150201_7
+               VALUES LESS THAN (8)
+               TABLESPACE VNP_DATA_HRC_P150201_7
+            ,
+            SUBPARTITION P150201_8
+               VALUES LESS THAN (9)
+               TABLESPACE VNP_DATA_HRC_P150201_8
+            ,
+            SUBPARTITION P150201_9
+               VALUES LESS THAN (10)
+               TABLESPACE VNP_DATA_HRC_P150201_9))
+NOCACHE
+NOPARALLEL
+MONITORING;
+
+
+CREATE TABLESPACE VNP_DATA_HRC_A_NUMBER_IDX
+  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/HRC_A_NUMBER_IDX01.dbf'
+    SIZE 100M
+    REUSE
+    AUTOEXTEND ON NEXT 100 M MAXSIZE UNLIMITED;
+
+
+CREATE INDEX VNP_DATA.IDX_HRC_A_NUMBER
+   ON VNP_DATA.HOT_RATED_CDR (A_NUMBER)
+   NOLOGGING
+   TABLESPACE VNP_DATA_HRC_A_NUMBER_IDX
+   PCTFREE 10
+   INITRANS 2
+   MAXTRANS 255
+   STORAGE (INITIAL 64 K
+            NEXT 1 M
+            MAXSIZE UNLIMITED
+            MINEXTENTS 1
+            MAXEXTENTS UNLIMITED
+            PCTINCREASE 0
+            BUFFER_POOL DEFAULT
+            FLASH_CACHE DEFAULT
+            CELL_FLASH_CACHE DEFAULT)
+   NOPARALLEL;
+
+GRANT DELETE,
+      INSERT,
+      SELECT,
+      UPDATE
+   ON VNP_DATA.HOT_RATED_CDR
+   TO VNP_COMMON;
+
+GRANT SELECT ON VNP_DATA.HOT_RATED_CDR TO VNP_VIEW;

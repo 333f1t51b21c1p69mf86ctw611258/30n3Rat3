@@ -1,0 +1,165 @@
+package e1reformat.db.pool;
+
+import java.util.Properties;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import org.apache.log4j.Logger;
+import e1reformat.util.IConstant;
+import oracle.jdbc.pool.OracleDataSource;
+
+public class DBPool {
+
+    private static Logger logger = Logger.getLogger("DBPool");
+    public static OracleDataSource ods = null;
+
+    /**
+     * private constructor for static class
+     */
+    public DBPool() {
+    }
+
+    public static Connection getConnection() throws SQLException {
+        if (ods == null) {
+            try {
+                ods = new OracleDataSource();
+                String fileName = IConstant.ROOT_CONFIG.CONFIG_FOLDER_PATH + "database.conf";
+                Properties props = new Properties();
+                props.load(new FileInputStream(fileName));
+                ods = new OracleDataSource();
+
+                ods.setURL(props.getProperty("db_url_service"));
+                ods.setDriverType(props.getProperty("db_driver_service"));
+                ods.setUser(props.getProperty("db_user_service"));
+                ods.setPassword(props.getProperty("db_pass_service"));
+                
+                ods.setConnectionCachingEnabled(true);
+                Properties cacheProps = new Properties();
+//                cacheProps.setProperty("MinLimit", props.getProperty("db_min_connections"));
+//                cacheProps.setProperty("MaxLimit", "5");
+//                cacheProps.setProperty("MaxLimit", props.getProperty("db_max_connections"));
+//                cacheProps.setProperty("ConnectionWaitTimeout", props.getProperty("ConnectionWaitTimeout"));
+                cacheProps.setProperty("ValidateConnection", "true");
+                ods.setConnectionCacheProperties(cacheProps);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return ods.getConnection();
+    }
+
+    public static Connection getConnection(DBConfig dbconfig) throws SQLException {
+        if (ods == null) {
+            logger.info("ods = null");
+            ods = new OracleDataSource();
+            ods.setURL(dbconfig.getUrlService());
+            ods.setDriverType(dbconfig.getDriver());
+        }
+        return ods.getConnection();
+    }
+
+    public static Connection getConnection(String env) throws SQLException {
+        logger.info("Request connection for " + env);
+        if (ods == null) {
+            throw new SQLException("OracleDataSource is null.");
+        }
+        return ods.getConnection();
+    }
+
+    public static void closePooledConnections() throws SQLException {
+        if (ods != null) {
+            ods.close();
+        }
+    }
+
+    public static void releaseConnection(Connection conn,
+            PreparedStatement preStmt) {
+        try {
+            if (conn != null) {
+                conn.close();
+            } else {
+                logger.error("conn is null.");
+            }
+            if (preStmt != null) {
+                preStmt.close();
+            }
+        } catch (SQLException e) {
+//			 logger.error(e.getMessage());
+        }
+    }
+
+    public static void releaseConnection(Connection conn,
+            Statement stmt) {
+        try {
+            if (conn != null) {
+                conn.close();
+            } else {
+                logger.error("conn is null.");
+            }
+            if (stmt != null) {
+                stmt.close();
+            }
+        } catch (SQLException e) {
+            // logger.error(e.getMessage());
+        }
+    }
+
+    public static void releaseConnection(Connection conn, PreparedStatement preStmt, ResultSet rs) {
+        releaseConnection(conn, preStmt);
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+        } catch (SQLException e) {
+            // logger.error(e.getMessage());
+        }
+    }
+
+    public static void releaseConnection(Connection conn, CallableStatement preStmt) {
+        try {
+            if (conn != null) {
+                conn.close();
+            } else {
+                // logger.info("conn is null.");
+            }
+            if (preStmt != null) {
+                preStmt.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void releaseConnection(Connection conn, CallableStatement preStmt, ResultSet rs) {
+        releaseConnection(conn, preStmt);
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+        } catch (SQLException e) {
+        }
+    }
+
+    public static void releaseConnection(Connection conn,
+            PreparedStatement preStmt, Statement stmt, ResultSet rs) {
+        releaseConnection(conn, preStmt, rs);
+        try {
+            if (stmt != null) {
+                stmt.close();
+            }
+        } catch (SQLException e) {
+        }
+        try {
+            if (rs != null) {
+                rs.close();
+            }
+        } catch (SQLException e) {
+        }
+    }
+
+}

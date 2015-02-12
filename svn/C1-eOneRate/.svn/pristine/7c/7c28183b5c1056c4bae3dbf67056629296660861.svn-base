@@ -1,0 +1,134 @@
+package e1reformat.db.pool;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+import org.apache.log4j.Logger;
+
+import e1reformat.util.IConstant;
+
+public class DBConfig {
+
+    private static Logger logger = Logger.getLogger("DBConfig");
+    private static String db_schema;
+    private static String db_pcat;
+    private static String urlService;
+    private static String driver;
+    private static String username;
+    private static String password;
+
+    private static String loadTableName;
+    private static String ratedTableName;
+    private static String aggregatedTableName;
+    private static String aggregatedViewName;
+    private static String medTempToHot;
+
+    private static String db_common;
+
+    public DBConfig() {
+        try {
+            loadProperties();
+        } catch (IOException e) {
+            logger.error("IOException: " + e.getMessage());
+        }
+    }
+
+    public static void loadProperties() throws IOException {
+        FileInputStream fi = null;
+        try {
+            String fileName = IConstant.ROOT_CONFIG.CONFIG_FOLDER_PATH + "database.conf";
+            Properties props = new Properties();
+            fi = new FileInputStream(fileName);
+            props.load(fi);
+            db_schema = props.getProperty("db_schema", db_schema);
+            db_common = props.getProperty("db_common", db_common);
+            db_pcat = props.getProperty("db_pcat", db_pcat);
+            urlService = props.getProperty("db_url_service");
+            driver = props.getProperty("db_url_service");
+            setUsername(props.getProperty("db_user_service"));
+            setPassword(props.getProperty("db_pass_service"));
+
+            loadTableName = props.getProperty("loadTableName", loadTableName);
+            ratedTableName = props.getProperty("ratedTableName", ratedTableName);
+            aggregatedTableName = props.getProperty("aggregatedTableName", aggregatedTableName);
+            aggregatedViewName = props.getProperty("aggregatedViewName", aggregatedViewName);
+            medTempToHot = props.getProperty("medTempToHot", medTempToHot);
+        } finally {
+            if (fi != null) {
+                fi.close();
+            }
+        }
+    }
+
+    public String getUrlService() {
+        return urlService;
+    }
+
+    public String getDb_schema() {
+        return db_schema + ".";
+    }
+
+    public String getDb_Common() {
+        return db_common + ".";
+    }
+
+    public String getDb_Pcat() {
+        return db_pcat + ".";
+    }
+
+    public String getLoadTableName() {
+        return loadTableName;
+    }
+
+    public String getRatedTableName() {
+        return ratedTableName;
+    }
+
+    public String getAggregatedTableName() {
+        return aggregatedTableName;
+    }
+
+    public String getAggregatedViewName() {
+        return aggregatedViewName;
+    }
+
+    public String getDriver() {
+        return driver;
+    }
+
+    public String getMedTempToHot() {
+        return medTempToHot;
+    }
+
+    public static void setMedTempToHot(String medTempToHot) {
+        DBConfig.medTempToHot = medTempToHot;
+    }
+
+    @SuppressWarnings("static-access")
+    public void setUrlService(String urlService) {
+        this.urlService = urlService;
+    }
+
+    @SuppressWarnings("static-access")
+    public void setDriver(String driver) {
+        this.driver = driver;
+    }
+
+    public static String getPassword() {
+        return password;
+    }
+
+    public static void setPassword(String password) {
+        DBConfig.password = password;
+    }
+
+    public static String getUsername() {
+        return username;
+    }
+
+    public static void setUsername(String username) {
+        DBConfig.username = username;
+    }
+
+}

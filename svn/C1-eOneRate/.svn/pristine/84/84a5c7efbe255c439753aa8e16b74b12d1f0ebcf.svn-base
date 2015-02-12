@@ -1,0 +1,1224 @@
+package e1reformat.gui.main;
+
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.DecimalFormat;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.JToolBar;
+import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableCellRenderer;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.log4j.Logger;
+
+import com.toedter.calendar.JDateChooser;
+
+import e1reformat.controller.CSVProcess;
+import e1reformat.controller.MainProcessor;
+import static e1reformat.controller.MainProcessor.props;
+import e1reformat.db.pool.DBConfig;
+import e1reformat.db.pool.DBPool;
+import e1reformat.entity.output.SummaryReportObject;
+import e1reformat.gui.menu.configuration.UserManagementDialog;
+import e1reformat.gui.menu.configuration.ZoneMapDialog;
+import e1reformat.gui.menu.errorMappingSearch.ErrorMappingDialog;
+import e1reformat.gui.menu.log.AuditTransactionDialog;
+import e1reformat.gui.menu.log.ChecksumDialog;
+import e1reformat.gui.menu.reformat.ReformatConfigDialog;
+import e1reformat.gui.menu.system.LoginDialog;
+import e1reformat.gui.util.MySortedJTable;
+import e1reformat.gui.util.MyTableModel;
+import e1reformat.util.DateUtils;
+import e1reformat.util.FunctionUtils;
+import e1reformat.util.IConstant;
+import e1reformat.util.ProgramLog;
+import e1reformat.util.SystemLog;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
+import java.io.FileFilter;
+import java.io.FileInputStream;
+import org.apache.commons.io.filefilter.RegexFileFilter;
+
+public class MainUI {
+
+    private static Logger logger = Logger.getLogger("ProcessingUI");
+    private static JFrame processingUIFrame;
+    private static JButton btnStartButton;
+    private JButton btnCancelButton;
+    private JProgressBar progressBar;
+    private JProgressBar progressCDR;
+    public static JTextArea taskOutput;
+    public static String method;
+    public static String sourceBehavior;
+    public static File sourceFile;
+    public static File destinationFile;
+    public static File movedFile;
+    public static String minutesInput;
+    private boolean isExportCsv = true;
+    private String newline = "\n";
+    private static JFrame frame;
+    public final static int SUCCESS = 0;
+    private Thread t1;
+    private Thread t2;
+    private boolean running;
+    private boolean isOpen;
+    private DBConfig dbconfig = new DBConfig();
+    public static String username;
+
+    public static ReformatConfigDialog reformatConfigDialog;
+    private static ZoneMapDialog zoneMapDialog;
+    private static ErrorMappingDialog errorMappingDialog;
+    private static JButton btnReformatConfig;
+    private static JButton btnZoneMapConfig;
+    private static JButton btnErrorMappingCDRSearch;  //thaiha: button view thong tin loi mapping
+
+    private double totalNumberOfFile;
+    private int totalNumberFileChecksumErr;
+    private float cdrTotal;
+    private JScrollPane scrollPane;
+    private static JMenuItem loginMenuItem;
+    private static JMenu mnConfiguration;
+    public static LoginDialog loginForm = new LoginDialog();
+    private static MyTableModel reformatConfigTableModel;
+    private static MySortedJTable reformatConfigTable;
+    private static String[] reformatConfigTableColumn = {"Config", "Values"};
+
+    private static String[] summaryTableColumn = {"Information", "Values"};
+    private static MyTableModel summaryTableModel;
+    private static MySortedJTable summaryTable;
+    private JPanel summaryPanel;
+    protected UserManagementDialog userManagementDialog;
+    private static JMenuItem mntmUserManagement;
+    private static JButton btnUserManagement;
+    private static JPanel historyPanel;
+    private static JLabel lblLastRunning;
+    private static JLabel lblLastLoginTime;
+    private static JLabel lblNumChecksumErr;
+    public static ChecksumDialog checksumDialog;
+    public static AuditTransactionDialog totalTransactionDialog;
+    public static AuditTransactionDialog successTransactionDialog;
+    public static AuditTransactionDialog fileInProcessDialog;
+    public static AuditTransactionDialog contentErrorDialog;
+    public static AuditTransactionDialog allFileErrorDialog;
+    private static JDateChooser fromDateChooser;
+    private static JDateChooser toDateChooser;
+    private static JButton btnReport;
+    private static JButton btnChecksum;
+    private static FunctionUtils fcUtils;
+    private static final int MAX_LENGTH_TEXT_AREA = 3000000;
+
+    /**
+     * Create the application.
+     */
+    public MainUI() {
+        initialize();
+    }
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            @SuppressWarnings("static-access")
+            public void run() {
+                try {
+                    MainUI window = new MainUI();
+                    window.processingUIFrame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    public void initialize() {
+
+        try {
+            MainProcessor.loadProperties();
+            UIManager.setLookAndFeel(MainProcessor.look_and_feel);
+            fcUtils = new FunctionUtils();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        JFrame.setDefaultLookAndFeelDecorated(true);
+
+        processingUIFrame = new JFrame();
+        processingUIFrame.setTitle("C1 Mediation");
+        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        Rectangle bounds = env.getMaximumWindowBounds();
+        processingUIFrame.setBounds(100, 100, bounds.width, bounds.height);
+        processingUIFrame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        processingUIFrame.getContentPane().setLayout(null);
+        processingUIFrame.setLocationRelativeTo(null);
+        processingUIFrame.setExtendedState(processingUIFrame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+
+        btnStartButton = new JButton("START");
+        btnStartButton.setFont(new Font("Tahoma", Font.BOLD, 11));
+        btnStartButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                doProcess();
+            }
+        });
+        btnStartButton.setForeground(Color.BLUE);
+        btnStartButton.setBounds(729, 642, 82, 27);
+        processingUIFrame.getContentPane().add(btnStartButton);
+
+        btnCancelButton = new JButton("CANCEL");
+        btnCancelButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                cancelAction();
+            }
+        });
+        btnCancelButton.setForeground(Color.RED);
+        btnCancelButton.setBounds(821, 642, 90, 27);
+        processingUIFrame.getContentPane().add(btnCancelButton);
+
+        btnChecksum = new JButton("Checksum");
+        btnChecksum.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                String result = fcUtils.checksumListFile(fcUtils.getPathErrorChecksumCdr(), ProgramLog.source_folder);
+                if (result.equals("")) {
+                    JOptionPane.showMessageDialog(frame, "Checksum Done !");
+                } else if (result.equals("empty")) {
+                    JOptionPane.showMessageDialog(frame, "Not exist file CDR to Checksum");
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Checksum Failure !");
+                }
+            }
+        });
+        btnChecksum.setForeground(Color.BLUE);
+        btnChecksum.setFont(new Font("Tahoma", Font.BOLD, 11));
+        btnChecksum.setBounds(292, 642, 108, 27);
+        processingUIFrame.getContentPane().add(btnChecksum);
+
+        JPanel panel = new JPanel();
+        panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Program Output", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+        panel.setBounds(10, 44, 699, 596);
+        processingUIFrame.getContentPane().add(panel);
+        panel.setLayout(null);
+
+        progressCDR = new JProgressBar(0, 100);
+        progressCDR.setBounds(93, 553, 220, 23);
+        panel.add(progressCDR);
+        progressCDR.setFont(new Font("Tahoma", Font.BOLD, 11));
+        progressCDR.setBackground(Color.BLACK);
+        progressCDR.setValue(0);
+        progressCDR.setStringPainted(true);
+        progressCDR.setForeground(Color.GREEN);
+
+        progressBar = new JProgressBar(0, 100);
+        progressBar.setBounds(469, 553, 220, 23);
+        panel.add(progressBar);
+        progressBar.setFont(new Font("Tahoma", Font.BOLD, 11));
+        progressBar.setBackground(Color.BLACK);
+        progressBar.setValue(0);
+        progressBar.setStringPainted(true);
+        progressBar.setForeground(Color.GREEN);
+
+        JLabel lblCdrsInFile = new JLabel("CDRs in file");
+        lblCdrsInFile.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        lblCdrsInFile.setBounds(20, 553, 75, 18);
+        panel.add(lblCdrsInFile);
+
+        JLabel lblFilesInFolder = new JLabel("Files in folder");
+        lblFilesInFolder.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        lblFilesInFolder.setBounds(384, 554, 75, 18);
+        panel.add(lblFilesInFolder);
+
+        scrollPane = new JScrollPane();
+        scrollPane.setBounds(10, 27, 679, 502);
+        panel.add(scrollPane);
+
+        taskOutput = new JTextArea();
+        taskOutput.setBackground(Color.BLACK);
+        taskOutput.setForeground(Color.YELLOW);
+        scrollPane.setViewportView(taskOutput);
+
+        JToolBar toolBar = new JToolBar();
+        toolBar.setFloatable(false);
+        toolBar.setBounds(0, 0, 1367, 33);
+        processingUIFrame.getContentPane().add(toolBar);
+
+        /*
+         * ########## [Start]           ADDING TOOL BAR FOR FRAMEWORK            #############
+         */
+        /**
+         * Add reformat config toolBar
+         */
+        btnReformatConfig = new JButton("");
+        btnReformatConfig.setToolTipText("Reformat Config");
+        btnReformatConfig.setIcon(new ImageIcon("./images/reformat2.png"));
+        btnReformatConfig.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (reformatConfigDialog == null) {
+                    reformatConfigDialog = new ReformatConfigDialog();
+                }
+                reformatConfigDialog.setVisible(true);
+            }
+        });
+        btnReformatConfig.setEnabled(false);
+        toolBar.add(btnReformatConfig);
+
+        /**
+         * Add reformat config toolBar
+         */
+        btnZoneMapConfig = new JButton("");
+        btnZoneMapConfig.setToolTipText("Zone Map");
+        btnZoneMapConfig.setIcon(new ImageIcon("./images/map.png"));
+        btnZoneMapConfig.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+//                if (zoneMapDialog == null) {
+                zoneMapDialog = new ZoneMapDialog();
+//                }
+                zoneMapDialog.setVisible(true);
+            }
+        });
+        btnZoneMapConfig.setEnabled(false);
+        toolBar.add(btnZoneMapConfig);
+//<editor-fold defaultstate="collapsed" desc="thaiha: tao chuc nang  tra cuu error mapping tren giao dien man hinh">
+
+        /**
+         * Add View error mapping CDR toolBar
+         */
+        btnErrorMappingCDRSearch = new JButton("");
+        btnErrorMappingCDRSearch.setToolTipText("Search Error Mapping CDR");
+        btnErrorMappingCDRSearch.setIcon(new ImageIcon("./images/search_error2.png"));
+        btnErrorMappingCDRSearch.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+//                if (errorMappingDialog == null) {
+                errorMappingDialog = new ErrorMappingDialog();
+//                }
+                errorMappingDialog.setVisible(true);
+            }
+        });
+        btnErrorMappingCDRSearch.setEnabled(false);
+        toolBar.add(btnErrorMappingCDRSearch);
+//</editor-fold>
+
+        /*
+         * Add user management toolBar
+         */
+        btnUserManagement = new JButton("");
+        btnUserManagement.setToolTipText("User Management");
+        btnUserManagement.setIcon(new ImageIcon("./images/user_management.png"));
+        btnUserManagement.setEnabled(false);
+        btnUserManagement.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (userManagementDialog == null) {
+                    userManagementDialog = new UserManagementDialog();
+                }
+                userManagementDialog.setVisible(true);
+            }
+        });
+        toolBar.add(btnUserManagement);
+
+        /*
+         * ########## [End]           ADDING TOOL BAR FOR FRAMEWORK            #############
+         */
+        /**
+         * add Reformat Config Table
+         */
+        JPanel reformatConfigPanel = new JPanel();
+        reformatConfigPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Reformat Configuration", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+        reformatConfigPanel.setBounds(719, 44, 621, 173);
+        processingUIFrame.getContentPane().add(reformatConfigPanel);
+        reformatConfigPanel.setLayout(null);
+
+        reformatConfigTableModel = new MyTableModel();
+        reformatConfigTableModel.setColumnNames(reformatConfigTableColumn);
+        DefaultTableCellRenderer sumRenderer = new DefaultTableCellRenderer();
+        reformatConfigTable = new MySortedJTable(reformatConfigTableModel);
+        reformatConfigTable.setBounds(10, 27, 601, 129);
+        reformatConfigTable.setFont(new Font("Tahoma", Font.BOLD, 11));
+        reformatConfigTable.getTable().getTableHeader().setForeground(Color.BLUE);
+        reformatConfigTable.getTable().getTableHeader().setBackground(Color.ORANGE);
+        reformatConfigTable.getTable().getColumnModel().getColumn(1).setPreferredWidth(300);
+        reformatConfigTable.getTable().getColumnModel().getColumn(0).setCellRenderer(sumRenderer);
+        reformatConfigTable.getTable().getColumnModel().getColumn(1).setCellRenderer(sumRenderer);
+        sumRenderer.setHorizontalAlignment(JLabel.LEFT);
+
+        reformatConfigPanel.add(reformatConfigTable);
+
+        /**
+         * add summary table
+         */
+        summaryPanel = new JPanel();
+        summaryPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Summary Report", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+        summaryPanel.setBounds(719, 228, 621, 284);
+        processingUIFrame.getContentPane().add(summaryPanel);
+        summaryPanel.setLayout(null);
+
+        summaryTableModel = new MyTableModel();
+        summaryTableModel.setColumnNames(summaryTableColumn);
+        summaryTableModel.setEditable(false);
+        summaryTable = new MySortedJTable(summaryTableModel);
+        summaryTable.getTable().setRowSorter(null);
+        summaryTable.setBounds(11, 72, 601, 189);
+        summaryTable.setFont(new Font("Tahoma", Font.BOLD, 11));
+        summaryTable.getTable().getTableHeader().setForeground(Color.BLUE);
+        summaryTable.getTable().getTableHeader().setBackground(Color.ORANGE);
+        summaryTable.getTable().getColumnModel().getColumn(1).setPreferredWidth(300);
+        summaryPanel.add(summaryTable);
+
+        JLabel lblFromDate = new JLabel("From Date");
+        lblFromDate.setBounds(11, 38, 75, 14);
+        summaryPanel.add(lblFromDate);
+
+        fromDateChooser = new JDateChooser();
+        fromDateChooser.setDateFormatString("dd/MM/yyyy");
+        fromDateChooser.setBounds(96, 33, 152, 23);
+        summaryPanel.add(fromDateChooser);
+
+        JLabel lblToDate = new JLabel("To Date");
+        lblToDate.setBounds(286, 38, 51, 14);
+        summaryPanel.add(lblToDate);
+
+        toDateChooser = new JDateChooser();
+        toDateChooser.setDateFormatString("dd/MM/yyyy");
+        toDateChooser.setBounds(349, 33, 152, 23);
+        summaryPanel.add(toDateChooser);
+
+        btnReport = new JButton("Report");
+        btnReport.setEnabled(false);
+        btnReport.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                searchSummaryReport();
+            }
+        });
+        btnReport.setForeground(Color.BLACK);
+        btnReport.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        btnReport.setBounds(526, 33, 82, 23);
+        summaryPanel.add(btnReport);
+
+        historyPanel = new JPanel();
+        historyPanel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "Program History", TitledBorder.CENTER, TitledBorder.TOP, null, null));
+        historyPanel.setBounds(719, 523, 621, 117);
+        processingUIFrame.getContentPane().add(historyPanel);
+        historyPanel.setLayout(null);
+
+        JLabel lastlogin = new JLabel("Last Login :");
+        lastlogin.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        lastlogin.setBounds(30, 37, 91, 18);
+        historyPanel.add(lastlogin);
+
+        JLabel lblLastLogOu = new JLabel("Last Reformat :");
+        lblLastLogOu.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        lblLastLogOu.setBounds(10, 76, 104, 18);
+        historyPanel.add(lblLastLogOu);
+
+        lblLastLoginTime = new JLabel("");
+        lblLastLoginTime.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        lblLastLoginTime.setBounds(137, 37, 226, 18);
+        historyPanel.add(lblLastLoginTime);
+
+        lblLastRunning = new JLabel("");
+        lblLastRunning.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        lblLastRunning.setBounds(138, 76, 226, 18);
+        historyPanel.add(lblLastRunning);
+
+        JLabel lblTitleNumChecksumErr = new JLabel("Total CDR files checksum error:");
+        lblTitleNumChecksumErr.setBounds(20, 645, 219, 20);
+        processingUIFrame.getContentPane().add(lblTitleNumChecksumErr);
+
+        lblNumChecksumErr = new JLabel("0");
+        lblNumChecksumErr.setForeground(Color.RED);
+        lblNumChecksumErr.setBounds(229, 648, 56, 14);
+        processingUIFrame.getContentPane().add(lblNumChecksumErr);
+
+        JMenuBar menuBar = new JMenuBar();
+        processingUIFrame.setJMenuBar(menuBar);
+
+        JMenu mnSystem = new JMenu("System");
+        menuBar.add(mnSystem);
+
+        loginMenuItem = new JMenuItem("Login");
+        /*
+         * add login submenu item
+         */
+        loginMenuItem = new JMenuItem("Login");
+        loginMenuItem.setIcon(new ImageIcon("./images/login.png"));
+        loginMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                if (!loginForm.getIsLogin()) {
+                    if (loginForm == null) {
+                        loginForm = new LoginDialog();
+                    }
+                    loginForm.setVisible(true);
+                } else {
+                    logout();
+                }
+            }
+        });
+        mnSystem.add(loginMenuItem);
+
+        JMenuItem exitMenuItem = new JMenuItem("Exit");
+        exitMenuItem = new JMenuItem("Exit");
+        exitMenuItem.setIcon(new ImageIcon("./images/logout.png"));
+        exitMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (running) {
+                    JOptionPane.showMessageDialog(frame, IConstant.WARNING_MESSAGE.PROGRAM_IN_RUNNING, "Warning", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                if (JOptionPane.showConfirmDialog(frame,
+                        "Are you sure to close this window?", "Really Closing?",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    isOpen = false;
+                    processingUIFrame.dispose();
+                }
+            }
+        });
+        mnSystem.add(exitMenuItem);
+
+        mnConfiguration = new JMenu("Configuration");
+        mnConfiguration.setEnabled(false);
+        menuBar.add(mnConfiguration);
+
+        JMenuItem mntmReformatConfig = new JMenuItem("Reformat Config");
+        mntmReformatConfig.setIcon(new ImageIcon("./images/reformat2.png"));
+        mntmReformatConfig.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (reformatConfigDialog == null) {
+                    reformatConfigDialog = new ReformatConfigDialog();
+                }
+                reformatConfigDialog.setVisible(true);
+            }
+        });
+        mnConfiguration.add(mntmReformatConfig);
+
+        JMenuItem mntmZoneMap = new JMenuItem("Zone Map");
+        mntmZoneMap.setIcon(new ImageIcon("./images/map.png"));
+        mntmZoneMap.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+//                if (zoneMapDialog == null) {
+                zoneMapDialog = new ZoneMapDialog();
+//                }
+                zoneMapDialog.setVisible(true);
+            }
+        });
+        mnConfiguration.add(mntmZoneMap);
+//<editor-fold defaultstate="collapsed" desc="thaiha: tao chuc nang Error Mapping Search tren thanh menu">
+
+        JMenuItem mntmErrorMapping = new JMenuItem("Error Mapping Search");
+        mntmErrorMapping.setIcon(new ImageIcon("./images/search_error2.png"));
+        mntmErrorMapping.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+//                if (errorMappingDialog == null) {
+                errorMappingDialog = new ErrorMappingDialog();
+//                }
+                errorMappingDialog.setVisible(true);
+            }
+        });
+        mnConfiguration.add(mntmErrorMapping);
+//</editor-fold>
+        mntmUserManagement = new JMenuItem("User Management");
+        mnConfiguration.add(mntmUserManagement);
+        mntmUserManagement.setIcon(new ImageIcon("./images/user_management.png"));
+        mntmUserManagement.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (userManagementDialog == null) {
+                    userManagementDialog = new UserManagementDialog();
+                }
+                userManagementDialog.setVisible(true);
+            }
+        });
+        processingUIFrame.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                if (running) {
+                    JOptionPane.showMessageDialog(frame, IConstant.WARNING_MESSAGE.PROGRAM_IN_RUNNING, "Warning", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+
+                if (JOptionPane.showConfirmDialog(frame,
+                        "Are you sure to close this window?", "Really Closing?",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                    isOpen = false;
+                    System.exit(1);
+                }
+            }
+        });
+
+        loadReformatConfig();
+        loadSummaryTable();
+        init();
+    }
+
+    @SuppressWarnings("unused")
+    public static void loadReformatConfig() {
+        ProgramLog programLog = new ProgramLog();
+        sourceFile = new File(ProgramLog.source_folder);
+        destinationFile = new File(ProgramLog.output_folder);
+        movedFile = new File(ProgramLog.moved_folder);
+        method = ProgramLog.method;
+        sourceBehavior = ProgramLog.source_behavior;
+        minutesInput = ProgramLog.minuteInput;
+
+        String[] rowValues = {sourceFile.getAbsolutePath(), destinationFile.getAbsolutePath(), sourceBehavior, movedFile.getAbsolutePath(), method, minutesInput};
+        try {
+            addConfigData(reformatConfigTableModel, reformatConfigTable, rowValues);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void searchSummaryReport() {
+        /*
+         * validate toDate > fromDate
+         */
+        Date fromDate = fromDateChooser.getDate();
+        Date toDate = toDateChooser.getDate();
+
+        if ((fromDate == null) || (toDate == null)) {
+            JOptionPane.showMessageDialog(frame, IConstant.WARNING_MESSAGE.INVALID_DATE_FORMAT, "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (toDate.before(fromDate)) {
+            JOptionPane.showMessageDialog(frame, IConstant.WARNING_MESSAGE.INVALID_INPUT_DATE, "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        SummaryReportObject summaryReportObject = new SummaryReportObject();
+        summaryReportObject = MainProcessor.getSummaryReport(fromDate, toDate);
+        String totalFileNumber = "";
+        String totalFileInProcess = "";
+        String totalSuccess = "";
+        String totalError = "";
+        String totalChecksumError = "";
+        String totalContentError = "";
+        if (summaryReportObject != null) {
+            totalFileNumber = summaryReportObject.getTotalFile().toString();
+            totalFileInProcess = summaryReportObject.getTotalFileInProcess().toString();
+            totalSuccess = summaryReportObject.getTotalSuccessFile().toString();
+            totalError = summaryReportObject.getTotalErrorFile().toString();
+            totalChecksumError = summaryReportObject.getTotalChecksumError().toString();
+            totalContentError = summaryReportObject.getTotalContentError().toString();
+        }
+        String _fromDate = DateUtils.getDateStringInformat(fromDateChooser.getDate(), DateUtils.ddMMYYYY_FULL_SLASH);
+        String _toDate = DateUtils.getDateStringInformat(toDateChooser.getDate(), DateUtils.ddMMYYYY_FULL_SLASH);
+        String[] rowValues = {_fromDate, _toDate, totalFileNumber, totalFileInProcess, totalSuccess, totalChecksumError, totalContentError, totalError,};
+        try {
+            addSummaryData(summaryTableModel, summaryTable, rowValues);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void loadSummaryTable() {
+        /*
+         * loading fromDate & toDate
+         */
+        Calendar cal = Calendar.getInstance();
+        Date today = cal.getTime();
+        cal.add(Calendar.DATE, -1);
+        Date yesterday = cal.getTime();
+
+        fromDateChooser.setDate(yesterday);
+        toDateChooser.setDate(today);
+
+        String[] rowValues = {"", "", "", "", "", "", "", ""};
+        try {
+            addSummaryData(summaryTableModel, summaryTable, rowValues);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        /*
+         * STEP 2: add subscriber selection event click
+         */
+        summaryTable.getTable().setColumnSelectionAllowed(false);
+        summaryTable.getTable().setRowSelectionAllowed(true);
+        summaryTable.getTable().addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent me) {
+                JTable table = (JTable) me.getSource();
+                Point p = me.getPoint();
+                int selectedRow = table.rowAtPoint(p);
+                if ((me.getClickCount() == 1) && (loginForm.getIsLogin())) {
+
+                    if (selectedRow == 2) { //search all transaction
+                        if (totalTransactionDialog == null) {
+                            totalTransactionDialog = new AuditTransactionDialog();
+                        }
+                        totalTransactionDialog.setTitle("All Transactions");
+                        totalTransactionDialog.setType(IConstant.SUMMARY_TABLE_INFO.TOTAL_FILE);
+                        totalTransactionDialog.setFromDate(fromDateChooser.getDate());
+                        totalTransactionDialog.setToDate(toDateChooser.getDate());
+                        totalTransactionDialog.setStatus("");
+                        totalTransactionDialog.fireDataUpdate();
+                    }
+
+                    if (selectedRow == 3) { //search all transaction in process
+                        if (fileInProcessDialog == null) {
+                            fileInProcessDialog = new AuditTransactionDialog();
+                        }
+                        fileInProcessDialog.setTitle("Transactions in process");
+                        fileInProcessDialog.setType(IConstant.SUMMARY_TABLE_INFO.TOTAL_FILE_IN_PROCESS);
+                        fileInProcessDialog.setFromDate(fromDateChooser.getDate());
+                        fileInProcessDialog.setToDate(toDateChooser.getDate());
+                        fileInProcessDialog.setStatus(IConstant.SUMMARY_TABLE_SEARCH.IN_PROCESS);
+                        fileInProcessDialog.fireDataUpdate();
+                    }
+
+                    if (selectedRow == 4) { //search all successful transaction
+                        if (successTransactionDialog == null) {
+                            successTransactionDialog = new AuditTransactionDialog();
+                        }
+                        successTransactionDialog.setTitle("Successful Transactions");
+                        successTransactionDialog.setType(IConstant.SUMMARY_TABLE_INFO.TOTAL_FILE_SUCCESS);
+                        successTransactionDialog.setFromDate(fromDateChooser.getDate());
+                        successTransactionDialog.setToDate(toDateChooser.getDate());
+                        successTransactionDialog.setStatus(IConstant.CDR_PROCESSING_STATUS.FINISHED.toString());
+                        successTransactionDialog.fireDataUpdate();
+                    }
+
+                    if (selectedRow == 5) { //search all checksum error transaction
+                        if (checksumDialog == null) {
+                            checksumDialog = new ChecksumDialog();
+                        }
+                        checksumDialog.setFromDate(fromDateChooser.getDate());
+                        checksumDialog.setToDate(toDateChooser.getDate());
+                        checksumDialog.setStatus(IConstant.REFORMATING_ERROR_CODE.INVALID_CHECKSUM_VALUE.toString());
+                        checksumDialog.fireDataUpdate();
+                    }
+
+                    if (selectedRow == 6) { //search all content error transaction
+                        if (contentErrorDialog == null) {
+                            contentErrorDialog = new AuditTransactionDialog();
+                        }
+                        contentErrorDialog.setTitle("Content Error Transaction");
+                        contentErrorDialog.setType(IConstant.SUMMARY_TABLE_INFO.TOTAL_FILES_CONTENT_ERROR);
+                        contentErrorDialog.setFromDate(fromDateChooser.getDate());
+                        contentErrorDialog.setToDate(toDateChooser.getDate());
+                        contentErrorDialog.setStatus(IConstant.SUMMARY_TABLE_SEARCH.CONTENT_ERROR);
+                        contentErrorDialog.fireDataUpdate();
+                    }
+
+                    if (selectedRow == 7) { //search all error
+                        if (allFileErrorDialog == null) {
+                            allFileErrorDialog = new AuditTransactionDialog();
+                        }
+                        allFileErrorDialog.setTitle("All Errors Transactions");
+                        allFileErrorDialog.setType(IConstant.SUMMARY_TABLE_INFO.TOTAL_FILE_ERROR);
+                        allFileErrorDialog.setFromDate(fromDateChooser.getDate());
+                        allFileErrorDialog.setToDate(toDateChooser.getDate());
+                        allFileErrorDialog.setStatus(IConstant.SUMMARY_TABLE_SEARCH.ERROR);
+                        allFileErrorDialog.fireDataUpdate();
+                    }
+
+                }
+            }
+        });
+
+    }
+
+    public static void addConfigData(MyTableModel tableModel, MySortedJTable tableInfo, String[] rowValues) throws SQLException, IOException {
+        rowValues[2] = (rowValues[2].equalsIgnoreCase(IConstant.SOURCE_BEHAVIOR.MOVE_TO_OTHER_FOLDER.toString())) ? IConstant.SOURCE_BEHAVIOR.MOVED : IConstant.SOURCE_BEHAVIOR.DELETED;
+        rowValues[4] = (rowValues[4].equalsIgnoreCase(IConstant.METHODS.AUTOMATION.toString())) ? IConstant.METHODS.AUTOMATION_TEXT : IConstant.METHODS.ON_DEMAND_TEXT;
+        String[] rowInfors = {"Source Folder",
+            "Output Folder",
+            "Behavior",
+            "Moved Folder",
+            "Method"
+        };
+        Object[][] data = new Object[rowInfors.length][2];
+        for (int i = 0; i < rowInfors.length; i++) {
+            data[i][0] = rowInfors[i] + "  ";
+            if (rowValues[i].equalsIgnoreCase(IConstant.METHODS.AUTOMATION_TEXT)) {
+                data[i][1] = rowValues[i] + " in every " + rowValues[i + 1] + " minutes";
+            } else {
+                data[i][1] = rowValues[i] + "  ";
+            }
+        }
+        tableModel.setData(data);
+        tableInfo.getTable().setModel(tableModel);
+        tableInfo.repaint();
+    }
+
+    public static void addSummaryData(MyTableModel tableModel, MySortedJTable tableInfo, String[] rowValues) throws SQLException, IOException {
+        String[] rowInfors = {
+            IConstant.SUMMARY_TABLE_INFO.FROM_DATE,
+            IConstant.SUMMARY_TABLE_INFO.TO_DATE,
+            IConstant.SUMMARY_TABLE_INFO.TOTAL_FILE,
+            IConstant.SUMMARY_TABLE_INFO.TOTAL_FILE_IN_PROCESS,
+            IConstant.SUMMARY_TABLE_INFO.TOTAL_FILE_SUCCESS,
+            IConstant.SUMMARY_TABLE_INFO.TOTAL_FILE_CHECKSUM_ERROR,
+            IConstant.SUMMARY_TABLE_INFO.TOTAL_FILES_CONTENT_ERROR,
+            IConstant.SUMMARY_TABLE_INFO.TOTAL_FILE_ERROR
+        };
+
+        Object[][] data = new Object[rowInfors.length][2];
+        for (int i = 0; i < rowInfors.length; i++) {
+            data[i][0] = rowInfors[i] + "  ";
+            if (rowValues[i].equalsIgnoreCase(IConstant.METHODS.AUTOMATION_TEXT)) {
+                data[i][1] = rowValues[i] + " in every " + rowValues[i + 1] + " minutes";
+            } else {
+                data[i][1] = rowValues[i] + "  ";
+            }
+        }
+        tableModel.setData(data);
+        tableInfo.getTable().setModel(tableModel);
+        tableInfo.repaint();
+    }
+
+    @SuppressWarnings("deprecation")
+    protected void cancelAction() {
+        /*//step1: pause tat ca tien trinh lai
+         //step2: hien thi ra man hinh*/
+
+        if (JOptionPane.showConfirmDialog(frame,
+                "Are you sure to cancel the process?\nPlease check the program finished all jobs before termination", "Really Canceling?",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+            running = false;
+            taskOutput.setText("");
+            btnCancelButton.setEnabled(false);
+            t1.stop();
+            t2.stop();
+            taskOutput.append("The process is cancel!");
+            taskOutput.append(newline);
+            taskOutput.append("The number of files in source folder: " + getTotalNumberOfFile(sourceFile));
+            btnStartButton.setEnabled(true);
+        }
+
+    }
+
+    protected void doProcess() {
+        running = true;
+        SystemLog.setLastRunningTime(DateUtils.getCurrentDateTime(DateUtils.ddMMyyyyHHmmss_FULL_SLASH1));
+        SystemLog.setSystemRuning(true);
+        try {
+            SystemLog.loadProperties();
+        } catch (IOException e2) {
+            e2.printStackTrace();
+        }
+        lblLastRunning.setText(SystemLog.lastRunningTime);
+        historyPanel.repaint();
+        btnStartButton.setEnabled(false);
+        btnCancelButton.setEnabled(true);
+        progressBar.setValue(0);
+        progressCDR.setValue(0);
+
+        /*
+         * display number of file in folder
+         */
+        taskOutput.setText("");
+        taskOutput.append("Source Folder: " + sourceFile.getAbsolutePath());
+        taskOutput.append(newline);
+
+        /*
+         * 1s 1 lan dem so file trong folder de in len man hinh
+         */
+        t1 = new Thread() {
+            public void run() {
+                double currentNumberOfFile = 0;
+                totalNumberOfFile = getTotalNumberOfFile(sourceFile);
+                float percentage = 0;
+                logger.info("totalNumberOfFile = " + totalNumberOfFile);
+                while (true) {
+                    try {
+                        totalNumberFileChecksumErr = getTotalNumberOfFile(new File(fcUtils.getPathErrorChecksumCdr()));
+                        lblNumChecksumErr.setText(String.valueOf(totalNumberFileChecksumErr));
+                        currentNumberOfFile = getTotalNumberOfFile(sourceFile);
+                        Thread.sleep(1000);
+                        //Display status in progressBar
+                        DecimalFormat df = new DecimalFormat("#,###");
+
+                        if (totalNumberOfFile != 0) {
+                            percentage = (float) ((float) ((totalNumberOfFile - currentNumberOfFile) * 100) / totalNumberOfFile);
+                            progressBar.setString(df.format(totalNumberOfFile - currentNumberOfFile) + "/" + df.format(totalNumberOfFile));
+                        } else {
+                            percentage = 100;
+                            progressBar.setString("0/0");
+                        }
+
+                        progressBar.setValue((int) percentage);
+                        progressBar.setString(df.format(totalNumberOfFile - currentNumberOfFile) + "/" + df.format(totalNumberOfFile));
+
+                        float cdrCount = CSVProcess.getProgress();
+                        cdrTotal = CSVProcess.getTotalCDR();
+
+                        if (cdrTotal != 0) {
+                            if (totalNumberOfFile == 0) {
+                                progressCDR.setValue(100);
+                                progressCDR.setString("0/0");
+                            } else {
+                                percentage = (cdrCount / cdrTotal) * 100;
+                                if (percentage > 100) {
+                                    percentage = 100;
+                                }
+
+                                progressCDR.setValue((int) percentage);
+                                progressCDR.setString(df.format(cdrCount) + "/" + df.format(cdrTotal));
+                            }
+                        }
+
+                    } catch (InterruptedException e) {
+                        break;
+                    }
+                }
+            }
+        };
+
+        /*
+         * Thread t2 to scan folder
+         */
+        try {
+            t2 = new Thread() {
+                public void run() {
+                    FileFilter fileFilter = new RegexFileFilter("IPbill.*");
+                    File[] listOfFiles = sourceFile.listFiles(fileFilter);
+                    List<File> listFile = Arrays.asList(listOfFiles);
+                    int result = SUCCESS;
+                    if (method.equalsIgnoreCase(IConstant.METHODS.ON_DEMAND.toString())) {
+                        logger.info("- Scan folder by demand");
+                        taskOutput.append("- Scan folder by demand");
+                        taskOutput.append(newline);
+                        taskOutput.append("Total files to process: " + getTotalNumberOfFile(sourceFile));
+//                        thaiha test: fix out of memory Text Area
+                        if (taskOutput.getText().length() > MAX_LENGTH_TEXT_AREA) {
+                            String textArea = taskOutput.getText();
+                            taskOutput.setText(textArea.substring(textArea.length() - MAX_LENGTH_TEXT_AREA, textArea.length()));
+                        }
+//                         thaiha test end
+                        taskOutput.append(newline);
+                        taskOutput.append("Program starting at " + DateUtils.getCurrentDateTime(DateUtils.MMddyyyyHHmmss_FULL_SLASH));
+                        taskOutput.append(newline);
+                        logger.info("Program starting at " + DateUtils.getCurrentDateTime(DateUtils.MMddyyyyHHmmss_FULL_SLASH));
+                        Statement stmt = null;
+                        Connection conn = null;
+                        try {
+                            if (getTotalNumberOfFile(sourceFile) > 0) {
+                                conn = DBPool.getConnection(dbconfig);
+                                stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                                result = MainProcessor.process(IConstant.METHODS.ON_DEMAND, isExportCsv, sourceBehavior, listFile, destinationFile, movedFile, conn, true);
+                            }
+                        } catch (SQLException e) {
+                            logger.error("Exception", e);
+                        } finally {
+                            try {
+                                if (stmt != null) {
+                                    stmt.close();
+                                }
+                                if (conn != null) {
+                                    conn.close();
+                                }
+                            } catch (Exception e) {
+                            }
+                        }
+                    } else {
+                        //chay theo dinh ky
+                        int count = 1;
+                        if (!StringUtils.isEmpty(minutesInput)) {
+                            Connection conn = null;
+                            Statement stmt = null;
+                            try {
+                                conn = DBPool.getConnection(dbconfig);
+                                while (true) {
+                                    listOfFiles = sourceFile.listFiles();
+                                    listFile = Arrays.asList(listOfFiles);
+                                    logger.info("\n\n- Scan folder automatically");
+                                    logger.info("- Run at " + count + " times:");
+                                    taskOutput.append(newline);
+                                    taskOutput.append("- Scan folder automatically");
+                                    taskOutput.append(newline);
+                                    taskOutput.append("- Total files to process: " + getTotalNumberOfFile(sourceFile));
+                                    taskOutput.append(newline);
+//                                    thaiha test: fix out of memory Text Area
+                                    if (taskOutput.getText().length() > MAX_LENGTH_TEXT_AREA) {
+                                        String textArea = taskOutput.getText();
+                                        taskOutput.setText(textArea.substring(textArea.length() - MAX_LENGTH_TEXT_AREA, textArea.length()));
+                                    }
+//                                    thaiha test end
+                                    count++;
+                                    int timeRepeat = NumberUtils.toInt(minutesInput);
+                                    timeRepeat = timeRepeat * 60 * 1000;
+                                    if (conn != null) {
+                                        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+                                        result = MainProcessor.process(IConstant.METHODS.AUTOMATION, isExportCsv, sourceBehavior,
+                                                listFile, destinationFile, movedFile, conn, true);
+                                    } else {
+                                        logger.info("Connection is NULL, stopping process CDR");
+                                    }
+                                    try {
+                                        logger.info("Sleeping " + timeRepeat + " miliseconds...");
+                                        Thread.sleep(timeRepeat);
+                                    } catch (InterruptedException e) {
+                                        break;
+                                    }
+                                }
+                            } catch (Exception e1) {
+                                e1.printStackTrace();
+                            } finally {
+                                try {
+                                    if (conn != null) {
+                                        conn.close();
+                                    }
+                                    if (stmt != null) {
+                                        stmt.close();
+                                    }
+                                } catch (Exception e) {
+                                }
+                            }
+                        }
+                    }
+
+                    if (result == SUCCESS) {
+                        t1.interrupt();
+                        finishDisplay();
+                        logger.info("Program finished at " + DateUtils.getCurrentDateTime(DateUtils.MMddyyyyHHmmss_FULL_SLASH));
+                        taskOutput.append("\t\tProgram finished at " + DateUtils.getCurrentDateTime(DateUtils.MMddyyyyHHmmss_FULL_SLASH));
+                        logger.info("######################## PROGRAM FINISH PROCESS ########################\n\n\n");
+                        taskOutput.append(newline);
+                    }
+                }
+            };
+        } catch (Exception e) {
+        }
+
+        t1.start();
+        t2.start();
+    }
+
+    protected void init() {
+        //clear all field;
+        isOpen = true;
+        running = false;
+        processingUIFrame.setVisible(true);
+        btnStartButton.setEnabled(false);
+        btnCancelButton.setEnabled(false);
+        btnChecksum.setEnabled(false);
+        taskOutput.setText("");
+        progressBar.setValue(0);
+//        loadProperties();
+    }
+
+    public static void loadProperties() {
+        FileInputStream fi = null;
+        try {
+            String fileName = IConstant.ROOT_CONFIG.CONFIG_FOLDER_PATH + "program.conf";
+            fi = new FileInputStream(fileName);
+            props.load(fi);
+//            listSluScan = props.getProperty("list_slu_scan", listSluScan) + ",";
+        } catch (Exception e) {
+            logger.error("Error loadProperties", e.fillInStackTrace());
+        } finally {
+            if (fi != null) {
+                try {
+                    fi.close();
+                } catch (IOException ex) {
+                }
+            }
+        }
+    }
+
+    protected void finishDisplay() {
+        running = false;
+        SystemLog.setSystemRuning(false);
+        progressBar.setValue(100);
+        progressCDR.setValue(100);
+
+        DecimalFormat df = new DecimalFormat("#,###");
+        progressBar.setString(df.format(totalNumberOfFile) + "/" + df.format(totalNumberOfFile));
+        progressCDR.setString(df.format(cdrTotal) + "/" + df.format(cdrTotal));
+
+        taskOutput.append("\t\tCompleted Process successfully!");
+        taskOutput.append(newline);
+        btnStartButton.setEnabled(true);
+        btnCancelButton.setEnabled(false);
+    }
+
+    private static int getTotalNumberOfFile(File sourceFolder) {
+        try {
+            int numberOfFile = 0;
+            File[] listOfFiles = sourceFolder.listFiles();
+            List<File> listFile = Arrays.asList(listOfFiles);
+            for (File f : listFile) {
+                if (f.isFile()) {
+                    if (!f.getName().contains(MainProcessor.application_id)) {
+                        numberOfFile++;
+                    }
+                }
+            }
+            return numberOfFile;
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    public String getSourceBehavior() {
+        return sourceBehavior;
+    }
+
+    public boolean isExportCsv() {
+        return isExportCsv;
+    }
+
+    public void setExportCsv(boolean isExportCsv) {
+        this.isExportCsv = isExportCsv;
+    }
+
+    public boolean isRunning() {
+        return running;
+    }
+
+    public void setRunning(boolean running) {
+        this.running = running;
+    }
+
+    public boolean isOpen() {
+        return isOpen;
+    }
+
+    public void setOpen(boolean isOpen) {
+        this.isOpen = isOpen;
+    }
+
+    public DBConfig getDbconfig() {
+        return dbconfig;
+    }
+
+    public void setDbconfig(DBConfig dbconfig) {
+        this.dbconfig = dbconfig;
+    }
+
+    protected void logout() {
+        if (CSVProcess.isRunning == false) {
+            int dialogResult = JOptionPane.showConfirmDialog(processingUIFrame, IConstant.WARNING_MESSAGE.ASK_FOR_LOGOUT, "Confirmation", JOptionPane.YES_NO_OPTION);
+            if (dialogResult == JOptionPane.YES_OPTION) {
+                loginForm.getPasswordTxtField().setText("");
+                loginForm.setIsLogin(false);
+                logger.warn("Logout successfully!");
+                running = false;
+                taskOutput.setText("");
+                btnStartButton.setEnabled(false);
+                btnChecksum.setEnabled(false);
+                processingUIFrame.dispose();
+                initialize();
+                processingUIFrame.setVisible(true);
+
+                if (checksumDialog != null) {
+                    checksumDialog.dispose();
+                    checksumDialog = null;
+                }
+                if (totalTransactionDialog != null) {
+                    totalTransactionDialog.dispose();
+                    totalTransactionDialog = null;
+                }
+                if (successTransactionDialog != null) {
+                    successTransactionDialog.dispose();
+                    successTransactionDialog = null;
+                }
+                if (successTransactionDialog != null) {
+                    successTransactionDialog.dispose();
+                    successTransactionDialog = null;
+                }
+                if (fileInProcessDialog != null) {
+                    fileInProcessDialog.dispose();
+                    fileInProcessDialog = null;
+                }
+                if (contentErrorDialog != null) {
+                    contentErrorDialog.dispose();
+                    contentErrorDialog = null;
+                }
+                if (allFileErrorDialog != null) {
+                    allFileErrorDialog.dispose();
+                    allFileErrorDialog = null;
+                }
+
+            } else {
+                return;
+            }
+        } else {
+            JOptionPane.showMessageDialog(frame, IConstant.WARNING_MESSAGE.FILE_IN_PROCESSING, "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+    }
+
+    public static void checkLoginStatus() throws SQLException {
+        try {
+            SystemLog.loadProperties();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (loginForm.getIsLogin()) {
+            loginForm.dispose();
+//            usernameLbl.setText("Welcome, " + username);
+            lblLastLoginTime.setText(SystemLog.lastLoginTime);
+            lblLastRunning.setText(SystemLog.lastRunningTime);
+            historyPanel.repaint();
+
+            if (loginForm.getRole() == IConstant.USER_ROLE_CODE.ADMIN) {
+                /*
+                 * enable menu
+                 */
+                mnConfiguration.setEnabled(true);
+                btnZoneMapConfig.setEnabled(true);
+                btnReformatConfig.setEnabled(true);
+                btnUserManagement.setEnabled(true);
+                btnStartButton.setEnabled(true);
+                btnChecksum.setEnabled(true);
+                btnReport.setEnabled(true);
+//                thaiha: enable chuc nang Error Mapping View
+                btnErrorMappingCDRSearch.setEnabled(true);
+            }
+
+            /*
+             * enable logout menu
+             */
+            loginMenuItem.setText("Log out");
+            loginMenuItem.setIcon(new ImageIcon("./images/1_logout.png"));
+            searchSummaryReport();
+
+        } else {
+            /*
+             * disable menu
+             */
+            mnConfiguration.setEnabled(false);
+
+        }
+    }
+
+}

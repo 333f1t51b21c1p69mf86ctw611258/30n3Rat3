@@ -1,0 +1,38 @@
+package e1reformat.util;
+
+import java.io.File;
+import java.util.Comparator;
+
+import org.apache.commons.lang3.StringUtils;
+
+public class FileNameComparator implements Comparator<File> {
+
+    @Override
+    public int compare(File sourceFile1, File sourceFile2) {
+
+        String timeOfFileName1 = StringUtils.substringAfterLast(sourceFile1.getName(), ".");
+
+        String timeOfFileName2 = StringUtils.substringAfterLast(sourceFile2.getName(), ".");
+
+        if (timeOfFileName1 == null || timeOfFileName2 == null) {
+            return 0;
+        } else {
+            try {
+//                return (int) (Long.valueOf(timeOfFileName1) - Long.valueOf(timeOfFileName2));
+                if ((Long.valueOf(timeOfFileName1) - Long.valueOf(timeOfFileName2)) == 0) {
+                    String seqName1 = sourceFile1.getName().split("\\.")[2];
+                    String seqName2 = sourceFile2.getName().split("\\.")[2];
+                    if(seqName1 == null || seqName2 == null){
+                        return 0;
+                    }
+                    return (int) (Long.valueOf(seqName1) - Long.valueOf(seqName2));
+                } else {
+                    return (int) (Long.valueOf(timeOfFileName1) - Long.valueOf(timeOfFileName2));
+                }
+
+            } catch (NumberFormatException nfe) {
+                return 0;
+            }
+        }
+    }
+}

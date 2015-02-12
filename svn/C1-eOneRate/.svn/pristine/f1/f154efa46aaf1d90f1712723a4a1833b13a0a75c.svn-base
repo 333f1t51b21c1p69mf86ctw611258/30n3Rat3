@@ -1,0 +1,61 @@
+package e1reformat.entity.cdr.sub;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.math.NumberUtils;
+
+public class Extension {
+
+    private static final String SUB_FIELD_DELIMITER = "\\*";
+    private static final int FULL_EXTENSION_FIELDS = 2;
+    private String EXT_TOKEN_NAME;
+    private String EXT_TOKEN_VALUE;
+
+    public String getEXT_TOKEN_NAME() {
+        return EXT_TOKEN_NAME;
+    }
+
+    public void setEXT_TOKEN_NAME(String eXT_TOKEN_NAME) {
+        EXT_TOKEN_NAME = eXT_TOKEN_NAME;
+    }
+
+    public String getEXT_TOKEN_VALUE() {
+        return EXT_TOKEN_VALUE;
+    }
+
+    public void setEXT_TOKEN_VALUE(String eXT_TOKEN_VALUE) {
+        EXT_TOKEN_VALUE = eXT_TOKEN_VALUE;
+    }
+
+    public Extension(List<String> listValue) {
+        if (listValue.size() == FULL_EXTENSION_FIELDS) {
+            this.EXT_TOKEN_NAME = listValue.get(0);
+            this.EXT_TOKEN_VALUE = listValue.get(1);
+        }
+    }
+
+    public static ArrayList<Extension> getListExtension(String numberOfExtension, String extensionInfo) {
+        ArrayList<Extension> listExtension = new ArrayList<Extension>();
+        String[] extInfoArray = extensionInfo.split(SUB_FIELD_DELIMITER);
+        int countIndex = FULL_EXTENSION_FIELDS;
+        int numberOfExtensions = NumberUtils.toInt(numberOfExtension);
+
+        while (true) {
+            List<String> ex = new ArrayList<String>();
+            for (int i = 0; i < countIndex; i++) {
+                ex.add(extInfoArray[numberOfExtensions * 2 + i]);
+            }
+
+            Extension newExtension = new Extension(ex);
+            listExtension.add(newExtension);
+            numberOfExtensions++;
+
+            if (numberOfExtensions * FULL_EXTENSION_FIELDS >= extInfoArray.length) {
+                break;
+            }
+        }
+
+        return listExtension;
+    }
+}

@@ -1,4 +1,3 @@
-/* Formatted on 17/11/2014 11:31:41 AM (QP5 v5.215.12089.38647) */
 DROP PACKAGE BODY VNP_COMMON.ELC_USER_FILTER;
 
 CREATE OR REPLACE PACKAGE BODY VNP_COMMON.ELC_USER_FILTER
@@ -209,9 +208,9 @@ AS
 
       COMMIT;
 
-      INS_ACTION_LOG ('RUNNING_FIRST',
-                      'ELC_USER_FILTER',
-                      'SUCCESSFUL',
+      INS_ACT_LOG ('VNP_DATA',
+                      'ELC_USER_FILTER.RUNNING_FIRST',
+                      'ELC_USER_FILTER.RUNNING_FIRST: SUCCESSFUL',
                       2);
    EXCEPTION
       --      WHEN NO_DATA_FOUND
@@ -221,9 +220,9 @@ AS
       THEN
          ROLLBACK;
 
-         INS_ACTION_LOG (
-            'RUNNING_FIRST',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.RUNNING_FIRST',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -267,9 +266,9 @@ AS
 
       COMMIT;
 
-      INS_ACTION_LOG (
-         'LETS_GO',
-         'ELC_USER_FILTER',
+      INS_ACT_LOG (
+         'VNP_DATA',
+         'ELC_USER_FILTER.LETS_GO',
          'LETS_GO ( ' || i_reseller_version_id || ' ) => SUCCESSFUL',
          2);
    EXCEPTION
@@ -282,9 +281,9 @@ AS
 
          CHANGE_CHANGING_STATUS (0);
 
-         INS_ACTION_LOG (
-            'LETS_GO',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.LETS_GO',
                'LETS_GO ( '
             || i_reseller_version_id
             || ' ) => ERROR CODE: '
@@ -358,9 +357,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_CURRENCY_TYPE',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_CURRENCY_TYPE',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -378,9 +377,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_UNIT_TYPE',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_UNIT_TYPE',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -399,9 +398,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_ZONE',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_ZONE',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -422,9 +421,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_ACCUMULATOR',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_ACCUMULATOR',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -443,9 +442,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_BALANCE',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_BALANCE',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -464,9 +463,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_DISCOUNT_MODEL',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_DISCOUNT_MODEL',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -485,9 +484,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_OFFER_ACCUMULATOR_MAP',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_OFFER_ACCUMULATOR_MAP',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -506,9 +505,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_OFFER_BALANCE_MAP',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_OFFER_BALANCE_MAP',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -527,9 +526,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_OFFER_PRIORITY',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_OFFER_PRIORITY',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -547,9 +546,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_OFFER_RC_AWARD_MAP',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_OFFER_RC_AWARD_MAP',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -587,9 +586,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_PRODUCT_OFFER',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_PRODUCT_OFFER',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -607,9 +606,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_PROMO_PLAN',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_PROMO_PLAN',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -627,9 +626,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_RUM_MAP',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_RUM_MAP',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -647,9 +646,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_TARIFF_MODEL',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_TARIFF_MODEL',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -667,9 +666,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_TARIFF_PLAN',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_TARIFF_PLAN',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -687,9 +686,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_TIME_MAP',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_TIME_MAP',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -707,9 +706,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_TIME_MODEL',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_TIME_MODEL',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -727,9 +726,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_USAGE_ACTIVITY',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_USAGE_ACTIVITY',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -747,9 +746,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_USAGE_ACTIVITY_GROUP',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_USAGE_ACTIVITY_GROUP',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -767,9 +766,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_USAGE_ACTIVITY_TRANS',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_USAGE_ACTIVITY_TRANS',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -787,9 +786,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_USAGE_PLAN',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_USAGE_PLAN',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -807,9 +806,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_ZONE_GROUP',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_ZONE_GROUP',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -827,9 +826,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_OFFER_RC_TERM_MAP',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_OFFER_RC_TERM_MAP',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -847,9 +846,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_RC_RATE',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_RC_RATE',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;
@@ -867,9 +866,9 @@ AS
    EXCEPTION
       WHEN OTHERS
       THEN
-         INS_ACTION_LOG (
-            'FILTER_BALANCE_EI',
-            'ELC_USER_FILTER',
+         INS_ACT_LOG (
+            'VNP_DATA',
+            'ELC_USER_FILTER.FILTER_BALANCE_EI',
             'ERROR CODE: ' || SQLCODE || '; DETAIL: ' || SQLERRM,
             4);
    END;

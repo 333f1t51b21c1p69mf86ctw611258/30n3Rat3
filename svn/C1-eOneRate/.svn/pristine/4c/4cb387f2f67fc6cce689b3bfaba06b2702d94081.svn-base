@@ -1,0 +1,638 @@
+package e1reformat.controller;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.log4j.Logger;
+import e1reformat.entity.cdr.CdrObject;
+import e1reformat.entity.cdr.sub.Balance;
+import e1reformat.entity.enrich.HotRatedCdr;
+import e1reformat.util.CDRConstant;
+import e1reformat.util.DateUtils;
+import e1reformat.util.IConstant;
+
+public class ConvertCDRObject {
+    
+    private static Logger logger = Logger.getLogger("CSVProcess");
+    private static final String CDR_CALL_TYPE_FOWARD = "58";
+    
+    public ConvertCDRObject() {
+        //nothing
+    }
+
+    //Rewrite
+	/*26 Oct 2014
+     * 
+     */
+    private static int getTypeOfCdr(String cdrRecord) {
+        int position = StringUtils.indexOf(cdrRecord, "|", 1);
+        try {
+            String typeOfCdr = StringUtils.substring(cdrRecord, position + 1, position + 2);
+            return NumberUtils.toInt(typeOfCdr);
+        } catch (Exception e) {
+            logger.error("Can not find type of CDR", e);
+            return -1;
+        }
+    }
+
+    //Check usage
+    public static void setValueToObject(Object object, String property, Object value) throws Exception {
+        Field field = object.getClass().getDeclaredField(property);
+        field.setAccessible(true);
+        field.set(object, value);
+    }
+
+    //Convert raw CDR String to CDR Object
+    public CdrObject convertCDR(String rawCDRs, StringBuilder br) {
+        CdrObject cdrObj = new CdrObject();
+        String[] rawCDRValues = null;
+        ArrayList<Balance> arrayBalances = new ArrayList<Balance>();
+        if (rawCDRs == null || StringUtils.EMPTY.equals(rawCDRs)) {
+            return null;
+        }
+        int typeOfCDR = getTypeOfCdr(rawCDRs);
+        cdrObj.setTYPE_OF_CDR(typeOfCDR);
+        rawCDRValues = rawCDRs.split(CDRConstant.CUT_FIELD_DELIMITTER);
+        try {
+            //<editor-fold defaultstate="collapsed" desc="Convert VOICE">
+            if (typeOfCDR == IConstant.RECORD_TYPE.VOICE) {
+                if (!rawCDRValues[CDRConstant.VOICE.CDR_CALL_TYPE].equals(CDR_CALL_TYPE_FOWARD)) {
+                    //<editor-fold defaultstate="collapsed" desc="Validate">
+                    if (checkDataNull(rawCDRValues[CDRConstant.VOICE.SUBSCRIBER_ID], HotRatedCdr.ERROR_CODE.A_NUMBER_NULL, cdrObj)) {
+                        
+                    } else if (checkDataNull(rawCDRValues[CDRConstant.VOICE.ROUNDED_DURATION], HotRatedCdr.ERROR_CODE.DURATION_NULL, cdrObj)) {
+                        
+                    } else if (checkDataNull(rawCDRValues[CDRConstant.VOICE.TOTAL_USAGE], HotRatedCdr.ERROR_CODE.TOTAL_USAGE_NULL, cdrObj)) {
+                        
+                    } else if (checkDataNull(rawCDRValues[CDRConstant.VOICE.ACTUAL_DESTINATION_NUMBER], HotRatedCdr.ERROR_CODE.B_NUMBER_NULL, cdrObj)) {
+                        
+                    } else if (checkDataNull(rawCDRValues[CDRConstant.VOICE.LOCATION_INDICATOR_PARTY_A], HotRatedCdr.ERROR_CODE.LOCATION_NO_NULL, cdrObj)) {
+                        
+                    } else if (checkDataNull(rawCDRValues[CDRConstant.VOICE.TIME1_FIRST_TARIFF_ID], HotRatedCdr.ERROR_CODE.CHARGE_FEE_ID_NULL, cdrObj)) {
+                        
+                    } else if (checkDataNull(rawCDRValues[CDRConstant.VOICE.MSC_ID], HotRatedCdr.ERROR_CODE.MSC_ID_NULL, cdrObj)) {
+                        
+                    } else if (checkDataNull(rawCDRValues[CDRConstant.VOICE.CELL_ID_OR_LAI], HotRatedCdr.ERROR_CODE.LAC_NULL, cdrObj)) {
+                        
+                    } else if (checkDataNull(rawCDRValues[CDRConstant.VOICE.CELL_ID], HotRatedCdr.ERROR_CODE.CELL_ID_NULL, cdrObj)) {
+                        
+                    } else if (checkDataNull(rawCDRValues[CDRConstant.VOICE.CDR_SEQUENCE_NUMBER], HotRatedCdr.ERROR_CODE.CDR_SEQUENCE_NUMBER_NULL, cdrObj)) {
+                        
+                    } else if (checkDataNull(rawCDRValues[CDRConstant.VOICE.ACTUAL_DESTINATION_NUMBER], HotRatedCdr.ERROR_CODE.DIAL_DIGIT_NULL, cdrObj)) {
+                        
+                    } else if (checkDataNull(rawCDRValues[CDRConstant.VOICE.USAGE_UNIT_TYPE], HotRatedCdr.ERROR_CODE.UNIT_TYPE_ID_NULL, cdrObj)) {
+                        
+                    } else if (checkDataNull(rawCDRValues[CDRConstant.VOICE.AUT_FINAL], HotRatedCdr.ERROR_CODE.AUT_FINAL_ID_NULL, cdrObj)) {
+                        
+                    } else if (checkDataNull(rawCDRValues[CDRConstant.VOICE.PRIMARY_OFFER_ID], HotRatedCdr.ERROR_CODE.PRIMARY_OFFER_ID_NULL, cdrObj)) {
+                        
+                    } else if (checkDataNull(rawCDRValues[CDRConstant.VOICE.DISCOUNT_ITEM_ID], HotRatedCdr.ERROR_CODE.DISCOUNT_ITEM_NULL, cdrObj)) {
+                        
+                    } else if (checkDataNull(rawCDRValues[CDRConstant.VOICE.TARIFF_PLAN_ID], HotRatedCdr.ERROR_CODE.TARIFF_PLAN_ID_NULL, cdrObj)) {
+                        
+                    } else if (checkDataNull(rawCDRValues[CDRConstant.VOICE.BALANCE_INFO], HotRatedCdr.ERROR_CODE.BALANCE_CHANGE_NULL, cdrObj)) {
+                        
+                    } else if (!DateUtils.checkFormatDate(DateUtils.MMddYY_NO_SLASH, rawCDRValues[CDRConstant.VOICE.ORIGINATE_OFFER_DATE])) {
+                        cdrObj.setERROR_CODE(HotRatedCdr.ERROR_CODE.CDR_START_TIME_WRONG_FORMAT);
+                    }
+//</editor-fold>
+                    cdrObj.setA_NUMBER(rawCDRValues[CDRConstant.VOICE.SUBSCRIBER_ID]);
+                    cdrObj.setCDR_START_TIME(DateUtils.convertDate(DateUtils.MMddYY_NO_SLASH, DateUtils.MMddYYYY_FULL_SLASH, rawCDRValues[CDRConstant.VOICE.ANSWERED_DATE]) + " " + DateUtils.correctHoursString(rawCDRValues[CDRConstant.VOICE.ANSWERED_TIME]));
+                    cdrObj.setDURATION(convertToInt(rawCDRValues[CDRConstant.VOICE.ROUNDED_DURATION]));
+                    cdrObj.setTOTAL_USAGE(convertToDouble(rawCDRValues[CDRConstant.VOICE.TOTAL_USAGE]));
+                    cdrObj.setB_NUMBER(rawCDRValues[CDRConstant.VOICE.ACTUAL_DESTINATION_NUMBER]);
+                    cdrObj.setLOCATION_NO(rawCDRValues[CDRConstant.VOICE.LOCATION_INDICATOR_PARTY_A]);
+                    cdrObj.setCHARGE_FEE_ID(convertToInt(rawCDRValues[CDRConstant.VOICE.TIME1_FIRST_TARIFF_ID]));
+                    double sumCharge = 0;
+                    if (validateChargeFee(CDRConstant.VOICE.TIME1_FIRST_TARIFF_ID, rawCDRValues)) {
+                        sumCharge += convertToDouble(rawCDRValues[CDRConstant.VOICE.TIME1_FIRST_TARIFF_CHARGE]);
+                    }
+                    if (validateChargeFee(CDRConstant.VOICE.TIME1_SECOND_TARIFF_ID, rawCDRValues)) {
+                        sumCharge += convertToDouble(rawCDRValues[CDRConstant.VOICE.TIME1_SECOND_TARIFF_CHARGE]);
+                    }
+                    if (validateChargeFee(CDRConstant.VOICE.TIME1_THIRD_TARIFF_ID, rawCDRValues)) {
+                        sumCharge += convertToDouble(rawCDRValues[CDRConstant.VOICE.TIME1_THIRD_TARIFF_CHARGE]);
+                    }
+                    if (validateChargeFee(CDRConstant.VOICE.TIME1_FOURTH_TARIFF_ID, rawCDRValues)) {
+                        sumCharge += convertToDouble(rawCDRValues[CDRConstant.VOICE.TIME1_FOURTH_TARIFF_CHARGE]);
+                    }
+                    if (validateChargeFee(CDRConstant.VOICE.TIME1_FIFTH_TARIFF_ID, rawCDRValues)) {
+                        sumCharge += convertToDouble(rawCDRValues[CDRConstant.VOICE.TIME1_FIFTH_TARIFF_CHARGE]);
+                    }
+                    cdrObj.setCHARGE_FEE(sumCharge);
+                    if (rawCDRValues[CDRConstant.VOICE.BALANCE_INFO].trim() != null) {
+                        arrayBalances = Balance.getlistBalance(IConstant.RECORD_TYPE.VOICE, Balance.FULL_BALANCE_FIELDS, rawCDRValues[CDRConstant.VOICE.BALANCE_INFO]);
+                        cdrObj.setArrayListBalance(arrayBalances);
+                    }
+                    cdrObj.setMSC_ID(rawCDRValues[CDRConstant.VOICE.MSC_ID]);
+                    cdrObj.setLAC(rawCDRValues[CDRConstant.VOICE.CELL_ID_OR_LAI]);
+                    cdrObj.setCELL_ID(rawCDRValues[CDRConstant.VOICE.CELL_ID]);
+                    cdrObj.setCDR_SEQUENCE_NUMBER(convertToInt(rawCDRValues[CDRConstant.VOICE.CDR_SEQUENCE_NUMBER]));
+                    cdrObj.setDIAL_DIGIT(rawCDRValues[CDRConstant.VOICE.ACTUAL_DESTINATION_NUMBER]);
+                    cdrObj.setUNIT_TYPE_ID(convertToInt(rawCDRValues[CDRConstant.VOICE.USAGE_UNIT_TYPE]));
+                    cdrObj.setRERATE_FLAG(0);
+                    cdrObj.setAUT_FINAL_ID(convertToInt(rawCDRValues[CDRConstant.VOICE.AUT_FINAL]));
+                    cdrObj.setUSAGE_OFFER_ID(convertToInt(rawCDRValues[CDRConstant.VOICE.USAGE_OFFER_ID]));
+                    cdrObj.setUSAGE_PLAN_ID(convertToInt(rawCDRValues[CDRConstant.VOICE.USAGE_PLAN_ID]));
+                    cdrObj.setPRIMARY_OFFER_ID(convertToInt(rawCDRValues[CDRConstant.VOICE.PRIMARY_OFFER_ID]));
+                    cdrObj.setDISCOUNT_ITEM_ID(convertToInt(rawCDRValues[CDRConstant.VOICE.DISCOUNT_ITEM_ID]));
+                    cdrObj.setTARIFF_PLAN_ID(convertToInt(rawCDRValues[CDRConstant.VOICE.TARIFF_PLAN_ID]));
+//                cdrObj.setBALANCE_CHANGE(rawCDRValues[CDRConstant.VOICE.BALANCE_INFO]);
+                } else {
+//                    logger.info("[VOICE] Skip processing the Record have CDR_SEQUENCE_NUMBER:" + rawCDRValues[CDRConstant.VOICE.CDR_SEQUENCE_NUMBER] + " because CDR_CALL_TYPE(19) = 58");
+                    br.append(rawCDRs).append("\n");
+                    return null;
+                }
+            } //</editor-fold>
+            //<editor-fold defaultstate="collapsed" desc="Convert OCS">
+            else if (typeOfCDR == IConstant.RECORD_TYPE.OCS) {
+                //<editor-fold defaultstate="collapsed" desc="validate">
+
+                if (checkDataNull(rawCDRValues[CDRConstant.OCS.SUBSCRIBER_ID], HotRatedCdr.ERROR_CODE.A_NUMBER_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.OCS.TOTAL_USAGE], HotRatedCdr.ERROR_CODE.TOTAL_USAGE_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.OCS.LOCATION_INDICATOR_PARTY_A], HotRatedCdr.ERROR_CODE.LOCATION_NO_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.OCS.TIME1_FIRST_TARIFF_ID], HotRatedCdr.ERROR_CODE.CHARGE_FEE_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.OCS.MSC_ID], HotRatedCdr.ERROR_CODE.MSC_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.OCS.CELL_ID_OR_LAI], HotRatedCdr.ERROR_CODE.LAC_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.OCS.CELL_ID], HotRatedCdr.ERROR_CODE.CELL_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.OCS.CDR_SEQUENCE_NUMBER], HotRatedCdr.ERROR_CODE.CDR_SEQUENCE_NUMBER_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.OCS.USAGE_UNIT_TYPE], HotRatedCdr.ERROR_CODE.UNIT_TYPE_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.OCS.AUT_FINAL], HotRatedCdr.ERROR_CODE.AUT_FINAL_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.OCS.PRIMARY_OFFER_ID], HotRatedCdr.ERROR_CODE.PRIMARY_OFFER_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.OCS.DISCOUNT_ITEM_ID], HotRatedCdr.ERROR_CODE.DISCOUNT_ITEM_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.OCS.TARIFF_PLAN_ID], HotRatedCdr.ERROR_CODE.TARIFF_PLAN_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.OCS.BALANCE_INFO], HotRatedCdr.ERROR_CODE.BALANCE_CHANGE_NULL, cdrObj)) {
+                    
+                } else if (!DateUtils.checkFormatDate(DateUtils.MMddYY_NO_SLASH, rawCDRValues[CDRConstant.OCS.ORIGINATE_OFFER_DATE])) {
+                    cdrObj.setERROR_CODE(HotRatedCdr.ERROR_CODE.CDR_START_TIME_WRONG_FORMAT);
+                } else if (rawCDRValues[CDRConstant.OCS.END_TSTAMP] == null || rawCDRValues[CDRConstant.OCS.END_TSTAMP].length() <= 0
+                        || rawCDRValues[CDRConstant.OCS.START_TSTAMP] == null || rawCDRValues[CDRConstant.OCS.START_TSTAMP].length() <= 0) {
+                    cdrObj.setERROR_CODE(HotRatedCdr.ERROR_CODE.DURATION_OCS_NULL);
+                }
+                int duration = DateUtils.minusDate(rawCDRValues[CDRConstant.OCS.END_TSTAMP], rawCDRValues[CDRConstant.OCS.START_TSTAMP]);
+//</editor-fold>
+                cdrObj.setA_NUMBER(rawCDRValues[CDRConstant.OCS.SUBSCRIBER_ID]);
+                cdrObj.setB_NUMBER("");
+                cdrObj.setCDR_START_TIME(DateUtils.convertDate(DateUtils.MMddYY_NO_SLASH, DateUtils.MMddYYYY_FULL_SLASH, rawCDRValues[CDRConstant.OCS.ANSWERED_DATE]) + " " + DateUtils.correctHoursString(rawCDRValues[CDRConstant.OCS.ANSWERED_TIME]));
+                cdrObj.setDURATION(duration);
+                cdrObj.setTOTAL_USAGE(convertToDouble(rawCDRValues[CDRConstant.OCS.TOTAL_USAGE]));
+                cdrObj.setLOCATION_NO(rawCDRValues[CDRConstant.OCS.LOCATION_INDICATOR_PARTY_A]);
+                
+                cdrObj.setCHARGE_FEE_ID(convertToInt(rawCDRValues[CDRConstant.OCS.TIME1_FIRST_TARIFF_ID]));
+                
+                double sumCharge = 0;
+                if (validateChargeFee(CDRConstant.OCS.TIME1_FIRST_TARIFF_ID, rawCDRValues)) {
+                    sumCharge += convertToDouble(rawCDRValues[CDRConstant.OCS.TIME1_FIRST_TARIFF_CHARGE]);
+                }
+                if (validateChargeFee(CDRConstant.OCS.TIME1_SECOND_TARIFF_ID, rawCDRValues)) {
+                    sumCharge += convertToDouble(rawCDRValues[CDRConstant.OCS.TIME1_SECOND_TARIFF_CHARGE]);
+                }
+                if (validateChargeFee(CDRConstant.OCS.TIME1_THIRD_TARIFF_ID, rawCDRValues)) {
+                    sumCharge += convertToDouble(rawCDRValues[CDRConstant.OCS.TIME1_THIRD_TARIFF_CHARGE]);
+                }
+                if (validateChargeFee(CDRConstant.OCS.TIME1_FOURTH_TARIFF_ID, rawCDRValues)) {
+                    sumCharge += convertToDouble(rawCDRValues[CDRConstant.OCS.TIME1_FOURTH_TARIFF_CHARGE]);
+                }
+                if (validateChargeFee(CDRConstant.OCS.TIME1_FIFTH_TARIFF_ID, rawCDRValues)) {
+                    sumCharge += convertToDouble(rawCDRValues[CDRConstant.OCS.TIME1_FIFTH_TARIFF_CHARGE]);
+                }
+                
+                cdrObj.setCHARGE_FEE(sumCharge);
+
+                //--------------------------------------------------------------------------------------
+                if (rawCDRValues[CDRConstant.OCS.BALANCE_INFO].trim() != null) {
+                    arrayBalances = Balance.getlistBalance(IConstant.RECORD_TYPE.OCS, Balance.FULL_BALANCE_FIELDS, rawCDRValues[CDRConstant.OCS.BALANCE_INFO]);
+                    cdrObj.setArrayListBalance(arrayBalances);
+                }
+
+                //--------------------------------------------------------------------------------------
+                cdrObj.setMSC_ID(rawCDRValues[CDRConstant.OCS.MSC_ID]);
+                cdrObj.setLAC(rawCDRValues[CDRConstant.OCS.CELL_ID_OR_LAI]);
+                cdrObj.setCELL_ID(rawCDRValues[CDRConstant.OCS.CELL_ID]);
+                cdrObj.setCDR_SEQUENCE_NUMBER(convertToInt(rawCDRValues[CDRConstant.OCS.CDR_SEQUENCE_NUMBER]));
+                cdrObj.setUNIT_TYPE_ID(convertToInt(rawCDRValues[CDRConstant.OCS.USAGE_UNIT_TYPE]));
+                cdrObj.setRERATE_FLAG(0);
+                cdrObj.setAUT_FINAL_ID(convertToInt(rawCDRValues[CDRConstant.OCS.AUT_FINAL]));
+                cdrObj.setUSAGE_OFFER_ID(convertToInt(rawCDRValues[CDRConstant.OCS.USAGE_OFFER_ID]));
+                cdrObj.setUSAGE_PLAN_ID(convertToInt(rawCDRValues[CDRConstant.OCS.USAGE_PLAN_ID]));
+
+                // Add to Test
+                cdrObj.setPRIMARY_OFFER_ID(convertToInt(rawCDRValues[CDRConstant.OCS.PRIMARY_OFFER_ID]));
+                cdrObj.setDISCOUNT_ITEM_ID(convertToInt(rawCDRValues[CDRConstant.OCS.DISCOUNT_ITEM_ID]));
+                cdrObj.setTARIFF_PLAN_ID(convertToInt(rawCDRValues[CDRConstant.OCS.TARIFF_PLAN_ID]));
+//                cdrObj.setBALANCE_CHANGE(rawCDRValues[CDRConstant.OCS.BALANCE_INFO]);
+
+            } //</editor-fold>
+            //<editor-fold defaultstate="collapsed" desc="Convert GPRS">
+            else if (typeOfCDR == IConstant.RECORD_TYPE.GPRS) {
+                //<editor-fold defaultstate="collapsed" desc="validate">
+
+                if (checkDataNull(rawCDRValues[CDRConstant.GPRS.SUBSCRIBER_ID], HotRatedCdr.ERROR_CODE.A_NUMBER_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.GPRS.TOTAL_USAGE], HotRatedCdr.ERROR_CODE.TOTAL_USAGE_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.GPRS.LOCATION_INDICATOR_PARTY_A], HotRatedCdr.ERROR_CODE.LOCATION_NO_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.GPRS.TIME1_FIRST_TARIFF_ID], HotRatedCdr.ERROR_CODE.CHARGE_FEE_ID_NULL, cdrObj)) {
+
+//            } else if (checkDataNull(rawCDRValues[CDRConstant.GPRS.MSC_ID], HotRatedCdr.ERROR_CODE.MSC_ID_NULL, cdrObj)) {
+//                
+//            } else if (checkDataNull(rawCDRValues[CDRConstant.GPRS.CELL_ID_OR_LAI], HotRatedCdr.ERROR_CODE.LAC_NULL, cdrObj)) {
+                } else if (checkDataNull(rawCDRValues[CDRConstant.GPRS.CELL_ID], HotRatedCdr.ERROR_CODE.CELL_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.GPRS.CDR_SEQUENCE_NUMBER], HotRatedCdr.ERROR_CODE.CDR_SEQUENCE_NUMBER_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.GPRS.USAGE_UNIT_TYPE], HotRatedCdr.ERROR_CODE.UNIT_TYPE_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.GPRS.AUT_FINAL], HotRatedCdr.ERROR_CODE.AUT_FINAL_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.GPRS.PRIMARY_OFFER_ID], HotRatedCdr.ERROR_CODE.PRIMARY_OFFER_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.GPRS.DISCOUNT_ITEM_ID], HotRatedCdr.ERROR_CODE.DISCOUNT_ITEM_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.GPRS.TARIFF_PLAN_ID], HotRatedCdr.ERROR_CODE.TARIFF_PLAN_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.GPRS.BALANCE_INFO], HotRatedCdr.ERROR_CODE.BALANCE_CHANGE_NULL, cdrObj)) {
+                } else if (checkDataNull(rawCDRValues[CDRConstant.GPRS.USAGE_OFFER_ID], HotRatedCdr.ERROR_CODE.USAGE_OFFER_ID_NULL, cdrObj)) {
+                } else if (checkDataNull(rawCDRValues[CDRConstant.GPRS.USAGE_PLAN_ID], HotRatedCdr.ERROR_CODE.USAGE_PLAN_ID_NULL, cdrObj)) {
+                    
+                } else if (!DateUtils.checkFormatDate(DateUtils.MMddYY_NO_SLASH, rawCDRValues[CDRConstant.GPRS.ORIGINATE_OFFER_DATE])) {
+                    cdrObj.setERROR_CODE(HotRatedCdr.ERROR_CODE.CDR_START_TIME_WRONG_FORMAT);
+                }
+                //</editor-fold>
+                cdrObj.setA_NUMBER(rawCDRValues[CDRConstant.GPRS.SUBSCRIBER_ID]);
+                cdrObj.setB_NUMBER("");
+                cdrObj.setCDR_START_TIME(DateUtils.convertDate(DateUtils.MMddYY_NO_SLASH, DateUtils.MMddYYYY_FULL_SLASH, rawCDRValues[CDRConstant.GPRS.ANSWERED_DATE]) + " " + DateUtils.correctHoursString(rawCDRValues[CDRConstant.GPRS.ANSWERED_TIME]));
+                cdrObj.setDURATION(convertToInt(rawCDRValues[CDRConstant.GPRS.ROUNDED_DURATION]));
+                cdrObj.setTOTAL_USAGE(convertToDouble(rawCDRValues[CDRConstant.GPRS.TOTAL_USAGE]));
+                cdrObj.setLOCATION_NO(rawCDRValues[CDRConstant.GPRS.LOCATION_INDICATOR_PARTY_A]);
+                cdrObj.setCHARGE_FEE_ID(convertToInt(rawCDRValues[CDRConstant.GPRS.TIME1_FIRST_TARIFF_ID]));
+                double sumCharge = 0;
+                if (validateChargeFee(CDRConstant.GPRS.TIME1_FIRST_TARIFF_ID, rawCDRValues)) {
+                    sumCharge += convertToDouble(rawCDRValues[CDRConstant.GPRS.TIME1_FIRST_TARIFF_CHARGE]);
+                }
+                if (validateChargeFee(CDRConstant.GPRS.TIME1_SECOND_TARIFF_ID, rawCDRValues)) {
+                    sumCharge += convertToDouble(rawCDRValues[CDRConstant.GPRS.TIME1_SECOND_TARIFF_CHARGE]);
+                }
+                if (validateChargeFee(CDRConstant.GPRS.TIME1_THIRD_TARIFF_ID, rawCDRValues)) {
+                    sumCharge += convertToDouble(rawCDRValues[CDRConstant.GPRS.TIME1_THIRD_TARIFF_CHARGE]);
+                }
+                if (validateChargeFee(CDRConstant.GPRS.TIME1_FOURTH_TARIFF_ID, rawCDRValues)) {
+                    sumCharge += convertToDouble(rawCDRValues[CDRConstant.GPRS.TIME1_FOURTH_TARIFF_CHARGE]);
+                }
+                if (validateChargeFee(CDRConstant.GPRS.TIME1_FIFTH_TARIFF_ID, rawCDRValues)) {
+                    sumCharge += convertToDouble(rawCDRValues[CDRConstant.GPRS.TIME1_FIFTH_TARIFF_CHARGE]);
+                }
+                cdrObj.setCHARGE_FEE(sumCharge);
+                if (rawCDRValues[CDRConstant.GPRS.BALANCE_INFO] != null) {
+                    arrayBalances = Balance.getlistBalance(IConstant.RECORD_TYPE.GPRS, Balance.FULL_BALANCE_FIELDS, rawCDRValues[CDRConstant.GPRS.BALANCE_INFO]);
+                    cdrObj.setArrayListBalance(arrayBalances);
+                }
+//            cdrObj.setMSC_ID(rawCDRValues[CDRConstant.GPRS.MSC_ID]);
+//            cdrObj.setLAC(rawCDRValues[CDRConstant.GPRS.CELL_ID_OR_LAI]);
+                cdrObj.setCELL_ID(rawCDRValues[CDRConstant.GPRS.CELL_ID]);
+                cdrObj.setCDR_SEQUENCE_NUMBER(convertToInt(rawCDRValues[CDRConstant.GPRS.CDR_SEQUENCE_NUMBER]));
+                cdrObj.setUNIT_TYPE_ID(convertToInt(rawCDRValues[CDRConstant.GPRS.USAGE_UNIT_TYPE]));
+                cdrObj.setRERATE_FLAG(0);
+                cdrObj.setAUT_FINAL_ID(convertToInt(rawCDRValues[CDRConstant.GPRS.AUT_FINAL]));
+                cdrObj.setUSAGE_OFFER_ID(convertToInt(rawCDRValues[CDRConstant.GPRS.USAGE_OFFER_ID]));
+                cdrObj.setUSAGE_PLAN_ID(convertToInt(rawCDRValues[CDRConstant.GPRS.USAGE_PLAN_ID]));
+                cdrObj.setPRIMARY_OFFER_ID(convertToInt(rawCDRValues[CDRConstant.GPRS.PRIMARY_OFFER_ID]));
+                cdrObj.setDISCOUNT_ITEM_ID(convertToInt(rawCDRValues[CDRConstant.GPRS.DISCOUNT_ITEM_ID]));
+                cdrObj.setTARIFF_PLAN_ID(convertToInt(rawCDRValues[CDRConstant.GPRS.TARIFF_PLAN_ID]));
+//                cdrObj.setBALANCE_CHANGE(rawCDRValues[CDRConstant.GPRS.BALANCE_INFO]);
+                cdrObj.setAPN(rawCDRValues[CDRConstant.GPRS.APN]);
+                
+            } //</editor-fold>
+            //<editor-fold defaultstate="collapsed" desc="Convert OSA">
+            else if (typeOfCDR == IConstant.RECORD_TYPE.OSA) {
+                //<editor-fold defaultstate="collapsed" desc="validate">
+                if (checkDataNull(rawCDRValues[CDRConstant.OSA.SUBSCRIBER_ID], HotRatedCdr.ERROR_CODE.A_NUMBER_NULL, cdrObj)) {
+                } else if (checkDataNull(rawCDRValues[CDRConstant.OSA.TOTAL_USAGE], HotRatedCdr.ERROR_CODE.TOTAL_USAGE_NULL, cdrObj)) {
+                } else if (checkDataNull(rawCDRValues[CDRConstant.OSA.LOCATION_INDICATOR_PARTY_A], HotRatedCdr.ERROR_CODE.LOCATION_NO_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.OSA.CDR_SEQUENCE_NUMBER], HotRatedCdr.ERROR_CODE.CDR_SEQUENCE_NUMBER_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.OSA.USAGE_UNIT_TYPE], HotRatedCdr.ERROR_CODE.UNIT_TYPE_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.OSA.AUT_FINAL], HotRatedCdr.ERROR_CODE.AUT_FINAL_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.OSA.PRIMARY_OFFER_ID], HotRatedCdr.ERROR_CODE.PRIMARY_OFFER_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.OSA.TARIFF_PLAN_ID], HotRatedCdr.ERROR_CODE.TARIFF_PLAN_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.OSA.BALANCE_INFO], HotRatedCdr.ERROR_CODE.BALANCE_CHANGE_NULL, cdrObj)) {
+                    
+                }
+//</editor-fold>
+                cdrObj.setA_NUMBER(rawCDRValues[CDRConstant.OSA.SUBSCRIBER_ID]);
+                cdrObj.setB_NUMBER("");
+                cdrObj.setTOTAL_USAGE(convertToDouble(rawCDRValues[CDRConstant.OSA.TOTAL_USAGE]));
+                cdrObj.setDURATION(0);
+                cdrObj.setLOCATION_NO(rawCDRValues[CDRConstant.OSA.LOCATION_INDICATOR_PARTY_A]);
+                
+                if (rawCDRValues[CDRConstant.OSA.BALANCE_INFO].trim() != null) {
+                    arrayBalances = Balance.getlistBalance(IConstant.RECORD_TYPE.OSA, Balance.FULL_BALANCE_FIELDS, rawCDRValues[CDRConstant.OSA.BALANCE_INFO]);
+                    cdrObj.setArrayListBalance(arrayBalances);
+                }
+                cdrObj.setCDR_SEQUENCE_NUMBER(convertToInt(rawCDRValues[CDRConstant.OSA.CDR_SEQUENCE_NUMBER]));
+                cdrObj.setUNIT_TYPE_ID(convertToInt(rawCDRValues[CDRConstant.OSA.USAGE_UNIT_TYPE]));
+                cdrObj.setRERATE_FLAG(0);
+                cdrObj.setAUT_FINAL_ID(convertToInt(rawCDRValues[CDRConstant.OSA.AUT_FINAL]));
+
+                // Add to Test
+                cdrObj.setPRIMARY_OFFER_ID(convertToInt(rawCDRValues[CDRConstant.OSA.PRIMARY_OFFER_ID]));
+                cdrObj.setTARIFF_PLAN_ID(convertToInt(rawCDRValues[CDRConstant.OSA.TARIFF_PLAN_ID]));
+//                cdrObj.setBALANCE_CHANGE(rawCDRValues[CDRConstant.OSA.BALANCE_INFO]);
+
+            } //</editor-fold>
+            //<editor-fold defaultstate="collapsed" desc="Convert PMT">
+            else if (typeOfCDR == IConstant.RECORD_TYPE.PMT) {
+                //<editor-fold defaultstate="collapsed" desc="validate">
+
+                if (checkDataNull(rawCDRValues[CDRConstant.PMT.SUBSCRIBER_ID], HotRatedCdr.ERROR_CODE.A_NUMBER_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.PMT.TOTAL_USAGE], HotRatedCdr.ERROR_CODE.TOTAL_USAGE_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.PMT.LOCATION_INDICATOR_PARTY_A], HotRatedCdr.ERROR_CODE.LOCATION_NO_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.PMT.TIME1_FIRST_TARIFF_ID], HotRatedCdr.ERROR_CODE.CHARGE_FEE_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.PMT.MSC_ID], HotRatedCdr.ERROR_CODE.MSC_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.PMT.CDR_SEQUENCE_NUMBER], HotRatedCdr.ERROR_CODE.CDR_SEQUENCE_NUMBER_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.PMT.USAGE_UNIT_TYPE], HotRatedCdr.ERROR_CODE.UNIT_TYPE_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.PMT.AUT_FINAL], HotRatedCdr.ERROR_CODE.AUT_FINAL_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.PMT.PRIMARY_OFFER_ID], HotRatedCdr.ERROR_CODE.PRIMARY_OFFER_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.PMT.DISCOUNT_ITEM_ID], HotRatedCdr.ERROR_CODE.DISCOUNT_ITEM_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.PMT.TARIFF_PLAN_ID], HotRatedCdr.ERROR_CODE.TARIFF_PLAN_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.PMT.BALANCE_INFO], HotRatedCdr.ERROR_CODE.BALANCE_CHANGE_NULL, cdrObj)) {
+                    
+                } else if (!DateUtils.checkFormatDate(DateUtils.MMddYY_NO_SLASH, rawCDRValues[CDRConstant.PMT.ORIGINATE_OFFER_DATE])) {
+                    cdrObj.setERROR_CODE(HotRatedCdr.ERROR_CODE.CDR_START_TIME_WRONG_FORMAT);
+                }
+//</editor-fold>
+
+                cdrObj.setA_NUMBER(rawCDRValues[CDRConstant.PMT.SUBSCRIBER_ID]);
+                cdrObj.setB_NUMBER("");
+                cdrObj.setCDR_START_TIME(DateUtils.convertDate(DateUtils.MMddYY_NO_SLASH, DateUtils.MMddYYYY_FULL_SLASH, rawCDRValues[CDRConstant.PMT.ANSWERED_DATE]) + " " + DateUtils.correctHoursString(rawCDRValues[CDRConstant.PMT.ANSWERED_TIME]));
+                cdrObj.setDURATION(0);
+                cdrObj.setTOTAL_USAGE(convertToDouble(rawCDRValues[CDRConstant.PMT.TOTAL_USAGE]));
+                cdrObj.setLOCATION_NO(rawCDRValues[CDRConstant.PMT.LOCATION_INDICATOR_PARTY_A]);
+                
+                cdrObj.setCHARGE_FEE_ID(convertToInt(rawCDRValues[CDRConstant.PMT.TIME1_FIRST_TARIFF_ID]));
+                
+                double sumCharge = 0;
+                if (validateChargeFee(CDRConstant.PMT.TIME1_FIRST_TARIFF_ID, rawCDRValues)) {
+                    sumCharge += convertToDouble(rawCDRValues[CDRConstant.PMT.TIME1_FIRST_TARIFF_CHARGE]);
+                }
+                if (validateChargeFee(CDRConstant.PMT.TIME1_SECOND_TARIFF_ID, rawCDRValues)) {
+                    sumCharge += convertToDouble(rawCDRValues[CDRConstant.PMT.TIME1_SECOND_TARIFF_CHARGE]);
+                }
+                if (validateChargeFee(CDRConstant.PMT.TIME1_THIRD_TARIFF_ID, rawCDRValues)) {
+                    sumCharge += convertToDouble(rawCDRValues[CDRConstant.PMT.TIME1_THIRD_TARIFF_CHARGE]);
+                }
+                if (validateChargeFee(CDRConstant.PMT.TIME1_FOURTH_TARIFF_ID, rawCDRValues)) {
+                    sumCharge += convertToDouble(rawCDRValues[CDRConstant.PMT.TIME1_FOURTH_TARIFF_CHARGE]);
+                }
+                if (validateChargeFee(CDRConstant.PMT.TIME1_FIFTH_TARIFF_ID, rawCDRValues)) {
+                    sumCharge += convertToDouble(rawCDRValues[CDRConstant.PMT.TIME1_FIFTH_TARIFF_CHARGE]);
+                }
+                cdrObj.setCHARGE_FEE(sumCharge);
+                if (rawCDRValues[CDRConstant.PMT.BALANCE_INFO].trim() != null) {
+                    arrayBalances = Balance.getlistBalance(IConstant.RECORD_TYPE.PMT, Balance.FULL_BALANCE_FIELDS, rawCDRValues[CDRConstant.PMT.BALANCE_INFO]);
+                    cdrObj.setArrayListBalance(arrayBalances);
+                }
+                cdrObj.setMSC_ID(rawCDRValues[CDRConstant.PMT.MSC_ID]);
+                cdrObj.setLAC("");
+                cdrObj.setCELL_ID("");
+                cdrObj.setCDR_SEQUENCE_NUMBER(convertToInt(rawCDRValues[CDRConstant.PMT.CDR_SEQUENCE_NUMBER]));
+                cdrObj.setUNIT_TYPE_ID(convertToInt(rawCDRValues[CDRConstant.PMT.USAGE_UNIT_TYPE]));
+                cdrObj.setRERATE_FLAG(0);
+                cdrObj.setAUT_FINAL_ID(convertToInt(rawCDRValues[CDRConstant.PMT.AUT_FINAL]));
+                cdrObj.setUSAGE_OFFER_ID(convertToInt(rawCDRValues[CDRConstant.PMT.USAGE_OFFER_ID]));
+                cdrObj.setUSAGE_PLAN_ID(convertToInt(rawCDRValues[CDRConstant.PMT.USAGE_PLAN_ID]));
+
+                // Add to Test
+                cdrObj.setPRIMARY_OFFER_ID(convertToInt(rawCDRValues[CDRConstant.PMT.PRIMARY_OFFER_ID]));
+                cdrObj.setDISCOUNT_ITEM_ID(convertToInt(rawCDRValues[CDRConstant.PMT.DISCOUNT_ITEM_ID]));
+                cdrObj.setTARIFF_PLAN_ID(convertToInt(rawCDRValues[CDRConstant.PMT.TARIFF_PLAN_ID]));
+//                cdrObj.setBALANCE_CHANGE(rawCDRValues[CDRConstant.PMT.BALANCE_INFO]);
+
+            } //</editor-fold>
+            //<editor-fold defaultstate="collapsed" desc="Convert SMS">
+            else if (typeOfCDR == IConstant.RECORD_TYPE.SMS) {
+                //<editor-fold defaultstate="collapsed" desc="validate">
+
+                if (checkDataNull(rawCDRValues[CDRConstant.SMS.SUBSCRIBER_ID], HotRatedCdr.ERROR_CODE.A_NUMBER_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.SMS.TOTAL_USAGE], HotRatedCdr.ERROR_CODE.TOTAL_USAGE_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.SMS.DESTINATION_NUMBER], HotRatedCdr.ERROR_CODE.B_NUMBER_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.SMS.LOCATION_INDICATOR_PARTY_A], HotRatedCdr.ERROR_CODE.LOCATION_NO_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.SMS.TIME1_FIRST_TARIFF_ID], HotRatedCdr.ERROR_CODE.CHARGE_FEE_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.SMS.MSC_ID], HotRatedCdr.ERROR_CODE.MSC_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.SMS.CELL_ID], HotRatedCdr.ERROR_CODE.CELL_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.SMS.CDR_SEQUENCE_NUMBER], HotRatedCdr.ERROR_CODE.CDR_SEQUENCE_NUMBER_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.SMS.USAGE_UNIT_TYPE], HotRatedCdr.ERROR_CODE.UNIT_TYPE_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.SMS.AUT_FINAL], HotRatedCdr.ERROR_CODE.AUT_FINAL_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.SMS.PRIMARY_OFFER_ID], HotRatedCdr.ERROR_CODE.PRIMARY_OFFER_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.SMS.DISCOUNT_ITEM_ID], HotRatedCdr.ERROR_CODE.DISCOUNT_ITEM_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.SMS.TARIFF_PLAN_ID], HotRatedCdr.ERROR_CODE.TARIFF_PLAN_ID_NULL, cdrObj)) {
+                    
+                } else if (checkDataNull(rawCDRValues[CDRConstant.SMS.BALANCE_INFO], HotRatedCdr.ERROR_CODE.BALANCE_CHANGE_NULL, cdrObj)) {
+                    
+                } else if (!DateUtils.checkFormatDate(DateUtils.MMddYY_NO_SLASH, rawCDRValues[CDRConstant.SMS.ORIGINATE_OFFER_DATE])) {
+                    cdrObj.setERROR_CODE(HotRatedCdr.ERROR_CODE.CDR_START_TIME_WRONG_FORMAT);
+                }
+//</editor-fold>
+
+                //Mapping Values.
+                cdrObj.setA_NUMBER(rawCDRValues[CDRConstant.SMS.SUBSCRIBER_ID]);
+                cdrObj.setCDR_START_TIME(DateUtils.convertDate(DateUtils.MMddYY_NO_SLASH, DateUtils.MMddYYYY_FULL_SLASH, rawCDRValues[CDRConstant.SMS.ORIGINATE_OFFER_DATE]) + " " + DateUtils.correctHoursString(rawCDRValues[CDRConstant.SMS.ORIGINATE_OFFER_TIME]));
+                cdrObj.setDURATION(0);
+                cdrObj.setTOTAL_USAGE(convertToDouble(rawCDRValues[CDRConstant.SMS.TOTAL_USAGE]));
+                cdrObj.setB_NUMBER(rawCDRValues[CDRConstant.SMS.DESTINATION_NUMBER]);
+                cdrObj.setLOCATION_NO(rawCDRValues[CDRConstant.SMS.LOCATION_INDICATOR_PARTY_A]);
+                //--------------------------------------------------------------------------------------
+                if (rawCDRValues[CDRConstant.SMS.BALANCE_INFO].trim() != null) {
+                    arrayBalances = Balance.getlistBalance(IConstant.RECORD_TYPE.SMS, Balance.FULL_BALANCE_FIELDS, rawCDRValues[CDRConstant.SMS.BALANCE_INFO]);
+                    cdrObj.setArrayListBalance(arrayBalances);
+                }
+
+                //--------------------------------------------------------------------------------------
+                cdrObj.setMSC_ID(rawCDRValues[CDRConstant.SMS.MSC_ID]);
+                cdrObj.setLAC(rawCDRValues[CDRConstant.SMS.CELL_ID]);
+                cdrObj.setCELL_ID(rawCDRValues[CDRConstant.SMS.CELL_ID]);
+                cdrObj.setCDR_SEQUENCE_NUMBER(convertToInt(rawCDRValues[CDRConstant.SMS.CDR_SEQUENCE_NUMBER]));
+                cdrObj.setUNIT_TYPE_ID(convertToInt(rawCDRValues[CDRConstant.SMS.USAGE_UNIT_TYPE]));
+                cdrObj.setDIAL_DIGIT(rawCDRValues[CDRConstant.SMS.DESTINATION_NUMBER]);
+                cdrObj.setRERATE_FLAG(0);
+                cdrObj.setAUT_FINAL_ID(convertToInt(rawCDRValues[CDRConstant.SMS.AUT_FINAL]));
+                cdrObj.setUSAGE_OFFER_ID(convertToInt(rawCDRValues[CDRConstant.SMS.USAGE_OFFER_ID]));
+                cdrObj.setUSAGE_PLAN_ID(convertToInt(rawCDRValues[CDRConstant.SMS.USAGE_PLAN_ID]));
+
+                // Add to Test
+                cdrObj.setPRIMARY_OFFER_ID(convertToInt(rawCDRValues[CDRConstant.SMS.PRIMARY_OFFER_ID]));
+                cdrObj.setDISCOUNT_ITEM_ID(convertToInt(rawCDRValues[CDRConstant.SMS.DISCOUNT_ITEM_ID]));
+                cdrObj.setTARIFF_PLAN_ID(convertToInt(rawCDRValues[CDRConstant.SMS.TARIFF_PLAN_ID]));
+//                cdrObj.setBALANCE_CHANGE(rawCDRValues[CDRConstant.SMS.BALANCE_INFO]);
+
+                //-----------------------------------------------------------------------------------------------
+                cdrObj.setCHARGE_FEE_ID(convertToInt(rawCDRValues[CDRConstant.SMS.TIME1_FIRST_TARIFF_ID]));
+                double sumCharge = 0;
+                if (validateChargeFee(CDRConstant.SMS.TIME1_FIRST_TARIFF_ID, rawCDRValues)) {
+                    sumCharge += convertToDouble(rawCDRValues[CDRConstant.SMS.TIME1_FIRST_TARIFF_CHARGE]);
+                }
+                if (validateChargeFee(CDRConstant.SMS.TIME1_SECOND_TARIFF_ID, rawCDRValues)) {
+                    sumCharge += convertToDouble(rawCDRValues[CDRConstant.SMS.TIME1_SECOND_TARIFF_CHARGE]);
+                }
+                if (validateChargeFee(CDRConstant.SMS.TIME1_THIRD_TARIFF_ID, rawCDRValues)) {
+                    sumCharge += convertToDouble(rawCDRValues[CDRConstant.SMS.TIME1_THIRD_TARIFF_CHARGE]);
+                }
+                if (validateChargeFee(CDRConstant.SMS.TIME1_FOURTH_TARIFF_ID, rawCDRValues)) {
+                    sumCharge += convertToDouble(rawCDRValues[CDRConstant.SMS.TIME1_FOURTH_TARIFF_CHARGE]);
+                }
+                if (validateChargeFee(CDRConstant.SMS.TIME1_FIFTH_TARIFF_ID, rawCDRValues)) {
+                    sumCharge += convertToDouble(rawCDRValues[CDRConstant.SMS.TIME1_FIFTH_TARIFF_CHARGE]);
+                }
+                
+                cdrObj.setCHARGE_FEE(sumCharge);
+                
+            } //</editor-fold>
+            //<editor-fold defaultstate="collapsed" desc="Khong tin thay CDR Type tuong ung">
+            else {
+//                logger.info("Khong ton tai CDR_TYPE tuong ung de xu ly, CDR Type: " + typeOfCDR);
+                br.append(rawCDRs).append("\n");
+                return null;
+            }
+            //</editor-fold>
+        } catch (Exception e) {
+//            logger.error("Loi Convert du lieu, RAW=" + rawCDRs + "\n\n");
+            br.append(rawCDRs).append("\n");
+            return null;
+        }
+        return cdrObj;
+    }
+    
+    private boolean validateChargeFee(int time1TariffId, String[] rawCDRValues) {
+        boolean result = false;
+        try {
+            if (rawCDRValues != null) {
+                result = (rawCDRValues[time1TariffId] != null && convertToInt(rawCDRValues[time1TariffId]) != 0);
+            }
+        } catch (Exception e) {
+            logger.error(e.fillInStackTrace());
+        }
+        return result;
+    }
+
+    /**
+     *
+     * @param convertToInt
+     * @return returnValue
+     */
+    public static double convertToDouble(String rawCDRValues) {
+        double returnValue;
+        try {
+            
+            if (rawCDRValues == null || rawCDRValues.equals(StringUtils.EMPTY)) {
+                return 0;
+            }
+            returnValue = Double.parseDouble(rawCDRValues);
+        } catch (NumberFormatException nfe) {
+            logger.info("Format fail: " + nfe.getMessage());
+            return -1;
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+            return -1;
+        }
+        return returnValue;
+    }
+
+    /**
+     *
+     * @param convertToInt
+     * @return returnValue
+     */
+    public static int convertToInt(String rawCDRValues) {
+        int returnValueInt;
+        try {
+            
+            if (rawCDRValues == null || rawCDRValues.equals(StringUtils.EMPTY)) {
+                return 0;
+            }
+            returnValueInt = Integer.parseInt(rawCDRValues);
+        } catch (NumberFormatException nfe) {
+            logger.info("Format fail " + nfe.getMessage());
+            return -1;
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+            return -1;
+        }
+        return returnValueInt;
+    }
+
+    /**
+     *
+     * @param convertToString
+     * @return SreturnValue
+     */
+    public static int convertToString(String rawCDRValues) {
+        int returnValueString;
+        try {
+            if (rawCDRValues == null || rawCDRValues.equals(StringUtils.EMPTY)) {
+                return 0;
+            }
+            returnValueString = Integer.parseInt(rawCDRValues);
+        } catch (NumberFormatException nfe) {
+            logger.info("Format fail " + nfe.getMessage());
+            return -1;
+        } catch (Exception e) {
+            logger.info(e.getMessage());
+            return -1;
+        }
+        return returnValueString;
+    }
+    
+    public static boolean checkDataNull(String data, String setValue, CdrObject cdrObj) {
+        if (!cdrObj.getERROR_CODE().equals("0")) {
+            return false;
+        }
+        if (data == null || data.length() <= 0) {
+            cdrObj.setERROR_CODE(setValue);
+            return true;
+        }
+        return false;
+    }
+}

@@ -1,0 +1,464 @@
+package e1reformat.entity.cdr;
+
+import java.util.ArrayList;
+
+import e1reformat.entity.cdr.sub.Accumulator;
+import e1reformat.entity.cdr.sub.Balance;
+import e1reformat.util.IConstant;
+
+public class CdrObject {
+
+    private int TYPE_OF_CDR;
+    private ArrayList<Balance> arrayListBalance;
+    private ArrayList<Accumulator> arrayListAccumulator;
+    private String A_NUMBER = "";
+    private String CREATED_TIME = "";
+    private String CDR_START_TIME = "";
+    private int DURATION = 0;
+    private double TOTAL_USAGE;
+    private String B_NUMBER = "";
+    private String B_NUMBER_PREFIX = "";
+    private String ZONE = "";
+    private String NW_GROUP = "";
+    private double CHARGE_FEE;
+    private int CHARGE_FEE_ID = 0;
+    private String LAC = "";
+    private String CELL_ID = "";
+    private String SUBSCRIBER_UNBILL = "";
+
+    private int BU_ID = 0;
+    private int OLD_BU_ID;
+    private double FREE_AMOUNT;
+    private double FREE_BLOCK;
+    private String DIAL_DIGIT = "";
+    private int CDR_RECORD_HEADER_ID = 0;
+    private int CDR_SEQUENCE_NUMBER = 0;
+    private String LOCATION_NO = "";
+    private int RERATE_FLAG = 0;
+    private int AUT_FINAL_ID = 0;
+    private int UNIT_TYPE_ID;
+
+    private double SERVICE_FEE = 0;
+    private int SERVICE_FEE_ID = 0;
+    private double FREE_COST = 0;
+    private double FREE_VALUE = 0;
+    private String MSC_ID = "";
+    private int USAGE_OFFER_ID;
+    private int USAGE_PLAN_ID;
+
+    // Add to Test
+    private int MAP_ID;
+    private int DATA_PART;
+    private int PRIMARY_OFFER_ID;
+    private int DISCOUNT_ITEM_ID;
+    private int TARIFF_PLAN_ID;
+//    private String BALANCE_CHANGE;
+
+    private String ERROR_CODE = "0";
+    private int PAYMENT_ID;
+    private String APN;
+
+    public String getAPN() {
+        return APN;
+    }
+
+    public void setAPN(String APN) {
+        this.APN = APN;
+    }
+
+    public int getPAYMENT_ID() {
+        return PAYMENT_ID;
+    }
+
+    public void setPAYMENT_ID(int PAYMENT_ID) {
+        this.PAYMENT_ID = PAYMENT_ID;
+    }
+
+    public String getERROR_CODE() {
+        return ERROR_CODE;
+    }
+
+    public void setERROR_CODE(String ERROR_CODE) {
+        this.ERROR_CODE = ERROR_CODE;
+    }
+
+    public int getMAP_ID() {
+        return MAP_ID;
+    }
+
+    public void setMAP_ID(int mAP_ID) {
+        MAP_ID = mAP_ID;
+    }
+
+    public int getUSAGE_OFFER_ID() {
+        return USAGE_OFFER_ID;
+    }
+
+    public void setUSAGE_OFFER_ID(int uSAGE_OFFER_ID) {
+        USAGE_OFFER_ID = uSAGE_OFFER_ID;
+    }
+
+    public int getUSAGE_PLAN_ID() {
+        return USAGE_PLAN_ID;
+    }
+
+    public void setUSAGE_PLAN_ID(int uSAGE_PLAN_ID) {
+        USAGE_PLAN_ID = uSAGE_PLAN_ID;
+    }
+
+    public int getTYPE_OF_CDR() {
+        return TYPE_OF_CDR;
+
+    }
+
+    public int getSERVICE_FEE_ID() {
+        return SERVICE_FEE_ID;
+    }
+
+    public void setSERVICE_FEE_ID(int service_id) {
+        SERVICE_FEE_ID = service_id;
+    }
+
+    public double getSERVICE_FEE() {
+        return SERVICE_FEE;
+    }
+
+    public void setSERVICE_FEE(double service_fee) {
+        SERVICE_FEE = service_fee;
+    }
+
+    public void setTYPE_OF_CDR(int tYPE_OF_CDR) {
+        this.TYPE_OF_CDR = tYPE_OF_CDR;
+
+    }
+
+    public static String[] split(String string) {
+
+        return null;
+    }
+
+    public int getAUT_FINAL_ID() {
+        return AUT_FINAL_ID;
+    }
+
+    public void setAUT_FINAL_ID(int aUT_FINAL_ID) {
+        AUT_FINAL_ID = aUT_FINAL_ID;
+    }
+
+    public int getRERATE_FLAG() {
+        return RERATE_FLAG;
+    }
+
+    public void setRERATE_FLAG(int rerate_flag) {
+        RERATE_FLAG = rerate_flag;
+    }
+
+    public int getCDR_RECORD_HEADER_ID() {
+        return CDR_RECORD_HEADER_ID;
+    }
+
+    public void setCDR_RECORD_HEADER_ID(int record) {
+        CDR_RECORD_HEADER_ID = record;
+    }
+
+    public int getCDR_SEQUENCE_NUMBER() {
+        return CDR_SEQUENCE_NUMBER;
+    }
+
+    public void setCDR_SEQUENCE_NUMBER(int sequence) {
+        CDR_SEQUENCE_NUMBER = sequence;
+    }
+
+    public String getLOCATION_NO() {
+        return LOCATION_NO;
+    }
+
+    public void setLOCATION_NO(String location) {
+        LOCATION_NO = location;
+    }
+
+    public String getDIAL_DIGIT() {
+        return DIAL_DIGIT;
+    }
+
+    public void setDIAL_DIGIT(String dialdigit) {
+        DIAL_DIGIT = dialdigit;
+    }
+
+    public double getFREE_BLOCK() {
+        return FREE_BLOCK;
+    }
+
+    public void setFREE_BLOCK(double free_block) {
+        FREE_BLOCK = free_block;
+    }
+
+    public double getFREE_AMOUNT() {
+        return FREE_AMOUNT;
+    }
+
+    public void setFREE_AMOUNT(double free_amount) {
+        FREE_AMOUNT = free_amount;
+    }
+
+    public int getOLD_BU_ID() {
+        return OLD_BU_ID;
+    }
+
+    public void setOLD_BU_ID(int provinceID_Old) {
+        OLD_BU_ID = provinceID_Old;
+    }
+
+    public int getBU_ID() {
+        return BU_ID;
+    }
+
+    public void setBU_ID(int provinceID) {
+        BU_ID = provinceID;
+    }
+
+    public String getSUBSCRIBER_UNBILL() {
+        return SUBSCRIBER_UNBILL;
+    }
+
+    public void setSUBSCRIBER_UNBILL(String sUBSCRIBER_UNBILL) {
+        SUBSCRIBER_UNBILL = sUBSCRIBER_UNBILL;
+    }
+
+    public String getCELL_ID() {
+        return CELL_ID;
+    }
+
+    public void setCELL_ID(String cell) {
+        CELL_ID = cell;
+    }
+
+    public String getLAC() {
+        return LAC;
+    }
+
+    public void setLAC(String lac) {
+        LAC = lac;
+    }
+
+    public String getA_NUMBER() {
+        return A_NUMBER;
+    }
+
+    public void setA_NUMBER(String a_number) {
+        A_NUMBER = a_number;
+    }
+
+    public String getCREATED_TIME() {
+        return CREATED_TIME;
+    }
+
+    public void setCREATED_TIME(String createtime) {
+        CREATED_TIME = createtime;
+    }
+
+    public String getCDR_START_TIME() {
+        return CDR_START_TIME;
+    }
+
+    public void setCDR_START_TIME(String starttime) {
+        CDR_START_TIME = starttime;
+    }
+
+    public int getDURATION() {
+        return DURATION;
+    }
+
+    public void setDURATION(int duration) {
+        DURATION = duration;
+    }
+
+    public double getTOTAL_USAGE() {
+        return TOTAL_USAGE;
+    }
+
+    public void setTOTAL_USAGE(double totalUsage) {
+        TOTAL_USAGE = totalUsage;
+    }
+
+    public String getB_NUMBER() {
+        return B_NUMBER;
+    }
+
+    public void setB_NUMBER(String bNumber) {
+        B_NUMBER = bNumber;
+    }
+
+    public String getB_NUMBER_PREFIX() {
+        return B_NUMBER_PREFIX;
+    }
+
+    public void setB_NUMBER_PREFIX(String bNumber_Prefix) {
+        B_NUMBER_PREFIX = bNumber_Prefix;
+    }
+
+    public String getZONE() {
+        return ZONE;
+    }
+
+    public void setZONE(String zone) {
+        ZONE = zone;
+    }
+
+    public String getNW_GROUP() {
+        return NW_GROUP;
+    }
+
+    public void setNW_GROUP(String nw_group) {
+        NW_GROUP = nw_group;
+    }
+
+    public int getUNIT_TYPE_ID() {
+        return UNIT_TYPE_ID;
+    }
+
+    public void setUNIT_TYPE_ID(int uNIT_TYPE_ID) {
+        UNIT_TYPE_ID = uNIT_TYPE_ID;
+    }
+
+    public double getCHARGE_FEE() {
+        return CHARGE_FEE;
+    }
+
+    public void setCHARGE_FEE(double charge_free) {
+        CHARGE_FEE = charge_free;
+    }
+
+    public int getCHARGE_FEE_ID() {
+        return CHARGE_FEE_ID;
+    }
+
+    public void setCHARGE_FEE_ID(int charge_free_id) {
+        CHARGE_FEE_ID = charge_free_id;
+    }
+
+    @Override
+    public String toString() {
+
+        StringBuilder returnStr = new StringBuilder();
+
+        String SPLITTER = IConstant.EXPORT_CSV.SPLITTER;
+        returnStr.append(A_NUMBER).append(SPLITTER);
+        returnStr.append(TYPE_OF_CDR).append(SPLITTER);
+        returnStr.append(CDR_START_TIME).append(SPLITTER);
+        returnStr.append(DURATION).append(SPLITTER);
+        returnStr.append(TOTAL_USAGE).append(SPLITTER);
+        returnStr.append(B_NUMBER).append(SPLITTER);
+        returnStr.append(ZONE).append(SPLITTER);
+        returnStr.append(NW_GROUP).append(SPLITTER);
+        returnStr.append(SERVICE_FEE).append(SPLITTER);
+        returnStr.append(SERVICE_FEE_ID).append(SPLITTER);
+        returnStr.append(CHARGE_FEE).append(SPLITTER);
+        returnStr.append(CHARGE_FEE_ID).append(SPLITTER);
+        returnStr.append(LAC).append(SPLITTER);
+        returnStr.append(CELL_ID).append(SPLITTER);
+        returnStr.append(SUBSCRIBER_UNBILL).append(SPLITTER);
+        returnStr.append(BU_ID).append(SPLITTER);
+        returnStr.append(OLD_BU_ID).append(SPLITTER);
+        returnStr.append(FREE_COST).append(SPLITTER);
+        returnStr.append(FREE_VALUE).append(SPLITTER);
+        returnStr.append(FREE_AMOUNT).append(SPLITTER);
+        returnStr.append(FREE_BLOCK).append(SPLITTER);
+        returnStr.append(DIAL_DIGIT).append(SPLITTER);
+        returnStr.append(CDR_RECORD_HEADER_ID).append(SPLITTER);
+        returnStr.append(CDR_SEQUENCE_NUMBER).append(SPLITTER);
+        returnStr.append(LOCATION_NO).append(SPLITTER);
+        returnStr.append(MSC_ID).append(SPLITTER);
+        returnStr.append(UNIT_TYPE_ID).append(SPLITTER);
+        returnStr.append(PRIMARY_OFFER_ID).append(SPLITTER);
+        returnStr.append(DISCOUNT_ITEM_ID).append(SPLITTER);
+//        returnStr.append(BALANCE_CHANGE).append(SPLITTER);
+        returnStr.append(RERATE_FLAG).append(SPLITTER);
+        returnStr.append(AUT_FINAL_ID).append(SPLITTER);
+        returnStr.append(TARIFF_PLAN_ID).append(SPLITTER);
+        returnStr.append(ERROR_CODE).append(SPLITTER);
+        returnStr.append(PAYMENT_ID).append(SPLITTER);
+
+        return returnStr.toString();
+    }
+    public int getDATA_PART() {
+        return DATA_PART;
+    }
+
+    public void setDATA_PART(int dATA_PART) {
+        DATA_PART = dATA_PART;
+    }
+
+    public double getFREE_VALUE() {
+        return FREE_VALUE;
+    }
+
+    public void setFREE_VALUE(double fREE_VALUE) {
+        FREE_VALUE = fREE_VALUE;
+    }
+
+    public double getFREE_COST() {
+        return FREE_COST;
+    }
+
+    public void setFREE_COST(double fREE_COST) {
+        FREE_COST = fREE_COST;
+    }
+
+    public ArrayList<Balance> getArrayListBalance() {
+        return arrayListBalance;
+    }
+
+    public void setArrayListBalance(ArrayList<Balance> arrayListBalance) {
+        this.arrayListBalance = arrayListBalance;
+    }
+
+    public ArrayList<Accumulator> getArrayListAccumulator() {
+        return arrayListAccumulator;
+    }
+
+    public void setArrayListAccumulator(ArrayList<Accumulator> arrayListAccumulator) {
+        this.arrayListAccumulator = arrayListAccumulator;
+    }
+
+    public String getMSC_ID() {
+        return MSC_ID;
+    }
+
+    public void setMSC_ID(String mSC_ID) {
+        MSC_ID = mSC_ID;
+    }
+
+    public int getPRIMARY_OFFER_ID() {
+        return PRIMARY_OFFER_ID;
+    }
+
+    public void setPRIMARY_OFFER_ID(int pRIMARY_OFFER_ID) {
+        PRIMARY_OFFER_ID = pRIMARY_OFFER_ID;
+    }
+
+    public int getDISCOUNT_ITEM_ID() {
+        return DISCOUNT_ITEM_ID;
+    }
+
+    public void setDISCOUNT_ITEM_ID(int dISCOUNT_ITEM_ID) {
+        DISCOUNT_ITEM_ID = dISCOUNT_ITEM_ID;
+    }
+
+    public int getTARIFF_PLAN_ID() {
+        return TARIFF_PLAN_ID;
+    }
+
+    public void setTARIFF_PLAN_ID(int tARIFF_PLAN_ID) {
+        TARIFF_PLAN_ID = tARIFF_PLAN_ID;
+    }
+
+//    public String getBALANCE_CHANGE() {
+//        return BALANCE_CHANGE;
+//    }
+//
+//    public void setBALANCE_CHANGE(String bALANCE_CHANGE) {
+//        BALANCE_CHANGE = bALANCE_CHANGE;
+//    }
+
+}

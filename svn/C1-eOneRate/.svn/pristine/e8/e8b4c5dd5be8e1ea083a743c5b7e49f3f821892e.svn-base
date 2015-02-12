@@ -1,0 +1,19 @@
+package e1reformat.util;
+
+import java.util.Comparator;
+
+public class ZoneCodeComparator implements Comparator<String> {
+
+    @Override
+    public int compare(String code1, String code2) {
+        if (code1 == null || code2 == null) {
+            return 0;
+        } else {
+            try {
+                return (int) (Long.valueOf(code1) - Long.valueOf(code2));
+            } catch (NumberFormatException nfe) {
+                return 0;
+            }
+        }
+    }
+}

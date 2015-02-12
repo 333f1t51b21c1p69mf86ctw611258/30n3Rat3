@@ -1,0 +1,4 @@
+eclipse.preferences.version=1
+encoding//src/c1/convert/controller/csv/CSVProcess.java=UTF-8
+encoding//src/c1/convert/util/EnrichCDR.java=UTF-8
+encoding//src/e1reformat/db/dao/RatedCdrDAO.java=UTF-8

@@ -1,0 +1,154 @@
+//package e1reformat.db.dao;
+//
+//import java.sql.Connection;
+//import java.sql.PreparedStatement;
+//import java.sql.ResultSet;
+//import java.util.ArrayList;
+//
+//import org.apache.commons.lang3.StringUtils;
+//
+//import e1reformat.db.pool.DBConfig;
+//import e1reformat.entity.enrich.MapCheckSumReport;
+//import java.sql.SQLException;
+//
+//public class CheckSumReportDao {
+//
+//    private static DBConfig dbconfig = new DBConfig();
+//    static int SUCCESS = 0;
+//    static int ERROR = -1;
+//
+//    public static ArrayList<MapCheckSumReport> getListCheckSumReport(Connection conn) {
+//
+//        ArrayList<MapCheckSumReport> searchResult = new ArrayList<MapCheckSumReport>();
+//        PreparedStatement pstmt = null;
+//        ResultSet rs = null;
+//        try {
+//            String sql = "select a.cdr_log_process_id, a.start_time, a.source_file_url, b.number_of_record, a.is_handle from"
+//                    + dbconfig.getDb_schema() + " cdr_log_process a, cdr_record_header b"
+//                    + "where  a.CDR_LOG_PROCESS_ID = b.CDR_RECORD_HEADER_ID";
+//
+//            pstmt = conn.prepareStatement(sql);
+//            rs = pstmt.executeQuery();
+//            while (rs.next()) {
+//                String cdr_log_process_id = rs.getString(1);
+//                String start_time = rs.getString(2);
+//                String source_file_url = rs.getString(3);
+//                String number_of_record = rs.getString(4);
+//                String is_handle = rs.getString(5);
+//                MapCheckSumReport mapCheckSumReport = new MapCheckSumReport(cdr_log_process_id, start_time, source_file_url, number_of_record, is_handle);
+//                searchResult.add(mapCheckSumReport);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                if (conn != null) {
+//                    conn.close();
+//                }
+//                if (rs != null) {
+//                    rs.close();
+//                }
+//                if (pstmt != null) {
+//                    pstmt.close();
+//                }
+//            } catch (SQLException ex) {
+//                ex.fillInStackTrace();
+//            }
+//        }
+//        return searchResult;
+//    }
+//
+////    public static ArrayList<MapCheckSumReport> getSearchCheckSumReport(String cdr_log_process_id, String fromDate, String toDate, Connection conn) {
+////
+////        ArrayList<MapCheckSumReport> searchResult = new ArrayList<MapCheckSumReport>();
+////        PreparedStatement pstmt = null;
+////        ResultSet rs = null;
+////        StringBuilder query = new StringBuilder("");
+////
+////        try {
+////
+////            query.append("SELECT a.cdr_log_process_id, a.start_time, a.source_file_url, b.number_of_record, a.is_handle");
+////            query.append(" FROM " + dbconfig.getDb_schema() + "cdr_log_process a, cdr_record_header b");
+////            query.append(" WHERE ");
+////            query.append("a.CDR_LOG_PROCESS_ID = b.CDR_RECORD_HEADER_ID");
+////            if (StringUtils.isNotEmpty(fromDate)) {
+////                query.append(" AND a.start_time >= to_date( ? ,'MM/DD/YYYY')");
+////            }
+////            if (StringUtils.isNotEmpty(toDate)) {
+////                query.append(" AND a.start_time <= to_date( ? ,'MM/DD/YYYY')");
+////            }
+////            pstmt = conn.prepareStatement(query.toString());
+////            if (StringUtils.isNotEmpty(fromDate)) {
+////                pstmt.setString(1, fromDate.toString());
+////            }
+////            if (StringUtils.isNotEmpty(toDate)) {
+////                if (fromDate != null) {
+////                    pstmt.setString(2, toDate.toString());
+////                } else {
+////                    pstmt.setString(1, toDate.toString());
+////                }
+////            }
+////            rs = pstmt.executeQuery();
+////
+////            while (rs.next()) {
+////                MapCheckSumReport mapCheckSumReport = new MapCheckSumReport(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5));
+////                searchResult.add(mapCheckSumReport);
+////            }
+////        } catch (Exception e) {
+////            e.printStackTrace();
+////        } finally {
+////            try {
+////                if (conn != null) {
+////                    conn.close();
+////                }
+////                if (rs != null) {
+////                    rs.close();
+////                }
+////                if (pstmt != null) {
+////                    pstmt.close();
+////                }
+////            } catch (SQLException ex) {
+////                ex.fillInStackTrace();
+////            }
+////        }
+////        return searchResult;
+////    }
+//
+////    public static Boolean checkExistHeaderId(String cdr_log_process_id, Connection conn) {
+////
+////        PreparedStatement pstmt = null;
+////        ResultSet rs = null;
+////        int result = 0;
+////
+////        try {
+////            String query = "SELECT count(1) FROM " + dbconfig.getDb_schema() + "CDR_LOG_PROCESS where cdr_log_process_id = '" + cdr_log_process_id + "'";
+////            pstmt = conn.prepareStatement(query);
+////            rs = pstmt.executeQuery(query);
+////            rs.next();
+////            result = rs.getInt(1);
+////        } catch (Exception e) {
+////            System.out.println("Exception: " + e.getMessage());
+////        } finally {
+////            try {
+////                if (conn != null) {
+////                    conn.close();
+////                }
+////                if (rs != null) {
+////                    rs.close();
+////                }
+////                if (pstmt != null) {
+////                    pstmt.close();
+////                }
+////            } catch (SQLException ex) {
+////                ex.fillInStackTrace();
+////            }
+////        }
+////
+////        if (result > 0) {
+////            return true;
+////        } else {
+////            return false;
+////        }
+////    }
+//
+//}

@@ -1,0 +1,19 @@
+<config>
+	<slus>data</slus>
+	<deleteGzipFile>false</deleteGzipFile>
+	<destFolderPath>/home/eonerate/deploy/orptransformation/Data/Input</destFolderPath>
+	<inputHostName>10.149.33.214</inputHostName>
+	<inputUserName>elcom</inputUserName>
+	<inputPassword>elcom@123456</inputPassword>
+	<inputDirectory>/u01/cdr</inputDirectory>
+	<inputOsFileSeparator>/</inputOsFileSeparator>
+	<retryCount>3</retryCount>
+	<retryDownloadFileSleepTime>3000</retryDownloadFileSleepTime>
+	<scanInterval>20</scanInterval>
+	<dbConnection>jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.113)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.114)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))</dbConnection>
+	<dbUserName>vnp_common</dbUserName>
+	<dbPassword>vnp_common</dbPassword>
+	<corePoolSize>8</corePoolSize>
+	<maximumPoolSize>16</maximumPoolSize>
+	<instancePort>10000</instancePort>
+</config>

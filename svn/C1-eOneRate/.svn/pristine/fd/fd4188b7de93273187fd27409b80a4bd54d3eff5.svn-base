@@ -1,0 +1,550 @@
+package e1reformat.util;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+import e1reformat.db.pool.DBConfig;
+import e1reformat.entity.cdr.CdrObject;
+import e1reformat.entity.cdr.sub.Balance;
+
+public class EnrichCDR {
+
+    private String schemaCommon;
+    private String schemaData;
+    private String tempRatedTable;
+    private ResultSet rs;
+    private static final String zoneQTE = "QTE";	// zone Quốc tế
+    private static final String zoneVAS = "VAS";
+    private static final String zoneSMS = "Short-Message";
+    private static final String sms1 = "SMS - ";
+    private static final String sms = "SMS";
+    private static final String mms = "MMS";
+    private static final String gpr = "GPR";
+    private static final String xml = "XML";
+    private static final String vas = "VAS";
+    private static final String sdp = "SDP";
+    private static Connection conn;
+    private static Statement stmt;
+    private static HashMap<String, MapB_Sub> mapBSub;
+    private static HashMap<String, String[]> mapBU;
+    private HashMap<String, callZoneGroup> mapZoneGroup;
+    private HashMap<String, DataProduct> mapDataPO;
+    protected HashMap<String, ArrayList<Integer>> mapSubPO;
+    private static Logger logger = Logger.getLogger("EnrichCDR");
+
+    public EnrichCDR() {
+    }
+
+    public EnrichCDR(Connection _conn, DBConfig dbconfig) {
+        try {
+            schemaCommon = dbconfig.getDb_Common();
+            schemaData = dbconfig.getDb_schema();
+            tempRatedTable = dbconfig.getLoadTableName();
+            conn = _conn;
+            logger.info("Start load Config Map:" + DateUtils.getCurrentDateTime(DateUtils.hhmmss_sss));
+            loadConfigMap(); 	// load các ký tự đặc biệt cần Enrich b_Sub vào cache. Chỉ cần load một lần
+            logger.info("End load Config Map:" + DateUtils.getCurrentDateTime(DateUtils.hhmmss_sss));
+
+            logger.info("Star load Data PO:" + DateUtils.getCurrentDateTime(DateUtils.hhmmss_sss));
+            loadDataPO();		// load zone và nw_group của data
+            logger.info("End load Data PO:" + DateUtils.getCurrentDateTime(DateUtils.hhmmss_sss));
+
+            logger.info("Star load Zone Group:" + DateUtils.getCurrentDateTime(DateUtils.hhmmss_sss));
+            loadZoneGroup();	// load các zone và nw_group của SMS VAS, SMS quốc tế và thư�?ng,  voice
+            logger.info("End load Zone  Group:" + DateUtils.getCurrentDateTime(DateUtils.hhmmss_sss));
+            if (rs != null) {
+                rs.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Hàm này thực hiện Enrich
+    public CdrObject enrichCDRObject(CdrObject cdrObject) {
+        try {
+            if (!StringUtils.isEmpty(cdrObject.getB_NUMBER())) { // Trư�?ng hợp có số B
+                enrichPrefix(cdrObject);
+                switch (cdrObject.getTYPE_OF_CDR()) {
+                    case 1:  //for VOICE
+                        enrichVoiceCase(cdrObject);
+                        break;
+
+                    case 2:  //MMS
+                        enrichMMSCase(cdrObject);
+                        break;
+
+                    case 4:  //for SMS
+                        enrichSMSCase(cdrObject);
+                        break;
+                }
+            } else {
+                enrichDataCase(cdrObject);
+            }
+            enrichBalance(cdrObject);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        return cdrObject;
+    }
+
+    //<editor-fold defaultstate="collapsed" desc="Load config">
+    private void loadConfigMap() {
+        mapBSub = new HashMap<String, MapB_Sub>();
+        MapB_Sub bSub;
+        ResultSet rsMap = null;
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("SELECT prefix, change FROM ")
+                    .append(schemaCommon).append("prefix_enrich");
+            rsMap = Select(sb.toString());
+//            rs = Select("SELECT prefix, change FROM " + schemaCommon + "prefix_enrich");
+            while (rsMap.next()) {
+                bSub = new MapB_Sub();
+                bSub.setChange(rsMap.getString("change"));
+                mapBSub.put(rsMap.getString("prefix"), bSub);
+            }
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rsMap != null) {
+                    rsMap.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                ex.fillInStackTrace();
+            }
+
+        }
+
+    }
+
+    private void loadZoneGroupToMap(HashMap<String, callZoneGroup> mapZoneGroup, String sql) {
+        callZoneGroup zg;
+        ResultSet rsZG = null;
+        try {
+            rsZG = Select(sql);
+
+            while (rsZG.next()) {
+                zg = new callZoneGroup();
+                zg.setZone(rsZG.getString(2));
+                zg.setNwGroup(rsZG.getString(3));
+                zg.setPayment_id(rsZG.getInt(4));
+                String shortCode = rsZG.getString(5).trim();
+                zg.setShort_code(shortCode);
+                String code = rsZG.getString(1).trim();
+                mapZoneGroup.put(code, zg);
+            }
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rsZG != null) {
+                    rsZG.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                ex.fillInStackTrace();
+            }
+
+        }
+    }
+
+    private void loadZoneGroup() {
+        mapZoneGroup = new HashMap<String, callZoneGroup>();
+        StringBuilder sb = new StringBuilder();
+        sb.append("SELECT code, zone, nw_group,payment_id,short_code FROM ")
+                .append(schemaCommon).append("NW_ZONE_MAP");
+        loadZoneGroupToMap(mapZoneGroup, sb.toString());
+    }
+
+    private void loadDataPO() {
+        mapDataPO = new HashMap<String, DataProduct>();
+        DataProduct dataPO;
+        ResultSet rsPO = null;
+        try {
+            StringBuilder sb = new StringBuilder();
+            sb.append("SELECT a.offer_id, a.offer_name zone  FROM  ")
+                    .append(schemaCommon).append("product_offer a ");
+            rsPO = Select(sb.toString());
+            while (rsPO.next()) {
+                dataPO = new DataProduct();
+                dataPO.setZone(rsPO.getString(2));
+                mapDataPO.put(rsPO.getString(1), dataPO);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rsPO != null) {
+                    rsPO.close();
+                }
+                if (stmt != null) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+                ex.fillInStackTrace();
+            }
+
+        }
+    }
+
+    //</editor-fold>
+    //<editor-fold defaultstate="collapsed" desc="ENRICH FUNCTIONS DETAIL">
+    private void enrichPrefix(CdrObject cdrObject) {
+        String tmpBPrefix = null;
+        String tmpBNumber = null;
+        try {
+            if (!cdrObject.getB_NUMBER().isEmpty()) {
+                int b_subLength = cdrObject.getB_NUMBER().length();
+                for (int i = b_subLength; i >= 0; i--) {
+
+                    if (mapBSub.containsKey(cdrObject.getB_NUMBER().substring(0, i))) {
+
+                        tmpBPrefix = mapBSub.get(cdrObject.getB_NUMBER().substring(0, i)).getChange();
+                        tmpBNumber = cdrObject.getB_NUMBER().substring(i, b_subLength);
+                        break;
+                    }
+                }
+                if (tmpBPrefix != null && tmpBNumber != null) {
+                    cdrObject.setB_NUMBER(tmpBPrefix + tmpBNumber);
+                }
+            }
+        } catch (Exception ex) {
+            logger.error("Not found B_Number", ex.fillInStackTrace());
+        }
+    }
+
+    private void enrichVoiceCase(CdrObject cdrObject) {
+        callZoneGroup zg = null;
+        if (cdrObject.getB_NUMBER() != null) {
+            if (mapZoneGroup.containsKey(cdrObject.getB_NUMBER())) {	//VOICE là VAS
+                if (cdrObject.getCHARGE_FEE_ID() != 0) {
+                    int service_fee_id = cdrObject.getCHARGE_FEE_ID();
+                    cdrObject.setSERVICE_FEE_ID(service_fee_id);
+                    cdrObject.setCHARGE_FEE_ID(0);
+                }
+                if (cdrObject.getCHARGE_FEE() != 0) {
+                    double service_fee = cdrObject.getCHARGE_FEE();
+                    cdrObject.setSERVICE_FEE(service_fee);
+                    cdrObject.setCHARGE_FEE(0);
+                }
+                zg = mapZoneGroup.get(cdrObject.getB_NUMBER());
+                if (zg != null) {
+                    cdrObject.setPAYMENT_ID(zg.payment_id);
+                }
+                if (zg.getNwGroup().equalsIgnoreCase(xml)) {
+                    cdrObject.setB_NUMBER("");  // Neu la xml thi B_SUBS = ""
+                } else if (zg.getNwGroup().equalsIgnoreCase(vas)) {
+                    cdrObject.setB_NUMBER(zg.getShort_code());   // Neu la VAS thi ra shortCode (zone)
+                } else if (zg.getNwGroup().equalsIgnoreCase(sdp)) {
+                    cdrObject.setB_NUMBER("");   // Neu la SDP thi B_SUBS = ""
+                }
+                cdrObject.setZONE(zg.getZone());
+                cdrObject.setNW_GROUP(zoneVAS);
+            } else {
+                String bNumber = cdrObject.getB_NUMBER();
+                for (int i = bNumber.length(); i >= 0; i--) {
+                    bNumber = bNumber.substring(0, i);
+                    if (mapZoneGroup.containsKey(bNumber)) {
+                        zg = mapZoneGroup.get(bNumber);
+                        break;
+                    }
+                }
+
+                if (zg != null) {
+                    cdrObject.setPAYMENT_ID(zg.payment_id);
+                }
+                if (zg != null && zg.getNwGroup() != null) {
+                    //Call VAS
+                    if (zg.getNwGroup().equals(zoneVAS)) {
+                        cdrObject.setZONE(zg.getZone());
+                        cdrObject.setNW_GROUP(zoneVAS);
+                    } //Call QTE
+                    else if (zg.getNwGroup().equals(zoneQTE)) {
+                        cdrObject.setZONE(zg.getZone());
+                        cdrObject.setNW_GROUP(zoneQTE);
+                    } //trư�?ng hợp thư�?ng
+                    else {
+                        cdrObject.setZONE(zg.getZone());
+                        cdrObject.setNW_GROUP(zg.getNwGroup());
+                    }
+                } else {
+                    cdrObject.setZONE("");
+                    cdrObject.setNW_GROUP("");
+//                    logger.info("Not exist B_Number :" + cdrObject.getB_NUMBER());
+                }
+            }
+        }
+    }
+
+    private void enrichSMSCase(CdrObject cdrObject) {
+        if (cdrObject.getB_NUMBER() != null) {
+            if (mapZoneGroup.containsKey(cdrObject.getB_NUMBER())) {	//SMS là VAS
+                if (cdrObject.getCHARGE_FEE_ID() != 0) {
+                    int service_fee_id = cdrObject.getCHARGE_FEE_ID();
+                    cdrObject.setSERVICE_FEE_ID(service_fee_id);
+                    cdrObject.setCHARGE_FEE_ID(0);
+                }
+                if (cdrObject.getCHARGE_FEE() != 0) {
+                    double service_fee = cdrObject.getCHARGE_FEE();
+                    cdrObject.setSERVICE_FEE(service_fee);
+                    cdrObject.setCHARGE_FEE(0);
+                }
+                callZoneGroup zg = mapZoneGroup.get(cdrObject.getB_NUMBER());
+                cdrObject.setPAYMENT_ID(zg.payment_id);
+                cdrObject.setNW_GROUP(zoneVAS);
+//            cdrObject.setNW_GROUP(zg.getNwGroup());
+                cdrObject.setZONE(zg.getZone());
+                if (zg.getNwGroup().equalsIgnoreCase(xml)) {
+                    cdrObject.setB_NUMBER("");  // Neu la xml thi B_SUBS = ""
+                } else if (zg.getNwGroup().equalsIgnoreCase(vas)) {
+                    cdrObject.setB_NUMBER(zg.getShort_code());   // Neu la VAS thi ra shortCode (zone)
+                } else if (zg.getNwGroup().equalsIgnoreCase(sdp)) {
+                    cdrObject.setB_NUMBER("");   // Neu la SDP thi B_SUBS = ""
+                }
+            } else {
+                String bNumber = cdrObject.getB_NUMBER();
+                callZoneGroup zg = null;
+                //scan from right to left of code, compare to b_number, if the same -> set hashMap value = zg
+                for (int i = bNumber.length(); i >= 0; i--) {
+                    bNumber = bNumber.substring(0, i);
+                    if (mapZoneGroup.containsKey(bNumber)) {
+                        zg = mapZoneGroup.get(bNumber);
+                        break;
+                    }
+                }
+                if (zg != null) {
+                    cdrObject.setPAYMENT_ID(zg.payment_id);
+                }
+                if (zg != null && zg.getNwGroup() != null) {
+                    //SMS quốc tế
+                    if (zg.getNwGroup().equals(zoneQTE)) {
+                        cdrObject.setZONE(sms1 + zg.getZone());
+                        cdrObject.setZONE(zoneQTE);
+//                        cdrObject.setNW_GROUP(sms1 + zg.getNwGroup());
+                    } //SMS thư�?ng
+                    else {
+                        cdrObject.setZONE(zoneSMS);
+                        cdrObject.setNW_GROUP(sms);
+                    }
+                } else {
+                    cdrObject.setZONE(zoneSMS);
+                    cdrObject.setNW_GROUP(sms);
+//                    logger.info("Not exist number :" + cdrObject.getB_NUMBER());
+                }
+            }
+        }
+    }
+
+    private void enrichMMSCase(CdrObject cdrObject) {
+        //để tạm, sau này làm như phần SMS
+        cdrObject.setZONE(mms);
+        cdrObject.setNW_GROUP(mms);
+        cdrObject.setDURATION(0);
+    }
+
+    private void enrichDataCase(CdrObject cdrObject) {
+        if (mapDataPO.containsKey(String.valueOf(cdrObject.getUSAGE_OFFER_ID()))) {
+            cdrObject.setZONE(mapDataPO.get(String.valueOf(cdrObject.getUSAGE_OFFER_ID())).getZone());
+            if ("Vol_apn".equalsIgnoreCase(cdrObject.getAPN())) {
+                cdrObject.setNW_GROUP(zoneQTE);
+            } else {
+                cdrObject.setNW_GROUP(gpr);
+            }
+        }
+    }
+
+    private void enrichBalance(CdrObject cdrObject) {
+        double freeBlock = 0;
+
+        if (cdrObject.getArrayListBalance() != null) {
+            for (Balance balance : cdrObject.getArrayListBalance()) {
+                if (Integer.parseInt(balance.getBALANCE_UNIT_TYPE()) == cdrObject.getUNIT_TYPE_ID() && balance.getBALANCE_CHANGE() != null) {
+                    freeBlock += Double.parseDouble(balance.getBALANCE_CHANGE());
+                }
+            }
+            cdrObject.setFREE_BLOCK(freeBlock);
+        }
+    }
+
+    public int enrichRest(int cdrRecordHeaderId) throws SQLException {
+        logger.info("[enrichRest] StartTime = " + DateUtils.getCurrentDateTime(DateUtils.MMddyyyyHHmmss_sss_FULL_SLASH));
+        int result = 0;
+        try {
+            conn.setAutoCommit(false);
+            if (stmt != null) {
+                stmt.close();
+            }
+            String sql = "UPDATE   " + schemaData + tempRatedTable + " y "
+                    + "SET y.bu_id = ((SELECT   x.change_bu FROM "
+                    + "                 (SELECT   a.subscriber_no,"
+                    + "                                           a.change_code,"
+                    + "                                           a.change_bu,"
+                    + "                                           a.change_date_time start_time,"
+                    + "                                           (SELECT   MIN (b.change_date_time)"
+                    + "                                           FROM   " + schemaCommon + "subs_bu_history b"
+                    + "                                           WHERE   b.change_date_time > a.change_date_time"
+                    + "                                           AND a.subscriber_no = b.subscriber_no) end_time"
+                    + "                            FROM   " + schemaCommon + "subs_bu_history a) x"
+                    + "                 WHERE   y.a_number = x.subscriber_no"
+                    + "                         AND y.cdr_start_time BETWEEN x.start_time"
+                    + "                         AND  DECODE (x.end_time, NULL, SYSDATE, x.end_time))),"
+                    + "         y.old_bu_id ="
+                    + "             ( (SELECT   x.change_bu"
+                    + "                  FROM   (SELECT   a.subscriber_no,"
+                    + "                                   a.change_code,"
+                    + "                                   a.change_bu,"
+                    + "                                   a.change_date_time start_time,"
+                    + "                                   (SELECT   MIN (b.change_date_time)"
+                    + "                                      FROM   " + schemaCommon + "subs_bu_history b"
+                    + "                                     WHERE   b.change_date_time > a.change_date_time"
+                    + "                                             AND a.subscriber_no = b.subscriber_no) end_time"
+                    + "                            FROM   " + schemaCommon + "subs_bu_history a) x WHERE   x.end_time ="
+                    + "                             (SELECT   MAX (z.end_time)"
+                    + "                                FROM   (SELECT   a.subscriber_no,"
+                    + "                                                 a.change_code,"
+                    + "                                                 a.change_bu,"
+                    + "                                                 a.change_date_time start_time,"
+                    + "                                                 (SELECT   MIN(b.change_date_time)"
+                    + "                                                   FROM   " + schemaCommon + "subs_bu_history b"
+                    + "                                                   WHERE   b.change_date_time > a.change_date_time"
+                    + "                                                   AND a.subscriber_no = b.subscriber_no) end_time"
+                    + "                                          FROM   " + schemaCommon + "subs_bu_history a) z"
+                    + "                               WHERE   z.end_time < y.cdr_start_time AND z.subscriber_no = y.a_number)))"
+                    + " WHERE   y.cdr_record_header_id = " + Integer.toString(cdrRecordHeaderId);
+
+            stmt = conn.createStatement();
+            result = stmt.executeUpdate(sql);
+            conn.commit();
+            logger.info("\tKet qua update bang TEMP voi CDR_RECORD_HEADER_ID = " + cdrRecordHeaderId + ": " + result + " ban ghi");
+            logger.info("[enrichRest] endTime  = " + DateUtils.getCurrentDateTime(DateUtils.MMddyyyyHHmmss_sss_FULL_SLASH));
+        } catch (SQLException e) {
+            conn.rollback();
+            logger.error("Loi SQL update ", e.fillInStackTrace());
+            return 0;
+        } finally {
+            if (stmt != null) {
+                stmt.close();
+            }
+        }
+        return result;
+    }
+//</editor-fold>
+
+    private ResultSet Select(String sql) throws SQLException {
+        if (stmt != null) {
+            stmt.close();
+        }
+        conn.setAutoCommit(false);
+        stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        stmt.setFetchSize(1000);
+        rs = stmt.executeQuery(sql);
+        return rs;
+    }
+}
+
+class MapB_Sub {
+
+    String prefix = "";
+    String change = "";
+
+    public String getChange() {
+        return change;
+    }
+
+    public void setChange(String _change) {
+        this.change = _change;
+    }
+
+}
+
+class DataProduct {
+
+    private int usage_Offer_ID;
+    private String zone;
+
+    public int getOfferID() {
+        return this.usage_Offer_ID;
+    }
+
+    public String getZone() {
+        return this.zone;
+    }
+
+    public void setZone(String _zone) {
+        this.zone = _zone;
+    }
+}
+
+class callZoneGroup {
+
+    String zone;
+    String short_code;
+    String nw_group;
+    int payment_id;
+
+    public String getShort_code() {
+        return short_code;
+    }
+
+    public void setShort_code(String short_code) {
+        this.short_code = short_code;
+    }
+
+    public int getPayment_id() {
+        return payment_id;
+    }
+
+    public void setPayment_id(int payment_id) {
+        this.payment_id = payment_id;
+    }
+
+    public String getZone() {
+        return this.zone;
+    }
+
+    public void setZone(String _zone) {
+        this.zone = _zone;
+    }
+
+    public String getNwGroup() {
+        return this.nw_group;
+    }
+
+    public void setNwGroup(String _nw_group) {
+        this.nw_group = _nw_group;
+    }
+}
+
+class dataBalance {
+
+    String Internal_cost = "0";
+
+    public String getInternal_cost() {
+        return Internal_cost;
+    }
+
+    public void setInternal_cost(String Incost) {
+        this.Internal_cost = Incost;
+    }
+
+}

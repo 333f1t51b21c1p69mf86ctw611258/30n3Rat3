@@ -1,0 +1,113 @@
+package e1reformat.gui.util;
+
+import javax.swing.table.AbstractTableModel;
+
+@SuppressWarnings("serial")
+public class MyTableModel extends AbstractTableModel {
+
+    private String[] columnNames;
+    private Object[][] data;
+    private int editableColumnIndex;
+    private boolean isEditable = false;
+
+    public int getColumnCount() {
+        return columnNames.length;
+    }
+
+    public int getRowCount() {
+        if (data != null) {
+            return data.length;
+        } else {
+            return 0;
+        }
+
+    }
+
+    public String getColumnName(int col) {
+        return columnNames[col];
+    }
+
+    public Object getValueAt(int row, int col) {
+        try {
+            return data[row][col];
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    /*
+     * JTable uses this method to determine the default renderer/
+     * editor for each cell.  If we didn't implement this method,
+     * then the last column would contain text ("true"/"false"),
+     * rather than a check box.
+     */
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    public Class getColumnClass(int c) {
+        try {
+            return getValueAt(0, c).getClass();
+        } catch (NullPointerException e) {
+            return String.class;
+        }
+
+    }
+
+    /*
+     * Don't need to implement this method unless your table's
+     * editable.
+     */
+    public boolean isCellEditable(int row, int col) {
+        if (!isEditable) {
+            return false;
+        }
+
+        if (col == editableColumnIndex) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /*
+     * Don't need to implement this method unless your table's
+     * data can change.
+     */
+    public void setValueAt(Object value, int row, int col) {
+        data[row][col] = value;
+    }
+    public String[] getColumnNames() {
+        return columnNames;
+    }
+
+    public Object[][] getData() {
+        return data;
+    }
+
+    public void setColumnNames(String[] columnNames) {
+        this.columnNames = columnNames;
+    }
+
+    public void setData(Object[][] data) {
+        try {
+            this.data = data;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public int getEditableColumnIndex() {
+        return editableColumnIndex;
+    }
+
+    public void setEditableColumnIndex(int editableColumnIndex) {
+        this.editableColumnIndex = editableColumnIndex;
+    }
+
+    public boolean isEditable() {
+        return isEditable;
+    }
+
+    public void setEditable(boolean isEditable) {
+        this.isEditable = isEditable;
+    }
+
+}

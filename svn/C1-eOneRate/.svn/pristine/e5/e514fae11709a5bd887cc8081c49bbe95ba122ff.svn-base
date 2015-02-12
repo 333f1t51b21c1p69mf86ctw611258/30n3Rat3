@@ -1,0 +1,175 @@
+2014-11-23 15:17:51,745 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepErrorRecord(MyFlatFileOutputAdapter.java:498)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:322)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepErrorRecord(MyFlatFileOutputAdapter.java:489)
+	... 3 more
+2014-11-23 15:17:51,789 ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepErrorRecord(MyFlatFileOutputAdapter.java:498)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:322)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at eonerate.orptransformation.adapter.MyFlatFileOutputAdapter.prepErrorRecord(MyFlatFileOutputAdapter.java:489)
+	... 3 more
+2014-11-23 16:31:17,490 FATAL - InitializationException thrown. Message <Error opening Search Map Data for <NormalizeCache> in config <1>>
+ElcRate.exception.InitializationException: Error opening Search Map Data for <NormalizeCache> in config <1>
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1111)
+	at ElcRate.cache.AbstractSyncLoaderCache.loadCache(AbstractSyncLoaderCache.java:302)
+	at ElcRate.cache.RegexMatchCache.loadCache(RegexMatchCache.java:234)
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:245)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+Caused by: java.lang.NullPointerException
+	at ElcRate.cache.RegexMatchCache.addEntry(RegexMatchCache.java:292)
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1089)
+	... 7 more
+2014-11-23 16:31:17,493 FATAL - InitializationException thrown. Message <Startup failed. Aborting.>
+ElcRate.exception.InitializationException: Startup failed. Aborting.
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:343)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-11-23 16:39:09,028 FATAL - InitializationException thrown. Message <Error opening Search Map Data for <NormalizeCache> in config <1>>
+ElcRate.exception.InitializationException: Error opening Search Map Data for <NormalizeCache> in config <1>
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1111)
+	at ElcRate.cache.AbstractSyncLoaderCache.loadCache(AbstractSyncLoaderCache.java:302)
+	at ElcRate.cache.RegexMatchCache.loadCache(RegexMatchCache.java:234)
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:245)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+Caused by: java.lang.NullPointerException
+	at ElcRate.cache.RegexMatchCache.addEntry(RegexMatchCache.java:292)
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1089)
+	... 7 more
+2014-11-23 16:39:09,032 FATAL - InitializationException thrown. Message <Startup failed. Aborting.>
+ElcRate.exception.InitializationException: Startup failed. Aborting.
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:343)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-11-23 16:53:32,831 FATAL - InitializationException thrown. Message <Error opening Search Map Data for <NormalizeCache> in config <1>>
+ElcRate.exception.InitializationException: Error opening Search Map Data for <NormalizeCache> in config <1>
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1111)
+	at ElcRate.cache.AbstractSyncLoaderCache.loadCache(AbstractSyncLoaderCache.java:302)
+	at ElcRate.cache.RegexMatchCache.loadCache(RegexMatchCache.java:234)
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:245)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+Caused by: java.lang.NullPointerException
+	at ElcRate.cache.RegexMatchCache.addEntry(RegexMatchCache.java:292)
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1089)
+	... 7 more
+2014-11-23 16:53:32,834 FATAL - InitializationException thrown. Message <Startup failed. Aborting.>
+ElcRate.exception.InitializationException: Startup failed. Aborting.
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:343)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-11-23 16:59:08,015 FATAL - InitializationException thrown. Message <Error opening Search Map Data for <NormalizeCache> in config <1>>
+ElcRate.exception.InitializationException: Error opening Search Map Data for <NormalizeCache> in config <1>
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1111)
+	at ElcRate.cache.AbstractSyncLoaderCache.loadCache(AbstractSyncLoaderCache.java:302)
+	at ElcRate.cache.RegexMatchCache.loadCache(RegexMatchCache.java:234)
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:245)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+Caused by: java.lang.NullPointerException
+	at ElcRate.cache.RegexMatchCache.addEntry(RegexMatchCache.java:292)
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1089)
+	... 7 more
+2014-11-23 16:59:08,018 FATAL - InitializationException thrown. Message <Startup failed. Aborting.>
+ElcRate.exception.InitializationException: Startup failed. Aborting.
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:343)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-11-23 17:05:37,688 FATAL - InitializationException thrown. Message <Error opening Search Map Data for <NormalizeCache> in config <1>>
+ElcRate.exception.InitializationException: Error opening Search Map Data for <NormalizeCache> in config <1>
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1111)
+	at ElcRate.cache.AbstractSyncLoaderCache.loadCache(AbstractSyncLoaderCache.java:302)
+	at ElcRate.cache.RegexMatchCache.loadCache(RegexMatchCache.java:234)
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:245)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+Caused by: java.lang.NullPointerException
+	at ElcRate.cache.RegexMatchCache.addEntry(RegexMatchCache.java:292)
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1089)
+	... 7 more
+2014-11-23 17:05:37,691 FATAL - InitializationException thrown. Message <Startup failed. Aborting.>
+ElcRate.exception.InitializationException: Startup failed. Aborting.
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:343)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-11-23 17:23:19,135 FATAL - InitializationException thrown. Message <ElcRateSocket.getServerSocket(): Could not listen on port <8198>. Message = <Address already in use: JVM_Bind>. Aborting.>
+ElcRate.exception.InitializationException: ElcRateSocket.getServerSocket(): Could not listen on port <8198>. Message = <Address already in use: JVM_Bind>. Aborting.
+	at ElcRate.configurationmanager.ElcRateSocket.<init>(ElcRateSocket.java:143)
+	at ElcRate.configurationmanager.EventHandler.init(EventHandler.java:164)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-11-23 17:38:51,708 FATAL - InitializationException thrown. Message <Error opening Search Map Data for <NormalizeCache> in config <1>>
+ElcRate.exception.InitializationException: Error opening Search Map Data for <NormalizeCache> in config <1>
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1111)
+	at ElcRate.cache.AbstractSyncLoaderCache.loadCache(AbstractSyncLoaderCache.java:302)
+	at ElcRate.cache.RegexMatchCache.loadCache(RegexMatchCache.java:234)
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:245)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+Caused by: java.lang.NullPointerException
+	at ElcRate.cache.RegexMatchCache.addEntry(RegexMatchCache.java:292)
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1089)
+	... 7 more
+2014-11-23 17:38:51,712 FATAL - InitializationException thrown. Message <Startup failed. Aborting.>
+ElcRate.exception.InitializationException: Startup failed. Aborting.
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:343)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-11-23 17:40:21,988 FATAL - InitializationException thrown. Message <Error opening Search Map Data for <NormalizeCache> in config <1>>
+ElcRate.exception.InitializationException: Error opening Search Map Data for <NormalizeCache> in config <1>
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1111)
+	at ElcRate.cache.AbstractSyncLoaderCache.loadCache(AbstractSyncLoaderCache.java:302)
+	at ElcRate.cache.RegexMatchCache.loadCache(RegexMatchCache.java:234)
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:245)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+Caused by: java.lang.NullPointerException
+	at ElcRate.cache.RegexMatchCache.addEntry(RegexMatchCache.java:292)
+	at ElcRate.cache.RegexMatchCache.loadDataFromDB(RegexMatchCache.java:1089)
+	... 7 more
+2014-11-23 17:40:21,992 FATAL - InitializationException thrown. Message <Startup failed. Aborting.>
+ElcRate.exception.InitializationException: Startup failed. Aborting.
+	at ElcRate.resource.CacheFactory.init(CacheFactory.java:343)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)

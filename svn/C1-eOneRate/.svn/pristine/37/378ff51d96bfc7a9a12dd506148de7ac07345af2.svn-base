@@ -1,0 +1,112 @@
+package e1reformat.gui.menu.log;
+
+import java.awt.EventQueue;
+import java.util.Date;
+
+import javax.swing.JFrame;
+
+import e1reformat.gui.main.MainUI;
+import e1reformat.util.IConstant;
+
+public class AuditTransactionDialog extends JFrame {
+
+    private static final long serialVersionUID = 1L;
+    private Date fromDate;
+    private Date toDate;
+    private String status;
+    private String type;
+    private String title;
+
+    public Date getFromDate() {
+        return fromDate;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setFromDate(Date fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public Date getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(Date toDate) {
+        this.toDate = toDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    AuditTransactionDialog frame = new AuditTransactionDialog();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the frame.
+     */
+    public AuditTransactionDialog() {
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setTitle(getTitle());
+
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+                if (type.equalsIgnoreCase(IConstant.SUMMARY_TABLE_INFO.TOTAL_FILE)) {
+                    MainUI.totalTransactionDialog = null;
+                }
+                if (type.equalsIgnoreCase(IConstant.SUMMARY_TABLE_INFO.TOTAL_FILE_ERROR)) {
+                    MainUI.allFileErrorDialog = null;
+                }
+                if (type.equalsIgnoreCase(IConstant.SUMMARY_TABLE_INFO.TOTAL_FILE_IN_PROCESS)) {
+                    MainUI.fileInProcessDialog = null;
+                }
+                if (type.equalsIgnoreCase(IConstant.SUMMARY_TABLE_INFO.TOTAL_FILE_SUCCESS)) {
+                    MainUI.successTransactionDialog = null;
+                }
+                if (type.equalsIgnoreCase(IConstant.SUMMARY_TABLE_INFO.TOTAL_FILES_CONTENT_ERROR)) {
+                    MainUI.contentErrorDialog = null;
+                }
+                setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            }
+        });
+    }
+
+    public void fireDataUpdate() {
+        AuditTransactionPanel auditTransactionPanel = new AuditTransactionPanel(fromDate, toDate, status);
+        getContentPane().add(auditTransactionPanel);
+        setVisible(true);
+        setLocation(200, 50);
+        setSize(800, 600);
+        setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
+        repaint();
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+}

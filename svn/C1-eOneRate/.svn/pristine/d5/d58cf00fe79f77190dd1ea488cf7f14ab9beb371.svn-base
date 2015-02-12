@@ -1,0 +1,82 @@
+package e1reformat.entity.cdr.sub;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.math.NumberUtils;
+
+public class Accumulator {
+
+    private static final int FULL_ACCUMULATOR_FIELDS = 4;
+    private static final String SUB_FIELD_DELIMITER = "\\*";
+    private String ACCUMULATOR_ID;
+    private String ACCUMULATOR_NAME;
+    private String ACCUMULATOR;
+    private String ACCUMULATOR_CHANGE;
+
+    public String getACCUMULATOR_ID() {
+        return ACCUMULATOR_ID;
+    }
+
+    public void setACCUMULATOR_ID(String aCCUMULATOR_ID) {
+        ACCUMULATOR_ID = aCCUMULATOR_ID;
+    }
+
+    public String getACCUMULATOR_NAME() {
+        return ACCUMULATOR_NAME;
+    }
+
+    public void setACCUMULATOR_NAME(String aCCUMULATOR_NAME) {
+        ACCUMULATOR_NAME = aCCUMULATOR_NAME;
+    }
+
+    public String getACCUMULATOR() {
+        return ACCUMULATOR;
+    }
+
+    public void setACCUMULATOR(String aCCUMULATOR) {
+        ACCUMULATOR = aCCUMULATOR;
+    }
+
+    public String getACCUMULATOR_CHANGE() {
+        return ACCUMULATOR_CHANGE;
+    }
+
+    public void setACCUMULATOR_CHANGE(String aCCUMULATOR_CHANGE) {
+        ACCUMULATOR_CHANGE = aCCUMULATOR_CHANGE;
+    }
+
+    public Accumulator(List<String> listValue) {
+        if (listValue.size() == FULL_ACCUMULATOR_FIELDS) {
+            this.ACCUMULATOR_ID = listValue.get(0);
+            this.ACCUMULATOR_NAME = listValue.get(1);
+            this.ACCUMULATOR = listValue.get(2);
+            this.ACCUMULATOR = listValue.get(3);
+        }
+    }
+
+    public static ArrayList<Accumulator> getlistAccumulator(String numberOfAccumulator, String accumulatorInfo) {
+        ArrayList<Accumulator> listAccumulator = new ArrayList<Accumulator>();
+        String[] accumulatorInfoArray = accumulatorInfo.split(SUB_FIELD_DELIMITER);
+        int countIndex = FULL_ACCUMULATOR_FIELDS;
+        int numberOfAccmulators = NumberUtils.toInt(numberOfAccumulator);
+
+        while (true) {
+            List<String> a = new ArrayList<String>();
+            for (int i = 0; i < countIndex; i++) {
+                a.add(accumulatorInfoArray[numberOfAccmulators * 4 + i]);
+            }
+
+            Accumulator newAccumulator = new Accumulator(a);
+            listAccumulator.add(newAccumulator);
+            numberOfAccmulators++;
+
+            if (numberOfAccmulators * FULL_ACCUMULATOR_FIELDS >= accumulatorInfoArray.length) {
+                break;
+            }
+
+        }
+        return listAccumulator;
+    }
+
+}

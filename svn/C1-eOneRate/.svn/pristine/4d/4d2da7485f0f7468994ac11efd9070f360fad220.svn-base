@@ -1,0 +1,63 @@
+package e1reformat.util;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import org.apache.log4j.Logger;
+
+import e1reformat.db.pool.DBConfig;
+
+public class DBUtils {
+
+    private static Logger logger = Logger.getLogger("DBUtils");
+
+    public boolean unusableIndex(DBConfig dbconfig, Connection conn) {
+        CallableStatement cas = null;
+        try {
+
+            String schema = dbconfig.getDb_schema();
+            String tempTable = dbconfig.getLoadTableName();
+
+            cas = conn.prepareCall(" CALL DISABLE_TEMP_INDEX(?,?)");
+            cas.setString(1, schema);
+            cas.setString(2, tempTable);
+            cas.executeUpdate();
+        } catch (SQLException sqle) {
+            logger.info(" unusableIndex Error " + sqle);
+            return false;
+        } finally {
+            try {
+                if (cas != null) {
+                    cas.close();
+                }
+            } catch (Exception e) {
+            }
+        }
+        return true;
+    }
+
+    public boolean rebuiltIndex(DBConfig dbconfig, Connection conn) {
+        CallableStatement cas = null;
+        try {
+            String schema = dbconfig.getDb_schema();
+            String tempTable = dbconfig.getLoadTableName();
+
+            cas = conn.prepareCall(" CALL ENABLE_TEMP_INDEX(?,?)");
+            cas.setString(1, schema);
+            cas.setString(2, tempTable);
+            cas.executeUpdate();
+        } catch (SQLException sqle) {
+            logger.info(" rebuiltIndex Error " + sqle);
+            return false;
+        } finally {
+            try {
+                if (cas != null) {
+                    cas.close();
+                }
+            } catch (Exception e) {
+            }
+        }
+        return true;
+    }
+}

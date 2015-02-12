@@ -8,7 +8,7 @@ BEGIN
    SYS.DBMS_SCHEDULER.CREATE_JOB (
       job_name          => 'VNP_DATA.UTIL_MOVE_TO_HOT_RATED_2',
       start_date        => SYSDATE, -- TO_TIMESTAMP_TZ('2014/12/10 09:11:33.000000 +07:00','yyyy/mm/dd hh24:mi:ss.ff tzr'),
-      repeat_interval   => 'FREQ=Hourly;INTERVAL=1;ByMinute=00',
+      repeat_interval   => 'FREQ=MINUTELY;INTERVAL=30;BySecond=00',
       end_date          => NULL,
       job_class         => 'DEFAULT_JOB_CLASS',
       job_type          => 'PLSQL_BLOCK',

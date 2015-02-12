@@ -1,0 +1,107 @@
+package e1reformat.entity.output;
+
+import java.util.Date;
+
+public class ChecksumErrorEntity {
+
+    private Integer cdrLogProcessId;
+    private String sourceFileUrl;
+    private Date startTime;
+    private String status;
+    private String isHandled;
+    private int totalCdr;
+    private int totalCdrProcessed;
+    private String start_rcd_seq;
+    private String end_rcd_seq;
+
+    public int getTotalCdrProcessed() {
+        return totalCdrProcessed;
+    }
+
+    public void setTotalCdrProcessed(int totalCdrProcessed) {
+        this.totalCdrProcessed = totalCdrProcessed;
+    }
+
+    public String getSourceFileUrl() {
+        return sourceFileUrl;
+    }
+
+    public void setSourceFileUrl(String sourceFileUrl) {
+        this.sourceFileUrl = sourceFileUrl;
+    }
+
+    public Date getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Date startTime) {
+        this.startTime = startTime;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getIsHandled() {
+        return isHandled;
+    }
+
+    public void setIsHandled(String isHandled) {
+        this.isHandled = isHandled;
+    }
+
+    public int getTotalCdr() {
+        return totalCdr;
+    }
+
+    public void setTotalCdr(int totalCdr) {
+        this.totalCdr = totalCdr;
+    }
+
+    public String getStart_rcd_seq() {
+        return start_rcd_seq;
+    }
+
+    public void setStart_rcd_seq(String start_rcd_seq) {
+        this.start_rcd_seq = start_rcd_seq;
+    }
+
+    public String getEnd_rcd_seq() {
+        return end_rcd_seq;
+    }
+
+    public void setEnd_rcd_seq(String end_rcd_seq) {
+        this.end_rcd_seq = end_rcd_seq;
+    }
+
+    public ChecksumErrorEntity(Integer cdrLogProcessId, String sourceFileUrl,
+            Date startTime, String status, String isHandled, int totalCdr,
+            String start_rcd_seq, String end_rcd_seq) {
+        super();
+        this.cdrLogProcessId = cdrLogProcessId;
+        this.sourceFileUrl = sourceFileUrl;
+        this.startTime = startTime;
+        this.status = status;
+        this.isHandled = isHandled;
+        this.totalCdr = totalCdr;
+        this.start_rcd_seq = start_rcd_seq;
+        this.end_rcd_seq = end_rcd_seq;
+    }
+
+    public ChecksumErrorEntity() {
+        super();
+    }
+
+    public Integer getCdrLogProcessId() {
+        return cdrLogProcessId;
+    }
+
+    public void setCdrLogProcessId(Integer cdrLogProcessId) {
+        this.cdrLogProcessId = cdrLogProcessId;
+    }
+
+}

@@ -1,0 +1,567 @@
+2014-11-18 08:30:59,530 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-18 08:30:59,532 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-18 08:30:59,540 ElcRateSocket.java            [ 155] INFO  - Listener on port <8086> is running...
+2014-11-18 08:30:59,631 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@//192.168.6.207:1521/eonerate>
+2014-11-18 08:31:00,668 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-18 08:31:00,671 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-18 08:31:00,672 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-18 08:31:00,677 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-18 08:31:00,679 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-18 08:31:00,692 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-18 08:31:00,716 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-18 08:31:00,717 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-18 08:31:00,717 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-18 08:31:00,717 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-18 08:31:00,719 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-18 08:31:00,722 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-18 08:31:00,780 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-18 08:31:00,780 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-18 08:31:00,780 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-18 08:31:00,781 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-18 08:31:00,782 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-18 08:31:00,784 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-18 08:31:00,789 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <70> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-18 08:31:00,790 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-18 08:31:00,790 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-18 08:31:00,791 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-18 08:31:00,792 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-18 08:31:00,792 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-18 08:31:00,793 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-18 08:31:00,793 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-18 08:31:00,793 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 122ms.
+2014-11-18 08:31:00,797 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformation> ***
+2014-11-18 08:31:00,805 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformation>
+2014-11-18 08:31:00,805 TransactionManager.java       [ 360] INFO  - Request Start for Transaction manager.
+2014-11-18 08:31:00,806 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-18 08:31:15,833 TransactionManager.java       [ 228] INFO  - Opened transaction <1> for pipeline <OrpTransformation>
+2014-11-18 08:31:15,833 TransactionManager.java       [ 229] INFO  - Opened transaction <1> for pipeline <OrpTransformation>
+2014-11-18 08:31:15,834 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <TAP_VOICE.0001.20141114153930.txt> for transaction <1>
+2014-11-18 08:31:15,859 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <9> events in <0> ms
+2014-11-18 08:31:15,861 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <9> events in <2> ms
+2014-11-18 08:31:15,863 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <9> events in <2> ms
+2014-11-18 08:31:15,872 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <9> events from a batch of <9> events in <8> ms
+2014-11-18 08:31:15,874 TransactionManager.java       [ 265] INFO  - Transaction <1> closed
+2014-11-18 08:31:15,874 TransactionManager.java       [ 266] INFO  - Transaction <1> closed
+2014-11-18 08:31:15,874 TransactionManager.java       [ 267] INFO  - Statistics: Records  <7>
+2014-11-18 08:31:15,874 TransactionManager.java       [ 268] INFO  -             Duration <42> ms
+2014-11-18 08:31:15,874 TransactionManager.java       [ 270] INFO  -             Speed    <166> records /sec
+2014-11-18 08:31:15,960 Pipeline.java                 [1287] ERROR - Exception thrown in pipeline <OrpTransformation>, see Error Log.
+2014-11-18 08:31:15,961 Pipeline.java                 [1296] ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:31:15,972 Pipeline.java                 [1297] ERROR - java.lang.NullPointerException
+2014-11-18 08:31:15,972 Pipeline.java                 [1296] ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:31:15,974 Pipeline.java                 [1297] ERROR - java.lang.NullPointerException
+2014-11-18 08:31:15,974 Pipeline.java                 [1296] ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:31:15,975 Pipeline.java                 [1297] ERROR - java.lang.NullPointerException
+2014-11-18 08:31:15,975 Pipeline.java                 [1296] ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:31:15,977 Pipeline.java                 [1297] ERROR - java.lang.NullPointerException
+2014-11-18 08:31:15,977 Pipeline.java                 [1296] ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:31:15,978 Pipeline.java                 [1297] ERROR - java.lang.NullPointerException
+2014-11-18 08:31:15,978 Pipeline.java                 [1296] ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:31:15,979 Pipeline.java                 [1297] ERROR - java.lang.NullPointerException
+2014-11-18 08:31:15,979 Pipeline.java                 [1296] ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:31:15,989 Pipeline.java                 [1297] ERROR - java.lang.NullPointerException
+2014-11-18 08:31:15,990 Pipeline.java                 [1308] ERROR - Pipeline <OrpTransformation> configured to shut down on exception. Shutting down.
+2014-11-18 08:31:16,819 ElcRate.java                  [1108] INFO  - Shutdown command received. Shutting down pipelines as soon as possible.
+2014-11-18 08:31:16,820 Pipeline.java                 [1074] WARN  - Pipeline <OrpTransformation> received Stop Command. Will exit after the current Transaction
+2014-11-18 08:31:17,821 ElcRate.java                  [1108] INFO  - Shutdown command received. Shutting down pipelines as soon as possible.
+2014-11-18 08:31:17,822 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-18 08:31:17,824 ElcRateSocket.java            [ 191] INFO  - Closing <Listener>
+2014-11-18 08:31:17,928 ElcRate.java                  [1108] INFO  - Shutdown command received. Shutting down pipelines as soon as possible.
+2014-11-18 08:31:17,928 ElcRate.java                  [1138] INFO  - Shutdown command called
+2014-11-18 08:50:10,300 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-18 08:50:10,302 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-18 08:50:10,311 ElcRateSocket.java            [ 155] INFO  - Listener on port <8086> is running...
+2014-11-18 08:50:10,446 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@//192.168.6.207:1521/eonerate>
+2014-11-18 08:50:11,545 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-18 08:50:11,548 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-18 08:50:11,548 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-18 08:50:11,553 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-18 08:50:11,554 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-18 08:50:11,566 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-18 08:50:11,588 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-18 08:50:11,589 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-18 08:50:11,589 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-18 08:50:11,590 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-18 08:50:11,591 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-18 08:50:11,594 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-18 08:50:11,680 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-18 08:50:11,680 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-18 08:50:11,681 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-18 08:50:11,682 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-18 08:50:11,683 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-18 08:50:11,686 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-18 08:50:11,695 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <70> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-18 08:50:11,695 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-18 08:50:11,696 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-18 08:50:11,696 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-18 08:50:11,696 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-18 08:50:11,696 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-18 08:50:11,697 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-18 08:50:11,697 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-18 08:50:11,697 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 149ms.
+2014-11-18 08:50:11,700 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformation> ***
+2014-11-18 08:50:11,706 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformation>
+2014-11-18 08:50:11,706 TransactionManager.java       [ 360] INFO  - Request Start for Transaction manager.
+2014-11-18 08:50:11,707 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-18 08:50:26,731 TransactionManager.java       [ 228] INFO  - Opened transaction <1> for pipeline <OrpTransformation>
+2014-11-18 08:50:26,731 TransactionManager.java       [ 229] INFO  - Opened transaction <1> for pipeline <OrpTransformation>
+2014-11-18 08:50:26,732 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <TAP_VOICE.0001.20141114153930.txt> for transaction <1>
+2014-11-18 08:50:26,754 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <9> events in <0> ms
+2014-11-18 08:50:26,755 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <9> events in <1> ms
+2014-11-18 08:50:26,757 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <9> events in <2> ms
+2014-11-18 08:50:26,760 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <9> events from a batch of <9> events in <3> ms
+2014-11-18 08:50:26,761 TransactionManager.java       [ 265] INFO  - Transaction <1> closed
+2014-11-18 08:50:26,761 TransactionManager.java       [ 266] INFO  - Transaction <1> closed
+2014-11-18 08:50:26,761 TransactionManager.java       [ 267] INFO  - Statistics: Records  <7>
+2014-11-18 08:50:26,761 TransactionManager.java       [ 268] INFO  -             Duration <31> ms
+2014-11-18 08:50:26,762 TransactionManager.java       [ 270] INFO  -             Speed    <225> records /sec
+2014-11-18 08:50:26,855 Pipeline.java                 [1287] ERROR - Exception thrown in pipeline <OrpTransformation>, see Error Log.
+2014-11-18 08:50:26,856 Pipeline.java                 [1296] ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:50:26,860 Pipeline.java                 [1297] ERROR - java.lang.NullPointerException
+2014-11-18 08:50:26,860 Pipeline.java                 [1296] ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:50:26,860 Pipeline.java                 [1297] ERROR - java.lang.NullPointerException
+2014-11-18 08:50:26,860 Pipeline.java                 [1296] ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:50:26,861 Pipeline.java                 [1297] ERROR - java.lang.NullPointerException
+2014-11-18 08:50:26,861 Pipeline.java                 [1296] ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:50:26,861 Pipeline.java                 [1297] ERROR - java.lang.NullPointerException
+2014-11-18 08:50:26,861 Pipeline.java                 [1296] ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:50:26,862 Pipeline.java                 [1297] ERROR - java.lang.NullPointerException
+2014-11-18 08:50:26,862 Pipeline.java                 [1296] ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:50:26,862 Pipeline.java                 [1297] ERROR - java.lang.NullPointerException
+2014-11-18 08:50:26,862 Pipeline.java                 [1296] ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:50:26,863 Pipeline.java                 [1297] ERROR - java.lang.NullPointerException
+2014-11-18 08:50:26,863 Pipeline.java                 [1308] ERROR - Pipeline <OrpTransformation> configured to shut down on exception. Shutting down.
+2014-11-18 08:50:27,719 ElcRate.java                  [1108] INFO  - Shutdown command received. Shutting down pipelines as soon as possible.
+2014-11-18 08:50:27,721 Pipeline.java                 [1074] WARN  - Pipeline <OrpTransformation> received Stop Command. Will exit after the current Transaction
+2014-11-18 08:50:28,722 ElcRate.java                  [1108] INFO  - Shutdown command received. Shutting down pipelines as soon as possible.
+2014-11-18 08:50:28,722 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-18 08:50:28,725 ElcRateSocket.java            [ 191] INFO  - Closing <Listener>
+2014-11-18 08:50:28,825 ElcRate.java                  [1108] INFO  - Shutdown command received. Shutting down pipelines as soon as possible.
+2014-11-18 08:50:28,826 ElcRate.java                  [1138] INFO  - Shutdown command called
+2014-11-18 08:59:02,495 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-18 08:59:02,499 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-18 08:59:02,557 ElcRateSocket.java            [ 155] INFO  - Listener on port <8086> is running...
+2014-11-18 08:59:02,682 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@//192.168.6.207:1521/eonerate>
+2014-11-18 08:59:03,871 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-18 08:59:03,875 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-18 08:59:03,876 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-18 08:59:03,882 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-18 08:59:03,883 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-18 08:59:03,899 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-18 08:59:03,929 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-18 08:59:03,930 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-18 08:59:03,930 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-18 08:59:03,931 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-18 08:59:03,931 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-18 08:59:03,934 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-18 08:59:04,011 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-18 08:59:04,012 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-18 08:59:04,013 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-18 08:59:04,016 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-18 08:59:04,018 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-18 08:59:04,021 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-18 08:59:04,033 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <70> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-18 08:59:04,033 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-18 08:59:04,034 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-18 08:59:04,034 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-18 08:59:04,034 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-18 08:59:04,034 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-18 08:59:04,035 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-18 08:59:04,035 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-18 08:59:04,036 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 161ms.
+2014-11-18 08:59:04,041 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformation> ***
+2014-11-18 08:59:04,050 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformation>
+2014-11-18 08:59:04,050 TransactionManager.java       [ 360] INFO  - Request Start for Transaction manager.
+2014-11-18 08:59:04,051 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-18 08:59:04,083 TransactionManager.java       [ 228] INFO  - Opened transaction <1> for pipeline <OrpTransformation>
+2014-11-18 08:59:04,083 TransactionManager.java       [ 229] INFO  - Opened transaction <1> for pipeline <OrpTransformation>
+2014-11-18 08:59:04,084 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <TAP_VOICE.0001.20141114153930.txt> for transaction <1>
+2014-11-18 08:59:04,099 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <9> events in <0> ms
+2014-11-18 08:59:04,101 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <9> events in <1> ms
+2014-11-18 08:59:04,103 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <9> events in <2> ms
+2014-11-18 08:59:04,108 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <9> events from a batch of <9> events in <5> ms
+2014-11-18 08:59:04,109 TransactionManager.java       [ 265] INFO  - Transaction <1> closed
+2014-11-18 08:59:04,109 TransactionManager.java       [ 266] INFO  - Transaction <1> closed
+2014-11-18 08:59:04,110 TransactionManager.java       [ 267] INFO  - Statistics: Records  <7>
+2014-11-18 08:59:04,110 TransactionManager.java       [ 268] INFO  -             Duration <26> ms
+2014-11-18 08:59:04,110 TransactionManager.java       [ 270] INFO  -             Speed    <269> records /sec
+2014-11-18 08:59:04,199 Pipeline.java                 [1287] ERROR - Exception thrown in pipeline <OrpTransformation>, see Error Log.
+2014-11-18 08:59:04,201 Pipeline.java                 [1296] ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:59:04,209 Pipeline.java                 [1297] ERROR - java.lang.NullPointerException
+2014-11-18 08:59:04,209 Pipeline.java                 [1296] ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:59:04,210 Pipeline.java                 [1297] ERROR - java.lang.NullPointerException
+2014-11-18 08:59:04,210 Pipeline.java                 [1296] ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:59:04,210 Pipeline.java                 [1297] ERROR - java.lang.NullPointerException
+2014-11-18 08:59:04,210 Pipeline.java                 [1296] ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:59:04,211 Pipeline.java                 [1297] ERROR - java.lang.NullPointerException
+2014-11-18 08:59:04,211 Pipeline.java                 [1296] ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:59:04,212 Pipeline.java                 [1297] ERROR - java.lang.NullPointerException
+2014-11-18 08:59:04,212 Pipeline.java                 [1296] ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:59:04,212 Pipeline.java                 [1297] ERROR - java.lang.NullPointerException
+2014-11-18 08:59:04,212 Pipeline.java                 [1296] ERROR - Processing Exception caught.
+ElcRate.exception.ProcessingException: java.lang.NullPointerException
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:318)
+	at ElcRate.adapter.AbstractOutputAdapter.write(AbstractOutputAdapter.java:288)
+	at ElcRate.adapter.AbstractOutputAdapter.run(AbstractOutputAdapter.java:191)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: java.lang.NullPointerException
+	at java.io.Writer.write(Writer.java:157)
+	at ElcRate.adapter.file.FlatFileOutputAdapter.prepValidRecord(FlatFileOutputAdapter.java:309)
+	... 3 more
+2014-11-18 08:59:04,213 Pipeline.java                 [1297] ERROR - java.lang.NullPointerException
+2014-11-18 08:59:04,213 Pipeline.java                 [1308] ERROR - Pipeline <OrpTransformation> configured to shut down on exception. Shutting down.
+2014-11-18 08:59:05,064 ElcRate.java                  [1108] INFO  - Shutdown command received. Shutting down pipelines as soon as possible.
+2014-11-18 08:59:05,065 Pipeline.java                 [1074] WARN  - Pipeline <OrpTransformation> received Stop Command. Will exit after the current Transaction
+2014-11-18 08:59:06,066 ElcRate.java                  [1108] INFO  - Shutdown command received. Shutting down pipelines as soon as possible.
+2014-11-18 08:59:06,066 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-18 08:59:06,069 ElcRateSocket.java            [ 191] INFO  - Closing <Listener>
+2014-11-18 08:59:06,172 ElcRate.java                  [1108] INFO  - Shutdown command received. Shutting down pipelines as soon as possible.
+2014-11-18 08:59:06,173 ElcRate.java                  [1138] INFO  - Shutdown command called
+2014-11-18 09:00:13,544 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-18 09:00:13,547 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-18 09:00:13,557 ElcRateSocket.java            [ 155] INFO  - Listener on port <8086> is running...
+2014-11-18 09:00:13,684 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@//192.168.6.207:1521/eonerate>
+2014-11-18 09:00:14,843 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-18 09:00:14,847 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-18 09:00:14,848 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-18 09:00:14,852 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-18 09:00:14,854 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-18 09:00:14,868 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-18 09:00:14,891 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-18 09:00:14,892 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-18 09:00:14,892 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-18 09:00:14,893 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-18 09:00:14,895 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-18 09:00:14,898 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-18 09:00:14,981 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-18 09:00:14,981 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-18 09:00:14,982 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-18 09:00:14,982 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-18 09:00:14,983 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-18 09:00:14,984 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-18 09:00:14,995 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <70> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-18 09:00:14,995 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-18 09:00:14,996 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-18 09:00:14,996 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-18 09:00:14,997 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-18 09:00:14,997 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-18 09:00:14,997 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-18 09:00:14,997 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-18 09:00:14,997 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 150ms.
+2014-11-18 09:00:15,000 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformation> ***
+2014-11-18 09:00:15,007 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformation>
+2014-11-18 09:00:15,007 TransactionManager.java       [ 360] INFO  - Request Start for Transaction manager.
+2014-11-18 09:00:15,008 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-18 09:00:35,035 TransactionManager.java       [ 228] INFO  - Opened transaction <1> for pipeline <OrpTransformation>
+2014-11-18 09:00:35,035 TransactionManager.java       [ 229] INFO  - Opened transaction <1> for pipeline <OrpTransformation>
+2014-11-18 09:00:35,036 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <TAP_VOICE.0001.20141114153930.txt> for transaction <1>
+2014-11-18 09:00:35,068 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <9> events in <0> ms
+2014-11-18 09:00:35,069 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <9> events in <1> ms
+2014-11-18 09:00:35,072 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <9> events in <3> ms
+2014-11-18 09:19:42,508 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-18 09:19:42,510 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-18 09:19:42,525 ElcRate.java                  [ 655] ERROR - Exception thrown in module <Framework>
+2014-11-18 09:19:42,526 ElcRate.java                  [ 705] FATAL - InitializationException thrown. Message <ElcRateSocket.getServerSocket(): Could not listen on port <8086>. Message = <Address already in use: JVM_Bind>. Aborting.>
+ElcRate.exception.InitializationException: ElcRateSocket.getServerSocket(): Could not listen on port <8086>. Message = <Address already in use: JVM_Bind>. Aborting.
+	at ElcRate.configurationmanager.ElcRateSocket.<init>(ElcRateSocket.java:143)
+	at ElcRate.configurationmanager.EventHandler.init(EventHandler.java:164)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-11-18 09:19:42,532 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <ElcRateSocket.getServerSocket(): Could not listen on port <8086>. Message = <Address already in use: JVM_Bind>. Aborting.>
+2014-11-18 09:19:42,532 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-18 09:20:28,976 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-18 09:20:28,980 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-18 09:20:28,995 ElcRate.java                  [ 655] ERROR - Exception thrown in module <Framework>
+2014-11-18 09:20:28,996 ElcRate.java                  [ 705] FATAL - InitializationException thrown. Message <ElcRateSocket.getServerSocket(): Could not listen on port <8086>. Message = <Address already in use: JVM_Bind>. Aborting.>
+ElcRate.exception.InitializationException: ElcRateSocket.getServerSocket(): Could not listen on port <8086>. Message = <Address already in use: JVM_Bind>. Aborting.
+	at ElcRate.configurationmanager.ElcRateSocket.<init>(ElcRateSocket.java:143)
+	at ElcRate.configurationmanager.EventHandler.init(EventHandler.java:164)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-11-18 09:20:29,013 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <ElcRateSocket.getServerSocket(): Could not listen on port <8086>. Message = <Address already in use: JVM_Bind>. Aborting.>
+2014-11-18 09:20:29,013 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-18 09:21:33,842 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-18 09:21:33,844 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-18 09:21:33,860 ElcRate.java                  [ 655] ERROR - Exception thrown in module <Framework>
+2014-11-18 09:21:33,860 ElcRate.java                  [ 705] FATAL - InitializationException thrown. Message <ElcRateSocket.getServerSocket(): Could not listen on port <8086>. Message = <Address already in use: JVM_Bind>. Aborting.>
+ElcRate.exception.InitializationException: ElcRateSocket.getServerSocket(): Could not listen on port <8086>. Message = <Address already in use: JVM_Bind>. Aborting.
+	at ElcRate.configurationmanager.ElcRateSocket.<init>(ElcRateSocket.java:143)
+	at ElcRate.configurationmanager.EventHandler.init(EventHandler.java:164)
+	at ElcRate.ElcRate.loadResources(ElcRate.java:1232)
+	at ElcRate.ElcRate.startupFramework(ElcRate.java:611)
+	at ElcRate.ElcRate.createApplication(ElcRate.java:472)
+	at ElcRate.ElcRate.main(ElcRate.java:289)
+2014-11-18 09:21:33,866 ElcRate.java                  [ 721] FATAL - InitializationException thrown. Message <ElcRateSocket.getServerSocket(): Could not listen on port <8086>. Message = <Address already in use: JVM_Bind>. Aborting.>
+2014-11-18 09:21:33,867 ElcRate.java                  [ 535] INFO  - :::: ElcRate Stopped ::::
+2014-11-18 09:21:46,309 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-18 09:21:46,312 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-18 09:21:46,323 ElcRateSocket.java            [ 155] INFO  - Listener on port <8086> is running...
+2014-11-18 09:21:46,464 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@//192.168.6.207:1521/eonerate>
+2014-11-18 09:21:47,658 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-18 09:21:47,663 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-18 09:21:47,664 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-18 09:21:47,669 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-18 09:21:47,670 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-18 09:21:47,685 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-18 09:21:47,713 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-18 09:21:47,713 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-18 09:21:47,714 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-18 09:21:47,714 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-18 09:21:47,716 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-18 09:21:47,719 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-18 09:21:47,806 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-18 09:21:47,806 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-18 09:21:47,807 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-18 09:21:47,807 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-18 09:21:47,808 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-18 09:21:47,809 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-18 09:21:47,817 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <70> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-18 09:21:47,818 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-18 09:21:47,818 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-18 09:21:47,818 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-18 09:21:47,818 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-18 09:21:47,818 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-18 09:21:47,819 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-18 09:21:47,819 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-18 09:21:47,819 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 156ms.
+2014-11-18 09:21:47,822 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformation> ***
+2014-11-18 09:21:47,831 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformation>
+2014-11-18 09:21:47,831 TransactionManager.java       [ 360] INFO  - Request Start for Transaction manager.
+2014-11-18 09:21:47,832 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-18 09:46:38,589 TransactionManager.java       [ 228] INFO  - Opened transaction <1> for pipeline <OrpTransformation>
+2014-11-18 09:46:38,589 TransactionManager.java       [ 229] INFO  - Opened transaction <1> for pipeline <OrpTransformation>
+2014-11-18 09:46:38,589 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <TAP_VOICE.0001.20141114153930.txt> for transaction <1>
+2014-11-18 09:46:38,612 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <9> events in <0> ms
+2014-11-18 09:46:38,617 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <9> events in <5> ms
+2014-11-18 09:46:38,630 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <9> events in <13> ms
+2014-11-18 13:29:49,703 ElcRate.java                  [ 592] INFO  - :::: ElcRate Started ::::
+2014-11-18 13:29:49,705 ElcRate.java                  [ 603] INFO  - ElcRate Build ElcRate V1.5.2.1, Build 001 (20140508)
+2014-11-18 13:29:49,714 ElcRateSocket.java            [ 155] INFO  - Listener on port <8086> is running...
+2014-11-18 13:29:49,810 BCPDataSource.java            [ 206] INFO  - Creating DataSource <eOneRateDB> using driver <oracle.jdbc.driver.OracleDriver> from URL <jdbc:oracle:thin:@//192.168.6.207:1521/eonerate>
+2014-11-18 13:29:50,828 DataSourceFactory.java        [ 190] INFO  - Successfully created DataSource <eOneRateDB>
+2014-11-18 13:29:50,832 CacheFactory.java             [ 173] INFO  - Starting CacheFactory initialisation
+2014-11-18 13:29:50,833 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <NormalizeCache>...
+2014-11-18 13:29:50,839 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <NormalizeCache>
+2014-11-18 13:29:50,840 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <NormalizeCache>
+2014-11-18 13:29:50,853 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <3> and Result = <1>
+2014-11-18 13:29:50,879 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <1> configuration lines loaded for <NormalizeCache> from <eOneRateDB>
+2014-11-18 13:29:50,879 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <NormalizeCache>...
+2014-11-18 13:29:50,881 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <RoamingCache>...
+2014-11-18 13:29:50,881 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <RoamingCache>
+2014-11-18 13:29:50,882 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <RoamingCache>
+2014-11-18 13:29:50,884 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <1> and Result = <1>
+2014-11-18 13:29:50,970 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <546> configuration lines loaded for <RoamingCache> from <eOneRateDB>
+2014-11-18 13:29:50,971 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <RoamingCache>...
+2014-11-18 13:29:50,971 CacheFactory.java             [ 222] INFO  - Loading Cacheable Class <GPRSCache>...
+2014-11-18 13:29:50,972 AbstractSyncLoaderCache.java  [ 214] INFO  - Starting cache loading for <GPRSCache>
+2014-11-18 13:29:50,972 RegexMatchCache.java          [ 987] INFO  - Starting Regex Match Cache Loading from DB for <GPRSCache>
+2014-11-18 13:29:50,974 RegexMatchCache.java          [1042] INFO  - Using default key factor for regex cache <eOneRateDB>. Assuming Key = <2> and Result = <1>
+2014-11-18 13:29:50,981 RegexMatchCache.java          [1132] INFO  - Regex Map Data Loading completed. <70> configuration lines loaded for <GPRSCache> from <eOneRateDB>
+2014-11-18 13:29:50,981 CacheFactory.java             [ 246] INFO  - Loaded  Cacheable Class <GPRSCache>...
+2014-11-18 13:29:50,982 CacheFactory.java             [ 411] INFO  - Cache <NormalizeCache> is set to auto reload with a period of <0>
+2014-11-18 13:29:50,982 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <NormalizeCache>
+2014-11-18 13:29:50,982 CacheFactory.java             [ 411] INFO  - Cache <RoamingCache> is set to auto reload with a period of <0>
+2014-11-18 13:29:50,982 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <RoamingCache>
+2014-11-18 13:29:50,982 CacheFactory.java             [ 411] INFO  - Cache <GPRSCache> is set to auto reload with a period of <0>
+2014-11-18 13:29:50,983 CacheFactory.java             [ 431] INFO  - Created Cacheable Class <GPRSCache>
+2014-11-18 13:29:50,983 CacheFactory.java             [ 479] INFO  - CacheFactory initialised in 151ms.
+2014-11-18 13:29:50,986 Pipeline.java                 [ 316] INFO  - *** Constructing Batch pipeline <OrpTransformation> ***
+2014-11-18 13:29:50,994 TransactionManager.java       [ 172] INFO  - Starting TransactionManager initialisation for pipeline <OrpTransformation>
+2014-11-18 13:29:50,994 TransactionManager.java       [ 360] INFO  - Request Start for Transaction manager.
+2014-11-18 13:29:50,995 TransactionManager.java       [ 206] INFO  - TransactionManager initialised
+2014-11-18 13:30:01,023 TransactionManager.java       [ 228] INFO  - Opened transaction <1> for pipeline <OrpTransformation>
+2014-11-18 13:30:01,023 TransactionManager.java       [ 229] INFO  - Opened transaction <1> for pipeline <OrpTransformation>
+2014-11-18 13:30:01,023 FlatFileInputAdapter.java     [1202] INFO  - Input File name is <TAP_VOICE.0001.20141114153930.txt> for transaction <1>
+2014-11-18 13:30:01,035 AbstractPlugIn.java           [ 451] INFO  - Plugin <NormalizationBNumber.Inst-0> processed <9> events in <1> ms
+2014-11-18 13:30:01,036 AbstractPlugIn.java           [ 451] INFO  - Plugin <GPRSTranslation.Inst-0> processed <9> events in <1> ms
+2014-11-18 13:30:01,038 AbstractPlugIn.java           [ 451] INFO  - Plugin <RoamingTranslation.Inst-0> processed <9> events in <2> ms
+2014-11-18 13:30:01,050 AbstractOutputAdapter.java    [ 457] INFO  - Output <TPOutAdapterNat> persisted <9> events from a batch of <9> events in <12> ms
+2014-11-18 13:30:01,051 TransactionManager.java       [ 265] INFO  - Transaction <1> closed
+2014-11-18 13:30:01,051 TransactionManager.java       [ 266] INFO  - Transaction <1> closed
+2014-11-18 13:30:01,051 TransactionManager.java       [ 267] INFO  - Statistics: Records  <7>
+2014-11-18 13:30:01,051 TransactionManager.java       [ 268] INFO  -             Duration <27> ms
+2014-11-18 13:30:01,051 TransactionManager.java       [ 270] INFO  -             Speed    <259> records /sec

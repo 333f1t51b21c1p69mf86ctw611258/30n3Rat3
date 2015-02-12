@@ -1,0 +1,127 @@
+package e1reformat.db.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+
+import e1reformat.db.pool.DBConfig;
+import e1reformat.db.pool.DBPool;
+import e1reformat.entity.enrich.MapSummaryReport;
+import e1reformat.entity.output.SummaryReportObject;
+import e1reformat.util.DateUtils;
+import e1reformat.util.IConstant;
+
+public class SummaryReportDAO {
+
+    private static DBConfig dbconfig = new DBConfig();
+    static int SUCCESS = 0;
+    static int ERROR = -1;
+
+    public static SummaryReportObject getListSummaryReport(Date fromDate, Date toDate) {
+        ArrayList<String> listStatus = new ArrayList<String>();
+        Integer totalFile = 0;
+        Integer totalFileInProcess = 0;
+        Integer totalSuccessFile = 0;
+        Integer totalErrorFile = 0;
+        Integer totalChecksumError = 0;
+        Integer totalContentError = 0;
+        SummaryReportObject summaryReportObject = new SummaryReportObject();
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(toDate);
+            cal.add(Calendar.DATE, 1);
+            Date _toDate = cal.getTime();
+
+            conn = getConnection();
+            if (conn != null) {
+                StringBuilder query = new StringBuilder("");
+                query.append("SELECT a.status ");
+                query.append("FROM "+dbconfig.getDb_schema()+"CDR_LOG_PROCESS a ");
+                query.append("WHERE a.start_time >= to_date( ? ,'DD/MM/YYYY')");
+                query.append("AND a.start_time <= to_date( ? ,'DD/MM/YYYY')");
+
+                pstmt = conn.prepareStatement(query.toString());
+                pstmt.setString(1, DateUtils.getDateStringInformat(fromDate, DateUtils.ddMMYYYY_FULL_SLASH));
+                pstmt.setString(2, DateUtils.getDateStringInformat(_toDate, DateUtils.ddMMYYYY_FULL_SLASH));
+                rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    String status = rs.getString("status");
+                    listStatus.add(status);
+                }
+            }
+
+            totalFile = listStatus.size();
+
+            for (String s : listStatus) {
+                Integer status = new Integer(s);
+
+                if ((status.equals(IConstant.CDR_PROCESSING_STATUS.LOADED)) || (status.equals(IConstant.CDR_PROCESSING_STATUS.CONVERTED))) {
+                    totalFileInProcess++;
+                }
+
+                if (status.equals(IConstant.CDR_PROCESSING_STATUS.FINISHED)) {
+                    totalSuccessFile++;
+                }
+
+                if (status.equals(IConstant.REFORMATING_ERROR_CODE.INVALID_CHECKSUM_VALUE)) {
+                    totalChecksumError++;
+                }
+
+                if (status.equals(IConstant.REFORMATING_ERROR_CODE.EXCEPTION)
+                        || (status.equals(IConstant.REFORMATING_ERROR_CODE.INVALID_HEADER_CONTENT))) {
+                    totalContentError++;
+                }
+
+                if ((status.equals(IConstant.REFORMATING_ERROR_CODE.INVALID_CHECKSUM_VALUE))
+                        || (status.equals(IConstant.REFORMATING_ERROR_CODE.FAIL))
+                        || (status.equals(IConstant.REFORMATING_ERROR_CODE.EXCEPTION))
+                        || (status.equals(IConstant.REFORMATING_ERROR_CODE.INVALID_HEADER_CONTENT))) {
+                    totalErrorFile++;
+                }
+            }
+
+            summaryReportObject = new SummaryReportObject(totalFile, totalFileInProcess, totalSuccessFile, totalErrorFile, totalChecksumError, totalContentError);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (Exception ex) {
+                ex.fillInStackTrace();
+            }
+        }
+
+        releaseConnection(conn, pstmt);
+        return summaryReportObject;
+    }
+
+    public static ArrayList<MapSummaryReport> getSearchSummaryReport(String fromDate, String toDate, Connection conn) {
+        ArrayList<MapSummaryReport> searchResult = new ArrayList<MapSummaryReport>();
+        return searchResult;
+    }
+
+    public static Connection getConnection() throws SQLException {
+        return DBPool.getConnection(dbconfig);
+    }
+
+    public static void releaseConnection(Connection conn, PreparedStatement preStmt) {
+        DBPool.releaseConnection(conn, preStmt);
+    }
+
+}

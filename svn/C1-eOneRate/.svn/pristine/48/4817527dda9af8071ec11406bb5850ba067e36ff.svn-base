@@ -1,0 +1,65 @@
+package e1reformat.entity.enrich;
+
+public class FileReport {
+
+    private Integer fileProcessInCycle;
+    private Integer fileNotError;
+    private Integer fileCheckSumError;
+    private Integer fileContentError;
+    private Integer betweenMissingFileError;
+
+    public Integer getFileProcessInCycle() {
+        return fileProcessInCycle;
+    }
+
+    public Integer getFileNotError() {
+        return fileNotError;
+    }
+
+    public Integer getFileCheckSumError() {
+        return fileCheckSumError;
+    }
+
+    public Integer getFileContentError() {
+        return fileContentError;
+    }
+
+    public Integer getBetweenMissingFileError() {
+        return betweenMissingFileError;
+    }
+
+    public void setFileProcessInCycle(Integer fileProcessInCycle) {
+        this.fileProcessInCycle = fileProcessInCycle;
+    }
+
+    public void setFileNotError(Integer fileNotError) {
+        this.fileNotError = fileNotError;
+    }
+
+    public void setFileCheckSumError(Integer fileCheckSumError) {
+        this.fileCheckSumError = fileCheckSumError;
+    }
+
+    public void setFileContentError(Integer fileContentError) {
+        this.fileContentError = fileContentError;
+    }
+
+    public void setBetweenMissingFileError(Integer betweenMissingFileError) {
+        this.betweenMissingFileError = betweenMissingFileError;
+    }
+
+    public FileReport(Integer fileProcessInCycle, Integer fileNotError, Integer fileCheckSumError, Integer fileContentError, Integer betweenMissingFileError) {
+        super();
+
+        this.fileProcessInCycle = fileProcessInCycle;
+        this.fileNotError = fileNotError;
+        this.fileCheckSumError = fileCheckSumError;
+        this.fileContentError = fileContentError;
+        this.betweenMissingFileError = betweenMissingFileError;
+    }
+
+    public FileReport() {
+        super();
+    }
+
+}

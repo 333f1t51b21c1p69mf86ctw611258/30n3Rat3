@@ -1,0 +1,46 @@
+DROP TABLE VNP_DATA.HOT_RC_C1RT_TMP CASCADE CONSTRAINTS;
+
+CREATE TABLE VNP_DATA.HOT_RC_C1RT_TMP
+(
+  PARENT_SUBSCRIBER_NO  NUMBER,
+  MSISDN                VARCHAR2(20 BYTE)       NOT NULL,
+  RC_TERM_INST_ID       NUMBER,
+  OFFER_ID              NUMBER                  NOT NULL,
+  FROM_DATE             DATE,
+  TO_DATE               DATE,
+  NUM_DAYS              NUMBER,
+  CYCLE_FROM_DATE       DATE,
+  CYCLE_TO_DATE         DATE,
+  APPLY_DATE            DATE,
+  CREATE_DATE           DATE,
+  RC_INST_START_DATE    DATE,
+  PCM_ACTIVE_DT         DATE,
+  EXPECTED_CUTOFF_DT    DATE,
+  AMOUNT                NUMBER                  NOT NULL,
+  RC_TERM_ID            NUMBER,
+  MODIFIED_DATE         DATE                    DEFAULT CURRENT_DATE          NOT NULL,
+  FILE_NAME             VARCHAR2(100 BYTE),
+  SHORT_NAME            VARCHAR2(20 BYTE)
+)
+TABLESPACE VNP_DATA
+RESULT_CACHE (MODE DEFAULT)
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MAXSIZE          UNLIMITED
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+            FLASH_CACHE      DEFAULT
+            CELL_FLASH_CACHE DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING;

@@ -1,0 +1,412 @@
+package e1reformat.entity.enrich;
+
+/**
+ *
+ * @author thaiha
+ */
+public class HotRatedCdr {
+
+    private String map_id;
+    private String a_number;
+    private String cdr_type;
+    private String created_time;
+    private String cdr_start_time;
+    private String data_part;
+    private String duration;
+    private String total_usage;
+    private String b_number;
+    private String b_zone;
+    private String nw_group;
+    private String service_fee;
+    private String service_fee_id;
+    private String charge_fee;
+    private String charge_fee_id;
+    private String lac;
+    private String cell_id;
+    private String subcriber_unbill;
+    private String bu_id;
+    private String old_bu_id;
+    private String offer_cost;
+    private String offer_free_block;
+    private String internal_cost;
+    private String internal_free_block;
+    private String dial_digit;
+    private String cdr_record_header_id;
+    private String cdr_sequence_number;
+    private String location_no;
+    private String msc_id;
+    private String unit_type_id;
+    private String primary_offer_id;
+    private String discount_item_id;
+    private String balance_change;
+    private String rerate_flag;
+    private String aut_final_id;
+    private String tariff_plan_id;
+    private String error_code;
+
+    public String getError_code() {
+        return error_code;
+    }
+
+    public void setError_code(String error_code) {
+        this.error_code = error_code;
+    }
+
+    public String getMap_id() {
+        return map_id;
+    }
+
+    public void setMap_id(String map_id) {
+        this.map_id = map_id;
+    }
+
+    public String getA_number() {
+        return a_number;
+    }
+
+    public void setA_number(String a_number) {
+        this.a_number = a_number;
+    }
+
+    public String getCdr_type() {
+        return cdr_type;
+    }
+
+    public void setCdr_type(String cdr_type) {
+        this.cdr_type = cdr_type;
+    }
+
+    public String getCreated_time() {
+        return created_time;
+    }
+
+    public void setCreated_time(String created_time) {
+        this.created_time = created_time;
+    }
+
+    public String getCdr_start_time() {
+        return cdr_start_time;
+    }
+
+    public void setCdr_start_time(String cdr_start_time) {
+        this.cdr_start_time = cdr_start_time;
+    }
+
+    public String getData_part() {
+        return data_part;
+    }
+
+    public void setData_part(String data_part) {
+        this.data_part = data_part;
+    }
+
+    public String getDuration() {
+        return duration;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getTotal_usage() {
+        return total_usage;
+    }
+
+    public void setTotal_usage(String total_usage) {
+        this.total_usage = total_usage;
+    }
+
+    public String getB_number() {
+        return b_number;
+    }
+
+    public void setB_number(String b_number) {
+        this.b_number = b_number;
+    }
+
+    public String getB_zone() {
+        return b_zone;
+    }
+
+    public void setB_zone(String b_zone) {
+        this.b_zone = b_zone;
+    }
+
+    public String getNw_group() {
+        return nw_group;
+    }
+
+    public void setNw_group(String nw_group) {
+        this.nw_group = nw_group;
+    }
+
+    public String getService_fee() {
+        return service_fee;
+    }
+
+    public void setService_fee(String service_fee) {
+        this.service_fee = service_fee;
+    }
+
+    public String getService_fee_id() {
+        return service_fee_id;
+    }
+
+    public void setService_fee_id(String service_fee_id) {
+        this.service_fee_id = service_fee_id;
+    }
+
+    public String getCharge_fee() {
+        return charge_fee;
+    }
+
+    public void setCharge_fee(String charge_fee) {
+        this.charge_fee = charge_fee;
+    }
+
+    public String getCharge_fee_id() {
+        return charge_fee_id;
+    }
+
+    public void setCharge_fee_id(String charge_fee_id) {
+        this.charge_fee_id = charge_fee_id;
+    }
+
+    public String getLac() {
+        return lac;
+    }
+
+    public void setLac(String lac) {
+        this.lac = lac;
+    }
+
+    public String getCell_id() {
+        return cell_id;
+    }
+
+    public void setCell_id(String cell_id) {
+        this.cell_id = cell_id;
+    }
+
+    public String getSubcriber_unbill() {
+        return subcriber_unbill;
+    }
+
+    public void setSubcriber_unbill(String subcriber_unbill) {
+        this.subcriber_unbill = subcriber_unbill;
+    }
+
+    public String getBu_id() {
+        return bu_id;
+    }
+
+    public void setBu_id(String bu_id) {
+        this.bu_id = bu_id;
+    }
+
+    public String getOld_bu_id() {
+        return old_bu_id;
+    }
+
+    public void setOld_bu_id(String old_bu_id) {
+        this.old_bu_id = old_bu_id;
+    }
+
+    public String getOffer_cost() {
+        return offer_cost;
+    }
+
+    public void setOffer_cost(String offer_cost) {
+        this.offer_cost = offer_cost;
+    }
+
+    public String getOffer_free_block() {
+        return offer_free_block;
+    }
+
+    public void setOffer_free_block(String offer_free_block) {
+        this.offer_free_block = offer_free_block;
+    }
+
+    public String getInternal_cost() {
+        return internal_cost;
+    }
+
+    public void setInternal_cost(String internal_cost) {
+        this.internal_cost = internal_cost;
+    }
+
+    public String getInternal_free_block() {
+        return internal_free_block;
+    }
+
+    public void setInternal_free_block(String internal_free_block) {
+        this.internal_free_block = internal_free_block;
+    }
+
+    public String getDial_digit() {
+        return dial_digit;
+    }
+
+    public void setDial_digit(String dial_digit) {
+        this.dial_digit = dial_digit;
+    }
+
+    public String getCdr_record_header_id() {
+        return cdr_record_header_id;
+    }
+
+    public void setCdr_record_header_id(String cdr_record_header_id) {
+        this.cdr_record_header_id = cdr_record_header_id;
+    }
+
+    public String getCdr_sequence_number() {
+        return cdr_sequence_number;
+    }
+
+    public void setCdr_sequence_number(String cdr_sequence_number) {
+        this.cdr_sequence_number = cdr_sequence_number;
+    }
+
+    public String getLocation_no() {
+        return location_no;
+    }
+
+    public void setLocation_no(String location_no) {
+        this.location_no = location_no;
+    }
+
+    public String getMsc_id() {
+        return msc_id;
+    }
+
+    public void setMsc_id(String msc_id) {
+        this.msc_id = msc_id;
+    }
+
+    public String getUnit_type_id() {
+        return unit_type_id;
+    }
+
+    public void setUnit_type_id(String unit_type_id) {
+        this.unit_type_id = unit_type_id;
+    }
+
+    public String getPrimary_offer_id() {
+        return primary_offer_id;
+    }
+
+    public void setPrimary_offer_id(String primary_offer_id) {
+        this.primary_offer_id = primary_offer_id;
+    }
+
+    public String getDiscount_item_id() {
+        return discount_item_id;
+    }
+
+    public void setDiscount_item_id(String discount_item_id) {
+        this.discount_item_id = discount_item_id;
+    }
+
+    public String getBalance_change() {
+        return balance_change;
+    }
+
+    public void setBalance_change(String balance_change) {
+        this.balance_change = balance_change;
+    }
+
+    public String getRerate_flag() {
+        return rerate_flag;
+    }
+
+    public void setRerate_flag(String rerate_flag) {
+        this.rerate_flag = rerate_flag;
+    }
+
+    public String getAut_final_id() {
+        return aut_final_id;
+    }
+
+    public void setAut_final_id(String aut_final_id) {
+        this.aut_final_id = aut_final_id;
+    }
+
+    public String getTariff_plan_id() {
+        return tariff_plan_id;
+    }
+
+    public void setTariff_plan_id(String tariff_plan_id) {
+        this.tariff_plan_id = tariff_plan_id;
+    }
+
+    public interface FIELD {
+
+        public static final String MAP_ID = "MAP_ID";
+        public static final String A_NUMBER = "A_NUMBER";
+        public static final String CDR_TYPE = "CDR_TYPE";
+        public static final String CREATED_TIME = "CREATED_TIME";
+        public static final String CDR_START_TIME = "CDR_START_TIME";
+        public static final String DATA_PART = "DATA_PART";
+        public static final String DURATION = "DURATION";
+        public static final String TOTAL_USAGE = "TOTAL_USAGE";
+        public static final String B_NUMBER = "B_NUMBER";
+        public static final String B_ZONE = "B_ZONE";
+        public static final String NW_GROUP = "NW_GROUP";
+        public static final String SERVICE_FEE = "SERVICE_FEE";
+        public static final String SERVICE_FEE_ID = "SERVICE_FEE_ID";
+        public static final String CHARGE_FEE = "CHARGE_FEE";
+        public static final String CHARGE_FEE_ID = "CHARGE_FEE_ID";
+        public static final String LAC = "LAC";
+        public static final String CELL_ID = "CELL_ID";
+        public static final String SUBSCRIBER_UNBILL = "SUBSCRIBER_UNBILL";
+        public static final String BU_ID = "BU_ID";
+        public static final String OLD_BU_ID = "OLD_BU_ID";
+        public static final String OFFER_COST = "OFFER_COST";
+        public static final String OFFER_FREE_BLOCK = "OFFER_FREE_BLOCK";
+        public static final String INTERNAL_COST = "INTERNAL_COST";
+        public static final String INTERNAL_FREE_BLOCK = "INTERNAL_FREE_BLOCK";
+        public static final String DIAL_DIGIT = "DIAL_DIGIT";
+        public static final String CDR_RECORD_HEADER_ID = "CDR_RECORD_HEADER_ID";
+        public static final String CDR_SEQUENCE_NUMBER = "CDR_SEQUENCE_NUMBER";
+        public static final String LOCATION_NO = "LOCATION_NO";
+        public static final String MSC_ID = "MSC_ID";
+        public static final String UNIT_TYPE_ID = "UNIT_TYPE_ID";
+        public static final String PRIMARY_OFFER_ID = "PRIMARY_OFFER_ID";
+        public static final String DISCOUNT_ITEM_ID = "DISCOUNT_ITEM_ID";
+        public static final String BALANCE_CHANGE = "BALANCE_CHANGE";
+        public static final String RERATE_FLAG = "RERATE_FLAG";
+        public static final String AUT_FINAL_ID = "AUT_FINAL_ID";
+        public static final String TARIFF_PLAN_ID = "TARIFF_PLAN_ID";
+        public static final String ERROR_CODE = "ERROR_CODE";
+    }
+
+    public interface ERROR_CODE {
+
+        public static final String A_NUMBER_NULL = "100000";
+        public static final String DURATION_NULL = "100001";
+        public static final String TOTAL_USAGE_NULL = "100002";
+        public static final String B_NUMBER_NULL = "100003";
+        public static final String LOCATION_NO_NULL = "100004";
+        public static final String CHARGE_FEE_NULL = "100005";
+        public static final String CHARGE_FEE_ID_NULL = "100006";
+        public static final String MSC_ID_NULL = "100007";
+        public static final String LAC_NULL = "100008";
+        public static final String CELL_ID_NULL = "100009";
+        public static final String CDR_SEQUENCE_NUMBER_NULL = "100010";
+        public static final String DIAL_DIGIT_NULL = "100011";
+        public static final String UNIT_TYPE_ID_NULL = "100012";
+//        public static final String RERATE_FLAG_NULL = "100000";
+        public static final String AUT_FINAL_ID_NULL = "100013";
+        public static final String USAGE_OFFER_ID_NULL = "100014";
+        public static final String USAGE_PLAN_ID_NULL = "100015";
+        public static final String PRIMARY_OFFER_ID_NULL = "100016";
+        public static final String DISCOUNT_ITEM_NULL = "100017";
+        public static final String TARIFF_PLAN_ID_NULL = "100018";
+        public static final String BALANCE_CHANGE_NULL = "100019";
+        public static final String DURATION_OCS_NULL = "100020";
+        public static final String CDR_START_TIME_WRONG_FORMAT = "120000";
+
+    }
+
+}

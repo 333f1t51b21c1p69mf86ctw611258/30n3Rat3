@@ -1,0 +1,37 @@
+package Test;
+
+public class XmlObject {
+	private String index;
+	private String columnName;
+	private String vinaphone;
+	public String getIndex() {
+		return index;
+	}
+	public void setIndex(String index) {
+		this.index = index;
+	}
+	public String getColumnName() {
+		return columnName;
+	}
+	public void setColumnName(String columnName) {
+		this.columnName = columnName;
+	}
+	public String getVinaphone() {
+		return vinaphone;
+	}
+	public void setVinaphone(String vinaphone) {
+		this.vinaphone = vinaphone;
+	}
+	public XmlObject(String index, String columnName, String vinaphone) {
+		super();
+		this.index = index;
+		this.columnName = columnName;
+		this.vinaphone = vinaphone;
+	}
+	public XmlObject() {
+		super();
+	}
+	
+	
+	
+}

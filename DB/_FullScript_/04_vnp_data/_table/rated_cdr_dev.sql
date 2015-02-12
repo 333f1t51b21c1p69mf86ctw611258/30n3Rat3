@@ -2,64 +2,64 @@
 DROP TABLE VNP_DATA.RATED_CDR_DEV;
 
 CREATE TABLESPACE rated_dev_p0
-  DATAFILE '/u01/app/oracle/oradata/eonerate/vnp_data/rated_dev_p0.dbf'
+  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/rated_dev_p0.dbf'
     SIZE 100M
     REUSE
     AUTOEXTEND ON NEXT 100 M MAXSIZE UNLIMITED;
 
 CREATE TABLESPACE rated_dev_p1
-  DATAFILE '/u01/app/oracle/oradata/eonerate/vnp_data/rated_dev_p1.dbf'
+  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/rated_dev_p1.dbf'
     SIZE 100M
     REUSE
-    AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
+    AUTOEXTEND ON NEXT 50 M MAXSIZE UNLIMITED;
 
 CREATE TABLESPACE rated_dev_p2
-  DATAFILE '/u01/app/oracle/oradata/eonerate/vnp_data/rated_dev_p2.dbf'
+  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/rated_dev_p2.dbf'
     SIZE 100M
     REUSE
-    AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
+    AUTOEXTEND ON NEXT 50 M MAXSIZE UNLIMITED;
 
 CREATE TABLESPACE rated_dev_p3
-  DATAFILE '/u01/app/oracle/oradata/eonerate/vnp_data/rated_dev_p3.dbf'
+  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/rated_dev_p3.dbf'
     SIZE 100M
     REUSE
-    AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
+    AUTOEXTEND ON NEXT 50 M MAXSIZE UNLIMITED;
 
 CREATE TABLESPACE rated_dev_p4
-  DATAFILE '/u01/app/oracle/oradata/eonerate/vnp_data/rated_dev_p4.dbf'
+  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/rated_dev_p4.dbf'
     SIZE 100M
     REUSE
-    AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
+    AUTOEXTEND ON NEXT 50 M MAXSIZE UNLIMITED;
 
 CREATE TABLESPACE rated_dev_p5
-  DATAFILE '/u01/app/oracle/oradata/eonerate/vnp_data/rated_dev_p5.dbf'
+  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/rated_dev_p5.dbf'
     SIZE 100M
     REUSE
-    AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
+    AUTOEXTEND ON NEXT 50 M MAXSIZE UNLIMITED;
 
 CREATE TABLESPACE rated_dev_p6
-  DATAFILE '/u01/app/oracle/oradata/eonerate/vnp_data/rated_dev_p6.dbf'
+  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/rated_dev_p6.dbf'
     SIZE 100M
     REUSE
-    AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
+    AUTOEXTEND ON NEXT 50 M MAXSIZE UNLIMITED;
 
 CREATE TABLESPACE rated_dev_p7
-  DATAFILE '/u01/app/oracle/oradata/eonerate/vnp_data/rated_dev_p7.dbf'
+  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/rated_dev_p7.dbf'
     SIZE 100M
     REUSE
-    AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
+    AUTOEXTEND ON NEXT 50 M MAXSIZE UNLIMITED;
 
 CREATE TABLESPACE rated_dev_p8
-  DATAFILE '/u01/app/oracle/oradata/eonerate/vnp_data/rated_dev_p8.dbf'
+  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/rated_dev_p8.dbf'
     SIZE 100M
     REUSE
-    AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
+    AUTOEXTEND ON NEXT 50 M MAXSIZE UNLIMITED;
 
 CREATE TABLESPACE rated_dev_p9
-  DATAFILE '/u01/app/oracle/oradata/eonerate/vnp_data/rated_dev_p9.dbf'
+  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/rated_dev_p9.dbf'
     SIZE 100M
     REUSE
-    AUTOEXTEND ON NEXT 50 M MAXSIZE 2 G;
+    AUTOEXTEND ON NEXT 50 M MAXSIZE UNLIMITED;
 
 
 CREATE TABLE RATED_CDR_DEV

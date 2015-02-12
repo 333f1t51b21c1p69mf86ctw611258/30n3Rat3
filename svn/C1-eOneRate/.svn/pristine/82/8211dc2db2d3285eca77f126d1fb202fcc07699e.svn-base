@@ -1,0 +1,65 @@
+package e1reformat.entity.enrich;
+
+public class MapSummaryReport {
+
+    private String total_file_process;
+    private String total_file_final;
+    private String total_file_checkSumError;
+    private String total_file_contentError;
+    private String between_file_missing;
+
+    public String getTotal_file_process() {
+        return total_file_process;
+    }
+
+    public String getTotal_file_final() {
+        return total_file_final;
+    }
+
+    public String getTotal_file_checkSumError() {
+        return total_file_checkSumError;
+    }
+
+    public String getTotal_file_contentError() {
+        return total_file_contentError;
+    }
+
+    public String getBetween_file_missing() {
+        return between_file_missing;
+    }
+
+    public void setTotal_file_process(String total_file_process) {
+        this.total_file_process = total_file_process;
+    }
+
+    public void setTotal_file_final(String total_file_final) {
+        this.total_file_final = total_file_final;
+    }
+
+    public void setTotal_file_checkSumError(String total_file_checkSumError) {
+        this.total_file_checkSumError = total_file_checkSumError;
+    }
+
+    public void setTotal_file_contentError(String total_file_contentError) {
+        this.total_file_contentError = total_file_contentError;
+    }
+
+    public void setBetween_file_missing(String between_file_missing) {
+        this.between_file_missing = between_file_missing;
+    }
+
+    public MapSummaryReport(String total_file_process, String total_file_final, String total_file_checkSumError, String total_file_contentError, String between_file_missing) {
+        super();
+
+        this.total_file_process = total_file_process;
+        this.total_file_checkSumError = total_file_checkSumError;
+        this.total_file_final = total_file_final;
+        this.between_file_missing = between_file_missing;
+        this.total_file_contentError = total_file_contentError;
+    }
+
+    public MapSummaryReport() {
+        super();
+    }
+
+}

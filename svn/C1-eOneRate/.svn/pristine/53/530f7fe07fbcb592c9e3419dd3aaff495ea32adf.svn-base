@@ -1,0 +1,117 @@
+package e1reformat.entity.output;
+
+import java.io.File;
+
+public class ReformatCdrOutput {
+
+    private Integer errorCode;
+
+    private String errorMessage;
+
+    private File csvFile;
+    private int cdrRecordHeaderId;
+    private boolean isInsertAccurateDone;
+    private boolean isAggregatedDone;
+    private boolean isDeletedTempRatedCdr;
+    private Integer totalCdr;
+    private Integer totalCdrProcessed;
+    private String isHandled;
+
+    public int getCdrRecordHeaderId() {
+        return cdrRecordHeaderId;
+    }
+
+    public void setCdrRecordHeaderId(int cdrRecordHeaderId) {
+        this.cdrRecordHeaderId = cdrRecordHeaderId;
+    }
+
+    public Integer getErrorCode() {
+        return errorCode;
+    }
+
+    public void setErrorCode(int errorCode) {
+        this.errorCode = errorCode;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
+    }
+
+    public void setErrorMessage(String errorMessage) {
+        this.errorMessage = errorMessage;
+    }
+
+    public File getCsvFile() {
+        return csvFile;
+    }
+
+    public void setCsvFile(File csvFile) {
+        this.csvFile = csvFile;
+    }
+
+    public ReformatCdrOutput(int errorCode, String errorMessage, File csvFile,
+            int cdrRecordHeaderId, boolean isInsertAccurateDone,
+            boolean isAggregatedDone, boolean isDeletedTempRatedCdr) {
+        super();
+        this.errorCode = errorCode;
+        this.errorMessage = errorMessage;
+        this.csvFile = csvFile;
+        this.cdrRecordHeaderId = cdrRecordHeaderId;
+        this.isInsertAccurateDone = isInsertAccurateDone;
+        this.isAggregatedDone = isAggregatedDone;
+        this.isDeletedTempRatedCdr = isDeletedTempRatedCdr;
+    }
+
+    public ReformatCdrOutput() {
+        super();
+    }
+
+    public boolean isInsertAccurateDone() {
+        return isInsertAccurateDone;
+    }
+
+    public void setInsertAccurateDone(boolean isInsertAccurateDone) {
+        this.isInsertAccurateDone = isInsertAccurateDone;
+    }
+
+    public boolean isAggregatedDone() {
+        return isAggregatedDone;
+    }
+
+    public void setAggregatedDone(boolean isAggregatedDone) {
+        this.isAggregatedDone = isAggregatedDone;
+    }
+
+    public boolean isDeletedTempRatedCdrDone() {
+        return isDeletedTempRatedCdr;
+    }
+
+    public void setDeletedTempRatedCdrDone(boolean isDeletedTempRatedCdr) {
+        this.isDeletedTempRatedCdr = isDeletedTempRatedCdr;
+    }
+
+    public Integer getTotalCdr() {
+        return totalCdr;
+    }
+
+    public void setTotalCdr(Integer totalCdr) {
+        this.totalCdr = totalCdr;
+    }
+
+    public Integer getTotalCdrProcessed() {
+        return totalCdrProcessed;
+    }
+
+    public void setTotalCdrProcessed(Integer totalCdrProcessed) {
+        this.totalCdrProcessed = totalCdrProcessed;
+    }
+
+    public String getIsHandled() {
+        return isHandled;
+    }
+
+    public void setIsHandled(String isHandled) {
+        this.isHandled = isHandled;
+    }
+
+}

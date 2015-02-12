@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<config>
+	<Application>
+		ORPTransformation
+	</Application>
+	<PipelineList>
+		<OrpTransformationPipeline>
+			<Active>true</Active>
+		</OrpTransformationPipeline>		
+	</PipelineList>
+	<OrpTransformationPipeline>
+		<InputAdapter>
+			<TPInpAdapter>
+			  <ClassName>eonerate.orptransformation.adapter.FileVNPInputAdapter</ClassName>
+			  <BatchSize>10000</BatchSize>
+			  <InputFilePath>Data/Input</InputFilePath>
+			  <InputFilePrefix></InputFilePrefix>
+			  <InputFileSuffix>.txt</InputFileSuffix>
+			  <DoneFilePath>Data/Done</DoneFilePath>
+			  <DoneFilePrefix></DoneFilePrefix>
+			  <DoneFileSuffix>.txt.done</DoneFileSuffix>
+			  <ErrFilePath>Data/Error</ErrFilePath>
+			  <ErrFilePrefix></ErrFilePrefix>
+			  <ErrFileSuffix>.txt.err</ErrFileSuffix>
+			</TPInpAdapter>
+		</InputAdapter>		
+		<Process>			
+			<GPRSTranslation>
+				<ClassName>eonerate.orptransformation.process.GPRSTranslation</ClassName>
+				<DataCache>GPRSCache</DataCache>
+				<Active>true</Active>
+				<BatchSize>10000</BatchSize>
+			 </GPRSTranslation>
+			 <RoamingTranslation>
+				<ClassName>eonerate.orptransformation.process.RoamingTranslation</ClassName>
+				<DataCache>RoamingCache</DataCache>
+				<Active>true</Active>
+				<BatchSize>10000</BatchSize>
+			 </RoamingTranslation>
+			  <SDPTranslation>
+				<ClassName>eonerate.orptransformation.process.SDPTranslation</ClassName>
+				<DataCache>SDPCache</DataCache>
+				<Active>true</Active>
+				<BatchSize>10000</BatchSize>
+			 </SDPTranslation>
+			 <OCGTranslation>
+				<ClassName>eonerate.orptransformation.process.OCGTranslation</ClassName>
+				<DataCache>OCGCache</DataCache>
+				<Active>true</Active>
+				<BatchSize>10000</BatchSize>
+			 </OCGTranslation>
+			 <NormalizationBNumber>
+				<ClassName>eonerate.orptransformation.process.NormalizeBNumber</ClassName>				
+				<DataCache>NormalizeCache</DataCache>
+				<Active>true</Active>
+				<BatchSize>10000</BatchSize>
+			 </NormalizationBNumber>
+		</Process>		
+		<OutputAdapter>
+		  <TPOutAdapterNat>
+			<ClassName>eonerate.orptransformation.adapter.FileORPOutputAdapter</ClassName>
+			<OutputName>default</OutputName>
+			<BatchSize>10000</BatchSize>
+			<MaxSleep>50</MaxSleep>
+			<OutputFilePath>Data/Output</OutputFilePath>
+			<OutputFilePrefix></OutputFilePrefix>
+			<OutputFileSuffix>.bill</OutputFileSuffix>
+			<ErrFilePath>Data/Error</ErrFilePath>
+			<ErrFilePrefix></ErrFilePrefix>
+			<ErrFileSuffix>.txt.err</ErrFileSuffix>
+		  </TPOutAdapterNat>
+		
+		  <!--<DBOutputAdapter>
+				<Active>false</Active>
+				<ClassName>eonerate.orptransformation.adapter.DBORPOutputAdapter</ClassName>
+				<OutputName>DBORPOutputAdapter</OutputName>
+				<BatchSize>10000</BatchSize>
+				<MaxSleep>50</MaxSleep>
+				<DataSource>eOneRateDB</DataSource>
+				<ValidateStatement></ValidateStatement>
+				<InitStatement></InitStatement>
+				<RecordInsertStatement>
+					insert into vnp_common.orp_transformation_log(input_file_name)
+					values(?)
+				</RecordInsertStatement>
+				<CommitStatement></CommitStatement>
+				<RollbackStatement></RollbackStatement>
+		  </DBOutputAdapter>-->
+		</OutputAdapter>
+	</OrpTransformationPipeline>
+
+	<Resource>
+		<LogFactory>
+			<ClassName>ElcRate.logging.LogFactory</ClassName>
+			<Properties>log.properties</Properties>
+			<DefaultCategory>OrpTransformation</DefaultCategory>
+		</LogFactory>
+
+		<ECI>
+			<ClassName>ElcRate.configurationmanager.EventHandler</ClassName>
+			<Port>8198</Port>
+			<MaxConnection>2</MaxConnection>
+		</ECI>
+
+		<TransactionManagerFactory>
+			<ClassName>ElcRate.transaction.TransactionManagerFactory</ClassName>
+		</TransactionManagerFactory>
+
+		<DataSourceFactory>
+			<ClassName>ElcRate.resource.DataSourceFactory</ClassName>
+			<DataSourceBuilder>
+				<ClassName>ElcRate.db.BCPDataSource</ClassName>
+			</DataSourceBuilder>
+			<DataSource>
+				<eOneRateDB>
+					<db_url>jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))</db_url>					
+					<driver>oracle.jdbc.driver.OracleDriver</driver>
+					<username>vnp_common</username>
+					<password>vnp_common</password>
+					<ValidationQuery>SELECT 1 FROM DUAL</ValidationQuery>
+					<InitQuery>SELECT 1 FROM DUAL</InitQuery>
+					<TestConnectionPeriod>60</TestConnectionPeriod>
+				</eOneRateDB>
+			</DataSource>
+		</DataSourceFactory>
+
+		<CacheFactory>
+			<ClassName>ElcRate.resource.CacheFactory</ClassName>
+			<CacheableClass>				
+				<NormalizeCache>
+					<ClassName>ElcRate.cache.RegexMatchCache</ClassName>
+					<DataSourceType>DB</DataSourceType>
+					<DataSource>eOneRateDB</DataSource>	
+					<KeyFields>1</KeyFields>
+					<SelectStatement>
+						SELECT MAP_GROUP,NUMBER_MATCH,REMOVE_PREFIX,NEW_PREFIX FROM VNP_COMMON.ORP_NORMALISATION_MAP ORDER BY RANK
+					</SelectStatement>
+				</NormalizeCache>
+				<RoamingCache>
+					<ClassName>ElcRate.cache.RegexMatchCache</ClassName>
+					<DataSourceType>DB</DataSourceType>
+					<DataSource>eOneRateDB</DataSource>					
+					<SelectStatement>
+						SELECT 'DEF',CODE, MSCID_PREFIX||'.'||CELLID_PREFIX PREFIX FROM VNP_COMMON.ORP_ROAMING_TRANSLATION
+					</SelectStatement>
+				</RoamingCache>
+				<GPRSCache>
+					<ClassName>ElcRate.cache.RegexMatchCache</ClassName>
+					<DataSourceType>DB</DataSourceType>
+					<DataSource>eOneRateDB</DataSource>					
+					<SelectStatement>
+						SELECT 'DEF',APN, QOS, APPLICATION_ID||'.'||SUB_TYPE_ID||'.'|| AUT_ID_VOLUME
+						FROM VNP_COMMON.ORP_GPRS_TRANSLATION
+					</SelectStatement>
+				</GPRSCache>
+				<SDPCache>
+					<ClassName>ElcRate.cache.RegexMatchCache</ClassName>
+					<DataSourceType>DB</DataSourceType>
+					<DataSource>eOneRateDB</DataSource>					
+					<SelectStatement>
+						SELECT 'DEF',PRODUCT_ID, SDIP, DIALEDDIGITS
+						FROM VNP_COMMON.ORP_SDP_TRANSLATION
+					</SelectStatement>
+				</SDPCache>
+				<OCGCache>
+					<ClassName>ElcRate.cache.RegexMatchCache</ClassName>
+					<DataSourceType>DB</DataSourceType>
+					<DataSource>eOneRateDB</DataSource>					
+					<SelectStatement>
+						SELECT 'DEF', CODE, DIALED_DIGIT 
+						FROM VNP_COMMON.ORP_OCG_TRANSFORMATION
+					</SelectStatement>
+				</OCGCache>
+			</CacheableClass>
+		</CacheFactory>
+	</Resource>
+</config>

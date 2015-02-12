@@ -2,7 +2,7 @@ DROP PROCEDURE VNP_DATA.DISABLE_TEMP_INDEX;
 
 CREATE OR REPLACE PROCEDURE VNP_DATA.disable_temp_index(i_schema in varchar2 ,i_tablename in varchar2) as
   CURSOR  usr_idxs IS select INDEX_NAME from user_indexes where 
-          TABLE_OWNER=i_schema and TABLE_NAME = i_tablename;          
+          upper(TABLE_OWNER)=upper(i_schema) and upper(TABLE_NAME) = UPPER(i_tablename);          
   cur_idx  usr_idxs% ROWTYPE;
   
   v_sql  VARCHAR2(1024);

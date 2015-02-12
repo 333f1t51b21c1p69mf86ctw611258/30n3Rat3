@@ -1,0 +1,20 @@
+<config>
+	<slus>slu1;slu3;slu5;slu7;slu9;slu11</slus>
+	<deleteGzipFile>false</deleteGzipFile>
+	<destFolderPath>/cdr</destFolderPath>
+	<extFolderPath>/cdr/ready</extFolderPath>
+	<inputHostName>10.149.3.15</inputHostName>
+	<inputUserName>elcom</inputUserName>
+	<inputPassword>elcom@123</inputPassword>
+	<inputDirectory>/orvol/re-rate</inputDirectory>
+	<inputOsFileSeparator>/</inputOsFileSeparator>
+	<retryCount>3</retryCount>
+	<retryDownloadFileSleepTime>3000</retryDownloadFileSleepTime>
+	<scanInterval>60</scanInterval>
+	<dbConnection>jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.113)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.114)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))</dbConnection>
+	<dbUserName>vnp_common</dbUserName>
+	<dbPassword>vnp_common</dbPassword>
+	<corePoolSize>8</corePoolSize>
+	<maximumPoolSize>16</maximumPoolSize>
+	<instancePort>8681</instancePort>
+</config>

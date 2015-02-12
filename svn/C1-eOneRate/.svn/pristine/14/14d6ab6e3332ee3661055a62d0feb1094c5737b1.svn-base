@@ -1,0 +1,85 @@
+package e1reformat.entity.enrich;
+
+public class MapFileReport {
+
+    private String cdr_record_header_id;
+    private String convert_time;
+    private String cdr_filename;
+    private String start_rcd_seq;
+    private String end_rcd_seq;
+    private String number_of_record;
+    private String status;
+
+    public String getConvert_time() {
+        return convert_time;
+    }
+
+    public String getCdr_filename() {
+        return cdr_filename;
+    }
+
+    public String getStart_rcd_seq() {
+        return start_rcd_seq;
+    }
+
+    public String getEnd_rcd_seq() {
+        return end_rcd_seq;
+    }
+
+    public String getNumber_of_record() {
+        return number_of_record;
+    }
+
+    public void setConvert_time(String convert_time) {
+        this.convert_time = convert_time;
+    }
+
+    public void setCdr_filename(String cdr_filename) {
+        this.cdr_filename = cdr_filename;
+    }
+
+    public void setStart_rcd_seq(String start_rcd_seq) {
+        this.start_rcd_seq = start_rcd_seq;
+    }
+
+    public void setEnd_rcd_seq(String end_rcd_seq) {
+        this.end_rcd_seq = end_rcd_seq;
+    }
+
+    public void setNumber_of_record(String number_of_record) {
+        this.number_of_record = number_of_record;
+    }
+
+    public String getCdr_record_header_id() {
+        return cdr_record_header_id;
+    }
+
+    public void setCdr_record_header_id(String cdr_record_header_id) {
+        this.cdr_record_header_id = cdr_record_header_id;
+    }
+
+    public MapFileReport(String cdr_record_header_id, String convert_time, String cdr_filename, String start_rcd_seq, String end_rcd_seq, String number_of_record, String status) {
+        super();
+
+        this.cdr_record_header_id = cdr_record_header_id;
+        this.convert_time = convert_time;
+        this.cdr_filename = cdr_filename;
+        this.start_rcd_seq = start_rcd_seq;
+        this.end_rcd_seq = end_rcd_seq;
+        this.number_of_record = number_of_record;
+        this.status = status;
+    }
+
+    public MapFileReport() {
+        super();
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+}

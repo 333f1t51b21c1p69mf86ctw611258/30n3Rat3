@@ -1,11 +1,13 @@
 DROP VIEW PRODUCT_OFFER_VIEW;
 
-/* Formatted on 28/12/2014 17:17:21 (QP5 v5.215.12089.38647) */
+/* Formatted on 2/6/2015 8:42:59 AM (QP5 v5.269.14213.34746) */
 CREATE OR REPLACE FORCE VIEW PRODUCT_OFFER_VIEW
 (
    OFFER_ID,
    OFFER_NAME,
+   SHORT_NAME,
    OFFER_TYPE,
+   DESCRIPTION,
    RESELLER_VERSION_ID,
    SALES_EFFECTIVE_TIME,
    SALES_EXPIRATION_TIME,
@@ -16,27 +18,18 @@ CREATE OR REPLACE FORCE VIEW PRODUCT_OFFER_VIEW
    AUTO_EXPIRATION_UNIT
 )
 AS
-   SELECT t1.OFFER_ID AS offer_id,                                 -- offerId,
-          t3.DISPLAY_VALUE AS offer_name,                     -- displayValue,
-          -- NULL AS offer_abbreviation,
-          -- 0 AS unbill,
-          -- NULL AS b_number_enrich,
-          -- NULL AS product_group_type,
-          -- NULL AS parent_id,
+   SELECT t1.OFFER_ID AS offer_id,
+          t3.DISPLAY_VALUE AS offer_name,
+          t3.SHORT_DISPLAY AS short_name,
           CASE T2.OFFER_TYPE WHEN 2 THEN 'PO' WHEN 3 THEN 'SO' ELSE 'AO' END
              AS offer_type,
+          T3.DESCRIPTION,
           t2.RESELLER_VERSION_ID,
-          -- add offer ref
           T2.SALES_EFFECTIVE_DT AS sales_effective_time,
           T2.SALES_EXPIRATION_DT AS sales_expiration_time,
-          -- add currency
           t23.DISPLAY_VALUE AS currency_name,
           T2.CURRENCY_CODE,
           T2.UPSELL_TEMPLATE_ID,
-          -- ,
-          -- 0
-          --       T2.AUTO_ACTIVATION,
-          --       T2.AUTO_EXPIRATION_DT,
           T2.AUTO_EXPIRATION_DURATION,
           CASE T2.AUTO_EXPIRATION_UNITS
              WHEN 1 THEN 'MINUTES'
@@ -47,11 +40,9 @@ AS
              WHEN 180 THEN 'YEARS'
              ELSE 'UNKNOWN'
           END
-             AS AUTO_EXPIRATION_UNIT                                      -- ,
-     --       T2.AUTO_EXTENSION_CTL
+             AS AUTO_EXPIRATION_UNIT
      FROM cbs_owner.OFFER_KEY t1
-          INNER JOIN cbs_owner.OFFER_REF t2
-             ON t1.OFFER_ID = t2.OFFER_ID
+          INNER JOIN cbs_owner.OFFER_REF t2 ON t1.OFFER_ID = t2.OFFER_ID
           INNER JOIN cbs_owner.OFFER_VALUES t3
              ON     t2.OFFER_ID = t3.OFFER_ID
                 AND t3.RESELLER_VERSION_ID = t2.RESELLER_VERSION_ID
@@ -63,7 +54,6 @@ AS
              ON     t2.SERVICE_CATEGORY_ID = t46.SERVICE_CATEGORY_ID
                 AND t46.LANGUAGE_CODE = t3.LANGUAGE_CODE
                 AND t46.service_version_id = t100.SERVICE_VERSION_ID
-          -- add currency
           INNER JOIN cbs_owner.RATE_CURRENCY_REF t22
              ON     T2.CURRENCY_CODE = t22.CURRENCY_CODE
                 AND T22.SERVICE_VERSION_ID = T46.SERVICE_VERSION_ID
@@ -74,4 +64,4 @@ AS
     WHERE t3.LANGUAGE_CODE = 1;
 
 
-GRANT SELECT ON PRODUCT_OFFER_VIEW TO VNP_COMMON;
+GRANT SELECT ON CBS_OWNER.PRODUCT_OFFER_VIEW TO VNP_COMMON;

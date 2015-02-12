@@ -1,0 +1,533 @@
+<?xml version="1.0"?>
+<config>
+	<Application>
+		Reformat2
+	</Application>
+
+	<PipelineList>
+		<HotExportPipe_1>
+			<Active>True</Active>
+			<!-- <HaltOnException>True</HaltOnException> -->
+			<PipelineType>Batch</PipelineType>
+		</HotExportPipe_1>
+		<HotExportPipe_2>
+			<Active>True</Active>
+			<!-- <HaltOnException>True</HaltOnException> -->
+			<PipelineType>Batch</PipelineType>
+		</HotExportPipe_2>
+	</PipelineList>
+	
+	<OnlyAuditCoreClasses>
+		True
+	</OnlyAuditCoreClasses>
+
+	<HotExportPipe_1>
+		<InputAdapter>
+			<DBInpAdapter>
+				<ClassName>eonerate.hotexport.data.DBInputAdapter</ClassName>
+				<BatchSize>100000</BatchSize>
+				<DataSource>eOneRateDB</DataSource>
+				<ValidateStatement>
+					SELECT 1 FROM DUAL
+					<!-- SELECT COUNT (1)
+					  FROM VNP_DATA.CDR_LOG_PROCESS_TMP
+					 WHERE     STATUS = 5
+						   AND INSTANCE = 1
+						   AND TOTAL_CDR_PROCESSED > 0 -->
+				</ValidateStatement>
+				<RecordCountStatement>
+					SELECT COUNT (1)
+					  FROM VNP_DATA.HOT_RATED_CDR_3
+					 WHERE CDR_RECORD_HEADER_ID =
+							  (SELECT CDR_LOG_PROCESS_ID
+								 FROM (  SELECT CDR_LOG_PROCESS_ID
+										   FROM VNP_DATA.CDR_LOG_PROCESS_TMP
+										  WHERE     (STATUS = 3 OR STATUS = 5)
+												AND INSTANCE = 1
+												AND TOTAL_CDR_PROCESSED > 0
+									   ORDER BY START_TIME)
+								WHERE ROWNUM &lt;= 1)
+				</RecordCountStatement>
+					<!-- SELECT COUNT(1)
+					  FROM VNP_DATA.HOT_RATED_CDR_3
+					 WHERE     CDR_RECORD_HEADER_ID = (SELECT CDR_RECORD_HEADER_ID
+														 FROM (  SELECT CDR_RECORD_HEADER_ID
+																   FROM (  SELECT CDR_RECORD_HEADER_ID,
+																				  MIN (CREATED_TIME)
+																					 CREATED_TIME
+																			 FROM VNP_DATA.HOT_RATED_CDR_3
+																			WHERE RERATE_FLAG = 10
+																		 GROUP BY CDR_RECORD_HEADER_ID)
+															   ORDER BY CREATED_TIME)
+														WHERE ROWNUM &lt;= 1)
+						   AND RERATE_FLAG = 10 -->
+				<InitStatement>
+					UPDATE VNP_DATA.CDR_LOG_PROCESS_TMP
+					   SET STATUS = 5
+					 WHERE CDR_LOG_PROCESS_ID =
+							  (SELECT CDR_LOG_PROCESS_ID
+								 FROM (  SELECT CDR_LOG_PROCESS_ID
+										   FROM VNP_DATA.CDR_LOG_PROCESS_TMP
+										  WHERE     (STATUS = 3 OR STATUS = 5)
+												AND INSTANCE = 1
+												AND TOTAL_CDR_PROCESSED > 0
+									   ORDER BY START_TIME)
+								WHERE ROWNUM &lt;= 1)
+				</InitStatement>
+					<!-- UPDATE VNP_DATA.HOT_RATED_CDR_3
+					   SET RERATE_FLAG = 11
+					 WHERE     CDR_RECORD_HEADER_ID = (SELECT CDR_RECORD_HEADER_ID
+														 FROM (  SELECT CDR_RECORD_HEADER_ID
+																   FROM (  SELECT CDR_RECORD_HEADER_ID,
+																				  MIN (CREATED_TIME)
+																					 CREATED_TIME
+																			 FROM VNP_DATA.HOT_RATED_CDR_3
+																			WHERE RERATE_FLAG = 10
+																		 GROUP BY CDR_RECORD_HEADER_ID)
+															   ORDER BY CREATED_TIME)
+														WHERE ROWNUM &lt;= 1)
+						   AND RERATE_FLAG = 10 -->
+				<RecordSelectStatement>
+					  SELECT A_NUMBER,
+							 CDR_TYPE,
+							 TO_CHAR (CREATED_TIME, 'DD/MM/YYYY HH24:MI:SS') CREATED_TIME,
+							 TO_CHAR (CDR_START_TIME, 'DD/MM/YYYY HH24:MI:SS') CDR_START_TIME,
+							 DATA_PART,
+							 DURATION,
+							 TOTAL_USAGE,
+							 B_NUMBER,
+							 B_ZONE,
+							 NW_GROUP,
+							 SERVICE_FEE,
+							 SERVICE_FEE_ID,
+							 CHARGE_FEE,
+							 CHARGE_FEE_ID,
+							 LAC,
+							 CELL_ID,
+							 SUBSCRIBER_UNBILL,
+							 BU_ID,
+							 OLD_BU_ID,
+							 OFFER_COST,
+							 OFFER_FREE_BLOCK,
+							 INTERNAL_COST,
+							 INTERNAL_FREE_BLOCK,
+							 DIAL_DIGIT,
+							 CDR_RECORD_HEADER_ID,
+							 CDR_SEQUENCE_NUMBER,
+							 LOCATION_NO,
+							 MSC_ID,
+							 UNIT_TYPE_ID,
+							 PRIMARY_OFFER_ID,
+							 DISCOUNT_ITEM_ID,
+							 BALANCE_CHANGE,
+							 RERATE_FLAG,
+							 AUT_FINAL_ID,
+							 TARIFF_PLAN_ID,
+							 ERROR_CODE,
+							 PAYMENT_ID,
+							 SUBSCRIBER_NO,
+							 SUBSCRIBER_NO_RESETS,
+							 ACCOUNT_NO,
+							 PARENT_ACCOUNT_NO,
+							 INTL_ID,
+							 INTL_VND,
+							 CDR_CALL_TYPE,
+							 QOS
+						FROM VNP_DATA.HOT_RATED_CDR_3
+					   WHERE CDR_RECORD_HEADER_ID =
+								(SELECT CDR_LOG_PROCESS_ID
+								   FROM (  SELECT CDR_LOG_PROCESS_ID
+											 FROM VNP_DATA.CDR_LOG_PROCESS_TMP
+											WHERE     STATUS = 5
+												  AND INSTANCE = 1
+												  AND TOTAL_CDR_PROCESSED > 0
+										 ORDER BY START_TIME)
+								  WHERE ROWNUM &lt;= 1)
+					ORDER BY CREATED_TIME
+				</RecordSelectStatement>
+					<!--   SELECT A_NUMBER,
+							 CDR_TYPE,
+							 TO_CHAR (CREATED_TIME, 'DD/MM/YYYY HH24:MI:SS') CREATED_TIME,
+							 TO_CHAR (CDR_START_TIME, 'DD/MM/YYYY HH24:MI:SS') CDR_START_TIME,
+							 DATA_PART,
+							 DURATION,
+							 TOTAL_USAGE,
+							 B_NUMBER,
+							 B_ZONE,
+							 NW_GROUP,
+							 SERVICE_FEE,
+							 SERVICE_FEE_ID,
+							 CHARGE_FEE,
+							 CHARGE_FEE_ID,
+							 LAC,
+							 CELL_ID,
+							 SUBSCRIBER_UNBILL,
+							 BU_ID,
+							 OLD_BU_ID,
+							 OFFER_COST,
+							 OFFER_FREE_BLOCK,
+							 INTERNAL_COST,
+							 INTERNAL_FREE_BLOCK,
+							 DIAL_DIGIT,
+							 CDR_RECORD_HEADER_ID,
+							 CDR_SEQUENCE_NUMBER,
+							 LOCATION_NO,
+							 MSC_ID,
+							 UNIT_TYPE_ID,
+							 PRIMARY_OFFER_ID,
+							 DISCOUNT_ITEM_ID,
+							 BALANCE_CHANGE,
+							 RERATE_FLAG,
+							 AUT_FINAL_ID,
+							 TARIFF_PLAN_ID,
+							 ERROR_CODE,
+							 PAYMENT_ID,
+							 SUBSCRIBER_NO,
+							 SUBSCRIBER_NO_RESETS,
+							 ACCOUNT_NO,
+							 PARENT_ACCOUNT_NO,
+							 INTL_ID,
+							 INTL_VND,
+							 CDR_CALL_TYPE,
+							 QOS
+						FROM VNP_DATA.HOT_RATED_CDR_3
+					   WHERE RERATE_FLAG = 11 AND ROWNUM &lt;= 100000
+					ORDER BY CREATED_TIME -->
+				<CommitStatement>
+					UPDATE VNP_DATA.CDR_LOG_PROCESS_TMP
+					   SET STATUS = 6
+					 WHERE CDR_LOG_PROCESS_ID =
+							  (SELECT CDR_LOG_PROCESS_ID
+								 FROM (  SELECT CDR_LOG_PROCESS_ID
+										   FROM VNP_DATA.CDR_LOG_PROCESS_TMP
+										  WHERE     STATUS = 5
+												AND INSTANCE = 1
+												AND TOTAL_CDR_PROCESSED > 0
+									   ORDER BY START_TIME)
+								WHERE ROWNUM &lt;= 1)
+				</CommitStatement>
+					<!-- UPDATE VNP_DATA.HOT_RATED_CDR_3
+					   SET RERATE_FLAG = 13
+					 WHERE RERATE_FLAG = 11 -->
+				<RollbackStatement>
+					UPDATE VNP_DATA.CDR_LOG_PROCESS_TMP
+					   SET STATUS = 7
+					 WHERE CDR_LOG_PROCESS_ID =
+							  (SELECT CDR_LOG_PROCESS_ID
+								 FROM (  SELECT CDR_LOG_PROCESS_ID
+										   FROM VNP_DATA.CDR_LOG_PROCESS_TMP
+										  WHERE     STATUS = 5
+												AND INSTANCE = 1
+												AND TOTAL_CDR_PROCESSED > 0
+									   ORDER BY START_TIME)
+								WHERE ROWNUM &lt;= 1)
+				</RollbackStatement>
+					<!-- UPDATE VNP_DATA.HOT_RATED_CDR_3
+					   SET RERATE_FLAG = 14
+					 WHERE RERATE_FLAG = 11 -->
+				
+				<OutputFilePath>data</OutputFilePath>
+				<HotTableSuffix>hot1</HotTableSuffix>
+				<OutputFilePrefix>hrc.</OutputFilePrefix>
+				<OutputFileSuffix>.csv</OutputFileSuffix>
+				<ErrFilePath>data</ErrFilePath>
+				<ErrFilePrefix>hrc.</ErrFilePrefix>
+				<ErrFileSuffix>.err</ErrFileSuffix>
+				<ProcessingSuffix>.doing</ProcessingSuffix>
+				
+			</DBInpAdapter>
+		</InputAdapter>
+		
+		<Process>
+		</Process>
+		
+		<OutputAdapter>
+			<NullOutput>
+				<Active>true</Active>
+				<OutputName>NullOutput</OutputName>
+				<ClassName>ElcRate.adapter.NullOutputAdapter</ClassName>
+				<BatchSize>100000</BatchSize>
+			</NullOutput>
+		</OutputAdapter>
+	</HotExportPipe_1>
+	
+	<HotExportPipe_2>
+		<InputAdapter>
+			<DBInpAdapter>
+				<ClassName>eonerate.hotexport.data.DBInputAdapter</ClassName>
+				<BatchSize>100000</BatchSize>
+				<DataSource>eOneRateDB</DataSource>
+				<ValidateStatement>
+					SELECT 1 FROM DUAL
+					<!-- SELECT COUNT (1)
+					  FROM VNP_DATA.CDR_LOG_PROCESS_TMP
+					 WHERE     STATUS = 5
+						   AND INSTANCE = 2
+						   AND TOTAL_CDR_PROCESSED > 0 -->
+				</ValidateStatement>
+				<RecordCountStatement>
+					SELECT COUNT (1)
+					  FROM VNP_DATA.HOT_RATED_CDR_4
+					 WHERE CDR_RECORD_HEADER_ID =
+							  (SELECT CDR_LOG_PROCESS_ID
+								 FROM (  SELECT CDR_LOG_PROCESS_ID
+										   FROM VNP_DATA.CDR_LOG_PROCESS_TMP
+										  WHERE     (STATUS = 3 OR STATUS = 5)
+												AND INSTANCE = 2
+												AND TOTAL_CDR_PROCESSED > 0
+									   ORDER BY START_TIME)
+								WHERE ROWNUM &lt;= 1)
+				</RecordCountStatement>
+					<!-- SELECT COUNT(1)
+					  FROM VNP_DATA.HOT_RATED_CDR_4
+					 WHERE     CDR_RECORD_HEADER_ID = (SELECT CDR_RECORD_HEADER_ID
+														 FROM (  SELECT CDR_RECORD_HEADER_ID
+																   FROM (  SELECT CDR_RECORD_HEADER_ID,
+																				  MIN (CREATED_TIME)
+																					 CREATED_TIME
+																			 FROM VNP_DATA.HOT_RATED_CDR_4
+																			WHERE RERATE_FLAG = 10
+																		 GROUP BY CDR_RECORD_HEADER_ID)
+															   ORDER BY CREATED_TIME)
+														WHERE ROWNUM &lt;= 1)
+						   AND RERATE_FLAG = 10 -->
+				<InitStatement>
+					UPDATE VNP_DATA.CDR_LOG_PROCESS_TMP
+					   SET STATUS = 5
+					 WHERE CDR_LOG_PROCESS_ID =
+							  (SELECT CDR_LOG_PROCESS_ID
+								 FROM (  SELECT CDR_LOG_PROCESS_ID
+										   FROM VNP_DATA.CDR_LOG_PROCESS_TMP
+										  WHERE     (STATUS = 3 OR STATUS = 5)
+												AND INSTANCE = 2
+												AND TOTAL_CDR_PROCESSED > 0
+									   ORDER BY START_TIME)
+								WHERE ROWNUM &lt;= 1)
+				</InitStatement>
+					<!-- UPDATE VNP_DATA.HOT_RATED_CDR_4
+					   SET RERATE_FLAG = 11
+					 WHERE     CDR_RECORD_HEADER_ID = (SELECT CDR_RECORD_HEADER_ID
+														 FROM (  SELECT CDR_RECORD_HEADER_ID
+																   FROM (  SELECT CDR_RECORD_HEADER_ID,
+																				  MIN (CREATED_TIME)
+																					 CREATED_TIME
+																			 FROM VNP_DATA.HOT_RATED_CDR_4
+																			WHERE RERATE_FLAG = 10
+																		 GROUP BY CDR_RECORD_HEADER_ID)
+															   ORDER BY CREATED_TIME)
+														WHERE ROWNUM &lt;= 1)
+						   AND RERATE_FLAG = 10 -->
+				<RecordSelectStatement>
+					  SELECT A_NUMBER,
+							 CDR_TYPE,
+							 TO_CHAR (CREATED_TIME, 'DD/MM/YYYY HH24:MI:SS') CREATED_TIME,
+							 TO_CHAR (CDR_START_TIME, 'DD/MM/YYYY HH24:MI:SS') CDR_START_TIME,
+							 DATA_PART,
+							 DURATION,
+							 TOTAL_USAGE,
+							 B_NUMBER,
+							 B_ZONE,
+							 NW_GROUP,
+							 SERVICE_FEE,
+							 SERVICE_FEE_ID,
+							 CHARGE_FEE,
+							 CHARGE_FEE_ID,
+							 LAC,
+							 CELL_ID,
+							 SUBSCRIBER_UNBILL,
+							 BU_ID,
+							 OLD_BU_ID,
+							 OFFER_COST,
+							 OFFER_FREE_BLOCK,
+							 INTERNAL_COST,
+							 INTERNAL_FREE_BLOCK,
+							 DIAL_DIGIT,
+							 CDR_RECORD_HEADER_ID,
+							 CDR_SEQUENCE_NUMBER,
+							 LOCATION_NO,
+							 MSC_ID,
+							 UNIT_TYPE_ID,
+							 PRIMARY_OFFER_ID,
+							 DISCOUNT_ITEM_ID,
+							 BALANCE_CHANGE,
+							 RERATE_FLAG,
+							 AUT_FINAL_ID,
+							 TARIFF_PLAN_ID,
+							 ERROR_CODE,
+							 PAYMENT_ID,
+							 SUBSCRIBER_NO,
+							 SUBSCRIBER_NO_RESETS,
+							 ACCOUNT_NO,
+							 PARENT_ACCOUNT_NO,
+							 INTL_ID,
+							 INTL_VND,
+							 CDR_CALL_TYPE,
+							 QOS
+						FROM VNP_DATA.HOT_RATED_CDR_4
+					   WHERE CDR_RECORD_HEADER_ID =
+								(SELECT CDR_LOG_PROCESS_ID
+								   FROM (  SELECT CDR_LOG_PROCESS_ID
+											 FROM VNP_DATA.CDR_LOG_PROCESS_TMP
+											WHERE     STATUS = 5
+												  AND INSTANCE = 2
+												  AND TOTAL_CDR_PROCESSED > 0
+										 ORDER BY START_TIME)
+								  WHERE ROWNUM &lt;= 1)
+					ORDER BY CREATED_TIME
+				</RecordSelectStatement>
+					<!--   SELECT A_NUMBER,
+							 CDR_TYPE,
+							 TO_CHAR (CREATED_TIME, 'DD/MM/YYYY HH24:MI:SS') CREATED_TIME,
+							 TO_CHAR (CDR_START_TIME, 'DD/MM/YYYY HH24:MI:SS') CDR_START_TIME,
+							 DATA_PART,
+							 DURATION,
+							 TOTAL_USAGE,
+							 B_NUMBER,
+							 B_ZONE,
+							 NW_GROUP,
+							 SERVICE_FEE,
+							 SERVICE_FEE_ID,
+							 CHARGE_FEE,
+							 CHARGE_FEE_ID,
+							 LAC,
+							 CELL_ID,
+							 SUBSCRIBER_UNBILL,
+							 BU_ID,
+							 OLD_BU_ID,
+							 OFFER_COST,
+							 OFFER_FREE_BLOCK,
+							 INTERNAL_COST,
+							 INTERNAL_FREE_BLOCK,
+							 DIAL_DIGIT,
+							 CDR_RECORD_HEADER_ID,
+							 CDR_SEQUENCE_NUMBER,
+							 LOCATION_NO,
+							 MSC_ID,
+							 UNIT_TYPE_ID,
+							 PRIMARY_OFFER_ID,
+							 DISCOUNT_ITEM_ID,
+							 BALANCE_CHANGE,
+							 RERATE_FLAG,
+							 AUT_FINAL_ID,
+							 TARIFF_PLAN_ID,
+							 ERROR_CODE,
+							 PAYMENT_ID,
+							 SUBSCRIBER_NO,
+							 SUBSCRIBER_NO_RESETS,
+							 ACCOUNT_NO,
+							 PARENT_ACCOUNT_NO,
+							 INTL_ID,
+							 INTL_VND,
+							 CDR_CALL_TYPE,
+							 QOS
+						FROM VNP_DATA.HOT_RATED_CDR_4
+					   WHERE RERATE_FLAG = 11 AND ROWNUM &lt;= 100000
+					ORDER BY CREATED_TIME -->
+				<CommitStatement>
+					UPDATE VNP_DATA.CDR_LOG_PROCESS_TMP
+					   SET STATUS = 6
+					 WHERE CDR_LOG_PROCESS_ID =
+							  (SELECT CDR_LOG_PROCESS_ID
+								 FROM (  SELECT CDR_LOG_PROCESS_ID
+										   FROM VNP_DATA.CDR_LOG_PROCESS_TMP
+										  WHERE     STATUS = 5
+												AND INSTANCE = 2
+												AND TOTAL_CDR_PROCESSED > 0
+									   ORDER BY START_TIME)
+								WHERE ROWNUM &lt;= 1)
+				</CommitStatement>
+					<!-- UPDATE VNP_DATA.HOT_RATED_CDR_4
+					   SET RERATE_FLAG = 13
+					 WHERE RERATE_FLAG = 11 -->
+				<RollbackStatement>
+					UPDATE VNP_DATA.CDR_LOG_PROCESS_TMP
+					   SET STATUS = 7
+					 WHERE CDR_LOG_PROCESS_ID =
+							  (SELECT CDR_LOG_PROCESS_ID
+								 FROM (  SELECT CDR_LOG_PROCESS_ID
+										   FROM VNP_DATA.CDR_LOG_PROCESS_TMP
+										  WHERE     STATUS = 5
+												AND INSTANCE = 2
+												AND TOTAL_CDR_PROCESSED > 0
+									   ORDER BY START_TIME)
+								WHERE ROWNUM &lt;= 1)
+				</RollbackStatement>
+					<!-- UPDATE VNP_DATA.HOT_RATED_CDR_4
+					   SET RERATE_FLAG = 14
+					 WHERE RERATE_FLAG = 11 -->
+				
+				<OutputFilePath>data</OutputFilePath>
+				<HotTableSuffix>hot2</HotTableSuffix>
+				<OutputFilePrefix>hrc.</OutputFilePrefix>
+				<OutputFileSuffix>.csv</OutputFileSuffix>
+				<ErrFilePath>data</ErrFilePath>
+				<ErrFilePrefix>hrc.</ErrFilePrefix>
+				<ErrFileSuffix>.err</ErrFileSuffix>
+				<ProcessingSuffix>.doing</ProcessingSuffix>
+				
+			</DBInpAdapter>
+		</InputAdapter>
+		
+		<Process>
+		</Process>
+		
+		<OutputAdapter>
+			<NullOutput>
+				<Active>true</Active>
+				<OutputName>NullOutput</OutputName>
+				<ClassName>ElcRate.adapter.NullOutputAdapter</ClassName>
+				<BatchSize>100000</BatchSize>
+			</NullOutput>
+		</OutputAdapter>
+	</HotExportPipe_2>
+	
+	<Resource>
+		<DataSourceFactory>
+			<ClassName>ElcRate.resource.DataSourceFactory</ClassName>
+			<DataSourceBuilder>
+				<ClassName>ElcRate.db.BCPDataSource</ClassName>
+			</DataSourceBuilder>
+			<DataSource>
+				<eOneRateDB>
+					<db_url>jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = 10.149.3.106)(PORT = 1521))(CONNECT_DATA =(SERVER = DEDICATED)(SERVICE_NAME = eonerate)))</db_url>
+					<!-- <db_url>jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = 10.149.33.157)(PORT = 1521))(CONNECT_DATA =(SERVER = DEDICATED)(SERVICE_NAME = eonerate)))</db_url> -->
+					<!-- <db_url>jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.6.207)(PORT=1521))(CONNECT_DATA=(SERVER=dedicated)(SERVICE_NAME=EONERATE)))</db_url> -->
+					<!-- <db_url>jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on)(ADDRESS_LIST=(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.111)(PORT=1521))(ADDRESS=(PROTOCOL=TCP)(HOST=10.149.3.112)(PORT=1521)))(CONNECT_DATA=(SERVICE_NAME=eonerate)))</db_url> -->
+					<driver>oracle.jdbc.driver.OracleDriver</driver>
+					<username>vnp_common</username>
+					<password>vnp_common</password>
+					<ValidationQuery>SELECT 1 FROM DUAL</ValidationQuery>
+					<InitQuery>SELECT 1 FROM DUAL</InitQuery>
+					<TestConnectionPeriod>60</TestConnectionPeriod>
+				</eOneRateDB>
+			</DataSource>
+		</DataSourceFactory>
+	
+		<LogFactory>
+			<ClassName>ElcRate.logging.LogFactory</ClassName>
+			<Properties>log.properties</Properties>
+			<DefaultCategory>HotExportPipe_1</DefaultCategory>
+		</LogFactory>
+
+		<ECI>
+			<ClassName>ElcRate.configurationmanager.EventHandler</ClassName>
+			<Port>8080</Port>
+			<MaxConnection>2</MaxConnection>
+		</ECI>
+
+		<TransactionManagerFactory>
+			<ClassName>ElcRate.transaction.TransactionManagerFactory</ClassName>
+		</TransactionManagerFactory>
+
+		<CacheFactory>
+			<ClassName>ElcRate.resource.CacheFactory</ClassName>
+			<CacheableClass>
+				<!-- <PrefixCache>
+					<ClassName>ElcRate.cache.BestMatchCache</ClassName>
+					<DataSourceType>File</DataSourceType>
+					<DataFile>configData/prefixdesc.dat</DataFile>
+				</PrefixCache> -->
+			</CacheableClass>
+		</CacheFactory>
+	</Resource>
+</config>

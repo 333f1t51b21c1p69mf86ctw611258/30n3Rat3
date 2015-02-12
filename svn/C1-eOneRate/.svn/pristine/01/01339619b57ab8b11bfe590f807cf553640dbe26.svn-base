@@ -1,0 +1,62 @@
+package Test;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class SqlLoaderTest
+{
+  public static void main1(String[] args)
+  {
+    try
+    {
+      String sqlldrCmd = "SQLLDR CONTROL= F:\\sqlloader\\gnis.ctl "+
+      "LOG=gnis.log "+
+      "DATA=gnis.csv USERID=hongson/123456@C1RT_ELCOM "+
+      "BAD=employee.bad ERRORS=999 "+
+      "LOAD=2000 SKIP=0";
+      
+      System.out.println("SQLLDR Started");
+      Runtime rt = Runtime.getRuntime();
+      Process proc = rt.exec(sqlldrCmd);
+      System.out.println("SQLLDR Ended");
+    }
+    catch (Exception e)
+    {
+    e.printStackTrace();
+    }
+  }
+  
+  public static void main(String args[]) {
+
+      String s = null;
+
+      try {
+          
+          Process p = Runtime.getRuntime().exec("sqlldr hongson/123456@C1RT_ELCOM control = F:\\sqlloader\\gnis log=F:\\sqlloader\\gnis_log data=F:\\sqlloader\\gnis.csv");
+          
+          BufferedReader stdInput = new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+          BufferedReader stdError = new BufferedReader(new  InputStreamReader(p.getErrorStream()));
+
+          // read the output from the command
+          System.out.println("Đầu ra:\n");
+          while ((s = stdInput.readLine()) != null) {
+              System.out.println(s);
+          }
+          
+          // read any errors from the attempted command
+          System.out.println("Lỗi (nếu có):\n");
+          while ((s = stdError.readLine()) != null) {
+              System.out.println(s);
+          }
+          System.exit(0);
+      }
+      catch (IOException e) {
+          System.out.println("Ngoại lệ xảy ra: ");
+          e.printStackTrace();
+          System.exit(-1);
+      }
+  }
+  
+}

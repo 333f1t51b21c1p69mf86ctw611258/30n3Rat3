@@ -1,0 +1,273 @@
+package e1reformat.gui.menu.configuration;
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
+
+import org.apache.commons.lang3.StringUtils;
+
+import e1reformat.db.dao.ZoneMapDAO;
+import e1reformat.db.pool.DBPool;
+import e1reformat.entity.enrich.MapZone;
+import e1reformat.util.ReturnObject;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+public class QuickZoneMapDialog extends JDialog {
+
+    private static final long serialVersionUID = 1L;
+    private JLabel updateResultLbl;
+    static int SUCCESS = 0;
+    static int ERROR = -1;
+    private JTextField codeTxt;
+    private JLabel lblResult;
+    private JFrame frame;
+    private JTextField txtZone;
+    private JTextField txtNw_group;
+    private ReturnObject result;
+    private JTextField txtPaymentId;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        try {
+            QuickZoneMapDialog dialog = new QuickZoneMapDialog();
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Create the dialog.
+     */
+    public QuickZoneMapDialog() {
+        setResizable(false);
+        setTitle("Create Zone Map");
+        setBounds(100, 100, 480, 230);
+        setModalityType(ModalityType.APPLICATION_MODAL);
+        getContentPane().setLayout(null);
+        setLocationRelativeTo(null);
+        QuickZoneMapDialog.setDefaultLookAndFeelDecorated(true);
+
+        updateResultLbl = new JLabel("");
+        updateResultLbl.setBounds(59, 388, 236, 22);
+        getContentPane().add(updateResultLbl);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+        panel.setBounds(10, 11, 454, 151);
+        getContentPane().add(panel);
+
+        JLabel lblCode = new JLabel("Code");
+        lblCode.setFont(new Font("Tahoma", Font.BOLD, 11));
+        lblCode.setBounds(10, 15, 63, 14);
+        panel.add(lblCode);
+
+        JLabel lblZone = new JLabel("Zone");
+        lblZone.setFont(new Font("Tahoma", Font.BOLD, 11));
+        lblZone.setBounds(10, 52, 63, 14);
+        panel.add(lblZone);
+
+        codeTxt = new JTextField();
+        codeTxt.setColumns(10);
+        codeTxt.setBounds(109, 11, 335, 23);
+        panel.add(codeTxt);
+
+        JLabel lblNwgroup = new JLabel("Nw_group");
+        lblNwgroup.setFont(new Font("Tahoma", Font.BOLD, 11));
+        lblNwgroup.setBounds(10, 93, 63, 14);
+        panel.add(lblNwgroup);
+
+        txtZone = new JTextField();
+        txtZone.setColumns(10);
+        txtZone.setBounds(109, 48, 335, 23);
+        panel.add(txtZone);
+
+        txtNw_group = new JTextField();
+        txtNw_group.setColumns(10);
+        txtNw_group.setBounds(109, 89, 335, 23);
+        panel.add(txtNw_group);
+
+        txtPaymentId = new JTextField();
+        txtPaymentId.setColumns(10);
+        txtPaymentId.setBounds(109, 123, 335, 23);
+        panel.add(txtPaymentId);
+
+        JLabel lblPaymentId = new JLabel("Payment_Id");
+        lblPaymentId.setFont(new Font("Tahoma", Font.BOLD, 11));
+        lblPaymentId.setBounds(10, 127, 89, 14);
+        panel.add(lblPaymentId);
+
+        final JButton btnCreate = new JButton("Save");
+        btnCreate.setFont(new Font("Tahoma", Font.BOLD, 11));
+
+        btnCreate.setBounds(164, 173, 71, 23);
+        getContentPane().add(btnCreate);
+
+        lblResult = new JLabel("");
+        lblResult.setBounds(369, 354, 186, 19);
+        getContentPane().add(lblResult);
+
+        JButton btnClose = new JButton("Close");
+        btnClose.setFont(new Font("Tahoma", Font.BOLD, 11));
+        btnClose.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                QuickZoneMapDialog.this.dispose();
+            }
+        });
+        btnClose.setBounds(245, 173, 71, 23);
+        getContentPane().add(btnClose);
+
+        btnCreate.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                createZoneMap();
+
+            }
+        });
+
+    }
+
+    protected void createZoneMap() {
+
+        if (StringUtils.isEmpty(codeTxt.getText())) {
+            codeTxt.setBackground(Color.YELLOW);
+            JOptionPane.showMessageDialog(frame, "Code cannot be empty! ");
+            return;
+        }
+
+        if (!isInteger(codeTxt.getText().trim())) {
+            JOptionPane.showMessageDialog(frame, "Code must be number");
+            codeTxt.setBackground(Color.YELLOW);
+            return;
+        }
+
+        if (!StringUtils.isEmpty(codeTxt.getText())) {
+            if (codeTxt.getText().trim().length() > 31) {
+                codeTxt.setBackground(Color.YELLOW);
+                JOptionPane.showMessageDialog(frame, "Code no more than 31 characters");
+                return;
+            }
+        }
+
+        if (StringUtils.isEmpty(txtZone.getText())) {
+            txtZone.setBackground(Color.YELLOW);
+            JOptionPane.showMessageDialog(frame, "Zone cannot be empty! ");
+            return;
+        }
+
+        if (!StringUtils.isEmpty(txtZone.getText())) {
+            if (txtZone.getText().toString().trim().length() > 63) {
+                codeTxt.setBackground(Color.YELLOW);
+                JOptionPane.showMessageDialog(frame, "Zone no more than 63 characters");
+                return;
+            }
+        }
+
+        if (!KTraKTDB(txtZone.getText().trim())) {
+            JOptionPane.showMessageDialog(frame, "Code not contain special character");
+            txtZone.setBackground(Color.YELLOW);
+            return;
+        }
+
+        if (StringUtils.isEmpty(txtNw_group.getText())) {
+            txtNw_group.setBackground(Color.YELLOW);
+            JOptionPane.showMessageDialog(frame, "nw_group cannot be empty! ");
+            return;
+        }
+
+        if (!StringUtils.isEmpty(txtZone.getText())) {
+            if (txtNw_group.getText().trim().length() > 7) {
+                txtNw_group.setBackground(Color.YELLOW);
+                JOptionPane.showMessageDialog(frame, "nw_group no more than 7 characters");
+                return;
+            }
+        }
+        if (!StringUtils.isEmpty(txtPaymentId.getText())) {
+            if (txtPaymentId.getText().length() > 6) {
+                txtPaymentId.setBackground(Color.YELLOW);
+                JOptionPane.showMessageDialog(frame, "Payment_Id no more than 6 characters");
+                return;
+            }
+        }
+        if (!KTraKTDB(txtNw_group.getText().trim())) {
+            JOptionPane.showMessageDialog(frame, "nw_group not contain special character");
+            txtNw_group.setBackground(Color.YELLOW);
+            return;
+        }
+
+        Connection conn = null;
+        try {
+            conn = DBPool.getConnection();
+            result = new ReturnObject();
+            MapZone mapZone = new MapZone(codeTxt.getText(), txtZone.getText(), txtNw_group.getText(), txtPaymentId.getText());
+            Boolean isExit = ZoneMapDAO.checkExistCode(codeTxt.getText().trim(), conn);
+            if (!isExit) {
+                result = ZoneMapDAO.createQuickZoneMap(mapZone, conn);
+                if (result.getReturnValue() == SUCCESS) {
+                    codeTxt.setBackground(Color.WHITE);
+                    conn.close();
+                    ZoneMapDialog.updateTable();
+                    QuickZoneMapDialog.this.dispose();
+                } else {
+                    JOptionPane.showMessageDialog(frame, result.getErrorDesc() + codeTxt.getText() + " with error code: " + result.getErrorCode());
+                }
+            } else {
+                JOptionPane.showMessageDialog(frame, "Code exit in database");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException ex) {
+                ex.fillInStackTrace();
+            }
+
+        }
+
+    }
+
+    public boolean isInteger(String str) {
+        int size = str.length();
+
+        for (int i = 0; i < size; i++) {
+            if (!Character.isDigit(str.charAt(i))) {
+                return false;
+            }
+        }
+
+        return size > 0;
+    }
+
+    public static boolean KTraKTDB(String str) {
+        boolean ktu_dac_biet = true;
+        char[] arr = {'@', '$', '!', '#', '&', '*', '%', '/', ':', '<', '>'};
+        for (int i = 0; i < str.length(); i++) {
+            for (int j = 0; j < arr.length; j++) {
+                if (str.charAt(i) == arr[j]) {
+                    ktu_dac_biet = false;
+                    break;
+                }
+            }
+        }
+        return ktu_dac_biet;
+    }
+}

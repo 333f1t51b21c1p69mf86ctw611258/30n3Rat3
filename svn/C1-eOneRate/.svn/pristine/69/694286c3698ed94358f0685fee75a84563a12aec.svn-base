@@ -1,0 +1,541 @@
+package e1reformat.gui.menu.errorMappingSearch;
+
+import e1reformat.db.dao.ErrorMappingDAO;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.swing.Box;
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.RowFilter;
+import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.TableRowSorter;
+
+import e1reformat.db.pool.DBPool;
+import e1reformat.entity.enrich.HotRatedCdr;
+import e1reformat.gui.util.MySortedJTable;
+import e1reformat.gui.util.MyTableModel;
+import e1reformat.gui.util.RadioButtonUI;
+import e1reformat.util.DateUtils;
+import e1reformat.util.IConstant;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import javax.swing.JFormattedTextField.AbstractFormatter;
+import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
+import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
+import net.sourceforge.jdatepicker.impl.UtilDateModel;
+import javax.swing.SwingConstants;
+import javax.swing.JTable;
+import javax.swing.table.TableColumn;
+
+public class ErrorMappingDialog extends JDialog {
+
+    private static final long serialVersionUID = 1L;
+    private static MySortedJTable listErrorMappingJTable;
+    private static ArrayList<HotRatedCdr> listHotRatedCdr = new ArrayList<HotRatedCdr>();
+    private JPanel errorMappingPanel;
+    private static final String[] columnNames = {"MAP_ID", "A_NUMBER", "CDR_TYPE", "CREATED_TIME",
+        "CDR_START_TIME", "DATA_PART", "DURATION", "TOTAL_USAGE", "B_NUMBER", "B_ZONE", "NW_GROUP", "SERVICE_FEE",
+        "SERVICE_FEE_ID", "CHARGE_FEE", "CHARGE_FEE_ID", "LAC", "CELL_ID", "SUBSCRIBER_UNBILL", "BU_ID", "OLD_BU_ID",
+        "OFFER_COST", "OFFER_FREE_BLOCK", "INTERNAL_COST", "INTERNAL_FREE_BLOCK", "DIAL_DIGIT", "CDR_RECORD_HEADER_ID",
+        "CDR_SEQUENCE_NUMBER", "LOCATION_NO", "MSC_ID", "UNIT_TYPE_ID", "PRIMARY_OFFER_ID", "DISCOUNT_ITEM_ID",
+        "BALANCE_CHANGE", "RERATE_FLAG", "AUT_FINAL_ID", "TARIFF_PLAN_ID", "ERROR_CODE", "DESCRIPTION"};
+    static int SUCCESS = 0;
+    private static JTextField aNumber;
+    private static JLabel lblResult;
+    private static JComboBox cbCdrType;
+    private static JDatePickerImpl dtpFromdate;
+    private static JDatePickerImpl dtpTodate;
+    public static int offSize = 50;
+    private final static int pageSize = 5;
+    private static RadioButtonUI ui = new RadioButtonUI();
+    private static MyTableModel model = new MyTableModel();
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    private static TableRowSorter sorter = new TableRowSorter(model);
+    private static Box box = Box.createHorizontalBox();
+    private static JComboBox comboBox;
+    private static JLabel totalLabel;
+    private static int currentTotal = 0;
+    private static HashMap<String, String> mErrorCode;
+    private JTextField txtErrorCode;
+
+    public static void main(String[] args) {
+        try {
+            ErrorMappingDialog dialog = new ErrorMappingDialog();
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public ErrorMappingDialog() {
+        setResizable(false);
+        Calendar cal = Calendar.getInstance();
+        Connection conn;
+        try {
+            conn = DBPool.getConnection();
+            mErrorCode = ErrorMappingDAO.getListErrorCode(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        setTitle("Search error mapping CDR");
+        setBounds(100, 100, 670, 569);
+        setModalityType(ModalityType.APPLICATION_MODAL);
+        getContentPane().setLayout(null);
+        setLocationRelativeTo(null);
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ErrorMappingDialog.setDefaultLookAndFeelDecorated(true);
+
+        errorMappingPanel = new JPanel(new BorderLayout());
+        errorMappingPanel.add(box, BorderLayout.SOUTH);
+
+        errorMappingPanel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        errorMappingPanel.setBounds(9, 186, 648, 350);
+        getContentPane().add(errorMappingPanel);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+        panel.setBounds(9, 11, 648, 164);
+        getContentPane().add(panel);
+        //<editor-fold defaultstate="collapsed" desc="Tao truong nhap lieu A_Number">
+        JLabel lblANumber = new JLabel("A_Number");
+        lblANumber.setFont(new Font("Tahoma", Font.BOLD, 11));
+        lblANumber.setBounds(10, 15, 59, 14);
+        panel.add(lblANumber);
+
+        aNumber = new JTextField();
+        aNumber.setColumns(10);
+        aNumber.setBounds(79, 11, 242, 23);
+        panel.add(aNumber);
+//</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc="Tao truong nhap lieu B_Number">
+//        JLabel lblCode = new JLabel("B_Number");
+//        lblCode.setFont(new Font("Tahoma", Font.BOLD, 11));
+//        lblCode.setBounds(331, 15, 58, 14);
+//        panel.add(lblCode);
+//
+//        bNumber = new JTextField();
+//        bNumber.setColumns(10);
+//        bNumber.setBounds(399, 11, 242, 23);
+//        panel.add(bNumber);
+//</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc="Tao button Search">
+
+        final JButton btnSearch = new JButton("Search");
+        btnSearch.setBounds(265, 130, 81, 23);
+        btnSearch.setFont(new Font("Tahoma", Font.BOLD, 11));
+        btnSearch.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                searchTable();
+            }
+        });
+        panel.add(btnSearch);
+//</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc="Tao button Close">
+
+        JButton btnClose = new JButton("Close");
+        btnClose.setBounds(356, 130, 71, 23);
+        btnClose.setFont(new Font("Tahoma", Font.BOLD, 11));
+        btnClose.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                lblResult.setVisible(false);
+                ErrorMappingDialog.this.dispose();
+            }
+        });
+        panel.add(btnClose);
+//</editor-fold>    
+        //<editor-fold defaultstate="collapsed" desc="Tao comboBox Cdr Type">
+
+        cbCdrType = new JComboBox();
+        cbCdrType.setBounds(79, 45, 242, 20);
+        cbCdrType.addItem("Select all");
+        cbCdrType.addItem(IConstant.XML_TAG.voice.toUpperCase() + " (" + IConstant.RECORD_TYPE.VOICE + ")");
+        cbCdrType.addItem(IConstant.XML_TAG.ocs.toUpperCase() + " (" + IConstant.RECORD_TYPE.OCS + ")");
+        cbCdrType.addItem(IConstant.XML_TAG.osa.toUpperCase() + " (" + IConstant.RECORD_TYPE.OSA + ")");
+        cbCdrType.addItem(IConstant.XML_TAG.pmt.toUpperCase() + " (" + IConstant.RECORD_TYPE.PMT + ")");
+        cbCdrType.addItem(IConstant.XML_TAG.sms.toUpperCase() + " (" + IConstant.RECORD_TYPE.SMS + ")");
+        panel.add(cbCdrType);
+
+        JLabel lblCdrType = new JLabel("CDR Type");
+        lblCdrType.setFont(new Font("Tahoma", Font.BOLD, 11));
+        lblCdrType.setBounds(10, 48, 59, 14);
+        panel.add(lblCdrType);
+//</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc="Tao DatePicker FromDate">
+
+        JLabel lblFromDate = new JLabel("From Date");
+        lblFromDate.setFont(new Font("Tahoma", Font.BOLD, 11));
+        lblFromDate.setBounds(10, 73, 59, 26);
+        panel.add(lblFromDate);
+
+        UtilDateModel modelFromDate = new UtilDateModel();
+        modelFromDate.setDate(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE));
+        modelFromDate.setSelected(true);
+        JDatePanelImpl dtPlFromDate = new JDatePanelImpl(modelFromDate);
+        dtpFromdate = new JDatePickerImpl(dtPlFromDate, new DateLabelFormatter());
+        dtpFromdate.setBounds(79, 76, 242, 23);
+        panel.add(dtpFromdate);
+//</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc="Tao DatePicker ToDate">
+
+        JLabel lblToDate = new JLabel("To Date");
+        lblToDate.setFont(new Font("Tahoma", Font.BOLD, 11));
+        lblToDate.setBounds(331, 76, 59, 26);
+        panel.add(lblToDate);
+
+        UtilDateModel modelToDate = new UtilDateModel();
+        modelToDate.setDate(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DATE));
+        modelToDate.setSelected(true);
+        JDatePanelImpl dtPlToDate = new JDatePanelImpl(modelToDate);
+        dtpTodate = new JDatePickerImpl(dtPlToDate, new DateLabelFormatter());
+        dtpTodate.setBounds(399, 76, 242, 23);
+        panel.add(dtpTodate);
+
+//</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc="Tao label Result">
+        lblResult = new JLabel("result");
+        lblResult.setForeground(Color.RED);
+        lblResult.setHorizontalAlignment(SwingConstants.CENTER);
+        lblResult.setFont(new Font("Tahoma", Font.BOLD, 11));
+        lblResult.setBounds(194, 110, 309, 14);
+        lblResult.setVisible(false);
+        panel.add(lblResult);
+
+//</editor-fold>
+        //<editor-fold defaultstate="collapsed" desc="Tao truong tim kiem Error Code">
+        JLabel lblErrorCode = new JLabel("ErrorCode");
+        lblErrorCode.setFont(new Font("Tahoma", Font.BOLD, 11));
+        lblErrorCode.setBounds(331, 48, 59, 14);
+        panel.add(lblErrorCode);
+
+        txtErrorCode = new JTextField();
+        txtErrorCode.setColumns(10);
+        txtErrorCode.setBounds(399, 45, 242, 23);
+        panel.add(txtErrorCode);
+
+//</editor-fold>
+        drawTable();
+    }
+
+    private Object[][] getDataHotRatedCdr(String fromDate, String toDate, Connection conn) throws Exception {
+        Object[][] data = null;
+        listHotRatedCdr = ErrorMappingDAO.getSearchHotRatedCdr(aNumber.getText().trim(),
+                cbCdrType.getSelectedItem().toString(), fromDate, toDate, txtErrorCode.getText().trim(), conn);
+        int size = listHotRatedCdr.size();
+        if (size > 0) {
+            data = new Object[size][columnNames.length];
+            for (int i = 0; i < size; i++) {
+                data[i][0] = listHotRatedCdr.get(i).getMap_id();
+                data[i][1] = listHotRatedCdr.get(i).getA_number();
+                data[i][2] = listHotRatedCdr.get(i).getCdr_type();
+                data[i][3] = listHotRatedCdr.get(i).getCreated_time();
+                data[i][4] = listHotRatedCdr.get(i).getCdr_start_time();
+                data[i][5] = listHotRatedCdr.get(i).getData_part();
+                data[i][6] = listHotRatedCdr.get(i).getDuration();
+                data[i][7] = listHotRatedCdr.get(i).getTotal_usage();
+                data[i][8] = listHotRatedCdr.get(i).getB_number();
+                data[i][9] = listHotRatedCdr.get(i).getB_zone();
+                data[i][10] = listHotRatedCdr.get(i).getNw_group();
+                data[i][11] = listHotRatedCdr.get(i).getService_fee();
+                data[i][12] = listHotRatedCdr.get(i).getService_fee_id();
+                data[i][13] = listHotRatedCdr.get(i).getCharge_fee();
+                data[i][14] = listHotRatedCdr.get(i).getCharge_fee_id();
+                data[i][15] = listHotRatedCdr.get(i).getLac();
+                data[i][16] = listHotRatedCdr.get(i).getCell_id();
+                data[i][17] = listHotRatedCdr.get(i).getSubcriber_unbill();
+                data[i][18] = listHotRatedCdr.get(i).getBu_id();
+                data[i][19] = listHotRatedCdr.get(i).getOld_bu_id();
+                data[i][20] = listHotRatedCdr.get(i).getOffer_cost();
+                data[i][21] = listHotRatedCdr.get(i).getOffer_free_block();
+                data[i][22] = listHotRatedCdr.get(i).getInternal_cost();
+                data[i][23] = listHotRatedCdr.get(i).getInternal_free_block();
+                data[i][24] = listHotRatedCdr.get(i).getDial_digit();
+                data[i][25] = listHotRatedCdr.get(i).getCdr_record_header_id();
+                data[i][26] = listHotRatedCdr.get(i).getCdr_sequence_number();
+                data[i][27] = listHotRatedCdr.get(i).getLocation_no();
+                data[i][28] = listHotRatedCdr.get(i).getMsc_id();
+                data[i][29] = listHotRatedCdr.get(i).getUnit_type_id();
+                data[i][30] = listHotRatedCdr.get(i).getPrimary_offer_id();
+                data[i][31] = listHotRatedCdr.get(i).getDiscount_item_id();
+                data[i][32] = listHotRatedCdr.get(i).getBalance_change();
+                data[i][33] = listHotRatedCdr.get(i).getRerate_flag();
+                data[i][34] = listHotRatedCdr.get(i).getAut_final_id();
+                data[i][35] = listHotRatedCdr.get(i).getTariff_plan_id();
+                data[i][36] = listHotRatedCdr.get(i).getError_code();
+                String desc = mErrorCode.get(listHotRatedCdr.get(i).getError_code());
+                data[i][37] = (desc == null) ? "No Description" : desc;
+            }
+        }
+        return data;
+    }
+
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    private void drawTable() {
+        MyTableModel tableModel = new MyTableModel();
+        tableModel.setColumnNames(columnNames);
+        tableModel.setEditable(false);
+        try {
+            Connection conn = DBPool.getConnection();
+            String fromDate = DateUtils.getDateStringInformat((Date) dtpFromdate.getModel().getValue(), DateUtils.ddMMYYYY_FULL_SLASH);
+            String toDate = DateUtils.getDateStringInformat((Date) dtpTodate.getModel().getValue(), DateUtils.ddMMYYYY_FULL_SLASH);
+            Object[][] data = null;
+//            data = getDataHotRatedCdr(fromDate, toDate, conn);
+            if (data != null) {
+                tableModel.setData(data);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //<editor-fold defaultstate="collapsed" desc="Tao JTable de do du lieu vao">       
+        listErrorMappingJTable = new MySortedJTable(tableModel);
+        listErrorMappingJTable.table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TableColumn column = null;
+        for (int i = 0; i < columnNames.length - 1; i++) {
+
+            column = listErrorMappingJTable.table.getColumnModel().getColumn(i);
+            column.setPreferredWidth(150);
+        }
+        column = listErrorMappingJTable.table.getColumnModel().getColumn(columnNames.length - 1);
+        column.setPreferredWidth(300);
+        listErrorMappingJTable.setBounds(10, 11, 604, 321);
+        listErrorMappingJTable.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        errorMappingPanel.add(listErrorMappingJTable);
+        //</editor-fold>
+        sorter = new TableRowSorter(tableModel);
+        model = tableModel;
+        listErrorMappingJTable.getTable().setRowSorter(sorter);
+        showPages(offSize, 1);
+    }
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    public void searchTable() {
+        try {
+            String fromDate = DateUtils.getDateStringInformat((Date) dtpFromdate.getModel().getValue(), DateUtils.ddMMYYYY_FULL_SLASH);
+            String toDate = DateUtils.getDateStringInformat((Date) dtpTodate.getModel().getValue(), DateUtils.ddMMYYYY_FULL_SLASH);
+            int validate = DateUtils.validateDate(fromDate, toDate);
+//            if (validate == -2) {
+//                lblResult.setVisible(true);
+//                lblResult.setText("You don't select From Date or To Date field!");
+//            } else 
+                if (validate == -1) {
+                lblResult.setVisible(true);
+                lblResult.setText("System error!");
+            } else if (validate == 1) {
+                lblResult.setVisible(true);
+                lblResult.setText("From Date is after To Date!");
+            } else if (validate == 2) {
+                lblResult.setVisible(true);
+                lblResult.setText("From Date is after Now!");
+            } else if (validate == 3) {
+                lblResult.setVisible(true);
+                lblResult.setText("To Date is after Now!");
+            } else {
+                lblResult.setVisible(false);
+                Connection conn = DBPool.getConnection();
+                Object[][] data = getDataHotRatedCdr(fromDate, toDate, conn);
+                if (data != null) {
+                    MyTableModel tableModel = new MyTableModel();
+                    tableModel.setColumnNames(columnNames);
+                    tableModel.setData(data);
+                    listErrorMappingJTable.setFont(new Font("Tahoma", Font.PLAIN, 11));
+                    listErrorMappingJTable.getTable().setModel(tableModel);
+                    listErrorMappingJTable.repaint();
+
+                    sorter = new TableRowSorter(tableModel);
+                    model = tableModel;
+                    listErrorMappingJTable.getTable().setRowSorter(sorter);
+                    showPages(offSize, 1);
+                    repaint();
+                } else {
+                    MyTableModel tableModel = new MyTableModel();
+                    tableModel.setColumnNames(columnNames);
+                    tableModel.setData(null);
+                    listErrorMappingJTable.setFont(new Font("Tahoma", Font.PLAIN, 11));
+                    listErrorMappingJTable.getTable().setModel(tableModel);
+                    listErrorMappingJTable.repaint();
+                    resetToEmptyTable();
+                }
+                listErrorMappingJTable.table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+                TableColumn column = null;
+                for (int i = 0; i < columnNames.length - 1; i++) {
+
+                    column = listErrorMappingJTable.table.getColumnModel().getColumn(i);
+                    column.setPreferredWidth(150);
+                }
+                column = listErrorMappingJTable.table.getColumnModel().getColumn(columnNames.length - 1);
+                column.setPreferredWidth(300);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    public static void showPages(final int itemsPerPage, final int currentPageIndex) {
+        ArrayList<JRadioButton> list = new ArrayList<JRadioButton>();
+        sorter.setRowFilter(filter(itemsPerPage, currentPageIndex - 1));
+        int maxPageIndex = 0;
+        int startPageIndex = currentPageIndex - pageSize;
+        if (startPageIndex <= 0) {
+            startPageIndex = 1;
+        }
+        if (model.getRowCount() == itemsPerPage) {
+            maxPageIndex = 1;
+        } else {
+            maxPageIndex = (model.getRowCount() / itemsPerPage) + 1;
+        }
+        int endPageIndex = currentPageIndex + pageSize - 1;
+        if (endPageIndex > maxPageIndex) {
+            endPageIndex = maxPageIndex;
+        }
+
+        if (currentPageIndex > 1) {
+            list.add(createRadioButtons(itemsPerPage, currentPageIndex - 1,
+                    "Prev"));
+        }
+        for (int i = startPageIndex; i <= endPageIndex; i++) {
+            list.add(createLinks(itemsPerPage, currentPageIndex, i - 1));
+        }
+        if (currentPageIndex < maxPageIndex) {
+            list.add(createRadioButtons(itemsPerPage, currentPageIndex + 1,
+                    "Next"));
+        }
+        box.removeAll();
+        JPanel a = new JPanel();
+        a.setLayout(null);
+        comboBox = new JComboBox();
+        comboBox.setModel(new DefaultComboBoxModel(new String[]{"25", "50", "100"}));
+        comboBox.setBounds(0, 3, 60, 20);
+        comboBox.setSelectedItem(String.valueOf(offSize));
+        comboBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                JComboBox comboBox = (JComboBox) event.getSource();
+                String selected = comboBox.getSelectedItem().toString();
+                offSize = Integer.parseInt(selected);
+                showPages(offSize, 1);
+            }
+        });
+        a.add(comboBox);
+        currentTotal = currentPageIndex * itemsPerPage;
+        currentTotal = (currentTotal >= model.getRowCount()) ? model.getRowCount() : currentTotal;
+        totalLabel = new JLabel("Total Record: " + String.valueOf(currentTotal) + "/" + String.valueOf(model.getRowCount()));
+        totalLabel.setBounds(70, 3, 200, 20);
+        a.add(totalLabel);
+        a.setPreferredSize(new Dimension(350, 20));
+        box.add(a);
+        ButtonGroup bg = new ButtonGroup();
+        box.add(Box.createHorizontalGlue());
+        for (JRadioButton r : list) {
+            box.add(r);
+            bg.add(r);
+        }
+        box.revalidate();
+        box.repaint();
+        list.clear();
+    }
+
+    @SuppressWarnings("serial")
+    private static JRadioButton createLinks(final int itemsPerPage, final int current,
+            final int target) {
+        JRadioButton radio = new JRadioButton("" + (target + 1)) {
+            protected void fireStateChanged() {
+                ButtonModel model = getModel();
+                if (!model.isEnabled()) {
+                    setForeground(Color.GRAY);
+                } else if (model.isPressed() && model.isArmed()) {
+                    setForeground(Color.GREEN);
+                } else if (model.isSelected()) {
+                    setForeground(Color.RED);
+                }
+                super.fireStateChanged();
+            }
+        };
+        radio.setForeground(Color.BLUE);
+        radio.setUI(ui);
+        if (target + 1 == current) {
+            radio.setSelected(true);
+        }
+        radio.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                showPages(itemsPerPage, target + 1);
+            }
+        });
+        return radio;
+    }
+
+    private static JRadioButton createRadioButtons(final int itemsPerPage,
+            final int target, String title) {
+        JRadioButton radio = new JRadioButton(title);
+        radio.setForeground(Color.BLUE);
+        radio.setUI(ui);
+        radio.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showPages(itemsPerPage, target);
+            }
+        });
+        return radio;
+    }
+
+    @SuppressWarnings("rawtypes")
+    private static RowFilter filter(final int itemsPerPage, final int target) {
+        return new RowFilter() {
+            public boolean include(Entry entry) {
+                int ei = (Integer) entry.getIdentifier();
+                return (target * itemsPerPage <= ei && ei < target
+                        * itemsPerPage + itemsPerPage);
+            }
+        };
+    }
+
+    public static void resetToEmptyTable() {
+        model.setData(null);
+        listErrorMappingJTable.getTable().setModel(model);
+        listErrorMappingJTable.repaint();
+        showPages(offSize, 1);
+    }
+
+    private class DateLabelFormatter extends AbstractFormatter {
+
+        private SimpleDateFormat dateFormatter = new SimpleDateFormat(DateUtils.ddMMYYYY_FULL_SLASH);
+
+        @Override
+        public Object stringToValue(String text) throws ParseException {
+            return dateFormatter.parseObject(text);
+        }
+
+        @Override
+        public String valueToString(Object value) throws ParseException {
+            if (value != null) {
+                Calendar cal = (Calendar) value;
+                return dateFormatter.format(cal.getTime());
+            }
+            return "";
+        }
+    }
+}

@@ -1,0 +1,508 @@
+package e1reformat.gui.menu.configuration;
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.swing.Box;
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.RowFilter;
+import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
+import javax.swing.table.TableRowSorter;
+
+import org.apache.commons.lang3.StringUtils;
+
+import e1reformat.db.dao.ZoneMapDAO;
+import e1reformat.db.pool.DBPool;
+import e1reformat.entity.enrich.MapZone;
+import e1reformat.gui.util.MySortedJTable;
+import e1reformat.gui.util.MyTableModel;
+import e1reformat.gui.util.RadioButtonUI;
+import e1reformat.util.ReturnObject;
+
+public class ZoneMapDialog extends JDialog {
+
+    public static QuickZoneMapDialog quickZoneMapDialog;
+    public static UpdateZoneMapDialog updateZoneMapDialog;
+    private static final long serialVersionUID = 1L;
+    private static MySortedJTable listZoneMapJTable;
+    private static JButton btnUpdate;
+    private static JButton btnDelete;
+    private static ArrayList<MapZone> listZoneMap = new ArrayList<MapZone>();
+    private JPanel zoneMapPanel;
+    private JLabel updateResultLbl;
+    private static final String[] columnNames = {"Code", "Zone", "Nw_Group", "Payment_Id"};
+    static int SUCCESS = 0;
+    static int ERROR = -1;
+    private static JTextField codeTxt;
+    private static JLabel lblResult;
+    private JFrame frame;
+    private static String code = "";
+    private static String zone = "";
+    private static String nw_group = "";
+    private static String paymentId = "";
+
+    public static int offSize = 50;
+    final static int pageSize = 5;
+    static RadioButtonUI ui = new RadioButtonUI();
+    public static MyTableModel model = new MyTableModel();
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    static TableRowSorter sorter = new TableRowSorter(model);
+    static Box box = Box.createHorizontalBox();
+    private static JComboBox comboBox;
+    private static JLabel totalLabel;
+    private static int currentTotal = 0;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        try {
+            ZoneMapDialog dialog = new ZoneMapDialog();
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Create the dialog.
+     */
+    public ZoneMapDialog() {
+        setResizable(false);
+        setTitle("Zone Map");
+        setBounds(100, 100, 651, 483);
+        setModalityType(ModalityType.APPLICATION_MODAL);
+        getContentPane().setLayout(null);
+        setLocationRelativeTo(null);
+        try {
+            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        ZoneMapDialog.setDefaultLookAndFeelDecorated(true);
+
+        zoneMapPanel = new JPanel(new BorderLayout());
+        zoneMapPanel.add(box, BorderLayout.SOUTH);
+
+        zoneMapPanel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+        zoneMapPanel.setBounds(9, 67, 627, 343);
+        getContentPane().add(zoneMapPanel);
+        btnUpdate = new JButton("Update");
+        btnUpdate.setFont(new Font("Tahoma", Font.BOLD, 11));
+        btnUpdate.setEnabled(false);
+        btnUpdate.setBounds(100, 421, 78, 23);
+        getContentPane().add(btnUpdate);
+
+        updateResultLbl = new JLabel("");
+        updateResultLbl.setBounds(59, 388, 236, 22);
+        getContentPane().add(updateResultLbl);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        panel.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+        panel.setBounds(9, 11, 625, 45);
+        getContentPane().add(panel);
+
+        JLabel lblCode = new JLabel("Code");
+        lblCode.setFont(new Font("Tahoma", Font.BOLD, 11));
+        lblCode.setBounds(10, 15, 45, 14);
+        panel.add(lblCode);
+
+        codeTxt = new JTextField();
+        codeTxt.setColumns(10);
+        codeTxt.setBounds(65, 11, 459, 23);
+        panel.add(codeTxt);
+
+        final JButton btnSearch = new JButton("Search");
+        btnSearch.setBounds(534, 10, 81, 23);
+        panel.add(btnSearch);
+        btnSearch.setFont(new Font("Tahoma", Font.BOLD, 11));
+
+        btnSearch.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                searchTable();
+            }
+        });
+
+        btnDelete = new JButton("Delete");
+        btnDelete.setFont(new Font("Tahoma", Font.BOLD, 11));
+        btnDelete.setEnabled(false);
+        btnDelete.setBounds(188, 421, 71, 23);
+        getContentPane().add(btnDelete);
+
+        lblResult = new JLabel("");
+        lblResult.setBounds(369, 354, 186, 19);
+        getContentPane().add(lblResult);
+
+        JButton btnClose = new JButton("Close");
+        btnClose.setFont(new Font("Tahoma", Font.BOLD, 11));
+        btnClose.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                ZoneMapDialog.this.dispose();
+            }
+        });
+        btnClose.setBounds(564, 421, 71, 23);
+        getContentPane().add(btnClose);
+
+        JButton btnQuickCreate = new JButton("Create");
+        btnQuickCreate.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                quickZoneMapDialog = new QuickZoneMapDialog();
+                quickZoneMapDialog.setVisible(true);
+            }
+        });
+        btnQuickCreate.setFont(new Font("Tahoma", Font.BOLD, 11));
+        btnQuickCreate.setBounds(9, 421, 81, 23);
+        getContentPane().add(btnQuickCreate);
+
+        btnUpdate.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent arg0) {
+                updateZoneMapDialog = new UpdateZoneMapDialog(code, zone, nw_group, paymentId);
+                updateZoneMapDialog.setVisible(true);
+            }
+        });
+        btnDelete.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                deleteZoneMap();
+            }
+        });
+
+        drawTable();
+    }
+
+    protected void deleteZoneMap() {
+        if (StringUtils.isEmpty(codeTxt.getText())) {
+            codeTxt.setBackground(Color.YELLOW);
+            lblResult.setText("code cannot be empty!");
+            lblResult.setForeground(Color.RED);
+            return;
+        }
+
+        if (JOptionPane.showConfirmDialog(frame,
+                "Are you sure to delete the zone map code: " + codeTxt.getText(), "Really Deleteing?",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE) == JOptionPane.NO_OPTION) {
+            return;
+        }
+
+        try {
+            Connection conn = DBPool.getConnection();
+            ReturnObject result = ZoneMapDAO.deleteZoneMap(codeTxt.getText(), conn);
+            if (result.getReturnValue() == SUCCESS) {
+                JOptionPane.showMessageDialog(frame, "Delete Zone map code " + codeTxt.getText() + " successfully!");
+                btnUpdate.setEnabled(false);
+                btnDelete.setEnabled(false);
+            } else {
+                JOptionPane.showMessageDialog(frame, result.getErrorDesc() + codeTxt.getText() + " with error code: " + result.getErrorCode());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        updateTable();
+    }
+
+    public static boolean KTraKTDB(String str) {
+        boolean ktu_dac_biet = true;
+        char[] arr = {'@', '$', '!', '#', '&', '*', '%', '/', ':', '<', '>'};
+        for (int i = 0; i < str.length(); i++) {
+            for (int j = 0; j < arr.length; j++) {
+                if (str.charAt(i) == arr[j]) {
+                    ktu_dac_biet = false;
+                    break;
+                }
+            }
+        }
+        return ktu_dac_biet;
+    }
+
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    private void drawTable() {
+        MyTableModel tableModel = new MyTableModel();
+        tableModel.setColumnNames(columnNames);
+        tableModel.setEditable(false);
+        try {
+            Connection conn = DBPool.getConnection();
+            listZoneMap = ZoneMapDAO.getListZoneMap(conn);
+            int size = listZoneMap.size();
+//            int size = 0;
+            if (size > 0) {
+
+                Object[][] data = new Object[size][columnNames.length];
+
+                for (int i = 0; i < size; i++) {
+                    data[i][0] = listZoneMap.get(i).getCode();
+                    data[i][1] = listZoneMap.get(i).getZone();
+                    data[i][2] = listZoneMap.get(i).getNwGroup();
+                    data[i][3] = listZoneMap.get(i).getPayment_id();
+                }
+                tableModel.setData(data);
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        listZoneMapJTable = new MySortedJTable(tableModel);
+        listZoneMapJTable.setBounds(10, 11, 604, 321);
+        listZoneMapJTable.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        zoneMapPanel.add(listZoneMapJTable);
+
+        sorter = new TableRowSorter(tableModel);
+        model = tableModel;
+        listZoneMapJTable.getTable().setRowSorter(sorter);
+        showPages(offSize, 1);
+
+        listZoneMapJTable.getTable().addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent me) {
+                JTable table = (JTable) me.getSource();
+                Point p = me.getPoint();
+                int selectedRow = table.rowAtPoint(p);
+
+                if (me.getClickCount() == 1 && selectedRow != -1) {
+                    listZoneMapJTable.repaint();
+                    code = (String) listZoneMapJTable.getTable().getValueAt(selectedRow, 0);
+                    zone = (String) listZoneMapJTable.getTable().getValueAt(selectedRow, 1);
+                    nw_group = (String) listZoneMapJTable.getTable().getValueAt(selectedRow, 2);
+                    paymentId = (String) listZoneMapJTable.getTable().getValueAt(selectedRow, 3);
+                    codeTxt.setText(code);
+                    btnDelete.setEnabled(true);
+                    btnUpdate.setEnabled(true);
+                }
+            }
+        });
+
+    }
+
+    public static void updateTable() {
+        try {
+            listZoneMap = null;
+            Connection conn = DBPool.getConnection();
+            listZoneMap = ZoneMapDAO.getListZoneMap(conn);
+            int size = listZoneMap.size();
+            if (size > 0) {
+                Object[][] data = new Object[size][columnNames.length];
+                for (int i = 0; i < size; i++) {
+                    data[i][0] = listZoneMap.get(i).getCode();
+                    data[i][1] = listZoneMap.get(i).getZone();
+                    data[i][2] = listZoneMap.get(i).getNwGroup();
+                    data[i][3] = listZoneMap.get(i).getPayment_id();
+                }
+                MyTableModel tableModel = new MyTableModel();
+                tableModel.setColumnNames(columnNames);
+                tableModel.setData(data);
+                listZoneMapJTable.setFont(new Font("Tahoma", Font.PLAIN, 11));
+                listZoneMapJTable.getTable().setModel(tableModel);
+                
+                sorter = new TableRowSorter(tableModel);
+                model = tableModel;
+                listZoneMapJTable.getTable().setRowSorter(sorter);
+                showPages(offSize, 1);
+                listZoneMapJTable.repaint();
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        codeTxt.setText("");
+    }
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    public void searchTable() {
+        try {
+            listZoneMap = null;
+
+            Connection conn = DBPool.getConnection();
+            listZoneMap = ZoneMapDAO.getSearchZoneMap(codeTxt.getText().trim(), conn);
+            int size = listZoneMap.size();
+            if (size > 0) {
+                Object[][] data = new Object[size][columnNames.length];
+                for (int i = 0; i < size; i++) {
+                    data[i][0] = listZoneMap.get(i).getCode();
+                    data[i][1] = listZoneMap.get(i).getZone();
+                    data[i][2] = listZoneMap.get(i).getNwGroup();
+                    data[i][3] = listZoneMap.get(i).getPayment_id();
+                }
+                MyTableModel tableModel = new MyTableModel();
+                tableModel.setColumnNames(columnNames);
+                tableModel.setData(data);
+                listZoneMapJTable.setFont(new Font("Tahoma", Font.PLAIN, 11));
+                listZoneMapJTable.getTable().setModel(tableModel);
+                listZoneMapJTable.repaint();
+
+                sorter = new TableRowSorter(tableModel);
+                model = tableModel;
+                listZoneMapJTable.getTable().setRowSorter(sorter);
+                showPages(offSize, 1);
+                repaint();
+
+            } else {
+                MyTableModel tableModel = new MyTableModel();
+                tableModel.setColumnNames(columnNames);
+                tableModel.setData(null);
+                listZoneMapJTable.setFont(new Font("Tahoma", Font.PLAIN, 11));
+                listZoneMapJTable.getTable().setModel(tableModel);
+                listZoneMapJTable.repaint();
+                resetToEmptyTable();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @SuppressWarnings("unchecked")
+    public static void showPages(final int itemsPerPage, final int currentPageIndex) {
+        ArrayList<JRadioButton> list = new ArrayList<JRadioButton>();
+        sorter.setRowFilter(filter(itemsPerPage, currentPageIndex - 1));
+        int maxPageIndex = 0;
+        int startPageIndex = currentPageIndex - pageSize;
+        if (startPageIndex <= 0) {
+            startPageIndex = 1;
+        }
+        if (model.getRowCount() == itemsPerPage) {
+            maxPageIndex = 1;
+        } else {
+            maxPageIndex = (model.getRowCount() / itemsPerPage) + 1;
+        }
+        int endPageIndex = currentPageIndex + pageSize - 1;
+        if (endPageIndex > maxPageIndex) {
+            endPageIndex = maxPageIndex;
+        }
+
+        if (currentPageIndex > 1) {
+            list.add(createRadioButtons(itemsPerPage, currentPageIndex - 1,
+                    "Prev"));
+        }
+        for (int i = startPageIndex; i <= endPageIndex; i++) {
+            list.add(createLinks(itemsPerPage, currentPageIndex, i - 1));
+        }
+        if (currentPageIndex < maxPageIndex) {
+            list.add(createRadioButtons(itemsPerPage, currentPageIndex + 1,
+                    "Next"));
+        }
+        box.removeAll();
+
+        JPanel a = new JPanel();
+        a.setLayout(null);
+        comboBox = new JComboBox();
+        comboBox.setModel(new DefaultComboBoxModel(new String[]{"50", "100", "200", "300", "500", "1000"}));
+        comboBox.setBounds(0, 3, 60, 20);
+        comboBox.setSelectedItem(String.valueOf(offSize));
+        comboBox.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent event) {
+                JComboBox comboBox = (JComboBox) event.getSource();
+                String selected = comboBox.getSelectedItem().toString();
+                offSize = Integer.parseInt(selected);
+                showPages(offSize, 1);
+            }
+        });
+
+        a.add(comboBox);
+
+        currentTotal = currentPageIndex * itemsPerPage;
+        currentTotal = (currentTotal >= model.getRowCount()) ? model.getRowCount() : currentTotal;
+        totalLabel = new JLabel("Total Record: " + String.valueOf(currentTotal) + "/" + String.valueOf(model.getRowCount()));
+        totalLabel.setBounds(70, 3, 200, 20);
+        a.add(totalLabel);
+        a.setPreferredSize(new Dimension(350, 20));
+        box.add(a);
+
+        ButtonGroup bg = new ButtonGroup();
+        box.add(Box.createHorizontalGlue());
+        for (JRadioButton r : list) {
+            box.add(r);
+            bg.add(r);
+        }
+
+        box.revalidate();
+        box.repaint();
+        list.clear();
+    }
+
+    @SuppressWarnings("serial")
+    private static JRadioButton createLinks(final int itemsPerPage, final int current,
+            final int target) {
+        JRadioButton radio = new JRadioButton("" + (target + 1)) {
+            protected void fireStateChanged() {
+                ButtonModel model = getModel();
+                if (!model.isEnabled()) {
+                    setForeground(Color.GRAY);
+                } else if (model.isPressed() && model.isArmed()) {
+                    setForeground(Color.GREEN);
+                } else if (model.isSelected()) {
+                    setForeground(Color.RED);
+                }
+                super.fireStateChanged();
+            }
+        };
+        radio.setForeground(Color.BLUE);
+        radio.setUI(ui);
+        if (target + 1 == current) {
+            radio.setSelected(true);
+        }
+        radio.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                showPages(itemsPerPage, target + 1);
+            }
+        });
+        return radio;
+    }
+
+    private static JRadioButton createRadioButtons(final int itemsPerPage,
+            final int target, String title) {
+        JRadioButton radio = new JRadioButton(title);
+        radio.setForeground(Color.BLUE);
+        radio.setUI(ui);
+        radio.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showPages(itemsPerPage, target);
+            }
+        });
+        return radio;
+    }
+
+    @SuppressWarnings("rawtypes")
+    private static RowFilter filter(final int itemsPerPage, final int target) {
+        return new RowFilter() {
+            public boolean include(Entry entry) {
+                int ei = (Integer) entry.getIdentifier();
+                return (target * itemsPerPage <= ei && ei < target
+                        * itemsPerPage + itemsPerPage);
+            }
+        };
+    }
+
+    public static void resetToEmptyTable() {
+        model.setData(null);
+        listZoneMapJTable.getTable().setModel(model);
+        listZoneMapJTable.repaint();
+        showPages(offSize, 1);
+    }
+}

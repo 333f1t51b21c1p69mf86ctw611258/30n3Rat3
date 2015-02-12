@@ -1,0 +1,181 @@
+package e1reformat.db.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import e1reformat.db.pool.DBConfig;
+import e1reformat.entity.enrich.HotRatedCdr;
+import e1reformat.util.DateUtils;
+import e1reformat.util.IConstant;
+import java.util.HashMap;
+
+/**
+ * TODO get result error mapping CDR
+ *
+ * @Author THAIHA
+ * @Date 12-11-2014
+ */
+public class ErrorMappingDAO {
+
+    private static DBConfig dbconfig = new DBConfig();
+    private static String schemaData = dbconfig.getDb_schema();
+    private static String schemaCommon = dbconfig.getDb_Common();
+    private static final int FETCH_SIZE = 1000;
+
+    public static HashMap<String, String> getListErrorCode(Connection conn) {
+
+        HashMap<String, String> searchResult = new HashMap<String, String>();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            String sql = "select * from " + schemaCommon + "CDR_MAPPING_ERROR_CODE a order by error_code";
+            pstmt = conn.prepareStatement(sql);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                searchResult.put(rs.getString("ERROR_CODE"), rs.getString("DESCRIPTION"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (Exception e) {
+                e.fillInStackTrace();
+            }
+        }
+        return searchResult;
+    }
+
+    public static ArrayList<HotRatedCdr> getSearchHotRatedCdr(String aNumber, String cdrType, String fromDate, String toDate, String errorCode, Connection conn) {
+        ArrayList<HotRatedCdr> searchResult = new ArrayList<HotRatedCdr>();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            ArrayList<String> arrParam = new ArrayList<String>();
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("select MAP_ID,A_NUMBER,CDR_TYPE,CREATED_TIME,CDR_START_TIME,DATA_PART,DURATION,");
+            sb.append("TOTAL_USAGE,B_NUMBER,B_ZONE,NW_GROUP,SERVICE_FEE,SERVICE_FEE_ID,CHARGE_FEE,");
+            sb.append("CHARGE_FEE_ID,LAC,CELL_ID,SUBSCRIBER_UNBILL,BU_ID,OLD_BU_ID,OFFER_COST,OFFER_FREE_BLOCK,");
+            sb.append("INTERNAL_COST,INTERNAL_FREE_BLOCK,DIAL_DIGIT,CDR_RECORD_HEADER_ID,CDR_SEQUENCE_NUMBER,");
+            sb.append("LOCATION_NO,MSC_ID,UNIT_TYPE_ID,PRIMARY_OFFER_ID,DISCOUNT_ITEM_ID,BALANCE_CHANGE,");
+            sb.append("RERATE_FLAG,AUT_FINAL_ID,TARIFF_PLAN_ID,ERROR_CODE FROM ").append(schemaData);
+            sb.append("HOT_RATED_CDR A where 1=1 and ERROR_CODE <> 0 ");
+            if (fromDate != null && !fromDate.isEmpty()) {
+                arrParam.add(fromDate);
+                sb.append("and trunc(cdr_start_time) >= to_date(?,'" + DateUtils.ddMMYYYY_FULL_SLASH + "') ");
+            }
+            if (toDate != null && !toDate.isEmpty()) {
+                arrParam.add(toDate);
+                sb.append("and trunc(cdr_start_time) <= to_date(?,'" + DateUtils.ddMMYYYY_FULL_SLASH + "') ");
+            }
+            if (aNumber != null && aNumber.length() > 0) {
+                sb.append("and a_number like ? ");
+//                arrParam.add("%" + aNumber + "%");
+                arrParam.add(aNumber + "%");
+            }
+            if (errorCode != null && errorCode.length() > 0) {
+                sb.append("and ERROR_CODE like ? ");
+                arrParam.add("%" + errorCode + "%");
+            }
+            if (cdrType != null && cdrType.length() > 0) {
+                if (cdrType.equalsIgnoreCase(IConstant.XML_TAG.voice)) {
+                    arrParam.add(String.valueOf(IConstant.RECORD_TYPE.VOICE));
+                    sb.append("and cdr_type = ? ");
+                } else if (cdrType.equalsIgnoreCase(IConstant.XML_TAG.ocs)) {
+                    arrParam.add(String.valueOf(IConstant.RECORD_TYPE.OCS));
+                    sb.append("and cdr_type = ? ");
+                } else if (cdrType.equalsIgnoreCase(IConstant.XML_TAG.osa)) {
+                    arrParam.add(String.valueOf(IConstant.RECORD_TYPE.OSA));
+                    sb.append("and cdr_type = ? ");
+                } else if (cdrType.equalsIgnoreCase(IConstant.XML_TAG.pmt)) {
+                    arrParam.add(String.valueOf(IConstant.RECORD_TYPE.PMT));
+                    sb.append("and cdr_type = ? ");
+                } else if (cdrType.equalsIgnoreCase(IConstant.XML_TAG.sms)) {
+                    arrParam.add(String.valueOf(IConstant.RECORD_TYPE.SMS));
+                    sb.append("and cdr_type = ? ");
+                } else if (cdrType.equalsIgnoreCase(IConstant.XML_TAG.gprs)) {
+                    arrParam.add(String.valueOf(IConstant.RECORD_TYPE.GPRS));
+                    sb.append("and cdr_type = ? ");
+                } else {
+//                    thaiha say: Truong hop chon tim kiem theo tat ca cac loai CDR
+                }
+            }
+//            sb.append("ORDER BY MAP_ID");
+            pstmt = conn.prepareStatement(sb.toString());
+            pstmt.setMaxRows(FETCH_SIZE);
+            for (int i = 1; i <= arrParam.size(); i++) {
+                pstmt.setString(i, arrParam.get(i - 1));
+            }
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                HotRatedCdr hotRatedCdr = new HotRatedCdr();
+                hotRatedCdr.setMap_id(rs.getString(HotRatedCdr.FIELD.MAP_ID));
+                hotRatedCdr.setA_number(rs.getString(HotRatedCdr.FIELD.A_NUMBER));
+                hotRatedCdr.setCdr_type(rs.getString(HotRatedCdr.FIELD.CDR_TYPE));
+                hotRatedCdr.setCreated_time(rs.getString(HotRatedCdr.FIELD.CREATED_TIME));
+                hotRatedCdr.setCdr_start_time(rs.getString(HotRatedCdr.FIELD.CDR_START_TIME));
+                hotRatedCdr.setData_part(rs.getString(HotRatedCdr.FIELD.DATA_PART));
+                hotRatedCdr.setDuration(rs.getString(HotRatedCdr.FIELD.DURATION));
+                hotRatedCdr.setTotal_usage(rs.getString(HotRatedCdr.FIELD.TOTAL_USAGE));
+                hotRatedCdr.setB_number(rs.getString(HotRatedCdr.FIELD.B_NUMBER));
+                hotRatedCdr.setB_zone(rs.getString(HotRatedCdr.FIELD.B_ZONE));
+                hotRatedCdr.setNw_group(rs.getString(HotRatedCdr.FIELD.NW_GROUP));
+                hotRatedCdr.setService_fee(rs.getString(HotRatedCdr.FIELD.SERVICE_FEE));
+                hotRatedCdr.setService_fee_id(rs.getString(HotRatedCdr.FIELD.SERVICE_FEE_ID));
+                hotRatedCdr.setCharge_fee(rs.getString(HotRatedCdr.FIELD.CHARGE_FEE));
+                hotRatedCdr.setCharge_fee_id(rs.getString(HotRatedCdr.FIELD.CHARGE_FEE_ID));
+                hotRatedCdr.setLac(rs.getString(HotRatedCdr.FIELD.LAC));
+                hotRatedCdr.setCell_id(rs.getString(HotRatedCdr.FIELD.CELL_ID));
+                hotRatedCdr.setSubcriber_unbill(rs.getString(HotRatedCdr.FIELD.SUBSCRIBER_UNBILL));
+                hotRatedCdr.setBu_id(rs.getString(HotRatedCdr.FIELD.BU_ID));
+                hotRatedCdr.setOld_bu_id(rs.getString(HotRatedCdr.FIELD.OLD_BU_ID));
+                hotRatedCdr.setOffer_cost(rs.getString(HotRatedCdr.FIELD.OFFER_COST));
+                hotRatedCdr.setOffer_free_block(rs.getString(HotRatedCdr.FIELD.OFFER_FREE_BLOCK));
+                hotRatedCdr.setInternal_cost(rs.getString(HotRatedCdr.FIELD.INTERNAL_COST));
+                hotRatedCdr.setInternal_free_block(rs.getString(HotRatedCdr.FIELD.INTERNAL_FREE_BLOCK));
+                hotRatedCdr.setDial_digit(rs.getString(HotRatedCdr.FIELD.DIAL_DIGIT));
+                hotRatedCdr.setCdr_record_header_id(rs.getString(HotRatedCdr.FIELD.CDR_RECORD_HEADER_ID));
+                hotRatedCdr.setCdr_sequence_number(rs.getString(HotRatedCdr.FIELD.CDR_SEQUENCE_NUMBER));
+                hotRatedCdr.setLocation_no(rs.getString(HotRatedCdr.FIELD.LOCATION_NO));
+                hotRatedCdr.setMsc_id(rs.getString(HotRatedCdr.FIELD.MSC_ID));
+                hotRatedCdr.setUnit_type_id(rs.getString(HotRatedCdr.FIELD.UNIT_TYPE_ID));
+                hotRatedCdr.setPrimary_offer_id(rs.getString(HotRatedCdr.FIELD.PRIMARY_OFFER_ID));
+                hotRatedCdr.setDiscount_item_id(rs.getString(HotRatedCdr.FIELD.DISCOUNT_ITEM_ID));
+                hotRatedCdr.setBalance_change(rs.getString(HotRatedCdr.FIELD.BALANCE_CHANGE));
+                hotRatedCdr.setRerate_flag(rs.getString(HotRatedCdr.FIELD.RERATE_FLAG));
+                hotRatedCdr.setAut_final_id(rs.getString(HotRatedCdr.FIELD.AUT_FINAL_ID));
+                hotRatedCdr.setTariff_plan_id(rs.getString(HotRatedCdr.FIELD.TARIFF_PLAN_ID));
+                hotRatedCdr.setError_code(rs.getString(HotRatedCdr.FIELD.ERROR_CODE));
+                searchResult.add(hotRatedCdr);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+                if (rs != null) {
+                    rs.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (Exception e) {
+                e.fillInStackTrace();
+            }
+        }
+        return searchResult;
+    }
+
+}

@@ -1,0 +1,55 @@
+package e1reformat.entity.cdr.sub;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang3.math.NumberUtils;
+
+public class Version {
+    private static final String SUB_FIELD_DELIMITER = "\\*";
+    private static final int FULL_VERSION_FIELDS = 2;
+    private String VERSION_MAJOR;
+    private String VERSION_MINOR;
+    public String getVERSION_MAJOR() {
+        return VERSION_MAJOR;
+    }
+    public void setVERSION_MAJOR(String vERSION_MAJOR) {
+        VERSION_MAJOR = vERSION_MAJOR;
+    }
+    public String getVERSION_MINOR() {
+        return VERSION_MINOR;
+    }
+    public void setVERSION_MINOR(String vERSION_MINOR) {
+        VERSION_MINOR = vERSION_MINOR;
+    }
+
+    public Version(List<String> listValue) {
+        if (listValue.size() == FULL_VERSION_FIELDS) {
+            this.VERSION_MAJOR = listValue.get(0);
+            this.VERSION_MINOR = listValue.get(1);
+        }
+    }
+
+    public static ArrayList<Version> getListVersion(String numberOfVersion, String versionInfo) {
+        ArrayList<Version> listVersions = new ArrayList<Version>();
+        String[] versionInfoArray = versionInfo.split(SUB_FIELD_DELIMITER);
+        int countIndex = FULL_VERSION_FIELDS;
+        int numberOfVersions = NumberUtils.toInt(numberOfVersion);
+
+        while (true) {
+            List<String> ver = new ArrayList<String>();
+            for (int i = 0; i < countIndex; i++) {
+                ver.add(versionInfoArray[numberOfVersions * 2 + i]);
+            }
+
+            Version newVersion = new Version(ver);
+            listVersions.add(newVersion);
+            numberOfVersions++;
+
+            if (numberOfVersions * FULL_VERSION_FIELDS >= versionInfoArray.length) {
+                break;
+            }
+        }
+        return listVersions;
+    }
+}

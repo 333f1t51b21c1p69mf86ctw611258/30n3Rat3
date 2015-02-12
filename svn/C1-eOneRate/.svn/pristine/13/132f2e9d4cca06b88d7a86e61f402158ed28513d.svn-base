@@ -1,0 +1,80 @@
+package e1reformat.entity.cdr.sub;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class AccountBalance {
+
+    private static final int FULL_ACCOUNT_BALANCE_FIELDS = 4;
+    private static final String SUB_FIELD_DELIMITER = "\\*";
+    private String ACCOUNT_BALANCE_ID;
+    private String ACCOUNT_BALANCE_NAME;
+    private String ACCOUNT_BALANCE;
+    private String ACCOUNT_BALANCE_CHANGE;
+
+    public String getACCOUNT_BALANCE_ID() {
+        return ACCOUNT_BALANCE_ID;
+    }
+
+    public void setACCOUNT_BALANCE_ID(String aCCOUNT_BALANCE_ID) {
+        ACCOUNT_BALANCE_ID = aCCOUNT_BALANCE_ID;
+    }
+
+    public String getACCOUNT_BALANCE_NAME() {
+        return ACCOUNT_BALANCE_NAME;
+    }
+
+    public void setACCOUNT_BALANCE_NAME(String aCCOUNT_BALANCE_NAME) {
+        ACCOUNT_BALANCE_NAME = aCCOUNT_BALANCE_NAME;
+    }
+
+    public String getACCOUNT_BALANCE() {
+        return ACCOUNT_BALANCE;
+    }
+
+    public void setACCOUNT_BALANCE(String aCCOUNT_BALANCE) {
+        ACCOUNT_BALANCE = aCCOUNT_BALANCE;
+    }
+
+    public String getACCOUNT_BALANCE_CHANGE() {
+        return ACCOUNT_BALANCE_CHANGE;
+    }
+
+    public void setACCOUNT_BALANCE_CHANGE(String aCCOUNT_BALANCE_CHANGE) {
+        ACCOUNT_BALANCE_CHANGE = aCCOUNT_BALANCE_CHANGE;
+    }
+
+    public AccountBalance(List<String> listValue) {
+        if (listValue.size() == FULL_ACCOUNT_BALANCE_FIELDS) {
+            this.ACCOUNT_BALANCE_ID = listValue.get(0);
+            this.ACCOUNT_BALANCE_NAME = listValue.get(1);
+            this.ACCOUNT_BALANCE = listValue.get(2);
+            this.ACCOUNT_BALANCE_CHANGE = listValue.get(3);
+        }
+    }
+
+    public static ArrayList<AccountBalance> getlistAccountBalance(String numberOfAccountBalance, String accountBalanceInfo) {
+        ArrayList<AccountBalance> listAccountBalance = new ArrayList<AccountBalance>();
+        String[] accountBalanceInfoArray = accountBalanceInfo.split(SUB_FIELD_DELIMITER);
+        int countIndex = FULL_ACCOUNT_BALANCE_FIELDS;
+        int numberOfAccountBalances = 0;
+
+        while (true) {
+            List<String> ab = new ArrayList<String>();
+            for (int i = 0; i < countIndex; i++) {
+
+                ab.add(accountBalanceInfoArray[numberOfAccountBalances * 4 + i]);
+            }
+            AccountBalance newAccountBalance = new AccountBalance(ab);
+
+            listAccountBalance.add(newAccountBalance);
+            numberOfAccountBalances++;
+
+            if (numberOfAccountBalances * FULL_ACCOUNT_BALANCE_FIELDS <= accountBalanceInfoArray.length) {
+                break;
+            }
+        }
+        return listAccountBalance;
+    }
+
+}

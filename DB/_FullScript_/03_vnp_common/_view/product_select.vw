@@ -1,10 +1,10 @@
-DROP VIEW PRODUCT_SELECT;
+DROP VIEW VNP_COMMON.PRODUCT_SELECT;
 
-/* Formatted on 12/20/2014 2:52:21 AM (QP5 v5.215.12089.38647) */
-CREATE OR REPLACE FORCE VIEW PRODUCT_SELECT
+/* Formatted on 2/6/2015 9:56:56 AM (QP5 v5.269.14213.34746) */
+CREATE OR REPLACE FORCE VIEW VNP_COMMON.PRODUCT_SELECT
 (
    ACCOUNT_VERSION_ID,
-   ID,
+   SUBS_OFFER_MAP_ID,
    OFFER_ID,
    OFFER_NAME,
    SUBSCRIBER_NO,
@@ -20,22 +20,71 @@ CREATE OR REPLACE FORCE VIEW PRODUCT_SELECT
 )
 AS
      SELECT ACCOUNT_VERSION_ID,
-            SUBS_OFFER_MAP_ID AS ID,            -- PROD_VIEW_ID_NEXTVAL AS ID,
+            SUBS_OFFER_MAP_ID,                  -- PROD_VIEW_ID_NEXTVAL AS ID,
             PRODUCT_OFFER.OFFER_ID,
             PRODUCT_OFFER.OFFER_NAME,
             SUBSCRIBER_NO,
             SUBSCRIBER.DATA_PART,
             RESELLER_VERSION_ID,                                -- SERVICE_ID,
-            SUBS_OFFER_MAP.FROM_DATE AS FROM_DATE_TEST,
-              (SUBS_OFFER_MAP.FROM_DATE - TO_DATE ('1970-01-01', 'yyyy-mm-dd'))
-            * 24
-            * 60
-            * 60
+            --         SUBS_OFFER_MAP.FROM_DATE AS FROM_DATE_TEST,
+            CASE
+               WHEN TO_NUMBER (TO_CHAR (SOM.FROM_DATE, 'DD')) < EED
+               THEN
+                  TRUNC (SOM.FROM_DATE, 'MM')
+               WHEN     TO_NUMBER (TO_CHAR (SOM.FROM_DATE, 'DD')) >= EED
+                    AND EED_TYPE = 1
+               THEN
+                  TO_DATE (EED || '/' || TO_CHAR (SOM.FROM_DATE, 'MM/YYYY'),
+                           'DD/MM/YYYY')
+               WHEN     TO_NUMBER (TO_CHAR (SOM.FROM_DATE, 'DD')) >= EED
+                    AND EED_TYPE = 2
+               THEN
+                  TRUNC (ADD_MONTHS (SOM.FROM_DATE, 1), 'MM')
+               ELSE                                            -- EED_TYPE = 3
+                  SOM.FROM_DATE
+            END
+               AS FROM_DATE_TEST,
+            --           (SUBS_OFFER_MAP.FROM_DATE - TO_DATE ('1970-01-01', 'yyyy-mm-dd'))
+            --         * 24
+            --         * 60
+            --         * 60
+            --            AS FROM_DATE,
+            CASE
+               WHEN TO_NUMBER (TO_CHAR (SOM.FROM_DATE, 'DD')) < EED
+               THEN
+                    (  TRUNC (SOM.FROM_DATE, 'MM')
+                     - TO_DATE ('1970-01-01', 'yyyy-mm-dd'))
+                  * 24
+                  * 60
+                  * 60
+               WHEN     TO_NUMBER (TO_CHAR (SOM.FROM_DATE, 'DD')) >= EED
+                    AND EED_TYPE = 1
+               THEN
+                    (  TO_DATE (
+                          EED || '/' || TO_CHAR (SOM.FROM_DATE, 'MM/YYYY'),
+                          'DD/MM/YYYY')
+                     - TO_DATE ('1970-01-01', 'yyyy-mm-dd'))
+                  * 24
+                  * 60
+                  * 60
+               WHEN     TO_NUMBER (TO_CHAR (SOM.FROM_DATE, 'DD')) >= EED
+                    AND EED_TYPE = 2
+               THEN
+                    (  TRUNC (ADD_MONTHS (SOM.FROM_DATE, 1), 'MM')
+                     - TO_DATE ('1970-01-01', 'yyyy-mm-dd'))
+                  * 24
+                  * 60
+                  * 60
+               ELSE                                            -- EED_TYPE = 3
+                    (SOM.FROM_DATE - TO_DATE ('1970-01-01', 'yyyy-mm-dd'))
+                  * 24
+                  * 60
+                  * 60
+            END
                AS FROM_DATE,
-            NVL (SUBS_OFFER_MAP.TO_DATE, TO_DATE ('2030-01-01', 'yyyy-mm-dd'))
+            NVL (SOM.TO_DATE, TO_DATE ('2030-01-01', 'yyyy-mm-dd'))
                AS TO_DATE_TEST,
-              (  NVL (SUBS_OFFER_MAP.TO_DATE,
-                      TO_DATE ('2030-01-01', 'yyyy-mm-dd'))
+              (  NVL (SOM.TO_DATE, TO_DATE ('2030-01-01', 'yyyy-mm-dd'))
                - TO_DATE ('1970-01-01', 'yyyy-mm-dd'))
             * 24
             * 60
@@ -48,22 +97,22 @@ AS
             --         * 60
             --            AS TO_DATE,
 
-            SUBS_OFFER_MAP.MODIFIED_DATE AS MODIFIED_DATE_TEST,
-              (  SUBS_OFFER_MAP.MODIFIED_DATE
-               - TO_DATE ('1970-01-01', 'yyyy-mm-dd'))
+            SOM.MODIFIED_DATE AS MODIFIED_DATE_TEST,
+              (SOM.MODIFIED_DATE - TO_DATE ('1970-01-01', 'yyyy-mm-dd'))
             * 24
             * 60
             * 60
                AS MODIFIED_DATE,
             PRODUCT_OFFER.OFFER_TYPE
        FROM SUBSCRIBER
-            INNER JOIN SUBS_OFFER_MAP
-               ON (SUBSCRIBER.SUBSCRIBER_ID = SUBS_OFFER_MAP.SUBSCRIBER_ID)
+            INNER JOIN SUBS_OFFER_MAP SOM
+               ON (SUBSCRIBER.SUBSCRIBER_ID = SOM.SUBSCRIBER_ID)
             INNER JOIN ACCOUNT_VERSION
                ON (SUBSCRIBER.SUBSCRIBER_ID = ACCOUNT_VERSION.SUBSCRIBER_ID)
             INNER JOIN PRODUCT_OFFER
-               ON (PRODUCT_OFFER.OFFER_ID = SUBS_OFFER_MAP.PRODUCT_OFFER_ID)
+               ON (PRODUCT_OFFER.OFFER_ID = SOM.PRODUCT_OFFER_ID)
    ORDER BY DECODE (PRODUCT_OFFER.OFFER_TYPE,  'PO', 1,  'SO', 2,  3)
+
 --          INNER JOIN
 --          PRODUCT_OFFER
 --             ON (PRODUCT_OFFER.PRODUCT_OFFER_ID =
