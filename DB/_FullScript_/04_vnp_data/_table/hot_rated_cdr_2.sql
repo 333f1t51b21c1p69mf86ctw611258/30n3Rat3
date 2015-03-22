@@ -1,65 +1,105 @@
 /* Formatted on 1/29/2015 11:32:43 AM (QP5 v5.215.12089.38647) */
 DROP TABLE VNP_DATA.HOT_RATED_CDR_2;
 
+DROP TABLESPACE hot_rated_2_p0
+  INCLUDING CONTENTS AND DATAFILES
+    CASCADE CONSTRAINTS;
+
 CREATE TABLESPACE hot_rated_2_p0
-  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_2_p0.dbf'
-    SIZE 100M
+  DATAFILE '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_2_p0.dbf'
+    SIZE 10M
     REUSE
-    AUTOEXTEND ON NEXT 100 M MAXSIZE UNLIMITED;
+    AUTOEXTEND ON NEXT 10 M MAXSIZE UNLIMITED;
+
+DROP TABLESPACE hot_rated_2_p1
+  INCLUDING CONTENTS AND DATAFILES
+    CASCADE CONSTRAINTS;
 
 CREATE TABLESPACE hot_rated_2_p1
-  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_2_p1.dbf'
-    SIZE 100M
+  DATAFILE '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_2_p1.dbf'
+    SIZE 10M
     REUSE
-    AUTOEXTEND ON NEXT 100 M MAXSIZE UNLIMITED;
+    AUTOEXTEND ON NEXT 10 M MAXSIZE UNLIMITED;
+
+DROP TABLESPACE hot_rated_2_p2
+  INCLUDING CONTENTS AND DATAFILES
+    CASCADE CONSTRAINTS;
 
 CREATE TABLESPACE hot_rated_2_p2
-  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_2_p2.dbf'
-    SIZE 100M
+  DATAFILE '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_2_p2.dbf'
+    SIZE 10M
     REUSE
-    AUTOEXTEND ON NEXT 100 M MAXSIZE UNLIMITED;
+    AUTOEXTEND ON NEXT 10 M MAXSIZE UNLIMITED;
+
+DROP TABLESPACE hot_rated_2_p3
+  INCLUDING CONTENTS AND DATAFILES
+    CASCADE CONSTRAINTS;
 
 CREATE TABLESPACE hot_rated_2_p3
-  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_2_p3.dbf'
-    SIZE 100M
+  DATAFILE '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_2_p3.dbf'
+    SIZE 10M
     REUSE
-    AUTOEXTEND ON NEXT 100 M MAXSIZE UNLIMITED;
+    AUTOEXTEND ON NEXT 10 M MAXSIZE UNLIMITED;
+
+DROP TABLESPACE hot_rated_2_p4
+  INCLUDING CONTENTS AND DATAFILES
+    CASCADE CONSTRAINTS;
 
 CREATE TABLESPACE hot_rated_2_p4
-  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_2_p4.dbf'
-    SIZE 100M
+  DATAFILE '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_2_p4.dbf'
+    SIZE 10M
     REUSE
-    AUTOEXTEND ON NEXT 100 M MAXSIZE UNLIMITED;
+    AUTOEXTEND ON NEXT 10 M MAXSIZE UNLIMITED;
+
+DROP TABLESPACE hot_rated_2_p5
+  INCLUDING CONTENTS AND DATAFILES
+    CASCADE CONSTRAINTS;
 
 CREATE TABLESPACE hot_rated_2_p5
-  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_2_p5.dbf'
-    SIZE 100M
+  DATAFILE '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_2_p5.dbf'
+    SIZE 10M
     REUSE
-    AUTOEXTEND ON NEXT 100 M MAXSIZE UNLIMITED;
+    AUTOEXTEND ON NEXT 10 M MAXSIZE UNLIMITED;
+
+DROP TABLESPACE hot_rated_2_p6
+  INCLUDING CONTENTS AND DATAFILES
+    CASCADE CONSTRAINTS;
 
 CREATE TABLESPACE hot_rated_2_p6
-  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_2_p6.dbf'
-    SIZE 100M
+  DATAFILE '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_2_p6.dbf'
+    SIZE 10M
     REUSE
-    AUTOEXTEND ON NEXT 100 M MAXSIZE UNLIMITED;
+    AUTOEXTEND ON NEXT 10 M MAXSIZE UNLIMITED;
+
+DROP TABLESPACE hot_rated_2_p7
+  INCLUDING CONTENTS AND DATAFILES
+    CASCADE CONSTRAINTS;
 
 CREATE TABLESPACE hot_rated_2_p7
-  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_2_p7.dbf'
-    SIZE 100M
+  DATAFILE '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_2_p7.dbf'
+    SIZE 10M
     REUSE
-    AUTOEXTEND ON NEXT 100 M MAXSIZE UNLIMITED;
+    AUTOEXTEND ON NEXT 10 M MAXSIZE UNLIMITED;
+
+DROP TABLESPACE hot_rated_2_p8
+  INCLUDING CONTENTS AND DATAFILES
+    CASCADE CONSTRAINTS;
 
 CREATE TABLESPACE hot_rated_2_p8
-  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_2_p8.dbf'
-    SIZE 100M
+  DATAFILE '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_2_p8.dbf'
+    SIZE 10M
     REUSE
-    AUTOEXTEND ON NEXT 100 M MAXSIZE UNLIMITED;
+    AUTOEXTEND ON NEXT 10 M MAXSIZE UNLIMITED;
+
+DROP TABLESPACE hot_rated_2_p9
+  INCLUDING CONTENTS AND DATAFILES
+    CASCADE CONSTRAINTS;
 
 CREATE TABLESPACE hot_rated_2_p9
-  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_2_p9.dbf'
-    SIZE 100M
+  DATAFILE '/u01/app/oracle/oradata/eonerate/vnp_data/hot_rated_2_p9.dbf'
+    SIZE 10M
     REUSE
-    AUTOEXTEND ON NEXT 100 M MAXSIZE UNLIMITED;
+    AUTOEXTEND ON NEXT 10 M MAXSIZE UNLIMITED;
 
 
 CREATE TABLE VNP_DATA.HOT_RATED_CDR_2
@@ -133,45 +173,56 @@ PARTITION BY RANGE (DATA_PART)
     PARTITION P9 VALUES LESS THAN (10)
        TABLESPACE hot_rated_2_p9);
 
+DROP TABLESPACE vnp_data_HRC_2_A_NUMBER
+  INCLUDING CONTENTS AND DATAFILES
+    CASCADE CONSTRAINTS;
+
 CREATE TABLESPACE vnp_data_HRC_2_A_NUMBER
-  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/HRC_2_A_NUMBER01.dbf'
-    SIZE 100M
+  DATAFILE '/u01/app/oracle/oradata/eonerate/vnp_data/HRC_2_A_NUMBER01.dbf'
+    SIZE 10M
     REUSE
-    AUTOEXTEND ON NEXT 100 M MAXSIZE UNLIMITED;
+    AUTOEXTEND ON NEXT 10 M MAXSIZE UNLIMITED;
 
 DROP INDEX IDX_HRC_2_A_NUMBER;
 
 CREATE INDEX IDX_HRC_2_A_NUMBER
    ON HOT_RATED_CDR_2 (A_NUMBER)
-   TABLESPACE VNP_DATA_HRC;
+   TABLESPACE vnp_data_HRC_2_A_NUMBER;
 
+DROP TABLESPACE vnp_data_hrc_2_rec_head_id
+  INCLUDING CONTENTS AND DATAFILES
+    CASCADE CONSTRAINTS;
 
 CREATE TABLESPACE vnp_data_hrc_2_rec_head_id
-  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/hrc_2_rec_head_id01.dbf'
-    SIZE 100M
+  DATAFILE '/u01/app/oracle/oradata/eonerate/vnp_data/hrc_2_rec_head_id01.dbf'
+    SIZE 10M
     REUSE
-    AUTOEXTEND ON NEXT 100 M MAXSIZE UNLIMITED;
+    AUTOEXTEND ON NEXT 10 M MAXSIZE UNLIMITED;
 
 CREATE INDEX IDX_HRC_2_CDR_REC_HEAD_ID
    ON HOT_RATED_CDR_2 (CDR_RECORD_HEADER_ID)
    TABLESPACE vnp_data_hrc_2_rec_head_id;
 
-CREATE TABLESPACE vnp_data_hrc_2_created_time
-  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/hrc_2_created_time01.dbf'
-    SIZE 100M
-    REUSE
-    AUTOEXTEND ON NEXT 100 M MAXSIZE UNLIMITED;
-
-CREATE INDEX IDX_HRC_2_CREATED_TIME
-   ON HOT_RATED_CDR_2 (CREATED_TIME)
-   NOLOGGING
-   TABLESPACE vnp_data_hrc_2_created_time;
+--DROP TABLESPACE vnp_data_hrc_2_created_time
+--  INCLUDING CONTENTS AND DATAFILES
+--    CASCADE CONSTRAINTS;
+--
+--CREATE TABLESPACE vnp_data_hrc_2_created_time
+--  DATAFILE '/u01/app/oracle/oradata/eonerate/vnp_data/hrc_2_created_time01.dbf'
+--    SIZE 10M
+--    REUSE
+--    AUTOEXTEND ON NEXT 10 M MAXSIZE UNLIMITED;
+--
+--CREATE INDEX IDX_HRC_2_CREATED_TIME
+--   ON HOT_RATED_CDR_2 (CREATED_TIME)
+--   NOLOGGING
+--   TABLESPACE vnp_data_hrc_2_created_time;
 
 --CREATE TABLESPACE vnp_data_hrc_2_rerate_flag
---  DATAFILE '/cdr/u01/app/oracle/oradata/eonerate/vnp_data/hrc_2_rerate_flag01.dbf'
---    SIZE 100M
+--  DATAFILE '/u01/app/oracle/oradata/eonerate/vnp_data/hrc_2_rerate_flag01.dbf'
+--    SIZE 10M
 --    REUSE
---    AUTOEXTEND ON NEXT 100 M MAXSIZE UNLIMITED;
+--    AUTOEXTEND ON NEXT 10 M MAXSIZE UNLIMITED;
 --
 --CREATE INDEX IDX_HRC_2_rerate_flag
 --   ON HOT_RATED_CDR_2 (rerate_flag)

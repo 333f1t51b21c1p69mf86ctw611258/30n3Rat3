@@ -20,6 +20,7 @@ public class RateRecord extends RatingRecord {
 	ILogger LOG_PROCESSING = LogUtil.getLogUtil().getLogger("Processing");
 
 	public enum HrcColumn {
+		MAP_ID,
 		A_NUMBER,
 		CDR_TYPE,
 		CREATED_TIME,
@@ -73,6 +74,7 @@ public class RateRecord extends RatingRecord {
 
 	long seqNextVal = 0;
 
+	public String MAP_ID = null;
 	public String A_NUMBER = null;
 	public String CDR_TYPE = null;
 	public String CREATED_TIME = null;
@@ -165,6 +167,7 @@ public class RateRecord extends RatingRecord {
 			seqNextVal = 0;
 		}
 
+		this.MAP_ID = getField(HrcColumn.MAP_ID.getIndex());
 		this.A_NUMBER = getField(HrcColumn.A_NUMBER.getIndex());
 		this.CDR_TYPE = getField(HrcColumn.CDR_TYPE.getIndex());
 		this.CREATED_TIME = getField(HrcColumn.CREATED_TIME.getIndex());
@@ -219,11 +222,12 @@ public class RateRecord extends RatingRecord {
 
 	public String unmapOriginalData() {
 
-		String outFields[] = new String[45];
+		String outFields[] = new String[46];
 		int numberOfFields;
 		int i;
 		StringBuilder tmpReassemble;
 
+		outFields[HrcColumn.MAP_ID.getIndex()] = MAP_ID;
 		outFields[HrcColumn.A_NUMBER.getIndex()] = A_NUMBER;
 		outFields[HrcColumn.CDR_TYPE.getIndex()] = CDR_TYPE;
 		outFields[HrcColumn.CREATED_TIME.getIndex()] = CREATED_TIME;

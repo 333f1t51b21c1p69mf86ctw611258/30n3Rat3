@@ -195,7 +195,7 @@ public class DBInputAdapter extends JDBCInputAdapter {
 	//	}
 
 	private String getDataFolder() {
-		return outputFilePath + System.getProperty("file.separator") + hotTableSuffix;
+		return outputFilePath + System.getProperty("file.separator"); // + hotTableSuffix;
 	}
 
 	private void createDataFolder() {

@@ -25,7 +25,7 @@ IS
 
 ******************************************************************************/
 BEGIN
-   INSERT /*+ APPEND */ INTO VNP_DATA.HOT_RATED_CDR_1 NOLOGGING(
+   INSERT INTO VNP_DATA.HOT_RATED_CDR_1 NOLOGGING(
                                         MAP_ID,
                                        A_NUMBER,
                                        CDR_TYPE,
@@ -115,8 +115,8 @@ BEGIN
              INTL_ID,
              INTL_VND,
              CDR_CALL_TYPE,QOS
-        FROM VNP_DATA.TEMP_RATED_CDR_1;
-       --WHERE CDR_RECORD_HEADER_ID = IN_HEADER_ID;
+        FROM VNP_DATA.TEMP_RATED_CDR_1
+       WHERE CDR_RECORD_HEADER_ID = IN_HEADER_ID;
 
    N_EFFECTED_COUNT := SQL%ROWCOUNT;
 

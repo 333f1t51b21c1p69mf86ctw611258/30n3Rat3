@@ -498,14 +498,14 @@ AS
       v_to_date                 DATE;
       v_partition_name_format   VARCHAR2 (31) := 'yyMMdd';
    BEGIN
-      v_to_date := SYSDATE + 2;
+      SELECT SYSDATE + 5
+        INTO v_to_date
+        FROM DUAL;
 
       SELECT SUBSTR (MAX (a.partition_name), 2)
         INTO v_max_part
         FROM user_tab_partitions a
        WHERE table_name = I_TABLE_NAME;
-
-
 
       d_date := TO_DATE (v_max_part, v_partition_name_format);
 
@@ -517,13 +517,9 @@ AS
            INTO v_tmp1
            FROM DUAL;
 
-
-
          SELECT TO_CHAR (d_date + 2, v_partition_name_format)
            INTO v_tmp2
            FROM DUAL;
-
-
 
          --      SELECT TO_CHAR (d_date + 2, 'dd/mm/yyyy') INTO v_tmp2 FROM DUAL;
 
@@ -602,7 +598,7 @@ AS
          d_date := d_date + 1;
       END LOOP;
 
-      INS_ACT_LOG ('DATABASE',
+      INS_ACT_LOG ('VNP_DATA',
                    'ADD_PART_BY_DAY: ' || I_TABLE_NAME,
                    'DONE: ADD_PART_BY_DAY: ' || I_TABLE_NAME,
                    0);
@@ -615,7 +611,7 @@ AS
                1,
                1023);
 
-         INS_ACT_LOG ('DATABASE',
+         INS_ACT_LOG ('VNP_DATA',
                       'ADD_PART_BY_DAY: ' || I_TABLE_NAME,
                       'ERROR: ' || v_err_msg,
                       3);
@@ -756,7 +752,7 @@ AS
          --            No_Invalidate      => FALSE);
 
          INS_ACT_LOG (
-            'DATABASE',
+            'VNP_DATA',
                'STUFF.MOVE_TO_HOT_RATED FROM HRC_1: < '
             || d_current_time
             || '; DATA_PART: '
@@ -769,7 +765,7 @@ AS
       END LOOP;
 
       INS_ACT_LOG (
-         'DATABASE',
+         'VNP_DATA',
          'STUFF.MOVE_TO_HOT_RATED FROM HRC_1: < ' || d_current_time,
          'DONE: STUFF.MOVE_TO_HOT_RATED FROM HRC_1: < ' || d_current_time,
          0);
@@ -878,7 +874,7 @@ AS
          --            No_Invalidate      => FALSE);
 
          INS_ACT_LOG (
-            'DATABASE',
+            'VNP_DATA',
                'STUFF.MOVE_TO_HOT_RATED FROM HRC_2: < '
             || d_current_time
             || '; DATA_PART: '
@@ -891,7 +887,7 @@ AS
       END LOOP;
 
       INS_ACT_LOG (
-         'DATABASE',
+         'VNP_DATA',
          'STUFF.MOVE_TO_HOT_RATED FROM HRC_2: < ' || d_current_time,
          'DONE: STUFF.MOVE_TO_HOT_RATED FROM HRC_2: < ' || d_current_time,
          0);
@@ -908,7 +904,7 @@ AS
                1,
                1023);
 
-         INS_ACT_LOG ('DATABASE',
+         INS_ACT_LOG ('VNP_DATA',
                       'STUFF.MOVE_TO_HOT_RATED: < ' || d_current_time,
                       'ERROR: ' || v_err_msg,
                       3);
@@ -1024,7 +1020,7 @@ AS
          COMMIT;
 
          INS_ACT_LOG (
-            'DATABASE',
+            'VNP_DATA',
                'STUFF.MOVE_TO_HOT_RATED FROM HRC_TEMP1: < '
             || d_current_time
             || '; DATA_PART: '
@@ -1037,7 +1033,7 @@ AS
       END LOOP;
 
       INS_ACT_LOG (
-         'DATABASE',
+         'VNP_DATA',
          'STUFF.MOVE_TO_HOT_RATED FROM HRC_TEMP1: < ' || d_current_time,
          'DONE: STUFF.MOVE_TO_HOT_RATED FROM HRC_TEMP1: < ' || d_current_time,
          0);
@@ -1137,7 +1133,7 @@ AS
          COMMIT;
 
          INS_ACT_LOG (
-            'DATABASE',
+            'VNP_DATA',
                'STUFF.MOVE_TO_HOT_RATED FROM HRC_TEMP2: < '
             || d_current_time
             || '; DATA_PART: '
@@ -1150,7 +1146,7 @@ AS
       END LOOP;
 
       INS_ACT_LOG (
-         'DATABASE',
+         'VNP_DATA',
          'STUFF.MOVE_TO_HOT_RATED FROM HRC_TEMP2: < ' || d_current_time,
          'DONE: STUFF.MOVE_TO_HOT_RATED FROM HRC_TEMP2: < ' || d_current_time,
          0);
@@ -1165,7 +1161,7 @@ AS
                1,
                1023);
 
-         INS_ACT_LOG ('DATABASE',
+         INS_ACT_LOG ('VNP_DATA',
                       'STUFF.MOVE_TO_HOT_RATED_2: < ' || d_current_time,
                       'ERROR: ' || v_err_msg,
                       3);
@@ -1185,7 +1181,9 @@ AS
 
       v_err_msg         VARCHAR2 (1023);
 
-      n_cdr_log_count   PLS_INTEGER := 10;
+      n_cdr_log_count   PLS_INTEGER := 100;
+
+      n_count           PLS_INTEGER;
 
       lockhandle        VARCHAR2 (128);
       retcode           NUMBER;
@@ -1203,239 +1201,260 @@ AS
                                   'AGGREGATE_HRC_12 is already running');
       END IF;
 
-      UPDATE VNP_DATA.CDR_LOG_PROCESS
-         SET STATUS = 11
-       WHERE CDR_LOG_PROCESS_ID IN (SELECT CDR_LOG_PROCESS_ID
-                                      FROM (  SELECT CDR_LOG_PROCESS_ID
-                                                FROM VNP_DATA.CDR_LOG_PROCESS
-                                               WHERE     STATUS = 6
-                                                     AND INSTANCE = 1
-                                            ORDER BY START_TIME)
-                                     WHERE ROWNUM <= n_cdr_log_count);
-
-      FOR i IN 0 .. 9
       LOOP
-         MERGE INTO VNP_DATA.hot_aggregated_cdr ag
-              USING (  SELECT COUNT (1) total_cdr,
-                              a_number,
-                              --                              TO_NUMBER (
-                              --                                 SUBSTR (a_number, LENGTH (a_number), 1))
-                              --                                 data_part,
-                              data_part,
-                              TO_CHAR ( (cdr_start_time), 'yyMM') bill_month,
-                              cdr_type,
-                              SUM (total_usage) AS total_usage,
-                              SUM (service_fee) AS service_fee,
-                              SUM (charge_fee) AS charge_fee,
-                              SUM (offer_cost) AS offer_cost,
-                              SUM (offer_free_block) AS offer_free_block,
-                              SUM (internal_cost) AS internal_cost,
-                              SUM (internal_free_block) internal_free_block,
-                              SUM (INTL_VND) INTL_VND,
-                              payment_id
-                         FROM VNP_DATA.hot_rated_cdr_1
-                        WHERE     data_part = i
-                              AND CDR_RECORD_HEADER_ID IN (SELECT CDR_LOG_PROCESS_ID
-                                                             FROM (SELECT CDR_LOG_PROCESS_ID
-                                                                     FROM VNP_DATA.CDR_LOG_PROCESS
-                                                                    WHERE     STATUS =
-                                                                                 11
-                                                                          AND INSTANCE =
-                                                                                 1))
-                     GROUP BY a_number,
-                              data_part,
-                              cdr_type,
-                              TO_CHAR ( (cdr_start_time), 'yyMM'),
-                              payment_id) v
-                 ON (    ag.data_part = i
-                     AND ag.data_part = v.data_part
-                     AND ag.a_number = v.a_number
-                     AND ag.bill_month = v.bill_month
-                     AND ag.cdr_type = v.cdr_type
-                     AND ag.payment_id = v.payment_id)
-         WHEN MATCHED
-         THEN
-            UPDATE SET
-               ag.total_cdr = ag.total_cdr + NVL (v.total_cdr, 0),
-               ag.total_usage = ag.total_usage + NVL (v.total_usage, 0),
-               ag.service_fee = ag.service_fee + NVL (v.service_fee, 0),
-               ag.charge_fee = ag.charge_fee + NVL (v.charge_fee, 0),
-               ag.offer_cost = ag.offer_cost + NVL (v.offer_cost, 0),
-               ag.offer_free_block =
-                  ag.offer_free_block + NVL (v.offer_free_block, 0),
-               ag.internal_cost = ag.internal_cost + NVL (v.internal_cost, 0),
-               ag.internal_free_block =
-                  ag.internal_free_block + NVL (v.internal_free_block, 0),
-               ag.INTL_VND = ag.INTL_VND + NVL (v.INTL_VND, 0)
-         WHEN NOT MATCHED
-         THEN
-            INSERT     (ag.a_number,
-                        ag.data_part,
-                        ag.cdr_type,
-                        ag.total_cdr,
-                        ag.bill_month,
-                        ag.total_usage,
-                        ag.service_fee,
-                        ag.charge_fee,
-                        ag.offer_cost,
-                        ag.offer_free_block,
-                        ag.internal_cost,
-                        ag.internal_free_block,
-                        ag.INTL_VND,
-                        ag.payment_id)
-                VALUES (v.a_number,
-                        v.data_part,
-                        v.cdr_type,
-                        v.total_cdr,
-                        v.bill_month,
-                        v.total_usage,
-                        v.service_fee,
-                        v.charge_fee,
-                        v.offer_cost,
-                        v.offer_free_block,
-                        v.internal_cost,
-                        v.internal_free_block,
-                        v.INTL_VND,
-                        v.payment_id);
+         SELECT COUNT (1)
+           INTO n_count
+           FROM VNP_DATA.CDR_LOG_PROCESS
+          WHERE STATUS = 6 AND INSTANCE = 1;
 
-         INS_ACT_LOG (
-            'DATABASE',
-            'STUFF.AGGREGATE_HRC_12 - HRC_1 - MERGE DATA_PART: ' || i,
-            'DONE: STUFF.AGGREGATE_HRC_12 - HRC_1 - MERGE DATA_PART: ' || i,
-            0);
+         EXIT WHEN n_count <= 0;
+
+         UPDATE VNP_DATA.CDR_LOG_PROCESS
+            SET STATUS = 11
+          WHERE CDR_LOG_PROCESS_ID IN (SELECT CDR_LOG_PROCESS_ID
+                                         FROM (  SELECT CDR_LOG_PROCESS_ID
+                                                   FROM VNP_DATA.CDR_LOG_PROCESS
+                                                  WHERE     STATUS = 6
+                                                        AND INSTANCE = 1
+                                               ORDER BY START_TIME)
+                                        WHERE ROWNUM <= n_cdr_log_count);
+
+         FOR i IN 0 .. 9
+         LOOP
+            MERGE INTO VNP_DATA.hot_aggregated_cdr ag
+                 USING (  SELECT COUNT (1) total_cdr,
+                                 a_number,
+                                 --                              TO_NUMBER (
+                                 --                                 SUBSTR (a_number, LENGTH (a_number), 1))
+                                 --                                 data_part,
+                                 data_part,
+                                 TO_CHAR ( (cdr_start_time), 'yyMM') bill_month,
+                                 cdr_type,
+                                 SUM (total_usage) AS total_usage,
+                                 SUM (service_fee) AS service_fee,
+                                 SUM (charge_fee) AS charge_fee,
+                                 SUM (offer_cost) AS offer_cost,
+                                 SUM (offer_free_block) AS offer_free_block,
+                                 SUM (internal_cost) AS internal_cost,
+                                 SUM (internal_free_block) internal_free_block,
+                                 SUM (INTL_VND) INTL_VND,
+                                 payment_id
+                            FROM VNP_DATA.hot_rated_cdr_1
+                           WHERE     data_part = i
+                                 AND CDR_RECORD_HEADER_ID IN (SELECT CDR_LOG_PROCESS_ID
+                                                                FROM (SELECT CDR_LOG_PROCESS_ID
+                                                                        FROM VNP_DATA.CDR_LOG_PROCESS
+                                                                       WHERE     STATUS =
+                                                                                    11
+                                                                             AND INSTANCE =
+                                                                                    1))
+                        GROUP BY a_number,
+                                 data_part,
+                                 cdr_type,
+                                 TO_CHAR ( (cdr_start_time), 'yyMM'),
+                                 payment_id) v
+                    ON (    ag.data_part = i
+                        AND ag.data_part = v.data_part
+                        AND ag.a_number = v.a_number
+                        AND ag.bill_month = v.bill_month
+                        AND ag.cdr_type = v.cdr_type
+                        AND ag.payment_id = v.payment_id)
+            WHEN MATCHED
+            THEN
+               UPDATE SET
+                  ag.total_cdr = ag.total_cdr + NVL (v.total_cdr, 0),
+                  ag.total_usage = ag.total_usage + NVL (v.total_usage, 0),
+                  ag.service_fee = ag.service_fee + NVL (v.service_fee, 0),
+                  ag.charge_fee = ag.charge_fee + NVL (v.charge_fee, 0),
+                  ag.offer_cost = ag.offer_cost + NVL (v.offer_cost, 0),
+                  ag.offer_free_block =
+                     ag.offer_free_block + NVL (v.offer_free_block, 0),
+                  ag.internal_cost =
+                     ag.internal_cost + NVL (v.internal_cost, 0),
+                  ag.internal_free_block =
+                     ag.internal_free_block + NVL (v.internal_free_block, 0),
+                  ag.INTL_VND = ag.INTL_VND + NVL (v.INTL_VND, 0)
+            WHEN NOT MATCHED
+            THEN
+               INSERT     (ag.a_number,
+                           ag.data_part,
+                           ag.cdr_type,
+                           ag.total_cdr,
+                           ag.bill_month,
+                           ag.total_usage,
+                           ag.service_fee,
+                           ag.charge_fee,
+                           ag.offer_cost,
+                           ag.offer_free_block,
+                           ag.internal_cost,
+                           ag.internal_free_block,
+                           ag.INTL_VND,
+                           ag.payment_id)
+                   VALUES (v.a_number,
+                           v.data_part,
+                           v.cdr_type,
+                           v.total_cdr,
+                           v.bill_month,
+                           v.total_usage,
+                           v.service_fee,
+                           v.charge_fee,
+                           v.offer_cost,
+                           v.offer_free_block,
+                           v.internal_cost,
+                           v.internal_free_block,
+                           v.INTL_VND,
+                           v.payment_id);
+
+            INS_ACT_LOG (
+               'VNP_DATA',
+               'STUFF.AGGREGATE_HRC_12 - HRC_1 - MERGE DATA_PART: ' || i,
+                  'DONE: STUFF.AGGREGATE_HRC_12 - HRC_1 - MERGE DATA_PART: '
+               || i,
+               0);
+         END LOOP;
+
+         UPDATE VNP_DATA.CDR_LOG_PROCESS
+            SET STATUS = 13
+          WHERE CDR_LOG_PROCESS_ID IN (SELECT CDR_LOG_PROCESS_ID
+                                         FROM (SELECT CDR_LOG_PROCESS_ID
+                                                 FROM VNP_DATA.CDR_LOG_PROCESS
+                                                WHERE     STATUS = 11
+                                                      AND INSTANCE = 1));
+
+         COMMIT;
       END LOOP;
 
-      UPDATE VNP_DATA.CDR_LOG_PROCESS
-         SET STATUS = 13
-       WHERE CDR_LOG_PROCESS_ID IN (SELECT CDR_LOG_PROCESS_ID
-                                      FROM (SELECT CDR_LOG_PROCESS_ID
-                                              FROM VNP_DATA.CDR_LOG_PROCESS
-                                             WHERE     STATUS = 11
-                                                   AND INSTANCE = 1));
-
-      COMMIT;
-
-      INS_ACT_LOG ('DATABASE',
+      INS_ACT_LOG ('VNP_DATA',
                    'STUFF.AGGREGATE_HRC_12 - HRC_1',
                    'DONE: STUFF.AGGREGATE_HRC_12 - HRC_1',
                    0);
 
       --
 
-
-      UPDATE VNP_DATA.CDR_LOG_PROCESS
-         SET STATUS = 11
-       WHERE CDR_LOG_PROCESS_ID IN (SELECT CDR_LOG_PROCESS_ID
-                                      FROM (  SELECT CDR_LOG_PROCESS_ID
-                                                FROM VNP_DATA.CDR_LOG_PROCESS
-                                               WHERE     STATUS = 6
-                                                     AND INSTANCE = 2
-                                            ORDER BY START_TIME)
-                                     WHERE ROWNUM <= n_cdr_log_count);
-
-      FOR i IN 0 .. 9
       LOOP
-         MERGE INTO VNP_DATA.hot_aggregated_cdr ag
-              USING (  SELECT COUNT (1) total_cdr,
-                              a_number,
-                              --                              TO_NUMBER (
-                              --                                 SUBSTR (a_number, LENGTH (a_number), 1))
-                              --                                 data_part,
-                              data_part,
-                              TO_CHAR ( (cdr_start_time), 'yyMM') bill_month,
-                              cdr_type,
-                              SUM (total_usage) AS total_usage,
-                              SUM (service_fee) AS service_fee,
-                              SUM (charge_fee) AS charge_fee,
-                              SUM (offer_cost) AS offer_cost,
-                              SUM (offer_free_block) AS offer_free_block,
-                              SUM (internal_cost) AS internal_cost,
-                              SUM (internal_free_block) internal_free_block,
-                              SUM (INTL_VND) INTL_VND,
-                              payment_id
-                         FROM VNP_DATA.hot_rated_cdr_2
-                        WHERE     data_part = i
-                              AND CDR_RECORD_HEADER_ID IN (SELECT CDR_LOG_PROCESS_ID
-                                                             FROM (SELECT CDR_LOG_PROCESS_ID
-                                                                     FROM VNP_DATA.CDR_LOG_PROCESS
-                                                                    WHERE     STATUS =
-                                                                                 11
-                                                                          AND INSTANCE =
-                                                                                 2))
-                     GROUP BY a_number,
-                              data_part,
-                              cdr_type,
-                              TO_CHAR ( (cdr_start_time), 'yyMM'),
-                              payment_id) v
-                 ON (    ag.data_part = i
-                     AND ag.data_part = v.data_part
-                     AND ag.a_number = v.a_number
-                     AND ag.bill_month = v.bill_month
-                     AND ag.cdr_type = v.cdr_type
-                     AND ag.payment_id = v.payment_id)
-         WHEN MATCHED
-         THEN
-            UPDATE SET
-               ag.total_cdr = ag.total_cdr + NVL (v.total_cdr, 0),
-               ag.total_usage = ag.total_usage + NVL (v.total_usage, 0),
-               ag.service_fee = ag.service_fee + NVL (v.service_fee, 0),
-               ag.charge_fee = ag.charge_fee + NVL (v.charge_fee, 0),
-               ag.offer_cost = ag.offer_cost + NVL (v.offer_cost, 0),
-               ag.offer_free_block =
-                  ag.offer_free_block + NVL (v.offer_free_block, 0),
-               ag.internal_cost = ag.internal_cost + NVL (v.internal_cost, 0),
-               ag.internal_free_block =
-                  ag.internal_free_block + NVL (v.internal_free_block, 0),
-               ag.INTL_VND = ag.INTL_VND + NVL (v.INTL_VND, 0)
-         WHEN NOT MATCHED
-         THEN
-            INSERT     (ag.a_number,
-                        ag.data_part,
-                        ag.cdr_type,
-                        ag.total_cdr,
-                        ag.bill_month,
-                        ag.total_usage,
-                        ag.service_fee,
-                        ag.charge_fee,
-                        ag.offer_cost,
-                        ag.offer_free_block,
-                        ag.internal_cost,
-                        ag.internal_free_block,
-                        ag.INTL_VND,
-                        ag.payment_id)
-                VALUES (v.a_number,
-                        v.data_part,
-                        v.cdr_type,
-                        v.total_cdr,
-                        v.bill_month,
-                        v.total_usage,
-                        v.service_fee,
-                        v.charge_fee,
-                        v.offer_cost,
-                        v.offer_free_block,
-                        v.internal_cost,
-                        v.internal_free_block,
-                        v.INTL_VND,
-                        v.payment_id);
+         SELECT COUNT (1)
+           INTO n_count
+           FROM VNP_DATA.CDR_LOG_PROCESS
+          WHERE STATUS = 6 AND INSTANCE = 2;
 
-         INS_ACT_LOG (
-            'DATABASE',
-            'STUFF.AGGREGATE_HRC_12 - HRC_2 - MERGE DATA_PART: ' || i,
-            'DONE: STUFF.AGGREGATE_HRC_12 - HRC_2 - MERGE DATA_PART: ' || i,
-            0);
+         EXIT WHEN n_count <= 0;
+
+         UPDATE VNP_DATA.CDR_LOG_PROCESS
+            SET STATUS = 11
+          WHERE CDR_LOG_PROCESS_ID IN (SELECT CDR_LOG_PROCESS_ID
+                                         FROM (  SELECT CDR_LOG_PROCESS_ID
+                                                   FROM VNP_DATA.CDR_LOG_PROCESS
+                                                  WHERE     STATUS = 6
+                                                        AND INSTANCE = 2
+                                               ORDER BY START_TIME)
+                                        WHERE ROWNUM <= n_cdr_log_count);
+
+         FOR i IN 0 .. 9
+         LOOP
+            MERGE INTO VNP_DATA.hot_aggregated_cdr ag
+                 USING (  SELECT COUNT (1) total_cdr,
+                                 a_number,
+                                 --                              TO_NUMBER (
+                                 --                                 SUBSTR (a_number, LENGTH (a_number), 1))
+                                 --                                 data_part,
+                                 data_part,
+                                 TO_CHAR ( (cdr_start_time), 'yyMM') bill_month,
+                                 cdr_type,
+                                 SUM (total_usage) AS total_usage,
+                                 SUM (service_fee) AS service_fee,
+                                 SUM (charge_fee) AS charge_fee,
+                                 SUM (offer_cost) AS offer_cost,
+                                 SUM (offer_free_block) AS offer_free_block,
+                                 SUM (internal_cost) AS internal_cost,
+                                 SUM (internal_free_block) internal_free_block,
+                                 SUM (INTL_VND) INTL_VND,
+                                 payment_id
+                            FROM VNP_DATA.hot_rated_cdr_2
+                           WHERE     data_part = i
+                                 AND CDR_RECORD_HEADER_ID IN (SELECT CDR_LOG_PROCESS_ID
+                                                                FROM (SELECT CDR_LOG_PROCESS_ID
+                                                                        FROM VNP_DATA.CDR_LOG_PROCESS
+                                                                       WHERE     STATUS =
+                                                                                    11
+                                                                             AND INSTANCE =
+                                                                                    2))
+                        GROUP BY a_number,
+                                 data_part,
+                                 cdr_type,
+                                 TO_CHAR ( (cdr_start_time), 'yyMM'),
+                                 payment_id) v
+                    ON (    ag.data_part = i
+                        AND ag.data_part = v.data_part
+                        AND ag.a_number = v.a_number
+                        AND ag.bill_month = v.bill_month
+                        AND ag.cdr_type = v.cdr_type
+                        AND ag.payment_id = v.payment_id)
+            WHEN MATCHED
+            THEN
+               UPDATE SET
+                  ag.total_cdr = ag.total_cdr + NVL (v.total_cdr, 0),
+                  ag.total_usage = ag.total_usage + NVL (v.total_usage, 0),
+                  ag.service_fee = ag.service_fee + NVL (v.service_fee, 0),
+                  ag.charge_fee = ag.charge_fee + NVL (v.charge_fee, 0),
+                  ag.offer_cost = ag.offer_cost + NVL (v.offer_cost, 0),
+                  ag.offer_free_block =
+                     ag.offer_free_block + NVL (v.offer_free_block, 0),
+                  ag.internal_cost =
+                     ag.internal_cost + NVL (v.internal_cost, 0),
+                  ag.internal_free_block =
+                     ag.internal_free_block + NVL (v.internal_free_block, 0),
+                  ag.INTL_VND = ag.INTL_VND + NVL (v.INTL_VND, 0)
+            WHEN NOT MATCHED
+            THEN
+               INSERT     (ag.a_number,
+                           ag.data_part,
+                           ag.cdr_type,
+                           ag.total_cdr,
+                           ag.bill_month,
+                           ag.total_usage,
+                           ag.service_fee,
+                           ag.charge_fee,
+                           ag.offer_cost,
+                           ag.offer_free_block,
+                           ag.internal_cost,
+                           ag.internal_free_block,
+                           ag.INTL_VND,
+                           ag.payment_id)
+                   VALUES (v.a_number,
+                           v.data_part,
+                           v.cdr_type,
+                           v.total_cdr,
+                           v.bill_month,
+                           v.total_usage,
+                           v.service_fee,
+                           v.charge_fee,
+                           v.offer_cost,
+                           v.offer_free_block,
+                           v.internal_cost,
+                           v.internal_free_block,
+                           v.INTL_VND,
+                           v.payment_id);
+
+            INS_ACT_LOG (
+               'VNP_DATA',
+               'STUFF.AGGREGATE_HRC_12 - HRC_2 - MERGE DATA_PART: ' || i,
+                  'DONE: STUFF.AGGREGATE_HRC_12 - HRC_2 - MERGE DATA_PART: '
+               || i,
+               0);
+         END LOOP;
+
+         UPDATE VNP_DATA.CDR_LOG_PROCESS
+            SET STATUS = 13
+          WHERE CDR_LOG_PROCESS_ID IN (SELECT CDR_LOG_PROCESS_ID
+                                         FROM (SELECT CDR_LOG_PROCESS_ID
+                                                 FROM VNP_DATA.CDR_LOG_PROCESS
+                                                WHERE     STATUS = 11
+                                                      AND INSTANCE = 2));
+
+         COMMIT;
       END LOOP;
 
-      UPDATE VNP_DATA.CDR_LOG_PROCESS
-         SET STATUS = 13
-       WHERE CDR_LOG_PROCESS_ID IN (SELECT CDR_LOG_PROCESS_ID
-                                      FROM (SELECT CDR_LOG_PROCESS_ID
-                                              FROM VNP_DATA.CDR_LOG_PROCESS
-                                             WHERE     STATUS = 11
-                                                   AND INSTANCE = 2));
-
-      COMMIT;
-
-      INS_ACT_LOG ('DATABASE',
+      INS_ACT_LOG ('VNP_DATA',
                    'STUFF.AGGREGATE_HRC_12 - HRC_2',
                    'DONE: STUFF.AGGREGATE_HRC_12 - HRC_2',
                    0);
@@ -1452,7 +1471,7 @@ AS
                1,
                1023);
 
-         INS_ACT_LOG ('DATABASE',
+         INS_ACT_LOG ('VNP_DATA',
                       'STUFF.AGGREGATE_HRC_12',
                       'ERROR: ' || v_err_msg,
                       3);
@@ -1472,7 +1491,9 @@ AS
 
       v_err_msg         VARCHAR2 (1023);
 
-      n_cdr_log_count   PLS_INTEGER := 10;
+      n_cdr_log_count   PLS_INTEGER := 100;
+
+      n_count           PLS_INTEGER;
 
       lockhandle        VARCHAR2 (128);
       retcode           NUMBER;
@@ -1490,109 +1511,39 @@ AS
                                   'MOVE_HRC_12_TO_HRC is already running');
       END IF;
 
-      UPDATE VNP_DATA.CDR_LOG_PROCESS
-         SET STATUS = 20
-       WHERE CDR_LOG_PROCESS_ID IN (SELECT CDR_LOG_PROCESS_ID
-                                      FROM (  SELECT CDR_LOG_PROCESS_ID
-                                                FROM VNP_DATA.CDR_LOG_PROCESS
-                                               WHERE     STATUS = 13
-                                                     AND INSTANCE = 1
-                                            ORDER BY START_TIME)
-                                     WHERE ROWNUM <= n_cdr_log_count);
-
-      FOR i IN 0 .. 9
       LOOP
-         INSERT INTO VNP_DATA.HOT_RATED_CDR (MAP_ID,
-                                             A_NUMBER,
-                                             CDR_TYPE,
-                                             CDR_START_TIME,
-                                             DATA_PART,
-                                             DURATION,
-                                             TOTAL_USAGE,
-                                             B_NUMBER,
-                                             B_ZONE,
-                                             NW_GROUP,
-                                             SERVICE_FEE,
-                                             SERVICE_FEE_ID,
-                                             CHARGE_FEE,
-                                             CHARGE_FEE_ID,
-                                             LAC,
-                                             CELL_ID,
-                                             SUBSCRIBER_UNBILL,
-                                             BU_ID,
-                                             OLD_BU_ID,
-                                             OFFER_COST,
-                                             OFFER_FREE_BLOCK,
-                                             INTERNAL_COST,
-                                             INTERNAL_FREE_BLOCK,
-                                             DIAL_DIGIT,
-                                             CDR_RECORD_HEADER_ID,
-                                             CDR_SEQUENCE_NUMBER,
-                                             LOCATION_NO,
-                                             MSC_ID,
-                                             UNIT_TYPE_ID,
-                                             PRIMARY_OFFER_ID,
-                                             DISCOUNT_ITEM_ID,
-                                             BALANCE_CHANGE,
-                                             RERATE_FLAG,
-                                             AUT_FINAL_ID,
-                                             TARIFF_PLAN_ID,
-                                             ERROR_CODE,
-                                             PAYMENT_ID,
-                                             SUBSCRIBER_NO,
-                                             SUBSCRIBER_NO_RESETS,
-                                             ACCOUNT_NO,
-                                             PARENT_ACCOUNT_NO,
-                                             INTL_VND,
-                                             INTL_ID,
-                                             CDR_CALL_TYPE,
-                                             QOS)
-            SELECT MAP_ID_SEQ.NEXTVAL,
-                   A_NUMBER,
-                   CDR_TYPE,
-                   CDR_START_TIME,
-                   DATA_PART,
-                   DURATION,
-                   TOTAL_USAGE,
-                   B_NUMBER,
-                   B_ZONE,
-                   NW_GROUP,
-                   SERVICE_FEE,
-                   SERVICE_FEE_ID,
-                   CHARGE_FEE,
-                   CHARGE_FEE_ID,
-                   LAC,
-                   CELL_ID,
-                   SUBSCRIBER_UNBILL,
-                   BU_ID,
-                   OLD_BU_ID,
-                   OFFER_COST,
-                   OFFER_FREE_BLOCK,
-                   INTERNAL_COST,
-                   INTERNAL_FREE_BLOCK,
-                   DIAL_DIGIT,
-                   CDR_RECORD_HEADER_ID,
-                   CDR_SEQUENCE_NUMBER,
-                   LOCATION_NO,
-                   MSC_ID,
-                   UNIT_TYPE_ID,
-                   PRIMARY_OFFER_ID,
-                   DISCOUNT_ITEM_ID,
-                   BALANCE_CHANGE,
-                   RERATE_FLAG,
-                   AUT_FINAL_ID,
-                   TARIFF_PLAN_ID,
-                   ERROR_CODE,
-                   PAYMENT_ID,
-                   SUBSCRIBER_NO,
-                   SUBSCRIBER_NO_RESETS,
-                   ACCOUNT_NO,
-                   PARENT_ACCOUNT_NO,
-                   INTL_VND,
-                   INTL_ID,
-                   CDR_CALL_TYPE,
-                   QOS
-              FROM HOT_RATED_CDR_1 A
+         SELECT COUNT (1)
+           INTO n_count
+           FROM VNP_DATA.CDR_LOG_PROCESS
+          WHERE STATUS = 13 AND INSTANCE = 1;
+
+         EXIT WHEN n_count <= 0;
+
+         UPDATE VNP_DATA.CDR_LOG_PROCESS
+            SET STATUS = 20
+          WHERE CDR_LOG_PROCESS_ID IN (SELECT CDR_LOG_PROCESS_ID
+                                         FROM (  SELECT CDR_LOG_PROCESS_ID
+                                                   FROM VNP_DATA.CDR_LOG_PROCESS
+                                                  WHERE     STATUS = 13
+                                                        AND INSTANCE = 1
+                                               ORDER BY START_TIME)
+                                        WHERE ROWNUM <= n_cdr_log_count);
+
+         FOR i IN 0 .. 9
+         LOOP
+            INSERT INTO VNP_DATA.HOT_RATED_CDR
+               SELECT *
+                 FROM HOT_RATED_CDR_1 A
+                WHERE     DATA_PART = i
+                      AND CDR_RECORD_HEADER_ID IN (SELECT CDR_LOG_PROCESS_ID
+                                                     FROM (SELECT CDR_LOG_PROCESS_ID
+                                                             FROM VNP_DATA.CDR_LOG_PROCESS
+                                                            WHERE     STATUS =
+                                                                         20
+                                                                  AND INSTANCE =
+                                                                         1));
+
+            DELETE HOT_RATED_CDR_1
              WHERE     DATA_PART = i
                    AND CDR_RECORD_HEADER_ID IN (SELECT CDR_LOG_PROCESS_ID
                                                   FROM (SELECT CDR_LOG_PROCESS_ID
@@ -1602,141 +1553,64 @@ AS
                                                                AND INSTANCE =
                                                                       1));
 
-         DELETE HOT_RATED_CDR_1
-          WHERE     DATA_PART = i
-                AND CDR_RECORD_HEADER_ID IN (SELECT CDR_LOG_PROCESS_ID
-                                               FROM (SELECT CDR_LOG_PROCESS_ID
-                                                       FROM VNP_DATA.CDR_LOG_PROCESS
-                                                      WHERE     STATUS = 20
-                                                            AND INSTANCE = 1));
+            INS_ACT_LOG (
+               'VNP_DATA',
+               'STUFF.MOVE_HRC_12_TO_HRC - HRC_1 - DATA_PART: ' || i,
+               'DONE: STUFF.MOVE_HRC_12_TO_HRC - HRC_1 - DATA_PART: ' || i,
+               0);
+         END LOOP;
 
-         INS_ACT_LOG (
-            'DATABASE',
-            'STUFF.MOVE_HRC_12_TO_HRC - HRC_1 - DATA_PART: ' || i,
-            'DONE: STUFF.MOVE_HRC_12_TO_HRC - HRC_1 - DATA_PART: ' || i,
-            0);
+         UPDATE VNP_DATA.CDR_LOG_PROCESS
+            SET STATUS = 21
+          WHERE CDR_LOG_PROCESS_ID IN (SELECT CDR_LOG_PROCESS_ID
+                                         FROM (SELECT CDR_LOG_PROCESS_ID
+                                                 FROM VNP_DATA.CDR_LOG_PROCESS
+                                                WHERE     STATUS = 20
+                                                      AND INSTANCE = 1));
+
+         COMMIT;
       END LOOP;
 
-      UPDATE VNP_DATA.CDR_LOG_PROCESS
-         SET STATUS = 21
-       WHERE CDR_LOG_PROCESS_ID IN (SELECT CDR_LOG_PROCESS_ID
-                                      FROM (SELECT CDR_LOG_PROCESS_ID
-                                              FROM VNP_DATA.CDR_LOG_PROCESS
-                                             WHERE     STATUS = 20
-                                                   AND INSTANCE = 1));
-
-      COMMIT;
-
-      INS_ACT_LOG ('DATABASE',
+      INS_ACT_LOG ('VNP_DATA',
                    'STUFF.MOVE_HRC_12_TO_HRC - HRC_1',
                    'DONE: STUFF.MOVE_HRC_12_TO_HRC - HRC_1',
                    0);
 
       --
 
-      UPDATE VNP_DATA.CDR_LOG_PROCESS
-         SET STATUS = 20
-       WHERE CDR_LOG_PROCESS_ID IN (SELECT CDR_LOG_PROCESS_ID
-                                      FROM (  SELECT CDR_LOG_PROCESS_ID
-                                                FROM VNP_DATA.CDR_LOG_PROCESS
-                                               WHERE     STATUS = 13
-                                                     AND INSTANCE = 2
-                                            ORDER BY START_TIME)
-                                     WHERE ROWNUM <= n_cdr_log_count);
-
-      FOR i IN 0 .. 9
       LOOP
-         INSERT INTO VNP_DATA.HOT_RATED_CDR (MAP_ID,
-                                             A_NUMBER,
-                                             CDR_TYPE,
-                                             CDR_START_TIME,
-                                             DATA_PART,
-                                             DURATION,
-                                             TOTAL_USAGE,
-                                             B_NUMBER,
-                                             B_ZONE,
-                                             NW_GROUP,
-                                             SERVICE_FEE,
-                                             SERVICE_FEE_ID,
-                                             CHARGE_FEE,
-                                             CHARGE_FEE_ID,
-                                             LAC,
-                                             CELL_ID,
-                                             SUBSCRIBER_UNBILL,
-                                             BU_ID,
-                                             OLD_BU_ID,
-                                             OFFER_COST,
-                                             OFFER_FREE_BLOCK,
-                                             INTERNAL_COST,
-                                             INTERNAL_FREE_BLOCK,
-                                             DIAL_DIGIT,
-                                             CDR_RECORD_HEADER_ID,
-                                             CDR_SEQUENCE_NUMBER,
-                                             LOCATION_NO,
-                                             MSC_ID,
-                                             UNIT_TYPE_ID,
-                                             PRIMARY_OFFER_ID,
-                                             DISCOUNT_ITEM_ID,
-                                             BALANCE_CHANGE,
-                                             RERATE_FLAG,
-                                             AUT_FINAL_ID,
-                                             TARIFF_PLAN_ID,
-                                             ERROR_CODE,
-                                             PAYMENT_ID,
-                                             SUBSCRIBER_NO,
-                                             SUBSCRIBER_NO_RESETS,
-                                             ACCOUNT_NO,
-                                             PARENT_ACCOUNT_NO,
-                                             INTL_VND,
-                                             INTL_ID,
-                                             CDR_CALL_TYPE,
-                                             QOS)
-            SELECT MAP_ID_SEQ.NEXTVAL,
-                   A_NUMBER,
-                   CDR_TYPE,
-                   CDR_START_TIME,
-                   DATA_PART,
-                   DURATION,
-                   TOTAL_USAGE,
-                   B_NUMBER,
-                   B_ZONE,
-                   NW_GROUP,
-                   SERVICE_FEE,
-                   SERVICE_FEE_ID,
-                   CHARGE_FEE,
-                   CHARGE_FEE_ID,
-                   LAC,
-                   CELL_ID,
-                   SUBSCRIBER_UNBILL,
-                   BU_ID,
-                   OLD_BU_ID,
-                   OFFER_COST,
-                   OFFER_FREE_BLOCK,
-                   INTERNAL_COST,
-                   INTERNAL_FREE_BLOCK,
-                   DIAL_DIGIT,
-                   CDR_RECORD_HEADER_ID,
-                   CDR_SEQUENCE_NUMBER,
-                   LOCATION_NO,
-                   MSC_ID,
-                   UNIT_TYPE_ID,
-                   PRIMARY_OFFER_ID,
-                   DISCOUNT_ITEM_ID,
-                   BALANCE_CHANGE,
-                   RERATE_FLAG,
-                   AUT_FINAL_ID,
-                   TARIFF_PLAN_ID,
-                   ERROR_CODE,
-                   PAYMENT_ID,
-                   SUBSCRIBER_NO,
-                   SUBSCRIBER_NO_RESETS,
-                   ACCOUNT_NO,
-                   PARENT_ACCOUNT_NO,
-                   INTL_VND,
-                   INTL_ID,
-                   CDR_CALL_TYPE,
-                   QOS
-              FROM HOT_RATED_CDR_2 A
+         SELECT COUNT (1)
+           INTO n_count
+           FROM VNP_DATA.CDR_LOG_PROCESS
+          WHERE STATUS = 13 AND INSTANCE = 2;
+
+         EXIT WHEN n_count <= 0;
+
+         UPDATE VNP_DATA.CDR_LOG_PROCESS
+            SET STATUS = 20
+          WHERE CDR_LOG_PROCESS_ID IN (SELECT CDR_LOG_PROCESS_ID
+                                         FROM (  SELECT CDR_LOG_PROCESS_ID
+                                                   FROM VNP_DATA.CDR_LOG_PROCESS
+                                                  WHERE     STATUS = 13
+                                                        AND INSTANCE = 2
+                                               ORDER BY START_TIME)
+                                        WHERE ROWNUM <= n_cdr_log_count);
+
+         FOR i IN 0 .. 9
+         LOOP
+            INSERT INTO VNP_DATA.HOT_RATED_CDR
+               SELECT *
+                 FROM HOT_RATED_CDR_2 A
+                WHERE     DATA_PART = i
+                      AND CDR_RECORD_HEADER_ID IN (SELECT CDR_LOG_PROCESS_ID
+                                                     FROM (SELECT CDR_LOG_PROCESS_ID
+                                                             FROM VNP_DATA.CDR_LOG_PROCESS
+                                                            WHERE     STATUS =
+                                                                         20
+                                                                  AND INSTANCE =
+                                                                         2));
+
+            DELETE HOT_RATED_CDR_2
              WHERE     DATA_PART = i
                    AND CDR_RECORD_HEADER_ID IN (SELECT CDR_LOG_PROCESS_ID
                                                   FROM (SELECT CDR_LOG_PROCESS_ID
@@ -1746,32 +1620,25 @@ AS
                                                                AND INSTANCE =
                                                                       2));
 
-         DELETE HOT_RATED_CDR_2
-          WHERE     DATA_PART = i
-                AND CDR_RECORD_HEADER_ID IN (SELECT CDR_LOG_PROCESS_ID
-                                               FROM (SELECT CDR_LOG_PROCESS_ID
-                                                       FROM VNP_DATA.CDR_LOG_PROCESS
-                                                      WHERE     STATUS = 20
-                                                            AND INSTANCE = 2));
+            INS_ACT_LOG (
+               'VNP_DATA',
+               'STUFF.MOVE_HRC_12_TO_HRC - HRC_2 - DATA_PART: ' || i,
+               'DONE: STUFF.MOVE_HRC_12_TO_HRC - HRC_2 - DATA_PART: ' || i,
+               0);
+         END LOOP;
 
-         INS_ACT_LOG (
-            'DATABASE',
-            'STUFF.MOVE_HRC_12_TO_HRC - HRC_2 - DATA_PART: ' || i,
-            'DONE: STUFF.MOVE_HRC_12_TO_HRC - HRC_2 - DATA_PART: ' || i,
-            0);
+         UPDATE VNP_DATA.CDR_LOG_PROCESS
+            SET STATUS = 21
+          WHERE CDR_LOG_PROCESS_ID IN (SELECT CDR_LOG_PROCESS_ID
+                                         FROM (SELECT CDR_LOG_PROCESS_ID
+                                                 FROM VNP_DATA.CDR_LOG_PROCESS
+                                                WHERE     STATUS = 20
+                                                      AND INSTANCE = 2));
+
+         COMMIT;
       END LOOP;
 
-      UPDATE VNP_DATA.CDR_LOG_PROCESS
-         SET STATUS = 21
-       WHERE CDR_LOG_PROCESS_ID IN (SELECT CDR_LOG_PROCESS_ID
-                                      FROM (SELECT CDR_LOG_PROCESS_ID
-                                              FROM VNP_DATA.CDR_LOG_PROCESS
-                                             WHERE     STATUS = 20
-                                                   AND INSTANCE = 2));
-
-      COMMIT;
-
-      INS_ACT_LOG ('DATABASE',
+      INS_ACT_LOG ('VNP_DATA',
                    'STUFF.MOVE_HRC_12_TO_HRC - HRC_2',
                    'DONE: STUFF.MOVE_HRC_12_TO_HRC - HRC_2',
                    0);
@@ -1788,7 +1655,7 @@ AS
                1,
                1023);
 
-         INS_ACT_LOG ('DATABASE',
+         INS_ACT_LOG ('VNP_DATA',
                       'STUFF.MOVE_HRC_12_TO_HRC',
                       'ERROR: ' || v_err_msg,
                       3);
@@ -1908,7 +1775,7 @@ AS
          COMMIT;
 
          INS_ACT_LOG (
-            'DATABASE',
+            'VNP_DATA',
             'STUFF.AGGREGATE_HRC_34 - HRC_3 - DATA_PART: ' || i,
             'DONE: STUFF.AGGREGATE_HRC_34 - HRC_3 - DATA_PART: ' || i,
             0);
@@ -2000,7 +1867,7 @@ AS
          COMMIT;
 
          INS_ACT_LOG (
-            'DATABASE',
+            'VNP_DATA',
             'STUFF.AGGREGATE_HRC_34 - HRC_4 - DATA_PART: ' || i,
             'DONE: STUFF.AGGREGATE_HRC_34 - HRC_4 - DATA_PART: ' || i,
             0);
@@ -2018,7 +1885,7 @@ AS
                1,
                1023);
 
-         INS_ACT_LOG ('DATABASE',
+         INS_ACT_LOG ('VNP_DATA',
                       'STUFF.AGGREGATE_HRC_34',
                       'ERROR: ' || v_err_msg,
                       3);
@@ -2139,7 +2006,7 @@ AS
          COMMIT;
 
          INS_ACT_LOG (
-            'DATABASE',
+            'VNP_DATA',
             'STUFF.MOVE_HRC_34_TO_HRC - HRC_3 - DATA_PART: ' || i,
             'DONE: STUFF.MOVE_HRC_34_TO_HRC - HRC_3 - DATA_PART: ' || i,
             0);
@@ -2232,7 +2099,7 @@ AS
          COMMIT;
 
          INS_ACT_LOG (
-            'DATABASE',
+            'VNP_DATA',
             'STUFF.MOVE_HRC_34_TO_HRC - HRC_4 - DATA_PART: ' || i,
             'DONE: STUFF.MOVE_HRC_34_TO_HRC - HRC_4 - DATA_PART: ' || i,
             0);
@@ -2250,7 +2117,7 @@ AS
                1,
                1023);
 
-         INS_ACT_LOG ('DATABASE',
+         INS_ACT_LOG ('VNP_DATA',
                       'STUFF.MOVE_HRC_34_TO_HRC',
                       'ERROR: ' || v_err_msg,
                       3);
@@ -2290,7 +2157,7 @@ AS
 
       CLOSE AAA;
 
-      INS_ACT_LOG ('DATABASE',
+      INS_ACT_LOG ('VNP_DATA',
                    'STUFF.MOVE_TEMP1_TO_1 FROM HRC_TEMP1',
                    'DONE: STUFF.MOVE_TEMP1_TO_1 FROM HRC_TEMP1',
                    0);
@@ -2305,7 +2172,7 @@ AS
                1,
                1023);
 
-         INS_ACT_LOG ('DATABASE',
+         INS_ACT_LOG ('VNP_DATA',
                       'STUFF.MOVE_TEMP1_TO_1',
                       'ERROR: ' || V_ERR_MSG,
                       3);
@@ -2345,7 +2212,7 @@ AS
 
       CLOSE BBB;
 
-      INS_ACT_LOG ('DATABASE',
+      INS_ACT_LOG ('VNP_DATA',
                    'STUFF.MOVE_TEMP2_TO_2 FROM HRC_TEMP1',
                    'DONE: STUFF.MOVE_TEMP2_TO_2 FROM HRC_TEMP1',
                    0);
@@ -2360,7 +2227,7 @@ AS
                1,
                1023);
 
-         INS_ACT_LOG ('DATABASE',
+         INS_ACT_LOG ('VNP_DATA',
                       'STUFF.MOVE_TEMP2_TO_2',
                       'ERROR: ' || V_ERR_MSG,
                       3);
@@ -2464,7 +2331,7 @@ AS
          COMMIT;
 
          INS_ACT_LOG (
-            'DATABASE',
+            'VNP_DATA',
             'STUFF.AGGR_MOVE_TO_HOT -> AGGREGATE HRC_1; DATA_PART: ' || i,
                'DONE: STUFF.AGGR_MOVE_TO_HOT -> AGGREGATE HRC_1; DATA_PART: '
             || i,
@@ -2570,13 +2437,13 @@ AS
          COMMIT;
 
          INS_ACT_LOG (
-            'DATABASE',
+            'VNP_DATA',
             'STUFF.AGGR_MOVE_TO_HOT -> MOVE HRC_1; DATA_PART: ' || i,
             'DONE: STUFF.AGGR_MOVE_TO_HOT -> MOVE HRC_1; DATA_PART: ' || i,
             0);
       END LOOP;
 
-      INS_ACT_LOG ('DATABASE',
+      INS_ACT_LOG ('VNP_DATA',
                    'STUFF.AGGR_MOVE_TO_HOT -> AGGREGATE, MOVE HRC_1',
                    'DONE: STUFF.AGGR_MOVE_TO_HOT -> AGGREGATE, MOVE HRC_1',
                    0);
@@ -2667,7 +2534,7 @@ AS
          COMMIT;
 
          INS_ACT_LOG (
-            'DATABASE',
+            'VNP_DATA',
             'STUFF.AGGR_MOVE_TO_HOT -> AGGREGATE HRC_2 - DATA_PART: ' || i,
                'DONE: STUFF.AGGR_MOVE_TO_HOT -> AGGREGATE HRC_2 - DATA_PART: '
             || i,
@@ -2772,13 +2639,13 @@ AS
          COMMIT;
 
          INS_ACT_LOG (
-            'DATABASE',
+            'VNP_DATA',
             'STUFF.AGGR_MOVE_TO_HOT -> MOVE HRC_2; DATA_PART: ' || i,
             'DONE: STUFF.AGGR_MOVE_TO_HOT -> MOVE HRC_2; DATA_PART: ' || i,
             0);
       END LOOP;
 
-      INS_ACT_LOG ('DATABASE',
+      INS_ACT_LOG ('VNP_DATA',
                    'STUFF.AGGR_MOVE_TO_HOT -> AGGREGATE, MOVE HRC_2',
                    'DONE: STUFF.AGGR_MOVE_TO_HOT -> AGGREGATE, MOVE HRC_2',
                    0);
@@ -2793,7 +2660,7 @@ AS
                1,
                1023);
 
-         INS_ACT_LOG ('DATABASE',
+         INS_ACT_LOG ('VNP_DATA',
                       'STUFF.AGGR_MOVE_TO_HOT',
                       'ERROR: ' || v_err_msg,
                       3);
