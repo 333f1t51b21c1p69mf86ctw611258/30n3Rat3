@@ -1,0 +1,94 @@
+1. Rating
+	- Tài liệu, ai làm phần nào chịu trách nhiệm phần đó
+	- RC
+	
+2. Reformat
+	- Dữ liệu ra:
+		Rated CDR (Bill Month)
+		Tổng hợp
+			Tên bảng/trường/độ dài
+				Payment_Item_ID
+		Nợ phát sinh
+		Hóa đơn (Chưa làm được)
+		
+	Thống nhất CSDL vào
+	Tài liệu
+	Tốc độ
+		
+Dữ liệu đầu vào
+	Thống nhất các bảng
+		Subscriber
+		Account
+		Product
+		ProductVersion
+		...
+		
+Cắt cước
+	23h chốt 
+
+Sizing
+	Rerate
+		Batchsize
+		
+	Tổng hợp
+		
+	
+	Reformat
+		Đặt trên mấy máy?
+		
+	12G
+	
+Tài liệu
+	Bao h xong, chốt
+		Hết tuần này
+	Thống nhất CSDL đầu vào
+	Sizing
+		Thống nhất cùng nhóm
+	Kế hoạch quan VNP
+	Tổng hợp cước
+	
+	
+Bảng giá cước
+	Alo
+	Giá
+	ProductCode
+	
+	
+Offer			Usage Plan
+				SMS
+				Voice
+				
+				
+Trường
+	Execute Batch
+Thuần + Trường
+	Bỏ phần tính chi phí
+	
+Rated_CDR_File
+	FileName
+	Created_Time
+	LastChangeTime
+	Status
+		0: Chưa làm gì; 1: Đang xử lý; 2: Done; 4: Error
+	Source
+		Rerate
+		C1
+		...
+		
+Dùng jTable
+	Tên file
+	Nguồn
+	Trạng thái
+	ErrorFile
+		BatchFile
+	LastChange
+	
+	
+AFTERNOON
+
+1. Table
+	Join Table
+		Product_version
+		Subscriber
+
+	

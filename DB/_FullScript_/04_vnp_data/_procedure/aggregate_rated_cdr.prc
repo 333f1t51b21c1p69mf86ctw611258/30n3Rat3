@@ -1,4 +1,3 @@
-/* Formatted on 17/3/15 10:34:07 (QP5 v5.240.12305.39476) */
 DROP PROCEDURE VNP_DATA.AGGREGATE_RATED_CDR;
 
 CREATE OR REPLACE PROCEDURE VNP_DATA.AGGREGATE_RATED_CDR
@@ -85,7 +84,7 @@ BEGIN
                SET status = 1
              WHERE     TO_NUMBER (SUBSTR (msisdn, -1, LENGTH (msisdn))) = i
                    AND month = s_month
-                   AND rerated_day = n_day - 1;
+                   AND aggred_day = n_day - 1;
 
             MERGE INTO VNP_DATA.cool_aggregated_cdr ag
                  USING (  SELECT COUNT (1) total_cdr,
@@ -170,7 +169,7 @@ BEGIN
                            v.payment_id);
 
             UPDATE subs_rerate_ctl
-               SET reRATED_DAY = reRATED_DAY + 1, status = 2
+               SET aggred_day = aggred_day + 1, status = 2
              WHERE status = 1;
 
             COMMIT;

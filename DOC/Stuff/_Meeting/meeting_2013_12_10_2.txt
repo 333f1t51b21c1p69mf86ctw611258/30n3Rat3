@@ -1,0 +1,109 @@
+1. VinhDH Change
+ok	1. AccountVersion
+		- Chuyển các trường Account_Version_Id (PK), Start_Date, End_Date vào bảng Subscriber_Bill_Map
+		- Xóa bảng AccountVersion
+		
+ok	2. Subscriber_Bill_Map
+		- Đổi tên bảng Subscriber_Bill_Map thành Account_Version
+		- Xóa Rating_Type_Id
+		
+ok	3. Product_Offer
+		- Bỏ hết chữ Package thay bằng Product
+		- Bỏ Package_Type
+		- Unbill (Char(1) Default 0): Là gói cước nghiệp vụ hay không
+		
+ok	4. Thêm bảng Service
+		- Service_ID
+		- Service_Name
+		- Service_Type
+		
+ok	5. PO_Service_Map: Bảng trung gian Product_Offer và Service
+	
+ok	6. Product_Offer_Version
+		- Doi chu Package thanh Product
+	
+ok	7. Subs_Offer_Map
+		- Doi chu Package thanh Product
+		
+ok	8. CDR_TYPE
+		CDR_TYPE_ID		NUMBER(2)
+		CDR_TYPE_NAME	VARCHAR2(31)
+		
+ok	9. RATED_CDR
+		- Sửa CDR_Type -> Cdr_type_id (Number(2))
+	
+ok	10. SUBS_STATUS_MAP
+		- Move qua phải chuyển cả trigger
+		
+ok	11. Tất cả những bảng không Start = Bak... => Move qua VNP_COMMON
+	
+ok	12. Những bảng có Bak có đề cập ở trên (1 -> 10) thì chuyển sang theo comment ở trên
+	
+
+Rating Change
+	
+ok	1. RUM_MAP
+		- Đổi chữ Resources thành Currency_Abb (Viết tắt)
+		- Đổi Resource_id thành Currency_id
+		
+ok	2. Balance_config
+		- Rum -> Rum_id
+		- Product_id -> Product_offer_id
+		- Lưu ý kiểu, độ rộng trường phải khớp với các bảng còn lại
+	
+ok	3. Counter_bals
+		- Đổi tên thành Balance_Counter
+		- Đổi Balance_Group -> Bal_Group_id
+		- Current_Bal Type: Number(15,3)
+		
+		* Chuyển qua VNP_Data
+		
+ok	4. Discount_Map
+		- Bỏ Map_Group
+		- Thêm Service_Id, Service_Name link với bảng Service (Mục 1.4)
+	
+ok	5. Discount_Config
+		- Chuyển từ Promotion config file
+		- Name -> Discount_id
+		- Rum -> Rum_id
+		- Initial_value -> Threshold_Value
+		- Change kiểu: Threshold_Value -> Type: Number(11)
+		- Thêm Priority_Discount -> Type: Number(2)
+		
+ok	7. E_R_A
+		- AccountVerId -> Account_Version_Id
+		- ERAKEY -> ERA_KEY
+		- ERAVALUE -> ERA_VALUE
+		- ACCOUNTID -> ACCOUNT_ID
+		- MODT -> MODIFIED_TIME
+		
+ok	8. PRICE_MAP
+		- Bỏ Map_Group
+		- Thêm Service_Id, Service_Name link với bảng Service (Mục 1.4)
+		- Sửa lại Kiểu dữ liệu, độ dài các trường
+		- Price_Out -> Price_Id
+		
+ok	9. Price_Model
+		- Price_Model -> Price_Id
+		- Sửa lại Kiểu dữ liệu, độ dài các trường (VarChar -> Number)
+		
+ok	10. Rate_Plan_Info
+		- Bỏ Service
+		- Thêm Service_Id, Service_Name link với bảng Service (Mục 1.4)
+		
+ok	11. TIME_MODLE_MAP
+		- PRODUCT_NAME_IN -> PRODUCT_OFFER_ID
+		
+3. VNP_Data
+
+ok	1. Thêm bảng Host_Rated_CDR giống hệ Rated_CDR
+	
+4. VNP_Common
+
+ok	1. Thêm bảng Payment_Item
+		- Payment_Item_id
+		- Payment_item_Name
+		
+		* Lấy dữ liệu từ bảng CCS_Common.Khoanmuc_TT (Khoản mục thanh toán)
+	
+	2. 

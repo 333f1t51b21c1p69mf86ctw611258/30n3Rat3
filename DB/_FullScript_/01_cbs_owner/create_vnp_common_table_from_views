@@ -1,0 +1,6 @@
+SELECT    'create table '
+       || SUBSTR (view_name, 1, LENGTH (view_name) - 5)
+       || ' as select * from cbs_owner.'
+       || view_name
+       || ';'
+  FROM user_views;

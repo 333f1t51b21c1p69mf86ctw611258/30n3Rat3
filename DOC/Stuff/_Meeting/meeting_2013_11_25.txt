@@ -1,0 +1,72 @@
+- Main form
+	+ Cước thuê bao
+	+ Cước cuộc gọi
+	
+- Chuẩn bị cho demo
+	+ Fixed được các bảng của eOneRate
+	+ Vào dữ liệu demo
+		--> Chiều nay, cập nhật vào highlevel
+	+ 
+	
+- Thêm 
+	+ Query
+		_ Subscriber
+		_ Product
+		_ Price
+		_ Discount
+		
+- Slide: Thứ 5
+- Gói cước: Chiều thứ 5 bao gồm phần lấy dữ liệu từ PCAT
+- Cước Data + PCAT: Nguyên
+- Cước SMS: anh Hinh
+- Dựng 4 gói cước: Chiều thứ 5 xong tất
+- 
+
+Thuần:
+	Thông tin CDR
+		Lưu thông tin Balance
+		Thông tin các cuộc gọi
+		=> Bao nhiêu phút free, còn lại bao nhiêu
+		Trừ lùi, giá trị còn lại
+		Cần số free, số balance hiện tại
+	
+	Trường nghiệp vụ: Comment đang ở sóng của mạng nào
+	Call forward? A -> B -> C nhận dạng B đã forward
+	=> Dựa vào Call Type, 0 là cuộc gọi bình thường, 2: Forward
+	
+	Trường hợp Data thì comment là số Data Block Usage
+		Trường Zone: Lưu tên gói => Chưa thống nhất
+	Trường Free KM => Chưa thống nhất
+		
+	Trường location number => Chờ Comverse
+	
+	Mã tỉnh: Mã tỉnh cũ, mã tỉnh mới
+	
+	Nghiệp vụ: Thứ 5 xong
+	
+	Zone_Map
+		Zone:
+		Application_ID
+		
+		84918324324 -> 03202343333
+		
+		Lookup số B: Lấy phần Prefix của số B => ZoneCode -> ZoneName = Hải Dương điền vào Zone
+		097 -> Viettel -> Zone = VTLDD
+		
+		8491234324 -> 19001091
+			-> Zone: Chăm sóc khách hàng Vinaphone VAS = CSKHVNP
+			
+		8494893242 -> 8411900234
+			-> 
+			
+Trường:
+	Tuning
+	Highlevel
+	Trường DateTime
+Thứ 6: Trường + Thuần xong code + Ghép code + Bổ xung tài liệu Enrich + Test chuẩn bị demo
+	Demo nội dung:
+		Trình bày slide, trình bày code
+		Toàn bộ nội dung reformat, phần enrich
+		Demo chương trình -> Trường
+		
+Chiều thứ 5 họp tổng kết chuẩn bị demo
